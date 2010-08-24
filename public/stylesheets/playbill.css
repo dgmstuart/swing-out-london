@@ -1,78 +1,81 @@
 body {
-	font-family:  Futura, Helvetica, Arial, Sans-serif ;
-	color: #0F0F0F;	
-	background: transparent url('../images/flock_02_by_ZEBiii.jpg');
+    font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
+    color: #0F0F0F;	
+    background: transparent url('../images/flock_02_by_ZEBiii.jpg');
 }
 
 #content {
-	font-size: 0.875em; /* = 14px */
+    font-size: 0.875em; /* = 14px */
 }
 
 #header, #page, #footer, #main_nav {
-	background: #FEE6B8 none;
+    background: #FEE6B8 none;
 }
 
 a {
-	text-decoration:none;
-	color:#384F6E;	
+    text-decoration:none;
+    color:#384F6E;	
 }
 
 a:hover {border-bottom:solid 2px;}
 
 p, li, h2 {
-	line-height:1.5em;
+    line-height:1.5em;
 }
 
 p {
-	text-align:justify;
-	margin-bottom:0.8em;
+    text-align:justify;
+    margin-bottom:0.8em;
 }
 
+p em {font-style:italic}
+
 q:before, q:after {
-	content:'"';
+    content:'"';
 }
 
 ul.textlist {
-	list-style-type: disc;
-	padding-left:3em;
+    list-style-type: disc;
+    padding-left:3em;
 }
 
 ul.indent {
-	list-style-type: square;
+    list-style-type: square;
 }
 
 ul.textlist li {
-	padding-left: 0.5em;
+    padding-left: 0.5em;
 }
 
 h1, h2, ul.navigation, .compass {
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 h1, h2 em, ul.navigation {
-	letter-spacing: 0.1em;
+    letter-spacing: 0.1em;
 }
+
 
 
 h2 {
-  font-size:1.6em; /*increase*/
+    font-size:1.6em; /*increase*/
 }
 
 h2 em {
-	font-size:1.83em; /*increase*/
-	font-weight:bold;
-	display:block;
+    font-size:1.83em; /*increase*/
+    font-weight:bold;
+    display:block;
 }
 
 h3 {
-	font-weight:bold;
+    font-weight:bold;
 }
 
 
 /* LAYOUT */
 
 #title {
-  padding: 20px;
+    padding: 20px;
 }
 
 #page {
@@ -81,33 +84,33 @@ h3 {
 }
 
 #content {
-	clear:left;
-	margin:35px 30px 50px 30px;
+    clear:left;
+    margin:35px 30px 50px 30px;
 }
 
 .about {
-	padding:0 20px 0 20px;
+    padding:0 20px 0 20px;
 }
 
 
 /* HEADER */
 
 #header {
-	text-align:center;
-	padding-top:50px;
+    text-align:center;
+    padding-top:50px;
 }
 
 #header h1 {
-	font-size:1.6em;
-	margin-bottom: 30px ;
+    font-size:1.6em;
+    margin-bottom: 30px ;
 }
 
 #header em {
-	font-size:2.53em;
-	font-weight: bold;
-	letter-spacing: 0;
-	display:block;
-	margin-bottom:30px;
+    font-size:2.53em;
+    font-weight: bold;
+    letter-spacing: 0;
+    display:block;
+    margin-bottom:30px;
 }
 
 #header a {color:#0F0F0F;}
@@ -119,17 +122,17 @@ h3 {
 ul.navigation {list-style-type:none;}
 
 #main_nav, #admin_nav {
-	margin:0 50px;
-	text-align:center;
+    margin:0 50px;
+    text-align:center;
 }
 
 #admin_nav {
-	padding:1em 0;
+    padding:1em 0;
 }
 
 #main_nav {
-	padding:1em 0 40px 0;
-	border-bottom: 3px solid #0F0F0F;
+    padding:1em 0 40px 0;
+    border-bottom: 3px solid #0F0F0F;
 }
 
 
@@ -138,23 +141,23 @@ ul.navigation a {color: #0F0F0F;}
 #main_nav a, #admin_nav a {padding: 10px;} /*added here so we can take it away when we apply the border*/
 
 #main_nav a:hover, #admin_nav a:hover  {
-	text-decoration:none;
-	padding: 8px;
-	border: 2px solid #0F0F0F;
+    text-decoration:none;
+    padding: 8px;
+    border: 2px solid #0F0F0F;
 }
 
 #main_nav .current, #admin_nav .current{
-	padding: 8px;
-	border: 6px double #0F0F0F;
+    padding: 8px;
+    border: 6px double #0F0F0F;
 }
 
 #footer_nav a:hover {
-	border-bottom: 1px solid #0F0F0F;
+    border-bottom: 1px solid #0F0F0F;
 }
 
 #footer_nav .current{
-	padding: 5px;
-	border: 1px solid #0F0F0F;
+    padding: 5px;
+    border: 1px solid #0F0F0F;
 }
 
 #main_nav li, #admin_nav li { border-left:3px solid #0F0F0F; }
@@ -162,14 +165,14 @@ ul.navigation a {color: #0F0F0F;}
 #footer_nav li { border-left:1px solid #0F0F0F;  }
 
 #main_nav li:first-child, #admin_nav li:first-child, #footer_nav li:first-child {
-  border:none;
-  padding-left:0;
+    border:none;
+    padding-left:0;
 }
 
 .navigation li {
-  display:inline;  
-  margin:0 0.5em 0 0;
-  padding:0 0 0 1em;
+    display:inline;  
+    margin:0 0.5em 0 0;
+    padding:0 0 0 1em;
 }
 
 
@@ -177,22 +180,41 @@ ul.navigation a {color: #0F0F0F;}
 /* FOOTER */
 
 #footer {
-	clear:both;
-	font-size:0.8em;
-	padding: 1.5em 20px ;
-	margin: 0 40px;
-	border-top: 3px solid #0F0F0F;
+    clear:both;
+    font-size:0.8em;
+    padding: 1.5em 0px 1.5em 20px;
+    margin: 0 40px;
+    border-top: 3px solid #0F0F0F;
 }
 
 #footer_nav, address {padding:1em 0;}
 
-address {
-	float:right;
+address, #valid_icons{
+    float:right;
 }
 
+#valid_icons {
+    padding-left:2em;
+    padding-top:0.3em;
+}
+
+#valid_icons a {
+    display: block;
+}
+
+#valid_icons a:hover {border:0;}
+
+#valid_icons img {
+    height:15px;
+    width:42.58px;
+}
+
+#xhtml_icon {
+    padding-bottom:2px;
+}
 
 p.flash {
-	color: green;
+    color: green;
 }
 
 
@@ -200,164 +222,166 @@ p.flash {
 /* INDEX PAGE */
 
 #classes {
-	width:421px;
-	float: left;
+    width:418px;
+    float: left;
+    position:relative;
+    left:3px;
 } 
 #socials{
-	width:422px;
-	margin-left:418px;
+    width:422px;
+    margin-left:418px;
 }
 
 
 #classes h2, #socials h2 {
-	text-align:center;
-	text-transform:none;
-	margin:0px 10px;
+    text-align:center;
+    text-transform:none;
+    margin:0px 10px;
 }
 .index h2 em { text-transform:uppercase; }
 
 
 #classes ul.daylist, #socials ul.datelist {
-	margin-top:1.2em;
+    margin-top:1.2em;
 }
 /*double up the borders, so it will always cover both lists:*/
 #classes ul.daylist {
-	border-right: 3px solid #0F0F0F;
-	padding-right:22px;
+    border-right: 3px solid #0F0F0F;
+    padding-right:22px;
 }
 #socials ul.datelist{
-	border-left: 3px solid #0F0F0F;
-	padding-left:22px;
+    border-left: 3px solid #0F0F0F;
+    padding-left:22px;
 }
 
 
 #classes ul.daylist h3{
-	float:left;
+    float:left;
 }
 
 li.day_row li {
-	margin-left:7.5em;
+    margin-left:7.5em;
 }
 
 li.date_row li, li.day_row li{
-	padding-left:3px; /*to account for the border we apply when it's today*/
+    padding-left:3px; /*to account for the border we apply when it's today*/
 }
 
 #socials ul.datelist h3 {
-	display:block;
-	text-align:center;
-	margin-bottom:0.5em;
+    display:block;
+    text-align:center;
+    margin-bottom:0.5em;
 }
 
 li.day_row, li.date_row{padding:0.6em 10px 0.3em 10px;}
 
 /* Padding between rows*/
 li.day_row li, li.date_row li {
-	margin-bottom:0.3em;
+    margin-bottom:0.3em;
 }
 li.day_row a, li.date_row a {color: #0F0F0F;}
 
 li.today { border: 3px dashed #0F0F0F;}
 li.today li {padding:0;}
 
-#today_label, #tomorrow_label {text-transform: uppercase;}
+.today_label, .tomorrow_label {text-transform: uppercase;}
 
-li.date_row #today_label, li.date_row #tomorrow_label{letter-spacing: 0.1em}
-li.date_row #today_label:after, li.date_row #tomorrow_label:after {content:":"}
+li.date_row .today_label, li.date_row .tomorrow_label{letter-spacing: 0.1em}
+li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
 
-li.day_row #today_label {
-  display:block;
-  text-align:center;
-  font-size: 1.2em;
-  letter-spacing: 0.7em;
-  padding-left:0.7em;
-  padding-bottom: 0.3em;
+li.day_row .today_label {
+    display:block;
+    text-align:center;
+    font-size: 1.2em;
+    letter-spacing: 0.7em;
+    padding-left:0.7em;
+    padding-bottom: 0.3em;
 }
 
 .compass {
-	font-size:0.9em;
-	width:1.6em;
-	line-height:1.6em;
-	text-align:center;
-	margin:0 3px 0 1.5em;
-	border: 1px solid #0F0F0F;
-	float:right;
+    font-size:0.9em;
+    width:1.6em;
+    line-height:1.6em;
+    text-align:center;
+    margin:0 3px 0 1.5em;
+    border: 1px solid #0F0F0F;
+    float:right;
 }
 
 li.today .compass {
-	margin-right:0; /*to line up the compass elements*/
+    margin-right:0; /*to line up the compass elements*/
 }
 
 .social_title{ font-weight: bold; }
 .social_details{ font-style: italic; }
 .social_details:before{ content:"- "; }
+.social_highlight{ color:#CC0000 }
 
 
 #caveat{
-  margin:2em 40px 0px 40px;
-  font-size: 1.2em;
+    margin:2em 40px 0px 40px;
+    font-size: 1.2em;
 }
 #caveat strong{text-transform: uppercase;}
-
 
 /* ABOUT PAGE */
 
 
 .about h2 {
-	margin-bottom:10px;
-	text-align:center;
+    margin-bottom:10px;
+    text-align:center;
 }
 
 #mission_statement, #scope {
-	width:450px;
-	float:left;
-	padding-right:50px;
-	border-right: 3px solid #0F0F0F;
+    width:450px;
+    float:left;
+    padding-right:50px;
+    border-right: 3px solid #0F0F0F;
 }
 
 #about_me, #about_lindy {
-	margin-left:500px;
-	width:247px;
-	padding-left:50px;
-	border-left: 3px solid #0F0F0F;
+    margin-left:500px;
+    width:247px;
+    padding-left:50px;
+    border-left: 3px solid #0F0F0F;
 }
 
 #about_me, #about_lindy, #colophon {
-	margin-bottom:2.3em; /* 2.3 = basic margin distance */ 
+    margin-bottom:2.3em; /* 2.3 = basic margin distance */ 
 }
 
 #mission_statement, #scope {
-	margin-bottom: 1.5em; /* 1.5 = (2.3 - 0.8)*/
+    margin-bottom: 1.5em; /* 1.5 = (2.3 - 0.8)*/
 }
 
 #colophon h2, #about_lindy h2{
-	padding-top:1.6em; /* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
-	border-top: 3px solid #0F0F0F;
+    padding-top:1.6em; /* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
+    border-top: 3px solid #0F0F0F;
 }
 
 #scope{
-	border:none;
+    border:none;
 }
 
 #colophon {
-	clear:both;
+    clear:both;
 }
 
 #colophon h2 {
-	margin:0 50px;
+    margin:0 50px;
 }
 
 #colophon, #development {
-	padding:0px 15%;
+    padding:0px 15%;
 }
 
 
 #mission_statement em {
-	display:block;
-	margin-top:0.8em;
-	padding-left:30px;
-	font-style: italic;
-	font-size:1.2em;
+    display:block;
+    margin-top:0.8em;
+    padding-left:30px;
+    font-style: italic;
+    font-size:1.2em;
 }
 
 

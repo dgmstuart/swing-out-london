@@ -92,10 +92,8 @@ class EventsController < ApplicationController
   def authenticate
     @cms_page=true
     
-    authenticate_or_request_with_http_basic do |username, password|
-      if username == USERNAME && password == PASSWORD
-        @authenticated=true
-      end
+    @authenticated = authenticate_or_request_with_http_basic do |username, password|
+      LOGINS[username] == Digest::MD5.hexdigest(password)
     end
   end
   

@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   layout "main" 
   
+  require 'digest/md5'
+  
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 end
