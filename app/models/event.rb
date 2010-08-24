@@ -123,7 +123,28 @@ class Event < ActiveRecord::Base
   def next_date
     date_array[0].to_s(:uk_date)
   end
-   
+  
+  # Are all the dates for the event in the past?
+  def out_of_date
+    return true if date_array == UNKNOWN_DATE
+    out_of_date_test(Date.today)
+  end
+  
+  # Does an event not have any dates not already shown in the socials list?
+  def near_out_of_date
+    out_of_date_test(Date.today + INITIAL_SOCIALS)
+  end
+  
+  private
+  
+  # Helper function for comparing event dates to a reference date
+  def out_of_date_test(comparison_date)
+    return false if date_array == NOTAPPLICABLE
+    date_array.each {|d| return false if d > comparison_date }
+    true
+  end
+  
+  public
   
   #################
   # CLASS METHODS # 
@@ -147,6 +168,7 @@ class Event < ActiveRecord::Base
     merge_dates_hashes(weekly_socials_dates, other_socials_dates).sort
   end
 
+  # work out if all the dates are in the past or there are no dates and should be
 
   # TODO: should put these somewhere extending Date class
   def self.weekday_name(d) 
