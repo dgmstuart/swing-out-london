@@ -15,6 +15,10 @@ table{
 	border-collapse:collapse;
 }
 
+/*TODO: Temp?*/
+table.events td.first{width:3.5em;}
+table.events td.last{width:5.5em;}
+
 th, td {
 	border: 1px solid black;
 	padding:5px;
@@ -32,16 +36,19 @@ td.center {
 	text-align:center;
 }
 
-td.actions {
-	width:100px;
-	border:none;
-}
+td.actions, th.actions{ border:none; }
 
 td.lines {
 	white-space:pre;
 }
 
-
+/*TODO- replace with proper colours!*/
+tr.out_of_date td.dates {
+	background-color:red;
+}
+tr.near_out_of_date td.dates {
+	background-color:orange;
+}
 
 /* NEW / EDIT / SHOW*/
 
