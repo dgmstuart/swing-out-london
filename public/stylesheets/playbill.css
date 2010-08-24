@@ -101,12 +101,12 @@ h3 {
 }
 
 #header h1 {
-    font-size:1.6em;
+    font-size:1.25em;
     margin-bottom: 30px ;
 }
 
 #header em {
-    font-size:2.53em;
+    font-size:3.24em;
     font-weight: bold;
     letter-spacing: 0;
     display:block;
@@ -253,7 +253,13 @@ p.flash {
     border-left: 3px solid #0F0F0F;
     padding-left:22px;
 }
-
+#key{
+    border-left: 3px solid #0F0F0F;
+    padding-left:32px;
+	padding-top:20px;
+	font-size:1.2em;
+	font-style:italic;
+}
 
 #classes ul.daylist h3{
     float:left;

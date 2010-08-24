@@ -1,62 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta name="author" content="Duncan Stuart"/>
-	
-	<title>Swing Out London - listings of Lindy Hop classes and socials</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-GB" />
+    <meta name="author" content="Duncan Stuart"/>
+    <meta name="description" content="SwingOut London is a listing of weekly Lindy Hop classes, regular socials and vintage clubs" />
+    
+    <title>Swing Out London - listings of Lindy Hop swing dance classes and socials</title>
 
-                <%= stylesheet_link_tag 'reset' %>
-                <!--[if lte IE 7 ]>
-                  <%= stylesheet_link_tag 'ie' %>
-                <![endif]-->
-		<%= stylesheet_link_tag 'playbill' %>
-		<%= stylesheet_link_tag 'cms' if @cms_page==true%>
-		<%= stylesheet_link_tag 'rails_errors' if @cms_page==true%>
-		
-		<link rel="profile" href="http://microformats.org/profile/hcalendar"/>
-		
+    <%= stylesheet_link_tag 'reset' %>
+    <!--[if lte IE 7 ]>
+    <%= stylesheet_link_tag 'ie' %>
+    <![endif]-->
+    <%= stylesheet_link_tag 'playbill' %>
+    <%= stylesheet_link_tag 'cms' if @cms_page==true%>
+    <%= stylesheet_link_tag 'rails_errors' if @cms_page==true%>
+        
+    <link rel="profile" href="http://microformats.org/profile/hcalendar"/>
+        
 </head>
 <body>
-  <div id="page">
+    <div id="page">
     
-  	<div id="header">
-      <h1>
-  			<em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
-      		Listings of classes and socials in London	
-  		</h1>
-    </div>
-  	
-  	<%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
-  	
-  	<%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
+        <div id="header">
+            <h1>
+                <em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
+                Listings of Lindy Hop classes and socials in London    
+            </h1>
+        </div>
+      
+        <%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
+        <%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
   
-  	<% content_tag(:div, :id => "content", :class => params[:action]) do %>
-  		<p class="flash"><%= flash[:notice] %></p>
-  		<%= yield %>
-  	<% end %>
+        <% content_tag(:div, :id => "content", :class => params[:action]) do %>
+              <p class="flash"><%= flash[:notice] %></p>
+              <%= yield %>
+        <% end %>
   
-  	<div id="footer"> 
-  		
-  		<div id="valid_icons">
-    		<a href="http://validator.w3.org/check?uri=referer" id="xhtml_icon">
-    		  <img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" />
-    	  </a>
-    	  <a href="http://jigsaw.w3.org/css-validator/check/referer" id="css_icon">
-          <img src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS" />
-        </a>
-  		</div>
-  		
-  		<address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a></address>
-  		
-  		<%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
-  			
-  	</div>
+        <div id="footer"> 
+          
+            <div id="valid_icons">
+                <a href="http://validator.w3.org/check?uri=referer" id="xhtml_icon">
+                    <img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" />
+                </a>
+                <a href="http://jigsaw.w3.org/css-validator/check/referer" id="css_icon">
+                    <img src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS" />
+                </a>
+            </div>
+          
+            <address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a></address>
+          
+            <%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
+              
+        </div>
 
   </div>
-
-  
+ 
 </body>
 </html>

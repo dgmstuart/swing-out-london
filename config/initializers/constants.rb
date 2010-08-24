@@ -7,6 +7,3 @@ LOGINS={
   "dgms" => "879851e2ad3d62ceceed2f74f2242ea8",
   "lancep" => "9a261213120510fcb48bb27d300f9815"
 }
-
-# Number of socials to show in the initial list
-INITIAL_SOCIALS = 14

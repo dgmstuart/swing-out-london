@@ -116,7 +116,6 @@ class Event < ActiveRecord::Base
   end
   
   def dates_rows
-    puts "ID=#{id}, #{title}"
     date_array(",\n")
   end
   
