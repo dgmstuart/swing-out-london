@@ -62,11 +62,11 @@ class Event < ActiveRecord::Base
   # ---------- #
   
   CLASS_TYPES = ['class', 'class with social']
-  SOCIAL_TYPES = ['social', 'social with class']
+  SOCIAL_TYPES = ['social', 'social with class', 'class with social', 'vintage club']
   HAS_CLASS_TYPES = ['class', 'class with social', 'social with class']
   
   def self.event_types
-    CLASS_TYPES + SOCIAL_TYPES
+    (CLASS_TYPES + SOCIAL_TYPES).uniq
   end
   
   def is_class?
@@ -116,6 +116,7 @@ class Event < ActiveRecord::Base
   end
   
   def dates_rows
+    puts "ID=#{id}, #{title}"
     date_array(",\n")
   end
   
@@ -164,6 +165,9 @@ class Event < ActiveRecord::Base
 
   private
 
+  # NOTE: this is a HORRIBLY inefficient way to build up the array, involving multiple passes and sorts. There must be a better way...
+
+
   # Get a hash of all dates in the selected range, and the list of all weekly socials occuring on that date
   def self.weekly_socials_dates
     #get an array of all the dates under consideration:
@@ -206,7 +210,10 @@ class Event < ActiveRecord::Base
 
   # merge two hashes of dates and socials, concatenating the lists of dates
   def self.merge_dates_hashes(hash1,hash2)
-    hash1.merge(hash2) {|key, val1, val2| val1 + val2}
+    hash1.merge(hash2) do |key, val1, val2| 
+      #have two sorted segments, but need to sort the result...
+      (val1 + val2).sort{|a,b| a.title <=> b.title}
+    end
   end  
 
   def self.date_array

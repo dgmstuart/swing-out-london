@@ -1,12 +1,11 @@
 body {
-	font-family: 'Trebuchet MS', Helvetica, Arial, Sans-serif ;
+	font-family: Futura, "Tw Cen MT", "Century Gothic", Avenir, sans-serif;
 	color: #0F0F0F;	
 	background: transparent url('../images/flock_02_by_ZEBiii.jpg');
 	font-size:1.2em;
 }
 
 h1 {
-	font-family:  Futura, Helvetica, Arial, Sans-serif ;
 	text-transform: uppercase;
 	font-size:1.4em;
 }

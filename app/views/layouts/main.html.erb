@@ -8,12 +8,15 @@
 	
 	<title>Swing Out London - listings of Lindy Hop classes and socials</title>
 
-    <%= stylesheet_link_tag 'reset' %>
+                <%= stylesheet_link_tag 'reset' %>
+                <!--[if lte IE 7 ]>
+                  <%= stylesheet_link_tag 'ie' %>
+                <![endif]-->
 		<%= stylesheet_link_tag 'playbill' %>
 		<%= stylesheet_link_tag 'cms' if @cms_page==true%>
 		<%= stylesheet_link_tag 'rails_errors' if @cms_page==true%>
 		
-		<link rel="profile" href="http://microformats.org/profile/hcalendar">
+		<link rel="profile" href="http://microformats.org/profile/hcalendar"/>
 		
 </head>
 <body>
@@ -35,9 +38,18 @@
   		<%= yield %>
   	<% end %>
   
-  	<div id="footer">
+  	<div id="footer"> 
   		
-  		<address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a></address> 
+  		<div id="valid_icons">
+    		<a href="http://validator.w3.org/check?uri=referer" id="xhtml_icon">
+    		  <img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" />
+    	  </a>
+    	  <a href="http://jigsaw.w3.org/css-validator/check/referer" id="css_icon">
+          <img src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS" />
+        </a>
+  		</div>
+  		
+  		<address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a></address>
   		
   		<%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
   			

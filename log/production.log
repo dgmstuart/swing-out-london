@@ -7,3 +7,231 @@ ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: events: SE
   app/controllers/website_controller.rb:3:in `index'
 
 Rendering rescues/layout (internal_server_error)
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-29 23:07:34) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 236ms (View: 101, DB: 33) | 200 OK [http://localhost/]
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-29 23:34:31) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 196ms (View: 86, DB: 33) | 200 OK [http://localhost/]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:41:18) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 5427ms (View: 5426, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:41:23) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-29 23:47:42) [GET]
+
+ActionController::RoutingError (No route matches "/app/views/website/about.html.erb" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-07-29 23:47:56) [GET]
+
+ActionController::RoutingError (No route matches "/app/views/website/about" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:48:02) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 124ms (View: 116, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:33) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 10, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:35) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:36) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 11ms (View: 10, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:36) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:36) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 54ms (View: 54, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:37) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 12ms (View: 11, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:37) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 10, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:48) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 13ms (View: 12, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:49) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 12ms (View: 12, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:49) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:50) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 10, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:50) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:50) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 11ms (View: 11, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:50) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:51) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:51) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 12ms (View: 11, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:55:52) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 11ms (View: 11, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:56:19) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 103ms (View: 94, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:56:19) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 11ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:56:20) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 10, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-29 23:58:33) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 240ms (View: 98, DB: 52) | 200 OK [http://localhost/]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-29 23:58:34) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 11ms (View: 11, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-30 00:00:55) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 99ms (View: 96, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#fish (for 127.0.0.1 at 2010-07-30 00:01:02) [GET]
+
+ActionController::UnknownAction (No action responded to fish. Actions: index):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-30 00:01:27) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 265ms (View: 149, DB: 40) | 200 OK [http://localhost/]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-30 00:01:29) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 26ms (View: 26, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-30 00:01:31) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 197ms (View: 88, DB: 33) | 200 OK [http://localhost/]
+
+
+Processing WebsiteController#about (for 127.0.0.1 at 2010-07-30 00:01:32) [GET]
+Rendering template within layouts/main
+Rendering website/about
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/about]
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-30 00:01:33) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 195ms (View: 87, DB: 33) | 200 OK [http://localhost/]
+
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-30 00:05:26) [GET]
+Rendering template within layouts/main
+Rendering website/index
+Completed in 198ms (View: 87, DB: 35) | 200 OK [http://localhost/]

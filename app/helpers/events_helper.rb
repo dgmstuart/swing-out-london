@@ -6,7 +6,7 @@ module EventsHelper
   
   #move somewhere general?
   def row_tag(myclass, day=nil)       
-   	tag :li, {:class => add_todayclass(myclass, day)}, false
+   	tag :li, {:class => add_todayclass(myclass, day)}, true
   end
   
   # add an extra event if today is the target day or date
@@ -28,13 +28,13 @@ module EventsHelper
   
   def today_label(d)
   	if is_today(d)
-      content_tag :span, "Today", :id => "today_label"
+      content_tag :span, "Today", :class => "today_label"
     end
   end
   
   def tomorrow_label(d)
   	if is_tomorrow(d)
-      content_tag :span, "Tomorrow", :id => "tomorrow_label"
+      content_tag :span, "Tomorrow", :class => "tomorrow_label"
     end
   end
   
@@ -57,6 +57,9 @@ module EventsHelper
   def social_link(event)
     event_title_class = "social_title"
     event_details_class = "social_details"
+    
+    #Highlight socials which are monthly or more infrequent:
+    event_title_class += " social_highlight" if event.frequency == 0 || event.frequency >= 4
     
     event_title = event.title 
     #If this is empty, something has gone wrong, and we shouldn't be displaying anything. Catch this earlier.
@@ -130,11 +133,7 @@ module EventsHelper
       title = event.venue.compass_text
       compass = event.venue.compass 
     end
-    
-    #TEMPORARY
-    compass = link_to compass, event
-    #END OF TEMPORARY
-     
+         
     content_tag :abbr, :title => title, :class => "compass" do
       compass
     end
