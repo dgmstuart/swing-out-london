@@ -155,17 +155,6 @@ module EventsHelper
     date.strftime("%A #{date.day.ordinalize} %B") # e.g. "Sunday 2nd March"
   end
   
-  # Assign a class to an event row to show whether it is out of date or not
-  def event_row_tag(event) 
-    if event.out_of_date
-      class_hash = {:class => "out_of_date"} 
-    elsif event.near_out_of_date
-      class_hash = {:class => "near_out_of_date"}
-    end
-    tag :tr, class_hash, true
-  end
-  
-  
   # ------- #
   # SELECTS #
   # ------- #
