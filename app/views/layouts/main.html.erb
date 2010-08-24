@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="Duncan Stuart"/>
+	
+	<title>Swing Out London - listings of Lindy Hop classes and socials</title>
+
+    <%= stylesheet_link_tag 'reset' %>
+		<%= stylesheet_link_tag 'playbill' %>
+		<%= stylesheet_link_tag 'cms' if @cms_page==true%>
+		<%= stylesheet_link_tag 'rails_errors' if @cms_page==true%>
+		
+		<link rel="profile" href="http://microformats.org/profile/hcalendar">
+		
+</head>
+<body>
+  <div id="page">
+    
+  	<div id="header">
+      <h1>
+  			<em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
+      		Listings of classes and socials in London	
+  		</h1>
+    </div>
+  	
+  	<%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
+  	
+  	<%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
+  
+  	<% content_tag(:div, :id => "content", :class => params[:action]) do %>
+  		<p class="flash"><%= flash[:notice] %></p>
+  		<%= yield %>
+  	<% end %>
+  
+  	<div id="footer">
+  		
+  		<address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a></address> 
+  		
+  		<%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
+  			
+  	</div>
+
+  </div>
+
+  
+</body>
+</html>

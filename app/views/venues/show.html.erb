@@ -1,0 +1,42 @@
+<ol class="show">
+	<li>
+		<span>Name:</span>
+		<%=h @venue.name %>
+	</li>
+
+	<li>
+		<span>Address:</span>
+		<%=h @venue.address %>
+	</li>
+
+	<li>
+		<span>Postcode:</span>
+		<%=h @venue.postcode %>
+	</li>
+	
+	<li>
+		<span>Area:</span>
+		<%=h @venue.area %>
+	</li>
+	
+	<li>
+		<span>NSEW:</span>
+		<%=h @venue.compass_text %>
+	</li>
+	
+	<li>
+		<span>Nearest tube:</span>
+		<%=h @venue.nearest_tube %>
+	</li>
+
+	<li>
+		<span>Website:</span>
+		<%=h @venue.website %>
+	</li>
+</ol>
+
+<div class="actions">
+	<%= link_to 'Edit', edit_venue_path(@venue) %> |
+	<%= link_to 'List', venues_path %> |
+	<%= link_to 'New venue', new_venue_path %>
+</div>

@@ -1,0 +1,40 @@
+body {
+	font-family: 'Trebuchet MS', Helvetica, Arial, Sans-serif ;
+	color: #0F0F0F;	
+	background: transparent url('../images/flock_02_by_ZEBiii.jpg');
+	font-size:1.2em;
+}
+
+h1 {
+	font-family:  Futura, Helvetica, Arial, Sans-serif ;
+	text-transform: uppercase;
+	font-size:1.4em;
+}
+
+p {
+	margin-top:20px;
+}
+
+a {
+	text-decoration:none;
+	color:#384F6E;	
+}
+a:hover {border-bottom:solid 2px;}
+
+
+#page {
+	background: #FEE6B8 none;
+	margin: 100px auto;
+	width: 900px;
+	padding:40px;
+}
+
+#box {
+	padding:40px;
+	border: 20px double #0F0F0F;
+	text-align:center;
+}
+
+
+
+

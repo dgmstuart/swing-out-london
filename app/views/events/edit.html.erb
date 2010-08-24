@@ -1,0 +1,8 @@
+<h1>Editing event</h1>
+
+<%=render :partial => "new_or_edit_fields", :locals => {:action => "Update" } %>
+
+<div class="actions">
+	<%= link_to 'Show', @event %> |
+	<%= link_to 'Cancel', events_path %>
+</div>

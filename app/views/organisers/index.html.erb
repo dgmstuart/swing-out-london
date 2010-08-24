@@ -1,0 +1,26 @@
+<h1>Listing organisers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Website</th>
+    <th>Description</th>
+  </tr>
+
+<% @organisers.each do |organiser| %>
+  <tr>
+    <td><%=h organiser.name %></td>
+    <td><%=h organiser.website %></td>
+    <td><%=h organiser.description %></td>
+    <td class="actions">
+		<%= link_to 'Show', organiser %>
+	    <%= link_to 'Edit', edit_organiser_path(organiser) %>
+	    <%= link_to 'Destroy', organiser, :confirm => 'Are you sure?', :method => :delete %>
+	</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New organiser', new_organiser_path %>

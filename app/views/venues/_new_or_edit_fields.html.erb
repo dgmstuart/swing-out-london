@@ -1,0 +1,37 @@
+<% form_for(@venue) do |f| %>
+<%= f.error_messages %>
+
+<ol>
+	<li>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</li>
+	<li>
+		<%= f.label :address %>
+		<%= f.text_area :address %>
+	</li>
+	<li>
+		<%= f.label :postcode %>
+		<%= f.text_field :postcode %>
+	</li>
+	<li>
+		<%= f.label :area %>
+		<%= f.text_field :area %>
+	</li>
+	<li>
+		<%= f.label :nearest_tube %>
+		<%= f.text_field :nearest_tube %>
+	</li>
+	<li>
+		<%= f.label :compass %>
+		<%= compass_dropdown(f) %>
+	</li>
+	<li>
+		<%= f.label :website %>
+		<%= f.text_field :website %>
+	</li>
+	<li>
+		<%= f.submit action %>
+	</li>
+</ol>
+<% end %>

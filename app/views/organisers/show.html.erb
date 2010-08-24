@@ -1,0 +1,21 @@
+<ol class="show">
+	<li>
+		<span>Name:</span>
+		<%=h @organiser.name %>
+	</li>
+
+	<li>
+		<span>Website:</span>
+		<%=h @organiser.website %>
+	</li>
+
+	<li>
+		<span>Description:</span>
+		<%=h @organiser.description %>
+	</li>
+</ol>
+
+<div class="actions">
+	<%= link_to 'Edit', edit_organiser_path(@organiser) %> |
+	<%= link_to 'Back', organisers_path %>
+</div>

@@ -1,0 +1,9 @@
+# Logfile created on Thu Jul 29 23:00:33 +0100 2010
+
+Processing WebsiteController#index (for 127.0.0.1 at 2010-07-29 23:00:52) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: events: SELECT * FROM "events"  ORDER BY title ASC):
+  app/models/event.rb:133:in `classes'
+  app/controllers/website_controller.rb:3:in `index'
+
+Rendering rescues/layout (internal_server_error)

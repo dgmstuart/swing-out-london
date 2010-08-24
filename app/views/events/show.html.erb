@@ -1,0 +1,73 @@
+<ol class="show">
+	<li>
+		<span>Title:</span>
+		<%=h @event.title %>
+	</li>
+	<li>
+		<span>Venue:</span>
+		<%= venue_link(@event) %>
+	</li>
+	<li>
+		<span>Organiser:</span>
+		<%= organiser_link(@event) %>
+	</li>
+	<li>
+		<span>Event type:</span>
+		<%=h @event.event_type %>
+	</li>
+	<li>
+		<span>Description:</span>
+		<%=h @event.description %>
+	</li>
+	
+	<% if @event.is_social? %>
+	<li>
+		<span>Music style:</span>
+		<%=h @event.music_style %>
+	</li>
+	<% end %>
+	
+	<% if @event.has_class? %>
+	<li>
+		<span>Class style:</span>
+		<%=h @event.class_style %>
+	</li>
+	<% end %>
+
+	<li>
+		<span>Day:</span>
+		<%=h @event.day %>
+	</li>
+	<li>
+		<span>Frequency:</span>
+		<%=h @event.frequency_text %>
+	</li>
+	
+	<% unless @event.frequency ==1 then %>
+	<li>
+		<span>Dates:</span>
+		<%=h @event.dates %>
+	</li>
+	<% end %>
+	
+	<li>
+		<span>Timing details:</span>
+		<%=h @event.timing_details %>
+	</li>
+	<li>
+		<span>Pricing details:</span>
+		<%=h @event.pricing_details %>
+	</li>
+	
+	<li>
+		<span>Url:</span>
+		<%= link_to @event.url, @event.url %>
+	</li>
+	
+</ol>
+
+<div class="actions">
+	<%= link_to 'Edit', edit_event_path(@event) %> |
+	<%= link_to 'List', events_path %> |
+	<%= link_to 'New event', new_event_path %>
+</div>

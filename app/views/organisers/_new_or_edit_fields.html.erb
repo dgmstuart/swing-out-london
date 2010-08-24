@@ -1,0 +1,22 @@
+<% form_for(@organiser) do |f| %>
+<%= f.error_messages %>
+
+<ol>
+	<li>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</li>
+	<li>
+		<%= f.label :website %>
+		<%= f.text_field :website %>
+	</li>
+	<li>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</li>
+	<li>
+		<%= f.submit action %>
+	</li>
+</ol>
+
+<% end %>
