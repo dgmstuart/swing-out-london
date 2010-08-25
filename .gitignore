@@ -1,4 +1,4 @@
-g/*.log
+log/*.log
 tmp/**/*
 Capfile
 doc/api

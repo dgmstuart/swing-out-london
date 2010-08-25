@@ -167,8 +167,6 @@ class Event < ActiveRecord::Base
     merge_dates_hashes(weekly_socials_dates, other_socials_dates).sort
   end
 
-  # work out if all the dates are in the past or there are no dates and should be
-
   # TODO: should put these somewhere extending Date class
   def self.weekday_name(d) 
     Date::DAYNAMES[d.wday]
@@ -181,7 +179,6 @@ class Event < ActiveRecord::Base
     logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
     return
   end
-
 
 
   private
