@@ -339,8 +339,10 @@ li.today .compass {
 }
 
 #mission_statement, #scope {
-    width:450px;
+    width:447px;
     float:left;
+		position:relative;
+    left:3px;
     padding-right:50px;
     border-right: 3px solid #0F0F0F;
 }
