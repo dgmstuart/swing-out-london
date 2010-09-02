@@ -15,6 +15,7 @@ class Event < ActiveRecord::Base
   UNKNOWN_DATE = "Unknown"
   UNKNOWN_VENUE = "Venue Unknown"
   UNKNOWN_ORGANISER = "Unknown"
+  WEEKLY = "Weekly"
   SEE_WEB = "(See Website)"
 
   def class_style
@@ -98,7 +99,7 @@ class Event < ActiveRecord::Base
   
   def date_array(sep=nil)
     # Weekly events don't have dates
-    return NOTAPPLICABLE if frequency == 1
+    return WEEKLY if frequency == 1
     
     if sep.nil?
       #return an array
@@ -138,7 +139,7 @@ class Event < ActiveRecord::Base
   
   # Helper function for comparing event dates to a reference date
   def out_of_date_test(comparison_date)
-    return false if date_array == NOTAPPLICABLE
+    return false if date_array == WEEKLY
     date_array.each {|d| return false if d > comparison_date }
     true
   end
