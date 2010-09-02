@@ -334,11 +334,14 @@ li.date_row li, li.day_row li {
   margin-bottom:0.5em;
 }
 
-li.day_row, li.date_row {padding:0.6em 10px 0.3em 10px;}
+li.day_row, li.date_row {
+	padding:0.6em 10px 0.3em 10px;
+	line-height:1.4em;
+}
 
 /* Padding between rows*/
 li.day_row li, li.date_row li {
-  margin-bottom:0.3em;
+  margin-bottom:0.6em;
 }
 li.day_row a, li.date_row a {color: #0F0F0F;}
 
