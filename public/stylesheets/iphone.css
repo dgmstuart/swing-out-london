@@ -1,0 +1,387 @@
+/*/* RESET  */
+/* By Eric Meyer: http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+body {
+	line-height: 1;
+	color: black;
+	background: white;
+}
+ol, ul {
+	list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+
+/* END RESET */
+
+
+
+body {
+  font-family: Futura, sans-serif;
+  color: #0F0F0F;
+	width:340px;
+}
+
+#content {
+  font-size: 0.875em;/* = 14px */
+}
+
+a {
+  text-decoration:none;
+  color:#384F6E;	
+}
+
+
+/* ABOVE HERE!!!!!!!!!!!!!!!!!*/
+
+
+
+a:hover {border-bottom:solid 2px;}
+
+p, li, h2 {
+  line-height:1.5em;
+}
+
+p {
+  text-align:justify;
+  margin-bottom:0.8em;
+}
+
+p em {font-style:italic}
+
+q:before, q:after {
+  content:'"';
+}
+
+ul.textlist {
+  list-style-type: disc;
+  padding-left:3em;
+}
+
+ul.indent {
+  list-style-type: square;
+}
+
+ul.textlist li {
+  padding-left: 0.5em;
+}
+
+h1, h2, ul.navigation, .compass {
+  text-transform: uppercase;
+}
+
+h1, h2 em, ul.navigation {
+  letter-spacing: 0.1em;
+}
+
+
+
+h2 {
+  font-size:1.4em;
+}
+
+h2 em {
+  font-size:1.83em;
+  display:block;
+}
+
+h3 {
+  font-weight:bold;
+}
+
+
+/* LAYOUT */
+
+#title {
+  padding: 20px;
+}
+
+#page {
+		background: #FEE6B8 none;
+}
+
+#content {
+  clear:left;
+  margin:0 10px;
+}
+
+.about {
+  padding:0 20px 0 20px;
+}
+
+
+/* HEADER */
+
+#header {
+  text-align:center;
+}
+
+#header h1 {
+  font-size:0.9em;
+	padding:25px;
+	line-height:1.1em;
+}
+
+#header em {
+  font-size:3.24em;
+  letter-spacing: 0;
+	line-height:1em;
+	display:block;
+  margin-bottom:0.5em;
+}
+
+#header a {color:#0F0F0F;}
+#header a:hover {border:none;}
+
+
+/*NAVIGATION*/
+
+ul.navigation {list-style-type:none;}
+
+#main_nav, #admin_nav {
+  margin:0 50px;
+  text-align:center;
+}
+
+#admin_nav {
+  padding:1em 0;
+}
+
+#main_nav {
+  padding:1em 0 40px 0;
+  border-bottom: 3px solid #0F0F0F;
+}
+
+
+ul.navigation a {color: #0F0F0F;}
+
+#main_nav a, #admin_nav a {padding: 10px;} /*added here so we can take it away when we apply the border*/
+
+#main_nav a:hover, #admin_nav a:hover {
+  text-decoration:none;
+  padding: 8px;
+  border: 2px solid #0F0F0F;
+}
+
+#main_nav .current, #admin_nav .current {
+  padding: 8px;
+  border: 6px double #0F0F0F;
+}
+
+#footer_nav a:hover {
+  border-bottom: 1px solid #0F0F0F;
+}
+
+#footer_nav .current {
+  padding: 5px;
+  border: 1px solid #0F0F0F;
+}
+
+#main_nav li, #admin_nav li { border-left:3px solid #0F0F0F;}
+
+#footer_nav li { border-left:1px solid #0F0F0F;}
+
+#main_nav li:first-child, #admin_nav li:first-child, #footer_nav li:first-child {
+  border:none;
+  padding-left:0;
+}
+
+.navigation li {
+  display:inline;
+  margin:0 0.5em 0 0;
+  padding:0 0 0 1em;
+}
+
+
+
+/* FOOTER */
+
+#footer {
+	text-align:center;
+	padding: 1em 0;
+  font-size:0.8em;
+  margin: 1em 40px 0;
+  border-top: 3px solid #0F0F0F;
+}
+
+#footer_nav {
+	padding:1em 0 3em;
+}
+
+
+address {
+	position:relative;
+	top:4em; height:0;
+	padding:0
+}
+
+#valid_icons {
+  display:none;
+}
+
+
+
+/* INDEX PAGE */
+
+#classes {
+} 
+#socials {
+}
+
+
+#classes h2, #socials h2 {
+  text-align:center;
+  text-transform:none;
+  margin:25px 10px 0;
+}
+.index h2 em { text-transform:uppercase;}
+
+
+#classes ul.daylist, #socials ul.datelist {
+  margin-top:1.2em;
+}
+
+#key {
+	padding:20px 10px 0;
+	font-size:1em;
+	font-style:italic;
+}
+
+li.date_row li, li.day_row li {
+  padding-left:3px;/*to account for the border we apply when it's today*/
+}
+
+#socials ul.datelist h3, #classes ul.daylist h3 {
+	display:block;
+  text-align:center;
+  margin-bottom:0.5em;
+}
+
+li.day_row, li.date_row {
+	padding:0.6em 10px 0.3em 10px;
+	line-height:1.4em;
+}
+
+/* Padding between rows*/
+li.day_row li, li.date_row li {
+  margin-bottom:0.6em;
+}
+li.day_row a, li.date_row a {color: #0F0F0F;}
+
+li.today { border: 3px dashed #0F0F0F;}
+li.today li {padding:0;}
+
+.today_label, .tomorrow_label {text-transform: uppercase;}
+
+li.date_row .today_label, li.date_row .tomorrow_label {letter-spacing: 0.1em}
+li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
+
+li.day_row .today_label {
+  text-align:center;
+	font-size:1.2em;
+  letter-spacing: 0.5em;
+	position:relative;
+	height:0;
+	width:0;
+	float:left;
+}
+
+.compass {
+  font-size:0.9em;
+  width:1.6em;
+  line-height:1.6em;
+  text-align:center;
+  margin:0 3px 0 1.5em;
+  border: 1px solid #0F0F0F;
+  float:right;
+}
+
+li.today .compass {
+  margin-right:0;/*to line up the compass elements*/
+}
+
+.social_title { font-weight: bold;}
+.social_details { font-style: italic;}
+.social_details:before { content:"- ";}
+.social_highlight { color:#CC0000 }
+
+
+#caveat {
+	padding:0.8em;
+  font-size: 1em;
+}
+#caveat strong {text-transform: uppercase;}
+
+/* ABOUT PAGE */
+
+
+.about h2 {
+  margin-bottom:10px;
+  text-align:center;
+}
+
+#mission_statement {
+	margin-top:20px;
+}
+
+#about_me, #about_lindy {
+
+}
+
+#about_me, #about_lindy, #colophon {
+  margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
+}
+
+#mission_statement, #scope {
+  margin-bottom: 1.5em;/* 1.5 = (2.3 - 0.8)*/
+}
+
+#colophon h2,{
+  padding-top:1.6em;/* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
+  border-top: 3px solid #0F0F0F;
+}
+
+#mission_statement em {
+  display:block;
+  margin-top:0.8em;
+  padding-left:30px;
+  font-style: italic;
+  font-size:1.2em;
+}
