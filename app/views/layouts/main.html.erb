@@ -13,8 +13,8 @@
     <!--[if lte IE 7 ]>
     <%= stylesheet_link_tag 'ie' %>
     <![endif]-->
-    <%= stylesheet_link_tag 'main' :media=>"screen and (min-device-width: 481px)"%>
-    <%= stylesheet_link_tag 'iphone' :media=>"only screen and (max-device-width: 480px)"%>
+    <%= stylesheet_link_tag 'main', :media=>"screen and (min-device-width: 481px)"%>
+    <%= stylesheet_link_tag 'iphone', :media=>"only screen and (max-device-width: 480px)"%>
     <%= stylesheet_link_tag 'cms' if @cms_page==true%>
         
     <link rel="profile" href="http://microformats.org/profile/hcalendar"/>
