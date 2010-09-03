@@ -118,12 +118,11 @@ h2 {
 
 h2 em {
   font-size:1.83em;/*increase*/
-  font-weight:bold;
   display:block;
 }
 
 h3 {
-  font-weight:bold;
+  font-size:1.3em;
 }
 
 
@@ -140,7 +139,7 @@ h3 {
 
 #content {
   clear:left;
-  margin:35px 30px 50px 30px;
+  margin:35px 30px 50px 27px;
 }
 
 .about {
@@ -157,12 +156,11 @@ h3 {
 
 #header h1 {
   font-size:1.25em;
-  margin-bottom: 30px ;
+  margin-bottom: 30px;
 }
 
 #header em {
   font-size:3.24em;
-  font-weight: bold;
   letter-spacing: 0;
   display:block;
   margin-bottom:30px;
@@ -277,14 +275,14 @@ p.flash {
 /* INDEX PAGE */
 
 #classes {
-  width:418px;
-  float: left;
+  width:421px;
+  float:left;
   position:relative;
   left:3px;
 } 
 #socials {
   width:422px;
-  margin-left:418px;
+  margin-left:421px;
 }
 
 
@@ -299,7 +297,7 @@ p.flash {
 #classes ul.daylist, #socials ul.datelist {
   margin-top:1.2em;
 }
-/*double up the borders, so it will always cover both lists:*/
+
 #classes ul.daylist {
   border-right: 3px solid #0F0F0F;
   padding-right:22px;
@@ -376,7 +374,7 @@ li.today .compass {
   margin-right:0;/*to line up the compass elements*/
 }
 
-.social_title { font-weight: bold;}
+.social_title { font-size:1.2em;}
 .social_details { font-style: italic;}
 .social_details:before { content:"- ";}
 .social_highlight { color:#CC0000 }
@@ -399,7 +397,7 @@ li.today .compass {
 #mission_statement, #scope {
   width:447px;
   float:left;
-		position:relative;
+  position:relative;
   left:3px;
   padding-right:50px;
   border-right: 3px solid #0F0F0F;

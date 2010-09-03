@@ -9,44 +9,44 @@ small, strike, strong, sub, sup, tt, var,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-weight: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	font-family: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
 }
 /* remember to define focus styles! */
 :focus {
-	outline: 0;
+  outline: 0;
 }
 
 body {
-	line-height: 1;
-	color: black;
-	background: white;
+  line-height: 1;
+  color: black;
+  background: white;
 }
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 /* tables still need 'cellspacing="0"' in the markup */
 table {
-	border-collapse: separate;
-	border-spacing: 0;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 caption, th, td {
-	text-align: left;
-	font-weight: normal;
+  text-align: left;
+  font-weight: normal;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: "";
+  content: "";
 }
 blockquote, q {
-	quotes: "" "";
+  quotes: "" "";
 }
 
 /* END RESET */
@@ -56,7 +56,7 @@ blockquote, q {
 body {
   font-family: Futura, sans-serif;
   color: #0F0F0F;
-	width:320px;
+  width:320px;
 }
 
 #content {
@@ -65,7 +65,7 @@ body {
 
 a {
   text-decoration:none;
-  color:#384F6E;	
+  color:#384F6E;  
 }
 
 
@@ -130,7 +130,7 @@ h2 em {
 }
 
 #page {
-		background: #FEE6B8 none;
+    background: #FEE6B8 none;
 }
 
 #content {
@@ -150,15 +150,15 @@ h2 em {
 
 #header h1 {
   font-size:0.8em;
-	padding:25px;
-	line-height:1.1em;
+  padding:25px;
+  line-height:1.1em;
 }
 
 #header em {
   font-size:3.24em;
   letter-spacing: 0;
-	line-height:1em;
-	display:block;
+  line-height:1em;
+  display:block;
   margin-bottom:0.5em;
 }
 
@@ -229,22 +229,22 @@ ul.navigation a {color: #0F0F0F;}
 /* FOOTER */
 
 #footer {
-	text-align:center;
-	padding: 1em 0;
+  text-align:center;
+  padding: 1em 0;
   font-size:0.8em;
   margin: 1em 40px 0;
   border-top: 3px solid #0F0F0F;
 }
 
 #footer_nav {
-	padding:1em 0 3em;
+  padding:1em 0 3em;
 }
 
 
 address {
-	position:relative;
-	top:4em; height:0;
-	padding:0
+  position:relative;
+  top:4em; height:0;
+  padding:0
 }
 
 #valid_icons {
@@ -254,12 +254,6 @@ address {
 
 
 /* INDEX PAGE */
-
-#classes {
-} 
-#socials {
-}
-
 
 #classes h2, #socials h2 {
   text-align:center;
@@ -274,9 +268,9 @@ address {
 }
 
 #key {
-	padding:20px 10px 0;
-	font-size:1em;
-	font-style:italic;
+  padding:20px 10px 0;
+  font-size:1em;
+  font-style:italic;
 }
 
 li.date_row li, li.day_row li {
@@ -284,14 +278,17 @@ li.date_row li, li.day_row li {
 }
 
 #socials ul.datelist h3, #classes ul.daylist h3 {
-	display:block;
+  display:block;
   text-align:center;
   margin-bottom:0.5em;
+  font-size:1.2em;
 }
 
+.social_title { font-size:1.1em;}
+.social_details {font-size:0.9em;}
 li.day_row, li.date_row {
-	padding:0.6em 10px 0.3em 10px;
-	line-height:1.4em;
+  padding:0.6em 10px 0.3em 10px;
+  line-height:1.4em;
 }
 
 /* Padding between rows*/
@@ -310,12 +307,12 @@ li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
 
 li.day_row .today_label {
   text-align:center;
-	font-size:1.2em;
+  font-size:1.2em;
   letter-spacing: 0.5em;
-	position:relative;
-	height:0;
-	width:0;
-	float:left;
+  position:relative;
+  height:0;
+  width:0;
+  float:left;
 }
 
 .compass {
@@ -338,7 +335,7 @@ li.today .compass {
 
 
 #caveat {
-	padding:0.8em;
+  padding:0.8em;
   font-size: 1em;
 }
 #caveat strong {text-transform: uppercase;}
@@ -352,24 +349,11 @@ li.today .compass {
 }
 
 #mission_statement {
-	margin-top:20px;
+  margin-top:20px;
 }
 
-#about_me, #about_lindy {
-
-}
-
-#about_me, #about_lindy, #colophon {
-  margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
-}
-
-#mission_statement, #scope {
-  margin-bottom: 1.5em;/* 1.5 = (2.3 - 0.8)*/
-}
-
-#colophon h2,{
-  padding-top:1.6em;/* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
-  border-top: 3px solid #0F0F0F;
+#about_me, #about_lindy, #colophon, #mission_statement, #scope {
+  margin-bottom:2.0em;
 }
 
 #mission_statement em {
@@ -379,3 +363,5 @@ li.today .compass {
   font-style: italic;
   font-size:1.2em;
 }
+
+#colophon li {text-align: justify;}
