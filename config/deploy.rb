@@ -13,4 +13,8 @@ role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 
+set :keep_releases, 4
+after 'deploy:update', 'deploy:cleanup'
+
+
 
