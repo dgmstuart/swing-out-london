@@ -2,64 +2,75 @@
 <%= f.error_messages %>
 
 <ol>
-	<!-- WHAT? -->
-	<li>
-		<%= f.label :title %>
-		<%= f.text_field :title %>
-	</li>
-	<li>
-		<%= f.label :venue %>
-		<%= f.select :venue_id, venue_select, {:include_blank => true} %>
-		<%= link_to 'New Venue', new_venue_path %>
-	</li>
-	<li>
-		<%= f.label :organiser %>
-		<%= f.select :organiser_id, organiser_select, {:include_blank => true} %>
-		<%= link_to 'New Organiser', new_organiser_path %>
-	</li>
-	<li>
-		<%= f.label :event_type %>
-		<%= f.select :event_type, event_type_select, {:include_blank => true} %>
-	</li>
-	<li>
-		<%= f.label :description %>
-		<%= f.text_area :description %>
-	</li>
-	<li>
-		<%= f.label :music_style %>
-		<%= f.text_area :music_style %>
-	</li>
-	<li>
-		<%= f.label :class_style %>
-		<%= f.text_area :class_style %>
-	</li>
-	
-	<!-- WHEN? -->
-	<li>
-		<%= f.label :day %>
-		<%= f.select :day, DAYNAMES %>
-		every <%= f.text_field :frequency, :size => 2, :class =>"two" %> weeks
-	</li>
-	<li>
-		<%= f.label :dates %>
-		<%= f.text_field :date_array, :value => @event.dates %>
-	</li>
-	<li>
-		<%= f.label :timing_details %>
-		<%= f.text_area :timing_details, :class => "narrow" %>
-	</li>
-	<li>
-		<%= f.label :pricing_details %>
-		<%= f.text_area :pricing_details, :class => "narrow" %>
-	</li>
-	
-	
-	<li>
-		<%= f.label :url %>
-		<%= f.text_field :url %>
-	</li>
-	<li>
-		<%= f.submit action %>
-	</li>
+    <!-- WHAT? -->
+    <li>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </li>
+    <li>
+        <%= f.label :venue %>
+        <%= f.select :venue_id, venue_select, {:include_blank => true} %>
+        <%= link_to 'New Venue', new_venue_path %>
+    </li>
+    <li>
+        <%= f.label :organiser %>
+        <%= f.select :organiser_id, organiser_select, {:include_blank => true} %>
+        <%= link_to 'New Organiser', new_organiser_path %>
+    </li>
+    <li>
+        <%= f.label :event_type %>
+        <%= f.select :event_type, event_type_select, {:include_blank => true} %>
+    </li>
+    <li>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+    </li>
+    <li>
+        <%= f.label :music_style %>
+        <%= f.text_area :music_style %>
+    </li>
+    <li>
+        <%= f.label :class_style %>
+        <%= f.text_area :class_style %>
+    </li>
+    
+    <!-- WHEN? -->
+    <li>
+        <%= f.label :day %>
+        <%= f.select :day, DAYNAMES %>
+        every <%= f.text_field :frequency, :size => 2, :class =>"shortfield" %> weeks
+    </li>
+    <li>
+        <%= f.label :dates %>
+        <%= f.text_field :date_array, :value => @event.dates %>
+    </li>
+    <li>
+        <%= f.label :cancelled_dates %>
+        <%= f.text_field :cancellation_array, :value => @event.cancelled_dates %>
+    </li>
+    <li>
+        <%= f.label :first_date %>
+        <%= f.text_field :first_date, :size => 10, :style => "float:left;", :class =>"shortfield" %>
+        <%= f.label :last_date, nil, :class => "inline_label" %>
+        <%= f.text_field :last_date, :size => 10, :class =>"shortfield"%>
+    </li>
+    
+    <li>
+        <%= f.label :timing_details%>
+        <%= f.text_area :timing_details, :class => "narrow" %>
+    </li>
+    <li>
+        <%= f.label :pricing_details%>
+        <%= f.text_area :pricing_details, :class => "narrow" %>
+    </li>
+    
+    
+    <li>
+        <%= f.label :url %>
+        <%= f.text_field :url %>
+    </li>
+    <li>
+        <%= f.submit action %>
+    </li>
 </ol>
 <% end %>

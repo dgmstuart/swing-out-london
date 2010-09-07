@@ -9,3 +9,11 @@ LOGINS={
 }
 
 INITIAL_SOCIALS=14
+
+# events etc:
+NOTAPPLICABLE = "n/a"
+UNKNOWN_DATE = "Unknown"
+UNKNOWN_VENUE = "Venue Unknown"
+UNKNOWN_ORGANISER = "Unknown"
+WEEKLY = "Weekly"
+SEE_WEB = "(See Website)"

@@ -60,7 +60,12 @@ input[type="text"] {
 	width:30em;
 }
 
-input.two{
+label.inline_label{
+  width: inherit;
+  float:none;
+  padding-left: 2em;
+}
+input.shortfield{
 	width:inherit;
 }
 textarea {

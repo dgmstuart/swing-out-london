@@ -7,16 +7,9 @@ class Event < ActiveRecord::Base
   default_scope :order => 'title ASC' #sets default search order
   
   serialize :date_array
+  serialize :cancellation_array
   
   validates_presence_of :title
-
-
-  NOTAPPLICABLE = "n/a"
-  UNKNOWN_DATE = "Unknown"
-  UNKNOWN_VENUE = "Venue Unknown"
-  UNKNOWN_ORGANISER = "Unknown"
-  WEEKLY = "Weekly"
-  SEE_WEB = "(See Website)"
 
   def class_style
     return NOTAPPLICABLE if read_attribute(:class_style).nil?
@@ -86,44 +79,42 @@ class Event < ActiveRecord::Base
   # Dates #
   # ----- #
 
-  #interpret a comma separated strings as dates
   def date_array=(date_string)
-    if date_string == UNKNOWN_DATE #this is equivalent to empty
-      string_array = [] 
-    else
-      string_array = date_string.split(',')
-    end
-    
-    self[:date_array]= string_array.collect { |d| uk_date_from_string(d) }.sort
+    self[:date_array]=DateArray.parse(date_string)
   end
-  
+
+  def cancellation_array=(date_string)
+    self[:cancellation_array]=DateArray.parse(date_string)
+  end
+
   def date_array(sep=nil)
-    # Weekly events don't have dates
+    # Weekly events don't have dates 
     return WEEKLY if frequency == 1
-    
-    if sep.nil?
-      #return an array
-      return [] if self[:date_array].nil? || self[:date_array].empty?
-      self[:date_array]
-    else  
-      #return a string
-      return UNKNOWN_DATE if self[:date_array].nil? || self[:date_array].empty?
-      self[:date_array].collect{ |d| d.to_s(:uk_date) }.join(sep) unless sep.nil?
-    end
+
+    DateArray.new(self[:date_array]).output(sep) 
   end
-   
+
+  def cancellation_array(sep=nil)
+    DateArray.new(self[:cancellation_array]).output(sep) 
+  end
+
   def dates
     date_array(', ')
   end
-  
+   
   def dates_rows
     date_array(",\n")
   end
   
-  def next_date
-    date_array[0].to_s(:uk_date)
+  def cancelled_dates
+    cancellation_array(', ')
   end
-  
+   
+  def cancelled_dates_rows
+    cancellation_array(",\n")
+  end
+   
+
   # Are all the dates for the event in the past?
   def out_of_date
     return true if date_array == UNKNOWN_DATE
@@ -172,11 +163,12 @@ class Event < ActiveRecord::Base
   def self.weekday_name(d) 
     Date::DAYNAMES[d.wday]
   end
-
+  
+  # TODO: should put these somewhere extending Date class
   def uk_date_from_string(date_string)    
     #HACK - to get around stupid date parsing not recognising UK dates
-    date_array = ParseDate.parsedate(date_string)
-    return Date.new(date_array[0], date_array[2], date_array[1]) unless (date_array[0].nil? || date_array[2].nil? || date_array[1].nil?)
+    date_part_array = ParseDate.parsedate(date_string)
+    return Date.new(date_part_array[0], date_part_array[2], date_part_array[1]) unless (date_part_array[0].nil? || date_part_array[2].nil? || date_part_array[1].nil?)
     logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
     return
   end
