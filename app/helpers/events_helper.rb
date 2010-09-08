@@ -45,18 +45,24 @@ module EventsHelper
   # LISTING ELEMENTS #
   # ---------------- #
   
-  def social_listing(social)
+  def social_listing(social, date)
     if social.title.nil? || social.title.empty?
       logger.error "ERROR: tried to display Event (id = #{social.id}) without a title"
       return 
     end
     
-    compass_point(social) + social_link(social)
+    compass_point(social) + social_link(social,date)
   end
   
-  def social_link(event)
+  def social_link(event, date)
     event_title_class = "social_title"
     event_details_class = "social_details"
+    
+    # Has the event been cancelled?
+    # TODO: this approach requires multiple passes through the cancellation_array... find a more efficient way
+    cancelled = event.cancellation_array.include?(date)
+    
+    event_cancelled_class = "social_cancelled"
     
     #Highlight socials which are monthly or more infrequent:
     event_title_class += " social_highlight" if event.frequency == 0 || event.frequency >= 4
@@ -78,15 +84,26 @@ module EventsHelper
     display = content_tag( :span, event_title, :class => event_title_class ) + " " + 
             content_tag( :span, event_details, :class => event_details_class )
     
+    # Add a label if the event is cancelled
+    display = content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " + display if cancelled
+    
     if event.url.nil?
-      display
+      #add a class to style the element
+      if cancelled
+        content_tag( :span, display, :class => event_cancelled_class )
+      else
+        display
+      end
     else
-      link_to display, event.url, :class => "url"
+      #add a class to style the link
+      class_string = "url"
+      class_string += " " + event_cancelled_class if cancelled
+      link_to display, event.url, :class => class_string
     end
     
   end
   
-  
+  #TODO - looks like it could be put in a funky new class...
   def swingclass_listing(swingclass)
     if swingclass.title.nil? || swingclass.title.empty?
       logger.error "ERROR: tried to display Social Class (id = #{swingclass.id}) without a title"
@@ -114,11 +131,15 @@ module EventsHelper
     display = event_title + " in " + event_details
     
     if event.url.nil?
-      content_tag( :span, display, :class => event_title_class )
+      output = content_tag( :span, display, :class => event_title_class )
     else
-      link_to( display, event.url, :class => event_title_class )
+      output = link_to( display, event.url, :class => event_title_class )
     end
     
+    # Add a cancellation message to the end
+    output += swingclass_cancelledmsg(event) unless event.cancellation_array.empty? 
+    
+    return output
   end
   
   
@@ -138,6 +159,11 @@ module EventsHelper
       compass
     end
     
+  end
+  
+  # Return a span containing a message about cancelled dates:
+  def swingclass_cancelledmsg(swingclass)
+    content_tag( :span, "Cancelled on #{swingclass.pretty_cancelled_dates}" , :class => "class_cancelled" )
   end
   
   # ------- #

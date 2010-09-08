@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100330000633) do
+ActiveRecord::Schema.define(:version => 20100906175422) do
 
 # Could not dump table "TEMP" because of following StandardError
 #   Unknown type '' for column 'id'
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20100330000633) do
     t.string   "class_style"
     t.string   "music_style"
     t.string   "description"
+    t.string   "cancellation_array"
+    t.date     "first_date"
+    t.date     "last_date"
   end
 
   create_table "organisers", :force => true do |t|
