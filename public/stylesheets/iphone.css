@@ -284,12 +284,28 @@ li.date_row li, li.day_row li {
   font-size:1.2em;
 }
 
+.class_cancelled  {
+  display:block;
+  font-style:italic;
+  padding-left:1em;
+  margin-right:1.5em;
+  color:#CC0000;
+}
+
 .social_title { font-size:1.1em;}
 .social_details {font-size:0.9em;}
 li.day_row, li.date_row {
   padding:0.6em 10px 0.3em 10px;
   line-height:1.4em;
 }
+
+.social_cancelled .cancelled_label {
+  color:#CC0000;
+  text-transform:uppercase;
+  font-size:1.1em;
+}
+
+.social_cancelled .social_title {color:inherit;}
 
 /* Padding between rows*/
 li.day_row li, li.date_row li {
