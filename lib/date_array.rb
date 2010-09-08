@@ -6,9 +6,10 @@ class DateArray
   end
   
   # return a list of date strings
-  def display(sep=nil)
+  def display(sep=nil,format=nil,future=true)
     return UNKNOWN_DATE if @dates.nil? || @dates.empty?
-    @dates.collect{ |d| d.to_s(:uk_date) }.join(sep) unless sep.nil?
+    @dates = @dates.select{ |d| d >= Date.today} if future  #Only return dates in the future
+    @dates.collect{ |d| d.to_s(format) }.join(sep) unless sep.nil?
   end
   
   def date_array  
@@ -16,11 +17,11 @@ class DateArray
     @dates
   end
   
-  def output(sep)
+  def output(sep,format,future)
     if sep.nil?
       date_array
     else  
-      display(sep)
+      display(sep,format,future)
     end
   end
   
@@ -46,7 +47,7 @@ class DateArray
     #HACK - to get around stupid date parsing not recognising UK dates
     date_part_array = ParseDate.parsedate(date_string)
     return Date.new(date_part_array[0], date_part_array[2], date_part_array[1]) unless (date_part_array[0].nil? || date_part_array[2].nil? || date_part_array[1].nil?)
-    logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
+    Rails.logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
     return
   end
 end

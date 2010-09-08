@@ -87,15 +87,15 @@ class Event < ActiveRecord::Base
     self[:cancellation_array]=DateArray.parse(date_string)
   end
 
-  def date_array(sep=nil)
+  def date_array(sep=nil, format= :uk_date, future= false)
     # Weekly events don't have dates 
     return WEEKLY if frequency == 1
 
-    DateArray.new(self[:date_array]).output(sep) 
+    DateArray.new(self[:date_array]).output(sep, format, future) 
   end
 
-  def cancellation_array(sep=nil)
-    DateArray.new(self[:cancellation_array]).output(sep) 
+  def cancellation_array(sep=nil, format= :uk_date, future= true)
+    DateArray.new(self[:cancellation_array]).output(sep, format, future) 
   end
 
   def dates
@@ -108,6 +108,10 @@ class Event < ActiveRecord::Base
   
   def cancelled_dates
     cancellation_array(', ')
+  end
+   
+  def pretty_cancelled_dates
+    cancellation_array(', ', :pretty_date, true)
   end
    
   def cancelled_dates_rows

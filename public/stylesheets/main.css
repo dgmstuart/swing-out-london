@@ -374,11 +374,25 @@ li.today .compass {
   margin-right:0;/*to line up the compass elements*/
 }
 
+.class_cancelled  {
+  display:block;
+  font-style:italic;
+  padding-left:1em;
+  color:#CC0000;
+}
+
 .social_title { font-size:1.2em;}
 .social_details { font-style: italic;}
 .social_details:before { content:"- ";}
 .social_highlight { color:#CC0000 }
 
+.social_cancelled .cancelled_label {
+  color:#CC0000;
+  text-transform:uppercase;
+  font-size:1.2em;
+}
+
+.social_cancelled .social_title {color:inherit;}
 
 #caveat {
   margin:2em 40px 0px 40px;
