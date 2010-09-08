@@ -1,7 +1,7 @@
 <h1>Listing venues</h1>
 <%= link_to 'New venue', new_venue_path %>
 
-<table>
+<table id="venues">
   <tr>
     <th>Name</th>
     <th>Address</th>
@@ -13,7 +13,7 @@
   </tr>
 
 <% @venues.each do |venue| %>
-  <tr>
+  <%= venue_row_tag(venue) %>
     <td class="name"><%=h venue.name %></td>
     <td><%=h venue.address %></td>
     <td style="width:70px"><%=h venue.postcode %></td>
