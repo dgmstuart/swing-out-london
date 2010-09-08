@@ -1,4 +1,4 @@
-/*/* RESET  */
+/* RESET  */
 /* By Eric Meyer: http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */
 
 html, body, div, span, applet, object, iframe,
@@ -313,7 +313,10 @@ li.day_row li, li.date_row li {
 }
 li.day_row a, li.date_row a {color: #0F0F0F;}
 
-li.today { border: 3px dashed #0F0F0F;}
+li.today { 
+  border: 3px dashed #0F0F0F;
+  margin-bottom:0.9em;
+}
 li.today li {padding:0;}
 
 .today_label, .tomorrow_label {text-transform: uppercase;}
