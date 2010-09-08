@@ -23,7 +23,7 @@
     </td>
 
     <td class="name"><%= link_to event.title, event.url %></td>
-    <td><%=h event.venue_name %></td>
+    <td><%= link_to event.venue_name, event.venue %></td>
     <td><%=h event.event_type %></td>
     <td><%= organiser_link(event) %></td>
     <td><%=h event.description %></td>
