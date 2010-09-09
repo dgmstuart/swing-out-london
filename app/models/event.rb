@@ -11,6 +11,14 @@ class Event < ActiveRecord::Base
   
   validates_presence_of :title
 
+  # display constants:
+  NOTAPPLICABLE = "n/a"
+  UNKNOWN_DATE = "Unknown"
+  UNKNOWN_VENUE = "Venue Unknown"
+  UNKNOWN_ORGANISER = "Unknown"
+  WEEKLY = "Weekly"
+  SEE_WEB = "(See Website)"
+
   def class_style
     return NOTAPPLICABLE if read_attribute(:class_style).nil?
     self[:class_style]
@@ -56,7 +64,7 @@ class Event < ActiveRecord::Base
   # ---------- #
   
   CLASS_TYPES = ['class', 'class with social']
-  SOCIAL_TYPES = ['social', 'social with class', 'class with social', 'vintage club']
+  SOCIAL_TYPES = ['social', 'social with class', 'class with social', 'vintage club', 'gig']
   HAS_CLASS_TYPES = ['class', 'class with social', 'social with class']
   
   def self.event_types
@@ -79,45 +87,117 @@ class Event < ActiveRecord::Base
   # Dates #
   # ----- #
 
+  # WRITE METHODS #
+  
   def date_array=(date_string)
-    self[:date_array]=DateArray.parse(date_string)
+    self[:date_array]=parse_date_string(date_string)
   end
 
   def cancellation_array=(date_string)
-    self[:cancellation_array]=DateArray.parse(date_string)
+    self[:cancellation_array]=parse_date_string(date_string)
+  end
+  
+  #TODO: the following should be elsewhere? i.e. not in the Event class
+  private
+  
+  # Interpret a comma separated string as dates:
+  def parse_date_string( date_string )
+    
+    if date_string.empty? || date_string.nil? || date_string == UNKNOWN_DATE || date_string == WEEKLY # These are equivalent to empty TODO: REQUIRED?
+      string_array = [] 
+    else
+      string_array = date_string.split(',')
+    end
+
+    string_array.collect { |d| uk_date_from_string(d) }.sort
   end
 
-  def date_array(sep=nil, format= :uk_date, future= false)
-    # Weekly events don't have dates 
-    return WEEKLY if frequency == 1
-
-    DateArray.new(self[:date_array]).output(sep, format, future) 
+  # TODO: should put this somewhere extending Date class
+   def uk_date_from_string(date_string)    
+     #HACK - to get around stupid date parsing not recognising UK dates
+     date_part_array = ParseDate.parsedate(date_string)
+     return Date.new(date_part_array[0], date_part_array[2], date_part_array[1]) unless (date_part_array[0].nil? || date_part_array[2].nil? || date_part_array[1].nil?)
+     logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
+     return
+   end
+  
+  public
+  
+  # READ METHODS #
+  
+  def date_array(future= false)
+    return_array_of_dates(self[:date_array], future)
   end
 
-  def cancellation_array(sep=nil, format= :uk_date, future= true)
-    DateArray.new(self[:cancellation_array]).output(sep, format, future) 
+  def cancellation_array(future= false)
+    return_array_of_dates(self[:cancellation_array], future)
   end
-
+  
+  private
+  
+  # Given an array of dates, return an appropriately filtered array
+  def return_array_of_dates(input_dates, future)
+    return [] if input_dates.nil? || input_dates.empty?
+    
+    input_dates = filter_future(input_dates) if future
+    input_dates
+  end
+  
+  # Given an array of dates, return only those in the future
+  def filter_future(date_array)
+    date_array.select{ |d| d >= Date.today}
+  end
+  
+  public
+  
+  
+  # PRINT METHODS #
+  
   def dates
-    date_array(', ')
+    print_date_array
   end
    
   def dates_rows
-    date_array(",\n")
+    print_date_array(",\n")
   end
   
   def cancelled_dates
-    cancellation_array(', ')
+    print_cancellation_array
   end
    
   def pretty_cancelled_dates
-    cancellation_array(', ', :pretty_date, true)
+    print_cancellation_array(', ', :pretty_date, true)
   end
    
   def cancelled_dates_rows
-    cancellation_array(",\n")
+    print_cancellation_array(",\n")
+  end
+  
+  # -- Helper functions for Print:
+  
+  def print_date_array(sep=',', format= :uk_date, future= false )
+    # Weekly events don't have dates 
+    return WEEKLY if frequency == 1
+    print_array_of_dates(self[:date_array], sep, format, future)
+  end
+  
+  def print_cancellation_array(sep=',', format= :uk_date, future= false )
+    print_array_of_dates(self[:cancellation_array], sep, format, future)
+  end
+  
+  private
+  
+  # Given an array of dates, return a formatted string
+  def print_array_of_dates(input_dates, sep=',', format= :uk_date, future= false )
+    return UNKNOWN_DATE if input_dates.nil? || input_dates.empty?
+    
+    input_dates = filter_future(input_dates) if future
+    input_dates.collect{ |d| d.to_s(format) }.join(sep)
   end
    
+  public
+
+  # COMPARISON METHODS #
 
   # Are all the dates for the event in the past?
   def out_of_date
@@ -134,7 +214,7 @@ class Event < ActiveRecord::Base
   
   # Helper function for comparing event dates to a reference date
   def out_of_date_test(comparison_date)
-    return false if date_array == WEEKLY
+    return false if frequency==1 # Weekly events shouldn't have date arrays...
     date_array.each {|d| return false if d > comparison_date }
     true
   end
@@ -167,16 +247,6 @@ class Event < ActiveRecord::Base
   def self.weekday_name(d) 
     Date::DAYNAMES[d.wday]
   end
-  
-  # TODO: should put these somewhere extending Date class
-  def uk_date_from_string(date_string)    
-    #HACK - to get around stupid date parsing not recognising UK dates
-    date_part_array = ParseDate.parsedate(date_string)
-    return Date.new(date_part_array[0], date_part_array[2], date_part_array[1]) unless (date_part_array[0].nil? || date_part_array[2].nil? || date_part_array[1].nil?)
-    logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
-    return
-  end
-
 
   private
 

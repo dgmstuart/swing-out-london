@@ -61,7 +61,6 @@ module EventsHelper
     # Has the event been cancelled?
     # TODO: this approach requires multiple passes through the cancellation_array... find a more efficient way
     cancelled = event.cancellation_array.include?(date)
-    
     event_cancelled_class = "social_cancelled"
     
     #Highlight socials which are monthly or more infrequent:
@@ -88,8 +87,8 @@ module EventsHelper
     display = content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " + display if cancelled
     
     if event.url.nil?
-      #add a class to style the element
       if cancelled
+        #add a class to style the element
         content_tag( :span, display, :class => event_cancelled_class )
       else
         display
@@ -136,8 +135,8 @@ module EventsHelper
       output = link_to( display, event.url, :class => event_title_class )
     end
     
-    # Add a cancellation message to the end
-    output += swingclass_cancelledmsg(event) unless event.cancellation_array.empty? 
+    # Add a cancellation message to the end if there are any FUTURE cancellations
+    output += swingclass_cancelledmsg(event) unless event.cancellation_array(true).empty? 
     
     return output
   end
