@@ -51,17 +51,22 @@ module EventsHelper
       return 
     end
     
-    compass_point(social) + social_link(social,date)
-  end
-  
-  def social_link(event, date)
-    event_title_class = "social_title"
-    event_details_class = "social_details"
-    
     # Has the event been cancelled?
     # TODO: this approach requires multiple passes through the cancellation_array... find a more efficient way
-    cancelled = event.cancellation_array.include?(date)
-    event_cancelled_class = "social_cancelled"
+    cancelled = social.cancellation_array.include?(date)
+    
+    listing_string = compass_point(social)
+    # Add a label if the event is cancelled
+    listing_string += content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " if cancelled
+    listing_string += social_link(social, date, cancelled)
+    
+    classstring = "social_cancelled" if cancelled
+    return content_tag( :li, listing_string, :class => classstring)
+  end
+  
+  def social_link(event, date, cancelled)
+    event_title_class = "social_title"
+    event_details_class = "social_details"
     
     #Highlight socials which are monthly or more infrequent:
     event_title_class += " social_highlight" if event.frequency == 0 || event.frequency >= 4
@@ -83,21 +88,11 @@ module EventsHelper
     display = content_tag( :span, event_title, :class => event_title_class ) + " " + 
             content_tag( :span, event_details, :class => event_details_class )
     
-    # Add a label if the event is cancelled
-    display = content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " + display if cancelled
-    
+    # display a link, or plain text if there is no url
     if event.url.nil?
-      if cancelled
-        #add a class to style the element
-        content_tag( :span, display, :class => event_cancelled_class )
-      else
         display
-      end
     else
-      #add a class to style the link
-      class_string = "url"
-      class_string += " " + event_cancelled_class if cancelled
-      link_to display, event.url, :class => class_string
+      link_to display, event.url
     end
     
   end
@@ -109,7 +104,7 @@ module EventsHelper
       return 
     end
     
-    compass_point(swingclass) + swingclass_link(swingclass)
+    content_tag( :li, compass_point(swingclass) + swingclass_link(swingclass) )
   end
   
   def swingclass_link(event)
@@ -129,6 +124,7 @@ module EventsHelper
     
     display = event_title + " in " + event_details
     
+    # display a link, or plain text if there is no url
     if event.url.nil?
       output = content_tag( :span, display, :class => event_title_class )
     else
@@ -174,10 +170,6 @@ module EventsHelper
     s.split(',').collect do |i|
       i.strip 
     end.join(",\n")
-  end
-  
-  def display_date(date)
-    date.strftime("%A #{date.day.ordinalize} %B") # e.g. "Sunday 2nd March"
   end
   
   # Assign a class to an event row to show whether it is out of date or not
