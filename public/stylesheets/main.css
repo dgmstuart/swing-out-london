@@ -240,27 +240,13 @@ ul.navigation a {color: #0F0F0F;}
   border-top: 3px solid #0F0F0F;
 }
 
-#footer_nav, address {padding:1em 0;}
+#footer_nav, address, #valid_statement {padding:1em 0;}
 
-address, #valid_icons {
+address, #valid_statement {
   float:right;
 }
 
-#valid_icons {
-  padding-left:2em;
-  padding-top:0.3em;
-}
-
-#valid_icons a {
-  display: block;
-}
-
-#valid_icons a:hover {border:0;}
-
-#valid_icons img {
-  height:15px;
-  width:42.58px;
-}
+#valid_statement{padding-left:1em;}
 
 #xhtml_icon {
   padding-bottom:2px;
