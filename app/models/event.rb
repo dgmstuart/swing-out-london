@@ -166,7 +166,7 @@ class Event < ActiveRecord::Base
   end
    
   def pretty_cancelled_dates
-    print_cancellation_array(', ', :pretty_date, true)
+    print_cancellation_array(', ', :short_date, true)
   end
    
   def cancelled_dates_rows

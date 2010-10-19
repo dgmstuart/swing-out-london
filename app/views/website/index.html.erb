@@ -1,50 +1,46 @@
 <div id="classes">
-	
-	<h2> <em>Learn!</em> Weekly Classes </h2>
+    
+    <h2> <em>Learn!</em> Weekly Classes </h2>
 
-	<ul class="daylist">
-	<% DAYNAMES.each do |day| %>
-		<%= row_tag"day_row", day %>
-			<%= today_label day -%>
-			<h3><%=day -%></h3>
-			<ul>
-			<% #get all events from this day: %>
-			<% if (@classes.select {|e| e.day == day}).each do |swingclass| %>
-				<li>
-					<%= swingclass_listing(swingclass) %>
-				</li>
-			<% end.empty? %>
-				<li>There are no classes on this day</li>
-			<% end %>
-			 
-			</ul>
-		</li>
-	<% end %>
-	</ul>
+    <ul class="daylist">
+    <% DAYNAMES.each do |day| %>
+        <%= row_tag"day_row", day %>
+            <%= today_label day -%>
+            <h3><%=day -%></h3>
+            <ul>
+            <% #get all events from this day: %>
+            <% if (@classes.select {|e| e.day == day}).each do |swingclass| %>
+                <%= swingclass_listing(swingclass) %>
+            <% end.empty? %>
+                <li>There are no classes on this day</li>
+            <% end %>
+             
+            </ul>
+        </li>
+    <% end %>
+    </ul>
 </div>
 
 <div id="socials">
-	<h2> <em>Dance!</em> Clubs and Social dancing</h2>
+    <h2> <em>Dance!</em> Clubs and Social dancing</h2>
 
-	<ul class="datelist">
-	<% reset_cycle "row_cycle"%>
-	<% @socials_dates.each do |date,socials| %>
-		<%= row_tag "date_row", date %>
-			<h3><%= today_label date %> <%= tomorrow_label date %> <%=display_date(date)%></h3>
-			<ul>
-			<% socials.each do |social| %>
-				<li>
-					<%= social_listing(social, date) %>
-				</li>
-			<% end %>
-			
-			</ul>
-		</li>
-	<% end %>
-	</ul>
-	<p id="key">
-		N.B. Infrequent events are <em class="social_highlight">highlighted in red</em>
-	</p>
+    <ul class="datelist">
+    <% reset_cycle "row_cycle"%>
+    <% @socials_dates.each do |date,socials| %>
+        <%= row_tag "date_row", date %>
+            <h3><%= today_label date %> <%= tomorrow_label date %> <%=date.to_s(:listing_date)%></h3>
+            <ul>
+            <% socials.each do |social| %>
+                <%= social_listing(social, date) %>
+            <% end %>
+            
+            </ul>
+        </li>
+    <% end %>
+    </ul>
+    <p id="key">
+        N.B. Infrequent events are prefixed with a <img alt="Image used for highlighing events" src="../images/highlight_icon.png" />
+    </p>
 </div>
 
 <p id="caveat"> 

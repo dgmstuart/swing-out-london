@@ -122,7 +122,7 @@ h2 em {
 }
 
 h3 {
-  font-size:1.3em;
+  font-size:1.2em;
 }
 
 
@@ -279,6 +279,7 @@ p.flash {
 }
 .index h2 em { text-transform:uppercase;}
 
+#socials h3 {font-size:1.4em;}
 
 #classes ul.daylist, #socials ul.datelist {
   margin-top:1.2em;
@@ -319,7 +320,7 @@ li.date_row li, li.day_row li {
 }
 
 li.day_row, li.date_row {
-	padding:0.6em 10px 0.3em 10px;
+	padding:1em 10px 0.4em 10px;
 	line-height:1.4em;
 }
 
@@ -374,12 +375,20 @@ li.today .compass {
 .social_title { font-size:1.2em;}
 .social_details { font-style: italic;}
 .social_details:before { content:"- ";}
-.social_highlight { color:#CC0000 }
 
-.social_cancelled .cancelled_label {
-  color:#CC0000;
+.social_highlight {
+  background: url("../images/highlight_icon.png") no-repeat 0 0.15em;
+  padding-left: 22px
+}
+
+.social_cancelled .cancelled_label  {
+  background-color:#CC0000;
+  color:#FEE6B8;
+  padding:0.1em 0.6em;
+  margin-right:0.2em;
+  position:relative;
+  bottom:0.1em;
   text-transform:uppercase;
-  font-size:1.2em;
 }
 
 .social_cancelled .social_title {color:inherit;}
