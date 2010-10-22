@@ -44,10 +44,14 @@ td.lines {
 
 /*TODO- replace with proper colours!*/
 tr.out_of_date td.dates, tr.all_out_of_date td{
-	background-color:red;
+	background-color:#F00;
 }
 tr.near_out_of_date td.dates, tr.all_nearly_out_of_date td{
-	background-color:orange;
+	background-color:#FFA500;
+}
+
+tr.inactive td.dates{
+	background-color:#999;
 }
 
 tr td.actions {

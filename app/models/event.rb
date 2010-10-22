@@ -59,6 +59,10 @@ class Event < ActiveRecord::Base
     end
   end
   
+  def one_off?
+    frequency==0
+  end
+  
   # ---------- #
   # Event Type #
   # ---------- #
@@ -208,6 +212,24 @@ class Event < ActiveRecord::Base
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
     out_of_date_test(Date.today + INITIAL_SOCIALS)
+  end
+  
+  # Is the event new? (probably only applicable to classes)
+  def new?
+    return false if first_date.nil?
+    first_date > Date.today - NEW_DAYS
+  end
+  
+  # Has the first instance of the event happened yet?
+  def started?
+    return false if first_date.nil?
+    first_date < Date.today
+  end
+  
+  # Has the last instance of the event happened?
+  def ended?
+    return false if last_date.nil?
+    last_date < Date.today
   end
   
   private

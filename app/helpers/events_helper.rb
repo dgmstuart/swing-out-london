@@ -124,6 +124,10 @@ module EventsHelper
     
     display = event_title + " in " + event_details
     
+    # Add a label if the event is new
+    display = "(from #{event.first_date.to_s(:short_date)}) " + display unless event.first_date.nil? || event.started?
+    display = new_label + display if event.new?
+    
     # display a link, or plain text if there is no url
     if event.url.nil?
       output = content_tag( :span, display, :class => event_title_class )
@@ -137,6 +141,9 @@ module EventsHelper
     return output
   end
   
+  def new_label
+    content_tag( :strong, "New!", :class => "new_label" )
+  end
   
   # Return a span containing a compass point
   def compass_point(event)
@@ -174,7 +181,9 @@ module EventsHelper
   
   # Assign a class to an event row to show whether it is out of date or not
   def event_row_tag(event) 
-    if event.out_of_date
+    if event.ended? || (event.out_of_date && event.one_off?)
+      class_string = "inactive"
+    elsif event.out_of_date
       class_string = "out_of_date"
     elsif event.near_out_of_date
       class_string = "near_out_of_date"

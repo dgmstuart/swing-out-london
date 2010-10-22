@@ -381,7 +381,7 @@ li.today .compass {
   padding-left: 22px
 }
 
-.social_cancelled .cancelled_label  {
+.social_cancelled .cancelled_label, .new_label  {
   background-color:#CC0000;
   color:#FEE6B8;
   padding:0.1em 0.6em;

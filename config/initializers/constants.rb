@@ -8,4 +8,8 @@ LOGINS={
   "lancep" => "9a261213120510fcb48bb27d300f9815"
 }
 
+# How many socials should be displayed on the index page?
 INITIAL_SOCIALS=14
+
+# For how many days can an event be considered 'New'?
+NEW_DAYS = 1.month
