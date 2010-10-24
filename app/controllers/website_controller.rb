@@ -1,6 +1,6 @@
 class WebsiteController < ApplicationController
   def index
-    @classes = Event.classes
+    @classes = Event.active_classes
     @socials_dates = Event.socials_dates(Date.today + (INITIAL_SOCIALS-1))  
 
     respond_to do |format|

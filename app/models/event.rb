@@ -232,6 +232,20 @@ class Event < ActiveRecord::Base
     last_date < Date.today
   end
   
+  # Is the event currently running?
+  def active?
+    started? && !ended?
+  end
+  def inactive?
+    !started? || ended?
+  end
+  
+  # is/was/will the event active on a particular date?
+  def active_on(date)
+    (first_date.nil? || first_date <= date) &&
+    (last_date.nil? || last_date >= date)
+  end
+  
   private
   
   # Helper function for comparing event dates to a reference date
@@ -255,6 +269,13 @@ class Event < ActiveRecord::Base
   def self.socials(*args)
     self.find(:all, *args).select{|e| e.is_social? }
   end
+
+  # Get a list of classes, excluding those which have ended
+  # TODO: not very DRY
+  def self.active_classes
+    self.all.select{ |e| e.is_class? && !e.ended? }
+  end  
+    
 
   # Get a list of socials with their associated dates
   def self.socials_dates(end_date)
@@ -286,7 +307,7 @@ class Event < ActiveRecord::Base
     #build up a hash of events occuring on each date
     date_socials_hash = {}
     date_day_array.each do |date,day| 
-      socials_on_that_day =  weekly_socials.select{ |s| s.day == day }
+      socials_on_that_day =  weekly_socials.select{ |s| s.day == day && s.active_on(date)}
       date_socials_hash.merge!( {date => socials_on_that_day} ) unless socials_on_that_day.empty?
     end
 
