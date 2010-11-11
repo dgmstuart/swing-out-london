@@ -1,12 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://opengraphprotocol.org/schema/"
+      xmlns:fb="http://www.facebook.com/2008/fbml"
+      xml:lang="en-GB" lang="en-GB">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Language" content="en-GB" />
     <meta name="author" content="Duncan Stuart"/>
-    <meta name="description" content="Swing Out London - a listing of weekly Lindy Hop classes, regular socials and vintage clubs" />
+    <meta name="description" content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials and vintage clubs" />
+    
+    <% if params[:action] == "index" && !@cms_page %> 
+    <meta property="og:title" content="Swing Out London - Listings" />
+    <meta property="og:site_name" content="Swing Out London" />
+    <meta property="og:description" content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials and vintage clubs" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.swingoutlondon.co.uk/" />
+    <meta property="og:image" content="/images/swingoutlondon_og.png" />
+    <meta property="og:email" content="leveretweb@googlemail.com" />
+    <meta property="fb:admins" content="dgmstuart"/>
+    <% end %>
     
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     
@@ -20,7 +34,7 @@
     <![endif]-->
     <%= stylesheet_link_tag 'main', :media=>"screen and (min-device-width: 481px)"%>
     <%= stylesheet_link_tag 'iphone', :media=>"only screen and (max-device-width: 480px)"%>
-    <%= stylesheet_link_tag 'cms' if @cms_page==true%>
+    <%= stylesheet_link_tag 'cms' if @cms_page%>
         
     <script type="text/javascript">
 
