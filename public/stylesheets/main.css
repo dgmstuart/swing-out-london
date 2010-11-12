@@ -169,6 +169,17 @@ h3 {
 #header a {color:#0F0F0F;}
 #header a:hover {border:none;}
 
+#social_media {
+/*  text-align:center;*/
+/*  margin-bottom:30px;*/
+  height:0;
+  float:left;
+  margin-left:50px;
+  position:relative;
+  top:1.1em;
+}
+
+
 
 /*NAVIGATION*/
 
