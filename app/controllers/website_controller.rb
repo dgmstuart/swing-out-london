@@ -9,4 +9,9 @@ class WebsiteController < ApplicationController
     end
   end
   
+  def about
+    @last_updated_time = Event.last_updated_datetime.to_s(:timepart)
+    @last_updated_date = Event.last_updated_datetime.to_s(:listing_date)
+  end
+  
 end
