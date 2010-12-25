@@ -2,5 +2,7 @@
 
 <% content_tag :ul, :id => nav_id, :class => 'navigation' do %>
 	<li class="first"><%= nav_link 'Home', :controller => "website", :action => "index" %></li>
+	<li><%= nav_link 'Learn', :controller => "website", :action => "index", :anchor => "classes_today" %></li>
+	<li><%= nav_link 'Dance', :controller => "website", :action => "index", :anchor => "socials_today" %></li>
 	<li><%= nav_link 'About', :controller => "website", :action => "about" %></li>
 <% end %>
