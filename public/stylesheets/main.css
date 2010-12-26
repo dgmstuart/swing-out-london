@@ -466,7 +466,7 @@ li.today .compass {
   text-align:center;
 }
 
-#mission_statement, #scope {
+#about_swingoutlondon, #scope {
   width:447px;
   float:left;
   position:relative;
@@ -486,7 +486,7 @@ li.today .compass {
   margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
 }
 
-#mission_statement, #scope {
+#about_swingoutlondon, #scope {
   margin-bottom: 1.5em;/* 1.5 = (2.3 - 0.8)*/
 }
 
@@ -512,7 +512,7 @@ li.today .compass {
 }
 
 
-#mission_statement em {
+#about_swingoutlondon em {
   display:block;
   margin-top:0.8em;
   padding-left:30px;
