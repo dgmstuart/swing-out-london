@@ -1,8 +1,4 @@
-.DS_Store
+.bundle
+db/*.sqlite3
 log/*.log
 tmp/**/*
-Capfile
-doc/api
-doc/app
-config/database.yml
-db/*.sqlite3
