@@ -8,4 +8,13 @@ module CommonHelper
     end 
   end
   
+  def tweet_message(tweet)
+    if tweet.nil?
+      "Could not load latest tweet. Please visit the " + 
+      link_to("Swing Out London Twitter feed", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter")
+    else
+      tweet
+    end
+  end
+  
 end

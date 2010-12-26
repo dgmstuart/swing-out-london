@@ -7,7 +7,7 @@ module EventsHelper
   #move somewhere general?
   
   def day_row(d)
-    if is_today (d)    
+    if is_today(d)    
       html_options = {:class => "day_row today", :id => "classes_today" }
     else
       html_options = {:class => "day_row" }
@@ -17,7 +17,7 @@ module EventsHelper
   end 
   
   def date_row(d)
-    if is_today (d)    
+    if is_today(d)    
       html_options = {:class => "date_row today", :id => "socials_today" }
     else
       html_options = {:class => "date_row" }

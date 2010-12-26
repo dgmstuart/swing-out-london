@@ -214,7 +214,7 @@ h3 {
   top:3px;
 }
 
-#latest_tweet {
+#latest_tweet{
   text-align:left;
   line-height:1.5em;
   font-style:italic;
@@ -223,7 +223,6 @@ h3 {
 }
 
 #latest_tweet a {
-  border:none;
   color:#C00;
 }
 
