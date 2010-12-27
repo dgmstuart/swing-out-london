@@ -1,14 +1,96 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
+    "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://opengraphprotocol.org/schema/"
+      xmlns:fb="http://www.facebook.com/2008/fbml"
+      xml:lang="en-GB" lang="en-GB">
 <head>
-  <title>Swingoutlondon</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-GB" />
+    <meta name="author" content="Duncan Stuart"/>
+    <meta name="description" content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" />
+    
+    <% if params[:action] == "index" && !@cms_page %> 
+    <script  type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+    
+    <meta property="og:title" content="Swing Out London - Lindy Hop Listings" />
+    <meta property="og:site_name" content="Swing Out London" />
+    <meta property="og:description" content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.swingoutlondon.co.uk/" />
+    <meta property="og:image" content="http://www.swingoutlondon.co.uk/images/swingoutlondon_og.png" />
+    <meta property="og:email" content="leveretweb@googlemail.com" />
+    <meta property="fb:admins" content="dgmstuart"/>
+    <% end %>
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    
+    <title>Swing Out London - listings of Lindy Hop swing dance classes and socials</title>
+
+    <!--[if lte IE 7 ]>
+    <%= stylesheet_link_tag 'ie' %>
+    <![endif]-->
+    <!--[if IE ]>
+    <%= stylesheet_link_tag 'main'%>
+    <![endif]-->
+    <%= stylesheet_link_tag 'main', :media=>"screen and (min-device-width: 481px)"%>
+    <%= stylesheet_link_tag 'iphone', :media=>"only screen and (max-device-width: 480px)"%>
+    <%= stylesheet_link_tag 'cms' if @cms_page%>
+        
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18613144-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
 </head>
 <body>
+    <div id="page">
+    
+        <div id="header">
+            <h1>
+                <em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
+                Listings of Lindy Hop classes and socials in London    
+            </h1>
+        </div>
+      
+        <% if params[:action] == "index" && !@cms_page %>
+        <div id="social_media">
+            <fb:like href="http://www.swingoutlondon.co.uk" action="like" layout="button_count" font="trebuchet ms"></fb:like>
+        </div>
+        <% end %>
+      
+        <%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
+        <%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
+        
+        <% content_tag(:div, :id => "content", :class => params[:action]) do %>
+              <p class="flash"><%= flash[:notice] %></p>
+              <%= yield %>
+        <% end %>
+  
+        <div id="footer"> 
+          
+            <div id="valid_statement">
+                <a href="http://validator.w3.org/check?uri=referer" id="xhtml_icon">
+                    (almost valid XHTML - blame facebook)
+                </a>
+            </div>
+          
+            <address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a> </address>
+          
+            <%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
+              
+        </div>
 
-<%= yield %>
-
+  </div>
+ 
 </body>
 </html>

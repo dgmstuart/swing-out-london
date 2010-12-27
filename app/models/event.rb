@@ -263,11 +263,11 @@ class Event < ActiveRecord::Base
 
   # Helper methods to get different types of event:
   def self.classes(*args)
-    self.find(:all, *args).select{|e| e.is_class? }
+    self.all(*args).select{|e| e.is_class? }
   end
 
   def self.socials(*args)
-    self.find(:all, *args).select{|e| e.is_social? }
+    self.all(*args).select{|e| e.is_social? }
   end
 
   # Get a list of classes, excluding those which have ended

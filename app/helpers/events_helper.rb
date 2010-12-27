@@ -1,5 +1,5 @@
 module EventsHelper
-  
+
   # ------------ #
   # LISTING ROWS #
   # ------------ #
@@ -37,8 +37,12 @@ module EventsHelper
       content_tag :span, "Tomorrow", :class => "tomorrow_label"
     end
   end
+
   
-  	
+  def classes_on_day(day)
+    @classes.select {|e| e.day == day}
+  end
+    
   
   
   # ---------------- #
@@ -197,7 +201,7 @@ module EventsHelper
   # ------- #
   
   def venue_select
-    Venue.find(:all, :order => "name").collect{ |v| [v.name_and_area,v.id] }
+    Venue.all(:order => "name").collect{ |v| [v.name_and_area,v.id] }
   end
   
   def organiser_select
