@@ -286,6 +286,12 @@ class Event < ActiveRecord::Base
     merge_dates_hashes(weekly_socials_dates, other_socials_dates).sort
   end
 
+  # Find the datetime of the most recently updated event
+  def self.last_updated_datetime
+    self.first( :order => 'updated_at DESC').updated_at
+  end
+    
+
   # TODO: should put these somewhere extending Date class
   def self.weekday_name(d) 
     Date::DAYNAMES[d.wday]

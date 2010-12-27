@@ -1,10 +1,10 @@
 <div id="classes">
     
     <h2> <em>Learn!</em> Weekly Classes </h2>
-
+    
     <ul class="daylist">
     <% DAYNAMES.each do |day| %>
-        <%= row_tag"day_row", day %>
+        <%= day_row day %>
             <%= today_label day -%>
             <h3><%=day -%></h3>
             <ul>
@@ -26,10 +26,14 @@
 <div id="socials">
     <h2> <em>Dance!</em> Clubs and Social dancing</h2>
 
+    <p id="key">
+        N.B. Infrequent events are prefixed with a <img alt="asterisk" src="../images/highlight_icon.png" />
+    </p>
+    
     <ul class="datelist">
     <% reset_cycle "row_cycle"%>
     <% @socials_dates.each do |date,socials| %>
-        <%= row_tag "date_row", date %>
+        <%= date_row date %>
             <h3><%= today_label date %> <%= tomorrow_label date %> <%=date.to_s(:listing_date)%></h3>
             <ul>
             <% socials.each do |social| %>
@@ -40,11 +44,4 @@
         </li>
     <% end %>
     </ul>
-    <p id="key">
-        N.B. Infrequent events are prefixed with a <img alt="Image used for highlighing events" src="../images/highlight_icon.png" />
-    </p>
 </div>
-
-<p id="caveat"> 
-  <strong>Please note:</strong> the listings shown are only a guide and you should always check the source website before making any plans 
-</p>

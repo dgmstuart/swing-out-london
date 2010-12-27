@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
     "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -22,6 +22,9 @@
     <meta property="og:image" content="http://www.swingoutlondon.co.uk/images/swingoutlondon_og.png" />
     <meta property="og:email" content="leveretweb@googlemail.com" />
     <meta property="fb:admins" content="dgmstuart"/>
+    
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    
     <% end %>
     
     <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -60,16 +63,14 @@
                 <em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
                 Listings of Lindy Hop classes and socials in London    
             </h1>
-        </div>
+        
+            <%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
+            <%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
       
-        <% if params[:action] == "index" && !@cms_page %>
-        <div id="social_media">
-            <fb:like href="http://www.swingoutlondon.co.uk" action="like" layout="button_count" font="trebuchet ms"></fb:like>
+            <% if params[:action] == "index" && !@cms_page %>
+                <%= render :partial => 'website/site_description' %>
+            <% end %>  
         </div>
-        <% end %>
-      
-        <%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
-        <%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
         
         <% content_tag(:div, :id => "content", :class => params[:action]) do %>
               <p class="flash"><%= flash[:notice] %></p>
@@ -91,6 +92,5 @@
         </div>
 
   </div>
- 
 </body>
 </html>

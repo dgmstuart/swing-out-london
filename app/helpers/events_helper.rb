@@ -5,16 +5,27 @@ module EventsHelper
   # ------------ #
   
   #move somewhere general?
-  def row_tag(myclass, day=nil)       
-   	tag :li, {:class => add_todayclass(myclass, day)}, true
-  end
   
-  # add an extra event if today is the target day or date
-  def add_todayclass(myclass, d)
-    myclass = myclass + " today" if is_today(d)
-      
-    return myclass
+  def day_row(d)
+    if is_today(d)    
+      html_options = {:class => "day_row today", :id => "classes_today" }
+    else
+      html_options = {:class => "day_row" }
+    end
+    
+    tag :li, html_options, true
+  end 
+  
+  def date_row(d)
+    if is_today(d)    
+      html_options = {:class => "date_row today", :id => "socials_today" }
+    else
+      html_options = {:class => "date_row" }
+    end
+    
+    tag :li, html_options, true
   end
+
   
   def is_today(d)
   	d.class == String && Event.weekday_name(Date.today) == d || 
@@ -29,6 +40,12 @@ module EventsHelper
   def today_label(d)
   	if is_today(d)
       content_tag :span, "Today", :class => "today_label"
+    end
+  end
+  
+  def classes_today(d)
+  	if is_today(d)
+      "id='classes_today"
     end
   end
   

@@ -152,6 +152,8 @@ h3 {
 #header {
   text-align:center;
   padding-top:50px;
+  margin: 0 50px;
+  border-bottom: 3px solid #0F0F0F;
 }
 
 #header h1 {
@@ -166,20 +168,63 @@ h3 {
   margin-bottom:30px;
 }
 
-#header a {color:#0F0F0F;}
-#header a:hover {border:none;}
+#header h1 a {color:#0F0F0F;}
+#header h1 a:hover {border:none;}
+
+#site_description {
+  font-size:0.875em;
+  margin-bottom:30px;
+  padding:30px 10px 0 10px;
+  border-top: 3px solid #0F0F0F;
+  width:100%;
+  overflow:hidden;
+}
+
+#site_description_text {
+  width:370px;
+  float:left;
+  clear:both;
+}
+
+#site_description_text a {
+  text-transform:capitalize;
+  font-size:1.2em;
+}
+
+#caveat {
+  font-style:italic;
+}
+#caveat strong {
+  text-transform: uppercase;
+  color:#C00;
+}
 
 #social_media {
-/*  text-align:center;*/
-/*  margin-bottom:30px;*/
-  height:0;
-  float:left;
-  margin-left:50px;
-  position:relative;
-  top:1.1em;
+  width:370px;
+  margin-left:410px;
 }
 
 
+#social_media #like_message{
+  margin-bottom:0.5em;
+}
+
+.twitter-share-button {
+  position:relative;
+  top:3px;
+}
+
+#latest_tweet{
+  text-align:left;
+  line-height:1.5em;
+  font-style:italic;
+  padding: 8px;
+  border: 6px double #0F0F0F;
+}
+
+#latest_tweet a {
+  color:#C00;
+}
 
 /*NAVIGATION*/
 
@@ -188,6 +233,7 @@ ul.navigation {list-style-type:none;}
 #main_nav, #admin_nav {
   margin:0 50px;
   text-align:center;
+  clear:both;
 }
 
 #admin_nav {
@@ -195,14 +241,15 @@ ul.navigation {list-style-type:none;}
 }
 
 #main_nav {
-  padding:1em 0 40px 0;
-  border-bottom: 3px solid #0F0F0F;
+  margin-bottom:30px;
 }
 
 
 ul.navigation a {color: #0F0F0F;}
 
-#main_nav a, #admin_nav a {padding: 10px;} /*added here so we can take it away when we apply the border*/
+#main_nav a, #admin_nav a {
+  padding: 10px; /*added here so we can take it away when we apply the border*/
+  } 
 
 #main_nav a:hover, #admin_nav a:hover {
   text-decoration:none;
@@ -213,6 +260,7 @@ ul.navigation a {color: #0F0F0F;}
 #main_nav .current, #admin_nav .current {
   padding: 8px;
   border: 6px double #0F0F0F;
+  display:inline-block;
 }
 
 #footer_nav a:hover {
@@ -305,9 +353,7 @@ p.flash {
   padding-left:22px;
 }
 #key {
-  border-left: 3px solid #0F0F0F;
-  padding-left:32px;
-	padding-top:20px;
+	margin: 20px 30px;
 	font-size:1.2em;
 	font-style:italic;
 }
@@ -344,6 +390,13 @@ li.day_row a, li.date_row a {color: #0F0F0F;}
 li.today { 
   border: 3px dashed #0F0F0F;
   margin-bottom:0.9em;
+}
+li.today:target { 
+  border-color: #C00;
+  -webkit-transition: all 0.8s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }
 li.today li {padding:0;}
 
@@ -404,11 +457,6 @@ li.today .compass {
 
 .social_cancelled .social_title {color:inherit;}
 
-#caveat {
-  margin:2em 40px 0px 40px;
-  font-size: 1.2em;
-}
-#caveat strong {text-transform: uppercase;}
 
 /* ABOUT PAGE */
 
@@ -418,7 +466,7 @@ li.today .compass {
   text-align:center;
 }
 
-#mission_statement, #scope {
+#about_swingoutlondon, #scope {
   width:447px;
   float:left;
   position:relative;
@@ -438,7 +486,7 @@ li.today .compass {
   margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
 }
 
-#mission_statement, #scope {
+#about_swingoutlondon, #scope {
   margin-bottom: 1.5em;/* 1.5 = (2.3 - 0.8)*/
 }
 
@@ -464,7 +512,7 @@ li.today .compass {
 }
 
 
-#mission_statement em {
+#about_swingoutlondon em {
   display:block;
   margin-top:0.8em;
   padding-left:30px;

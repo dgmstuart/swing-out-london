@@ -1,0 +1,21 @@
+<div id="site_description">
+    <div id="site_description_text">
+        <p>Swing Out London lists all of the regular <%= link_to "dance classes", :anchor => "classes_today" %> in London teaching <%= link_to "Lindy Hop", :action => "about", :anchor=> "about_lindy" %> and related styles like Balboa and Blues.</p>
+
+        <p>We also list all of the <%= link_to "social dancing", :anchor => "socials_today" %> opportunities for those styles including dedicated swing dance socials, vintage clubs and selected gigs from swing bands.</p>
+        
+        <p id="caveat"> <strong>Please note:</strong> The listings shown are only a guide and you should always check the source website before making any plans.</p>
+    </div>
+
+    <div id="social_media">
+        <p id="like_message">Show us some Facebook love: <fb:like href="http://www.swingoutlondon.co.uk" action="like" layout="button_count" font="trebuchet ms"></fb:like></p>   
+        <p id="tweet_message">Tell the world about us on twitter: <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-related="swingevents:Listing Lindy and blues camps and exchanges in the UK and Europe">Tweet</a>
+        <p>
+            <%= link_to "Follow us on Twitter", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"%> for changes and breaking news: 
+        
+        <div id="latest_tweet"><%=tweet_message(@latest_tweet)%></div>
+        
+    </div>
+
+</div>
+
