@@ -55,14 +55,14 @@
 
     </script>
 </head>
-<body>
+<%= tag(:body, :class => params[:action]) %>
     <div id="page">
     
         <div id="header">
-            <h1>
+            <%= heading_hn(params[:action]) do %>
                 <em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
                 Listings of Lindy Hop classes and socials in London    
-            </h1>
+            <% end %>
         
             <%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
             <%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
@@ -72,10 +72,9 @@
             <% end %>  
         </div>
         
-        <% content_tag(:div, :id => "content", :class => params[:action]) do %>
-              <p class="flash"><%= flash[:notice] %></p>
+        <div id="content">
               <%= yield %>
-        <% end %>
+        </div>
   
         <div id="footer"> 
           
@@ -85,7 +84,7 @@
                 </a>
             </div>
           
-            <address><a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">Site by LeveretWeb</a> </address>
+            <address><%= mail_to CONTACT_EMAIL, "Site by LeveretWeb", :subject => "Swing Out London"%></address>
           
             <%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
               

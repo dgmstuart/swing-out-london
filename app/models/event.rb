@@ -119,7 +119,7 @@ class Event < ActiveRecord::Base
   # TODO: should put this somewhere extending Date class
    def uk_date_from_string(date_string)    
      #HACK - to get around stupid date parsing not recognising UK dates
-     date_part_array = ParseDate.parsedate(date_string)
+     date_part_array = Time.parse(date_string)
      return Date.new(date_part_array[0], date_part_array[2], date_part_array[1]) unless (date_part_array[0].nil? || date_part_array[2].nil? || date_part_array[1].nil?)
      logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
      return

@@ -1,5 +1,17 @@
 module CommonHelper
+
+  # Switching h1 and h2 in the header
+  def heading_hn(action, &block)
+    if action == "index" then
+      hn = :h1
+    else
+      hn = :h2
+    end
+    
+    content_tag hn, &block
+  end
   
+  # Links for navigation
   def nav_link(name, *args)
     # Render the link...
     link_to_unless_current(name, *args) do 
@@ -8,12 +20,14 @@ module CommonHelper
     end 
   end
   
-  def tweet_message(tweet)
-    if tweet.nil?
-      "Could not load latest tweet. Please visit the " + 
+  def tweet_message
+    if @latest_tweet.nil?
+      "Sorry, for some reason we can't load the latest tweet. Please visit the " + 
       link_to("Swing Out London Twitter feed", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter")
     else
-      tweet
+      created_date = Time.parse(@latest_tweet.created_at)
+      created_date_string = created_date.to_s(:timepart) + " on " + created_date.to_s(:short_date)
+      @latest_tweet.text.twitterify + " "+ link_to(created_date_string, "http://www.twitter.com/swingoutlondon/#{@latest_tweet.id_str}", :class => "tweet_created")
     end
   end
   

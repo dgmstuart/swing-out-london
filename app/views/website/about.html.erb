@@ -1,5 +1,5 @@
 <div id="about_swingoutlondon">
-	<h2>About the site</h2>
+	<h1>About Swing Out London</h1>
 
     <p>This website is mainly for <%= link_to "Me", :anchor => "about_me" %>. There - I've said it: it presents the information I want to see, the way I want to see it and it's my main way of personally deciding where I want to dance. If it's useful to other people as well, then I'm very glad.</p>
 
@@ -13,9 +13,7 @@
 
     <p>If you like Swing Out London and find it useful, please consider linking to it from your Blog, Facebook, <%= link_to "Twitter", "http://twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"%> or personal website: this really helps Google to know that people are interested and will make it easier for others to find the site. </p>
     
-    <p>
-    	This site is very much a work in progress - currently it shows weekly classes, and clubs/socials for the next 14 days. See <a href="#development">Development</a> below for details.
-    </p>
+    <p>It's always nice to get <%=mail_to CONTACT_EMAIL, "Email"%> as well.</p>
 
     <p>Swing Out London has been live since August 2010 and the listings were last updated at <%=@last_updated_time%> on  <%=@last_updated_date%>.</p>
 </div>
@@ -23,15 +21,39 @@
 
 <div id="scope">
 	<h2>What we cover</h2>
-	<p>
-		At least to start with the listings will focus on <em>regular</em> events: weekly classes teaching primarily Lindy Hop, and weekly and monthly clubs and social dances where Lindy Hop can be danced. Blues, Balboa and 20s Charleston will also be considered, but nights which are primarily 50's Jive or Rock and Roll are out.
-	</p>
-	<p>
-		Personally I love to dress up and go to vintage clubs: while the dancing usually isn't great, for me it's all an extension of the experience, so I'm going to cover these (most listings don't).  
-	</p>
-	<p>
-		Listings are primarily for events within the M25 and usually those which are on the London transport network (i.e. places you can get a night bus home from!). 
-	</p>
+	
+	<h3>20s-40's Dance styles </h3>
+    <p>The focus is on <% link_to "Lindy Hop", "http://en.wikipedia.org/wiki/Lindy_Hop" %> (8-count, 6-count and 30's Charleston) but 
+        <%= link_to "Blues", "http://en.wikipedia.org/wiki/Blues_dance#Blues_dancing_in_the_contemporary_swing_dance_community" %>
+        <%= link_to "Balboa", "http://en.wikipedia.org/wiki/Balboa_(dance)"%>,
+        <%= link_to "Shag", "http://en.wikipedia.org/wiki/Collegiate_shag"%>, 
+        and 
+        <%= link_to "1920's Charleston", "http://en.wikipedia.org/wiki/Charleston_(dance)"%> are also listed since many Lindyhoppers also dance these styles. 
+    </p>
+    <p><%= link_to "Jitterbug", "http://swungover.wordpress.com/2010/11/09/the-definition-of-jitterbug/" %> is included (on the borderline), but generally nights which are primarily 50's Jive or Rock and Roll are out, as are modern jive, west coast swing and anything of that sort.</p>
+    <p> The world seems to Love <%= link_to "Electro Swing", "http://en.wikipedia.org/wiki/Electroswing" %> at the moment, but I don't, so it's out. If you're really interested, there's a regular night at <%= link_to "The Book Club", "http://www.wearetbc.com/" %> in Shoreditch.</p>
+
+    <h3>Only in London </h3>
+    <p>Listings are only for events within the M25 and usually those which are on the London transport network (i.e. places you can get a night bus home from!).</p>
+
+    <h3>Regular classes...</h3>
+    <p>I try and list all of the <em>regular</em> dance classes for the dance styles mentioned above - that means weekly drop-in classes and also courses which take place over a number of weeks but repeat regularly. </p>
+
+    <h3>...but not workshops</h3>
+    <p>There are also many one-off workshops and classes going on in London, but keeping track of those is much more than I can handle: try the websites of the individual swing schools to find out about these.</p>
+    
+    <p>I will however tweet about anything particularly interested coming up (especially <%= link_to "aerials", "http://en.wikipedia.org/wiki/Aerial_(dance_move)"%> workshops) on the <%= link_to "Swing Out London twitter feed", "http://twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"%>.</p>
+
+    <h3>All social dancing...</h3>
+    <p>I try and list all of the opportunities for dancing Lindy Hop in London over the next 14 days and the main nights for related styles.</p> 
+    
+    <p>The exceptions are smaller venues like <%= link_to "The Swan at The Globe", "http://www.swanattheglobe.co.uk/#/newscontact/events/"%> and <%= link_to "The Quecumbar", "http://www.quecumbar.co.uk/"%>: while they put on great Swing bands, they can only accommodate a handful of Balboa dancers at best and aren't really suitable for <%= link_to "lindy-bombing", "http://wikibin.org/articles/lindy-bombing.html"%>.</p>
+
+    <h3>...including vintage clubs</h3>
+    <p>I Love getting dressed up in vintage attire and going out to a club like <%= link_to "the Blitz party", "www.theblitzparty.com"%> or <%= link_to "Die Freche Muse", "http://www.diefrechemuse.co.uk/"%> where the music is swinging and everyone looks fabulous. These nights aren't focused at dancers, but if you Bring Your Own there's often a great time to be had, as well as a crowd of admiring Civilians (non-dancers). </p>
+
+    <h3>...and swing gigs</h3>
+    <p>London has a solid bunch of trad jazz and swing bands like <%= link_to "The Shirt Tail Stompers", "http://shirttailstompers.com/"%>, <%= link_to "Top Shelf Jazz", "http://www.topshelfjazz.co.uk/"%> and <%= link_to "The Sax Pastilles", "www.saxpastilles.co.uk/"%> playing great dancing music. You'll see them around town playing Lindy socials, but they also sometimes play straight gigs where there is room to dance. Again it's usually a case of <acronym title="Bring Your Own">BYO</acronym> dancers.</p>
 </div>
 
 
@@ -41,24 +63,58 @@
 	<p>I live in South London, I've been dancing Lindy since late 2009, and I love it.</p>
 	<p>I have a blog called "<%= link_to "Why I Dance...", "http://whyidance.tumblr.com/"%>" which does exactly what it says on the tin.</p>
 	<p>Leads in London don't get to meet and talk to each other so much, so I organise <%= link_to "London Lindy Leads Dinners", "http://www.facebook.com/home.php?sk=group_147221981989905"%> to try and fix that.</p>
-	<p>I dance all over town and I've tried to have lessons from each of the London swing schools. I mainly dance Lindy Hop (6 &amp; 8 count and charleston), but also some Blues and I'm keen to learn more 1920's style Charleston.</p>
-	<p>Please send any comments, corrections or listings to <a href="mailto:leveretweb@googlemail.com?subject=Swing Out London">leveretweb@googlemail.com</a>.</p>
+	<p>I dance all over town and I've tried to have lessons from each of the London swing schools. I mainly dance Lindy Hop (6 &amp; 8 count and Charleston), but also some Blues and I'm keen to learn more 1920's style Charleston.</p>
+	<p>Please send any comments, corrections or listings to <%=mail_to CONTACT_EMAIL%></p>
 </div>
 
 <div id="about_lindy">
 	<h2>What is the Lindy Hop?</h2>
-	<p><a href="http://en.wikipedia.org/wiki/Lindy_Hop" title="Wikipedia - Lindy Hop">The Lindy Hop</a> or <q>Jitterbug</q> is a fun and dynamic swing dance of the 1930's and 40's, mainly danced to Big Band Swing and Hot Jazz.</p>
+	<p><a href="http://en.wikipedia.org/wiki/Lindy_Hop" title="Wikipedia - Lindy Hop">The Lindy Hop</a> is a fun and dynamic swing dance of the 1930's and 40's, mainly danced to Big Band Swing and Hot Jazz.</p>
 	<p>
-		Here are some YouTube clips of Lindy Hop from 
-		<a href="http://www.youtube.com/watch?v=mTg5V2oA_hY" title="YouTube - Lindy Hop - Hellzapoppin (1941)"> 
-			a classic film</a>, 
-		<a href="http://www.youtube.com/watch?v=LAAAV7BB1HU" title="YouTube - Lindy Hop Showdown">
-			a modern competition</a>, and 
-		<a href="http://www.youtube.com/watch?v=XlKCJZt2yzE" title="YouTube - Swing Patrol London - Greenwich Class - 3/06/09">
-			a beginners class in London</a>.
+		Here are some YouTube clips to give you an idea:
+		<ul>
+		    <li><%= link_to "The 2010 competition routine that has been blowing everyone's minds", "http://www.youtube.com/watch?v=X1me6wfoqI4", :title => "YouTube - ILHC 2010 - Showcase - Max Pitruzzella & Annie Trudeau"%></li>
+		      <li><%= link_to "Something a little older and less insane, but equally amazing", "http://www.youtube.com/watch?v=NEtG4F4JWOo", :title => "Skye & Frida - ULHS 2007 - Couples Division"%> </li>
+		      <li><%= link_to "A beginner's class in London", "http://www.youtube.com/watch?v=DD84kBRSb7g", :title=>"YouTube - Swing Patrol London - Angel Class - 08/11/2010" %></li>
+		      <li><%= link_to "The iconic clip from the Movie Hellzapoppin", "http://www.youtube.com/watch?v=mTg5V2oA_hY", :title =>"YouTube - Lindy Hop - Hellzapoppin (1941)" %> </li>
+	    </ul>
 	</p>
 	
 </div>
+
+
+<div id="principles">
+    <h2>Principles</h2>
+
+    <ol>
+        <li>
+            <h3>Clear</h3>
+            <p>I aim to make it quick and easy to decide where you want to <%= link_to "Learn", :action => "index", :anchor => "classes_today" %> and <%= link_to "Dance", :action => "index", :anchor => "socials_today" %>, by providing all the information you need to make that decision up front and then passing you on to an external website which has more detail.</p>
+        </li>
+
+        <li>
+            <h3>Comprehensive</h3>
+            <p>I aim to cover every regular class going on in the capital and I've got my ear to the ground - seeking out social dancing opportunities you won't hear about anywhere else.</p>
+        </li>
+
+        <li>
+            <h3>Independent</h3>
+            <p>At the moment I'm just listing everything I can find, so there's no scope for bias towards any swing school or promoter, but I hope to expand the scope of the site in future, so I want to lay out my colours up front: obviously I have my preferences of lessons and social nights, but you should never see any of that preference on the site.</p>
+        </li>
+
+        <li>
+            <h3>Up-to-Date</h3>
+            <p>I'm wired into all of the mailing lists, Facebook groups and Twitter feeds, so if something gets cancelled, or something new comes up, you'll be the first to know. On other listings sites you'll still find long-dead dance events, but not here.</p>
+        </li>
+
+        <li>
+            <h3>Sexy</h3>
+            <p>Whatever you think of the other listings sites, you'd have a hard time arguing that they were pretty. I do my best to make sure that the site is attractive and easy to read.</p>
+        </li>
+  
+    </ol>
+</div>
+
 
 
 <div id="colophon">
@@ -78,7 +134,10 @@
 			
 		</li>
 		<li>The site sits on a custom-built <a href="http://rubyonrails.org/" title="Ruby on Rails">Ruby on Rails</a> CMS, which I wrote from scratch. I plan to make this available as open source, once I've figured out how to do that...</li>
+		<li>I use <%= link_to "git", "http://git-scm.com/" %> for version control, but I don't have a public repo yet.</li>
 		<li><a href="http://www.codestyle.org/servlets/FontStack" title="Font Stack Builder">CodeStyle's Font Stack Builder</a> and <a href="http://www.identifont.com/similar.html" title="Identifont">Identifont</a> came in handy for picking fonts.</li>
+		<li>The site in general uses clear, elegant semantic markup and separation of content from presentation. I read <%=link_to "A List Apart", "www.alistapart.com/"%> and <%=link_to ".net magazine", "http://www.netmag.co.uk/"%> which have instilled in me the desire to Do Things Right.</li>
+		<li>Unfortunately the code of the site doesn't quite validate on all pages. The <acronym title="Cascading Style Sheets">CSS</acronym> uses <%= link_to "CSS3 media selectors", "http://www.css3.info/preview/media-queries/"%> and the HTML on the homepage uses a <%=link_to "Facebook 'like' button", "http://developers.facebook.com/docs/reference/plugins/like"%> which isn't valid. Hopefully at some point I'll get these to validate, but it's not high on my priority list.</li> 
 		<li>The site is currently hosted on <a href="https://www.asmallorange.com/" title="A Small Orange">A Small Orange</a>.</li>
 	</ul>
 </div>

@@ -74,7 +74,7 @@ a {
 
 a:hover {border-bottom:solid 2px;}
 
-p, li, h2 {
+p, li, h2, .about h1 {
   line-height:1.5em;
 }
 
@@ -106,13 +106,11 @@ h1, h2, ul.navigation, .compass {
   text-transform: uppercase;
 }
 
-h1, h2 em, ul.navigation {
+.index h1, .index h2 em, .about #header h2, ul.navigation {
   letter-spacing: 0.1em;
 }
 
-
-
-h2 {
+h2, .about h1 {
   font-size:1.6em;/*increase*/
 }
 
@@ -142,7 +140,7 @@ h3 {
   margin:35px 30px 50px 27px;
 }
 
-.about {
+.about #content {
   padding:0 20px 0 20px;
 }
 
@@ -156,7 +154,7 @@ h3 {
   border-bottom: 3px solid #0F0F0F;
 }
 
-#header h1 {
+.index #header h1, .about #header h2{
   font-size:1.25em;
   margin-bottom: 30px;
 }
@@ -168,13 +166,12 @@ h3 {
   margin-bottom:30px;
 }
 
-#header h1 a {color:#0F0F0F;}
-#header h1 a:hover {border:none;}
+.index #header h1 a, .about #header h2 a {color:#0F0F0F;}
+.index #header h1 a:hover, .about #header h2 a:hover {border:none;}
 
 #site_description {
   font-size:0.875em;
-  margin-bottom:30px;
-  padding:30px 10px 0 10px;
+  padding:30px 10px;
   border-top: 3px solid #0F0F0F;
   width:100%;
   overflow:hidden;
@@ -190,12 +187,26 @@ h3 {
   text-transform:capitalize;
   font-size:1.2em;
 }
+#site_description_text a[href^='mailto:'] {
+  color:#C00;
+}
+
 
 #caveat {
   font-style:italic;
+  clear:left;
+  padding-top:0.8em;
 }
+#caveat p {
+  text-align:center;
+  margin-bottom:0;
+}
+
 #caveat strong {
   text-transform: uppercase;
+  display:block;
+  margin-bottom:0.4em;
+  font-size:1.2em;
   color:#C00;
 }
 
@@ -203,7 +214,6 @@ h3 {
   width:370px;
   margin-left:410px;
 }
-
 
 #social_media #like_message{
   margin-bottom:0.5em;
@@ -217,7 +227,9 @@ h3 {
 #latest_tweet{
   text-align:left;
   line-height:1.5em;
+  font-family: Helvetica, Arial, sans-serif;
   font-style:italic;
+  font-size:0.9em;
   padding: 8px;
   border: 6px double #0F0F0F;
 }
@@ -225,6 +237,11 @@ h3 {
 #latest_tweet a {
   color:#C00;
 }
+#latest_tweet a.tweet_created {
+  font-size:0.8em;
+  color:#384F6E;
+}
+
 
 /*NAVIGATION*/
 
@@ -249,12 +266,15 @@ ul.navigation a {color: #0F0F0F;}
 
 #main_nav a, #admin_nav a {
   padding: 10px; /*added here so we can take it away when we apply the border*/
-  } 
+} 
 
 #main_nav a:hover, #admin_nav a:hover {
   text-decoration:none;
   padding: 8px;
   border: 2px solid #0F0F0F;
+}
+.index #main_nav a.internal:hover {
+ background: url("../images/downarrow.png") no-repeat 50% 95%;  
 }
 
 #main_nav .current, #admin_nav .current {
@@ -461,9 +481,13 @@ li.today .compass {
 /* ABOUT PAGE */
 
 
-.about h2 {
+.about h2, .about h1 {
   margin-bottom:10px;
   text-align:center;
+}
+
+.about h2 {
+  line-height:inherit
 }
 
 #about_swingoutlondon, #scope {
@@ -475,14 +499,21 @@ li.today .compass {
   border-right: 3px solid #0F0F0F;
 }
 
-#about_me, #about_lindy {
+#about_me, #about_lindy, #principles {
   margin-left:500px;
   width:247px;
   padding-left:50px;
   border-left: 3px solid #0F0F0F;
 }
 
+#about_me a[href^='mailto:'] { display:block; }
+
 #about_me, #about_lindy, #colophon {
+  padding-bottom:1.5em;/* 2.3 = basic margin distance */ 
+}
+
+#principles {
+  padding-bottom:0.8em;
   margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
 }
 
@@ -490,7 +521,7 @@ li.today .compass {
   margin-bottom: 1.5em;/* 1.5 = (2.3 - 0.8)*/
 }
 
-#colophon h2, #about_lindy h2 {
+#colophon h2, #about_lindy h2, #principles h2 {
   padding-top:1.6em;/* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
   border-top: 3px solid #0F0F0F;
 }
@@ -498,6 +529,29 @@ li.today .compass {
 #scope {
   border:none;
 }
+
+.about h3 {
+  margin:1.2em 0 0.4em 0;
+}
+
+#scope p {
+  padding-left:2em;
+}
+
+#principles li {
+  font-size:1.2em;
+  list-style: outside decimal;
+}
+#principles li h3{font-size:1em;}
+#principles li p{font-size:0.83em;}
+
+#about_lindy ul{margin:0 0 0.8em 1em;}
+#about_lindy li{
+  list-style:outside disc;
+  margin:0 0 0.5em 1em;
+}
+
+
 
 #colophon {
   clear:both;
