@@ -214,6 +214,15 @@ class Event < ActiveRecord::Base
     out_of_date_test(Date.today + INITIAL_SOCIALS)
   end
   
+  # For infrequent events (6 months or less), is the next expected date (based on the last known date)
+  # more than 3 months away?
+  def infrequent_in_date
+    return false if date_array.nil?
+    return false if frequency < 26
+    expected_date = date_array.sort.reverse.first + frequency.weeks #Belt and Braces: the date array should already be sorted.
+    expected_date > Date.today + 3.months
+  end
+  
   # Is the event new? (probably only applicable to classes)
   def new?
     return false if first_date.nil?
@@ -250,6 +259,7 @@ class Event < ActiveRecord::Base
   
   # Helper function for comparing event dates to a reference date
   def out_of_date_test(comparison_date)
+    return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
     return false if frequency==1 # Weekly events shouldn't have date arrays...
     date_array.each {|d| return false if d > comparison_date }
     true
