@@ -27,7 +27,7 @@ module CommonHelper
     else
       created_date = Time.parse(@latest_tweet.created_at)
       created_date_string = created_date.to_s(:timepart) + " on " + created_date.to_s(:short_date)
-      @latest_tweet.text.twitterify + " "+ link_to(created_date_string, "http://www.twitter.com/swingoutlondon/#{@latest_tweet.id_str}", :class => "tweet_created")
+      @latest_tweet.text.twitterify + " " + link_to(created_date_string, "http://www.twitter.com/swingoutlondon/#{@latest_tweet.id_str}", :class => "tweet_created")
     end
   end
   
