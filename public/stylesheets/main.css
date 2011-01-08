@@ -493,6 +493,7 @@ li.today .compass {
 #about_swingoutlondon, #scope {
   width:447px;
   float:left;
+  clear:left;
   position:relative;
   left:3px;
   padding-right:50px;
