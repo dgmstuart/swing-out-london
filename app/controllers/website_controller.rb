@@ -12,7 +12,7 @@ class WebsiteController < ApplicationController
       @latest_tweet = Twitter.user_timeline("swingoutlondon").first
     rescue Exception => msg
       @latest_tweet = nil
-      logger.error "Failed to get latest tweet with message '#{msg}'"
+      logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
     end
     
     respond_to do |format|

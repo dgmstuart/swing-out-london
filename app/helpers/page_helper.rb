@@ -1,4 +1,4 @@
-module CommonHelper
+module PageHelper
 
   # Switching h1 and h2 in the header
   def heading_hn(action, &block)
