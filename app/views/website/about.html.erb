@@ -1,7 +1,7 @@
 <div id="about_swingoutlondon">
 	<h1>About Swing Out London</h1>
 
-    <p>This website is mainly for <%= link_to "Me", :anchor => "about_me" %>. There - I've said it: it presents the information I want to see, the way I want to see it and it's my main way of personally deciding where I want to dance. If it's useful to other people as well, then I'm very glad.</p>
+    <p>This website is mainly for <%= link_to "Me", {:anchor => "about_me"}, {:rel =>"subsection"} %>. There - I've said it: it presents the information I want to see, the way I want to see it and it's my main way of personally deciding where I want to dance. If it's useful to other people as well, then I'm very glad.</p>
 
     <p>We are incredibly privileged in London to have such a great range of opportunities for dancing available to us. The problem is finding out about those opportunities.</p>
 
@@ -122,23 +122,23 @@
 
 	<ul>
 		<li>The styling of the site was inspired by vintage playbills, magazine listings and event posters. The primary font used is <a href="http://en.wikipedia.org/wiki/Futura_(typeface)" title="Wikipedia - Futura">Futura</a> (falling back to Trebuchet MS on Windows) which was designed in 1927.</li>
-		<li>The vintage wallpaper in the background is by <a href="http://zebiii.deviantart.com/" title="ZeBii on DeviantArt">ZeBii on DeviantArt</a>. You can get it <a href="http://zebiii.deviantart.com/art/Patterns-2-94330934" title="Patterns.2 by ZeBii on DeviantArt">here</a>.</li>
+		<li>The vintage wallpaper in the background is by <a href="http://zebiii.deviantart.com/" >ZeBii on DeviantArt</a>. You can get it <a href="http://zebiii.deviantart.com/art/Patterns-2-94330934" title="Patterns.2 by ZeBii on DeviantArt">here</a>.</li>
 		<li>This site was written on a Mac, mainly using <a href="http://www.firefox.com" title="Firefox web browser">Firefox</a> with the following plugins:	
 
 			<ul class="textlist">
-				<li><a href="http://getfirebug.com/" title="Firebug">Firebug</a> with <a href="http://tools.sitepoint.com/codeburner/" title="CodeBurner - Reference Tool for Web Developers">Code Burner</a>;</li>
-				<li>The <a href="http://chrispederick.com/work/web-developer/" title="Web Developer">Web Developer</a> toolbar;</li>
+				<li><a href="http://getfirebug.com/">Firebug</a> with <a href="http://tools.sitepoint.com/codeburner/" title="CodeBurner - Reference Tool for Web Developers">Code Burner</a>;</li>
+				<li>The <a href="http://chrispederick.com/work/web-developer/">Web Developer</a> toolbar;</li>
 				<li>
 					<a href="http://www.colorzilla.com/firefox/" title="ColorZilla for Firefox - Eyedropper, Color Picker and much more">ColorZilla</a> and <a href="http://www.kevinfreitas.net/extensions/measureit/" title="MeasureIt - Firefox ruler extension for web developers">MeasureIt</a>.</li>
 			</ul>
 			
 		</li>
-		<li>The site sits on a custom-built <a href="http://rubyonrails.org/" title="Ruby on Rails">Ruby on Rails</a> CMS, which I wrote from scratch. I plan to make this available as open source, once I've figured out how to do that...</li>
+		<li>The site sits on a custom-built <a href="http://rubyonrails.org/">Ruby on Rails</a> CMS, which I wrote from scratch. I plan to make this available as open source, once I've figured out how to do that...</li>
 		<li>I use <%= link_to "git", "http://git-scm.com/" %> for version control, but I don't have a public repo yet.</li>
-		<li><a href="http://www.codestyle.org/servlets/FontStack" title="Font Stack Builder">CodeStyle's Font Stack Builder</a> and <a href="http://www.identifont.com/similar.html" title="Identifont">Identifont</a> came in handy for picking fonts.</li>
+		<li><a href="http://www.codestyle.org/servlets/FontStack">CodeStyle's Font Stack Builder</a> and <a href="http://www.identifont.com/similar.html">Identifont</a> came in handy for picking fonts.</li>
 		<li>The site in general uses clear, elegant semantic markup and separation of content from presentation. I read <%=link_to "A List Apart", "www.alistapart.com/"%> and <%=link_to ".net magazine", "http://www.netmag.co.uk/"%> which have instilled in me the desire to Do Things Right.</li>
 		<li>Unfortunately the code of the site doesn't quite validate on all pages. The <acronym title="Cascading Style Sheets">CSS</acronym> uses <%= link_to "CSS3 media selectors", "http://www.css3.info/preview/media-queries/"%> and the HTML on the homepage uses a <%=link_to "Facebook 'like' button", "http://developers.facebook.com/docs/reference/plugins/like"%> which isn't valid. Hopefully at some point I'll get these to validate, but it's not high on my priority list.</li> 
-		<li>The site is currently hosted on <a href="https://www.asmallorange.com/" title="A Small Orange">A Small Orange</a>.</li>
+		<li>The site is currently hosted on <a href="https://www.asmallorange.com/">A Small Orange</a>.</li>
 	</ul>
 </div>
 
