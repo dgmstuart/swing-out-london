@@ -53,13 +53,14 @@ blockquote, q {
 
 
 
+
+
+
+
 body {
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: #0F0F0F;	
   background: transparent url('../images/flock_02_by_ZEBiii.jpg');
-}
-
-#content {
   font-size: 0.875em;/* = 14px */
 }
 
@@ -74,7 +75,7 @@ a {
 
 a:hover {border-bottom:solid 2px;}
 
-p, li, h2, .about h1 {
+p, li, address {
   line-height:1.5em;
 }
 
@@ -102,21 +103,17 @@ ul.textlist li {
   padding-left: 0.5em;
 }
 
-h1, h2, ul.navigation, .compass {
+ul.navigation, .compass {
   text-transform: uppercase;
+}
+.section_heading {
+  text-transform: uppercase;
+  text-align:center;
+  line-height:1.5em;
 }
 
 .index h1, .index h2 em, .about #header h2, ul.navigation {
   letter-spacing: 0.1em;
-}
-
-h2, .about h1 {
-  font-size:1.6em;/*increase*/
-}
-
-h2 em {
-  font-size:1.83em;/*increase*/
-  display:block;
 }
 
 h3 {
@@ -137,82 +134,50 @@ h3 {
 
 #content {
   clear:left;
-  margin:35px 30px 50px 27px;
+  margin:0px 0px 0px 0px;
 }
-
-.about #content {
-  padding:0 20px 0 20px;
-}
-
 
 /* HEADER */
 
-#header {
-  text-align:center;
+.site_title {
   padding-top:50px;
-  margin: 0 50px;
-  border-bottom: 3px solid #0F0F0F;
-}
-
-.index #header h1, .about #header h2{
-  font-size:1.25em;
+  font-size:1.43em;
   margin-bottom: 30px;
+  text-transform:uppercase;
+  text-align:center;
 }
 
-#header em {
+.site_title em {
   font-size:3.24em;
   letter-spacing: 0;
   display:block;
   margin-bottom:30px;
 }
 
-.index #header h1 a, .about #header h2 a {color:#0F0F0F;}
-.index #header h1 a:hover, .about #header h2 a:hover {border:none;}
+.site_title a {color:#0F0F0F;}
+.site_title a:hover {border:none;}
+
+
+/* SITE DESCRIPTION */
 
 #site_description {
-  font-size:0.875em;
-  padding:30px 10px;
-  border-top: 3px solid #0F0F0F;
-  width:100%;
-  overflow:hidden;
-}
-
-#site_description_text {
   width:370px;
+  margin:30px 0 0 60px;
   float:left;
   clear:both;
 }
 
-#site_description_text a {
+#site_description a {
   text-transform:capitalize;
   font-size:1.2em;
 }
-#site_description_text a[href^='mailto:'] {
-  color:#C00;
-}
-
-
-#caveat {
-  font-style:italic;
-  clear:left;
-  padding-top:0.8em;
-}
-#caveat p {
-  text-align:center;
-  margin-bottom:0;
-}
-
-#caveat strong {
-  text-transform: uppercase;
-  display:block;
-  margin-bottom:0.4em;
-  font-size:1.2em;
+#site_description a[href^='mailto:'] {
   color:#C00;
 }
 
 #social_media {
   width:370px;
-  margin-left:410px;
+  margin:30px 60px 0 470px;
 }
 
 #social_media #like_message{
@@ -242,13 +207,30 @@ h3 {
   color:#384F6E;
 }
 
+#caveat {
+  font-style:italic;
+  clear:left;
+  text-align:center;
+  padding: 0.8em 10px 30px 0;
+  margin:0 50px;
+  border-bottom: 3px solid #0F0F0F;
+}
+
+#caveat strong {
+  text-transform: uppercase;
+  display:block;
+  margin-bottom:0.4em;
+  font-size:1.2em;
+  color:#C00;
+}
+
+
 
 /*NAVIGATION*/
 
 ul.navigation {list-style-type:none;}
 
 #main_nav, #admin_nav {
-  margin:0 50px;
   text-align:center;
   clear:both;
 }
@@ -258,7 +240,10 @@ ul.navigation {list-style-type:none;}
 }
 
 #main_nav {
-  margin-bottom:30px;
+  font-size:1.14em;
+  margin: 0 50px;
+  padding-bottom:30px;
+  border-bottom: 3px solid #0F0F0F;
 }
 
 
@@ -313,7 +298,7 @@ ul.navigation a {color: #0F0F0F;}
 
 #footer {
   clear:both;
-  font-size:0.8em;
+  font-size:0.91em;
   padding: 1.5em 0px 1.5em 20px;
   margin: 0 40px;
   border-top: 3px solid #0F0F0F;
@@ -344,19 +329,24 @@ p.flash {
   float:left;
   position:relative;
   left:3px;
+  margin: 35px 0 50px 27px;
 } 
 #socials {
   width:422px;
-  margin-left:421px;
+  margin:35px 30px 50px 448px;
 }
 
-
 #classes h2, #socials h2 {
+  font-size:1.6em;
   text-align:center;
   text-transform:none;
   margin:0px 10px;
 }
-.index h2 em { text-transform:uppercase;}
+.index h2 em {
+  text-transform:uppercase;
+  font-size:1.83em;
+  display:block;
+}
 
 #socials h3 {font-size:1.4em;}
 
@@ -481,27 +471,34 @@ li.today .compass {
 /* ABOUT PAGE */
 
 
-.about h2, .about h1 {
+.about .section_heading{
   margin-bottom:10px;
-  text-align:center;
 }
 
-.about h2 {
-  line-height:inherit
-}
+.about h1 {font-size:1.8em;}
+.about h2 {font-size:1.6em;}
 
-#about_swingoutlondon, #scope {
+
+
+#about_swingoutlondon{
   width:447px;
   float:left;
-  clear:left;
   position:relative;
   left:3px;
   padding-right:50px;
+  margin:35px 0 1.5em 50px;/* 1.5em = (2.3 - 0.8)*/
   border-right: 3px solid #0F0F0F;
 }
 
+#listings_policy_header, #show_love_header{
+  padding-top:1.28em;
+}
+
+
+
+
 #about_me, #about_lindy, #principles {
-  margin-left:500px;
+  margin-left:550px;
   width:247px;
   padding-left:50px;
   border-left: 3px solid #0F0F0F;
@@ -509,6 +506,7 @@ li.today .compass {
 
 #about_me a[href^='mailto:'] { display:block; }
 
+#about_me{margin-top:35px;}
 #about_me, #about_lindy, #colophon {
   padding-bottom:1.5em;/* 2.3 = basic margin distance */ 
 }
@@ -518,33 +516,26 @@ li.today .compass {
   margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
 }
 
-#about_swingoutlondon, #scope {
-  margin-bottom: 1.5em;/* 1.5 = (2.3 - 0.8)*/
-}
 
 #colophon h2, #about_lindy h2, #principles h2 {
   padding-top:1.6em;/* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
   border-top: 3px solid #0F0F0F;
 }
 
-#scope {
-  border:none;
-}
-
-.about h3 {
+#principles h3, #listings_policy h4 {
   margin:1.2em 0 0.4em 0;
 }
 
-#scope p {
+#listings_policy p {
   padding-left:2em;
 }
 
-#principles li {
+#principles {
   font-size:1.2em;
   list-style: outside decimal;
 }
-#principles li h3{font-size:1em;}
-#principles li p{font-size:0.83em;}
+#principles h3{font-size:1em;}
+#principles p{font-size:0.83em;}
 
 #about_lindy ul{margin:0 0 0.8em 1em;}
 #about_lindy li{
@@ -565,18 +556,3 @@ li.today .compass {
 #colophon, #development {
   padding:0px 15%;
 }
-
-
-#about_swingoutlondon em {
-  display:block;
-  margin-top:0.8em;
-  padding-left:30px;
-  font-style: italic;
-  font-size:1.2em;
-}
-
-
-
-
-
-

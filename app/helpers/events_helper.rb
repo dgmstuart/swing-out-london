@@ -39,7 +39,7 @@ module EventsHelper
   
   def today_label(d)
   	if is_today(d)
-      content_tag :span, "Today", :class => "today_label"
+      content_tag :strong, "Today", :class => "today_label"
     end
   end
   
@@ -51,7 +51,7 @@ module EventsHelper
   
   def tomorrow_label(d)
   	if is_tomorrow(d)
-      content_tag :span, "Tomorrow", :class => "tomorrow_label"
+      content_tag :strong, "Tomorrow", :class => "tomorrow_label"
     end
   end
 
@@ -186,7 +186,7 @@ module EventsHelper
   
   # Return a span containing a message about cancelled dates:
   def swingclass_cancelledmsg(swingclass)
-    content_tag( :span, "Cancelled on #{swingclass.pretty_cancelled_dates}" , :class => "class_cancelled" )
+    content_tag( :em, "Cancelled on #{swingclass.pretty_cancelled_dates}" , :class => "class_cancelled" )
   end
   
   # ------- #

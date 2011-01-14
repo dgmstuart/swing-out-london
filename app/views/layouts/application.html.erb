@@ -2,8 +2,8 @@
     "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:og="http://opengraphprotocol.org/schema/"
       xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:og="http://opengraphprotocol.org/schema/"
       xml:lang="en-GB" lang="en-GB">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -59,7 +59,7 @@
     <div id="page">
     
         <div id="header">
-            <%= heading_hn(params[:action]) do %>
+            <%= heading_hn(params[:action], :class=>"site_title") do %>
                 <em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
                 Listings of Lindy Hop classes and socials in London    
             <% end %>
@@ -72,17 +72,17 @@
             <% end %>  
         </div>
         
-        <div id="content">
-              <%= yield %>
-        </div>
+        
+        <%= yield %>
+        
   
         <div id="footer"> 
           
-            <div id="valid_statement">
+            <p id="valid_statement">
                 <a href="http://validator.w3.org/check?uri=referer" id="xhtml_icon">
                     (almost valid XHTML - blame facebook)
                 </a>
-            </div>
+            </p>
           
             <address><%= mail_to CONTACT_EMAIL, "Site by LeveretWeb", :subject => "Swing Out London"%></address>
           
