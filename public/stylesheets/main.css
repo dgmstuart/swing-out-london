@@ -112,7 +112,7 @@ ul.navigation, .compass {
   line-height:1.5em;
 }
 
-.index h1, .index h2 em, .about #header h2, ul.navigation {
+.index h2 em, .site_title, ul.navigation {
   letter-spacing: 0.1em;
 }
 
@@ -471,88 +471,68 @@ li.today .compass {
 /* ABOUT PAGE */
 
 
-.about .section_heading{
+.section_heading{
   margin-bottom:10px;
 }
 
-.about h1 {font-size:1.8em;}
-.about h2 {font-size:1.6em;}
-
-
-
-#about_swingoutlondon{
-  width:447px;
-  float:left;
-  position:relative;
-  left:3px;
-  padding-right:50px;
-  margin:35px 0 1.5em 50px;/* 1.5em = (2.3 - 0.8)*/
-  border-right: 3px solid #0F0F0F;
+h1.section_heading {
+  font-size:1.8em;
+  margin-top:35px;
+}
+h2.section_heading {
+  font-size:1.5em;
+  margin-top:35px;
 }
 
-#listings_policy_header, #show_love_header{
-  padding-top:1.28em;
+#about_swingoutlondon, #policy{
+  margin:35px 76px 35px 50px;
 }
 
-
-
-
-#about_me, #about_lindy, #principles {
-  margin-left:550px;
+.sidebar {
+  padding:20px;
+  margin:0 50px 30px 30px;
+  border: 6px double #0F0F0F;
   width:247px;
-  padding-left:50px;
-  border-left: 3px solid #0F0F0F;
+  float:right;
+  clear:right;
 }
 
-#about_me a[href^='mailto:'] { display:block; }
-
-#about_me{margin-top:35px;}
-#about_me, #about_lindy, #colophon {
-  padding-bottom:1.5em;/* 2.3 = basic margin distance */ 
+.sidebar p, .sidebar ul {
+  font-family: Georgia, serif;
+  font-style:italic;
 }
 
-#principles {
-  padding-bottom:0.8em;
-  margin-bottom:2.3em;/* 2.3 = basic margin distance */ 
-}
+/*style for first sidebar*/
+#about_me, #about_lindy {margin-top:35px;}
 
+#about_me a[href^='mailto:'] { text-align:left; }
 
-#colophon h2, #about_lindy h2, #principles h2 {
-  padding-top:1.6em;/* 1.6 = 2.3/1.4 = margin of above element / size difference between p and h2*/
-  border-top: 3px solid #0F0F0F;
+#colophon {
+  padding:20px;
+  margin:35px 100px; 
+  border: 6px double #0F0F0F;
 }
-
-#principles h3, #listings_policy h4 {
-  margin:1.2em 0 0.4em 0;
-}
-
-#listings_policy p {
-  padding-left:2em;
-}
+#colophon h2 {margin-top:0px;}
+#colophon li {margin-bottom:0.8em;}
+#colophon .textlist li {margin-bottom:inherit;}
 
 #principles {
   font-size:1.2em;
   list-style: outside decimal;
+  margin-left:1.7em;
 }
 #principles h3{font-size:1em;}
 #principles p{font-size:0.83em;}
+
+#principles h3, #listings_policy h4 {margin-bottom:0.4em;}
+#principles li, #listings_policy li {margin-bottom:1.2em;}
+
+#listings_policy p {padding-left:2em;}
+
+
 
 #about_lindy ul{margin:0 0 0.8em 1em;}
 #about_lindy li{
   list-style:outside disc;
   margin:0 0 0.5em 1em;
-}
-
-
-
-#colophon {
-  clear:both;
-}
-
-#colophon h2 {
-  margin:0 50px;
-}
-
-#colophon, #development {
-  padding:0px 15%;
 }
