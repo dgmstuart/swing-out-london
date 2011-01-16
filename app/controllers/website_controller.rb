@@ -1,7 +1,10 @@
 class WebsiteController < ApplicationController
-
+  
   require 'rubygems'
   require 'twitter'
+  
+  before_filter :get_updated_times
+  
   
   def index
     @classes = Event.active_classes
@@ -21,9 +24,11 @@ class WebsiteController < ApplicationController
     end
   end
   
-  def about
+  #TODO: move into a different file?
+  def get_updated_times
     @last_updated_time = Event.last_updated_datetime.to_s(:timepart)
     @last_updated_date = Event.last_updated_datetime.to_s(:listing_date)
+    @last_updated_datetime = Event.last_updated_datetime
   end
   
 end

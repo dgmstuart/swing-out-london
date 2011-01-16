@@ -157,6 +157,11 @@ h3 {
 .site_title a {color:#0F0F0F;}
 .site_title a:hover {border:none;}
 
+#last_updated_ago {
+  font-style:italic;
+  text-align:center;
+  margin-bottom:20px;
+}
 
 /* SITE DESCRIPTION */
 
@@ -299,27 +304,31 @@ ul.navigation a {color: #0F0F0F;}
 #footer {
   clear:both;
   font-size:0.91em;
-  padding: 1.5em 0px 1.5em 20px;
+  text-align:center;
+}
+
+#footer_nav, #valid_statement {padding-top:2.5em;}
+    
+#footer_nav {
+  text-align:left;
   margin: 0 40px;
+  padding-left:20px;
   border-top: 3px solid #0F0F0F;
 }
 
-#footer_nav, address, #valid_statement {padding:1em 0;}
-
-address, #valid_statement {
+#valid_statement {
   float:right;
+  margin-right:40px;
+  padding-right:20px;
+  border-top: 3px solid #0F0F0F;
+  height:0;
 }
 
-#valid_statement{padding-left:1em;}
-
-#xhtml_icon {
-  padding-bottom:2px;
+address, #last_updated{
+  display:inline-block;
+  padding: 2.5em 0;
+  margin:0px;
 }
-
-p.flash {
-  color: green;
-}
-
 
 
 /* INDEX PAGE */
