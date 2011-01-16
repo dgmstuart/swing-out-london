@@ -5,7 +5,7 @@
 	<p>Leads in London don't get to meet and talk to each other so much, so I organise <%= link_to "London Lindy Leads Dinners", "http://www.facebook.com/home.php?sk=group_147221981989905"%> to try and fix that.</p>
 	<p>I dance all over town and I've tried to have lessons from each of the London swing schools. I mainly dance <%= link_to "Lindy Hop", "http://en.wikipedia.org/wiki/Lindy_Hop" %> (6 &amp; 8 count and 30's Charleston) and a little <%= link_to "Blues", "http://en.wikipedia.org/wiki/Blues_dance#Blues_dancing_in_the_contemporary_swing_dance_community" %>.</p>
 	<p>I'm keen to learn more 1920's style Charleston, and I've started a <%=link_to "1920's Partner Charleston revolution","http://www.facebook.com/home.php?sk=group_187534864606727&ap=1"%> to try and encourage more teaching in this area.</p>
-	<p>Please send any comments, corrections or listings to:</br><%=mail_to CONTACT_EMAIL%></p>
+	<p>Please send any comments, corrections or listings to:<br/><%=mail_to CONTACT_EMAIL%></p>
 </div>
 
 <div id="show_love" class="sidebar">
@@ -25,7 +25,7 @@
     <p>We are incredibly privileged in London to have such a great range of opportunities for dancing available to us. The problem is finding out about those opportunities.</p>
     
     <h2 class="section_heading" id="motivation_header">Motivation</h2>
-    <p>I was frustrated when starting out that I couldn't find any comprehensive Lindy Hop listings and although I later found out about existing services like <%= link_to "Swing Junction", "http://www.swingjunction.co.uk/modules/piCal/index.php?cid=1"%> , <%= link_to "Swing Dancers Of London", "http://www.swingdancersoflondon.org/"%> and Judy's List (an email list - ask an experienced dancer) they don't provide exactly what I want, so I decided to make my own site (as you do).</p>
+    <p>I was frustrated when starting out that I couldn't find any comprehensive Lindy Hop listings and although I later found out about existing services like <%= link_to "Swing Junction", "http://www.swingjunction.co.uk/modules/piCal/index.php?cid=1"%> , <%= link_to "Swing Dancers Of London", "http://www.swingdancersoflondon.org/"%> and Judy's List (a regular email - ask an experienced dancer) they don't provide exactly what I want, so I decided to make my own site (as you do).</p>
 
     <p>In some respects London is quite a divided scene with a lot of dancers unaware of what's going on outside the bubble of the first swing school they came across.</p>
 	
@@ -34,7 +34,8 @@
 	<p>Swing Out London has been live since August 2010 and the listings were last updated at <%=@last_updated_time%> on  <%=@last_updated_date%>.</p>
 
     <h2 class="section_heading">Principles</h2>
-
+    <p>There are a number of principles which I try and stick to in running this site which I think are important to delivering a useful service. Swing Out London is:</p>
+    
     <ol id="principles">
         <li>
             <h3>Clear</h3>
@@ -45,15 +46,15 @@
             <h3>Comprehensive</h3>
             <p>I aim to cover every regular class going on in the capital and I've got my ear to the ground - seeking out social dancing opportunities you won't hear about anywhere else.</p>
         </li>
-
-        <li>
-            <h3>Independent</h3>
-            <p>At the moment I'm just listing everything I can find, so there's no scope for bias towards any swing school or promoter, but I hope to expand the scope of the site in future, so I want to lay out my colours up front: obviously I have my preferences of lessons and social nights, but you should never see any of that preference on the site.</p>
-        </li>
-
+        
         <li>
             <h3>Up-to-Date</h3>
             <p>I'm wired into all of the mailing lists, Facebook groups and Twitter feeds, so if something gets cancelled, or something new comes up, you'll be the first to know. On other listings sites you'll still find long-dead dance events, but not here.</p>
+        </li>
+        
+        <li>
+            <h3>Independent</h3>
+            <p>At the moment I'm just listing everything I can find, so there's no scope for bias towards any swing school or promoter, but I hope to expand the scope of the site in future, so I want to lay out my colours up front: obviously I have my preferences of lessons and social nights, but you should never see any of that preference on the site.</p>
         </li>
 
         <li>
@@ -79,12 +80,13 @@
     			</ul>
 
     		</li>
-    		<li>The site sits on a custom-built <a href="http://rubyonrails.org/">Ruby on Rails</a> <acronym title="Content Management System">CMS</acronym>, which I wrote from scratch. I plan to make this available as open source, once I've figured out how to do that...</li>
-    		<li>I use <%= link_to "Git", "http://git-scm.com/" %> for version control, but I don't have a public <abbr title="repository">repo</abbr> yet.</li>
     		<li><a href="http://www.codestyle.org/servlets/FontStack">CodeStyle's Font Stack Builder</a> and <a href="http://www.identifont.com/similar.html">Identifont</a> came in handy for picking fonts.</li>
+    		
+    		<li>The site sits on a custom-built <a href="http://rubyonrails.org/">Ruby on Rails</a> <acronym title="Content Management System">CMS</acronym>, which I wrote from scratch. I use <%= link_to "Git", "http://git-scm.com/" %> for version control, but I don't have a public <abbr title="repository">repo</abbr> yet.</li>
+    		<li>The site is currently hosted on <a href="https://www.asmallorange.com/">A Small Orange</a>.</li>
+    		
     		<li>I read <%=link_to "A List Apart", "www.alistapart.com/"%> and <%=link_to ".net magazine", "http://www.netmag.co.uk/"%> and I'm sold on <%= link_to "web standards", "http://www.w3schools.com/site/site_standards.asp" %>.</li>
     		<li>Unfortunately the code of the site doesn't quite validate on all pages. The <acronym title="Cascading Style Sheets">CSS</acronym> uses <%= link_to "CSS3 media selectors", "http://www.css3.info/preview/media-queries/"%> and the HTML on the homepage uses a <%=link_to "Facebook 'like' button", "http://developers.facebook.com/docs/reference/plugins/like"%> which uses a custom xml namespace which (according to my current understanding) the <a href="http://validator.w3.org/" title="The W3C Markup Validation Service">W3C validator</a> doesn't recognise. Hopefully at some point I'll get these to validate, but it's not high on my priority list.</li> 
-    		<li>The site is currently hosted on <a href="https://www.asmallorange.com/">A Small Orange</a>.</li>
     	</ul>
     </div>
     

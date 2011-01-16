@@ -112,10 +112,6 @@ ul.navigation, .compass {
   line-height:1.5em;
 }
 
-.index h2 em, .site_title, ul.navigation {
-  letter-spacing: 0.1em;
-}
-
 h3 {
   font-size:1.2em;
 }
@@ -142,6 +138,7 @@ h3 {
 .site_title {
   padding-top:50px;
   font-size:1.43em;
+  letter-spacing: 0.1em;
   margin-bottom: 30px;
   text-transform:uppercase;
   text-align:center;
@@ -233,7 +230,10 @@ h3 {
 
 /*NAVIGATION*/
 
-ul.navigation {list-style-type:none;}
+ul.navigation {
+  list-style-type:none;
+  letter-spacing: 0.1em;
+}
 
 #main_nav, #admin_nav {
   text-align:center;
@@ -338,29 +338,32 @@ address, #last_updated{
   float:left;
   position:relative;
   left:3px;
-  margin: 35px 0 50px 27px;
+  margin-left: 27px;
 } 
 #socials {
   width:422px;
-  margin:35px 30px 50px 448px;
+  margin-left:448px;
 }
 
 #classes h2, #socials h2 {
   font-size:1.6em;
   text-align:center;
   text-transform:none;
-  margin:0px 10px;
+  margin:35px 10px 0 10px;
 }
 .index h2 em {
   text-transform:uppercase;
   font-size:1.83em;
+  letter-spacing: 0.1em;
   display:block;
+  margin-bottom:0.2em;
 }
 
 #socials h3 {font-size:1.4em;}
 
 #classes ul.daylist, #socials ul.datelist {
-  margin-top:1.2em;
+  margin:1.2em 0 40px 0;
+  padding-bottom:10px;
 }
 
 #classes ul.daylist {
@@ -514,31 +517,26 @@ h2.section_heading {
 /*style for first sidebar*/
 #about_me, #about_lindy {margin-top:35px;}
 
-#about_me a[href^='mailto:'] { text-align:left; }
-
 #colophon {
   padding:20px;
   margin:35px 100px; 
   border: 6px double #0F0F0F;
+  text-align:justify;
 }
 #colophon h2 {margin-top:0px;}
 #colophon li {margin-bottom:0.8em;}
 #colophon .textlist li {margin-bottom:inherit;}
 
 #principles {
-  font-size:1.2em;
   list-style: outside decimal;
   margin-left:1.7em;
 }
-#principles h3{font-size:1em;}
-#principles p{font-size:0.83em;}
+#principles h3{font-size:1.2em;}
 
 #principles h3, #listings_policy h4 {margin-bottom:0.4em;}
 #principles li, #listings_policy li {margin-bottom:1.2em;}
 
 #listings_policy p {padding-left:2em;}
-
-
 
 #about_lindy ul{margin:0 0 0.8em 1em;}
 #about_lindy li{
