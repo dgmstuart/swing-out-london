@@ -113,17 +113,10 @@ class Event < ActiveRecord::Base
       string_array = date_string.split(',')
     end
 
-    string_array.collect { |d| uk_date_from_string(d) }.sort
+    string_array.collect { |d| d.to_uk_date }.compact.sort
+    #to_uk_date is defined in config/initializers/uk_dates.rb, which extends String.
   end
-
-  # TODO: should put this somewhere extending Date class
-   def uk_date_from_string(date_string)    
-     #HACK - to get around stupid date parsing not recognising UK dates
-     date_part_array = Time.parse(date_string)
-     return Date.new(date_part_array[0], date_part_array[2], date_part_array[1]) unless (date_part_array[0].nil? || date_part_array[2].nil? || date_part_array[1].nil?)
-     logger.warn "WARNING: Bad date found: '#{date_string}' - ignored"
-     return
-   end
+  
   
   public
   
