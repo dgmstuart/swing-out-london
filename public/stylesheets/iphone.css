@@ -53,29 +53,26 @@ blockquote, q {
 
 
 
-body {
-  font-family: Futura, sans-serif;
-  color: #0F0F0F;
-  width:320px;
-}
 
-#content {
+
+
+/*DIFFERENCE*/
+body {
+  font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
+  color: #0F0F0F;
   font-size: 0.875em;/* = 14px */
 }
+
+#page{background: #FEE6B8 none;}
 
 a {
   text-decoration:none;
   color:#384F6E;  
 }
 
-
-/* ABOVE HERE!!!!!!!!!!!!!!!!!*/
-
-
-
 a:hover {border-bottom:solid 2px;}
 
-p, li, h2 {
+p, li, address {
   line-height:1.5em;
 }
 
@@ -103,23 +100,17 @@ ul.textlist li {
   padding-left: 0.5em;
 }
 
-h1, h2, ul.navigation, .compass {
+ul.navigation, .compass {
   text-transform: uppercase;
 }
-
-h1, h2 em, ul.navigation {
-  letter-spacing: 0.1em;
+.section_heading {
+  text-transform: uppercase;
+  text-align:center;
+  line-height:1.5em;
 }
 
-
-
-h2 {
-  font-size:1.4em;
-}
-
-h2 em {
-  font-size:1.83em;
-  display:block;
+h3 {
+  font-size:1.2em;
 }
 
 
@@ -129,75 +120,165 @@ h2 em {
   padding: 20px;
 }
 
-#page {
-    background: #FEE6B8 none;
-}
-
-#content {
-  margin:0 10px;
-}
-
-.about {
-  padding:0 20px 0 20px;
-}
-
+/*DIFFERENCE - removed #page styles*/
 
 /* HEADER */
 
-#header {
+.site_title {
+  padding-top:50px;
+  font-size:1.43em;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+  text-transform:uppercase;
   text-align:center;
 }
 
-#header h1 {
-  font-size:0.8em;
-  padding:25px;
-  line-height:1.1em;
-}
-
-#header em {
+.site_title em {
   font-size:3.24em;
   letter-spacing: 0;
-  line-height:1em;
   display:block;
+  margin-bottom:30px;
+}
+
+.site_title a {color:#0F0F0F;}
+.site_title a:hover {border:none;}
+
+#last_updated_ago {
+  font-style:italic;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+/* SITE DESCRIPTION */
+
+/*DIFFERENCE - removed layout styling, added border*/
+#site_description {
+  margin:30px;
+  padding-bottom:30px;
+  border-bottom: 3px solid #0F0F0F;
+}
+
+#site_description a {
+  text-transform:capitalize;
+  font-size:1.2em;
+}
+#site_description a[href^='mailto:'] {
+  color:#C00;
+}
+
+/*DIFFERENCE - changed layout styling*/
+#social_media {
+  margin:30px 30px 10px 30px;
+}
+
+#social_media #like_message{
   margin-bottom:0.5em;
 }
 
-#header a {color:#0F0F0F;}
-#header a:hover {border:none;}
+.twitter-share-button {
+  position:relative;
+  top:3px;
+}
+
+#latest_tweet{
+  text-align:left;
+  line-height:1.5em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-style:italic;
+  font-size:0.9em;
+  padding: 8px;
+  border: 6px double #0F0F0F;
+}
+
+#latest_tweet a {
+  color:#C00;
+}
+#latest_tweet a.tweet_created {
+  font-size:0.8em;
+  color:#384F6E;
+}
+
+#caveat {
+  font-style:italic;
+  clear:left;
+  text-align:center;
+  padding: 0.8em 10px 30px 0;
+  margin:0 50px;
+  border-bottom: 3px solid #0F0F0F;
+}
+
+#caveat strong {
+  text-transform: uppercase;
+  display:block;
+  margin-bottom:0.4em;
+  font-size:1.2em;
+  color:#C00;
+}
+
 
 
 /*NAVIGATION*/
 
-ul.navigation {list-style-type:none;}
+ul.navigation {
+  list-style-type:none;
+  letter-spacing: 0.1em;
+  line-height:3.5em;
+}
+
+ul.navigation li {
+  display:inline;
+  margin:0 0.5em 0 0;
+  padding:0 0 0 1em;
+  white-space:nowrap;
+}
 
 #main_nav, #admin_nav {
-  margin:0 50px;
   text-align:center;
+  clear:both;
 }
 
 #admin_nav {
   padding:1em 0;
 }
 
+/*DIFFERENCE - changed padding to force nav configuration*/
 #main_nav {
-  padding:1em 0 40px 0;
+  font-size:1.14em;
+  margin: 0 30px;
+  padding:0 30px 15px 30px;
   border-bottom: 3px solid #0F0F0F;
 }
 
+ul.navigation a {
+  color: #0F0F0F;
+}
 
-ul.navigation a {color: #0F0F0F;}
+/*DIFFERENCE - push 'about' link onto next line*/
+ul.navigation li#about_link {
+  border:none;
+  padding:0px;
+}
+ul.navigation li#dance_link {
+  
+}
 
-#main_nav a, #admin_nav a {padding: 10px;} /*added here so we can take it away when we apply the border*/
+#main_nav a, #admin_nav a {
+  padding: 10px; /*added here so we can take it away when we apply the border*/
+} 
 
 #main_nav a:hover, #admin_nav a:hover {
   text-decoration:none;
   padding: 8px;
   border: 2px solid #0F0F0F;
 }
+.index #main_nav a.internal:hover {
+ background: url("../images/downarrow.png") no-repeat 50% 95%;  
+}
 
 #main_nav .current, #admin_nav .current {
   padding: 8px;
   border: 6px double #0F0F0F;
+  display:inline-block;
 }
 
 #footer_nav a:hover {
@@ -218,94 +299,103 @@ ul.navigation a {color: #0F0F0F;}
   padding-left:0;
 }
 
-.navigation li {
-  display:inline;
-  margin:0 0.5em 0 0;
-  padding:0 0 0 1em;
-}
-
-
 
 /* FOOTER */
 
 #footer {
+  clear:both;
+  font-size:0.91em;
   text-align:center;
-  padding: 1em 0;
-  font-size:0.8em;
-  margin: 1em 40px 0;
+}
+
+#valid_statement {padding-top:2.5em;}
+    
+/*DIFFERENCE - removed left alignment increased padding */
+#footer_nav {
+  margin: 0 40px;
+  padding:2.5em 80px 0 80px;
   border-top: 3px solid #0F0F0F;
 }
 
-#footer_nav {
-  padding:1em 0 3em;
-}
-
-
-address {
-  position:relative;
-  top:4em; height:0;
-  padding:0
-}
-
+/*DIFFERENCE - removed the validation link */
 #valid_statement {
   display:none;
 }
 
-
+address, #last_updated{
+  display:inline-block;
+  padding: 15px 0 20px 0;
+}
 
 /* INDEX PAGE */
 
+/*DIFFERENCE - removed most layout styling from #classes and #socials */
+#classes, #socials {
+  margin:0 20px;
+}
+
+/*DIFFERENCE - changed margins */
 #classes h2, #socials h2 {
+  font-size:1.6em;
   text-align:center;
   text-transform:none;
-  margin:25px 10px 0;
 }
-.index h2 em { text-transform:uppercase;}
+/*DIFFERENCE - changed margins */
+#classes h2{
+  margin:35px 10px 0 10px;
+}
+/*DIFFERENCE - changed margins, added separator */
+#socials h2{
+  margin:0 30px;
+  padding-top:50px;
+  border-top: 3px solid #0F0F0F;
+}
 
 
+.index h2 em {
+  text-transform:uppercase;
+  font-size:1.83em;
+  letter-spacing: 0.1em;
+  display:block;
+  margin-bottom:0.2em;
+}
+
+#socials h3 {font-size:1.4em;}
+
+/*DIFFERENCE -changed margins */
 #classes ul.daylist, #socials ul.datelist {
-  margin-top:1.2em;
+  margin:1.2em 0 30px 0;
 }
 
+/*DIFFERENCE - removed all layout styling from #classes ul and #socials ul */
 #key {
-  padding:20px 10px 0;
-  font-size:1em;
+  margin: 20px 30px;
+  font-size:1.2em;
   font-style:italic;
+}
+
+#classes ul.daylist h3 {
+  float:left;
+}
+
+li.day_row li {
+  margin-left:7.5em;
 }
 
 li.date_row li, li.day_row li {
   padding-left:3px;/*to account for the border we apply when it's today*/
 }
 
-#socials ul.datelist h3, #classes ul.daylist h3 {
+#socials ul.datelist h3 {
   display:block;
   text-align:center;
   margin-bottom:0.5em;
-  font-size:1.2em;
 }
 
-.class_cancelled  {
-  display:block;
-  font-style:italic;
-  padding-left:1em;
-  margin-right:1.5em;
-  color:#CC0000;
-}
-
-.social_title { font-size:1.1em;}
-.social_details {font-size:0.9em;}
 li.day_row, li.date_row {
-  padding:0.6em 10px 0.3em 10px;
+  padding:1em 10px 0.4em 10px;
   line-height:1.4em;
 }
-
-.social_cancelled .cancelled_label {
-  color:#CC0000;
-  text-transform:uppercase;
-  font-size:1.1em;
-}
-
-.social_cancelled .social_title {color:inherit;}
 
 /* Padding between rows*/
 li.day_row li, li.date_row li {
@@ -317,6 +407,13 @@ li.today {
   border: 3px dashed #0F0F0F;
   margin-bottom:0.9em;
 }
+li.today:target { 
+  border-color: #C00;
+  -webkit-transition: all 0.8s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
 li.today li {padding:0;}
 
 .today_label, .tomorrow_label {text-transform: uppercase;}
@@ -325,13 +422,12 @@ li.date_row .today_label, li.date_row .tomorrow_label {letter-spacing: 0.1em}
 li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
 
 li.day_row .today_label {
+  display:block;
   text-align:center;
-  font-size:1.2em;
-  letter-spacing: 0.5em;
-  position:relative;
-  height:0;
-  width:0;
-  float:left;
+  font-size: 1.2em;
+  letter-spacing: 0.7em;
+  padding-left:0.7em;
+  padding-bottom: 0.3em;
 }
 
 .compass {
@@ -348,39 +444,96 @@ li.today .compass {
   margin-right:0;/*to line up the compass elements*/
 }
 
+.class_cancelled  {
+  display:block;
+  font-style:italic;
+  padding-left:1em;
+  margin-right:1.5em;
+  color:#CC0000;
+}
+
+.social_title { font-size:1.2em;}
 .social_details { font-style: italic;}
 .social_details:before { content:"- ";}
-.social_highlight { color:#CC0000 }
 
-
-#caveat {
-  padding:0.8em;
-  font-size: 1em;
+.social_highlight {
+  background: url("../images/highlight_icon.png") no-repeat 0 0.15em;
+  padding-left: 22px
 }
-#caveat strong {text-transform: uppercase;}
+
+.social_cancelled .cancelled_label, .new_label  {
+  background-color:#CC0000;
+  color:#FEE6B8;
+  padding:0.1em 0.6em;
+  margin-right:0.2em;
+  position:relative;
+  bottom:0.1em;
+  text-transform:uppercase;
+}
+
+.social_cancelled .social_title {color:inherit;}
+
 
 /* ABOUT PAGE */
 
 
-.about h2 {
+.section_heading{
   margin-bottom:10px;
-  text-align:center;
 }
 
-#mission_statement {
-  margin-top:20px;
+h1.section_heading {
+  font-size:1.8em;
+  margin-top:35px;
+}
+h2.section_heading {
+  font-size:1.5em;
+  margin-top:35px;
 }
 
-#about_me, #about_lindy, #colophon, #mission_statement, #scope {
-  margin-bottom:2.0em;
+/*DIFFERENCE - changed margins*/
+#about_swingoutlondon, #policy{
+  margin:35px 30px;
 }
 
-#mission_statement em {
-  display:block;
-  margin-top:0.8em;
-  padding-left:30px;
-  font-style: italic;
-  font-size:1.2em;
+/*DIFFERENCE - changed margins*/
+.sidebar {
+  padding:20px;
+  margin:0 20px 30px 20px;
+  border: 6px double #0F0F0F;
 }
 
-#colophon li {text-align: justify;}
+.sidebar p, .sidebar ul {
+  font-family: Georgia, serif;
+  font-style:italic;
+}
+
+/*style for first sidebar*/
+#about_me, #about_lindy {margin-top:35px;}
+
+/*DIFFERENCE - changed styling*/
+#colophon {
+  margin:35px 0px; 
+  padding:20px;
+  border: 6px double #0F0F0F;
+  text-align:justify;
+}
+#colophon h2 {margin-top:0px;}
+#colophon li {margin-bottom:0.8em;}
+#colophon .textlist li {margin-bottom:inherit;}
+
+#principles {
+  list-style: outside decimal;
+  margin-left:1.7em;
+}
+#principles h3{font-size:1.2em;}
+
+#principles h3, #listings_policy h4 {margin-bottom:0.4em;}
+#principles li, #listings_policy li {margin-bottom:1.2em;}
+
+#listings_policy p {padding-left:2em;}
+
+#about_lindy ul{margin:0 0 0.8em 1em;}
+#about_lindy li{
+  list-style:outside disc;
+  margin:0 0 0.5em 1em;
+}
