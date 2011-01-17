@@ -113,8 +113,8 @@ class Event < ActiveRecord::Base
       string_array = date_string.split(',')
     end
 
-    string_array.collect { |d| d.to_uk_date }.compact.sort
-    #to_uk_date is defined in config/initializers/uk_dates.rb, which extends String.
+    string_array.collect { |d| d.to_date }.compact.sort
+    #to_date is defined in config/initializers/uk_dates.rb, which extends String.
   end
   
   
@@ -291,11 +291,10 @@ class Event < ActiveRecord::Base
   
   # Get the socials which are happening today:
   def self.socials_today
-    #TODO UNFINISHED
-    return []
     dates_array = self.socials_dates(Date.today)
-    
-    #TODO UNFINISHED
+    # Get the list of events
+    return dates_array[0][1] unless dates_array == []
+    return []
   end
 
   # Find the datetime of the most recently updated event
