@@ -301,20 +301,19 @@ ul.navigation a {
   font-size:0.91em;
   text-align:center;
 }
-
-#valid_statement {padding-top:2.5em;}
     
 #footer_nav {
   text-align:left;
   margin: 0 40px;
-  padding:2.5em 0 0 20px;
+  padding:2em 0 0 20px;
   border-top: 3px solid #0F0F0F;
 }
 
 #valid_statement {
   float:right;
   margin-right:40px;
-  padding-right:20px;
+  padding:2em 20px 0 0;
+  line-height: 3.5em;
   border-top: 3px solid #0F0F0F;
   height:0;
 }
