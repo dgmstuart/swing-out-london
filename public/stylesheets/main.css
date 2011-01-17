@@ -353,6 +353,14 @@ address, #last_updated{
   margin-bottom:0.2em;
 }
 
+.index h2:target em{ 
+  color: #C00;
+  -webkit-transition: all 0.8s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
+
 #socials h3 {font-size:1.4em;}
 
 #classes ul.daylist, #socials ul.datelist {
