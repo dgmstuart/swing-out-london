@@ -63,9 +63,9 @@
                 <em><%= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index" %></em>
                 Listings of Lindy Hop classes and socials in London    
             <% end %>
-            
+            <% if !@cms_page %>
             <p id="last_updated_ago">Last updated <%= time_ago_in_words @last_updated_datetime %> ago</p>
-        
+            <% end %>
             <%= render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true %>
             <%= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' } %>
       
@@ -90,8 +90,9 @@
             
             <address>Site by <%= mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"%></address>
             
-            <p id="last_updated"> &ndash; last updated at <%=@last_updated_time%> on  <%=@last_updated_date%></p>
-              
+            <% if !@cms_page %>
+            <p id="last_updated"> &ndash; last updated at <%=@last_updated_time%> on <%=@last_updated_date%></p>
+            <%end%>  
         </div>
 
   </div>
