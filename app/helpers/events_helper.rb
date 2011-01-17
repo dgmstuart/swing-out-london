@@ -25,7 +25,15 @@ module EventsHelper
     
     tag :li, html_options, true
   end
-
+  
+  #if there are no socials on this day, we need to add a class
+  def socialsh2(&block)
+    if socials_today.empty?
+      content_tag :h2, :id => "socials_today", &block
+    else
+      content_tag :h2, &block
+    end
+  end
   
   def is_today(d)
   	d.class == String && Event.weekday_name(Date.today) == d || 
@@ -40,12 +48,6 @@ module EventsHelper
   def today_label(d)
   	if is_today(d)
       content_tag :strong, "Today", :class => "today_label"
-    end
-  end
-  
-  def classes_today(d)
-  	if is_today(d)
-      "id='classes_today"
     end
   end
   

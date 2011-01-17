@@ -295,6 +295,15 @@ class Event < ActiveRecord::Base
 
     merge_dates_hashes(weekly_socials_dates, other_socials_dates).sort
   end
+  
+  # Get the socials which are happening today:
+  def self.socials_today
+    #TODO UNFINISHED
+    return []
+    dates_array = self.socials_dates(Date.today)
+    
+    #TODO UNFINISHED
+  end
 
   # Find the datetime of the most recently updated event
   def self.last_updated_datetime
