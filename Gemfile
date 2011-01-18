@@ -11,7 +11,10 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'capistrano'
 
 gem 'twitter'
+
+# Hosting on heroku
 gem 'heroku'
+gem 'taps'
 
 
 # To use debugger
