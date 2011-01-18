@@ -62,8 +62,11 @@ body {
   color: #0F0F0F;
   font-size: 0.875em;/* = 14px */
 }
-
-#page{background: #FEE6B8 none;}
+/*DIFFERENCE*/
+#page{
+  background: #FEE6B8 none;
+  width:480px;
+}
 
 a {
   text-decoration:none;
