@@ -19,6 +19,6 @@ class Date
   end
     
   def self.local_tomorrow
-    (Time.zone.now +1.day).to_date
+    (Time.zone.now + 1.day).to_date
   end
 end
