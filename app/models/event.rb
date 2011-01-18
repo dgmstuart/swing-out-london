@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :organiser
   
-  default_scope :order => 'title ASC' #sets default search order
+  #default_scope :order => 'title ASC' #sets default search order
   
   serialize :date_array
   serialize :cancellation_array
@@ -266,17 +266,17 @@ class Event < ActiveRecord::Base
 
   # Helper methods to get different types of event:
   def self.classes(*args)
-    self.all(*args).select{|e| e.is_class? }
+    self.all(*args).select{|e| e.is_class? }.order("title ASC")
   end
 
   def self.socials(*args)
-    self.all(*args).select{|e| e.is_social? }
+    self.all(*args).select{|e| e.is_social? }.order("title ASC")
   end
 
   # Get a list of classes, excluding those which have ended
   # TODO: not very DRY
   def self.active_classes
-    self.all.select{ |e| e.is_class? && !e.ended? }
+    self.all.select{ |e| e.is_class? && !e.ended? }.order("title ASC")
   end  
     
 
@@ -301,8 +301,8 @@ class Event < ActiveRecord::Base
   def self.last_updated_datetime
     #if the db is empty, return the beginning of the epoch:
     return Time.at(0) if self.first.nil?
-    
-    self.first( :order => 'updated_at DESC').updated_at
+
+    self.order('updated_at DESC').first.updated_at
   end
     
 
