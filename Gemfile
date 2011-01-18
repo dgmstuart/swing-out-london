@@ -11,6 +11,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'capistrano'
 
 gem 'twitter'
+gem 'heroku'
 
 
 # To use debugger
