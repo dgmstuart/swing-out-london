@@ -266,17 +266,17 @@ class Event < ActiveRecord::Base
 
   # Helper methods to get different types of event:
   def self.classes(*args)
-    self.all(*args).select{|e| e.is_class? }.order("title ASC")
+    self.order("title ASC").all(*args).select{|e| e.is_class? }
   end
 
   def self.socials(*args)
-    self.all(*args).select{|e| e.is_social? }.order("title ASC")
+    self.order("title ASC").all(*args).select{|e| e.is_social? }
   end
 
   # Get a list of classes, excluding those which have ended
   # TODO: not very DRY
   def self.active_classes
-    self.all.select{ |e| e.is_class? && !e.ended? }.order("title ASC")
+    self.order("title ASC").all.select{ |e| e.is_class? && !e.ended? }
   end  
     
 
