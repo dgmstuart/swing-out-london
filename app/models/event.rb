@@ -299,6 +299,9 @@ class Event < ActiveRecord::Base
 
   # Find the datetime of the most recently updated event
   def self.last_updated_datetime
+    #if the db is empty, return the beginning of the epoch:
+    return Time.at(0) if self.first.nil?
+    
     self.first( :order => 'updated_at DESC').updated_at
   end
     
