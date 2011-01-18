@@ -259,10 +259,6 @@ ul.navigation a {
 /*DIFFERENCE - push 'about' link onto next line*/
 ul.navigation li#about_link {
   border:none;
-  padding:0px;
-}
-ul.navigation li#dance_link {
-  
 }
 
 #main_nav a, #admin_nav a {
