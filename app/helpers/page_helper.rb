@@ -25,7 +25,7 @@ module PageHelper
       "Sorry, for some reason we can't load the latest tweet. Please visit the " + 
       link_to("Swing Out London Twitter feed", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter")
     else
-      created_date = Time.parse(@latest_tweet.created_at)
+      created_date = Time.zone.parse(@latest_tweet.created_at)
       created_date_string = created_date.to_s(:timepart) + " on " + created_date.to_s(:short_date)
       @latest_tweet.text.twitterify + " " + link_to(created_date_string, "http://www.twitter.com/swingoutlondon/#{@latest_tweet.id_str}", :class => "tweet_created")
     end

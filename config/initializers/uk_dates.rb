@@ -11,3 +11,14 @@ class String
       end
    end
 end
+
+
+class Date
+  def self.local_today
+    Time.zone.today.to_date
+  end
+    
+  def self.local_tomorrow
+    (Time.zone.now +1.day).to_date
+  end
+end

@@ -114,7 +114,7 @@ class Event < ActiveRecord::Base
     end
 
     string_array.collect { |d| d.to_date }.compact.sort
-    #to_date is defined in config/initializers/uk_dates.rb, which extends String.
+    #to_date is defined in config/initializers/better_dates.rb, which extends String.
   end
   
   
@@ -142,7 +142,7 @@ class Event < ActiveRecord::Base
   
   # Given an array of dates, return only those in the future
   def filter_future(date_array)
-    date_array.select{ |d| d >= Date.today}
+    date_array.select{ |d| d >= Date.local_today}
   end
   
   public
@@ -199,12 +199,12 @@ class Event < ActiveRecord::Base
   # Are all the dates for the event in the past?
   def out_of_date
     return true if date_array == UNKNOWN_DATE
-    out_of_date_test(Date.today)
+    out_of_date_test(Date.local_today)
   end
   
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
-    out_of_date_test(Date.today + INITIAL_SOCIALS)
+    out_of_date_test(Date.local_today + INITIAL_SOCIALS)
   end
   
   # For infrequent events (6 months or less), is the next expected date (based on the last known date)
@@ -213,25 +213,25 @@ class Event < ActiveRecord::Base
     return false if date_array.nil?
     return false if frequency < 26
     expected_date = date_array.sort.reverse.first + frequency.weeks #Belt and Braces: the date array should already be sorted.
-    expected_date > Date.today + 3.months
+    expected_date > Date.local_today + 3.months
   end
   
   # Is the event new? (probably only applicable to classes)
   def new?
     return false if first_date.nil?
-    first_date > Date.today - NEW_DAYS
+    first_date > Date.local_today - NEW_DAYS
   end
   
   # Has the first instance of the event happened yet?
   def started?
     return false if first_date.nil?
-    first_date < Date.today
+    first_date < Date.local_today
   end
   
   # Has the last instance of the event happened?
   def ended?
     return false if last_date.nil?
-    last_date < Date.today
+    last_date < Date.local_today
   end
   
   # Is the event currently running?
@@ -291,7 +291,7 @@ class Event < ActiveRecord::Base
   
   # Get the socials which are happening today:
   def self.socials_today
-    dates_array = self.socials_dates(Date.today)
+    dates_array = self.socials_dates(Date.local_today)
     # Get the list of events
     return dates_array[0][1] unless dates_array == []
     return []
@@ -365,7 +365,7 @@ class Event < ActiveRecord::Base
   end  
 
   def self.date_array
-    (Date.today..@end_date).to_a
+    (Date.local_today..@end_date).to_a
   end
 
 end

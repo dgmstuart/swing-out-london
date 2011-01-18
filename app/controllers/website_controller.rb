@@ -8,7 +8,7 @@ class WebsiteController < ApplicationController
   
   def index
     @classes = Event.active_classes
-    @socials_dates = Event.socials_dates(Date.today + (INITIAL_SOCIALS-1))  
+    @socials_dates = Event.socials_dates(Date.local_today + (INITIAL_SOCIALS-1))  
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
     begin
