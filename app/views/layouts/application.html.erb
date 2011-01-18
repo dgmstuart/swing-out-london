@@ -43,7 +43,7 @@
     <%= stylesheet_link_tag 'iphone', :media=>"only screen and (max-device-width: 480px)"%>
     <%= stylesheet_link_tag 'cms' if @cms_page%>
     
-    <%= javascript_include_tag :defaults, :cache => "application_scripts" %>
+    <%= javascript_include_tag :defaults%>
 
 </head>
 <%= tag(:body, :class => params[:action]) %>
