@@ -46,7 +46,7 @@
     <%= javascript_include_tag :defaults%>
 
 </head>
-<%= tag(:body, :class => params[:action]) %>
+<%= content_tag(:body, :class => params[:action]) do %>
     <div id="page">
     
         <div id="header">
@@ -87,5 +87,5 @@
         </div>
 
   </div>
-</body>
+<%end #/body%>
 </html>
