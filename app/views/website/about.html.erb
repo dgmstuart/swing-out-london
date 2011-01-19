@@ -5,7 +5,7 @@
 	<p>Leads in London don't get to meet and talk to each other so much, so I organise <%= link_to "London Lindy Leads Dinners", "http://www.facebook.com/home.php?sk=group_147221981989905"%> to try and fix that.</p>
 	<p>I dance all over town and I've tried to have lessons from each of the London swing schools. I mainly dance <%= link_to "Lindy Hop", "http://en.wikipedia.org/wiki/Lindy_Hop" %> (6 &amp; 8 count and 30's Charleston) and a little <%= link_to "Blues", "http://en.wikipedia.org/wiki/Blues_dance#Blues_dancing_in_the_contemporary_swing_dance_community" %>.</p>
 	<p>I'm keen to learn more 1920's style Charleston, and I've started a <%=link_to "1920's Partner Charleston revolution","http://www.facebook.com/home.php?sk=group_187534864606727&ap=1"%> to try and encourage more teaching in this area.</p>
-	<p>Please send any comments, corrections or listings to:<br/><%=mail_to CONTACT_EMAIL%></p>
+	<p>Please send any comments, corrections or listings to:<br/><%=mail_to CONTACT_EMAIL, :subject => "Swing Out London"%></p>
 </div>
 
 <div id="show_love" class="sidebar">
@@ -13,7 +13,7 @@
 
     <p>If you like Swing Out London and find it useful, please consider linking to it from your Blog, Facebook, <%= link_to "Twitter", "http://twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"%> or personal website: this really helps Google to know that people are interested and will make it easier for others to find the site. </p>
 
-    <p>It's always nice to get <%=mail_to CONTACT_EMAIL, "Email"%> as well.</p>
+    <p>It's always nice to get <%=mail_to CONTACT_EMAIL, "Email", :subject => "Swing Out London"%> as well.</p>
 </div>
 
 
@@ -29,7 +29,7 @@
 
     <p>In some respects London is quite a divided scene with a lot of dancers unaware of what's going on outside the bubble of the first swing school they came across.</p>
 	
-	<p>I think that independent and community-founded organisations like <%= link_to "Swing Dancers Of London", "http://www.swingdancersoflondon.org/"%>, <%= link_to "Swing Events", "http://www.swingevents.co.uk/"%> and the <%= link_to "London Lindy Exchange", "http://londonlindyexchange.com/ "%> are really important and I want to follow in their footsteps by providing a great service independently of any of the swing schools. </p>
+	<p>I think that independent and community-founded organisations like <%= link_to "Swing Dancers Of London", "http://www.swingdancersoflondon.org/"%>, <%= link_to "Swing Events", "http://swingevents.co.uk/"%> and the <%= link_to "London Lindy Exchange", "http://londonlindyexchange.com/ "%> are really important and I want to follow in their footsteps by providing a great service independently of any of the swing schools. </p>
 	
 	<p>Swing Out London has been live since August 2010 and the listings were last updated at <%=@last_updated_time%> on  <%=@last_updated_date%>.</p>
 
