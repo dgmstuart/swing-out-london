@@ -10,7 +10,7 @@ Date::DATE_FORMATS[:short_date] = lambda { |date| date.strftime("#{date.day.ordi
 Date::DATE_FORMATS[:listing_date]= lambda { |date| date.strftime("%A #{date.day.ordinalize} %B") }
 
 #ADD?
-Time::DATE_FORMATS[:uk_datetime] = "%d/%m/%Y %H:%M"
+Time::DATE_FORMATS[:default] = "%d/%m/%Y %H:%M"
 # TODO: REMOVE
 Time::DATE_FORMATS[:uk_date] = "%d/%m/%Y"
 Time::DATE_FORMATS[:uk_datetime] = "%d/%m/%Y %H:%M"
