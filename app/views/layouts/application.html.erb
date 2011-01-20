@@ -68,10 +68,11 @@
         
   
         <div id="footer"> 
-          
+            <% if !@cms_page %>
             <p id="valid_statement">
                 <%= raw valid_statement(params[:action])%>
             </p>
+            <%end%>
           
             <%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>
             
