@@ -12,7 +12,8 @@
     <meta name="description" content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" />
     
     <% if params[:action] == "index" && !@cms_page %> 
-    <script  type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
     
     <meta property="og:title" content="Swing Out London - Lindy Hop Listings" />
     <meta property="og:site_name" content="Swing Out London" />
@@ -22,9 +23,6 @@
     <meta property="og:image" content="http://www.swingoutlondon.co.uk/images/swingoutlondon_og.png" />
     <meta property="og:email" content="leveretweb@googlemail.com" />
     <meta property="fb:admins" content="dgmstuart"/>
-    
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    
     <% end %>
     
     <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -72,9 +70,7 @@
         <div id="footer"> 
           
             <p id="valid_statement">
-                <a href="http://validator.w3.org/check?uri=referer" id="xhtml_icon">
-                    Almost valid XHTML (blame Facebook)
-                </a>
+                <%= raw valid_statement(params[:action])%>
             </p>
           
             <%= render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' } %>

@@ -534,3 +534,17 @@ h2.section_heading {
   list-style:outside disc;
   margin:0 0 0.5em 1em;
 }
+
+a[name=validation_failures] {
+  text-decoration:inherit;
+  color:inherit;
+  border:inherit;
+}
+
+a[name=validation_failures]:target{ 
+  color: #C00;
+  -webkit-transition: all 0.8s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
