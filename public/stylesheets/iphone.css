@@ -256,8 +256,8 @@ ul.navigation a {
   color: #0F0F0F;
 }
 
-/*DIFFERENCE - push 'about' link onto next line*/
-ul.navigation li#about_link {
+/*DIFFERENCE - 'about' link will be pushed onto next line so doesn't need a separator*/
+ul.navigation li.about_link {
   border:none;
 }
 
