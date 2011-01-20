@@ -10,7 +10,13 @@
 
 <div id="social_media">
     <p id="like_message">Show us some Facebook love: <fb:like href="http://www.swingoutlondon.co.uk" action="like" layout="button_count" font="trebuchet ms"></fb:like></p>   
-    <p id="tweet_message">Tell the world about us on twitter: <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-related="swingevents:Listing Lindy and blues camps and exchanges in the UK and Europe">Tweet</a></p>
+    <p id="tweet_message">Tell the world about us on twitter: 
+        <%=link_to "Tweet" ,"http://twitter.com/share", {
+            :class =>"twitter-share-button",
+            "data-count" =>"horizontal",
+            "data-url" =>"http://www.swingoutlondon.co.uk",
+            "data-text" =>"Swing Out London lists Lindy Hop classes and social dancing in London:",
+            "data-related" =>"swingevents:Listing Lindy and blues camps and exchanges in the UK and Europe"} %></p>
     <p id="twitter_follow"> <%= link_to "Follow us on Twitter", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"%> for changes and breaking news:</p> 
     
     <p id="latest_tweet"><%= raw tweet_message %></p>
