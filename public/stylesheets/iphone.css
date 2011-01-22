@@ -535,13 +535,13 @@ h2.section_heading {
   margin:0 0 0.5em 1em;
 }
 
-a[name=validation_failures] {
+a#validation_failures {
   text-decoration:inherit;
   color:inherit;
   border:inherit;
 }
 
-a[name=validation_failures]:target{ 
+a#validation_failures:target{ 
   color: #C00;
   -webkit-transition: all 0.8s ease-in;
   -moz-transition: all 1s ease-in;
