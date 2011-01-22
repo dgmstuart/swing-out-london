@@ -31,15 +31,15 @@
     
     <title>Swing Out London - listings of Lindy Hop swing dance classes and socials</title>
 
+    <%= stylesheet_link_tag 'main', :media=>"screen and (min-device-width: 481px)"%>
+    <%= stylesheet_link_tag 'iphone', :media=>"only screen and (max-device-width: 480px)"%>
+    <%= stylesheet_link_tag 'cms' if @cms_page%>
     <!--[if lte IE 7 ]>
     <%= stylesheet_link_tag 'ie' %>
     <![endif]-->
     <!--[if IE ]>
     <%= stylesheet_link_tag 'main'%>
     <![endif]-->
-    <%= stylesheet_link_tag 'main', :media=>"screen and (min-device-width: 481px)"%>
-    <%= stylesheet_link_tag 'iphone', :media=>"only screen and (max-device-width: 480px)"%>
-    <%= stylesheet_link_tag 'cms' if @cms_page%>
     
     <%= javascript_include_tag :defaults%>
 

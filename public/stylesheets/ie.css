@@ -1,2 +1,4 @@
 ul.daylist, ul.daylist li{min-height:0}
 em {font-style:normal}
+#main_nav .current, #admin_nav .current {display:inline;}
+address, #last_updated{display:inline;}
