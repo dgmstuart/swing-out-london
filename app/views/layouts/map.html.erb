@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-GB" />
+    <meta name="author" content="Duncan Stuart"/>
+    <meta name="description" content="Swing Out London's Lindy Map - mapping all the London swing venues"/>
+
+    <title>Swing Out London's Lindy Map - mapping all the London swing venues.</title>
+    
+    <%= stylesheet_link_tag 'main' %>
+    
+    <%= raw Cartographer::Header.new.to_s %>
+    <%= raw @map.to_html %>
+</head>
+<%= content_tag(:body, :class => params[:action]) do %>
+
+<header>
+    <h1 id="map_header">
+        Swing Out London's Lindy Map
+    </h1>
+</header>
+
+<%= yield %>    
+    
+    
+    
+<%end #/body%>
+
+</html>

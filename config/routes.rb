@@ -1,5 +1,7 @@
 Swingoutlondon::Application.routes.draw do 
   
+  get "maps/lindy_map"
+
   root :to => 'website#index'
   
   resources :organisers do

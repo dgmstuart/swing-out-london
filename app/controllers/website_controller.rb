@@ -31,4 +31,18 @@ class WebsiteController < ApplicationController
     @last_updated_datetime = Event.last_updated_datetime
   end
   
+  def lindy_map
+    @map = Cartographer::Gmap.new( 'map', :type => :roadmap )
+    @map.center = [51.51985,-0.06729]
+    @map.zoom = 12
+    @map.controls << :type
+    @map.controls << :large
+    @map.controls << :overview
+    
+    @map.icons << Cartographer::Gicon.new
+    
+    
+    render :layout => 'map'
+  end
+  
 end

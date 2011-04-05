@@ -560,6 +560,28 @@ a#validation_failures:target{
   transition: all 1s ease-in;
 }
 
+
+/* LINDY MAP */
+
+#control_panel, .lindy_map header {
+  width:260px;
+  padding:20px; 
+  float:left;
+  clear:left;
+}
+body.lindy_map{background: #FEE6B8 none;} 
+.lindy_map header {
+/*  text-transform: uppercase;*/
+  text-align:center;
+  font-size:2em;
+}
+
+#map {
+  width:100%;
+  height:100%;
+  margin-left:300px;
+  position:absolute;
+}
 /* GOOGLE AD */
 #googleAd{
   padding-top: 1.6em;
