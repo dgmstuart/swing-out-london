@@ -34,13 +34,29 @@
     
     <ul class="datelist">
     <% reset_cycle "row_cycle"%>
-    <% @socials_dates.each do |date,socials| %>
+    <% @socials_dates.each_with_index do |(date,socials),index| %>
         <%= date_row date %>
             <h3><%= today_label date %> <%= tomorrow_label date %> <%=date.to_s(:listing_date)%></h3>
             <ul>
             <% socials.each do |social| %>
                 <%= social_listing(social, date) %>
             <% end %>
+            
+            <%if index==5%>
+                <li id="googleAd">
+                    <div><script type="text/javascript"><!--
+                google_ad_client = "ca-pub-6077065686774573";
+                /* In Listings */
+                google_ad_slot = "6685462170";
+                google_ad_width = 234;
+                google_ad_height = 60;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script></div>
+                </li>
+            <%end%>
             
             </ul>
         </li>
