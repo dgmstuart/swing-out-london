@@ -40,6 +40,14 @@ class Event < ActiveRecord::Base
       venue.name
     end
   end
+  
+  def venue_area
+    if venue.nil? || venue.name.nil?
+      blank_venue
+    else
+      venue.area
+    end
+  end
 
   # --------- #
   # Frequency #

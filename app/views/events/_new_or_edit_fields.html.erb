@@ -21,18 +21,6 @@
         <%= f.label :event_type %>
         <%= f.select :event_type, event_type_select, {:include_blank => true} %>
     </li>
-    <li>
-        <%= f.label :description %>
-        <%= f.text_area :description %>
-    </li>
-    <li>
-        <%= f.label :music_style %>
-        <%= f.text_area :music_style %>
-    </li>
-    <li>
-        <%= f.label :class_style %>
-        <%= f.text_area :class_style %>
-    </li>
     
     <!-- WHEN? -->
     <li>
@@ -54,17 +42,7 @@
         <%= f.label :last_date, nil, :class => "inline_label" %>
         <%= f.text_field :last_date, :size => 10, :class =>"shortfield"%>
     </li>
-    
-    <li>
-        <%= f.label :timing_details%>
-        <%= f.text_area :timing_details, :class => "narrow" %>
-    </li>
-    <li>
-        <%= f.label :pricing_details%>
-        <%= f.text_area :pricing_details, :class => "narrow" %>
-    </li>
-    
-    
+
     <li>
         <%= f.label :url %>
         <%= f.text_field :url %>
