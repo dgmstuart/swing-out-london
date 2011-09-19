@@ -29,6 +29,9 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
 
+    @event.venue = Venue.find(params[:venueid])unless params[:venueid].nil?
+    @event.organiser = Organiser.find(params[:organiserid])unless params[:organiserid].nil?
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }

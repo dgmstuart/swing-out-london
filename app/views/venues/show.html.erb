@@ -31,12 +31,13 @@
 
 	<li>
 		<span>Website:</span>
-		<%=h @venue.website %>
+		<%= link_to @venue.website %>
 	</li>
 </ol>
 
 <div class="actions">
 	<%= link_to 'Edit', edit_venue_path(@venue) %> |
 	<%= link_to 'List', venues_path %> |
-	<%= link_to 'New venue', new_venue_path %>
+	<%= link_to 'New venue', new_venue_path %> |
+	<%= link_to 'New Event at this venue',  new_event_path( :venueid => @venue.id) %>
 </div>
