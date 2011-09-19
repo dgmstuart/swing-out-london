@@ -76,7 +76,7 @@ class Event < ActiveRecord::Base
   # ---------- #
   
   CLASS_TYPES = ['class', 'class with social']
-  SOCIAL_TYPES = ['social', 'social with class', 'class with social', 'vintage club', 'gig']
+  SOCIAL_TYPES = ['social', 'social with class', 'class with social', 'vintage club', 'gig', 'festival']
   HAS_CLASS_TYPES = ['class', 'class with social', 'social with class']
   
   def self.event_types
