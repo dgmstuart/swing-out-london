@@ -280,14 +280,31 @@ class Event < ActiveRecord::Base
   def self.socials(*args)
     self.order("title ASC").all(*args).select{|e| e.is_social? }
   end
+  
+  def self.gigs
+    self.all.select{ |e| e.event_type=="gig" }
+  end
 
   # Get a list of classes, excluding those which have ended
   # TODO: not very DRY
   def self.active_classes
     self.order("title ASC").all.select{ |e| e.is_class? && !e.ended? }
-  end  
+  end
+  
+  # Get lists of current and oldevents
+  def self.current_events
+    self.all.select{ |e| !e.ended? }
+  end
+  def self.old_events
+    self.all.select{ |e| e.ended? }
+  end
+  def self.archive_events
+    self.all.select{ |e| e.event_type=="gig" || e.ended? }
+  end
+  
     
-
+  
+  
   # Get a list of socials with their associated dates
   def self.socials_dates(end_date)
     @end_date = end_date
