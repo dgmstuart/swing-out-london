@@ -1,5 +1,5 @@
 <%= form_for(@organiser) do |f| %>
-<%= f.error_messages %>
+<%= render "shared/error_messages", :target => @organiser %>
 
 <ol>
 	<li>
