@@ -4,5 +4,6 @@
 
 <div class="actions">
 	<%= link_to 'Show', @event %> |
-	<%= link_to 'Cancel', events_path %>
+	<%= link_to 'Cancel', events_path %> |
+	<%= link_to 'Delete', @event, :confirm => 'Are you sure you want to delete this event?', :method => :delete %>
 </div>

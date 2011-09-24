@@ -4,5 +4,6 @@
 
 <div class="actions">
 	<%= link_to 'Show', @organiser %> |
-	<%= link_to 'Back', organisers_path %>
+	<%= link_to 'Back', organisers_path %> |
+	<%= link_to 'Delete', @organiser, :confirm => 'Are you sure you want to delete this organiser?', :method => :delete %>
 </div>

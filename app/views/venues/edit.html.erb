@@ -4,5 +4,6 @@
 
 <div class="actions">
 	<%= link_to 'Show', @venue %> |
-	<%= link_to 'Back', venues_path %>
+	<%= link_to 'Back', venues_path %> |
+	<%= link_to 'Delete', @venue, :confirm => 'Are you sure you want to delete this venue?', :method => :delete %>
 </div>
