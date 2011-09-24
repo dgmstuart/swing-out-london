@@ -211,7 +211,7 @@ module EventsHelper
     elsif event.near_out_of_date
       class_string = "near_out_of_date"
     end
-    tag :tr, {:class => class_string}, true
+    tag :tr, {:class => class_string, :id => "event_#{event.id}"}, true
   end
   
   
