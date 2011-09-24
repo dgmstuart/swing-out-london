@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   serialize :date_array
   serialize :cancellation_array
   
-  validates_presence_of :title
+  validates_presence_of :title, :frequency, :url
 
   # display constants:
   NOTAPPLICABLE = "n/a"
