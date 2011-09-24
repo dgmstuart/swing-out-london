@@ -91,6 +91,10 @@ class Event < ActiveRecord::Base
     SOCIAL_TYPES.include?event_type
   end
   
+  def is_gig?
+    event_type == "gig"
+  end  
+  
   def has_class?
     HAS_CLASS_TYPES.include?event_type
   end
@@ -282,7 +286,7 @@ class Event < ActiveRecord::Base
   end
   
   def self.gigs
-    self.all.select{ |e| e.event_type=="gig" }
+    self.all.select{ |e| e.is_gig? }
   end
 
   # Get a list of classes, excluding those which have ended
@@ -293,14 +297,16 @@ class Event < ActiveRecord::Base
   
   # Get lists of current and oldevents
   def self.current_events
-    self.all.select{ |e| !e.ended? }
+    self.all.select{ |e| !e.ended? && !e.is_gig? }
   end
   def self.old_events
     self.all.select{ |e| e.ended? }
   end
-  def self.archive_events
-    self.all.select{ |e| e.event_type=="gig" || e.ended? }
+  #n.b. currently matches old events...
+  def self.archive_events 
+    self.all.select{ |e| e.ended? }
   end
+  
   
     
   

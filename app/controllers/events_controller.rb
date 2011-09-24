@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   # GET /events.xml
   def index    
     @current_events = Event.current_events
+    @gigs = Event.gigs
     @archived_events = Event.archive_events
     
     respond_to do |format|

@@ -5,6 +5,13 @@
 
 <%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
 
+<h1>Gigs</h1>
+<%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
+
+<%=render :partial => "event_listing_table", :locals => {:events => @gigs  } %>
+
+<%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
+
 <h2>Archived Events</h2>
 <%=render :partial => "event_listing_table", :locals => {:events => @archived_events } %>
 
