@@ -10,37 +10,24 @@ input, label, textarea, div.actions, ol.show li, form a{
 }
 
 /* INDEX */
+h1{text-align:center;font-size:3em;padding-top:1em;margin-bottom:0.5em;}
+h2 {text-align:center;font-size:3em;margin-bottom:0.5em;}
+p.actions_panel{text-align:center;font-size:1.5em;text-transform:uppercase;}
 
-table{
-	border-collapse:collapse;
-}
+
+table{border-collapse:collapse;margin:1.5em 1em 4em;}
 
 /*TODO: Temp?*/
 table.events td.first{width:3.5em;}
 table.events td.last{width:5.5em;}
 
-th, td {
-	border: 1px solid black;
-	padding:5px;
-}
-
-th {
-	font-weight:bold;
-}
-
-th.name, td.name {
-	width:120px;
-}
-
-td.center {
-	text-align:center;
-}
-
+th, td {border:1px solid black; padding:5px;}
+th {font-weight:bold;}
+th.name, td.name {width:120px;}
+td.center {text-align:center;}
 td.actions, th.actions{ border:none; }
 
-td.lines {
-	white-space:pre;
-}
+td.lines {white-space:pre;}
 
 /*TODO- replace with proper colours!*/
 tr.out_of_date td.dates, tr.all_out_of_date td{

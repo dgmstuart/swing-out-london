@@ -1,20 +1,13 @@
-<h1>Listing Events</h1>
-<%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
-
+<h1 id="events">Events</h1>
+<%= action_links(["gigs","archived"]) %>
 <%=render :partial => "event_listing_table", :locals => {:events => @current_events  } %>
 
-<%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
-
-<h1>Gigs</h1>
-<%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
-
+<h2 id="gigs">Gigs</h2>
+<%= action_links(["events","archived"]) %>
 <%=render :partial => "event_listing_table", :locals => {:events => @gigs  } %>
 
-<%= link_to 'New event', new_event_path, :class=>"new_event_link"%>
-
-<h2>Archived Events</h2>
+<h2 id="archived">Archived Events</h2>
+<%= action_links(["events","gigs"]) %>
 <%=render :partial => "event_listing_table", :locals => {:events => @archived_events } %>
 
-<br />
-
-<%= link_to 'New event', new_event_path, :class=>"new_event_link" %>
+<%= action_links(["events","gigs","archived"]) %>

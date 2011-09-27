@@ -245,4 +245,19 @@ module EventsHelper
     link_to_unless event.venue.website.nil?, event.venue.name, event.venue.website
   end
   
+  # --- #
+  # CMS #
+  # --- #
+  
+  def action_links(anchors)
+    content_tag :p, :class => "actions_panel" do 
+      string = link_to 'New event', new_event_path
+      anchors.each do |a|
+        string += " -- "
+        string += link_to "#{a}", :anchor => a
+      end
+      string
+    end
+  end
+  
 end
