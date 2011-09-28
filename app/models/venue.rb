@@ -53,4 +53,8 @@ class Venue < ActiveRecord::Base
     return true
   end
   
+  def self.active_venues
+    all.select{|venue| !venue.all_events_out_of_date?}
+  end
+  
 end

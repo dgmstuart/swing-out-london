@@ -16,6 +16,8 @@ Swingoutlondon::Application.routes.draw do
 
   match 'admin/', :to => 'events#index'
   match ':action/', :to => 'website#index'
+  
+  match 'venue_map_info/:id' => 'website#venue_map_info', :as => :venue_map_info
 
   
   # The priority is based upon order of creation:

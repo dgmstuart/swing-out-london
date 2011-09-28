@@ -9,6 +9,8 @@ gem 'capistrano'
 
 gem 'twitter'
 
+gem 'geokit'
+
 # Hosting on heroku
 gem 'heroku'
 gem 'taps'

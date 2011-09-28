@@ -2,9 +2,11 @@ class WebsiteController < ApplicationController
   
   require 'rubygems'
   require 'twitter'
+  require 'geokit'
+  
+  include Geokit::Geocoders
   
   before_filter :get_updated_times
-  
   
   def index
     @classes = Event.active_classes
@@ -16,11 +18,6 @@ class WebsiteController < ApplicationController
     rescue Exception => msg
       @latest_tweet = nil
       logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
-    end
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      #format.xml  { render :xml => @events }
     end
   end
   
@@ -35,14 +32,35 @@ class WebsiteController < ApplicationController
     @map = Cartographer::Gmap.new( 'map', :type => :roadmap )
     @map.center = [51.51985,-0.06729]
     @map.zoom = 12
+    @map.showtubes=(params[:tubes]=="y")
     @map.controls << :type
     @map.controls << :large
     @map.controls << :overview
     
-    @map.icons << Cartographer::Gicon.new
+    @icon = Cartographer::Gicon.new
+    @map.icons << @icon
     
+    Venue.active_venues.each do |venue|
+    # [Venue.first].each do |venue|
+      sleep 0.05
+      location = GoogleGeocoder.geocode(venue.postcode)
+      if location.success
+        @map.markers << Cartographer::Gmarker.new(
+          :name => "venue_#{venue.id}",
+          :title => venue.name,
+          :position => [location.lat,location.lng],
+          :info_window_url => venue_map_info_url(venue.id),
+          :icon => @icon
+        )
+      end
+    end
     
     render :layout => 'map'
+  end
+  
+  def venue_map_info
+    @venue = Venue.find(params[:id])
+    render :layout => false
   end
   
 end
