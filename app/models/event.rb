@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   serialize :date_array
   serialize :cancellation_array
   
-  validates_presence_of :title, :frequency, :url
+  validates_presence_of :title, :frequency, :url, :day
 
   # display constants:
   NOTAPPLICABLE = "n/a"
@@ -22,6 +22,11 @@ class Event < ActiveRecord::Base
   def class_style
     return NOTAPPLICABLE if read_attribute(:class_style).nil?
     self[:class_style]
+  end
+  
+  # TODO: should put these somewhere extending Date class
+  def weekday_name(d) 
+    Date::DAYNAMES[d.wday]
   end
 
   # ----- #
@@ -260,17 +265,64 @@ class Event < ActiveRecord::Base
     (last_date.nil? || last_date >= date)
   end
   
+  # what's the latest date in the date array?
+  # Assumes date array is sorted!
+  def latest_date
+    date_array.last
+  end
+ 
+  
+  # For repeating events, find the next and previous events
+  def next_date
+    return Date.today if day == self.weekday_name(Date.today)
+    return Date.today.next_week(day.downcase.to_sym)
+  end
+  
+  def prev_date
+    return Date.today if day == self.weekday_name(Date.today)
+    #prev_week doesn't seem to be implemented...
+    #return Date.today.prev_week(day.downcase.to_sym)
+    return (next_date - 7.days)
+  end
+  
+  
+  
+  
   private
   
   # Helper function for comparing event dates to a reference date
   def out_of_date_test(comparison_date)
     return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
     return false if frequency==1 # Weekly events shouldn't have date arrays...
-    date_array.each {|d| return false if d > comparison_date }
+    
+    return false if date_array.empty?
+    return false if date_array.last > comparison_date
+    
     true
   end
   
   public
+  
+  
+  ###########
+  # ACTIONS # 
+  ###########
+  # what date should the event be archived with
+  def archivedate  
+    return if !last_date.nil? && (last_date < Date.today)
+    # If there's already a last date in the past, then it should already be archived!
+      
+    if frequency==1
+      last_date = prev_date
+    elsif latest_date.nil?
+      # (should only be when the date array is empty)
+      last_date = Date.new #Earliest possible Ruby date
+    else latest_date
+      last_date = latest_date
+    end
+    #TODO: error case?
+    return last_date
+  end
   
   #################
   # CLASS METHODS # 
@@ -335,12 +387,7 @@ class Event < ActiveRecord::Base
 
     self.order('updated_at DESC').first.updated_at
   end
-    
-
-  # TODO: should put these somewhere extending Date class
-  def self.weekday_name(d) 
-    Date::DAYNAMES[d.wday]
-  end
+  
 
   private
 

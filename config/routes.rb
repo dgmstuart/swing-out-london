@@ -10,8 +10,10 @@ Swingoutlondon::Application.routes.draw do
     resources :events
   end
    
-  resources :events
-
+  resources :events do
+    put :archive, :on => :member
+  end  
+  
   match 'admin/', :to => 'events#index'
   match ':action/', :to => 'website#index'
 
