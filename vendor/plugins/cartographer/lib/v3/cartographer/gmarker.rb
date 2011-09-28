@@ -1,9 +1,10 @@
 class Cartographer::Gmarker
   #include Reloadable
-  attr_accessor :name, :marker_type, :highlight, :icon, :position, :click, :info_window, :info_window_url, :map, :min_zoom, :max_zoom, :dblclick, :draggable
+  attr_accessor :name, :title, :marker_type, :highlight, :icon, :position, :click, :info_window, :info_window_url, :map, :min_zoom, :max_zoom, :dblclick, :draggable
 
   def initialize(options = {})
     @name = options[:name] || "marker"
+    @title = options[:title] || nil
     @marker_type = options[:marker_type] || nil
     @position = options[:position] || [0, 0]
     @icon = options[:icon] || :normal
@@ -55,7 +56,7 @@ class Cartographer::Gmarker
     marker_clusterer = marker_clusterer_flag
     script = []
     script << "// Set up the pre-defined marker" if @debug
-    script << "#{@name} = new google.maps.Marker({map: null,position: new google.maps.LatLng(#{@position[0]}, #{@position[1]}), draggable: #{@draggable}, icon: #{@icon.name}}); \n"
+    script << "#{@name} = new google.maps.Marker({map: null, position: new google.maps.LatLng(#{@position[0]}, #{@position[1]}), draggable: #{@draggable}, title: \"#{@title}\", icon: #{@icon.name}, shadow: #{@icon.name}_shadow}); \n"
 
     if @click
       script << "// Create the listener for your custom click event" if @debug
