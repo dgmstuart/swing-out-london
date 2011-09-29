@@ -295,14 +295,15 @@ class Event < ActiveRecord::Base
     self.order("title ASC").all.select{ |e| e.is_class? && !e.ended? }
   end
   
-  # Get lists of current and oldevents
+  def current?
+    !ended? && !is_gig?
+  end
+  
+  # Get lists of current and archived events
   def self.current_events
-    self.all.select{ |e| !e.ended? && !e.is_gig? }
+    self.all.select{ |e| e.current? }
   end
-  def self.old_events
-    self.all.select{ |e| e.ended? }
-  end
-  #n.b. currently matches old events...
+
   def self.archive_events 
     self.all.select{ |e| e.ended? }
   end
