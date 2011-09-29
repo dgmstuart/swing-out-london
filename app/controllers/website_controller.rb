@@ -42,7 +42,7 @@ class WebsiteController < ApplicationController
     
     Venue.active_venues.each do |venue|
     #[Venue.first].each do |venue|
-      sleep 0.05
+      sleep 0.01
       location = GoogleGeocoder.geocode(venue.postcode)
       if location.success
         @map.markers << Cartographer::Gmarker.new(
