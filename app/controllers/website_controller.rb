@@ -32,7 +32,7 @@ class WebsiteController < ApplicationController
     @map = Cartographer::Gmap.new( 'map', :type => :roadmap )
     @map.center = [51.51985,-0.06729]
     @map.zoom = 12
-    @map.showtubes=(params[:tubes]=="y")
+    @map.showtubes = (params[:tubes]=="y")
     @map.controls << :type
     @map.controls << :large
     @map.controls << :overview
@@ -41,8 +41,8 @@ class WebsiteController < ApplicationController
     @map.icons << @icon
     
     Venue.active_venues.each do |venue|
-    # [Venue.first].each do |venue|
-      sleep 0.05
+    #[Venue.first].each do |venue|
+      sleep 0.1
       location = GoogleGeocoder.geocode(venue.postcode)
       if location.success
         @map.markers << Cartographer::Gmarker.new(

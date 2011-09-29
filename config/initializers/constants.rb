@@ -14,5 +14,3 @@ INITIAL_SOCIALS=14
 NEW_DAYS = 1.month
 
 CONTACT_EMAIL = "leveretweb@googlemail.com"
-
-CARTOGRAPHER_GMAP_VERSION = 3

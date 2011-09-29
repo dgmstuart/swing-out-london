@@ -24,9 +24,9 @@
 # +scale+::    Scale of current map/zoom level, shown in the lower-left
 class Cartographer::Gmap
   
-  attr_accessor :dom_id, :draggable, :polylines,:type, :controls,
-  :markers, :center, :zoom, :scroll, :icons, :debug, :marker_mgr, :current_marker, :marker_clusterer, :shared_info_window, :marker_clusterer_icons,
-  :type,:showtubes
+  attr_accessor :dom_id, :draggable, :polylines,:type, :controls, :showtubes,
+  :markers, :center, :zoom, :icons, :debug, :marker_mgr, :current_marker, :marker_clusterer, :shared_info_window, :marker_clusterer_icons
+
 
 
   @@window_onload = ""
@@ -52,11 +52,7 @@ class Cartographer::Gmap
     @controls  = opts[:controls] || [ :zoom ]
     @center    = opts[:center] || [0,0]
     @zoom      = opts[:zoom] || 1
-    @scroll    = opts[:scroll] || true
-    @type      = opts[:type] || "ROADMAP"
-    
-@showtubes = opts[:showtubes] ||false
-    
+    @showtubes = opts[:showtubes] || false
     
     @debug = opts[:debug]
     
@@ -116,7 +112,7 @@ class Cartographer::Gmap
 
     html << "// define the map-initializing function for the onload event" if @debug
     html << "function initialize_gmap_#{@dom_id}() {
-#{@dom_id} = new google.maps.Map(document.getElementById(\"#{@dom_id}\"),{center: new google.maps.LatLng(0, 0), zoom: 0, scrollWheel: #{@scroll}, mapTypeId: google.maps.MapTypeId.#{@type}});"
+#{@dom_id} = new google.maps.Map(document.getElementById(\"#{@dom_id}\"),{center: new google.maps.LatLng(0, 0), zoom: 0, mapTypeId: google.maps.MapTypeId.ROADMAP});"
 
     html << "  #{@dom_id}.draggable = false;" if @draggable == false
     
@@ -159,6 +155,7 @@ class Cartographer::Gmap
           html << "#{@dom_id}.overlayMapTypes.insertAt(0, transitMapType);"
     end
     #HACK ENDS
+    
     
     # ending the gmap_#{name} function
     html << "}\n"

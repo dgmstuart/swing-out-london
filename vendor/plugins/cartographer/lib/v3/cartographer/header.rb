@@ -33,8 +33,8 @@ class Cartographer::Header
     html = "\n<!--[if IE]>\n<style type=\"text/css\">v\\:* { behavior:url(#default#VML); }</style>\n<![endif]-->"
     html << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=true\"></script>"
     html << "<script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/src/markermanager_packed.js' type='text/javascript'></script>"
-    html << "<script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_packed.js' type='text/javascript'></script>"
-       
+    #html << "<script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_packed.js' type='text/javascript'></script>"
+    html << "<script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js' type='text/javascript'></script>"       
     return html
   end
 
