@@ -70,7 +70,7 @@ module EventsHelper
   
   def social_listing(social, date)
     if social.title.nil? || social.title.empty?
-      logger.error "ERROR: tried to display Event (id = #{social.id}) without a title"
+      logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return 
     end
     
@@ -123,7 +123,7 @@ module EventsHelper
   #TODO - looks like it could be put in a funky new class...
   def swingclass_listing(swingclass)
     if swingclass.title.nil? || swingclass.title.empty?
-      logger.error "ERROR: tried to display Social Class (id = #{swingclass.id}) without a title"
+      logger.error "[ERROR]: tried to display Social Class (id = #{swingclass.id}) without a title"
       return 
     end
     
@@ -174,7 +174,7 @@ module EventsHelper
     if event.venue.nil?
       title = Venue::UNKNOWN_AREA
       compass = Venue::UNKNOWN_COMPASS
-      logger.warn "WARNING: Venue was nil for '#{event.title}' (event #{event.id})"
+      logger.warn "[WARNING]: Venue was nil for '#{event.title}' (event #{event.id})"
     else 
       title = event.venue.compass_text
       compass = event.venue.compass 
