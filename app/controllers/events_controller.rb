@@ -19,11 +19,6 @@ class EventsController < ApplicationController
   # GET /events/1.xml
   def show
     @event = Event.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @event }
-    end
   end
 
   # GET /events/new
@@ -33,11 +28,6 @@ class EventsController < ApplicationController
 
     @event.venue = Venue.find(params[:venueid])unless params[:venueid].nil?
     @event.organiser = Organiser.find(params[:organiserid])unless params[:organiserid].nil?
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @event }
-    end
   end
 
   # GET /events/1/edit
@@ -84,13 +74,18 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(events_url) }
-      format.xml  { head :ok }
-    end
+    
+    redirect_to events_path
   end
   
+  def archive
+    @event = Event.find(params[:id])
+    @event.update_attribute :last_date, @event.archivedate unless @event.archivedate.nil?
+    #TODO: error cases
+    
+    redirect_to events_path
+  end
+
   
   protected
   

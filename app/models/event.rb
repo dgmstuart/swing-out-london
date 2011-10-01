@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   serialize :date_array
   serialize :cancellation_array
   
-  validates_presence_of :title, :frequency, :url
+  validates_presence_of :title, :frequency, :url, :day
 
   # display constants:
   NOTAPPLICABLE = "n/a"
@@ -254,6 +254,40 @@ class Event < ActiveRecord::Base
     !started? || ended?
   end
   
+  def intermittent?
+    frequency == 0 && last_date != latest_date
+  end
+  
+  def one_off?
+    frequency == 0 && last_date == latest_date && first_date == latest_date
+  end
+  
+  def infrequent?
+    frequency > 26
+  end
+    
+  
+  # What's the Latest date in the date array
+  # N.B. Assumes the date array is sorted!
+  def latest_date
+    date_array.last
+  end
+  
+  # for repeating events - find the next and previous dates
+  def next_date
+    return unless frequency == 1
+    return Date.today if day = self.weekday_name(Date.today)
+    return Date.today.next_week(day.downcase.to_sym)
+  end
+  
+  def prev_date
+    return unless frequency == 1
+    return Date.today if day = self.weekday_name(Date.today)
+    #prev_week doesn't seem to be implemented...
+    return (next_date - 7.days)
+  end
+  
+  
   # is/was/will the event active on a particular date?
   def active_on(date)
     (first_date.nil? || first_date <= date) &&
@@ -266,11 +300,34 @@ class Event < ActiveRecord::Base
   def out_of_date_test(comparison_date)
     return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
     return false if frequency==1 # Weekly events shouldn't have date arrays...
-    date_array.each {|d| return false if d > comparison_date }
+    
+    return true if date_array.empty?
+    return false if latest_date >= comparison_date
     true
   end
   
   public
+  
+  ###########
+  # ACTIONS # 
+  ###########
+  
+  # What date should the event be archived with?
+  def archive
+    return false if !last_date.nil? && last_date < Date.today
+    # If there's already a last_date in the past, then the event should already be archived!
+    
+    if frequency=1
+      self.last_date = prev_date
+    elsif date_array.nil?
+      self.last_date = Date.new # Earliest possible ruby date
+    else
+      self.last_date = latest_date
+    end
+    
+    return true if save
+  end
+  
   
   #################
   # CLASS METHODS # 

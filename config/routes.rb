@@ -10,7 +10,9 @@ Swingoutlondon::Application.routes.draw do
     resources :events
   end
    
-  resources :events
+  resources :events do
+    put :archive, :on => :member
+  end
   
   match 'map(/:id)' => 'maps#map', :as => "map"
   match 'venue_map_info/:id' => 'maps#venue_map_info', :as => :venue_map_info
