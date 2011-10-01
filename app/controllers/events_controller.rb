@@ -80,8 +80,8 @@ class EventsController < ApplicationController
   
   def archive
     @event = Event.find(params[:id])
-    @event.update_attribute :last_date, @event.archivedate unless @event.archivedate.nil?
-    #TODO: error cases
+    @event.archive
+    #TODO: handle case where save fails or already archived (archive = false)
     
     redirect_to events_path
   end
