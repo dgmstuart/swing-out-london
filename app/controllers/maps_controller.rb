@@ -38,7 +38,7 @@ class MapsController < ApplicationController
           :icon => @icon
         )
       else
-        "[ERROR]: 'position' was nil when trying to plot a marker for venue id #{params[:id]}"
+        logger.error "[ERROR]: 'position' was nil when trying to plot a marker for venue id #{params[:id]}"
       end
     end
     
