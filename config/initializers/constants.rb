@@ -14,3 +14,6 @@ INITIAL_SOCIALS=14
 NEW_DAYS = 1.month
 
 CONTACT_EMAIL = "leveretweb@googlemail.com"
+
+# Where should the map be centred?
+CENTRAL_LONDON = [51.51985,-0.06729]

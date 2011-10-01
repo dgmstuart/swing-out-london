@@ -1,6 +1,4 @@
 Swingoutlondon::Application.routes.draw do 
-  
-  get "maps/lindy_map"
 
   root :to => 'website#index'
   
@@ -13,11 +11,15 @@ Swingoutlondon::Application.routes.draw do
   end
    
   resources :events
-
-  match 'admin/', :to => 'events#index'
-  match ':action/', :to => 'website#index'
   
-  match 'venue_map_info/:id' => 'website#venue_map_info', :as => :venue_map_info
+  match 'map(/:id)' => 'maps#map', :as => "map"
+  match 'venue_map_info/:id' => 'maps#venue_map_info', :as => :venue_map_info
+  
+  match 'admin' => 'events#index'
+  
+  # Assume everything else is a page on the website:
+  # todo: use the page_url(action) form of urls
+  match ':action' => 'website', :as => "page"
 
   
   # The priority is based upon order of creation:

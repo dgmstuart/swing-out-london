@@ -1,9 +1,24 @@
 class Venue < ActiveRecord::Base
+  
+  require 'geokit'
+  include Geokit::Geocoders
+  
   has_many :events
   
   default_scope :order => 'name ASC' #sets default search order
   
   validates_presence_of :name, :area, :compass
+
+  before_validation do
+    if lat.nil? || lng.nil?
+      geocoded = self.geocode!
+      errors.add :lat, "The address information could not be geocoded. 
+        Please check the address information or manually enter 
+        latitude and longitude" if !geocoded
+    end
+  end
+
+
 
   UNKNOWN_AREA = "Unknown Area"
   UNKNOWN_COMPASS = "?"
@@ -61,6 +76,74 @@ class Venue < ActiveRecord::Base
   
   def self.active_venues
     all.select{|venue| venue.active? }
+  end
+  
+  
+  
+  # Map-related methods:
+  def position
+    [lat,lng] unless lat.nil? || lng.nil?
+  end
+  
+  def coordinates
+    "[ #{lat.to_s}, #{lng.to_s} ]"
+  end
+  
+  
+  def geocode
+    #TODO - split out the "London" part from addresses (populate it as default) so that we can search "postcode, London" here
+    GoogleGeocoder.geocode(postcode) unless postcode.nil?
+  end
+  
+  def geocode!
+    location = geocode
+    
+    if !location.nil? && location.success
+      self[:lat]=location.lat
+      self[:lng]=location.lng
+      return true
+    end
+
+    return false
+  end
+  
+  def self.geocode_all
+    bulk_geocode
+  end
+  
+  def self.geocode_all_non_geocoded
+    bulk_geocode(non_geocoded)
+  end
+  
+  def self.geocoded
+    all.select{ |v| !sv.position.nil?}
+  end
+  
+  def self.non_geocoded
+    all.select{ |v| v.position.nil?}
+  end
+  
+  
+  def self.bulk_geocode(venuelist=all)
+    failed_save = []
+    failed_geocode = []
+
+    venuelist.each do |venue|
+      
+      if venue.geocode!
+        failed_save << venue unless venue.save
+      else
+        failed_geocode << venue
+      end
+      sleep 0.02 # need to sleep so that Google doesn't get all overwhelmed
+    end  
+ 
+    if failed_save.empty? && failed_geocode.empty?
+      return true
+    else
+      return {:failed_save => failed_save, :failed_geocode => failed_geocode}
+    end
+
   end
   
 end
