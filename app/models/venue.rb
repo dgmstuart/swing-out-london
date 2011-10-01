@@ -135,7 +135,7 @@ class Venue < ActiveRecord::Base
       else
         failed_geocode << venue
       end
-      sleep 0.02 # need to sleep so that Google doesn't get all overwhelmed
+      sleep 0.05 # need to sleep so that Google doesn't get all overwhelmed
     end  
  
     if failed_save.empty? && failed_geocode.empty?
