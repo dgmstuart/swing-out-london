@@ -72,6 +72,7 @@ class Venue < ActiveRecord::Base
     events.each do |event|
        return true if event.current?
     end
+    false
   end  
   
   def self.active_venues
