@@ -581,6 +581,15 @@ body.lindy_map{background: #FEE6B8 none;}
   height:100%;
   position:absolute;
 }
+
+@media only screen and (max-device-width: 480px) {
+  #map {
+    width:480px;
+    height:480px;
+  }
+}
+
+
 /* GOOGLE AD */
 #googleAd{
   padding-top: 1.6em;
