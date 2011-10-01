@@ -26,7 +26,7 @@ class MapsController < ApplicationController
     @icon = Cartographer::Gicon.new
     @map.icons << @icon
     
-    Venue.active_venues.each do |venue|
+    Venue.regular_venues.each do |venue|
     
       unless venue.position.nil?
         @map.markers << Cartographer::Gmarker.new(

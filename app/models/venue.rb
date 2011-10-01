@@ -79,7 +79,16 @@ class Venue < ActiveRecord::Base
     all.select{|venue| venue.active? }
   end
   
+  def regular?
+    events.each do |e|
+       return true if e.current? && !e.intermittent? && !e.one_off? && !e.infrequent?
+    end
+    false
+  end
   
+  def self.regular_venues
+    all.select{|venue| venue.regular? }
+  end
   
   # Map-related methods:
   def position

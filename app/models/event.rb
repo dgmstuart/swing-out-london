@@ -254,6 +254,10 @@ class Event < ActiveRecord::Base
     !started? || ended?
   end
   
+  def current?
+    !ended? && !is_gig?
+  end
+  
   def intermittent?
     frequency == 0 && last_date != latest_date
   end
@@ -276,13 +280,13 @@ class Event < ActiveRecord::Base
   # for repeating events - find the next and previous dates
   def next_date
     return unless frequency == 1
-    return Date.today if day = self.weekday_name(Date.today)
-    return Date.today.next_week(day.downcase.to_sym)
+    return Date.local_today if day = self.weekday_name(Date.local_today)
+    return Date.local_today.next_week(day.downcase.to_sym)
   end
   
   def prev_date
     return unless frequency == 1
-    return Date.today if day = self.weekday_name(Date.today)
+    return Date.local_today if day = self.weekday_name(Date.local_today)
     #prev_week doesn't seem to be implemented...
     return (next_date - 7.days)
   end
@@ -314,7 +318,7 @@ class Event < ActiveRecord::Base
   
   # What date should the event be archived with?
   def archive
-    return false if !last_date.nil? && last_date < Date.today
+    return false if !last_date.nil? && last_date < Date.local_today
     # If there's already a last_date in the past, then the event should already be archived!
     
     if frequency=1
@@ -352,9 +356,6 @@ class Event < ActiveRecord::Base
     self.order("title ASC").all.select{ |e| e.is_class? && !e.ended? }
   end
   
-  def current?
-    !ended? && !is_gig?
-  end
   
   # Get lists of current and archived events
   def self.current_events
