@@ -36,13 +36,13 @@ module EventsHelper
   end
   
   def is_today(d)
-  	d.class == String && Event.weekday_name(Date.local_today) == d || 
-    d.class == Date && d == Date.local_today
+  	d.class == String && Event.weekday_name(@today) == d || 
+    d.class == Date && d == @today
   end
   
   def is_tomorrow(d)
-  	d.class == String && Event.weekday_name(Date.local_tomorrow) == d || 
-    d.class == Date && d == Date.local_tomorrow
+  	d.class == String && Event.weekday_name(@today + 1) == d || 
+    d.class == Date && d == @today + 1
   end
   
   def today_label(d)

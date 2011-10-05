@@ -371,8 +371,8 @@ class Event < ActiveRecord::Base
   
   
   # Get a list of socials with their associated dates
-  def self.socials_dates(end_date)
-    @end_date = end_date
+  def self.socials_dates(start_date)
+    @start_date = start_date
     # Concatenate the list of dates of weekly and other socials in the period,
     # and sort by date 
 
@@ -455,7 +455,8 @@ class Event < ActiveRecord::Base
   end  
 
   def self.date_array
-    (Date.local_today..@end_date).to_a
+    end_date = @start_date + (INITIAL_SOCIALS-1)
+    (@start_date..end_date).to_a
   end
 
 end
