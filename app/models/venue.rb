@@ -19,31 +19,15 @@ class Venue < ActiveRecord::Base
   end
 
 
-
   UNKNOWN_AREA = "Unknown Area"
-  UNKNOWN_COMPASS = "?"
+  UNKNOWN_POSTCODE = "???"
   
-  def compass_text
-    title = case compass
-      when "C" then "Central London" 
-      when "N" then "North London"
-      when "S" then "South London"
-      when "E" then "East London"
-      when "W" then "West London"
-      when "NE" then "North East London"
-      when "NW" then "North West London"
-      when "SE" then "South East London"
-      when "SW" then "South West London"
-    else 
-      UNKNOWN_AREA
-    end  
-    return title
-  end
-  
-  def compass
-    return UNKNOWN_COMPASS if self[:compass].nil? || self[:compass].empty?
-      
-    self[:compass]
+  def outward_postcode
+    return UNKNOWN_POSTCODE if postcode.nil? || postcode.empty?
+    
+    # Match the first part of the postcode:
+    regexp = /[A-Z][A-Z]?[1-9]([1-9]|[A-Z])?/
+    regexp.match(postcode.upcase)[0]
   end
   
   def name_and_area

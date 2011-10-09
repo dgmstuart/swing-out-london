@@ -59,7 +59,7 @@ module EventsHelper
 
   
   def classes_on_day(day)
-    @classes.select {|e| e.day == day}
+    @classes.select {|e| e.day == day}.sort{|e,v| e.venue.area <=> v.venue.area}
   end
     
   
@@ -74,43 +74,29 @@ module EventsHelper
       return 
     end
     
-    # Has the event been cancelled?
     # TODO: this approach requires multiple passes through the cancellation_array... find a more efficient way
     cancelled = social.cancellation_array.include?(date)
+    cancelled_label = ""
+    cancelled_label = content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " if cancelled
     
-    listing_string = compass_point(social)
-    # Add a label if the event is cancelled
-    listing_string += content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " if cancelled
-    listing_string += social_link(social, date, cancelled)
-    
-    classstring = "social_cancelled" if cancelled
-    return content_tag( :li, listing_string, :class => classstring)
+    content_tag :li, 
+      outward_postcode(social) + " " + 
+      content_tag( :span, raw(cancelled_label + social_link(social)), :class => "social_details")
   end
   
-  def social_link(event, date, cancelled)
-    event_title_class = "social_title"
-    event_details_class = "social_details"
+  def social_link(event)    
+    new_label =""
+    new_label = new_label(event) + " " if event.new?
     
+    event_title = event.title
     #Highlight socials which are monthly or more infrequent:
-    event_title_class += " social_highlight" if event.frequency == 0 || event.frequency >= 4
+    event_title =  content_tag( :span, event.title, :class => "social_highlight") if event.less_frequent?
     
-    event_title = event.title 
-    #If this is empty, something has gone wrong, and we shouldn't be displaying anything. Catch this earlier.
+    event_location = content_tag( :span, "#{event.venue_name} in #{event.venue_area}", :class => "social_info")
     
-    # We shouldn't have any blank fields, but if we do, then display as much as possible
-    if event.venue.nil? || (event.venue.name.nil? && event.venue.area.nil?)
-      event.blank_venue
-    elsif event.venue.name.nil?
-      #because of the conditions above, venue area is not nil
-      event_details = event.venue.area 
-    else
-      event_details = event.venue.name
-      event_details += (" in " + event.venue.area) unless event.venue.area.nil? 
-    end  
-    
-    display = content_tag( :span, event_title, :class => event_title_class ) + " " + 
-            content_tag( :span, event_details, :class => event_details_class )
-    
+    #display = new_label + "#{event_title} - #{event_location}"
+    display = raw(new_label + event_title + " - " + event_location)
+            
     # display a link, or plain text if there is no url
     if event.url.nil?
         display
@@ -120,76 +106,84 @@ module EventsHelper
     
   end
   
-  #TODO - looks like it could be put in a funky new class...
   def swingclass_listing(swingclass)
-    if swingclass.title.nil? || swingclass.title.empty?
-      logger.error "[ERROR]: tried to display Social Class (id = #{swingclass.id}) without a title"
-      return 
-    end
-    
-    content_tag( :li, compass_point(swingclass) + swingclass_link(swingclass) )
+    content_tag :li,
+      outward_postcode(swingclass) + " " + 
+      content_tag( :span, swingclass_link(swingclass) + swingclass_cancelledmsg(swingclass), :class => "swingclass_details")
   end
   
   def swingclass_link(event)
-    event_title_class = "swingclass_title"
-    event_details_class = "swingclass_details"
+    new_label = ""
+    new_label = new_label(event) + " " if event.new?
     
-    event_title = event.title 
-    #If this is empty, something has gone wrong, and we shouldn't be displaying anything. Catch this earlier.
-     
-    # We shouldn't have any blank fields, but if we do, then display as much as possible
-    if event.venue.nil? || event.venue.area.nil?
-      event.blank_venue
+    start_date = ""
+    start_date = " (from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
+    
+    class_style = ""
+    class_style = " (#{event.class_style})" unless event.class_style.nil? || event.class_style.empty?
+    
+    course_length = ""
+    course_length = " - #{event.course_length} week courses" unless event.course_length.nil?
+    
+    social_info = ""
+    social_info = "at #{event.title} " if event.is_social?
+    
+    if event.organiser.nil?
+      school_info = "" 
+    elsif event.organiser.shortname.nil?
+      school_info = "with #{event.organiser.name}"
+    elsif event.organiser.name.nil?
+      school_info = "with #{event.organiser.shortname}"
     else
-      #because of the conditions above, venue area is not nil
-      event_details = event.venue.area 
-    end  
+      school_info = "with " + content_tag( :abbr, event.organiser.shortname, :title => event.organiser.name )
+    end
     
-    display = event_title + " in " + event_details
     
-    # Add a label if the event is new
-    display = "(from #{event.first_date.to_s(:short_date)}) " + display unless event.first_date.nil? || event.started?
-    display = new_label + display if event.new?
+    # TODO: work out why this needs the "raw" on the new_label to display properly
+    display = raw(
+      new_label +
+      event.venue_area + start_date + class_style + course_length + " " +
+      swingclass_info(social_info + school_info)
+    )
     
     # display a link, or plain text if there is no url
     if event.url.nil?
-      output = content_tag( :span, display, :class => event_title_class )
+      return display
     else
-      output = link_to( display, event.url, :class => event_title_class )
+      return link_to display, event.url
     end
-    
-    # Add a cancellation message to the end if there are any FUTURE cancellations
-    output += swingclass_cancelledmsg(event) unless event.cancellation_array(true).empty? 
-    
-    return output
   end
-  
-  def new_label
+
+  def new_label(event)
     content_tag( :strong, "New!", :class => "new_label" )
+  end
+
+  def swingclass_info(text)
+    content_tag( :span, raw(text), :class => "swingclass_info" )
   end
   
   # Return a span containing a compass point
-  def compass_point(event)
+  def outward_postcode(event)
+    # Default message:
+    title = "Bah - this event is too secret to have a postcode!"
     
     if event.venue.nil?
-      title = Venue::UNKNOWN_AREA
-      compass = Venue::UNKNOWN_COMPASS
+      postcode = Venue::UNKNOWN_COMPASS
       logger.warn "[WARNING]: Venue was nil for '#{event.title}' (event #{event.id})"
     else 
-      title = event.venue.compass_text
-      compass = event.venue.compass 
+      title = "#{ event.venue.postcode } to be precise" unless event.venue.postcode.nil? || event.venue.postcode.empty?
+      postcode = event.venue.outward_postcode
     end
-         
-    content_tag :abbr, :title => title, :class => "compass" do
-      compass
-    end
-    
+
+    content_tag :abbr, postcode, :title => title, :class => "postcode"
   end
   
   # Return a span containing a message about cancelled dates:
   def swingclass_cancelledmsg(swingclass)
+    return "" if swingclass.cancellation_array(true).empty?
     content_tag( :em, "Cancelled on #{swingclass.pretty_cancelled_dates}" , :class => "class_cancelled" )
   end
+
   
   # ------- #
   # DISPLAY #

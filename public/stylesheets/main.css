@@ -361,98 +361,58 @@ address, #last_updated{
   transition: all 1s ease-in;
 }
 
-#socials h3 {font-size:1.4em;}
 
-#classes ul.daylist, #socials ul.datelist {
+
+
+/* LISTINGS */
+/************/
+#classes .daylist{ font-size:1.1em }
+#socials .datelist{ font-size:1.1em }
+#classes h3 { font-size:1.1em; padding-left:3px; float:left; }
+  #classes .today h3 {padding-left:0px;}
+#socials h3 { font-size:1.2em; display:block; text-align:center; margin-bottom:0.5em; }
+#classes li.day_row{ padding:0.7em 10px 0.4em 7px; }
+#socials li.date_row { padding:0.7em 10px 0.4em 7px; margin-bottom:0.8em; }
+
+
+
+#classes ul.daylist{
   margin:1.2em 0 40px 0;
   padding-bottom:10px;
-}
-
-#classes ul.daylist {
   border-right: 3px solid #0F0F0F;
   padding-right:22px;
 }
+
 #socials ul.datelist {
+  margin:1.2em 0 40px 0;
+  padding-bottom:10px;
   border-left: 3px solid #0F0F0F;
   padding-left:22px;
 }
+
 #key {
   margin: 20px 30px;
   font-size:1.2em;
   font-style:italic;
 }
 
-#classes ul.daylist h3 {
-  float:left;
-}
+li.day_row li { margin-left:6.5em; }
 
-li.day_row li {
-  margin-left:7.5em;
-}
 
-li.date_row li, li.day_row li {
-  padding-left:3px;/*to account for the border we apply when it's today*/
-}
-
-#socials ul.datelist h3 {
-  display:block;
-  text-align:center;
-  margin-bottom:0.5em;
-}
-
-li.day_row, li.date_row {
-  padding:1em 10px 0.4em 10px;
-  line-height:1.4em;
-}
-
-/* Padding between rows*/
-li.day_row li, li.date_row li {
-  margin-bottom:0.6em;
-}
-li.day_row a, li.date_row a {color: #0F0F0F;}
-
-li.today { 
-  border: 3px dashed #0F0F0F;
-  margin-bottom:0.9em;
-}
-li.today:target { 
-  border-color: #C00;
-  -webkit-transition: all 0.8s ease-in;
-  -moz-transition: all 1s ease-in;
-  -o-transition: all 1s ease-in;
-  transition: all 1s ease-in;
-}
+li.day_row li, li.date_row li { line-height:1.4em; margin-bottom:0.6em; padding-left:3px; /*to account for the border we apply when it's today*/}
 li.today li {padding:0;}
 
-.today_label, .tomorrow_label {text-transform: uppercase;}
+li.day_row a {color: #0F0F0F; }
+li.date_row a {color: #0F0F0F; }
 
-li.date_row .today_label, li.date_row .tomorrow_label {letter-spacing: 0.1em}
-li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
+.swingclass_info{ font-size:0.8em; font-style:italic; color:#666; line-height: 0;}
+.social_info{ font-size:0.8em; font-style:italic; color:#666; line-height: 0;}
 
-li.day_row .today_label {
-  display:block;
-  text-align:center;
-  font-size: 1.2em;
-  letter-spacing: 0.7em;
-  padding-left:0.7em;
-  padding-bottom: 0.3em;
-}
-
-.compass {
-  font-size:0.9em;
-  width:1.6em;
-  line-height:1.6em;
-  text-align:center;
-  margin:0 3px 0 1.5em;
-  border: 1px solid #0F0F0F;
-  float:right;
-}
-
-li.today .compass {
-  margin-right:0;/*to line up the compass elements*/
-}
+.swingclass_details{ display:block; margin-left:3.4em; }
+.social_details{ display:block; margin-left:3.4em; }
 
 .class_cancelled  {
+  font-size:0.8em;
   display:block;
   font-style:italic;
   padding-left:1em;
@@ -460,27 +420,60 @@ li.today .compass {
   color:#CC0000;
 }
 
-.social_title { font-size:1.2em;}
-.social_details { font-style: italic;}
-.social_details:before { content:"- ";}
-
 .social_highlight {
   background: url("../images/highlight_icon.png") no-repeat 0 0.15em;
   padding-left: 22px
 }
 
-.social_cancelled .cancelled_label, .new_label  {
-  background-color:#CC0000;
-  color:#FEE6B8;
+.cancelled_label, .new_label{
   padding:0.1em 0.6em;
   margin-right:0.2em;
   position:relative;
   bottom:0.1em;
   text-transform:uppercase;
+  font-size:0.8em;
 }
 
-.social_cancelled .social_title {color:inherit;}
+.cancelled_label{color:#FEE6B8; background-color:#CC0000; }
+.new_label {color:#FEE6B8; background-color:#0F0F0F; }
 
+.postcode {
+    border: 1px solid #0F0F0F;
+    display: block;
+    float: left;
+    width: 3.5em; /*N.B. Longest displaying postcode is NW1W. This won't fit in this space, but we don't have any postcodes in that area a.t.m.*/
+    position:relative;
+    bottom:0.1em;
+    padding-left:0.3em;
+    text-transform:uppercase;
+    font-size:0.7em;
+}
+
+/* TODAY AND TOMORROW */
+/**********************/
+li.today { border: 3px dashed #0F0F0F;}
+  #socials li.today  { margin-bottom:1.7em;}
+  #classes li.today  { margin-bottom:0.9em;}
+
+li.today:target { 
+  border-color: #C00;
+  -webkit-transition: all 0.8s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
+
+.today_label, .tomorrow_label {text-transform: uppercase;}
+  li.date_row .today_label, li.date_row .tomorrow_label {letter-spacing: 0.1em}
+  li.day_row .today_label {
+    display:block;
+    text-align:center;
+    font-size: 1.2em;
+    letter-spacing: 0.7em;
+    padding-left:0.7em;
+    padding-bottom: 0.3em;
+  }
+    li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
 
 /* ABOUT PAGE */
 

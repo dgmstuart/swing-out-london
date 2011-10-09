@@ -34,6 +34,7 @@ class Event < ActiveRecord::Base
     return UNKNOWN_VENUE
   end
   
+  # We shouldn't have any blank fields, but if we do, then display as much as possible:
   def venue_name
     if venue.nil? || venue.name.nil?
       blank_venue
@@ -43,7 +44,7 @@ class Event < ActiveRecord::Base
   end
   
   def venue_area
-    if venue.nil? || venue.name.nil?
+    if venue.nil? || venue.area.nil?
       blank_venue
     else
       venue.area
@@ -232,7 +233,7 @@ class Event < ActiveRecord::Base
   # Is the event new? (probably only applicable to classes)
   def new?
     return false if first_date.nil?
-    first_date > Date.local_today - NEW_DAYS
+    first_date > Date.local_today - 1.month
   end
   
   # Has the first instance of the event happened yet?
@@ -269,6 +270,10 @@ class Event < ActiveRecord::Base
   
   def infrequent?
     frequency > 26
+  end
+  
+  def less_frequent?
+    frequency == 0 || frequency >= 4
   end
     
   
