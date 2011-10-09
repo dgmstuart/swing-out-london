@@ -281,13 +281,13 @@ class Event < ActiveRecord::Base
   # for repeating events - find the next and previous dates
   def next_date
     return unless frequency == 1
-    return Date.local_today if day = self.weekday_name(Date.local_today)
+    return Date.local_today if day = Event.weekday_name(Date.local_today)
     return Date.local_today.next_week(day.downcase.to_sym)
   end
   
   def prev_date
     return unless frequency == 1
-    return Date.local_today if day = self.weekday_name(Date.local_today)
+    return Date.local_today if day = Event.weekday_name(Date.local_today)
     #prev_week doesn't seem to be implemented...
     return (next_date - 7.days)
   end
@@ -317,20 +317,19 @@ class Event < ActiveRecord::Base
   # ACTIONS # 
   ###########
   
-  # What date should the event be archived with?
-  def archive
+  def archive!
     return false if !last_date.nil? && last_date < Date.local_today
     # If there's already a last_date in the past, then the event should already be archived!
     
-    if frequency=1
-      self.last_date = prev_date
+    if frequency == 1
+      self[:last_date] = prev_date
     elsif date_array.nil?
-      self.last_date = Date.new # Earliest possible ruby date
+      self[:last_date] = Date.new # Earliest possible ruby date
     else
-      self.last_date = latest_date
+      self[:last_date] = latest_date
     end
     
-    return true if save
+    return true if self.save!
   end
   
   

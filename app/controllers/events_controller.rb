@@ -80,7 +80,7 @@ class EventsController < ApplicationController
   
   def archive
     @event = Event.find(params[:id])
-    @event.archive
+    @event.archive!
     #TODO: handle case where save fails or already archived (archive = false)
     
     redirect_to events_path
