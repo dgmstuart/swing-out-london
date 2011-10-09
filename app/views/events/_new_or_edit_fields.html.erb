@@ -8,6 +8,10 @@
         <%= f.text_field :title %>
     </li>
     <li>
+        <%= f.label :shortname %>
+        <%= f.text_field :shortname %>
+    </li>
+    <li>
         <%= f.label :venue %>
         <%= f.select :venue_id, venue_select, {:include_blank => true} %>
         <%= link_to 'New Venue', new_venue_path %>
@@ -20,6 +24,14 @@
     <li>
         <%= f.label :event_type %>
         <%= f.select :event_type, event_type_select, {:include_blank => true} %>
+    </li>
+    <li>
+        <%= f.label :class_style %>
+        <%= f.text_field :class_style %>
+    </li>
+    <li>
+        <%= f.label :course_length %>
+        <%= f.text_field :course_length, :size => 2, :class =>"shortfield" %> weeks
     </li>
     
     <!-- WHEN? -->

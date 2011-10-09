@@ -10,44 +10,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930221310) do
+ActiveRecord::Schema.define(:version => 20111007204237) do
 
   create_table "events", :force => true do |t|
-    t.string   "title"
-    t.string   "day"
-    t.string   "event_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "venue_id"
-    t.integer  "organiser_id"
-    t.integer  "frequency"
-    t.string   "url"
-    t.string   "date_array"
-    t.string   "cancellation_array"
-    t.date     "first_date"
-    t.date     "last_date"
+    t.string    "title"
+    t.string    "day"
+    t.string    "event_type"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "venue_id"
+    t.integer   "organiser_id"
+    t.integer   "frequency"
+    t.string    "url"
+    t.string    "date_array"
+    t.string    "cancellation_array"
+    t.date      "first_date"
+    t.date      "last_date"
+    t.string    "shortname"
+    t.text      "class_style"
+    t.integer   "course_length"
   end
 
   create_table "organisers", :force => true do |t|
-    t.string   "name"
-    t.string   "website"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.string    "website"
+    t.text      "description"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "shortname"
   end
 
   create_table "venues", :force => true do |t|
-    t.string   "name"
-    t.text     "address"
-    t.string   "postcode"
-    t.string   "nearest_tube"
-    t.string   "website"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "area"
-    t.string   "compass"
-    t.decimal  "lat"
-    t.decimal  "lng"
+    t.string    "name"
+    t.text      "address"
+    t.string    "postcode"
+    t.string    "nearest_tube"
+    t.string    "website"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "area"
+    t.string    "compass"
+    t.decimal   "lat"
+    t.decimal   "lng"
   end
 
 end

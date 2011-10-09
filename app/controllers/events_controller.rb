@@ -18,7 +18,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.xml
   def show
-    @event = Event.find(params[:id])
+    @event = Event.findevent(params[:id])
   end
 
   # GET /events/new
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+    @event = Event.findevent(params[:id])
   end
 
   # POST /events

@@ -4,6 +4,10 @@
         <%=h @event.title %>
     </li>
     <li>
+        <span>Shortname:</span>
+        <%=h @event.shortname %>
+    </li>
+    <li>
         <span>Venue:</span>
         <%= venue_link(@event) %>
     </li>
@@ -15,6 +19,16 @@
         <span>Event type:</span>
         <%=h @event.event_type %>
     </li>
+    <% unless @event.course_length.nil?%>
+    <li>
+        <span>Course_length:</span>
+        <%=h @event.course_length %> weeks
+    </li>
+    <% end %>
+    <li>
+        <span>Class style:</span>
+        <%=h @event.class_style %>
+    </li>
     <li>
         <span>Day:</span>
         <%=h @event.day %>
@@ -24,7 +38,7 @@
         <%=h @event.frequency_text %>
     </li>
     
-    <% unless @event.frequency ==1 then %>
+    <% unless @event.frequency ==1%>
     <li>
         <span>Dates:</span>
         <%=h @event.dates %>

@@ -9,7 +9,13 @@ class Event < ActiveRecord::Base
   serialize :date_array
   serialize :cancellation_array
   
-  validates_presence_of :title, :frequency, :url, :day
+  validates_presence_of :frequency, :url, :day
+  
+  validates_format_of :shortname, :with => /^[a-z]*$/, :message => "can only contain lowercase characters (no spaces)"
+  validates_length_of :shortname, :maximum => 20
+  validates_uniqueness_of :shortname, :allow_nil => true, :allow_blank => true
+
+  validates_numericality_of :course_length, :only_integer => true , :greater_than => 0, :allow_nil => true
 
   # display constants:
   NOTAPPLICABLE = "n/a"
@@ -18,11 +24,6 @@ class Event < ActiveRecord::Base
   UNKNOWN_ORGANISER = "Unknown"
   WEEKLY = "Weekly"
   SEE_WEB = "(See Website)"
-
-  def class_style
-    return NOTAPPLICABLE if read_attribute(:class_style).nil?
-    self[:class_style]
-  end
 
   # ----- #
   # Venue #
@@ -336,6 +337,22 @@ class Event < ActiveRecord::Base
   #################
   # CLASS METHODS # 
   #################
+  
+  # Allows urls like "/event/blackcotton"
+  def self.findevent(input)
+    # If to_i is called on a character string, 0 is returned
+    if input.to_i == 0
+      e = first(:conditions => ["shortname = ?",input])
+      if e.nil?
+        raise ActiveRecord::RecordNotFound, "Couldn't find Event with Shortname=\"#{input}\""
+      else 
+        e
+      end
+    else
+      find(input)
+    end
+  end
+  
 
   # Helper methods to get different types of event:
   def self.classes(*args)
