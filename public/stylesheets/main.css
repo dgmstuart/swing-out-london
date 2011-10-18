@@ -20,42 +20,19 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   vertical-align: baseline;
 }
 /* remember to define focus styles! */
-:focus {
-  outline: 0;
-}
+:focus { outline: 0; }
+body { line-height: 1; color: black; background: white;}
+ol, ul {list-style: none; }
 
-body {
-  line-height: 1;
-  color: black;
-  background: white;
-}
-ol, ul {
-  list-style: none;
-}
 /* tables still need 'cellspacing="0"' in the markup */
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-}
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+
 blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
-}
-blockquote, q {
-  quotes: "" "";
-}
+q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }
 
 /* END RESET */
-
-
-
-
-
-
 
 body {
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
@@ -64,46 +41,40 @@ body {
   font-size: 0.875em;/* = 14px */
 }
 
-#page{background: #FEE6B8 none;}
-
-a {
-  text-decoration:none;
-  color:#384F6E;  
+@media only screen and (max-device-width: 480px){
+body{
+  -webkit-text-size-adjust:none;
+  background:inherit;
+}
 }
 
+#page{background: #FEE6B8 none; margin: auto; width: 900px;}
+@media only screen and (max-device-width: 480px){
+  #page{width:480px; margin:0;};
+}
+@media only screen and (max-device-width: 480px) and (orientation:landscape){
+  #page{width:960px; margin:0;};
+}
+@media only screen and (max-device-width: 480px) and (orientation:portrait){
+  #page{width:480px; margin:0;};
+}
+
+a {text-decoration: none; color: #384F6E;}
 a:hover {border-bottom:solid 2px;}
 
 p, li, address {
   line-height:1.5em;
 }
 
-p {
-  text-align:justify;
-  margin-bottom:0.8em;
-}
+p { text-align: justify; margin-bottom: 0.8em; }
+p em { font-style: italic }
 
-p em {font-style:italic}
+q:before, q:after { content:'"'; }
 
-q:before, q:after {
-  content:'"';
-}
+ul.textlist { list-style-type: disc; padding-left: 3em; }
+  ul.textlist li { padding-left: 0.5em; }
+ul.indent {list-style-type: square;}
 
-ul.textlist {
-  list-style-type: disc;
-  padding-left:3em;
-}
-
-ul.indent {
-  list-style-type: square;
-}
-
-ul.textlist li {
-  padding-left: 0.5em;
-}
-
-ul.navigation, .compass {
-  text-transform: uppercase;
-}
 .section_heading {
   text-transform: uppercase;
   text-align:center;
@@ -115,18 +86,9 @@ h3 {
 }
 
 
-/* LAYOUT */
-
-#title {
-  padding: 20px;
-}
-
-#page {
-  margin: auto;
-  width: 900px;
-}
-
 /* HEADER */
+
+#title { padding: 20px; }
 
 .site_title {
   padding-top:50px;
@@ -162,6 +124,19 @@ h3 {
   clear:both;
 }
 
+@media only screen and (max-device-width: 480px){
+  #site_description {
+    width:auto;
+    margin:30px;
+    padding-bottom:30px;
+    border-bottom: 3px solid #0F0F0F;
+    float:none;
+    clear:none;
+  }
+}
+
+
+
 #site_description a {
   text-transform:capitalize;
   font-size:1.2em;
@@ -174,6 +149,14 @@ h3 {
   width:370px;
   margin:30px 60px 0 470px;
 }
+
+@media only screen and (max-device-width: 480px){
+  #social_media {
+    width:inherit;
+    margin:30px 30px 10px 30px;
+  }
+}
+
 
 #social_media #like_message{
   margin-bottom:0.5em;
@@ -223,43 +206,25 @@ h3 {
 
 /*NAVIGATION*/
 
-ul.navigation {
-  list-style-type:none;
-  letter-spacing: 0.1em;
-  line-height:3.5em;
+ul.navigation{list-style-type:none;letter-spacing:0.1em;line-height:3.5em;text-transform:uppercase;}
+ul.navigation li{display:inline;margin:0 0.5em 0 0;padding:0 0 0 1em;white-space:nowrap;}
+
+#main_nav,#admin_nav{}
+#admin_nav{text-align:center;clear:both;padding:1em 0;}
+#main_nav{text-align:center;clear:both;font-size:1.14em;margin:0 50px;padding-bottom:15px;border-bottom:3px solid #0F0F0F;}
+
+@media only screen and (max-device-width: 480px){
+  /* changed padding to force nav configuration */
+  #main_nav{margin:0 30px;padding:0 30px 15px 30px;}
+
+  /* 'about' link will be pushed onto next line so doesn't need a separator */
+  ul.navigation li.about_link{border:none;}
 }
 
-ul.navigation li {
-  display:inline;
-  margin:0 0.5em 0 0;
-  padding:0 0 0 1em;
-  white-space:nowrap;
-}
 
-#main_nav, #admin_nav {
-  text-align:center;
-  clear:both;
-}
+ul.navigation a { color: #0F0F0F;}
 
-#admin_nav {
-  padding:1em 0;
-}
-
-#main_nav {
-  font-size:1.14em;
-  margin: 0 50px;
-  padding-bottom:15px;
-  border-bottom: 3px solid #0F0F0F;
-}
-
-ul.navigation a {
-  color: #0F0F0F;
-}
-
-#main_nav a, #admin_nav a {
-  padding: 10px; /*added here so we can take it away when we apply the border*/
-} 
-
+#main_nav a, #admin_nav a { padding: 10px; } /*added here so we can take it away when we apply the border*/
 #main_nav a:hover, #admin_nav a:hover {
   text-decoration:none;
   padding: 8px;
@@ -285,7 +250,6 @@ ul.navigation a {
 }
 
 #main_nav li, #admin_nav li { border-left:3px solid #0F0F0F;}
-
 #footer_nav li { border-left:1px solid #0F0F0F;}
 
 #main_nav li:first-child, #admin_nav li:first-child, #footer_nav li:first-child {
@@ -309,6 +273,11 @@ ul.navigation a {
   border-top: 3px solid #0F0F0F;
 }
 
+@media only screen and (max-device-width: 480px){
+  #footer_nav { padding:2.5em 60px 0 60px; text-align:inherit; }
+}
+
+
 #valid_statement {
   float:right;
   margin-right:40px;
@@ -316,6 +285,10 @@ ul.navigation a {
   line-height: 3.5em;
   border-top: 3px solid #0F0F0F;
   height:0;
+}
+
+@media only screen and (max-device-width: 480px){
+   #valid_statement { display:none; }
 }
 
 address, #last_updated{
@@ -343,7 +316,7 @@ address, #last_updated{
   font-size:1.6em;
   text-align:center;
   text-transform:none;
-  margin:35px 10px 0 10px;
+  margin-top:35px;
 }
 .index h2 em {
   text-transform:uppercase;
@@ -361,34 +334,28 @@ address, #last_updated{
   transition: all 1s ease-in;
 }
 
+@media only screen and (max-device-width: 480px){
+  #classes, #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left 0;}
+  #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
+}
 
 
 
 /* LISTINGS */
 /************/
-#classes .daylist{ font-size:1.1em }
-#socials .datelist{ font-size:1.1em }
+#classes .daylist{ font-size:1.1em; margin:1.2em 0 40px 0; padding-bottom:10px; border-right: 3px solid #0F0F0F;padding-right:22px; }
+#socials .datelist{ font-size:1.1em; margin:1.2em 0 40px 0; padding-bottom:10px; border-left: 3px solid #0F0F0F; padding-left:22px; }
 #classes h3 { font-size:1.1em; padding-left:3px; float:left; }
   #classes .today h3 {padding-left:0px;}
 #socials h3 { font-size:1.2em; display:block; text-align:center; margin-bottom:0.5em; }
 #classes li.day_row{ padding:0.7em 10px 0.4em 7px; }
 #socials li.date_row { padding:0.7em 10px 0.4em 7px; margin-bottom:0.8em; }
 
-
-
-#classes ul.daylist{
-  margin:1.2em 0 40px 0;
-  padding-bottom:10px;
-  border-right: 3px solid #0F0F0F;
-  padding-right:22px;
+@media only screen and (max-device-width: 480px){
+  #classes .daylist{border:none; padding:0;}
+  #socials .datelist{border:none; padding:0;}
 }
 
-#socials ul.datelist {
-  margin:1.2em 0 40px 0;
-  padding-bottom:10px;
-  border-left: 3px solid #0F0F0F;
-  padding-left:22px;
-}
 
 #key {
   margin: 20px 30px;
@@ -422,7 +389,7 @@ li.date_row a {color: #0F0F0F; }
 
 .social_highlight {
   background: url("../images/highlight_icon.png") no-repeat 0 0.15em;
-  padding-left: 22px
+  padding-left: 20px
 }
 
 .cancelled_label, .new_label{
@@ -491,9 +458,8 @@ h2.section_heading {
   margin-top:35px;
 }
 
-#about_swingoutlondon, #policy{
-  margin:35px 76px 35px 50px;
-}
+#about_swingoutlondon{ margin:35px 76px 35px 50px; }
+#policy{ margin:35px 76px 35px 50px; }
 
 .sidebar {
   padding:20px;
@@ -503,6 +469,13 @@ h2.section_heading {
   float:right;
   clear:right;
 }
+
+@media only screen and (max-device-width: 480px){
+  #about_swingoutlondon{ margin:35px 30px; }
+  #policy{ margin:35px 30px; }
+  .sidebar { margin:0 20px 30px 20px; width:auto; float:none; clear:none; }
+}
+
 
 .sidebar p, .sidebar ul {
   font-family: Georgia, serif;
@@ -518,9 +491,12 @@ h2.section_heading {
   border: 6px double #0F0F0F;
   text-align:justify;
 }
-#colophon h2 {margin-top:0px;}
-#colophon li {margin-bottom:0.8em;}
-#colophon .textlist li {margin-bottom:inherit;}
+@media only screen and (max-device-width: 480px){
+  #colophon { margin:35px 0px; }
+}
+  #colophon h2 {margin-top:0px;}
+  #colophon li {margin-bottom:0.8em;}
+  #colophon .textlist li {margin-bottom:inherit;}
 
 #principles {
   list-style: outside decimal;
