@@ -52,12 +52,6 @@ body{
 @media only screen and (max-device-width: 480px){
   #page{width:480px; margin:0;};
 }
-@media only screen and (max-device-width: 480px) and (orientation:landscape){
-  #page{width:960px; margin:0;};
-}
-@media only screen and (max-device-width: 480px) and (orientation:portrait){
-  #page{width:480px; margin:0;};
-}
 
 a {text-decoration: none; color: #384F6E;}
 a:hover {border-bottom:solid 2px;}
