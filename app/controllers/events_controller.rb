@@ -5,9 +5,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
   def index    
-    @current_events = Event.current_events
-    @gigs = Event.gigs
-    @archived_events = Event.archive_events
+    @current_events = Event.current_events :order => "frequency, updated_at"
+    @gigs = Event.gigs :order => "title"
+    @archived_events = Event.archive_events :order => "title"
     
     respond_to do |format|
       format.html # index.html.erb

@@ -367,24 +367,24 @@ class Event < ActiveRecord::Base
     self.order("title ASC").all(*args).select{|e| e.is_social? }
   end
   
-  def self.gigs
-    self.all.select{ |e| e.is_gig? }
+  def self.gigs(*args)
+    self.all(*args).select{ |e| e.is_gig? }
   end
 
   # Get a list of classes, excluding those which have ended
   # TODO: not very DRY
-  def self.active_classes
-    self.order("title ASC").all.select{ |e| e.is_class? && !e.ended? }
+  def self.active_classes(*args)
+    self.order("title ASC").all(*args).select{ |e| e.is_class? && !e.ended? }
   end
   
   
   # Get lists of current and archived events
-  def self.current_events
-    self.all.select{ |e| e.current? }
+  def self.current_events(*args)
+    self.all(*args).select{ |e| e.current? }
   end
 
-  def self.archive_events 
-    self.all.select{ |e| e.ended? }
+  def self.archive_events(*args) 
+    self.all(*args).select{ |e| e.ended? && !e.is_gig?}
   end
   
   
