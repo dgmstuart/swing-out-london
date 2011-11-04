@@ -1,10 +1,7 @@
 class Event < ActiveRecord::Base
 
-  has_many :activities
   belongs_to :venue
   belongs_to :organiser
-  
-  #default_scope :order => 'title ASC' #sets default search order
   
   serialize :date_array
   serialize :cancellation_array
@@ -360,15 +357,15 @@ class Event < ActiveRecord::Base
 
   # Helper methods to get different types of event:
   def self.classes(*args)
-    self.order("title ASC").all(*args).select{|e| e.is_class? }
+    self.where(:event_type => CLASS_TYPES).order("title").all(*args)
   end
 
   def self.socials(*args)
-    self.order("title ASC").all(*args).select{|e| e.is_social? }
+    self.where(:event_type => SOCIAL_TYPES).order("title").all(*args)
   end
   
   def self.gigs(*args)
-    self.all(*args).select{ |e| e.is_gig? }
+    self.all({:conditions => ["event_type = ?","gig"]},*args)
   end
 
   # Get a list of classes, excluding those which have ended

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007204237) do
+ActiveRecord::Schema.define(:version => 20111103223749) do
 
   create_table "events", :force => true do |t|
     t.string    "title"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(:version => 20111007204237) do
     t.text      "class_style"
     t.integer   "course_length"
   end
+
+  add_index "events", ["event_type"], :name => "index_events_on_event_type"
+  add_index "events", ["organiser_id"], :name => "index_events_on_organiser_id"
+  add_index "events", ["venue_id"], :name => "index_events_on_venue_id"
 
   create_table "organisers", :force => true do |t|
     t.string    "name"
