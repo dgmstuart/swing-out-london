@@ -4,7 +4,7 @@ class WebsiteController < ApplicationController
   require 'twitter'
   
   before_filter :get_updated_times
-  caches_action :index
+  #caches_action :index
   
   def index
     @classes = Event.active_classes
