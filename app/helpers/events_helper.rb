@@ -130,7 +130,7 @@ module EventsHelper
     
     if event.organiser.nil?
       school_info = "" 
-    elsif event.organiser.shortname.nil?
+    elsif event.organiser.shortname.nil? || event.organiser.shortname.empty?
       school_info = "with #{event.organiser.name}"
     elsif event.organiser.name.nil?
       school_info = "with #{event.organiser.shortname}"
