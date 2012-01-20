@@ -3,20 +3,8 @@ class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :organiser
   
-  class DateArray
-    def load x 
-      return unless x
-      x.split("|").collect{|s| s.to_date}
-    end
-
-    def dump x 
-      [x].collect{|d| d.to_s}.join "|"
-    end
-  end
-  
-  
-  serialize :date_array , DateArray.new
-  serialize :cancellation_array, DateArray.new
+  serialize :date_array
+  serialize :cancellation_array
   
   validates_presence_of :frequency, :url, :day
   
