@@ -2,11 +2,13 @@ class Event < ActiveRecord::Base
 
   belongs_to :venue
   belongs_to :organiser
+  has_and_belongs_to_many :swing_dates, :uniq => true
+  has_and_belongs_to_many :swing_cancellations, :class_name => "SwingDate", :join_table => "events_swing_cancellations", :uniq => true
   
   serialize :date_array
   serialize :cancellation_array
   
-  validates_presence_of :frequency, :url, :day
+  validates_presence_of :event_type, :frequency, :url, :day
   
   validates_format_of :shortname, :with => /^[a-z]*$/, :message => "can only contain lowercase characters (no spaces)"
   validates_length_of :shortname, :maximum => 20
@@ -21,6 +23,16 @@ class Event < ActiveRecord::Base
   UNKNOWN_ORGANISER = "Unknown"
   WEEKLY = "Weekly"
   SEE_WEB = "(See Website)"
+
+  #########
+  ## TEMP #
+  #########
+  
+  # Convert the old, fragile way of storing dates (serialised as an array) into the new one (stored in a table)
+  def modernise
+    self.date_array = self[:date_array].collect{|ds| ds.to_date.to_s}.join(", ") unless Event.empty_date_string(self[:date_array])
+    self.cancellation_array = self[:cancellation_array].collect{|ds| ds.to_date.to_s}.join(", ") unless Event.empty_date_string(self[:cancellation_array])
+  end
 
   # ----- #
   # Venue #
@@ -102,49 +114,60 @@ class Event < ActiveRecord::Base
   # Dates #
   # ----- #
 
+  def dates
+    swing_dates.collect{|sd| sd.date}
+  end
+  
+  def cancellations
+    swing_cancellations.collect{|sc| sc.date}
+  end
+
   # WRITE METHODS #
   
   def date_array=(date_string)
-    self[:date_array]=parse_date_string(date_string)
+    self.swing_dates = Event.parse_date_string(date_string)
   end
 
   def cancellation_array=(date_string)
-    self[:cancellation_array]=parse_date_string(date_string)
+    self.swing_cancellations = Event.parse_date_string(date_string)
   end
   
-  #TODO: the following should be elsewhere? i.e. not in the Event class
-  private
+  def self.empty_date_string(date_string)
+    date_string.nil? || date_string.empty? || date_string == UNKNOWN_DATE || date_string == WEEKLY
+  end
   
-  # Interpret a comma separated string as dates:
-  def parse_date_string( date_string )
+  def self.parse_date_string( date_string )
+    return [] if empty_date_string(date_string)
     
-    if date_string.empty? || date_string.nil? || date_string == UNKNOWN_DATE || date_string == WEEKLY # These are equivalent to empty TODO: REQUIRED?
-      string_array = [] 
-    else
-      string_array = date_string.split(',')
+    output_dates = []
+    
+    date_string.split(',').each do |ds|
+      begin
+        date = ds.to_date
+        #to_date is defined in config/initializers/better_dates.rb, which extends String.
+      rescue Exception => msg
+        #TODO
+      else
+        output_dates << SwingDate.find_or_initialize_by_date(date)
+      end
     end
-
-    string_array.collect { |d| d.to_date }.compact.sort
-    #to_date is defined in config/initializers/better_dates.rb, which extends String.
+    return output_dates 
   end
-  
-  
-  public
   
   # READ METHODS #
   
   def date_array(future= false)
-    return_array_of_dates(self[:date_array], future)
+    return_array_of_dates(dates, future)
   end
 
   def cancellation_array(future= false)
-    return_array_of_dates(self[:cancellation_array], future)
+    return_array_of_dates(cancellations, future)
   end
   
   private
   
   # Given an array of dates, return an appropriately filtered array
-  def return_array_of_dates(input_dates, future)
+  def return_array_of_dates(input_dates, future=true)
     return [] if input_dates.nil? || input_dates.empty?
     
     input_dates = filter_future(input_dates) if future
@@ -161,15 +184,15 @@ class Event < ActiveRecord::Base
   
   # PRINT METHODS #
   
-  def dates
+  def print_dates
     print_date_array
   end
    
-  def dates_rows
+  def print_dates_rows
     print_date_array(",\n")
   end
   
-  def cancelled_dates
+  def print_cancellations
     print_cancellation_array
   end
    
@@ -186,11 +209,11 @@ class Event < ActiveRecord::Base
   def print_date_array(sep=',', format= :uk_date, future= false )
     # Weekly events don't have dates 
     return WEEKLY if frequency == 1
-    print_array_of_dates(self[:date_array], sep, format, future)
+    print_array_of_dates(dates, sep, format, future)
   end
   
   def print_cancellation_array(sep=',', format= :uk_date, future= false )
-    print_array_of_dates(self[:cancellation_array], sep, format, future)
+    print_array_of_dates(cancellations, sep, format, future)
   end
   
   private

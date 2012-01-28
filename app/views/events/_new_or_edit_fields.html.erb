@@ -42,11 +42,11 @@
     </li>
     <li>
         <%= f.label :dates %>
-        <%= f.text_field :date_array, :value => @event.dates %>
+        <%= f.text_field :date_array, :value => @event.print_dates %>
     </li>
     <li>
         <%= f.label :cancelled_dates %>
-        <%= f.text_field :cancellation_array, :value => @event.cancelled_dates %>
+        <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
     </li>
     <li>
         <%= f.label :first_date %>

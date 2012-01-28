@@ -26,7 +26,7 @@
     <td><%= organiser_link(event) %></td>
     <td><%=h event.day[0..2] %></td>
     <td class="center"><%=h event.frequency %></td>
-    <td class="dates lines"><%=h event.dates_rows %></td>
+    <td class="dates lines"><%=h event.print_dates_rows %></td>
     <td><%=h event.updated_at.to_s(:uk_date) %></td>
 
     <td class="actions last">

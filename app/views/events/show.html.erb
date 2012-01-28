@@ -41,13 +41,13 @@
     <% unless @event.frequency ==1%>
     <li>
         <span>Dates:</span>
-        <%=h @event.dates %>
+        <%=h @event.print_dates %>
     </li>
     <% end %>
     
     <li>
         <span>Cancelled:</span>
-        <%=h @event.cancelled_dates %>
+        <%=h @event.print_cancellations %>
     </li>
     
     <li>

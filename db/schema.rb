@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103223749) do
+ActiveRecord::Schema.define(:version => 20120122223421) do
 
   create_table "events", :force => true do |t|
     t.string    "title"
@@ -35,6 +35,20 @@ ActiveRecord::Schema.define(:version => 20111103223749) do
   add_index "events", ["organiser_id"], :name => "index_events_on_organiser_id"
   add_index "events", ["venue_id"], :name => "index_events_on_venue_id"
 
+  create_table "events_swing_cancellations", :id => false, :force => true do |t|
+    t.integer "swing_date_id", :null => false
+    t.integer "event_id",      :null => false
+  end
+
+  add_index "events_swing_cancellations", ["swing_date_id", "event_id"], :name => "index_events_swing_cancellations_on_swing_date_id_and_event_id", :unique => true
+
+  create_table "events_swing_dates", :id => false, :force => true do |t|
+    t.integer "swing_date_id", :null => false
+    t.integer "event_id",      :null => false
+  end
+
+  add_index "events_swing_dates", ["swing_date_id", "event_id"], :name => "index_events_swing_dates_on_swing_date_id_and_event_id", :unique => true
+
   create_table "organisers", :force => true do |t|
     t.string    "name"
     t.string    "website"
@@ -42,6 +56,12 @@ ActiveRecord::Schema.define(:version => 20111103223749) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.string    "shortname"
+  end
+
+  create_table "swing_dates", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "date"
   end
 
   create_table "venues", :force => true do |t|

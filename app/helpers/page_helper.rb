@@ -20,7 +20,8 @@ module PageHelper
     end 
   end
   
-  def tweet_message
+  #this version works with 1.9.2
+  def tweet_message_1_9_2
     if @latest_tweet.nil?
       "Sorry, for some reason we can't load the latest tweet. Please visit the " + 
       link_to("Swing Out London Twitter feed", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter")
@@ -28,6 +29,18 @@ module PageHelper
       created_date = Time.zone.parse(@latest_tweet.created_at)
       created_date_string = created_date.to_s(:timepart) + " on " + created_date.to_s(:short_date)
       @latest_tweet.text.twitterify + " " + link_to(created_date_string, "http://www.twitter.com/swingoutlondon/#{@latest_tweet.id_str}", :class => "tweet_created")
+    end
+  end
+  
+  #this version works with 1.9.3
+  def tweet_message
+    if @latest_tweet.nil?
+      "Sorry, for some reason we can't load the latest tweet. Please visit the " + 
+      link_to("Swing Out London Twitter feed", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter")
+    else
+      created_date = @latest_tweet.created_at
+      created_date_string = created_date.to_s(:timepart) + " on " + created_date.to_s(:short_date)
+      @latest_tweet.text.twitterify + " " + link_to(created_date_string, "http://www.twitter.com/swingoutlondon/#{@latest_tweet.user.id}", :class => "tweet_created")
     end
   end
   
