@@ -22,6 +22,7 @@ gem 'taps'
 group :development, :test do
    #gem 'webrat'
    gem 'rspec-rails'
+   gem 'factory_girl_rails', '~> 1.2'
    gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
    gem 'guard-rspec'
    gem 'guard-livereload'

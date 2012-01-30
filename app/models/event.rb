@@ -16,6 +16,15 @@ class Event < ActiveRecord::Base
 
   validates_numericality_of :course_length, :only_integer => true , :greater_than => 0, :allow_nil => true
 
+  validate :cannot_be_weekly_and_have_dates
+
+  def cannot_be_weekly_and_have_dates
+    if frequency == 1 && !dates.empty?
+      errors.add(:date_array, "must be empty for weekly events")
+    end
+  end
+
+
   # display constants:
   NOTAPPLICABLE = "n/a"
   UNKNOWN_DATE = "Unknown"
@@ -33,7 +42,11 @@ class Event < ActiveRecord::Base
     self.date_array = self[:date_array].collect{|ds| ds.to_date.to_s}.join(", ") unless Event.empty_date_string(self[:date_array])
     self.cancellation_array = self[:cancellation_array].collect{|ds| ds.to_date.to_s}.join(", ") unless Event.empty_date_string(self[:cancellation_array])
   end
-
+  
+  def self.modernise_all
+    all.each{ |e| e.modernise }
+  end
+    
   # ----- #
   # Venue #
   # ----- #
@@ -114,28 +127,47 @@ class Event < ActiveRecord::Base
   # Dates #
   # ----- #
 
+  #TODO: find a way of DRYing this up...
   def dates
     swing_dates.collect{|sd| sd.date}
   end
   
+  def add_date(new_date)
+    self.swing_dates << SwingDate.find_or_initialize_by_date(new_date)
+  end
+    
+  def dates=(array_of_new_dates)
+    self.swing_dates = []
+    array_of_new_dates.each{ |nd| add_date(nd) }
+  end
+  
+  def date_array=(date_string)
+    self.dates = Event.parse_date_string(date_string)
+  end
+  
+  
   def cancellations
     swing_cancellations.collect{|sc| sc.date}
   end
-
-  # WRITE METHODS #
   
-  def date_array=(date_string)
-    self.swing_dates = Event.parse_date_string(date_string)
+  def cancellations=(array_of_new_cancellations)
+    self.swing_cancellations = []
+    array_of_new_cancellations.each{ |nc| add_cancellation(nc) }
   end
-
+  
+  def add_cancellation(new_cancellation)
+    self.swing_cancellations << SwingDate.find_or_initialize_by_date(new_cancellation)
+  end
+  
   def cancellation_array=(date_string)
-    self.swing_cancellations = Event.parse_date_string(date_string)
+    self.cancellations = Event.parse_date_string(date_string)
   end
   
   def self.empty_date_string(date_string)
     date_string.nil? || date_string.empty? || date_string == UNKNOWN_DATE || date_string == WEEKLY
   end
   
+  #TODO - move to better_dates.rb?
   def self.parse_date_string( date_string )
     return [] if empty_date_string(date_string)
     
@@ -148,7 +180,7 @@ class Event < ActiveRecord::Base
       rescue Exception => msg
         #TODO
       else
-        output_dates << SwingDate.find_or_initialize_by_date(date)
+        output_dates << date
       end
     end
     return output_dates 
@@ -175,8 +207,9 @@ class Event < ActiveRecord::Base
   end
   
   # Given an array of dates, return only those in the future
-  def filter_future(date_array)
-    date_array.select{ |d| d >= Date.local_today}
+  def filter_future(input_dates)
+    #TODO - should be able to simply replace this with some variant of ".future?", but need to test
+    input_dates.select{ |d| d >= Date.local_today}
   end
   
   public
@@ -244,9 +277,9 @@ class Event < ActiveRecord::Base
   # For infrequent events (6 months or less), is the next expected date (based on the last known date)
   # more than 3 months away?
   def infrequent_in_date
-    return false if date_array.nil?
+    return false if dates.nil?
     return false if frequency < 26
-    expected_date = date_array.sort.reverse.first + frequency.weeks #Belt and Braces: the date array should already be sorted.
+    expected_date = dates.sort.reverse.first + frequency.weeks #Belt and Braces: the date array should already be sorted.
     expected_date > Date.local_today + 3.months
   end
   
@@ -300,7 +333,7 @@ class Event < ActiveRecord::Base
   # What's the Latest date in the date array
   # N.B. Assumes the date array is sorted!
   def latest_date
-    date_array.last
+    dates.last
   end
   
   # for repeating events - find the next and previous dates
@@ -331,7 +364,7 @@ class Event < ActiveRecord::Base
     return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
     return false if frequency==1 # Weekly events shouldn't have date arrays...
     
-    return true if date_array.empty?
+    return true if dates.empty? || dates.nil?
     return false if latest_date >= comparison_date
     true
   end
@@ -348,7 +381,7 @@ class Event < ActiveRecord::Base
     
     if frequency == 1
       self[:last_date] = prev_date
-    elsif date_array.nil?
+    elsif dates.nil?
       self[:last_date] = Date.new # Earliest possible ruby date
     else
       self[:last_date] = latest_date
@@ -450,7 +483,7 @@ class Event < ActiveRecord::Base
   # Get a hash of all dates in the selected range, and the list of all weekly socials occuring on that date
   def self.weekly_socials_dates
     #get an array of all the dates under consideration:
-    date_day_array = date_array.collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
+    date_day_array = listing_dates.collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
 
     #get the list of weekly socials
     weekly_socials = self.socials(:conditions => { :frequency => 1 })
@@ -470,15 +503,11 @@ class Event < ActiveRecord::Base
 
   # Get a hash of all dates in the selected range, and the list of all non - weekly socials occuring on that date
   def self.other_socials_dates
-
-    #get the list of non-weekly socials
-    non_weekly_socials = self.socials.select {|s| s.frequency != 1 } #need to select because of negative condition
-
-    #build up a hash of events occuring on each date
     date_socials_hash2 = {}
-    date_array.each do |date|
-      socials_on_that_day =  non_weekly_socials.select{ |s| s.date_array.include?(date) }
-      date_socials_hash2.merge!( {date => socials_on_that_day} ) unless socials_on_that_day.empty?
+    
+    listing_swing_dates.each do |swingdate|
+      socials_on_that_day = swingdate.events.select{|e| e.is_social? }
+      date_socials_hash2.merge!( {swingdate.date => socials_on_that_day} ) unless socials_on_that_day.empty?
     end
 
     #output is of form { date1 => [array of monthly socials occuring on date1], ... }
@@ -495,9 +524,14 @@ class Event < ActiveRecord::Base
     end
   end  
 
-  def self.date_array
+  def self.listing_dates
     end_date = @start_date + (INITIAL_SOCIALS-1)
     (@start_date..end_date).to_a
   end
-
+  
+  def self.listing_swing_dates
+    end_date = @start_date + (INITIAL_SOCIALS-1)
+    SwingDate.all(:conditions => [ "date >= ? AND date <= ?", @start_date, end_date], :order => "Date ASC")
+  end
+  
 end

@@ -7,7 +7,7 @@ class Venue < ActiveRecord::Base
   
   default_scope :order => 'name ASC' #sets default search order
   
-  validates_presence_of :name, :area, :compass
+  validates_presence_of :name, :area
 
   before_validation do
     if lat.nil? || lng.nil?
@@ -22,6 +22,7 @@ class Venue < ActiveRecord::Base
   UNKNOWN_AREA = "Unknown Area"
   UNKNOWN_POSTCODE = "???"
   
+ # TODO: legacy
   def compass_text
     title = case compass
       when "C" then "Central London" 

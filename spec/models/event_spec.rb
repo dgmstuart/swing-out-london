@@ -5,7 +5,78 @@ describe Event do
     @event = Event.new
   end
   
-  describe "modernise" do
+  describe ".self.socials_dates" do 
+    describe "one social" do
+      it "returns the correct array with one event with one social in the future" do
+        one_date = Date.today + 7
+        event = FactoryGirl.create(:intermittent_social, :dates => [one_date])
+        Event.socials_dates(Date.today).should == [[one_date,[event]]] 
+      end
+    
+      it "returns the correct array with one event with two socials in the future" do
+        later_date = Date.today + 7
+        earlier_date = Date.today + 1
+        event = FactoryGirl.create(:intermittent_social, :dates => [later_date,earlier_date])
+        Event.socials_dates(Date.today).should == [[earlier_date,[event]],[later_date,[event]]] 
+      end
+    
+      it "returns the correct array with one event with one social today, one at the limit and one outside the limit" do
+        lower_limit_date = Date.today
+        upper_limit_date = Date.today + 13
+        outside_limit_date = Date.today + 14
+        event = FactoryGirl.create(:intermittent_social, :dates => [upper_limit_date, outside_limit_date, lower_limit_date])
+        Event.socials_dates(Date.today).should == [[lower_limit_date,[event]],[upper_limit_date,[event]]] 
+      end
+    
+      it "returns the correct array with one event with one social in the future and one in the past" do
+        past_date = Date.today - 1.month
+        future_date = Date.today + 5
+        event = FactoryGirl.create(:intermittent_social, :dates => [past_date,future_date])
+        Event.socials_dates(Date.today).should == [[future_date,[event]]] 
+      end
+    end
+    
+    pending "add more tests for socials_dates which return multiple events"
+    pending "add tests including weekly events!"
+    
+    describe "complex examples" do
+      
+      def d(n)
+        Date.today + n
+      end
+      
+      pending "do more complex examples!"
+      
+      #class_with_social = FactoryGirl.create(:class, :event_type =>"class_with_social", :day => "Tuesday")
+      
+      it "returns the correct array with a bunch of classes and socials" do
+        #create one class for each day, starting on monday. None of these should be included
+        FactoryGirl.create_list(:class,7)
+        
+        # not included events:
+        old_event_1 = FactoryGirl.create(:intermittent_social, :dates => [d(-10)])
+        old_event_2 = FactoryGirl.create(:intermittent_social, :dates => [d(-370)])
+        far_event_1 = FactoryGirl.create(:intermittent_social, :dates => [d(20)])
+        
+        # included events:
+        event_d1 = FactoryGirl.create(:intermittent_social, :dates => [d(1)])
+        event_d10_d11 = FactoryGirl.create(:social, :frequency => 4, :dates => [d(10),d(11)])
+        event_1_d8 = FactoryGirl.create(:social, :frequency => 4, :dates => [d(8)])
+        event_2_d8 = FactoryGirl.create(:social, :frequency => 2, :dates => [d(8)])
+
+        Event.socials_dates(Date.today).should == [
+          [d(1),[event_d1]],
+          [d(8),[event_1_d8, event_2_d8]],
+          [d(10),[event_d10_d11]],
+          [d(11),[event_d10_d11]]
+        ] 
+      end
+    end
+  end
+  
+  
+  
+  describe ".modernise" do
     it "handles events with no dates" do
       @event[:date_array] = []
       @event.dates.should == []
@@ -31,7 +102,8 @@ describe Event do
       @event.cancellations.should == [Date.new(2011,6,11)]
     end
   end
-    
+  
+  # ultimately do away with date_array and test .dates= instead" 
   describe ".date_array =" do
     
     describe "empty strings" do
@@ -64,6 +136,13 @@ describe Event do
     it "successfully adds two valid dates to an event with no dates and orders them" do
       @event.date_array = "01/02/2012, 30/11/2011"
       @event.dates.should == [Date.new(2012,02,01), Date.new(2011,11,30)]
+    end
+  
+    it "blanks out a date array where there existing dates" do 
+      @event = FactoryGirl.create(:event, :date_array => "01/02/2012, 30/11/2011")
+      @event.dates.should == [Date.new(2012,02,01), Date.new(2011,11,30)]
+      @event.date_array=""
+      @event.dates.should == []
     end
   
     pending "multiple valid dates, one invalid date on the end"
@@ -109,10 +188,16 @@ describe Event do
       @event.cancellation_array = "01/02/2012, 30/11/2011"
       @event.cancellations.should == [Date.new(2012,02,01), Date.new(2011,11,30)]
     end
+    
+    it "blanks out a cancellation array where there existing dates" do 
+      event = FactoryGirl.create(:event, :cancellation_array => "01/02/2012")
+      event.cancellations.should == [Date.new(2012,02,01)]
+      event.cancellation_array=""
+      event.cancellations.should == []
+    end
   
     pending "multiple valid cancellations, one invalid date on the end"
     pending "multiple valid cancellations, one invalid date in the middle"
-    pending "blanking out where there are existing cancellations"
     pending "fails to add an invalid date to an event"
   
     pending "save with an invalid cancellations array"
