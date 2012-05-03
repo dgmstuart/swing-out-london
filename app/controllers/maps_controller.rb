@@ -1,6 +1,9 @@
 class MapsController < ApplicationController
   
   def map
+    # Varnish will cache the page for 3600 seconds = 1 hour:
+    response.headers['Cache-Control'] = 'public, max-age=3600'
+    
     @map = Cartographer::Gmap.new( 'map', :type => :roadmap )
     
     @map.center  = CENTRAL_LONDON
