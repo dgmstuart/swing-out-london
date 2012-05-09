@@ -20,6 +20,10 @@ Swingoutlondon::Application.configure do
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
+  
+  # We seem to need these explicitly to make logging work on Heroku:
+  config.logger = Logger.new(STDOUT) 
+  config.log_level = :info
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
