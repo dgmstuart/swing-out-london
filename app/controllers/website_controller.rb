@@ -20,11 +20,13 @@ class WebsiteController < ApplicationController
     @socials_dates = Event.socials_dates(@today)  
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
-    begin
-      @latest_tweet = APICache.get(Twitter.user_timeline("swingoutlondon").first)
-    rescue Exception => msg
-      @latest_tweet = nil
-      logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
+    APICache.get('latest_tweet', :cache => 600) do
+      begin
+        @latest_tweet = Twitter.user_timeline("swingoutlondon").first
+      rescue Exception => msg   
+        logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
+        raise APICache::InvalidResponse
+      end
     end
   end
   
