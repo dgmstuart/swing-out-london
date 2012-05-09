@@ -12,6 +12,9 @@ gem 'geokit'
 gem 'heroku'
 gem 'taps'
 
+gem 'dalli'
+gem 'api_cache'
+
 
 # To use debugger
 # gem 'ruby-debug'
