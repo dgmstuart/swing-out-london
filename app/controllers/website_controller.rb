@@ -2,7 +2,6 @@ class WebsiteController < ApplicationController
   
   require 'rubygems'
   require 'twitter'
-  APICache.store = APICache::DalliStore.new(Dalli::Client.new)
   
   before_filter :get_updated_times
   #caches_action :index

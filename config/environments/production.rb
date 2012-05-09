@@ -31,7 +31,8 @@ Swingoutlondon::Application.configure do
   config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
                       {:username => ENV["MEMCACHIER_USERNAME"],
                        :password => ENV["MEMCACHIER_PASSWORD"]}
-
+  APICache.store = APICache::DalliStore.new(Dalli::Client.new)
+  
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
   config.serve_static_assets = false
