@@ -22,9 +22,9 @@ class WebsiteController < ApplicationController
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
     begin
-      APICache.get('latest_tweet', :cache => 600) do
+      @latest_tweet = APICache.get('latest_tweet', :cache => 600) do
         begin
-          @latest_tweet = Twitter.user_timeline("swingoutlondon").first
+          Twitter.user_timeline("swingoutlondon").first
         rescue Exception => msg   
           logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
           raise APICache::InvalidResponse
