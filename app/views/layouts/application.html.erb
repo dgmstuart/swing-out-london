@@ -28,8 +28,9 @@
     <% end %>
     
     <meta name="viewport" content="width=device-width" />
-    
-    <%= csrf_meta_tag %>
+    <% if @cms_page%>
+      <%= csrf_meta_tag %>
+    <% end %>
     
     <title>Swing Out London - listings of Lindy Hop swing dance classes and socials</title>
 
