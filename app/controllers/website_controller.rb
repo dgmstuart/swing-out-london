@@ -5,6 +5,7 @@ class WebsiteController < ApplicationController
   APICache.store = APICache::DalliStore.new(Dalli::Client.new)
   
   before_filter :get_updated_times
+  before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
   #caches_action :index
   
   def index
@@ -44,4 +45,10 @@ class WebsiteController < ApplicationController
     @last_updated_datetime = Event.last_updated_datetime
   end
   
+  private
+  
+  def set_cache_control_on_static_pages
+    # Varnish will cache the page for 43200 seconds = 12 hours:
+    response.headers['Cache-Control'] = 'public, max-age=43200'
+  end
 end
