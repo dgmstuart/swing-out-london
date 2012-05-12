@@ -21,13 +21,13 @@ module PageHelper
   end
   
   def tweet_message
-    if @latest_tweet.nil?
+    if @latest_tweet.blank?
       "Sorry, for some reason we can't load the latest tweet. Please visit the " + 
       link_to("Swing Out London Twitter feed", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter")
     else
-      created_date = Time.zone.parse(@latest_tweet.created_at)
+      created_date = Time.zone.parse(@latest_tweet['created_at'])
       created_date_string = created_date.to_s(:timepart) + " on " + created_date.to_s(:short_date)
-      @latest_tweet.text.twitterify + " " + link_to(created_date_string, "http://www.twitter.com/swingoutlondon/status/#{@latest_tweet.id_str}", :class => "tweet_created")
+      @latest_tweet['text'].twitterify + " " + link_to(created_date_string, "http://www.twitter.com/swingoutlondon/status/#{@latest_tweet["id_str"]}", :class => "tweet_created")
     end
   end
   
