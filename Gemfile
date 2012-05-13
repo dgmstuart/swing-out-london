@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+source 'https://github.com/'
 
 gem 'rails', '3.0.3'
 
@@ -11,6 +12,11 @@ gem 'geokit'
 # Hosting on heroku
 gem 'heroku'
 gem 'taps'
+
+gem 'memcachier'
+gem 'dalli'
+gem 'api_cache'
+
 
 
 # To use debugger
