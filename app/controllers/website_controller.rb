@@ -9,8 +9,8 @@ class WebsiteController < ApplicationController
   #caches_action :index
   
   def index
-    # Varnish will cache the page for 1800 seconds = 30 minutes:
-    response.headers['Cache-Control'] = 'public, max-age=1800'
+    # Varnish will cache the page for 1200 seconds = 20 minutes:
+    response.headers['Cache-Control'] = 'public, max-age=1200'
     @classes = Event.active_classes
     
     if (Date.local_today.midnight)  > Time.local_now.ago(4.hours) # Would be great to just use 4.hours.ago, but timezones would screw it up??
@@ -23,6 +23,7 @@ class WebsiteController < ApplicationController
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
     begin
+      # Cache tweets for 10 minutes
       @latest_tweet = APICache.get('latest_tweet', :cache => 600) do
         begin
           "[INFO]: retrieving Twitter message from twitter instead of the cache"
