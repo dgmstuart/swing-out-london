@@ -9,8 +9,8 @@ class WebsiteController < ApplicationController
   #caches_action :index
   
   def index
-    # Varnish will cache the page for 300 seconds = 5 minutes:
-    response.headers['Cache-Control'] = 'public, max-age=300'
+    # Varnish will cache the page for 1800 seconds = 30 minutes:
+    response.headers['Cache-Control'] = 'public, max-age=1800'
     @classes = Event.active_classes
     
     if (Date.local_today.midnight)  > Time.local_now.ago(4.hours) # Would be great to just use 4.hours.ago, but timezones would screw it up??
