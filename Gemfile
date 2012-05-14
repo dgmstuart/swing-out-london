@@ -28,7 +28,7 @@ gem 'api_cache'
 group :development, :test do
    #gem 'webrat'
    gem 'rspec-rails'
-   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+   gem 'rb-fsevent'
    gem 'guard-rspec'
    gem 'guard-livereload'
 end
