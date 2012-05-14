@@ -23,8 +23,8 @@ class WebsiteController < ApplicationController
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
     begin
-      # Cache tweets for 10 minutes
-      @latest_tweet = APICache.get('latest_tweet', :cache => 600) do
+      # Cache tweets for 10 minutes, timeout after 2 seconds
+      @latest_tweet = APICache.get('latest_tweet', :cache => 600, :timeout => 2) do
         begin
           "[INFO]: retrieving Twitter message from twitter instead of the cache"
           # Memcached can't store a Hashie::Mash object, so we need to use a normal hash:
