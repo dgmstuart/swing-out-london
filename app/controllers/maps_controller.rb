@@ -1,6 +1,9 @@
 class MapsController < ApplicationController
   
   def map
+    # Varnish will cache the page for 3600 seconds = 1 hour:
+    response.headers['Cache-Control'] = 'public, max-age=3600'
+    
     @map = Cartographer::Gmap.new( 'map', :type => :roadmap )
     
     @map.center  = CENTRAL_LONDON
@@ -38,7 +41,7 @@ class MapsController < ApplicationController
           :icon => @icon
         )
       else
-        logger.error "[ERROR]: 'position' was nil when trying to plot a marker for venue id #{params[:id]}"
+        logger.error "[ERROR]: 'position' was nil when trying to plot a marker for venue id #{venue.id}: #{venue.name}"
       end
     end
     

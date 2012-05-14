@@ -6,6 +6,8 @@
       xmlns:og="http://opengraphprotocol.org/schema/"
       xml:lang="en-GB">
 <head>
+    <!--Digital window verification 001 -->
+    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Language" content="en-GB" />
     <meta name="author" content="Duncan Stuart"/>
@@ -26,8 +28,9 @@
     <% end %>
     
     <meta name="viewport" content="width=device-width" />
-    
-    <%= csrf_meta_tag %>
+    <% if @cms_page%>
+      <%= csrf_meta_tag %>
+    <% end %>
     
     <title>Swing Out London - listings of Lindy Hop swing dance classes and socials</title>
 

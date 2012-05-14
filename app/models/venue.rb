@@ -45,7 +45,7 @@ class Venue < ActiveRecord::Base
     return UNKNOWN_POSTCODE if postcode.nil? || postcode.empty?
     
     # Match the first part of the postcode:
-    regexp = /[A-Z][A-Z]?[1-9]([1-9]|[A-Z])?/
+    regexp = /[A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?/
     regexp.match(postcode.upcase)[0]
   end
   

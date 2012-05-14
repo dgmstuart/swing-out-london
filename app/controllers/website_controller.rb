@@ -2,11 +2,15 @@ class WebsiteController < ApplicationController
   
   require 'rubygems'
   require 'twitter'
+  APICache.store = APICache::DalliStore.new(Dalli::Client.new)
   
   before_filter :get_updated_times
+  before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
   #caches_action :index
   
   def index
+    # Varnish will cache the page for 1200 seconds = 20 minutes:
+    response.headers['Cache-Control'] = 'public, max-age=1200'
     @classes = Event.active_classes
     
     if (Date.local_today.midnight)  > Time.local_now.ago(4.hours) # Would be great to just use 4.hours.ago, but timezones would screw it up??
@@ -19,10 +23,19 @@ class WebsiteController < ApplicationController
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
     begin
-      @latest_tweet = Twitter.user_timeline("swingoutlondon").first
-    rescue Exception => msg
-      @latest_tweet = nil
-      logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
+      # Cache tweets for 10 minutes, timeout after 2 seconds
+      @latest_tweet = APICache.get('latest_tweet', :cache => 600, :timeout => 2) do
+        begin
+          "[INFO]: retrieving Twitter message from twitter instead of the cache"
+          # Memcached can't store a Hashie::Mash object, so we need to use a normal hash:
+          Twitter.user_timeline("swingoutlondon").first.to_hash
+        rescue Exception => msg   
+          logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
+          raise APICache::InvalidResponse
+        end
+      end
+    rescue Dalli::RingError => e
+      logger.error "[ERROR]: Dalli::RingError - MemCachier isn't available? #{e}'"
     end
   end
   
@@ -33,4 +46,10 @@ class WebsiteController < ApplicationController
     @last_updated_datetime = Event.last_updated_datetime
   end
   
+  private
+  
+  def set_cache_control_on_static_pages
+    # Varnish will cache the page for 43200 seconds = 12 hours:
+    response.headers['Cache-Control'] = 'public, max-age=43200'
+  end
 end
