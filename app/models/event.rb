@@ -452,21 +452,21 @@ class Event < ActiveRecord::Base
     
     #build up a hash of events occuring on each date
     date_day_array.collect do |date,day| 
-      socials_on_that_day = weekly_socials.includes(:venue, :swing_cancellations).active_on(date).where(day: day)  
+      socials_on_that_day = weekly_socials.includes(:venue).active_on(date).where(day: day)  
       
       swing_date = SwingDate.find_by_date(date)
   
-      socials_on_that_day += swing_date.events.socials.includes(:venue) unless swing_date.nil?
-      # including swing cancellations seems to makes a real performance hit...
+      unless swing_date.nil?
+        socials_on_that_day += swing_date.events.socials.includes(:venue) 
+        cancelled_events_on_that_day = swing_date.cancelled_events.collect{|e|e.id}
+      end
 
       socials_on_that_day.sort!{|a,b| a.title <=> b.title}
-      puts socials_on_that_day.length
-      # cancelled_events_on_that_day = swingdate.cancelled_events.collect{|e|e.id}
       
-      [date,socials_on_that_day]
+      [date, socials_on_that_day, cancelled_events_on_that_day]
     end
 
-    #output is of form [ [date1 => [array of weekly socials occuring on date1]], ... ]
+    #output is of form [ [date1, [array of weekly socials occuring on date1], [array of event ids cancelled on date1] ], ... ]
 
   end 
   

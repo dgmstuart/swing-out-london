@@ -68,14 +68,12 @@ module EventsHelper
   # LISTING ELEMENTS #
   # ---------------- #
   
-  def social_listing(social, date)
+  def social_listing(social, date, cancelled)
     if social.title.nil? || social.title.empty?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return 
     end
     
-    # TODO: this approach requires multiple passes through the cancellation_array... find a more efficient way
-    cancelled = social.cancellation_array.include?(date)
     cancelled_label = ""
     cancelled_label = content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " if cancelled
     

@@ -34,12 +34,13 @@
     
     <ul class="datelist">
     <% reset_cycle "row_cycle"%>
-    <% @socials_dates.each_with_index do |(date,socials),index| %>
+    <% @socials_dates.each_with_index do |(date,socials,cancelled_ids),index| %>
         <%= date_row date %>
             <h3><%= today_label date %> <%= tomorrow_label date %> <%=date.to_s(:listing_date)%></h3>
             <ul>
             <% socials.each do |social| %>
-                <%= social_listing(social, date) %>
+                <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?%>
+                <%= social_listing(social, date, cancelled) %>
             <% end %>
             
             <%if index==5%>
