@@ -443,7 +443,7 @@ class Event < ActiveRecord::Base
     #if the db is empty, return the beginning of the epoch:
     return Time.at(0) if self.first.nil?
 
-    self.order('updated_at DESC').first.updated_at
+    maximum(:updated_at)
   end
     
 
