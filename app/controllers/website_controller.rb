@@ -12,14 +12,14 @@ class WebsiteController < ApplicationController
     # Varnish will cache the page for 1200 seconds = 20 minutes:
     response.headers['Cache-Control'] = 'public, max-age=1200'
     
-    @classes = Event.active.classes.includes(:venue, :organiser)
+    @classes = Event.active.classes.includes(:venue, :organiser, :swing_cancellations)
     
     if (Date.local_today.midnight)  > Time.local_now.ago(4.hours) # Would be great to just use 4.hours.ago, but timezones would screw it up??
       @today = Date.local_yesterday
     else
       @today = Date.local_today
     end
-      
+    
     @socials_dates = Event.socials_dates(@today)  
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
