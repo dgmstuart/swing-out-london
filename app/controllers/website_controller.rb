@@ -29,7 +29,8 @@ class WebsiteController < ApplicationController
         begin
           "[INFO]: retrieving Twitter message from twitter instead of the cache"
           # Memcached can't store a Hashie::Mash object, so we need to use a normal hash:
-          Twitter.user_timeline("swingoutlondon").first.to_hash
+          @latest_tweet = Twitter.user_timeline("swingoutlondon").first.to_hash
+          # Twitter.user_timeline("swingoutlondon").first.to_hash
         rescue Exception => msg   
           logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
           raise APICache::InvalidResponse
