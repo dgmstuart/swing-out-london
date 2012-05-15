@@ -28,7 +28,7 @@ module EventsHelper
   
   #if there are no socials on this day, we need to add a class
   def socialsh2(&block)
-    if Event.socials_today.empty?
+    if @socials_dates.empty?
       content_tag :h2, :id => "socials_today", &block
     else
       content_tag :h2, &block
