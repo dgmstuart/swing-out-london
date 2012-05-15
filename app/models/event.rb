@@ -394,7 +394,11 @@ class Event < ActiveRecord::Base
   # Get a list of classes, excluding those which have ended
   # TODO: not very DRY
   def self.active_classes(*args)
-    self.order("title ASC").all(*args).select{ |e| e.is_class? && !e.ended? }
+    # Terse but slow:
+    # self.order("title ASC").all(*args).select{ |e| e.is_class? && !e.ended? }
+   
+    # Verbose but much faster
+    Event.order("title ASC").where("last_date IS NULL OR last_date > ?", Date.local_today).select{ |e| e.is_class? }
   end
   
   
