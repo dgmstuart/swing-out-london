@@ -55,38 +55,25 @@ class Venue < ActiveRecord::Base
   
   # Are there any active events associated with this venue?
   def all_events_out_of_date?
-    events.each do |event|
-      # not out of date means there is at least one event which has current dates...
-      return false if !event.out_of_date
-    end
-    
-    return true
+    events.all?{|e| e.out_of_date}
   end
   
   def all_events_nearly_out_of_date?
-    events.each do |event|
-      return false if !event.near_out_of_date
-    end
-    
-    return true
+    events.all?{|e| e.near_out_of_date}
   end
   
+  # A venue is active if ANY of it's events are active
   def active?
-    events.each do |event|
-       return true if event.current?
-    end
-    false
+    events.any?{|e|e.current?}
   end  
   
   def self.active_venues
     all.select{|venue| venue.active? }
   end
   
+  # A venue is regular if ANY of it's events are regular
   def regular?
-    events.each do |e|
-       return true if e.current? && !e.intermittent? && !e.one_off? && !e.infrequent?
-    end
-    false
+    events.any?{|e| e.regular?}
   end
   
   def self.regular_venues

@@ -128,7 +128,7 @@ class Event < ActiveRecord::Base
   
   scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
   scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
-
+  
   # For making sections in the Events editing screens:
   scope :current, active.non_gigs
   scope :archived, ended.non_gigs
@@ -285,12 +285,28 @@ class Event < ActiveRecord::Base
     out_of_date_test(Date.local_today + INITIAL_SOCIALS)
   end
   
+  private
+  
+  # Helper function for comparing event dates to a reference date
+  def out_of_date_test(comparison_date)
+    return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
+    return false if frequency==1 # Weekly events shouldn't have date arrays...
+    
+    return true if dates.empty? || dates.nil?
+    return false if latest_date >= comparison_date
+    true
+  end
+  
+  public
+  
+  
   # For infrequent events (6 months or less), is the next expected date (based on the last known date)
   # more than 3 months away?
   def infrequent_in_date
     return false if dates.nil?
     return false if frequency < 26
-    expected_date = dates.sort.reverse.first + frequency.weeks #Belt and Braces: the date array should already be sorted.
+    
+    expected_date = latest_date + frequency.weeks #Belt and Braces: the date array should already be sorted.
     expected_date > Date.local_today + 3.months
   end
   
@@ -339,12 +355,18 @@ class Event < ActiveRecord::Base
   def less_frequent?
     frequency == 0 || frequency >= 4
   end
-    
+  
+  #for the purposes of mapping:
+  def regular?
+    current? && !intermittent? && !one_off? && !infrequent?
+  end
+  
+  
   
   # What's the Latest date in the date array
   # N.B. Assumes the date array is sorted!
   def latest_date
-    dates.last
+    swing_dates.maximum(:date)
   end
   
   # for repeating events - find the next and previous dates
@@ -368,19 +390,8 @@ class Event < ActiveRecord::Base
     (last_date.nil? || last_date >= date)
   end
   
-  private
+  scope :active_on, lambda{ |date| where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
   
-  # Helper function for comparing event dates to a reference date
-  def out_of_date_test(comparison_date)
-    return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
-    return false if frequency==1 # Weekly events shouldn't have date arrays...
-    
-    return true if dates.empty? || dates.nil?
-    return false if latest_date >= comparison_date
-    true
-  end
-  
-  public
   
   ###########
   # ACTIONS # 
@@ -465,7 +476,7 @@ class Event < ActiveRecord::Base
     #build up a hash of events occuring on each date
     date_socials_hash = {}
     date_day_array.each do |date,day| 
-      socials_on_that_day = weekly_socials.includes(:venue, :swing_cancellations).active.where(day: day).select{ |s| s.active_on(date)}
+      socials_on_that_day = weekly_socials.includes(:venue, :swing_cancellations).active_on(date).where(day: day)
       date_socials_hash.merge!( {date => socials_on_that_day} ) unless socials_on_that_day.empty?
     end
 
