@@ -33,7 +33,7 @@ class WebsiteController < ApplicationController
           # Twitter.user_timeline("swingoutlondon").first.to_hash
         rescue Exception => msg   
           logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
-          raise APICache::InvalidResponse
+          # raise APICache::InvalidResponse
         end
     #   end
     # rescue Dalli::RingError => e
