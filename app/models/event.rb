@@ -431,23 +431,6 @@ class Event < ActiveRecord::Base
       find(input)
     end
   end
-  
-  # Get a list of socials with their associated dates
-  def self.socials_dates(start_date)
-    @start_date = start_date
-    # Concatenate the list of dates of weekly and other socials in the period,
-    # and sort by date 
-
-    merge_dates_hashes(weekly_socials_dates, other_socials_dates).sort
-  end
-  
-  # Get the socials which are happening today:
-  def self.socials_today
-    dates_array = self.socials_dates(Date.local_today)
-    # Get the list of events
-    return dates_array[0][1] unless dates_array == []
-    return []
-  end
 
   # Find the datetime of the most recently updated event
   def self.last_updated_datetime
@@ -463,58 +446,34 @@ class Event < ActiveRecord::Base
     Date::DAYNAMES[d.wday]
   end
 
-  private
-
-  # NOTE: this is a HORRIBLY inefficient way to build up the array, involving multiple passes and sorts. There must be a better way...
-
-
-  # Get a hash of all dates in the selected range, and the list of all weekly socials occuring on that date
-  def self.weekly_socials_dates
+  def self.socials_dates(start_date)
     #get an array of all the dates under consideration:
-    date_day_array = listing_dates.collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
-
-    #build up a hash of events occuring on each date
-    date_socials_hash = {}
-    date_day_array.each do |date,day| 
-      socials_on_that_day = weekly_socials.includes(:venue, :swing_cancellations).active_on(date).where(day: day)
-      date_socials_hash.merge!( {date => socials_on_that_day} ) unless socials_on_that_day.empty?
-    end
-
-    #output is of form { date1 => [array of weekly socials occuring on date1], ... }
-    return date_socials_hash
-  end
-
-
-  # Get a hash of all dates in the selected range, and the list of all non - weekly socials occuring on that date
-  def self.other_socials_dates
-    date_socials_hash2 = {}
+    date_day_array = listing_dates(start_date).collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
     
-    listing_swing_dates.each do |swingdate|
-      socials_on_that_day = swingdate.events.socials.includes(:venue) # including swing cancellations seems to makes a real performance hit...
-      date_socials_hash2.merge!( {swingdate.date => socials_on_that_day} ) unless socials_on_that_day.empty?
+    #build up a hash of events occuring on each date
+    date_day_array.collect do |date,day| 
+      socials_on_that_day = weekly_socials.includes(:venue, :swing_cancellations).active_on(date).where(day: day)  
+      
+      swing_date = SwingDate.find_by_date(date)
+  
+      socials_on_that_day += swing_date.events.socials.includes(:venue) unless swing_date.nil?
+      # including swing cancellations seems to makes a real performance hit...
+
+      socials_on_that_day.sort!{|a,b| a.title <=> b.title}
+      puts socials_on_that_day.length
+      # cancelled_events_on_that_day = swingdate.cancelled_events.collect{|e|e.id}
+      
+      [date,socials_on_that_day]
     end
-    #output is of form { date1 => [array of monthly socials occuring on date1], ... }
 
-    return date_socials_hash2
-  end
+    #output is of form [ [date1 => [array of weekly socials occuring on date1]], ... ]
 
-
-  # merge two hashes of dates and socials, concatenating the lists of dates
-  def self.merge_dates_hashes(hash1,hash2)
-    hash1.merge(hash2) do |key, val1, val2| 
-      #have two sorted segments, but need to sort the result...
-      (val1 + val2).sort{|a,b| a.title <=> b.title}
-    end
-  end  
-
-  def self.listing_dates
-    end_date = @start_date + (INITIAL_SOCIALS-1)
-    (@start_date..end_date).to_a
+  end 
+  
+  def self.listing_dates(start_date)
+    end_date = start_date + (INITIAL_SOCIALS-1)
+    (start_date..end_date).to_a
   end
   
-  def self.listing_swing_dates
-    end_date = @start_date + (INITIAL_SOCIALS-1)
-    SwingDate.listing_dates(@start_date,end_date)
-  end
   
 end
