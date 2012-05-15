@@ -42,10 +42,6 @@ class Event < ActiveRecord::Base
     self.date_array = self[:date_array].collect{|ds| ds.to_date.to_s}.join(", ") unless Event.empty_date_string(self[:date_array])
     self.cancellation_array = self[:cancellation_array].collect{|ds| ds.to_date.to_s}.join(", ") unless Event.empty_date_string(self[:cancellation_array])
   end
-  
-  def self.modernise_all
-    all.each{ |e| e.modernise }
-  end
     
   # ----- #
   # Venue #
