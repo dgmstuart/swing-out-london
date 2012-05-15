@@ -24,7 +24,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-
   # display constants:
   NOTAPPLICABLE = "n/a"
   UNKNOWN_DATE = "Unknown"
@@ -118,6 +117,22 @@ class Event < ActiveRecord::Base
   def has_class?
     HAS_CLASS_TYPES.include?event_type
   end
+  
+  # scopes to get different types of event:
+  scope :classes, where(:event_type => CLASS_TYPES).order("title")  
+  scope :socials, where(:event_type => SOCIAL_TYPES).order("title")
+  scope :weekly_socials, socials.where(frequency: 1)
+  
+  scope :gigs, where(:event_type => "gig")
+  scope :non_gigs, where("event_type != ?", "gig")
+  
+  scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
+  scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
+
+  # For making sections in the Events editing screens:
+  scope :current, active.non_gigs
+  scope :archived, ended.non_gigs
+
 
   # ----- #
   # Dates #
@@ -406,44 +421,6 @@ class Event < ActiveRecord::Base
     end
   end
   
-
-  # Helper methods to get different types of event:
-  def self.classes(*args)
-    self.where(:event_type => CLASS_TYPES).order("title").all(*args)
-  end
-
-  def self.socials(*args)
-    self.where(:event_type => SOCIAL_TYPES).order("title").all(*args)
-  end
-  
-  def self.gigs(*args)
-    self.all({:conditions => ["event_type = ?","gig"]},*args)
-  end
-
-  # Get a list of classes, excluding those which have ended
-  # TODO: not very DRY
-  def self.active_classes(*args)
-    # Terse but slow:
-    # self.order("title ASC").all(*args).select{ |e| e.is_class? && !e.ended? }
-   
-    # Verbose but much faster
-    Event.order("title ASC").where("last_date IS NULL OR last_date > ?", Date.local_today).select{ |e| e.is_class? }
-  end
-  
-  
-  # Get lists of current and archived events
-  def self.current_events(*args)
-    self.all(*args).select{ |e| e.current? }
-  end
-
-  def self.archive_events(*args) 
-    self.all(*args).select{ |e| e.ended? && !e.is_gig?}
-  end
-  
-  
-    
-  
-  
   # Get a list of socials with their associated dates
   def self.socials_dates(start_date)
     @start_date = start_date
@@ -485,9 +462,6 @@ class Event < ActiveRecord::Base
     #get an array of all the dates under consideration:
     date_day_array = listing_dates.collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
 
-    #get the list of weekly socials
-    weekly_socials = self.socials(:conditions => { :frequency => 1 })
-
     #build up a hash of events occuring on each date
     date_socials_hash = {}
     date_day_array.each do |date,day| 
@@ -506,7 +480,7 @@ class Event < ActiveRecord::Base
     date_socials_hash2 = {}
     
     listing_swing_dates.each do |swingdate|
-      socials_on_that_day = swingdate.events.select{|e| e.is_social? }
+      socials_on_that_day = swingdate.events.socials
       date_socials_hash2.merge!( {swingdate.date => socials_on_that_day} ) unless socials_on_that_day.empty?
     end
 

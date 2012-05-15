@@ -217,22 +217,22 @@ describe Event do
   
   require File.dirname(__FILE__) + '/../spec_helper'
 
-  describe "active_classes" do
+  describe "active.classes" do
     it "should return classes with no 'last date'" do
       event = FactoryGirl.create(:class, last_date: nil)
-      Event.active_classes.should == [event]
+      Event.active.classes.should == [event]
     end
     
     it "should not return classes with a 'last date' in the past" do
       FactoryGirl.create(:class, last_date: Date.today - 1)
-      Event.active_classes.should == []
+      Event.active.classes.should == []
     end
     
     it "should not return non-classes" do
       FactoryGirl.create(:event, last_date: nil, event_type: "social")
       FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
       
-      Event.active_classes.should == []
+      Event.active.classes.should == []
     end
     
     it "should return the correct list of classes" do
@@ -246,7 +246,10 @@ describe Event do
       FactoryGirl.create(:event, last_date: nil, event_type: "social")
       FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
       
-      Event.active_classes.should == returned
+      Event.active.classes.length.should == returned.length
+      returned.should include(Event.active.classes[0])
+      returned.should include(Event.active.classes[1])
+      returned.should include(Event.active.classes[2])
     end
     
   end
