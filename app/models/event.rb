@@ -465,12 +465,11 @@ class Event < ActiveRecord::Base
     #build up a hash of events occuring on each date
     date_socials_hash = {}
     date_day_array.each do |date,day| 
-      socials_on_that_day =  weekly_socials.select{ |s| s.day == day && s.active_on(date)}
+      socials_on_that_day = weekly_socials.includes(:venue).active.where(day: day).select{ |s| s.active_on(date)}
       date_socials_hash.merge!( {date => socials_on_that_day} ) unless socials_on_that_day.empty?
     end
 
     #output is of form { date1 => [array of weekly socials occuring on date1], ... }
-
     return date_socials_hash
   end
 
@@ -480,7 +479,7 @@ class Event < ActiveRecord::Base
     date_socials_hash2 = {}
     
     listing_swing_dates.each do |swingdate|
-      socials_on_that_day = swingdate.events.socials
+      socials_on_that_day = swingdate.events.socials.includes(:venue)
       date_socials_hash2.merge!( {swingdate.date => socials_on_that_day} ) unless socials_on_that_day.empty?
     end
 

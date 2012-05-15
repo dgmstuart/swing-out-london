@@ -11,7 +11,8 @@ class WebsiteController < ApplicationController
   def index
     # Varnish will cache the page for 1200 seconds = 20 minutes:
     response.headers['Cache-Control'] = 'public, max-age=1200'
-    @classes = Event.active.classes
+    
+    @classes = Event.active.classes.includes(:venue, :organiser)
     
     if (Date.local_today.midnight)  > Time.local_now.ago(4.hours) # Would be great to just use 4.hours.ago, but timezones would screw it up??
       @today = Date.local_yesterday
