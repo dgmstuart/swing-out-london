@@ -215,5 +215,41 @@ describe Event do
     pending "test with multiple cancellations, different orders, whitespace"
   end
   
+  require File.dirname(__FILE__) + '/../spec_helper'
+
+  describe "active_classes" do
+    it "should return classes with no 'last date'" do
+      event = FactoryGirl.create(:class, last_date: nil)
+      Event.active_classes.should == [event]
+    end
+    
+    it "should not return classes with a 'last date' in the past" do
+      FactoryGirl.create(:class, last_date: Date.today - 1)
+      Event.active_classes.should == []
+    end
+    
+    it "should not return non-classes" do
+      FactoryGirl.create(:event, last_date: nil, event_type: "social")
+      FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
+      
+      Event.active_classes.should == []
+    end
+    
+    it "should return the correct list of classes" do
+      FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
+      FactoryGirl.create(:event, last_date: nil, event_type: "gig")
+      returned = [
+        FactoryGirl.create(:class),
+        FactoryGirl.create(:class, event_type: 'class with social'),
+        FactoryGirl.create(:class, :last_date => Date.today + 1),
+      ]
+      FactoryGirl.create(:event, last_date: nil, event_type: "social")
+      FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
+      
+      Event.active_classes.should == returned
+    end
+    
+  end
+  
   pending "test existing events functionality #{__FILE__}"
 end
