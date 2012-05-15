@@ -514,7 +514,7 @@ class Event < ActiveRecord::Base
   
   def self.listing_swing_dates
     end_date = @start_date + (INITIAL_SOCIALS-1)
-    SwingDate.all(:conditions => [ "date >= ? AND date <= ?", @start_date, end_date], :order => "Date ASC")
+    SwingDate.listing_dates(@start_date,end_date)
   end
   
 end
