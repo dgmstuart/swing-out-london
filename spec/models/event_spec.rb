@@ -144,6 +144,16 @@ describe Event do
       @event.date_array=""
       @event.dates.should == []
     end
+    
+    it "shouldn't create multiple instances of the same date" do
+      event1 = FactoryGirl.create(:event)
+      event1.date_array = "05/05/2005"
+      event1.save!
+      event2 = FactoryGirl.create(:event)
+      event2.date_array = "05/05/2005"
+      event2.save!
+      SwingDate.where(:date => Date.new(2005,05,05)).length.should == 1
+    end
   
     pending "multiple valid dates, one invalid date on the end"
     pending "multiple valid dates, one invalid date in the middle"
