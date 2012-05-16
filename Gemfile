@@ -26,10 +26,11 @@ gem 'api_cache'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-   #gem 'webrat'
-   gem 'rspec-rails'
-   gem 'factory_girl_rails', '~> 1.2'
-   gem 'rb-fsevent'
-   gem 'guard-rspec'
-   gem 'guard-livereload'
+  gem 'awesome_print'
+  #gem 'webrat'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 1.2'
+  gem 'rb-fsevent'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
 end
