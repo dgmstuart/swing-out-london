@@ -27,6 +27,7 @@ gem 'api_cache'
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'awesome_print'
+  gem 'pry'
   #gem 'webrat'
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 1.2'
