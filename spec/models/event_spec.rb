@@ -5,41 +5,53 @@ describe Event do
     @event = Event.new
   end
   
-  describe ".self.socials_dates" do 
-    describe "one social" do
-      it "returns the correct array with one event with one social in the future" do
+  describe ".self.socials_dates" do
+    
+    context "when there is only one social" do
+      it "returns the correct array when that social has only one date in the future" do
         one_date = Date.today + 7
         event = FactoryGirl.create(:intermittent_social, :dates => [one_date])
-        Event.socials_dates(Date.today).should == [[one_date,[event]]] 
+        Event.socials_dates(Date.today).length.should == 1
+        Event.socials_dates(Date.today)[0][0].should == one_date
+        Event.socials_dates(Date.today)[0][1].should == [event] 
       end
     
-      it "returns the correct array with one event with two socials in the future" do
+      it "returns the correct array when that social has two dates in the future" do
         later_date = Date.today + 7
         earlier_date = Date.today + 1
         event = FactoryGirl.create(:intermittent_social, :dates => [later_date,earlier_date])
-        Event.socials_dates(Date.today).should == [[earlier_date,[event]],[later_date,[event]]] 
+        
+        Event.socials_dates(Date.today).length.should == 2
+        Event.socials_dates(Date.today)[0][0].should == earlier_date
+        Event.socials_dates(Date.today)[0][1].should == [event]
+        Event.socials_dates(Date.today)[1][0].should == later_date
+        Event.socials_dates(Date.today)[1][1].should == [event]
       end
     
-      it "returns the correct array with one event with one social today, one at the limit and one outside the limit" do
+      it "returns the correct array when that social has one date today, one at the limit and one outside the limit" do
         lower_limit_date = Date.today
         upper_limit_date = Date.today + 13
         outside_limit_date = Date.today + 14
         event = FactoryGirl.create(:intermittent_social, :dates => [upper_limit_date, outside_limit_date, lower_limit_date])
-        Event.socials_dates(Date.today).should == [[lower_limit_date,[event]],[upper_limit_date,[event]]] 
+        
+        Event.socials_dates(Date.today).length.should == 2
+        Event.socials_dates(Date.today).should == [[lower_limit_date,[event],[]],[upper_limit_date,[event],[]]] 
       end
     
-      it "returns the correct array with one event with one social in the future and one in the past" do
+      it "returns the correct array when that social has one date in the future and one in the past" do
         past_date = Date.today - 1.month
         future_date = Date.today + 5
         event = FactoryGirl.create(:intermittent_social, :dates => [past_date,future_date])
-        Event.socials_dates(Date.today).should == [[future_date,[event]]] 
+        
+        Event.socials_dates(Date.today).length.should == 1
+        Event.socials_dates(Date.today).should == [[future_date,[event],[]]] 
       end
     end
     
     pending "add more tests for socials_dates which return multiple events"
     pending "add tests including weekly events!"
     
-    describe "complex examples" do
+    context "in a complex scenario" do
       
       def d(n)
         Date.today + n
@@ -65,10 +77,10 @@ describe Event do
         event_2_d8 = FactoryGirl.create(:social, :frequency => 2, :dates => [d(8)])
 
         Event.socials_dates(Date.today).should == [
-          [d(1),[event_d1]],
-          [d(8),[event_1_d8, event_2_d8]],
-          [d(10),[event_d10_d11]],
-          [d(11),[event_d10_d11]]
+          [d(1),[event_d1],[]],
+          [d(8),[event_1_d8, event_2_d8],[]],
+          [d(10),[event_d10_d11],[]],
+          [d(11),[event_d10_d11],[]]
         ] 
       end
     end
@@ -229,22 +241,22 @@ describe Event do
     end
     
     it "should not return non-classes" do
-      FactoryGirl.create(:event, last_date: nil, event_type: "social")
-      FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
+      FactoryGirl.create(:event, last_date: nil, has_class: "false")
+      FactoryGirl.create(:event, last_date: nil, has_taster: "true")
       
       Event.active.classes.should == []
     end
     
     it "should return the correct list of classes" do
-      FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
-      FactoryGirl.create(:event, last_date: nil, event_type: "gig")
+      FactoryGirl.create(:social, last_date: nil)
+      FactoryGirl.create(:class, last_date: Date.today - 5)
       returned = [
         FactoryGirl.create(:class),
-        FactoryGirl.create(:class, event_type: 'class with social'),
+        FactoryGirl.create(:class, last_date: nil),
         FactoryGirl.create(:class, :last_date => Date.today + 1),
       ]
-      FactoryGirl.create(:event, last_date: nil, event_type: "social")
-      FactoryGirl.create(:event, last_date: nil, event_type: "social with class")
+      FactoryGirl.create(:social)
+      FactoryGirl.create(:event, has_class: "false", has_taster: "true")
       
       Event.active.classes.length.should == returned.length
       returned.should include(Event.active.classes[0])

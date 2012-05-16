@@ -438,8 +438,10 @@ class Event < ActiveRecord::Base
     #get an array of all the dates under consideration:
     date_day_array = listing_dates(start_date).collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
     
-    #build up a hash of events occuring on each date
-    date_day_array.collect do |date,day| 
+    #build up an array of events occuring on each date
+    output = []
+    
+    date_day_array.each do |date,day| 
       socials_on_that_day = weekly.socials.includes(:venue).active_on(date).where(day: day)  
       
       swing_date = SwingDate.find_by_date(date)
@@ -448,12 +450,15 @@ class Event < ActiveRecord::Base
         socials_on_that_day += swing_date.events.socials.includes(:venue) 
         cancelled_events_on_that_day = swing_date.cancelled_events.collect{|e|e.id}
       end
-
-      socials_on_that_day.sort!{|a,b| a.title <=> b.title}
       
-      [date, socials_on_that_day, cancelled_events_on_that_day]
+      unless socials_on_that_day.blank?
+        socials_on_that_day.sort!{|a,b| a.title <=> b.title}
+        output << [date, socials_on_that_day, cancelled_events_on_that_day]
+      end
     end
-
+    
+    return output
+    
     #output is of form [ [date1, [array of weekly socials occuring on date1], [array of event ids cancelled on date1] ], ... ]
 
   end 
