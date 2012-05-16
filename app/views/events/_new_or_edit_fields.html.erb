@@ -23,7 +23,13 @@
     </li>
     <li>
         <%= f.label :event_type %>
-        <%= f.select :event_type, event_type_select, {:include_blank => true} %>
+        <%= f.select :event_type, Event::EVENT_TYPES, {:include_blank => true} %>
+        <%= f.label :has_taster, "Has a taster?", :class => 'inline_label'  %>
+        <%= f.check_box :has_taster  %>
+        <%= f.label :has_class, "Has a class?", :class => 'inline_label'   %>
+        <%= f.check_box :has_class  %>
+        <%= f.label :has_social, "Has social?", :class => 'inline_label'   %>
+        <%= f.check_box :has_social  %>
     </li>
     <li>
         <%= f.label :class_style %>

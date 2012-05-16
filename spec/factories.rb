@@ -1,12 +1,16 @@
 FactoryGirl.define do
   factory :event, :aliases => [:social, :intermittent_social] do
-    event_type 'social'
+    has_taster false
+    has_class false
+    has_social true
+    event_type 'school'
     frequency 0 
     day 'monday'
     url 'http://www.example.com' 
     
     factory :class, :class => Event do
-      event_type 'class'
+      has_class true
+      has_social false
       frequency 1
       # generate classes for different days of the week:
       sequence(:day) { |wd| Date::DAYNAMES[wd%7] }

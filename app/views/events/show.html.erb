@@ -17,7 +17,10 @@
     </li>
     <li>
         <span>Event type:</span>
-        <%=h @event.event_type %>
+        <%=h @event.event_type %>,
+        has taster: <%=h @event.has_taster %>,
+        has class: <%=h @event.has_class %>,
+        has social: <%=h @event.has_social %>
     </li>
     <% unless @event.course_length.nil?%>
     <li>

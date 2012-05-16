@@ -4,7 +4,6 @@
     <th>Event Name</th>
     <th>Venue</th>
     <th>Area</th>
-    <th>Event type</th>
     <th>Organiser</th>
     <th>Day</th>
     <th>Fq.</th>
@@ -22,7 +21,6 @@
     <td class="name"><%= link_to event.title, event.url %></td>
     <td><%= link_to event.venue_name, event.venue %></td>
     <td><%= event.venue_area %></td>
-    <td><%=h event.event_type %></td>
     <td><%= organiser_link(event) %></td>
     <td><%=h event.day[0..2] %></td>
     <td class="center"><%=h event.frequency %></td>

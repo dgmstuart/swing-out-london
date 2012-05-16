@@ -94,33 +94,21 @@ class Event < ActiveRecord::Base
   # Event Type #
   # ---------- #
   
-  CLASS_TYPES = ['class', 'class with social']
-  SOCIAL_TYPES = ['social', 'social with class', 'class with social', 'vintage club', 'gig', 'festival']
-  HAS_CLASS_TYPES = ['class', 'class with social', 'social with class']
-  
-  def self.event_types
-    (CLASS_TYPES + SOCIAL_TYPES).uniq
-  end
-  
-  def is_class?
-    CLASS_TYPES.include?event_type
-  end
-  
-  def is_social?
-    SOCIAL_TYPES.include?event_type
-  end
-  
+  EVENT_TYPES=[
+    'school',
+    'dance_club',
+    'vintage_club',
+    'gig',
+    'festival'
+  ]
+ 
   def is_gig?
     event_type == "gig"
   end  
   
-  def has_class?
-    HAS_CLASS_TYPES.include?event_type
-  end
-  
   # scopes to get different types of event:
-  scope :classes, where(:event_type => CLASS_TYPES).order("title")  
-  scope :socials, where(:event_type => SOCIAL_TYPES).order("title")
+  scope :classes, where(has_class: true).order("title")  
+  scope :socials, where(has_social: true).order("title")
   scope :weekly, where(frequency: 1)
   
   scope :gigs, where(:event_type => "gig")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120122223421) do
+ActiveRecord::Schema.define(:version => 20120516005542) do
 
   create_table "events", :force => true do |t|
     t.string    "title"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(:version => 20120122223421) do
     t.string    "shortname"
     t.text      "class_style"
     t.integer   "course_length"
+    t.boolean   "has_taster"
+    t.boolean   "has_class"
+    t.boolean   "has_social"
   end
 
   add_index "events", ["event_type"], :name => "index_events_on_event_type"
@@ -59,9 +62,9 @@ ActiveRecord::Schema.define(:version => 20120122223421) do
   end
 
   create_table "swing_dates", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "date"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.date      "date"
   end
 
   create_table "venues", :force => true do |t|

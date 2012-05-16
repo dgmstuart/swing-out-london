@@ -219,10 +219,6 @@ module EventsHelper
     Organiser.all.collect{ |o| [o.name,o.id] }
   end
   
-  def event_type_select
-    Event::event_types
-  end
-  
   # ----- #
   # LINKS #
   # ----- #
