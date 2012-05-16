@@ -14,7 +14,8 @@ class WebsiteController < ApplicationController
     
     @classes = Event.active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
     
-    if (Date.local_today.midnight)  > Time.local_now.ago(4.hours) # Would be great to just use 4.hours.ago, but timezones would screw it up??
+    if (Date.local_today.midnight)  > Time.local_now.ago(4.hours)
+      # Would be great to just use 4.hours.ago, but timezones would screw it up??
       @today = Date.local_yesterday
     else
       @today = Date.local_today
