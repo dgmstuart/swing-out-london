@@ -110,6 +110,7 @@ class Event < ActiveRecord::Base
   scope :classes, where(has_class: true).order("title")  
   scope :socials, where(has_social: true).order("title")
   scope :weekly, where(frequency: 1)
+  scope :weekly_or_fortnightly, where(frequency: [1,2])
   
   scope :gigs, where(:event_type => "gig")
   scope :non_gigs, where("event_type != ?", "gig")
