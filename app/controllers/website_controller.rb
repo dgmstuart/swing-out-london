@@ -20,29 +20,7 @@ class WebsiteController < ApplicationController
       @today = Date.local_today
     end
     
-    @socials_dates = Event.socials_dates(@today)  
-    
-    # The call to the twitter api fails if it can't reach twitter, so we need to handle this
-    begin
-      # Cache tweets for 10 minutes, timeout after 2 seconds      
-      @latest_tweet = APICache.get('latest_tweet', :cache => 600, :timeout => 2) do
-        begin
-          logger.info "[INFO]: retrieving Twitter message from twitter instead of the cache"
-          # Memcached can't store a Hashie::Mash object, so we need to use a normal hash:
-          Twitter.user_timeline("swingoutlondon").first.to_hash
-        rescue Exception => msg   
-          logger.error "[ERROR]: Failed to get latest tweet with message '#{msg}'"
-          raise APICache::InvalidResponse
-        end
-      end
-    rescue Dalli::RingError => e
-         logger.error "[ERROR]: Dalli::RingError - MemCachier isn't available? #{e}'"
-    rescue => e
-      # Catch-all: so that the site doesn't crash when caching breaks
-      logger.error "[ERROR]: #{e.class} - #{e.message}" 
-      e.backtrace.each { |line| logger.error line }
-    end
-      
+    @socials_dates = Event.socials_dates(@today)    
   end
   
   #TODO: move into a different file?
