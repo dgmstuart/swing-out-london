@@ -25,16 +25,7 @@ class WebsiteController < ApplicationController
     
     # The call to the twitter api fails if it can't reach twitter, so we need to handle this
     begin
-      # Cache tweets for 10 minutes, timeout after 2 seconds
-      logger.info "[INFO]: API Cache info: Time.now: #{Time.now}"
-      created_at =  APICache.store.get("#{Digest::MD5.hexdigest 'latest_tweet'}_created_at")
-      logger.info "[INFO]: API Cache info - created at: #{created_at}"
-      time_passed = Time.now - created_at
-      logger.info "[INFO]: API Cache info - time passed = #{time_passed}"
-      expired = time_passed > 600
-      logger.info "[INFO]: API Cache info - expired = #{expired}"
-      
-      
+      # Cache tweets for 10 minutes, timeout after 2 seconds      
       @latest_tweet = APICache.get('latest_tweet', :cache => 600, :timeout => 2) do
         begin
           logger.info "[INFO]: retrieving Twitter message from twitter instead of the cache"
