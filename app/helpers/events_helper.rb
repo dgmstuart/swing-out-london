@@ -124,7 +124,7 @@ module EventsHelper
     course_length = " - #{event.course_length} week courses" unless event.course_length.nil?
     
     social_info = ""
-    social_info = "at #{event.title} " if event.is_social?
+    social_info = "at #{event.title} " if event.has_social?
     
     if event.organiser.nil?
       school_info = "" 
