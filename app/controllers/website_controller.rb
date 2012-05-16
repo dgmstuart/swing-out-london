@@ -2,7 +2,6 @@ class WebsiteController < ApplicationController
   
   require 'rubygems'
   require 'twitter'
-  APICache.store = APICache::DalliStore.new(Dalli::Client.new)
   
   before_filter :get_updated_times
   before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
