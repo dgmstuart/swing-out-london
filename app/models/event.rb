@@ -121,7 +121,7 @@ class Event < ActiveRecord::Base
   # scopes to get different types of event:
   scope :classes, where(:event_type => CLASS_TYPES).order("title")  
   scope :socials, where(:event_type => SOCIAL_TYPES).order("title")
-  scope :weekly_socials, socials.where(frequency: 1)
+  scope :weekly, where(frequency: 1)
   
   scope :gigs, where(:event_type => "gig")
   scope :non_gigs, where("event_type != ?", "gig")
@@ -452,7 +452,7 @@ class Event < ActiveRecord::Base
     
     #build up a hash of events occuring on each date
     date_day_array.collect do |date,day| 
-      socials_on_that_day = weekly_socials.includes(:venue).active_on(date).where(day: day)  
+      socials_on_that_day = weekly.socials.includes(:venue).active_on(date).where(day: day)  
       
       swing_date = SwingDate.find_by_date(date)
   
