@@ -56,9 +56,9 @@
     </li>
     <li>
         <%= f.label :first_date %>
-        <%= f.text_field :first_date, :size => 10, :style => "float:left;", :class =>"shortfield" %>
+        <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :style => "float:left;", :class =>"shortfield" %>
         <%= f.label :last_date, nil, :class => "inline_label" %>
-        <%= f.text_field :last_date, :size => 10, :class =>"shortfield"%>
+        <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
     </li>
 
     <li>
