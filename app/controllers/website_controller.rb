@@ -39,7 +39,8 @@ class WebsiteController < ApplicationController
          logger.error "[ERROR]: Dalli::RingError - MemCachier isn't available? #{e}'"
     rescue => e
       # Catch-all: so that the site doesn't crash when caching breaks
-      logger.error "[ERROR]: #{e.class} - #{e.message}\n #{e.backtrace}" 
+      logger.error "[ERROR]: #{e.class} - #{e.message}" 
+      e.backtrace.each { |line| logger.error line }
     end
       
   end
