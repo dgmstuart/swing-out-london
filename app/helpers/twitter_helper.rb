@@ -3,8 +3,8 @@ module TwitterHelper
   
   def tweet_message
     begin
-      # Cache tweets for 10 minutes, timeout after 2 seconds      
-      message = APICache.get('latest_tweet', :cache => 600, :timeout => 2) do
+      # Cache tweets for 30 minutes, timeout after 1 second
+      message = APICache.get('latest_tweet', :cache => 1800, :timeout => 1) do
         logger.info "[INFO]: Retrieving Twitter message from twitter instead of the cache"
         get_tweet_message
       end
