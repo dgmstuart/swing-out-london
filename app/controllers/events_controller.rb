@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   
   before_filter :authenticate
   caches_action :index
-  cache_sweeper :event_sweeper
+  cache_sweeper :event_sweeper, :only => [:create, :update, :destroy]
   
   # GET /events
   # GET /events.xml

@@ -5,7 +5,7 @@ class WebsiteController < ApplicationController
   
   before_filter :get_updated_times
   before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
-  #caches_action :index
+  caches_action :index, :layout => false, :expires_in => 1.hour
   
   def index
     # Varnish will cache the page for 3600 seconds = 1 hour:
