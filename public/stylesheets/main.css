@@ -53,6 +53,30 @@ body{
   #page{width:480px; margin:0;};
 }
 
+
+.banner {
+  padding: 10px 40px;
+  background: #EBB68F;
+  text-align: center;
+  top:0;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  margin-bottom: 0;
+}
+@media only screen and (max-device-width: 480px){
+  .banner{position: static};
+}
+.banner h3 {
+  padding-bottom:10px;
+}
+.banner p {
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
 a {text-decoration: none; color: #384F6E;}
 a:hover {border-bottom:solid 2px;}
 
