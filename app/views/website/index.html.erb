@@ -1,26 +1,7 @@
 <div id="classes">
     
     <h2> <em>Learn!</em> Weekly Classes </h2>
-    
-    <ul class="daylist">
-    <% DAYNAMES.each do |day| %>
-        <%= day_row day %>
-            <%= today_label day -%>
-            <h3><%=day -%></h3>
-            <ul>
-            <% #get all events from this day: %>
-            
-            <%if classes_on_day(day).empty?%>
-                <%= content_tag :li, "There are no classes on this day"%>      
-            <% else %>
-                <% classes_on_day(day).each do |swingclass|%>
-                    <%=swingclass_listing(swingclass)%>
-                <%end%>
-            <%end%>
-            </ul>
-        </li>
-    <% end %>
-    </ul>
+    <%= render :partial => "events/class_listings" %>
 </div>
 
 <div id="socials">
@@ -31,36 +12,5 @@
     <p id="key">
         N.B. Infrequent events are prefixed with a <img alt="asterisk" src="../images/highlight_icon.png" />
     </p>
-    
-    <ul class="datelist">
-    <% reset_cycle "row_cycle"%>
-    <% @socials_dates.each_with_index do |(date,socials,cancelled_ids),index| %>
-        <%= date_row date %>
-            <h3><%= today_label date %> <%= tomorrow_label date %> <%=date.to_s(:listing_date)%></h3>
-            <ul>
-            <% socials.each do |social| %>
-                <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?%>
-                <%= social_listing(social, date, cancelled) %>
-            <% end %>
-            
-            <%if index==5%>
-                <li id="googleAd">
-                    <div><script type="text/javascript"><!--
-                google_ad_client = "ca-pub-6077065686774573";
-                /* In Listings */
-                google_ad_slot = "6685462170";
-                google_ad_width = 234;
-                google_ad_height = 60;
-                //-->
-                </script>
-                <script type="text/javascript"
-                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-                </script></div>
-                </li>
-            <%end%>
-            
-            </ul>
-        </li>
-    <% end %>
-    </ul>
+    <%= render :partial => "events/social_listings" %>
 </div>

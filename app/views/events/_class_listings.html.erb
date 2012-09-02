@@ -1,0 +1,5 @@
+<ul class="daylist">
+<% DAYNAMES.each do |day| %>
+    <%= render :partial => "events/class_listing", :locals => {:day => day} %>
+<% end %>
+</ul>

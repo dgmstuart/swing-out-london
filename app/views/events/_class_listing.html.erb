@@ -1,0 +1,15 @@
+<%= day_row day %>
+    <%= today_label day -%>
+    <h3><%=day -%></h3>
+    <ul>
+    <% #get all events from this day: %>
+    
+    <%if classes_on_day(day).empty?%>
+        <%= content_tag :li, "There are no classes on this day"%>      
+    <% else %>
+        <% classes_on_day(day).each do |swingclass|%>
+            <%=swingclass_listing(swingclass)%>
+        <%end%>
+    <%end%>
+    </ul>
+</li>
