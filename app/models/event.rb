@@ -118,6 +118,9 @@ class Event < ActiveRecord::Base
   scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
   scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
   
+  # for the main listing:
+  scope :class_listing, active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
+  
   # For making sections in the Events editing screens:
   scope :current, active.non_gigs
   scope :archived, ended.non_gigs

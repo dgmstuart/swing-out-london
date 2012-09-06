@@ -45,6 +45,16 @@ class MapsController < ApplicationController
       end
     end
     
+    # TODO Duplicated from website controller:
+    if (Date.local_today.midnight)  > Time.local_now.ago(4.hours)
+      # Would be great to just use 4.hours.ago, but timezones would screw it up??
+      @today = Date.local_yesterday
+    else
+      @today = Date.local_today
+    end
+    
+    @classes = Event.class_listing
+    
     render :layout => 'map'
   end
   
