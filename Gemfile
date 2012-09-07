@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-source 'https://github.com/'
+source 'http://gems.github.com'
 
 gem 'rails', '3.0.3'
 
@@ -30,8 +30,10 @@ group :development, :test do
   gem 'pry'
   #gem 'webrat'
   gem 'rspec-rails'
+  gem 'spork'
   gem 'factory_girl_rails', '~> 1.2'
   gem 'rb-fsevent'
   gem 'guard-rspec'
+  gem 'guard-spork'
   gem 'guard-livereload'
 end
