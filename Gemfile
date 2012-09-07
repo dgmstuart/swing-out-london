@@ -3,8 +3,6 @@ source 'http://gems.github.com'
 
 gem 'rails', '3.1.8'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
-
 gem 'jquery-rails'
 
 gem 'twitter'
@@ -29,7 +27,6 @@ group :assets do
   gem 'uglifier'
 end
 
-
 # To use debugger
 # gem 'ruby-debug'
 
@@ -37,6 +34,7 @@ end
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'awesome_print'
   gem 'pry'
   #gem 'webrat'
@@ -52,4 +50,5 @@ end
 group :production do
   gem 'pg'
   gem 'thin'
+  gem 'newrelic_rpm'
 end

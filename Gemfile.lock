@@ -102,6 +102,7 @@ GEM
     multi_json (1.2.0)
     multipart-post (1.1.5)
     netrc (0.7.7)
+    newrelic_rpm (3.4.2)
     pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
@@ -211,6 +212,7 @@ DEPENDENCIES
   heroku
   jquery-rails
   memcachier
+  newrelic_rpm
   pg
   pry
   rails (= 3.1.8)
