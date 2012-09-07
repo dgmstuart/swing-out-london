@@ -1,9 +1,11 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.1.8'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
+
+gem 'jquery-rails'
 
 gem 'twitter'
 
@@ -13,10 +15,19 @@ gem 'geokit'
 gem 'heroku'
 gem 'taps'
 
+#Caching
 gem 'memcachier'
 gem 'dalli'
 gem 'api_cache'
 
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+end
 
 
 # To use debugger

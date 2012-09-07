@@ -22,7 +22,7 @@
     <meta property="og:description" content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://www.swingoutlondon.co.uk/" />
-    <meta property="og:image" content="http://www.swingoutlondon.co.uk/images/swingoutlondon_og.png" />
+    <meta property="og:image" content="http://www.swingoutlondon.co.uk<%= asset_path "swingoutlondon_og.png" %>" />
     <meta property="og:email" content="leveretweb@googlemail.com" />
     <meta property="fb:admins" content="dgmstuart"/>
     <% end %>
@@ -43,7 +43,7 @@
     <%= stylesheet_link_tag 'main'%>
     <![endif]-->
     
-    <%= javascript_include_tag :defaults%>
+    <%= javascript_include_tag :application %>
 
 </head>
 <%= content_tag(:body, :class => params[:action]) do %>

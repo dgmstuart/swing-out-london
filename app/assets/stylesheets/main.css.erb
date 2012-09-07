@@ -37,7 +37,7 @@ blockquote, q { quotes: "" ""; }
 body {
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: #0F0F0F;
-  background: transparent url('../images/flock_02_by_ZEBiii.jpg');
+  background: transparent url(<%= asset_path "flock_02_by_ZEBiii.jpg" %>);
   font-size: 0.875em;/* = 14px */
 }
 
@@ -249,7 +249,7 @@ ul.navigation a { color: #0F0F0F;}
   border: 2px solid #0F0F0F;
 }
 .index #main_nav a.internal:hover {
- background: url("../images/downarrow.png") no-repeat 50% 95%;  
+ background: url(<%= asset_path "downarrow.png" %>) no-repeat 50% 95%;  
 }
 
 #main_nav .current, #admin_nav .current {
@@ -406,7 +406,7 @@ li.date_row a {color: #0F0F0F; }
 }
 
 .social_highlight {
-  background: url("../images/highlight_icon.png") no-repeat 0 0.15em;
+  background: url(<%= asset_path "highlight_icon.png" %>) no-repeat 0 0.15em;
   padding-left: 20px
 }
 
