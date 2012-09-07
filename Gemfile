@@ -3,6 +3,9 @@ source 'http://gems.github.com'
 
 gem 'rails', '3.1.8'
 
+# Gems used in all environments
+gem 'haml'
+gem 'haml_rails'
 gem 'jquery-rails'
 
 gem 'twitter'
