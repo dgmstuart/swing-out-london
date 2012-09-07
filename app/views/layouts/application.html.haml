@@ -1,0 +1,75 @@
+!!! 5
+%html{ xmlns: "http://www.w3.org/1999/xhtml",
+       "xmlns:fb" =>"http://www.facebook.com/2008/fbml",
+       "xmlns:og" => "http://opengraphprotocol.org/schema/",
+       "xml:lang" =>"en-GB" }
+  %head
+    %meta{ "http-equiv" => "Content-Type",      content: "text/html; charset=utf-8" }/
+    %meta{ "http-equiv" => "Content-Language",  content: "en-GB" }/
+    %meta{ name: "author",      content: "Duncan Stuart" }/
+    %meta{ name: "description", content: "Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" }/
+    - if params[:action] == "index" && !@cms_page
+      %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}
+      %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1", :type => "text/javascript"}
+      
+      %meta{ property: "og:title",        content: "Swing Out London - Lindy Hop Listings" }/
+      %meta{ property: "og:site_name",    content: "Swing Out London" }/
+      %meta{ property: "og:description",  content: "Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" }/
+      %meta{ property: "og:type",         content: "website" }/
+      %meta{ property: "og:url",          content: "http://www.swingoutlondon.co.uk/" }/
+      %meta{ property: "og:image",        content: "http://www.swingoutlondon.co.uk#{asset_path "swingoutlondon_og.png"}"}/
+      %meta{ property: "og:email",        content: "leveretweb@googlemail.com" }/
+      %meta{ property: "fb:admins",       content: "dgmstuart" }/
+
+    %meta{ :name => "viewport", :content => "width=device-width" }/
+    
+    = csrf_meta_tag if @cms_page
+
+    %title Swing Out London - listings of Lindy Hop swing dance classes and socials
+    
+    = stylesheet_link_tag 'application', media: "screen"
+    = stylesheet_link_tag 'cms' if @cms_page 
+    /[if lte IE 7 ]
+      = stylesheet_link_tag 'ie'
+    
+    = javascript_include_tag :application
+  
+  = content_tag( :body, :class => params[:action] ) do
+    -#
+      .banner
+        %h3 Swing Out London is BACK FROM HERRÄNG
+        %p Give me a couple of days to get it back under control - please be sure to check with the event websites in case anything has changed.
+      
+    #page
+      #header
+        = heading_hn(params[:action], :class=>"site_title") do
+          %em= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index"
+          Listings of Lindy Hop classes and socials in London
+        
+        - unless @cms_page
+          %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago
+
+        = render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true
+        = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' }
+    
+        - if params[:action] == "index" && !@cms_page
+          = render :partial => 'website/site_description'
+
+      = yield
+    
+      #footer
+        - if !@cms_page
+          %p#valid_statement
+            = raw valid_statement(params[:action])
+    
+        = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' }
+        %address
+          Site by
+          = mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"
+      
+        - if !@cms_page
+          %p#last_updated
+            &ndash; last updated at
+            = @last_updated_time
+            on
+            = @last_updated_date
