@@ -48,3 +48,8 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-livereload'
 end
+
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
