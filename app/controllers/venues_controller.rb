@@ -1,5 +1,5 @@
 class VenuesController < ApplicationController
-  
+  layout 'cms'
   before_filter :authenticate
   
   # GET /venues

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
-  
+  layout 'cms'
   before_filter :authenticate
+  
   caches_action :index
   cache_sweeper :event_sweeper, :only => [:create, :update, :destroy]
   

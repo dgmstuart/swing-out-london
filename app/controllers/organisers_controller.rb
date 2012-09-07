@@ -1,5 +1,5 @@
 class OrganisersController < ApplicationController
-  
+  layout 'cms'
   before_filter :authenticate
   
   # GET /organisers
