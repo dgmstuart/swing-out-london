@@ -14,7 +14,7 @@ input, label, textarea, div.actions, ol.show li, form a{
 }
 
 /* INDEX */
-#page { width: 100% }
+#page { width: 100%; }
 
 h1{text-align:center;font-size:3em;padding-top:1em;margin-bottom:0.5em;}
 h2 {text-align:center;font-size:3em;margin-bottom:0.5em;}
