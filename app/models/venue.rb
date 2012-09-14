@@ -8,6 +8,7 @@ class Venue < ActiveRecord::Base
   default_scope :order => 'name ASC' #sets default search order
   
   validates_presence_of :name, :area
+  validates :website, format: URI::regexp(%w(http https))
 
   before_validation do
     if lat.nil? || lng.nil?

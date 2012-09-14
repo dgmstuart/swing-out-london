@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
   serialize :date_array
   serialize :cancellation_array
   
+  validates :url, format: URI::regexp(%w(http https))
+  
   validates_presence_of :event_type, :frequency, :url, :day
   
   validates_format_of :shortname, :with => /^[a-z]*$/, :message => "can only contain lowercase characters (no spaces)"
