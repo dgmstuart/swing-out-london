@@ -420,34 +420,34 @@ class Event < ActiveRecord::Base
     Date::DAYNAMES[d.wday]
   end
 
-  def self.socials_dates(start_date)
-    #get an array of all the dates under consideration:
-    date_day_array = listing_dates(start_date).collect { |d| [d,weekday_name(d)] } #TODO: forget about matching on weekday names - just use numbers
-    
+  def self.socials_dates(start_date) 
     #build up an array of events occuring on each date
     output = []
     
-    date_day_array.each do |date,day| 
-      socials_on_that_day = weekly.socials.includes(:venue).active_on(date).where(day: day)  
-      
-      swing_date = SwingDate.find_by_date(date)
-  
-      unless swing_date.nil?
-        socials_on_that_day += swing_date.events.socials.includes(:venue) 
-        cancelled_events_on_that_day = swing_date.cancelled_events.collect{|e|e.id}
-      end
-      
-      unless socials_on_that_day.blank?
-        socials_on_that_day.sort!{|a,b| a.title <=> b.title}
-        output << [date, socials_on_that_day, cancelled_events_on_that_day]
-      end
+    listing_dates(start_date).each do |date|
+      socials_on_date = socials_on_date(date)
+      output << [date, socials_on_date, cancelled_events_on_date(date)] if socials_on_date
     end
     
     return output
-    
-    #output is of form [ [date1, [array of weekly socials occuring on date1], [array of event ids cancelled on date1] ], ... ]
-
   end 
+  
+  def self.socials_on_date(date)
+    day = weekday_name(date)
+    socials_on_that_date = weekly.socials.includes(:venue).active_on(date).where(day: day)  
+    
+    swing_date = SwingDate.find_by_date(date)
+    socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
+
+    return if socials_on_that_date.blank?
+    
+    socials_on_that_date.sort!{|a,b| a.title <=> b.title}
+  end
+  
+  def self.cancelled_events_on_date(date)
+    swing_date = SwingDate.find_by_date(date)
+    swing_date.cancelled_events.collect{ |e| e.id } if swing_date
+  end
   
   def self.listing_dates(start_date)
     end_date = start_date + (INITIAL_SOCIALS-1)
