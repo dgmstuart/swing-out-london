@@ -62,23 +62,6 @@ class Venue < ActiveRecord::Base
     events.all?{|e| e.near_out_of_date}
   end
   
-  # A venue is active if ANY of it's events are active
-  def active?
-    events.any?{|e|e.current?}
-  end  
-  
-  def self.active_venues
-    all.select{|venue| venue.active? }
-  end
-  
-  # A venue is regular if ANY of it's events are regular
-  def regular?
-    events.any?{|e| e.regular?}
-  end
-  
-  def self.regular_venues
-    all.select{|venue| venue.regular? }
-  end
   
   # Map-related methods:
   def position

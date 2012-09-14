@@ -320,18 +320,6 @@ class Event < ActiveRecord::Base
     last_date < Date.local_today
   end
   
-  # Is the event currently running?
-  def active?
-    started? && !ended?
-  end
-  def inactive?
-    !started? || ended?
-  end
-  
-  def current?
-    !ended? && !is_gig?
-  end
-  
   def intermittent?
     frequency == 0 && last_date != latest_date
   end
@@ -346,13 +334,7 @@ class Event < ActiveRecord::Base
   
   def less_frequent?
     frequency == 0 || frequency >= 4
-  end
-  
-  #for the purposes of mapping:
-  def regular?
-    current? && !intermittent? && !one_off? && !infrequent?
-  end
-  
+  end 
   
   
   # What's the Latest date in the date array
