@@ -99,7 +99,7 @@ module EventsHelper
     if event.url.nil?
         display
     else
-      link_to display, event.url
+      link_to display, event.url, id: event.id
     end
     
   end
