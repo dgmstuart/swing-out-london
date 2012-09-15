@@ -36,7 +36,7 @@
         - unless @cms_page
           %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago
 
-        = render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav' } if @authenticated == true
-        = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav' }
+        = render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav', nav_class: "navigation primary-nav" } if @authenticated == true
+        = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
 
       = content_for?(:content) ? yield(:content) : yield

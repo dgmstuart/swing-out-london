@@ -6,8 +6,8 @@ class MapsController < ApplicationController
     
     @listing_dates = Event.listing_dates(today)
     
-    type = params[:type].downcase.to_sym if params[:type]
-    case type
+    @type = params[:type].downcase.to_sym if params[:type]
+    case @type
     when :classes
       # Days are stored in the database in titlecase - also in the DAYNAMES constant
       day = case params[:day] 
@@ -36,6 +36,7 @@ class MapsController < ApplicationController
                   Event.socials_dates(today).collect{ |a| a[1] }.flatten
                 end
     else # no type or invalid type
+      @type = nil
       events = Event.active.weekly_or_fortnightly.classes + Event.socials_dates(today).collect{ |a| a[1] }.flatten
     end
     

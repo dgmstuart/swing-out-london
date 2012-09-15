@@ -1,43 +1,7 @@
-/* RESET  */
-/* By Eric Meyer: http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
-/* remember to define focus styles! */
-:focus { outline: 0; }
-body { line-height: 1; color: black; background: white;}
-ol, ul {list-style: none; }
-
-/* tables still need 'cellspacing="0"' in the markup */
-table { border-collapse: separate; border-spacing: 0; }
-caption, th, td { text-align: left; font-weight: normal; }
-
-blockquote:before, blockquote:after,
-q:before, q:after { content: ""; }
-blockquote, q { quotes: "" ""; }
-
-/* END RESET */
-
 body {
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: #0F0F0F;
-  background: transparent url(<%= asset_path "flock_02_by_ZEBiii.jpg" %>);
+  background: transparent url(image_path("flock_02_by_ZEBiii.jpg"));
   font-size: 0.875em;/* = 14px */
 }
 
@@ -227,7 +191,6 @@ h3 {
 ul.navigation{list-style-type:none;letter-spacing:0.1em;line-height:3.5em;text-transform:uppercase;}
 ul.navigation li{display:inline;margin:0 0.5em 0 0;padding:0 0 0 1em;white-space:nowrap;}
 
-#main_nav,#admin_nav{}
 #admin_nav{text-align:center;clear:both;padding:1em 0;}
 #main_nav{text-align:center;clear:both;font-size:1.14em;margin:0 50px;padding-bottom:15px;border-bottom:3px solid #0F0F0F;}
 
@@ -242,30 +205,35 @@ ul.navigation li{display:inline;margin:0 0.5em 0 0;padding:0 0 0 1em;white-space
 
 ul.navigation a { color: #0F0F0F;}
 
-#main_nav a, #admin_nav a { padding: 10px; } /*added here so we can take it away when we apply the border*/
-#main_nav a:hover, #admin_nav a:hover {
-  text-decoration:none;
-  padding: 8px;
-  border: 2px solid #0F0F0F;
-}
-.index #main_nav a.internal:hover {
- background: url(<%= asset_path "downarrow.png" %>) no-repeat 50% 95%;  
+.navigation.primary-nav {
+  a { 
+    padding: 10px; /*added here so we can take it away when we apply the border*/
+    &:hover { 
+      text-decoration:none;
+      padding: 8px;
+      border: 2px solid #0F0F0F;
+    }   
+  }
+  a.internal:hover {
+   background: url(image_path("downarrow.png")) no-repeat 50% 95%;  
+  }
+  .current {
+    padding: 8px;
+    border: 6px double #0F0F0F;
+    display:inline-block;
+  }
 }
 
-#main_nav .current, #admin_nav .current {
-  padding: 8px;
-  border: 6px double #0F0F0F;
-  display:inline-block;
+#footer_nav {
+  a:hover {
+    border-bottom: 1px solid #0F0F0F;
+  }
+  .current {
+    padding: 5px;
+    border: 1px solid #0F0F0F;
+  }
 }
 
-#footer_nav a:hover {
-  border-bottom: 1px solid #0F0F0F;
-}
-
-#footer_nav .current {
-  padding: 5px;
-  border: 1px solid #0F0F0F;
-}
 
 #main_nav li, #admin_nav li { border-left:3px solid #0F0F0F;}
 #footer_nav li { border-left:1px solid #0F0F0F;}
@@ -406,7 +374,7 @@ li.date_row a {color: #0F0F0F; }
 }
 
 .social_highlight {
-  background: url(<%= asset_path "highlight_icon.png" %>) no-repeat 0 0.15em;
+  background: url(image_path("highlight_icon.png")) no-repeat 0 0.15em;
   padding-left: 20px
 }
 

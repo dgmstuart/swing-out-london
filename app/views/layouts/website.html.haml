@@ -24,7 +24,7 @@
     %p#valid_statement
       = raw valid_statement(params[:action])
 
-    = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav' }
+    = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav', nav_class: "navigation secondary-nav" }
     %address
       Site by
       = mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"
