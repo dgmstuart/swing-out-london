@@ -22,7 +22,8 @@ class MapsController < ApplicationController
                 else
                   Event.active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
                 end
-    when :socials
+    else # :socials or invalid type
+      @type = :socials # in case type was nil or invalid
       date =  case params[:date]
               when "today"      then today
               when "tomorrow"   then today + 1
@@ -35,9 +36,9 @@ class MapsController < ApplicationController
                 else 
                   Event.socials_dates(today).collect{ |a| a[1] }.flatten
                 end
-    else # no type or invalid type
-      @type = nil
-      events = Event.active.weekly_or_fortnightly.classes + Event.socials_dates(today).collect{ |a| a[1] }.flatten
+    # else # no type or invalid type
+    #   @type = nil
+    #   events = Event.active.weekly_or_fortnightly.classes + Event.socials_dates(today).collect{ |a| a[1] }.flatten
     end
     
     if events.nil? 

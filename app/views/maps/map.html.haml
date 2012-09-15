@@ -3,12 +3,13 @@
 %header
   %h1 Swing Out London
   .navigation.primary-nav<
-    - if @type == :classes
-      %span.current Classes
-      = link_to "Socials", type: "socials"
-    - elsif @type == :socials
-      = link_to "Classes", type: "classes"
+    
+    - if @type == :socials
       %span.current Socials
+      = link_to "Classes", type: "classes"
+    - elsif @type == :classes
+      = link_to "Socials", type: "socials"
+      %span.current Classes
     
 #page
   - if @type == :classes
