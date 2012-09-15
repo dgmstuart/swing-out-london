@@ -1,5 +1,6 @@
 class Venue < ActiveRecord::Base
-  
+  acts_as_gmappable :lat => 'lat', :lng => 'lng', :process_geocoding => false
+   
   require 'geokit'
   include Geokit::Geocoders
   

@@ -9,10 +9,7 @@
     <title>Swing Out London's Lindy Map - mapping all the London swing venues.</title>
     
     <%= stylesheet_link_tag 'application' %>
-    
-    <%= raw Cartographer::Header.new.to_s %>
-    <%= raw @map.to_html %>
-    
+    <%= javascript_include_tag :application %>
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 </head>
 <%= content_tag(:body, :class => params[:action]) do %>

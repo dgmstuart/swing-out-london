@@ -32,68 +32,23 @@ class MapsController < ApplicationController
                     Event.socials_on_date(date)
                   else 
                     Event.socials_dates(today).collect{ |a| a[1] }.flatten
-                  end   
-      end        
+                  end
+      end
     end
     
     unless events
       # Either no "type" was supplied, or the type was invalid
       events = Event.active.weekly_or_fortnightly.classes + Event.socials_dates(today).collect{ |a| a[1] }.flatten
     end
-     
+    
     venues = events.map{ |e| e.venue }.uniq unless events.nil?  
-          
     
-    @map = Cartographer::Gmap.new( 'map', :type => :roadmap )
-    
-    @map.center  = CENTRAL_LONDON
-    
-    # If a venue was specified, centre on that venue
-    if !params[:id].nil?
-      venue = Venue.find(params[:id])
-      unless venue.nil?
-        unless venue.position.nil?
-          @map.center = venue.position
-        else
-          logger.error "[ERROR]: 'position' was nil when trying to center map on venue id #{params[:id]}"
-        end
-      end
+    @json = venues.to_gmaps4rails do |venue, marker|
+      marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue })
+      marker.json({ :id => venue.id, :title => venue.name })
     end
-    
-    @map.zoom = 12
-    @map.showtubes = (params[:tubes]=="y")
-    @map.controls << :type
-    @map.controls << :large
-    @map.controls << :overview
-    
-    @icon = Cartographer::Gicon.new
-    @map.icons << @icon
-    
-    venues.each do |venue|
-    
-      unless venue.position.nil?
-        @map.markers << Cartographer::Gmarker.new(
-          :name => "venue_#{venue.id}",
-          :title => venue.name,
-          :position => venue.position,
-          :info_window_url => venue_map_info_url(venue.id),
-          #:info_window_open => true,
-          :icon => @icon
-        )
-      else
-        logger.error "[ERROR]: 'position' was nil when trying to plot a marker for venue id #{venue.id}: #{venue.name}"
-      end
-    end
-        
-    @classes = Event.class_listing
-    
+
     render :layout => 'map'
-  end
-  
-  def venue_map_info
-    @venue = Venue.find(params[:id])
-    @events = @venue.events
-    render :layout => false
   end
 
 end
