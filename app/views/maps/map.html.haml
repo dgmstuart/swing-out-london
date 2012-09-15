@@ -1,1 +1,23 @@
-= gmaps4rails(@json)
+= map(@map_options, @json)
+
+%header
+  %h1 Swing Out London
+  #main_nav<
+    = link_to "Classes", type: "classes"
+    = link_to "Socials", type: "socials"
+    = link_to "Everything"
+#page
+  %ul
+    - DAYNAMES.each do |day|
+      %li= link_to day.pluralize, type: "classes", day: day
+  %ul
+    - @listing_dates.each do |date|
+      %li= link_to date.to_s(:listing_date), type: "socials", date: date.to_s(:db)
+
+- content_for :scripts do
+  :javascript
+    Gmaps.map.callback = function() {  
+      //var layer = new google.maps.BicyclingLayer();
+      //var layer = new google.maps.TransitLayer();
+      //layer.setMap(Gmaps.map.serviceObject);
+    }

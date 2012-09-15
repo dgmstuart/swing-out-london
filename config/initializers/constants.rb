@@ -11,6 +11,3 @@ LOGINS={
 INITIAL_SOCIALS=14
 
 CONTACT_EMAIL = "leveretweb@googlemail.com"
-
-# Where should the map be centred?
-CENTRAL_LONDON = [51.51985,-0.06729]

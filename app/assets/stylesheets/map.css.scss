@@ -22,14 +22,30 @@ body.map {
       }
     }
   }
-
-
+  a {
+    color: inherit;
+  }
+  
+  header{
+    margin: 20px 20px 0;
+    padding: 20px;
+    background: #FEE6B8 none;
+    width: 320px;
+    height: 120px;
+    position: absolute;
+    h1{
+      text-transform: uppercase;
+      font-size: 1.5em;
+      text-align:center;
+      margin-bottom: 20px
+    }
+  }
 
   #page {
     background: #FEE6B8 none;
-    width: 400px;
+    width: 320px;
     position: absolute;
-    top:100px;
+    top: 140px;
     margin:0 20px 20px;
     padding: 20px;
     overflow-y: auto;
@@ -37,22 +53,20 @@ body.map {
     -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    9px 9px 12px rgba(50, 50, 50, 0.75);
     box-shadow:         9px 9px 12px rgba(50, 50, 50, 0.75);
+    
+    li {
+      text-align: center;
+      padding: 10px;
+      font-size: 1.3em;
+      border-bottom: solid 1px #BEBEBE;
+      -webkit-box-shadow: 0 1px 0 #e4e4e4;
+      -moz-box-shadow:    0 1px 0 #e4e4e4;
+      box-shadow: 0 1px 0 #e4e4e4;
+    }
   }
+  
+  
 
-  #header{
-    height: 80px;
-    margin:20px 20px 0;
-    padding: 20px;
-    background: #FEE6B8 none;
-    width: 400px;
-    position: absolute;
-  }
-
-  body.map #header h1{
-    text-transform: uppercase;
-    font-size: 1.5em;
-    text-align:center;
-  }
 
   body.map #classes, body.map #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left: 0;}
   body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
