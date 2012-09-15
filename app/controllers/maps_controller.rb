@@ -92,6 +92,7 @@ class MapsController < ApplicationController
   
   def venue_map_info
     @venue = Venue.find(params[:id])
+    @events = @venue.events
     render :layout => false
   end
 
