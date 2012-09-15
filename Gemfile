@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'twitter'
 
 gem 'geokit'
+gem 'gmaps4rails'
 
 # Hosting on heroku
 gem 'heroku'
