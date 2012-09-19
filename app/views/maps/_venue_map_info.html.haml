@@ -4,3 +4,13 @@
     %p= venue.address
     %p.postal-code
       = venue.postcode
+%ul
+  - events.each do |event|
+    %li
+      -# N.B. NOT SHOWING CANCELLATIONS YET!
+      - if event.has_social?
+        = link_to event.title, event.url
+      - else
+        - # N.B. FACTOR OUT FUNCTIONALITY FROM CLASS LISTINGS
+        = link_to "Class by #{event.organiser.name}", event.url
+    

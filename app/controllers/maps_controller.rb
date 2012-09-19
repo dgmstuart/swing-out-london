@@ -51,7 +51,12 @@ class MapsController < ApplicationController
       venues = events.map{ |e| e.venue }.uniq
       
       @json = venues.to_gmaps4rails do |venue, marker|
-        marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue })
+        
+        #TODO: this is a horribly inefficient way of calculating this array of events - redesign the whole method/approach
+        #TODO: add in cancelled
+        venue_events = events.select{ |e| e.venue == venue }.uniq
+        
+        marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue, events: venue_events })
         marker.json({ :id => venue.id, :title => venue.name })
       end
     end

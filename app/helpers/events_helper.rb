@@ -68,7 +68,7 @@ module EventsHelper
   # LISTING ELEMENTS #
   # ---------------- #
   
-  def social_listing(social, date, cancelled)
+  def social_listing(social, cancelled)
     if social.title.nil? || social.title.empty?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return 

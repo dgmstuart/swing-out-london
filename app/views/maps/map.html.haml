@@ -1,22 +1,24 @@
 = map(@map_options, @json)
 
-%header
+    
+
+%header.page
   %h1 Swing Out London
   .navigation.primary-nav<
-    
+
     - if @type == :socials
       %span.current Socials
       = link_to "Classes", type: "classes"
     - elsif @type == :classes
       = link_to "Socials", type: "socials"
       %span.current Classes
-    
-#page
+      
+.listings.page
   - if @type == :classes
     %ul
       - DAYNAMES.each do |day|
         %li= link_to day.pluralize, type: "classes", day: day
-  
+
   - elsif @type == :socials
     %ul
       - @listing_dates.each do |date|
