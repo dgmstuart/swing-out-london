@@ -16,8 +16,6 @@ body.map {
     }
   }
 
-  
-
   .venue_info {
     h3 {
       font-size: 1em;
@@ -77,6 +75,10 @@ body.map {
       -webkit-box-shadow: 0 1px 0 #e4e4e4;
       -moz-box-shadow:    0 1px 0 #e4e4e4;
       box-shadow: 0 1px 0 #e4e4e4;
+      &.current {
+        color: #FEE6B8;
+        background-color: #0F0F0F;
+      }
     }
   }
 

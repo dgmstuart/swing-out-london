@@ -18,7 +18,8 @@ class MapsController < ApplicationController
             end
         
       events =  if day && DAYNAMES.include?(day.titlecase)
-                    Event.active.weekly_or_fortnightly.classes.where(day: day.titlecase).includes(:venue, :organiser, :swing_cancellations)
+                    @day = day.titlecase
+                    Event.active.weekly_or_fortnightly.classes.where(day: @day).includes(:venue, :organiser, :swing_cancellations)
                 else
                   Event.active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
                 end
@@ -32,6 +33,7 @@ class MapsController < ApplicationController
               end
       
       events =  if date && @listing_dates.include?(date)
+                  @date = date
                   Event.socials_on_date(date)
                 else 
                   Event.socials_dates(today).collect{ |a| a[1] }.flatten
