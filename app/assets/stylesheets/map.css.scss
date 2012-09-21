@@ -31,6 +31,12 @@ body.map {
       }
     }
   }
+  .listing_info {
+    li {
+      /* padding to allow for the bottom border applied to the link it contains on hover */
+      padding-bottom: 1px; 
+    }
+  }
   
   .page {
     background: #FEE6B8 none;
