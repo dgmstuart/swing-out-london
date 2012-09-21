@@ -17,18 +17,16 @@
   - if @type == :classes
     %ul
       - DAYNAMES.each do |day|
-        -if day == @day
-          %li.current= day.pluralize
-        -else
-          %li= link_to day.pluralize, type: "classes", day: day
+        %li 
+          = link_to_unless (day == @day), day.pluralize, type: "classes", day: day, anchor: "current" do
+            %span#current= day.pluralize
 
   - elsif @type == :socials
     %ul
       - @listing_dates.each do |date|
-        -if date == @date
-          %li.current= date.to_s(:listing_date)
-        -else
-          %li= link_to date.to_s(:listing_date), type: "socials", date: date.to_s(:db)
+        %li 
+          = link_to_unless (date == @date), date.to_s(:listing_date), type: "socials", date: date.to_s(:db), anchor: "current" do
+            %span#current= date.to_s(:listing_date)
 
 - content_for :scripts do
   :javascript
