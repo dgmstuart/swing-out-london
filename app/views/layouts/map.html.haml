@@ -5,7 +5,7 @@
   = map(@map_options, @json)
 
   %header.page
-    %h1 Swing Out London
+    %h1=link_to 'Swing Out London', :controller => "website", :action => "index"
     .navigation.primary-nav<
       = yield :primary_nav
       
