@@ -14,13 +14,29 @@ class MapsController < ApplicationController
           end
       
     events =  if day && DAYNAMES.include?(day)
-                  @day = day
-                  Event.active.weekly_or_fortnightly.classes.where(day: @day).includes(:venue, :organiser, :swing_cancellations)
+                @day = day
+                Event.active.weekly_or_fortnightly.classes.where(day: @day).includes(:venue)
               else
-                Event.active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
+                Event.active.weekly_or_fortnightly.classes.includes(:venue)
               end
-    
-    create_map(events)
+
+    if events.nil? 
+      empty_map
+    else
+      venues = events.map{ |e| e.venue }.uniq
+
+      @json = venues.to_gmaps4rails do |venue, marker|
+                # TODO: ADD IN CANCELLATIONS!
+                venue_events =  if @day 
+                                  Event.active.weekly_or_fortnightly.classes.where(day: @day).where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
+                                else
+                                  Event.active.weekly_or_fortnightly.classes.where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
+                                end
+
+                marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue, events: venue_events })
+                marker.json({ :id => venue.id, :title => venue.name })
+      end
+    end
   end
   
   def socials
@@ -42,32 +58,31 @@ class MapsController < ApplicationController
                 Event.socials_on_date(date)
               else 
                 Event.socials_dates(today).collect{ |a| a[1] }.flatten
-              end      
-    create_map(events)
-  end
-  
-  private
-  
-  def create_map(events)
+              end
+    
     if events.nil? 
-      @json = {}
-      @map_options =  { center_latitude: 51.51985,
-                        center_longitude: -0.4,
-                        zoom: 10
-                      }      
+      empty_map
     else
       venues = events.map{ |e| e.venue }.uniq
-      
+
       @json = venues.to_gmaps4rails do |venue, marker|
         
-        #TODO: this is a horribly inefficient way of calculating this array of events - redesign the whole method/approach
-        #TODO: add in cancelled
+        # TODO: DO THIS PROPERLY! AND INCLUDE CANCELLATIONS!
         venue_events = events.select{ |e| e.venue == venue }.uniq
-        
+
         marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue, events: venue_events })
         marker.json({ :id => venue.id, :title => venue.name })
       end
     end
   end
-
+  
+  private
+  
+  def empty_map
+    @json = {}
+    @map_options =  { center_latitude: 51.51985,
+                      center_longitude: -0.4,
+                      zoom: 10
+                    }      
+  end
 end
