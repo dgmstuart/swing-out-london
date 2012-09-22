@@ -1,22 +1,16 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="Content-Language" content="en-GB" />
-    <meta name="author" content="Duncan Stuart"/>
-    <meta name="description" content="Swing Out London's Lindy Map - mapping all the London swing venues"/>
-
-    <title>Swing Out London's Lindy Map - mapping all the London swing venues.</title>
-    
-    <%= stylesheet_link_tag 'application' %>
-    <%= javascript_include_tag :application %>
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
-</head>
-<%= content_tag(:body, :class => params[:action]) do %>
-
-    <%= yield %>    
-    
-<%end #/body%>
-
-<%= yield :scripts %>
-</html>
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "en-GB", "http-equiv" => "Content-Language"}/
+    %meta{:content => "Duncan Stuart", :name => "author"}/
+    %meta{:content => "Swing Out London's Lindy Map - mapping all the London swing venues", :name => "description"}/
+    %title Swing Out London's Lindy Map - mapping all the London swing venues.
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag :application
+    %meta{:content => "width=device-width, user-scalable=no", :name => "viewport"}/
+  = content_tag(:body, :class => params[:action]) do
+  
+  = yield
+  
+  = yield :scripts

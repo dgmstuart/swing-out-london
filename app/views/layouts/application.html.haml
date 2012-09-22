@@ -22,21 +22,4 @@
     = yield :head
   
   = content_tag( :body, :class => params[:action] ) do
-    -#
-      .banner
-        %h3 Swing Out London is BACK FROM HERRÄNG
-        %p Give me a couple of days to get it back under control - please be sure to check with the event websites in case anything has changed.
-      
-    #page
-      #header
-        = heading_hn(params[:action], :class=>"site_title") do
-          %em= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index"
-          Listings of Lindy Hop classes and socials in London
-        
-        - unless @cms_page
-          %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago
-
-        = render :partial => 'website/admin_nav', :locals => { :nav_id => 'admin_nav', nav_class: "navigation primary-nav" } if @authenticated == true
-        = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
-
-      = content_for?(:content) ? yield(:content) : yield
+    = content_for?(:content) ? yield(:content) : yield
