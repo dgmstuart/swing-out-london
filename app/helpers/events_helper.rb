@@ -106,16 +106,33 @@ module EventsHelper
     
     cancelled_part = ""
     cancelled_part = cancelled_label + " " if cancelled
-    raw(cancelled_part + mapinfo_social_link(social))
+    
+    class_info =""
+    if social.has_class? || social.has_taster?
+      class_style = ""
+      class_style = " #{social.class_style}" unless social.class_style.blank?
+      
+      if social.has_class?
+        class_type = "class"
+      else 
+        class_type = "taster"
+      end
+      
+      school_info = "" 
+      school_info = " by #{school_name(social)}" if school_name(social)
+      
+      class_info = " (with#{class_style} #{class_type}#{school_info})"
+    end
+    
+    raw(cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
   end
   
   def mapinfo_social_link(event)    
     new_label =""
     new_label = new_label(event) + " " if event.new?
     
-    event_title = event.title
-    display = raw(new_label + event_title)
-            
+    display = raw(new_label + event.title)
+           
     link_to_unless event.url.nil?, display, event.url
   end
   
@@ -133,7 +150,7 @@ module EventsHelper
     start_date = " (from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
     
     class_style = ""
-    class_style = " (#{event.class_style})" unless event.class_style.nil? || event.class_style.empty?
+    class_style = " (#{event.class_style})" unless event.class_style.blank?
     
     course_length = ""
     course_length = " - #{event.course_length} week courses" unless event.course_length.nil?
@@ -155,8 +172,38 @@ module EventsHelper
     link_to_unless event.url.nil?, display, event.url
   end
   
+  def mapinfo_swingclass_link(event)
+    new_label = ""
+    new_label = new_label(event) + " " if event.new?
+
+    start_date = ""
+    start_date = " (from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
+
+    class_type = " Class"
+    class_type = " #{event.course_length} week courses" unless event.course_length.nil?
+    
+    class_style = ""
+    class_style = " (#{event.class_style})" unless event.class_style.blank?
+    
+    social_info = ""
+    social_info = "at #{event.title} " if event.has_social?
+
+    school_info = "" 
+    school_info = "with #{school_name(event)}" if school_name(event)
+
+
+    # TODO: work out why this needs the "raw" on the new_label to display properly
+    display = raw(
+      new_label + start_date + 
+      class_type + class_style + " " +
+      swingclass_info(social_info + school_info)
+    )
+
+    link_to_unless event.url.nil?, display, event.url
+  end
+  
   def school_name(event)
-    fail "Tried to get class-related info from an event with no class" unless event.has_class?
+    fail "Tried to get class-related info from an event with no class" unless event.has_class? || event.has_taster?
     return if event.organiser.nil?
     fail "Invalid Organiser (##{event.organiser.id}): name was blank" if event.organiser.name.blank?
     if event.organiser.shortname.blank?

@@ -4,13 +4,12 @@
     %p= venue.address
     %p.postal-code
       = venue.postcode
-%ul
+%ul.listing_info
   - events.each do |event|
     %li
       -# N.B. NOT SHOWING CANCELLATIONS YET!
       - if event.has_social?
-        = link_to event.title, event.url
+        = mapinfo_social_listing(event, false)
       - else
         - # N.B. FACTOR OUT FUNCTIONALITY FROM CLASS LISTINGS
-        = link_to "Class by #{event.organiser.name}", event.url
-    
+        = mapinfo_swingclass_link(event)
