@@ -1,4 +1,11 @@
-body.map {
+/*
+*= require reset
+*= require main
+*= require_self
+*/
+
+
+body.classes, body.socials {
   a {
     color: inherit;
   }

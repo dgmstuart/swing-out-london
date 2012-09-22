@@ -1,0 +1,10 @@
+-content_for :primary_nav do
+  %span.current Socials
+  = link_to "Classes", action: :classes
+      
+- content_for :listings do
+  %ul
+    - @listing_dates.each do |date|
+      %li 
+        = link_to_unless (date == @date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do
+          %span#current= date.to_s(:listing_date)

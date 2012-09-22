@@ -1,16 +1,23 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "en-GB", "http-equiv" => "Content-Language"}/
-    %meta{:content => "Duncan Stuart", :name => "author"}/
-    %meta{:content => "Swing Out London's Lindy Map - mapping all the London swing venues", :name => "description"}/
-    %title Swing Out London's Lindy Map - mapping all the London swing venues.
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag :application
-    %meta{:content => "width=device-width, user-scalable=no", :name => "viewport"}/
-  = content_tag(:body, :class => params[:action]) do
-  
-  = yield
+- content_for :stylesheet do
+  = stylesheet_link_tag 'application_map', media: "screen"
+
+- content_for :content do
+  = map(@map_options, @json)
+
+  %header.page
+    %h1 Swing Out London
+    .navigation.primary-nav<
+      = yield :primary_nav
+      
+  .listings.page
+    = yield :listings
   
   = yield :scripts
+  :javascript
+    Gmaps.map.callback = function() {  
+      //var layer = new google.maps.BicyclingLayer();
+      //var layer = new google.maps.TransitLayer();
+      //layer.setMap(Gmaps.map.serviceObject);
+    }
+  
+= render template: 'layouts/application'

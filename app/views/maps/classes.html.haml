@@ -1,0 +1,10 @@
+-content_for :primary_nav do
+  = link_to "Socials", action: :socials
+  %span.current Classes
+      
+- content_for :listings do
+  %ul
+    - DAYNAMES.each do |day|
+      %li 
+        = link_to_unless (day == @day), day.pluralize, day: day, anchor: "current" do
+          %span#current= day.pluralize
