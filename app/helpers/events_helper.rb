@@ -74,12 +74,12 @@ module EventsHelper
       return 
     end
     
-    cancelled_label = ""
-    cancelled_label = content_tag( :strong, "Cancelled", :class => "cancelled_label" ) + " " if cancelled
+    cancelled_part = ""
+    cancelled_part = cancelled_label + " " if cancelled
     
     content_tag :li, 
       outward_postcode(social) + " " + 
-      content_tag( :span, raw(cancelled_label + social_link(social)), :class => "social_details")
+      content_tag( :span, raw(cancelled_part + social_link(social)), :class => "social_details")
   end
   
   def social_link(event)    
@@ -95,13 +95,28 @@ module EventsHelper
     #display = new_label + "#{event_title} - #{event_location}"
     display = raw(new_label + event_title + " - " + event_location)
             
-    # display a link, or plain text if there is no url
-    if event.url.nil?
-        display
-    else
-      link_to display, event.url, id: event.id
+    link_to_unless event.url.nil?, display, event.url
+  end
+  
+  def mapinfo_social_listing(social, cancelled)
+    if social.title.nil? || social.title.empty?
+      logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
+      return 
     end
     
+    cancelled_part = ""
+    cancelled_part = cancelled_label + " " if cancelled
+    raw(cancelled_part + mapinfo_social_link(social))
+  end
+  
+  def mapinfo_social_link(event)    
+    new_label =""
+    new_label = new_label(event) + " " if event.new?
+    
+    event_title = event.title
+    display = raw(new_label + event_title)
+            
+    link_to_unless event.url.nil?, display, event.url
   end
   
   def swingclass_listing(swingclass)
@@ -126,15 +141,8 @@ module EventsHelper
     social_info = ""
     social_info = "at #{event.title} " if event.has_social?
     
-    if event.organiser.nil?
-      school_info = "" 
-    elsif event.organiser.shortname.nil? || event.organiser.shortname.empty?
-      school_info = "with #{event.organiser.name}"
-    elsif event.organiser.name.nil?
-      school_info = "with #{event.organiser.shortname}"
-    else
-      school_info = "with " + content_tag( :abbr, event.organiser.shortname, :title => event.organiser.name )
-    end
+    school_info = "" 
+    school_info = "with #{school_name(event)}" if school_name(event)
     
     
     # TODO: work out why this needs the "raw" on the new_label to display properly
@@ -144,16 +152,26 @@ module EventsHelper
       swingclass_info(social_info + school_info)
     )
     
-    # display a link, or plain text if there is no url
-    if event.url.nil?
-      return display
+    link_to_unless event.url.nil?, display, event.url
+  end
+  
+  def school_name(event)
+    fail "Tried to get class-related info from an event with no class" unless event.has_class?
+    return if event.organiser.nil?
+    fail "Invalid Organiser (##{event.organiser.id}): name was blank" if event.organiser.name.blank?
+    if event.organiser.shortname.blank?
+      event.organiser.name
     else
-      return link_to display, event.url
+      content_tag( :abbr, event.organiser.shortname, :title => event.organiser.name )
     end
   end
 
-  def new_label(event)
+  def new_label
     content_tag( :strong, "New!", :class => "new_label" )
+  end
+  
+  def cancelled_label
+    content_tag( :strong, "Cancelled", :class => "cancelled_label" )
   end
 
   def swingclass_info(text)
