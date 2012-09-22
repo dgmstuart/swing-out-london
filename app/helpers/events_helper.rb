@@ -84,7 +84,7 @@ module EventsHelper
   
   def social_link(event)    
     new_label =""
-    new_label = new_label + " " if event.new?
+    new_label = new_event_label + " " if event.new?
     
     event_title = event.title
     #Highlight socials which are monthly or more infrequent:
@@ -129,7 +129,7 @@ module EventsHelper
   
   def mapinfo_social_link(event)    
     new_label =""
-    new_label = new_label + " " if event.new?
+    new_label = new_event_label + " " if event.new?
     
     display = raw(new_label + event.title)
            
@@ -144,7 +144,7 @@ module EventsHelper
   
   def swingclass_link(event)
     new_label = ""
-    new_label = new_label + " " if event.new?
+    new_label = new_event_label + " " if event.new?
     
     start_date = ""
     start_date = " (from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
@@ -174,7 +174,7 @@ module EventsHelper
   
   def mapinfo_swingclass_link(event)
     new_label = ""
-    new_label = new_label + " " if event.new?
+    new_label = new_event_label + " " if event.new?
 
     start_date = ""
     start_date = " (from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
@@ -194,7 +194,7 @@ module EventsHelper
 
     # TODO: work out why this needs the "raw" on the new_label to display properly
     display = raw(
-      new_label + start_date + 
+      new_event_label + start_date + 
       class_type + class_style + " " +
       swingclass_info(social_info + school_info)
     )
@@ -213,7 +213,7 @@ module EventsHelper
     end
   end
 
-  def new_label
+  def new_event_label
     content_tag( :strong, "New!", :class => "new_label" )
   end
   
