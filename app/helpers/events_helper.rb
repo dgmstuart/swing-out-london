@@ -45,14 +45,14 @@ module EventsHelper
     d.class == Date && d == @today + 1
   end
   
-  def today_label(d)
-  	if is_today(d)
+  def today_label(d=nil?)    
+  	unless d && !is_today(d)
       content_tag :strong, "Today", :class => "today_label"
     end
   end
   
-  def tomorrow_label(d)
-  	if is_tomorrow(d)
+  def tomorrow_label(d=nil)
+  	unless d && is_tomorrow(d)
       content_tag :strong, "Tomorrow", :class => "tomorrow_label"
     end
   end
@@ -98,10 +98,20 @@ module EventsHelper
     link_to_unless event.url.nil?, display, event.url
   end
   
-  def mapinfo_social_listing(social, cancelled)
+  def mapinfo_social_listing(social, cancelled, date=nil)
     if social.title.nil? || social.title.empty?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return 
+    end
+    
+    date_part = ""
+    if date
+      date_part_content = date.to_s(:listing_date)
+      date_part_content += " (#{today_label date})" if is_today(date)
+      date_part_content += " (#{tomorrow_label date})" if is_tomorrow(date)
+      date_part_content += ": "
+      
+      date_part = link_to date_part_content, date: date.to_s(:db)
     end
     
     cancelled_part = ""
@@ -124,7 +134,7 @@ module EventsHelper
       class_info = " (with#{class_style} #{class_type}#{school_info})"
     end
     
-    raw(cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
+    raw(date_part + cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
   end
   
   def mapinfo_social_link(event)    

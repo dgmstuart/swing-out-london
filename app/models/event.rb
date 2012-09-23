@@ -421,25 +421,30 @@ class Event < ActiveRecord::Base
     Date::DAYNAMES[d.wday]
   end
 
-  def self.socials_dates(start_date) 
+  def self.socials_dates(start_date, venue=nil) 
     #build up an array of events occuring on each date
     output = []
     
     listing_dates(start_date).each do |date|
-      socials_on_date = socials_on_date(date)
+      socials_on_date = socials_on_date(date, venue)
       output << [date, socials_on_date, cancelled_events_on_date(date)] if socials_on_date
     end
     
     return output
   end 
   
-  def self.socials_on_date(date)
+  def self.socials_on_date(date, venue=nil)
     day = weekday_name(date)
-    socials_on_that_date = weekly.socials.includes(:venue).active_on(date).where(day: day)  
-    
     swing_date = SwingDate.find_by_date(date)
-    socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
-
+    
+    if venue 
+      socials_on_that_date = weekly.socials.where(venue_id: venue.id).active_on(date).where(day: day)
+      socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
+    else  
+      socials_on_that_date = weekly.socials.includes(:venue).active_on(date).where(day: day)  
+      socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
+    end
+    
     return if socials_on_that_date.blank?
     
     socials_on_that_date.sort!{|a,b| a.title <=> b.title}

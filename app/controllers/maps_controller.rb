@@ -45,7 +45,6 @@ class MapsController < ApplicationController
     
     @listing_dates = Event.listing_dates(today)
     
-    @type = :socials # in case type was nil or invalid
     date =  case params[:date]
             when "today"      then today
             when "tomorrow"   then today + 1
@@ -57,7 +56,7 @@ class MapsController < ApplicationController
                 @date = date
                 Event.socials_on_date(date)
               else 
-                Event.socials_dates(today).collect{ |a| a[1] }.flatten
+                Event.socials_dates(today).map{ |s| s[1] }.flatten
               end
     
     if events.nil? 
@@ -67,8 +66,11 @@ class MapsController < ApplicationController
 
       @json = venues.to_gmaps4rails do |venue, marker|
         
-        # TODO: DO THIS PROPERLY! AND INCLUDE CANCELLATIONS!
-        venue_events = events.select{ |e| e.venue == venue }.uniq
+        venue_events =  if @date
+                          [Event.socials_on_date(date, venue), Event.cancelled_events_on_date(date)]
+                        else 
+                          Event.socials_dates(today, venue)
+                        end
 
         marker.infowindow render_to_string(:partial => "socials_map_info", :locals => { venue: venue, events: venue_events })
         marker.json({ :id => venue.id, :title => venue.name })
