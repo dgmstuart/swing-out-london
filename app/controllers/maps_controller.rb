@@ -15,9 +15,9 @@ class MapsController < ApplicationController
       
     events =  if day && DAYNAMES.include?(day)
                 @day = day
-                Event.active.weekly_or_fortnightly.classes.where(day: @day).includes(:venue)
+                Event.listing_classes.where(day: @day).includes(:venue)
               else
-                Event.active.weekly_or_fortnightly.classes.includes(:venue)
+                Event.listing_classes.includes(:venue)
               end
 
     if events.nil? 
@@ -28,9 +28,9 @@ class MapsController < ApplicationController
       @json = venues.to_gmaps4rails do |venue, marker|
                 # TODO: ADD IN CANCELLATIONS!
                 venue_events =  if @day 
-                                  Event.active.weekly_or_fortnightly.classes.where(day: @day).where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
+                                  Event.listing_classes.where(day: @day).where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
                                 else
-                                  Event.active.weekly_or_fortnightly.classes.where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
+                                  Event.listing_classes.where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
                                 end
 
                 marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue, events: venue_events })

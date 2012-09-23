@@ -11,7 +11,7 @@ class WebsiteController < ApplicationController
     # Varnish will cache the page for 3600 seconds = 1 hour:
     response.headers['Cache-Control'] = 'public, max-age=3600'
     
-    @classes = Event.active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
+    @classes = Event.listing_classes.includes(:venue, :organiser, :swing_cancellations)
     
     @today = today
     

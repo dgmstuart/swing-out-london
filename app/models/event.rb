@@ -113,15 +113,14 @@ class Event < ActiveRecord::Base
   scope :socials, where(has_social: true).order("title")
   scope :weekly, where(frequency: 1)
   scope :weekly_or_fortnightly, where(frequency: [1,2])
-  
+    
   scope :gigs, where(:event_type => "gig")
   scope :non_gigs, where("event_type != ?", "gig")
   
   scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
   scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
   
-  # for the main listing:
-  scope :class_listing, active.weekly_or_fortnightly.classes.includes(:venue, :organiser, :swing_cancellations)
+  scope :listing_classes, active.weekly_or_fortnightly.classes
   
   # For making sections in the Events editing screens:
   scope :current, active.non_gigs
