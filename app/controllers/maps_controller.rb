@@ -62,6 +62,8 @@ class MapsController < ApplicationController
     if events.nil? 
       empty_map
     else
+      @map_options = { "zoom" => 14, "auto_zoom" => false } if events.count == 1
+        
       venues = events.map{ |e| e.venue }.uniq
 
       @json = venues.to_gmaps4rails do |venue, marker|
