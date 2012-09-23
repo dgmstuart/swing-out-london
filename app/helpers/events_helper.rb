@@ -107,8 +107,8 @@ module EventsHelper
     date_part = ""
     if date
       date_part_content = date.to_s(:listing_date)
-      date_part_content += " (#{today_label date})" if is_today(date)
-      date_part_content += " (#{tomorrow_label date})" if is_tomorrow(date)
+      date_part_content += " (#{today_label})" if is_today(date)
+      date_part_content += " (#{tomorrow_label})" if is_tomorrow(date)
       date_part_content += ": "
       
       date_part = link_to raw(date_part_content), date: date.to_s(:db)
