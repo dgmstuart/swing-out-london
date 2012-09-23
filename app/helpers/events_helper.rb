@@ -26,6 +26,26 @@ module EventsHelper
     tag :li, html_options, true
   end
   
+  def day_header(day)
+    url_options = { controller: :maps, 
+                        action: :classes, 
+                           day: day }
+    link_to day, url_options, title: "Click to view this day's weekly classes on a map" 
+  end
+  
+  
+  def date_header(date)
+    display = ""
+    display = "#{today_label} " if is_today(date)
+    display = "#{tomorrow_label} " if is_tomorrow(date)
+    display += date.to_s(:listing_date)
+    
+    url_options = { controller: :maps, 
+                    action: :socials, 
+                    date: date.to_s(:db) }
+    link_to raw(display), url_options, title: "Click to view this date's events on a map" 
+  end
+  
   #if there are no socials on this day, we need to add a class
   def socialsh2(&block)
     if @socials_dates.empty?
@@ -45,16 +65,12 @@ module EventsHelper
     d.class == Date && d == @today + 1
   end
   
-  def today_label(d=nil)    
-  	if d.nil? || is_today(d)
-      content_tag :strong, "Today", :class => "today_label"
-    end
+  def today_label
+  	content_tag :strong, "Today", :class => "today_label"
   end
   
-  def tomorrow_label(d=nil)
-  	if d.nil? || is_tomorrow(d)
-      content_tag :strong, "Tomorrow", :class => "tomorrow_label"
-    end
+  def tomorrow_label
+    content_tag :strong, "Tomorrow", :class => "tomorrow_label"
   end
 
   

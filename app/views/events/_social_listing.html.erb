@@ -1,5 +1,5 @@
 <%= date_row date %>
-    <h3><%= today_label date %> <%= tomorrow_label date %> <%=date.to_s(:listing_date)%></h3>
+    <h3><%= date_header(date) %></h3>
     <ul>
     <% socials.each do |social| %>
         <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?%>
