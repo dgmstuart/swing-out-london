@@ -34,7 +34,9 @@ class MapsController < ApplicationController
                                 end
 
                 marker.infowindow render_to_string(:partial => "classes_map_info", :locals => { venue: venue, events: venue_events })
-                marker.json({ :id => venue.id, :title => venue.name })
+                json_options =  { id: venue.id, title: venue.name}
+                json_options.merge!coloured_marker_json_options(:green) if venue.id.to_s == params[:id]
+                marker.json(json_options)
       end
     end
   end
@@ -65,7 +67,7 @@ class MapsController < ApplicationController
       @map_options = { "zoom" => 14, "auto_zoom" => false } if events.count == 1
         
       venues = events.map{ |e| e.venue }.uniq
-
+        
       @json = venues.to_gmaps4rails do |venue, marker|
         
         venue_events =  if @date
@@ -75,12 +77,32 @@ class MapsController < ApplicationController
                         end
 
         marker.infowindow render_to_string(:partial => "socials_map_info", :locals => { venue: venue, events: venue_events })
-        marker.json({ :id => venue.id, :title => venue.name })
+        
+        json_options =  { id: venue.id, title: venue.name}
+        json_options.merge!coloured_marker_json_options(:green) if venue.id.to_s == params[:id]
+        marker.json(json_options)
       end
     end
   end
   
   private
+  
+  def coloured_marker_json_options(colour)
+    fail unless [ :black,
+                    :grey,
+                    :white,
+                    :orange,
+                    :yellow,
+                    :purple,
+                    :green
+                ].include?(colour)
+    { picture: "http://maps.google.com/mapfiles/marker_#{colour.to_s}.png", 
+      shadow_picture: 'http://maps.google.com/mapfiles/shadow50.png', 
+      shadow_width: 37, 
+      shadow_height: 34,
+      shadow_anchor: [10,34], # Icon is 20x34, and the anchor is in the middle (10px) at the bottom (34px)
+    }
+  end
   
   def empty_map
     @json = {}

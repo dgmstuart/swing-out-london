@@ -68,7 +68,7 @@ module EventsHelper
   # LISTING ELEMENTS #
   # ---------------- #
   
-  def social_listing(social, cancelled)
+  def social_listing(social, cancelled, date)
     if social.title.nil? || social.title.empty?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return 
@@ -77,8 +77,12 @@ module EventsHelper
     cancelled_part = ""
     cancelled_part = cancelled_label + " " if cancelled
     
+    postcode_part = link_to_unless (social.venue.lat.nil? || social.venue.lng.nil?), outward_postcode(social), "map/socials/#{date.to_s(:db)}/#{social.venue_id}" do
+                      outward_postcode(social)
+                    end
+    
     content_tag :li, 
-      outward_postcode(social) + " " + 
+      postcode_part + " " + 
       content_tag( :span, raw(cancelled_part + social_link(social)), :class => "social_details")
   end
   
@@ -146,9 +150,13 @@ module EventsHelper
     link_to_unless event.url.nil?, display, event.url
   end
   
-  def swingclass_listing(swingclass)
+  def swingclass_listing(swingclass, day)
+    postcode_part = link_to_unless (swingclass.venue.lat.nil? || swingclass.venue.lng.nil?), outward_postcode(swingclass), "map/classes/#{day}/#{swingclass.venue_id}" do
+                      outward_postcode(swingclass)
+                    end
+    
     content_tag :li,
-      outward_postcode(swingclass) + " " + 
+      postcode_part + " " + 
       content_tag( :span, swingclass_link(swingclass) + swingclass_cancelledmsg(swingclass), :class => "swingclass_details")
   end
   
@@ -244,7 +252,7 @@ module EventsHelper
       postcode = Venue::UNKNOWN_COMPASS
       logger.warn "[WARNING]: Venue was nil for '#{event.title}' (event #{event.id})"
     else 
-      title = "#{ event.venue.postcode } to be precise" unless event.venue.postcode.nil? || event.venue.postcode.empty?
+      title = "#{ event.venue.postcode } to be precise. Click to see the venue on a map" unless event.venue.postcode.nil? || event.venue.postcode.empty?
       postcode = event.venue.outward_postcode
     end
 

@@ -8,7 +8,7 @@
         <%= content_tag :li, "There are no classes on this day"%>      
     <% else %>
         <% classes_on_day(day).each do |swingclass|%>
-            <%=swingclass_listing(swingclass)%>
+            <%=swingclass_listing(swingclass, day)%>
         <%end%>
     <%end%>
     </ul>
