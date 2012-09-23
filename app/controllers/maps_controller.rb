@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
-  layout "map"
+  layout "map" 
   
   def classes
     # Varnish will cache the page for 3600 seconds = 1 hour:
@@ -81,8 +81,8 @@ class MapsController < ApplicationController
   def empty_map
     @json = {}
     @map_options =  { center_latitude: 51.51985,
-                      center_longitude: -0.4,
-                      zoom: 10
+                      center_longitude: -0.06729,
+                      zoom: 11
                     }      
   end
 end
