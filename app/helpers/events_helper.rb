@@ -194,7 +194,7 @@ module EventsHelper
 
     # TODO: work out why this needs the "raw" on the new_label to display properly
     display = raw(
-      new_event_label + start_date + 
+      new_label + start_date + 
       class_type + class_style + " " +
       swingclass_info(social_info + school_info)
     )
