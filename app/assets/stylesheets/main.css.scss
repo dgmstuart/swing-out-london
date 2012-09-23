@@ -222,6 +222,11 @@ ul.navigation a { color: #0F0F0F;}
     border: 6px double #0F0F0F;
     display:inline-block;
   }
+  // We allow the current link to be a link on the map:
+  a.current:hover {
+    border: 6px solid #0F0F0F;
+  }
+  
 }
 
 #footer_nav {

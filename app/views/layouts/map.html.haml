@@ -7,7 +7,10 @@
   %header.page
     %h1=link_to 'Swing Out London', :controller => "website", :action => "index"
     .navigation.primary-nav<
-      = yield :primary_nav
+      = link_to_unless_current "Socials", { action: :socials }, :class => ("current" if params[:action] == "socials") do
+        %span.current Socials
+      = link_to_unless_current "Classes", { action: :classes }, :class => ("current" if params[:action] == "classes") do
+        %span.current Classes
       
   .listings.page
     = yield :listings

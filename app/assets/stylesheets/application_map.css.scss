@@ -66,6 +66,12 @@ body.classes, body.socials {
     .primary-nav {
       font-size: 1.4em;
       text-align: center;
+      a {
+        margin: 0 5px;
+        &.current {
+          margin: 0 3px;
+        }
+      }
     }
   }
   .listings {
