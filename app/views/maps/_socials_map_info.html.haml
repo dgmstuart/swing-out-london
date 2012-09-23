@@ -1,0 +1,6 @@
+= render partial: "map_info_address", locals: { venue: venue }
+
+%ul.listing_info
+  - events.each do |event|
+    %li
+      = mapinfo_social_listing(event, false)

@@ -33,7 +33,7 @@ class MapsController < ApplicationController
                                   Event.listing_classes.where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
                                 end
 
-                marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue, events: venue_events })
+                marker.infowindow render_to_string(:partial => "classes_map_info", :locals => { venue: venue, events: venue_events })
                 marker.json({ :id => venue.id, :title => venue.name })
       end
     end
@@ -70,7 +70,7 @@ class MapsController < ApplicationController
         # TODO: DO THIS PROPERLY! AND INCLUDE CANCELLATIONS!
         venue_events = events.select{ |e| e.venue == venue }.uniq
 
-        marker.infowindow render_to_string(:partial => "venue_map_info", :locals => { venue: venue, events: venue_events })
+        marker.infowindow render_to_string(:partial => "socials_map_info", :locals => { venue: venue, events: venue_events })
         marker.json({ :id => venue.id, :title => venue.name })
       end
     end
