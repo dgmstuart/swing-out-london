@@ -45,14 +45,14 @@ module EventsHelper
     d.class == Date && d == @today + 1
   end
   
-  def today_label(d=nil?)    
-  	unless d && !is_today(d)
+  def today_label(d=nil)    
+  	if d.nil? || is_today(d)
       content_tag :strong, "Today", :class => "today_label"
     end
   end
   
   def tomorrow_label(d=nil)
-  	unless d && is_tomorrow(d)
+  	if d.nil? || is_tomorrow(d)
       content_tag :strong, "Tomorrow", :class => "tomorrow_label"
     end
   end
