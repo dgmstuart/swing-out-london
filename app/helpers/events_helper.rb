@@ -111,7 +111,7 @@ module EventsHelper
       date_part_content += " (#{tomorrow_label date})" if is_tomorrow(date)
       date_part_content += ": "
       
-      date_part = link_to date_part_content, date: date.to_s(:db)
+      date_part = link_to raw(date_part_content), date: date.to_s(:db)
     end
     
     cancelled_part = ""
