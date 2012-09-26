@@ -15,7 +15,12 @@ class WebsiteController < ApplicationController
     
     @today = today
     
-    @socials_dates = Event.socials_dates(@today)    
+    @socials_dates = Event.socials_dates(@today)
+    
+    # @ad_type = :square_ads
+    @foo = { image_url: "http://placehold.it/150",
+                ad_url: "http://foo.bar.com", 
+                 title: "Foobar!" }
   end
   
   #TODO: move into a different file?

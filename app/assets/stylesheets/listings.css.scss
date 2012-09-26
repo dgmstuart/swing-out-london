@@ -1,0 +1,32 @@
+.ad_units {
+  padding-top: 1.6em;
+}
+
+.square_ads {
+  a:hover {
+    border: 0;
+  }
+  img{
+    border: 6px double #0F0F0F;
+    margin: 12px;
+  }
+  .placeholder {
+    display: inline-block;
+    margin: 12px;
+    a {
+      border: 6px double #0F0F0F;
+      width: 150px;
+      height: 150px;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}
+
+#googleAd div{
+  width: 254px;
+  border: 6px double #0F0F0F;
+  padding: 10px;
+  margin: auto;
+}

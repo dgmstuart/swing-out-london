@@ -7,19 +7,7 @@
     <% end %>
     
     <%if index==5%>
-        <li id="googleAd">
-            <div><script type="text/javascript"><!--
-        google_ad_client = "ca-pub-6077065686774573";
-        /* In Listings */
-        google_ad_slot = "6685462170";
-        google_ad_width = 234;
-        google_ad_height = 60;
-        //-->
-        </script>
-        <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-        </script></div>
-        </li>
+       <%= render partial: "website/advertising"%>
     <%end%>
     
     </ul>
