@@ -88,15 +88,26 @@ class MapsController < ApplicationController
   private
   
   def coloured_marker_json_options(colour)
-    fail unless [ :black,
-                    :grey,
-                    :white,
-                    :orange,
-                    :yellow,
-                    :purple,
-                    :green
-                ].include?(colour)
-    { picture: "http://maps.google.com/mapfiles/marker_#{colour.to_s}.png", 
+    if [  :black,
+          :grey,
+          :white,
+          :orange,
+          :yellow,
+          :purple,
+          :green].include?(colour)
+      picture = "http://maps.google.com/mapfiles/marker_#{colour.to_s}.png"
+    elsif [ :blue,
+            :ltblue,
+            #:green, # A lighter green
+            #:yellow, # A lighter yellow
+            #:purple, # A lighter purple
+            :pink].include?(colour)
+      picture = "https://maps.gstatic.com/mapfiles/ms2/micons/#{colour.to_s}-dot.png"    
+    else
+      fail "Tried to created a marker with an invalid colour: #{colour}"
+    end
+    
+    { picture: picture, 
       shadow_picture: 'http://maps.google.com/mapfiles/shadow50.png', 
       shadow_width: 37, 
       shadow_height: 34,
