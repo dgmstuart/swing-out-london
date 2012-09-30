@@ -85,15 +85,4 @@ class VenuesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  
-  protected
-  
-  def authenticate
-    @cms_page=true
-    
-    @authenticated = authenticate_or_request_with_http_basic do |username, password|
-      LOGINS[username] == Digest::MD5.hexdigest(password)
-    end
-  end
 end

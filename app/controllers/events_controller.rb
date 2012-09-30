@@ -91,15 +91,4 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
-  
-  protected
-  
-  def authenticate
-    @cms_page=true
-    
-    @authenticated = authenticate_or_request_with_http_basic do |username, password|
-      LOGINS[username] == Digest::MD5.hexdigest(password)
-    end
-  end
-  
 end

@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  # helper :all # include all helpers, all the time
-  
   require 'digest/md5'
   
   def today
@@ -13,4 +11,18 @@ class ApplicationController < ActionController::Base
       @today = Date.local_today
     end
   end
+  
+  def sign_out
+  
+  end
+  
+  protected
+  
+  def authenticate
+    session[:authenticated] =nil  
+     authenticate_or_request_with_http_basic do |username, password|
+      session[:authenticated] =( LOGINS[username] == Digest::MD5.hexdigest(password) )
+    end
+  end
+  
 end
