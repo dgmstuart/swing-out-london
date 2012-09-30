@@ -1,3 +1,15 @@
+- content_for :title do
+  - case params[:action]
+  - when "about"
+    About Swing Out London
+  - when "listings_policy"
+    Swing Out London's listings policy
+
+- content_for :description do
+  - case params[:action] 
+  - when "listings_policy"
+    A guide to the criteria for deciding what classes and socials are listed on Swing Out London
+
 - content_for :stylesheet do
   = stylesheet_link_tag 'application', media: "screen"
   
