@@ -11,3 +11,5 @@ LOGINS={
 INITIAL_SOCIALS=14
 
 CONTACT_EMAIL = "leveretweb@googlemail.com"
+
+TWITTER_URL = "http://www.twitter.com/swingoutlondon"

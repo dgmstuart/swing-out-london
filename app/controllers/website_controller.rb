@@ -15,6 +15,8 @@ class WebsiteController < ApplicationController
     
     @today = today
     
+    @tweet = Tweet.message
+    
     @socials_dates = Event.socials_dates(@today)
     
     # @ad_type = :square_ads
@@ -23,14 +25,13 @@ class WebsiteController < ApplicationController
                  title: "Foobar!" }
   end
   
-  #TODO: move into a different file?
+  private
+
   def get_updated_times
     @last_updated_time = Event.last_updated_datetime.to_s(:timepart)
     @last_updated_date = Event.last_updated_datetime.to_s(:listing_date)
     @last_updated_datetime = Event.last_updated_datetime
   end
-  
-  private
   
   def set_cache_control_on_static_pages
     # Varnish will cache the page for 43200 seconds = 12 hours:
