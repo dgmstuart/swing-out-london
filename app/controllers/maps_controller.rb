@@ -95,24 +95,31 @@ class MapsController < ApplicationController
           :yellow,
           :purple,
           :green].include?(colour)
-      picture = "http://maps.google.com/mapfiles/marker_#{colour.to_s}.png"
+      { picture: "http://maps.google.com/mapfiles/marker_#{colour.to_s}.png",
+        shadow_picture: 'http://maps.google.com/mapfiles/shadow50.png', 
+        shadow_width: 37, 
+        shadow_height: 34,
+        shadow_anchor: [10,34], # Icon is 20x34, and the anchor is in the middle (10px) at the bottom (34px)
+      }
     elsif [ :blue,
             :ltblue,
+            #:red # Black outline
             #:green, # A lighter green
             #:yellow, # A lighter yellow
             #:purple, # A lighter purple
             :pink].include?(colour)
-      picture = "https://maps.gstatic.com/mapfiles/ms2/micons/#{colour.to_s}-dot.png"    
+      { picture: "https://maps.gstatic.com/mapfiles/ms2/micons/#{colour.to_s}-dot.png",
+        width: 32,
+        height: 32,
+        shadow_picture: 'https://maps.gstatic.com/mapfiles/ms2/micons/msmarker.shadow.png', 
+        shadow_width: 59, 
+        shadow_height: 32,
+        shadow_anchor: [16,32],}
     else
       fail "Tried to created a marker with an invalid colour: #{colour}"
     end
     
-    { picture: picture, 
-      shadow_picture: 'http://maps.google.com/mapfiles/shadow50.png', 
-      shadow_width: 37, 
-      shadow_height: 34,
-      shadow_anchor: [10,34], # Icon is 20x34, and the anchor is in the middle (10px) at the bottom (34px)
-    }
+    
   end
   
   def empty_map
