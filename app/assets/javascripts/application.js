@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
+//= require listing
 //= require_self
-//= require_tree .
 
 var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-18613144-1']);
