@@ -2,6 +2,7 @@
   = stylesheet_link_tag 'application_cms', media: "screen"
 
 - content_for :content do
+  =render partial: "admin_bar"
   #page
     #header
       = heading_hn(params[:action], :class=>"site_title") do
