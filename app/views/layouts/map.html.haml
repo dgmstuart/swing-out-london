@@ -14,7 +14,7 @@
     .navigation.primary-nav<
       = link_to_unless_current "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") do
         %span.current Socials
-      = link_to_unless_current "Classes", { action: :socials, day: nil }, :class => ("current" if params[:action] == "classes") do
+      = link_to_unless_current "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") do
         %span.current Classes
       
   .listings.page
