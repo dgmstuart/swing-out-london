@@ -25,7 +25,7 @@ body.classes, body.socials {
 
   .venue_info {
     h3 {
-      font-size: 1em;
+      font-size: 1.2em;
     }
     .adr {
       font-style: italic;
@@ -36,11 +36,17 @@ body.classes, body.socials {
       }
     }
   }
-  .listing_info {
+  ul.listing_info {
+    margin-top: 15px;
     li {
       /* padding to allow for the bottom border applied to the link it contains on hover */
       padding-bottom: 1px; 
     }
+  }
+  .nota_bene {
+    margin: 15px 0 0 0 ;
+    font-size: 0.9em;
+    color: #666;
   }
   
   .page {
