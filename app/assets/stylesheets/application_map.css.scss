@@ -121,7 +121,11 @@ body.classes, body.socials {
       }
     }
   }
-
+  .note {
+    padding: 30px 15px 20px;
+  }
+  
+  
   body.map #classes, body.map #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left: 0;}
   body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
   body.map #classes .daylist{border:none; padding:0;}
