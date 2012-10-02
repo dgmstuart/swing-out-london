@@ -20,18 +20,6 @@ module PageHelper
     end 
   end
   
-  # Display a link to validate the markup of the page
-  def valid_statement(page)
-    validator_address = "http://validator.w3.org/check?uri=referer"
-    
-    # Different pages may or may not validate depending on use of external namespaces, so this needs to be reflected in the link:
-    if page=="index"
-      return "#{link_to "Almost valid XHTML", validator_address} (#{link_to "blame Facebook & Twitter", :action => "about", :anchor => "validation_failures"})"
-    else
-      return link_to "Valid XHTML", validator_address
-    end
-  end
-  
   def display_tweet(tweet)
     if tweet
       # tweet is a Hashie::Mash, so acts like an object
@@ -43,6 +31,4 @@ module PageHelper
         link_to("Swing Out London Twitter feed", "#{TWITTER_URL}", :title => "Swing Out London on Twitter")
     end
   end
-  
-  
 end

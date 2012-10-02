@@ -17,9 +17,19 @@
     first).
 
 #social_media
+  - # Foo for the facebook like button:
+  #fb-root
+  :javascript
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
   %p#like_message
-    Show us some Facebook love: 
-    %fb:like{ href: "http://www.swingoutlondon.co.uk", action:"like", :layout => "button_count", font: "trebuchet ms" }/
+    Show us some Facebook love:
+    %span.fb-like{ "data-href" => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-send" => "true", "data-font" => "trebuchet ms" }
   %p#tweet_message
     Tell the world about us on twitter:
     =link_to "Tweet" ,"http://twitter.com/share", { :class =>"twitter-share-button", "data-count" =>"horizontal", "data-url" =>"http://www.swingoutlondon.co.uk", "data-text" =>"Swing Out London lists Lindy Hop classes and social dancing in London:", "data-related" =>"swingevents:Listing Lindy and blues camps and exchanges in the UK and Europe" }
