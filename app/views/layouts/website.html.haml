@@ -25,7 +25,8 @@
         %em= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index"
         Listings of Lindy Hop classes and socials in London
       
-      %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago
+      - if params[:action] == "index"
+        %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago 
 
       = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
   
