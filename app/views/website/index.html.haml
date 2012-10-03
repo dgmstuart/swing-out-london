@@ -12,8 +12,10 @@
   %meta{ property: "og:email",        content: "leveretweb@googlemail.com" }/
   %meta{ property: "fb:admins",       content: "dgmstuart" }/
 
+- content_for :navigation do
+  = render partial: "listing_navigation"
+
 - content_for :page do
-  =render :partial => 'website/site_description'
   #classes
     %h2
       %em Learn!

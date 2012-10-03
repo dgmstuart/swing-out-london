@@ -1,14 +1,16 @@
-#site_description
+#listing_navigation
   %p 
-    Swing Out London lists all of the regular
-    = link_to "dance classes", {:anchor => "classes_today"}, {:rel =>"subsection"} 
-    in London teaching 
-    = link_to "Lindy Hop", {:action => "listings_policy", :anchor=> "about_lindy"}, {:rel =>"subsection"}
-    and related styles like Balboa and Blues.
+    Swing Out London lists all of the regular 
+    = link_to "swing dance classes", {:anchor => "classes_today"}, {:rel =>"subsection"}
+    in London which teach
+    = succeed "," do 
+      = link_to "Lindy Hop", {:action => "listings_policy", :anchor=> "about_lindy"}, {:rel =>"subsection"}
+    Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
   %p 
-    We also list all of the
+    We also list all of the opportunities for
     = link_to "social dancing", {:anchor => "socials_today"}, {:rel =>"subsection"}
-    opportunities for those styles including dedicated swing dance socials, vintage clubs and selected gigs from swing bands.
+    to Swing, Hot Jazz, Trad Jazz and Manouche 
+    - #including dedicated swing dance socials, vintage clubs and selected gigs from swing bands.
   %p 
     Please
     = mail_to CONTACT_EMAIL, "Email us", :subject => "Swing Out London"
@@ -16,7 +18,6 @@
     =link_to "listings policy", :action => "listings_policy"
     first).
 
-#social_media
   - # Foo for the facebook like button:
   #fb-root
   :javascript
@@ -38,6 +39,6 @@
     for changes and breaking news:
   %p#latest_tweet= display_tweet(@tweet)
 
-%p#caveat
-  %strong Please note:
-  The listings shown are only a guide and you should always check the source website before making any plans.
+  %p#caveat
+    %strong Please note:
+    The listings shown are only a guide and you should always check the source website before making any plans.

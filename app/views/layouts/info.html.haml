@@ -1,0 +1,19 @@
+- content_for :title do
+  - case params[:action]
+  - when "about"
+    About Swing Out London
+  - when "listings_policy"
+    Swing Out London's listings policy
+
+- content_for :description do
+  - case params[:action] 
+  - when "listings_policy"
+    A guide to the criteria for deciding what classes and socials are listed on Swing Out London
+
+- content_for :navigation do
+  = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
+
+- content_for :page do
+  = yield
+
+= render :template => 'layouts/website'

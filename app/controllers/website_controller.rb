@@ -2,6 +2,8 @@ class WebsiteController < ApplicationController
   require 'rubygems'
   require 'twitter'
   
+  layout "info", :except => :index
+  
   before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
   caches_action :index, :layout => false, :expires_in => 1.hour
   
