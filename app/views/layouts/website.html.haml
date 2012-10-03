@@ -30,7 +30,7 @@
 
       = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
   
-    = content_for?(:content) ? yield(:content) : yield
+    = content_for?(:page) ? yield(:page) : yield
   
     #footer
       %p#valid_statement

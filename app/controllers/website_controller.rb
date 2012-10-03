@@ -1,5 +1,4 @@
-class WebsiteController < ApplicationController
-  
+class WebsiteController < ApplicationController  
   require 'rubygems'
   require 'twitter'
   
