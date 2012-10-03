@@ -44,7 +44,7 @@
         %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago 
 
       = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
-    /baz
+
     = content_for?(:page_content) ? yield(:page_content) : yield
   
     #footer
