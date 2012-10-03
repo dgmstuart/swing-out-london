@@ -1,30 +1,15 @@
-- content_for :head do
-  -# FaceBook and twitter js
-  %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}
-  
-  -# Facebook open graph tags
-  %meta{ property: "og:title",        content: "Swing Out London - Lindy Hop Listings" }/
-  %meta{ property: "og:site_name",    content: "Swing Out London" }/
-  %meta{ property: "og:description",  content: "Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" }/
-  %meta{ property: "og:type",         content: "website" }/
-  %meta{ property: "og:url",          content: "http://www.swingoutlondon.co.uk/" }/
-  %meta{ property: "og:image",        content: "http://www.swingoutlondon.co.uk#{asset_path "swingoutlondon_og.png"}"}/
-  %meta{ property: "og:email",        content: "leveretweb@googlemail.com" }/
-  %meta{ property: "fb:admins",       content: "dgmstuart" }/
+=render :partial => 'website/site_description'
+#classes
+  %h2
+    %em Learn!
+    Weekly Classes
+  = render :partial => "events/class_listings"
+#socials
+  = socialsh2 do
+    %em Dance!
+    Clubs and Social dancing
 
-- content_for :page_content do
-  =render :partial => 'website/site_description'
-  #classes
-    %h2
-      %em Learn!
-      Weekly Classes
-    = render :partial => "events/class_listings"
-  #socials
-    = socialsh2 do
-      %em Dance!
-      Clubs and Social dancing
-
-    %p#key
-      N.B. Infrequent events are prefixed with a
-      = image_tag "highlight_icon.png", alt: "asterisk"
-    = render :partial => "events/social_listings"
+  %p#key
+    N.B. Infrequent events are prefixed with a
+    = image_tag "highlight_icon.png", alt: "asterisk"
+  = render :partial => "events/social_listings"
