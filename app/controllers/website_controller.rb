@@ -2,8 +2,8 @@ class WebsiteController < ApplicationController
   require 'rubygems'
   require 'twitter'
   
+  cache_sweeper :event_sweeper, :only => :index
   before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
-  # caches_action :index, :layout => true, :expires_in => 1.hour
   
   def index
     # Varnish will cache the page for 3600 seconds = 1 hour:
