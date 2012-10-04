@@ -5,18 +5,32 @@
     in London which teach
     = succeed "," do 
       = link_to "Lindy Hop", {:action => "listings_policy", :anchor=> "about_lindy"}, {:rel =>"subsection"}
-    Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
+    Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz
   %p 
     We also list all of the opportunities for
     = link_to "social dancing", {:anchor => "socials_today"}, {:rel =>"subsection"}
-    to Swing, Hot Jazz, Trad Jazz and Manouche 
+    to Swing, Hot Jazz, Trad Jazz and Manouche.
     - #including dedicated swing dance socials, vintage clubs and selected gigs from swing bands.
-  %p 
-    Please
+    Read more
+    = link_to "about", :action => "about"
+    us or check out the awesome
+    = link_to "map", controller: "maps", action: "socials"
+    
+#note
+  %p
+    If you think something is missing or incorrect please
     = mail_to CONTACT_EMAIL, "Email us", :subject => "Swing Out London"
-    if you think something is missing or incorrect (please check the 
+    (but check the 
     =link_to "listings policy", :action => "listings_policy"
-    first).
+    first)
+  %p#caveat
+    %strong Please note:
+    The listings shown are only a guide. You should always check the source website before making any plans
+
+#social_media
+  #latest_tweet
+    %h4 Breaking news:
+    %p= display_tweet(@tweet)
 
   - # Foo for the facebook like button:
   #fb-root
@@ -28,17 +42,10 @@
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  %p#like_message
-    Show us some Facebook love:
-    %span.fb-like{ "data-href" => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-send" => "true", "data-font" => "trebuchet ms" }
-  %p#tweet_message
-    Tell the world about us on twitter:
-    =link_to "Tweet" ,"http://twitter.com/share", { :class =>"twitter-share-button", "data-count" =>"horizontal", "data-url" =>"http://www.swingoutlondon.co.uk", "data-text" =>"Swing Out London lists Lindy Hop classes and social dancing in London:", "data-related" =>"swingevents:Listing Lindy and blues camps and exchanges in the UK and Europe" }
-  %p#twitter_follow
-    = link_to "Follow us on Twitter", "http://www.twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"
-    for changes and breaking news:
-  %p#latest_tweet= display_tweet(@tweet)
+  
+  %a.fb-like{ :href => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-send" => "true", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
+  %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/swingoutlondon"} Follow @swingoutlondon
+  :javascript
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-  %p#caveat
-    %strong Please note:
-    The listings shown are only a guide and you should always check the source website before making any plans.
+  
