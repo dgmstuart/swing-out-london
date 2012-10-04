@@ -14,7 +14,7 @@
 
 - content_for :page_content do  
   =render :partial => 'website/site_description'
-  - cache expires_in: 1.hour, race_condition_ttl: 10 do
+  - cache({ :action => "index" }, { expires_in: 1.hour, race_condition_ttl: 10 }) do
     #classes
       %h2
         %em Learn!

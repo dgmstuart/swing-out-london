@@ -1,11 +1,11 @@
 class EventSweeper < ActionController::Caching::Sweeper
   observe Event, Venue, Organiser
   
-  def after_save
+  def after_save(record)
     expire_cache
   end
   
-  def after_destroy
+  def after_destroy(record)
     expire_cache
   end
   
