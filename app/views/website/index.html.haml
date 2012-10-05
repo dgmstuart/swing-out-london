@@ -14,18 +14,17 @@
 
 - content_for :page_content do  
   =render :partial => 'website/site_description'
-  - cache({ :action => "index" }, { expires_in: 1.hour, race_condition_ttl: 10 }) do
-    #classes
-      %h2
-        %em Learn!
-        Weekly Classes
-      = render :partial => "events/class_listings"
-    #socials
-      = socialsh2 do
-        %em Dance!
-        Clubs and Social dancing
+  #classes
+    %h2
+      %em Learn!
+      Weekly Classes
+    = render :partial => "events/class_listings"
+  #socials
+    = socialsh2 do
+      %em Dance!
+      Clubs and Social dancing
 
-      %p#key
-        N.B. Infrequent events are prefixed with a
-        = image_tag "highlight_icon.png", alt: "asterisk"
-      = render :partial => "events/social_listings"
+    %p#key
+      N.B. Infrequent events are prefixed with a
+      = image_tag "highlight_icon.png", alt: "asterisk"
+    = render :partial => "events/social_listings"

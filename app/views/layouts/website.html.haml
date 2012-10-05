@@ -26,7 +26,11 @@
         Listings of Lindy Hop classes and socials in London
       
       - if params[:action] == "index"
-        %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago 
+        %p#last_updated_ago 
+          Last updated at
+          = @last_updated_time
+          on
+          = @last_updated_date 
 
       = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
 
