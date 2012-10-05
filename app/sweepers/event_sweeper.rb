@@ -12,7 +12,7 @@ class EventSweeper < ActionController::Caching::Sweeper
   private
   
   def expire_cache
-    expire_fragment :controller => 'events', :action => 'index'
+    expire_action :controller => 'events', :action => 'index'
     expire_action :controller => 'website', :action => 'index'
   end
 end
