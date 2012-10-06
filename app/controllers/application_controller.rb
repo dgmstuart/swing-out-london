@@ -25,4 +25,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  before_filter :get_controller_and_action
+  
+  def get_controller_and_action
+    @controller_name = controller_name
+    @action_name     = action_name 
+  end
+  
 end

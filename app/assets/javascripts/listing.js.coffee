@@ -1,7 +1,8 @@
 $(document).ready ->
-  $("time.timeago").timeago()
-  load_latest_tweet()
-  add_socials_analytics_events()
+  if($('body').hasClass('website') && $('body').hasClass('index'))
+    $("time.timeago").timeago()
+    load_latest_tweet()
+    add_socials_analytics_events()
 
 load_latest_tweet = ->
   $.get "latest_tweet", (tweet)->
