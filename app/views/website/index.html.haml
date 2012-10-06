@@ -1,7 +1,7 @@
 - content_for :head do
   -# FaceBook and twitter js
   %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}
-  
+
   -# Facebook open graph tags
   %meta{ property: "og:title",        content: "Swing Out London - Lindy Hop Listings" }/
   %meta{ property: "og:site_name",    content: "Swing Out London" }/
@@ -12,10 +12,11 @@
   %meta{ property: "og:email",        content: "leveretweb@googlemail.com" }/
   %meta{ property: "fb:admins",       content: "dgmstuart" }/
 
+
 - content_for :navigation do
   = render partial: "listing_navigation"
 
-- content_for :page do
+- content_for :page_content do
   #classes
     %h2
       %em Learn!
@@ -30,4 +31,3 @@
       N.B. Infrequent events are prefixed with a
       = image_tag "highlight_icon.png", alt: "asterisk"
     = render :partial => "events/social_listings"
-

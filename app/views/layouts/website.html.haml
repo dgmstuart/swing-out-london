@@ -14,12 +14,15 @@
         Listings of Lindy Hop classes and socials in London
       
       - if params[:action] == "index"
-        %p#last_updated_ago Last updated #{ time_ago_in_words @last_updated_datetime } ago 
+        %p#last_updated_ago
+          Last updated
+          %time.timeago{ datetime: @last_updated_datetime.getutc.iso8601 }
+            at #{ @last_updated_time } on #{ @last_updated_date }
 
       = yield(:navigation)
-  
-    = content_for?(:page) ? yield(:page) : yield
-  
+    
+    = content_for?(:page_content) ? yield(:page_content) : yield
+    
     #footer
       %p#valid_statement
         = link_to "Valid HTML5", "http://validator.w3.org/check?uri=referer"
@@ -30,9 +33,6 @@
         = mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"
   
       %p#last_updated
-        &ndash; last updated at
-        = @last_updated_time
-        on
-        = @last_updated_date
+        &ndash; last updated at #{ @last_updated_time } on #{ @last_updated_date }
 
 = render :template => 'layouts/application'

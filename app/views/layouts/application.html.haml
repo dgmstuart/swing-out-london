@@ -17,6 +17,6 @@
       
     = yield :head
   
-  = content_tag( :body, :class => params[:action] ) do
+  = content_tag( :body, :class => "#{@controller_name} #{@action_name}") do
     -# = render partial: "admin_bar" if session[:authenticated]
     = content_for?(:content) ? yield(:content) : yield
