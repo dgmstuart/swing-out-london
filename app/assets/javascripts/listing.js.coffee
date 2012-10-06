@@ -1,11 +1,7 @@
 $(document).ready ->
-  load_last_updated()
+  $("time.timeago").timeago()
   load_latest_tweet()
   add_socials_analytics_events()
-
-load_last_updated = ->
-  $.get "last_updated", (last_updated_msg)->
-    $("#last_updated_ago").html(last_updated_msg)
 
 load_latest_tweet = ->
   $.get "latest_tweet", (tweet)->

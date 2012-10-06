@@ -26,11 +26,10 @@
         Listings of Lindy Hop classes and socials in London
       
       - if params[:action] == "index"
-        %p#last_updated_ago 
-          Last updated at
-          = @last_updated_time
-          on
-          = @last_updated_date 
+        %p#last_updated_ago
+          Last updated
+          %time.timeago{ datetime: @last_updated_datetime.getutc.iso8601 }
+            at #{ @last_updated_time } on #{ @last_updated_date }
 
       = render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }
 
@@ -46,9 +45,6 @@
         = mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"
   
       %p#last_updated
-        &ndash; last updated at
-        = @last_updated_time
-        on
-        = @last_updated_date
+        &ndash; last updated at #{ @last_updated_time } on #{ @last_updated_date }
 
 = render :template => 'layouts/application'

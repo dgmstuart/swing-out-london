@@ -21,7 +21,6 @@ Swingoutlondon::Application.routes.draw do
   
   match 'admin' => 'events#index'
   
-  match 'last_updated' => 'website#last_updated'
   match 'latest_tweet' => 'website#latest_tweet'
   # Assume everything else is a page on the website:
   # todo: use the page_url(action) form of urls

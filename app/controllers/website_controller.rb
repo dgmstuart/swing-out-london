@@ -12,6 +12,8 @@ class WebsiteController < ApplicationController
     
     @last_updated_time = Event.last_updated_datetime.to_s(:timepart)
     @last_updated_date = Event.last_updated_datetime.to_s(:listing_date)
+    @last_updated_datetime = Event.last_updated_datetime
+    
     @today = today
     
     @classes = Event.listing_classes.includes(:venue, :organiser, :swing_cancellations)
@@ -27,11 +29,6 @@ class WebsiteController < ApplicationController
   # In the meantime Maybe these two actions (and associated views and roots) belong as a single action, to reduce the number of http requests...
   def latest_tweet
     @tweet = Tweet.message
-    render layout: false
-  end
-
-  def last_updated
-    @last_updated_datetime = Event.last_updated_datetime
     render layout: false
   end
   
