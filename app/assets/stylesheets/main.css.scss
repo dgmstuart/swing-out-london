@@ -104,6 +104,9 @@ h3 {
 #header {
   border-bottom: 3px solid #0F0F0F;
   margin: 0 60px;
+}
+
+body.website.index #header {
   padding-bottom: 30px;
 }
 
@@ -233,7 +236,7 @@ ul.navigation{list-style-type:none;letter-spacing:0.1em;line-height:3.5em;text-t
 ul.navigation li{display:inline;margin:0 0.5em 0 0;padding:0 0 0 1em;white-space:nowrap;}
 
 #admin_nav{text-align:center;clear:both;padding:1em 0;}
-#main_nav{text-align:center;clear:both;font-size:1.14em;margin:0 50px;padding-bottom:15px;border-bottom:3px solid #0F0F0F;}
+#main_nav{text-align:center;clear:both;font-size:1.14em;padding-bottom:15px;}
 
 @media only screen and (max-device-width: 480px){
   /* changed padding to force nav configuration */
