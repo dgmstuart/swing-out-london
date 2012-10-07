@@ -124,14 +124,10 @@ module EventsHelper
       return 
     end
     
-    date_part = ""
+    date_info = ""
     if date
-      date_part_content = date.to_s(:listing_date)
-      date_part_content += " (#{today_label})" if is_today(date)
-      date_part_content += " (#{tomorrow_label})" if is_tomorrow(date)
-      date_part_content += ": "
-      
-      date_part = link_to raw(date_part_content), date: date.to_s(:db)
+      date_part_content = link_to date.to_s(:listing_date), date: date.to_s(:db)
+      date_info = content_tag :span, date_part_content + ": ", :class => "social_date"
     end
     
     cancelled_part = ""
@@ -154,7 +150,9 @@ module EventsHelper
       class_info = " (with#{class_style} #{class_type}#{school_info})"
     end
     
-    raw(date_part + cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
+    social_details = content_tag :span, raw(cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info)), :class => "event_details"
+    
+    raw(date_info + social_details)
   end
   
   def mapinfo_social_link(event)    
