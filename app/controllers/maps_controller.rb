@@ -13,18 +13,17 @@ class MapsController < ApplicationController
           else params[:day].titlecase unless params[:day].nil?
           end
       
-    events =  if day && DAYNAMES.include?(day)
+    venues =  if day && DAYNAMES.include?(day)
                 @day = day
-                Event.listing_classes.where(day: @day).includes(:venue)
+                Venue.where(:id => Event.listing_classes.where(day: @day).select("distinct venue_id"))
               else
                 Event.listing_classes.includes(:venue)
+                Venue.where(:id => Event.listing_classes.select("distinct venue_id"))
               end
 
-    if events.nil? 
+    if venues.nil? 
       empty_map
     else
-      venues = events.map{ |e| e.venue }.uniq
-
       @json = venues.to_gmaps4rails do |venue, marker|
                 # TODO: ADD IN CANCELLATIONS!
                 venue_events =  if @day 
