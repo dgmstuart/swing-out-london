@@ -1,7 +1,8 @@
 class Event < ActiveRecord::Base
 
   belongs_to :venue
-  belongs_to :organiser
+  belongs_to :class_organiser, :class_name => "Organiser"
+  belongs_to :social_organiser, :class_name => "Organiser"
   has_and_belongs_to_many :swing_dates, :uniq => true
   has_and_belongs_to_many :swing_cancellations, :class_name => "SwingDate", :join_table => "events_swing_cancellations", :uniq => true
   

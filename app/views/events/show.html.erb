@@ -12,8 +12,12 @@
         <%= venue_link(@event) %>
     </li>
     <li>
-        <span>Organiser:</span>
-        <%= organiser_link(@event) %>
+        <span>Class Organiser:</span>
+        <%= organiser_link(@event.class_organiser) %>
+    </li>
+    <li>
+        <span>Social Organiser:</span>
+        <%= organiser_link(@event.social_organiser) %>
     </li>
     <li>
         <span>Event type:</span>

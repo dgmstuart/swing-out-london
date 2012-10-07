@@ -1,5 +1,6 @@
 class Organiser < ActiveRecord::Base
-  has_many :events
+  has_many :classes, class_name: "Event", foreign_key: "class_organiser_id"
+  has_many :socials, class_name: "Event", foreign_key: "social_organiser_id"
   
   default_scope :order => 'name ASC' #sets default search order
   

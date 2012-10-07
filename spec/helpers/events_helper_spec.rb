@@ -8,16 +8,16 @@ describe EventsHelper do
     end
     context "when there is no organiser" do
       before(:each) do
-        @class = FactoryGirl.create(:class, organiser: nil)
+        @class = FactoryGirl.create(:class, class_organiser: nil)
       end
       it "should return an empty string" do
         helper.school_name(@class).should be_nil
       end
     end
-    context "when there is an organiser" do
+    context "when there is a class organiser" do
       before(:each) do
         @organiser = FactoryGirl.create(:organiser)
-        @class = FactoryGirl.create(:class, organiser: @organiser)
+        @class = FactoryGirl.create(:class, class_organiser: @organiser)
       end
       it "should raise an error if the organiser's name is blank" do
         @organiser.name = nil

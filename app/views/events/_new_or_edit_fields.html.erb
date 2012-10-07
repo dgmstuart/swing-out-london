@@ -17,9 +17,13 @@
         <%= link_to 'New Venue', new_venue_path %>
     </li>
     <li>
-        <%= f.label :organiser %>
-        <%= f.select :organiser_id, organiser_select, {:include_blank => true} %>
+        <%= f.label :social_organiser %>
+        <%= f.select :social_organiser_id, organiser_select, {:include_blank => true} %>
         <%= link_to 'New Organiser', new_organiser_path %>
+    </li>
+    <li>
+        <%= f.label :class_organiser %>
+        <%= f.select :class_organiser_id, organiser_select, {:include_blank => true} %>
     </li>
     <li>
         <%= f.label :event_type %>

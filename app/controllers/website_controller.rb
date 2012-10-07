@@ -16,7 +16,7 @@ class WebsiteController < ApplicationController
     
     @today = today
     
-    @classes = Event.listing_classes.includes(:venue, :organiser, :swing_cancellations)
+    @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates = Event.socials_dates(@today)
     
     # @ad_type = :square_ads

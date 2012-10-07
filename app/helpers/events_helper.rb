@@ -238,12 +238,12 @@ module EventsHelper
   
   def school_name(event)
     fail "Tried to get class-related info from an event with no class" unless event.has_class? || event.has_taster?
-    return if event.organiser.nil?
-    fail "Invalid Organiser (##{event.organiser.id}): name was blank" if event.organiser.name.blank?
-    if event.organiser.shortname.blank?
-      event.organiser.name
+    return if event.class_organiser.nil?
+    fail "Invalid Organiser (##{event.class_organiser.id}): name was blank" if event.class_organiser.name.blank?
+    if event.class_organiser.shortname.blank?
+      event.class_organiser.name
     else
-      content_tag( :abbr, event.organiser.shortname, :title => event.organiser.name )
+      content_tag( :abbr, event.class_organiser.shortname, :title => event.class_organiser.name )
     end
   end
 
@@ -322,9 +322,9 @@ module EventsHelper
   # LINKS #
   # ----- #
   
-  def organiser_link(event)
-    return Event::UNKNOWN_ORGANISER if event.organiser.nil?
-    link_to_unless event.organiser.website.nil?, event.organiser.name, event.organiser.website
+  def organiser_link(organiser)
+    return Event::UNKNOWN_ORGANISER if organiser.nil?
+    link_to_unless organiser.website.nil?, organiser.name, organiser.website
   end
   
   def venue_link(event)
