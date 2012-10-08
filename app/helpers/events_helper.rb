@@ -150,7 +150,9 @@ module EventsHelper
       class_info = " (with#{class_style} #{class_type}#{school_info})"
     end
     
-    social_details = content_tag :span, raw(cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info)), :class => "event_details"
+    
+    social_details = raw(cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
+    social_details = content_tag :span, social_details, :class => "event_details" if date
     
     raw(date_info + social_details)
   end
