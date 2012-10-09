@@ -3,7 +3,6 @@ class WebsiteController < ApplicationController
   require 'twitter'
   
   caches_action :index, :layout => true, :expires_in => 1.hour, :race_condition_ttl => 10
-  caches_action :latest_tweet, :expires_in => 1.hour, :race_condition_ttl => 10
   cache_sweeper :event_sweeper, :only => :index
   before_filter :set_cache_control_on_static_pages, only: [:about, :listings_policy]
   
@@ -29,8 +28,6 @@ class WebsiteController < ApplicationController
   # TODO: re-implement these in pure javascript! Bypass rails altogether!
   # In the meantime Maybe these two actions (and associated views and roots) belong as a single action, to reduce the number of http requests...
   def latest_tweet
-    # Varnish/users browsers will cache the page for 3600 seconds = 1 hour:
-    response.headers['Cache-Control'] = 'public, max-age=3600'
     @tweet = Tweet.message
     render layout: false
   end
