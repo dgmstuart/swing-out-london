@@ -439,17 +439,6 @@ li.date_row a {color: #0F0F0F; }
 .cancelled_label{color:#FEE6B8; background-color:#CC0000; }
 .new_label {color:#FEE6B8; background-color:#0F0F0F; }
 
-.postcode {
-    border: 1px solid #0F0F0F;
-    display: block;
-    float: left;
-    width: 3.5em; /*N.B. Longest displaying postcode is NW1W. This won't fit in this space, but we don't have any postcodes in that area a.t.m.*/
-    position:relative;
-    bottom:0.1em;
-    padding-left:0.3em;
-    text-transform:uppercase;
-    font-size:0.7em;
-}
 
 /* TODAY AND TOMORROW */
 /**********************/

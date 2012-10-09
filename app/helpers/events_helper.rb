@@ -93,9 +93,8 @@ module EventsHelper
     cancelled_part = ""
     cancelled_part = cancelled_label + " " if cancelled
     
-    postcode_part = link_to_unless (social.venue.lat.nil? || social.venue.lng.nil?), outward_postcode(social), "map/socials/#{date.to_s(:db)}/#{social.venue_id}" do
-                      outward_postcode(social)
-                    end
+    map_url = "map/socials/#{date.to_s(:db)}/#{social.venue_id}" unless (social.venue.lat.nil? || social.venue.lng.nil?)
+    postcode_part = outward_postcode(social, map_url)
     
     content_tag :li, 
       postcode_part + " " + 
@@ -167,9 +166,8 @@ module EventsHelper
   end
   
   def swingclass_listing(swingclass, day)
-    postcode_part = link_to_unless (swingclass.venue.lat.nil? || swingclass.venue.lng.nil?), outward_postcode(swingclass), "map/classes/#{day}/#{swingclass.venue_id}" do
-                      outward_postcode(swingclass)
-                    end
+    map_url = "map/classes/#{day}/#{swingclass.venue_id}" unless (swingclass.venue.lat.nil? || swingclass.venue.lng.nil?)
+    postcode_part = outward_postcode(swingclass, map_url)
     
     content_tag :li,
       postcode_part + " " + 
@@ -259,8 +257,7 @@ module EventsHelper
     content_tag( :span, raw(text), :class => "swingclass_info" )
   end
   
-  # Return a span containing a compass point
-  def outward_postcode(event)
+  def outward_postcode(event, map_url=nil)
     # Default message:
     title = "Bah - this event is too secret to have a postcode!"
     
@@ -271,8 +268,10 @@ module EventsHelper
       title = "#{ event.venue.postcode } to be precise. Click to see the venue on a map" unless event.venue.postcode.nil? || event.venue.postcode.empty?
       postcode = event.venue.outward_postcode
     end
-
-    content_tag :abbr, postcode, :title => title, :class => "postcode"
+        
+    link_to_unless map_url.nil?, postcode, map_url, :title => title, :class => "postcode" do
+      content_tag :abbr, postcode, :title => title, :class => "postcode"
+    end
   end
   
   # Return a span containing a message about cancelled dates:
