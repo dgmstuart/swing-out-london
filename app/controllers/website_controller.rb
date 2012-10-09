@@ -3,8 +3,9 @@ class WebsiteController < ApplicationController
   require 'twitter'
   
   caches_action :index, :layout => true, :expires_in => 1.hour, :race_condition_ttl => 10
+  caches_action :latest_tweet, :layout => false, :expires_in => 1.hour, :race_condition_ttl => 10
   cache_sweeper :event_sweeper, :only => :index
-  before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
+  before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy, :latest_tweet]
   
   def index
     # Varnish/users browsers will cache the page for 3600 seconds = 1 hour:
