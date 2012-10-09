@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
   layout "map" 
   
+  caches_action :socials, :classes, cache_path: Proc.new { |c| c.params }, layout: true, :expires_in => 1.hour, :race_condition_ttl => 10
+  
   def classes
     # Varnish will cache the page for 3600 seconds = 1 hour:
     response.headers['Cache-Control'] = 'public, max-age=3600'
