@@ -17,7 +17,6 @@ class MapsController < ApplicationController
                 @day = day
                 Venue.where(:id => Event.listing_classes.where(day: @day).select("distinct venue_id"))
               else
-                Event.listing_classes.includes(:venue)
                 Venue.where(:id => Event.listing_classes.select("distinct venue_id"))
               end
 

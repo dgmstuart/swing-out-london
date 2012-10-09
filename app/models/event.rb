@@ -110,8 +110,8 @@ class Event < ActiveRecord::Base
   end  
   
   # scopes to get different types of event:
-  scope :classes, where(has_class: true).order("title")  
-  scope :socials, where(has_social: true).order("title")
+  scope :classes, where(has_class: true)
+  scope :socials, where(has_social: true)
   scope :weekly, where(frequency: 1)
   scope :weekly_or_fortnightly, where(frequency: [1,2])
     
