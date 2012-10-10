@@ -42,6 +42,19 @@ body.classes, body.socials {
       /* padding to allow for the bottom border applied to the link it contains on hover */
       padding-bottom: 1px; 
     }
+    .social_date {
+      display: block;
+      float: left;
+      width: 190px;
+    }
+    .event_details {
+      display: block;
+      margin-left: 190px;
+      max-width: 400px;
+    }
+    .day {
+      margin-right: 5px;
+    }
   }
   .nota_bene {
     margin: 15px 0 0 0 ;

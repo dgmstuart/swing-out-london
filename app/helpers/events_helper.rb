@@ -123,14 +123,10 @@ module EventsHelper
       return 
     end
     
-    date_part = ""
+    date_info = ""
     if date
-      date_part_content = date.to_s(:listing_date)
-      date_part_content += " (#{today_label})" if is_today(date)
-      date_part_content += " (#{tomorrow_label})" if is_tomorrow(date)
-      date_part_content += ": "
-      
-      date_part = link_to raw(date_part_content), date: date.to_s(:db)
+      date_part_content = link_to date.to_s(:listing_date), date: date.to_s(:db)
+      date_info = content_tag :span, date_part_content + ": ", :class => "social_date"
     end
     
     cancelled_part = ""
@@ -153,7 +149,11 @@ module EventsHelper
       class_info = " (with#{class_style} #{class_type}#{school_info})"
     end
     
-    raw(date_part + cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
+    
+    social_details = raw(cancelled_part + mapinfo_social_link(social)+ swingclass_info(class_info))
+    social_details = content_tag :span, social_details, :class => "event_details" if date
+    
+    raw(date_info + social_details)
   end
   
   def mapinfo_social_link(event)    
@@ -236,12 +236,12 @@ module EventsHelper
   
   def school_name(event)
     fail "Tried to get class-related info from an event with no class" unless event.has_class? || event.has_taster?
-    return if event.organiser.nil?
-    fail "Invalid Organiser (##{event.organiser.id}): name was blank" if event.organiser.name.blank?
-    if event.organiser.shortname.blank?
-      event.organiser.name
+    return if event.class_organiser.nil?
+    fail "Invalid Organiser (##{event.class_organiser.id}): name was blank" if event.class_organiser.name.blank?
+    if event.class_organiser.shortname.blank?
+      event.class_organiser.name
     else
-      content_tag( :abbr, event.organiser.shortname, :title => event.organiser.name )
+      content_tag( :abbr, event.class_organiser.shortname, :title => event.class_organiser.name )
     end
   end
 
@@ -321,9 +321,9 @@ module EventsHelper
   # LINKS #
   # ----- #
   
-  def organiser_link(event)
-    return Event::UNKNOWN_ORGANISER if event.organiser.nil?
-    link_to_unless event.organiser.website.nil?, event.organiser.name, event.organiser.website
+  def organiser_link(organiser)
+    return Event::UNKNOWN_ORGANISER if organiser.nil?
+    link_to_unless organiser.website.nil?, organiser.name, organiser.website
   end
   
   def venue_link(event)

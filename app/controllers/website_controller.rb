@@ -6,7 +6,7 @@ class WebsiteController < ApplicationController
 
   caches_action :index, :layout => true, :expires_in => 1.hour, :race_condition_ttl => 10
   cache_sweeper :event_sweeper, :only => :index
-  before_filter :set_cache_control_on_static_pages, only: [:about,:listings_policy]
+  before_filter :set_cache_control_on_static_pages, only: [:about, :listings_policy]
   
   def index
     # Varnish/users browsers will cache the page for 3600 seconds = 1 hour:
@@ -18,7 +18,7 @@ class WebsiteController < ApplicationController
     
     @today = today
     
-    @classes = Event.listing_classes.includes(:venue, :organiser, :swing_cancellations)
+    @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates = Event.socials_dates(@today)
     
     # @ad_type = :square_ads

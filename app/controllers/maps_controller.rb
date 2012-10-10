@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
   layout "map" 
   
+  caches_action :socials, :classes, cache_path: Proc.new { |c| c.params }, layout: true, :expires_in => 1.hour, :race_condition_ttl => 10
+  
   def classes
     # Varnish will cache the page for 3600 seconds = 1 hour:
     response.headers['Cache-Control'] = 'public, max-age=3600'
@@ -13,24 +15,22 @@ class MapsController < ApplicationController
           else params[:day].titlecase unless params[:day].nil?
           end
       
-    events =  if day && DAYNAMES.include?(day)
+    venues =  if day && DAYNAMES.include?(day)
                 @day = day
-                Event.listing_classes.where(day: @day).includes(:venue)
+                Venue.where(:id => Event.listing_classes.where(day: @day).select("distinct venue_id"))
               else
-                Event.listing_classes.includes(:venue)
+                Venue.where(:id => Event.listing_classes.select("distinct venue_id"))
               end
 
-    if events.nil? 
+    if venues.nil? 
       empty_map
     else
-      venues = events.map{ |e| e.venue }.uniq
-
       @json = venues.to_gmaps4rails do |venue, marker|
                 # TODO: ADD IN CANCELLATIONS!
                 venue_events =  if @day 
-                                  Event.listing_classes.where(day: @day).where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
+                                  Event.listing_classes.where(day: @day).where(venue_id: venue.id).includes(:class_organiser, :swing_cancellations)
                                 else
-                                  Event.listing_classes.where(venue_id: venue.id).includes(:organiser, :swing_cancellations)
+                                  Event.listing_classes.where(venue_id: venue.id).includes(:class_organiser, :swing_cancellations)
                                 end
 
                 marker.infowindow render_to_string(:partial => "classes_map_info", :locals => { venue: venue, events: venue_events })
