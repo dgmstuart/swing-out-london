@@ -16,7 +16,7 @@ class MapsController < ApplicationController
               end
 
 
-    if venues.nil?
+    if venues.blank?
       empty_map
     else
       @json = venues.to_gmaps4rails do |venue, marker|
@@ -139,8 +139,8 @@ class MapsController < ApplicationController
   
   def empty_map
     @json = {}
-    @map_options =  { center_latitude: 51.51985,
-                      center_longitude: -0.06729,
+    @map_options =  { center_latitude: 51.5264,
+                      center_longitude: -0.0878,
                       zoom: 11
                     }      
   end
