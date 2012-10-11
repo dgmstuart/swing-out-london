@@ -9,14 +9,14 @@ class MapsController < ApplicationController
     
     # Days are stored in the database in titlecase - also in the DAYNAMES constant
     @day = get_day(params[:day])
-      
     venues =  if @day
                 Venue.all_with_classes_listed_on_day(@day)
               else
                 Venue.all_with_classes_listed
               end
 
-    if venues.nil? 
+
+    if venues.nil?
       empty_map
     else
       @json = venues.to_gmaps4rails do |venue, marker|
@@ -39,14 +39,12 @@ class MapsController < ApplicationController
     # Varnish will cache the page for 3600 seconds = 1 hour:
     response.headers['Cache-Control'] = 'public, max-age=3600'
     
-    
-    
+    @listing_dates = Event.listing_dates(today)
     @date = get_date(params[:date])
     
     events =  if @date
                 Event.socials_on_date(@date)
               else
-                @listing_dates = Event.listing_dates(today)
                 Event.socials_dates(today).map{ |s| s[1] }.flatten
               end
     
@@ -74,6 +72,9 @@ class MapsController < ApplicationController
     end
   end
   
+  
+  private
+  
   # TODO: get_day and get_date maybe don't belong here...
   
   # Return a Capitalised string IF the input refers to a valid listing day
@@ -92,19 +93,16 @@ class MapsController < ApplicationController
   
   # Return a Date IF the input refers to a valid listing date
   def get_date(date_string)
-    return unless date_string
-    
+    return unless date_string   
     case date_string
     when "today"      then today
     when "tomorrow"   then today + 1
     else
       date = date_string.to_date rescue nil 
-      raise ActiveRecord::RecordNotFound unless Event.listing_dates(today).include?(date)
+      raise ActiveRecord::RecordNotFound unless @listing_dates.include?(date)
       return date
     end
   end
-  
-  private
   
   def coloured_marker_json_options(colour)
     if [  :black,
