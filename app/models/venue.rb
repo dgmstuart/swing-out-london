@@ -6,7 +6,8 @@ class Venue < ActiveRecord::Base
   
   has_many :events
   
-  default_scope :order => 'name ASC' #sets default search order
+  scope :all_with_classes_listed, where(:id => Event.listing_classes.select("distinct venue_id"))
+  scope :all_with_classes_listed_on_day, lambda { |day| where(:id => Event.listing_classes_on_day(day).select("distinct venue_id")) }
   
   validates_presence_of :name, :area
   validates :website, format: URI::regexp(%w(http https))

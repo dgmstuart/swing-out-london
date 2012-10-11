@@ -122,6 +122,9 @@ class Event < ActiveRecord::Base
   scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
   
   scope :listing_classes, active.weekly_or_fortnightly.classes
+  scope :listing_classes_on_day, lambda { |day| listing_classes.where(day: day) }
+  scope :listing_classes_at_venue, lambda { |venue| listing_classes.where(venue_id: venue.id) }
+  scope :listing_classes_on_day_at_venue, lambda { |day, venue| listing_classes_on_day(day).where(venue_id: venue.id) }
   
   # For making sections in the Events editing screens:
   scope :current, active.non_gigs
