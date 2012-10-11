@@ -49,6 +49,18 @@ describe MapsController do
   end
   
   describe "GET socials" do
+    it "should assign an array of dates to @listings dates" do
+      #Stub out irrelevant logic:
+      controller.stub(:get_date)
+      Event.stub(:socials_dates).and_return([])
+      
+      Event.stub(:listing_dates).and_return([Date.new])
+      
+      get :socials
+      assigns[:listing_dates].should be_an(Array)
+      assigns[:listing_dates][0].should be_a(Date)
+    end
+    
     describe "assigns dates correctly:" do
       before(:each) do
         Event.stub(:socials_on_date).and_return([])
