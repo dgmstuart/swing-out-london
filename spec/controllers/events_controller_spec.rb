@@ -10,12 +10,14 @@ describe EventsController do
       assigns[:event].should == event
     end
     it "should set a message if there is no taster, class or social" do
-      event = FactoryGirl.create(:event, has_taster: false, has_class: false, has_social: false)
+      event = FactoryGirl.build(:event, has_taster: false, has_class: false, has_social: false)
+      event.save(:validate => false)
       get :show, :id => event.to_param
       assigns[:warning].should_not be_blank
     end
     it "should set a message if there is a taster but no class or social" do
-      event = FactoryGirl.create(:event, has_taster: true, has_class: false, has_social: false)
+      event = FactoryGirl.build(:event, has_taster: true, has_class: false, has_social: false)
+      event.save(:validate => false)
       get :show, :id => event.to_param
       assigns[:warning].should_not be_blank
     end

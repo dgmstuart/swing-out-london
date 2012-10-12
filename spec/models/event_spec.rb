@@ -267,4 +267,19 @@ describe Event do
   end
   
   pending "test existing events functionality #{__FILE__}"
+  
+  describe "(validations)" do
+    it "should be invalid if it has neither a class nor a social nor a taster" do
+      FactoryGirl.build(:event, has_taster: false, has_social: false, has_class: false).should_not be_valid
+    end
+    it "should be invalid if it has a taster but no class or social" do
+      FactoryGirl.build(:event, has_taster: true, has_social: false, has_class: false).should_not be_valid
+    end
+    it "should be valid if it has a class but no taster or social (and everything else is OK)" do
+      FactoryGirl.build(:event, has_taster: false, has_social: false, has_class: true).should be_valid
+    end
+    it "should be valid if it has a social but no taster or class (and everything else is OK)" do
+      FactoryGirl.build(:event, has_taster: false, has_social: true, has_class: false).should be_valid
+    end
+  end
 end
