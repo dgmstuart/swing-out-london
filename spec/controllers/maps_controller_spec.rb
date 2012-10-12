@@ -69,7 +69,24 @@ describe MapsController do
         it "should render an empty map (nil array)" do
           Venue.stub(:all_with_classes_listed).and_return(nil)
         end
-      end      
+      end   
+    end
+    context "when there is exactly one venue" do
+      before(:each) do
+        venue = FactoryGirl.create(:venue)
+        Venue.stub(:all_with_classes_listed).and_return([venue])
+        relation = double("Array")
+        relation.stub(:includes)
+        Event.stub(:listing_classes_at_venue).and_return(relation)
+        get :classes
+      end
+      it "should set the zoom level to 14" do
+        puts assigns
+        assigns[:map_options][:zoom].should == 14
+      end
+      it "should disable auto zoom" do
+        assigns[:map_options][:auto_zoom].should == false
+      end
     end
     # it "assigns @teams" do
     #   team = Team.create
@@ -139,6 +156,19 @@ describe MapsController do
       end
       it "should raise a 404 if the url contains as string which doesn't represent a date" do
         expect { get :socials, date: "asfasfasf" }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+    context "when there is exactly one venue" do
+      before(:each) do
+        event = FactoryGirl.create(:social)
+        Event.stub(:socials_dates).and_return([[nil,event]])
+        get :socials
+      end
+      it "should set the zoom level to 14" do
+        assigns[:map_options][:zoom].should == 14
+      end
+      it "should disable auto zoom" do
+        assigns[:map_options][:auto_zoom].should == false
       end
     end
   end

@@ -19,6 +19,8 @@ class MapsController < ApplicationController
     if venues.blank?
       empty_map
     else
+      @map_options = { "zoom" => 14, "auto_zoom" => false } if venues.count == 1
+      
       @json = venues.to_gmaps4rails do |venue, marker|
                 # TODO: ADD IN CANCELLATIONS!
                 venue_events =  if @day 
@@ -50,10 +52,9 @@ class MapsController < ApplicationController
     
     if events.nil? 
       empty_map
-    else
-      @map_options = { "zoom" => 14, "auto_zoom" => false } if events.count == 1
-        
+    else  
       venues = events.map{ |e| e.venue }.uniq
+      @map_options = { "zoom" => 14, "auto_zoom" => false } if venues.count == 1
         
       @json = venues.to_gmaps4rails do |venue, marker|
         
