@@ -51,6 +51,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'guard-livereload'
+  gem 'simplecov'
 end
 
 group :production do

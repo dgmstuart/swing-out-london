@@ -4,3 +4,4 @@ log/*.log
 tmp/**/*
 .rvmrc
 .sass-cache/
+coverage/*

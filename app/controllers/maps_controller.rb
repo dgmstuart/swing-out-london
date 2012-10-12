@@ -8,29 +8,25 @@ class MapsController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
     
     # Days are stored in the database in titlecase - also in the DAYNAMES constant
-    day = case params[:day] 
-          when "today"      then Event.weekday_name(today)
-          when "tomorrow"   then Event.weekday_name(today + 1)
-          when "yesterday"  then Event.weekday_name(today - 1)
-          else params[:day].titlecase unless params[:day].nil?
-          end
-      
-    venues =  if day && DAYNAMES.include?(day)
-                @day = day
-                Venue.where(:id => Event.listing_classes.where(day: @day).select("distinct venue_id"))
+    @day = get_day(params[:day])
+    venues =  if @day
+                Venue.all_with_classes_listed_on_day(@day)
               else
-                Venue.where(:id => Event.listing_classes.select("distinct venue_id"))
+                Venue.all_with_classes_listed
               end
 
-    if venues.nil? 
+
+    if venues.blank?
       empty_map
     else
+      @map_options = { "zoom" => 14, "auto_zoom" => false } if venues.count == 1
+      
       @json = venues.to_gmaps4rails do |venue, marker|
                 # TODO: ADD IN CANCELLATIONS!
                 venue_events =  if @day 
-                                  Event.listing_classes.where(day: @day).where(venue_id: venue.id).includes(:class_organiser, :swing_cancellations)
+                                  Event.listing_classes_on_day_at_venue(@day,venue).includes(:class_organiser, :swing_cancellations)
                                 else
-                                  Event.listing_classes.where(venue_id: venue.id).includes(:class_organiser, :swing_cancellations)
+                                  Event.listing_classes_at_venue(venue).includes(:class_organiser, :swing_cancellations)
                                 end
 
                 marker.infowindow render_to_string(:partial => "classes_map_info", :locals => { venue: venue, events: venue_events })
@@ -46,32 +42,24 @@ class MapsController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
     
     @listing_dates = Event.listing_dates(today)
+    @date = get_date(params[:date])
     
-    date =  case params[:date]
-            when "today"      then today
-            when "tomorrow"   then today + 1
-            when "yesterday"  then today - 1
-            else params[:date].to_date rescue nil
-            end
-    
-    events =  if date && @listing_dates.include?(date)
-                @date = date
-                Event.socials_on_date(date)
-              else 
+    events =  if @date
+                Event.socials_on_date(@date)
+              else
                 Event.socials_dates(today).map{ |s| s[1] }.flatten
               end
     
     if events.nil? 
       empty_map
-    else
-      @map_options = { "zoom" => 14, "auto_zoom" => false } if events.count == 1
-        
+    else  
       venues = events.map{ |e| e.venue }.uniq
+      @map_options = { "zoom" => 14, "auto_zoom" => false } if venues.count == 1
         
       @json = venues.to_gmaps4rails do |venue, marker|
         
         venue_events =  if @date
-                          [Event.socials_on_date(date, venue), Event.cancelled_events_on_date(date)]
+                          [Event.socials_on_date(@date, venue), Event.cancelled_events_on_date(@date)]
                         else 
                           Event.socials_dates(today, venue)
                         end
@@ -85,7 +73,37 @@ class MapsController < ApplicationController
     end
   end
   
+  
   private
+  
+  # TODO: get_day and get_date maybe don't belong here...
+  
+  # Return a Capitalised string IF the input refers to a valid listing day
+  def get_day(day_string)
+    return unless day_string
+    
+    case day_string
+    when "today"      then Event.weekday_name(today)
+    when "tomorrow"   then Event.weekday_name(today + 1)
+    else 
+      day = day_string.titlecase
+      raise ActiveRecord::RecordNotFound unless DAYNAMES.include?(day)
+      return day
+    end
+  end
+  
+  # Return a Date IF the input refers to a valid listing date
+  def get_date(date_string)
+    return unless date_string   
+    case date_string
+    when "today"      then today
+    when "tomorrow"   then today + 1
+    else
+      date = date_string.to_date rescue nil 
+      raise ActiveRecord::RecordNotFound unless @listing_dates.include?(date)
+      return date
+    end
+  end
   
   def coloured_marker_json_options(colour)
     if [  :black,
@@ -118,14 +136,12 @@ class MapsController < ApplicationController
     else
       fail "Tried to created a marker with an invalid colour: #{colour}"
     end
-    
-    
   end
   
   def empty_map
     @json = {}
-    @map_options =  { center_latitude: 51.51985,
-                      center_longitude: -0.06729,
+    @map_options =  { center_latitude: 51.5264,
+                      center_longitude: -0.0878,
                       zoom: 11
                     }      
   end

@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  
   factory :event, :aliases => [:social, :intermittent_social] do
     has_taster false
     has_class false
@@ -7,6 +8,8 @@ FactoryGirl.define do
     frequency 0 
     day 'monday'
     url 'http://www.example.com' 
+    
+    venue
     
     factory :class, :class => Event do
       has_class true
@@ -18,8 +21,11 @@ FactoryGirl.define do
   end
 
   factory :venue do
-    name "test_venue"
-    area "test_area"
+    name      "test_venue"
+    area      "test_area"
+    lat       0.0
+    lng       0.0
+    website   'http://www.example.com'
   end
   
   factory :organiser do

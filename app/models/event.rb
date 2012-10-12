@@ -18,12 +18,19 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of :shortname, :allow_nil => true, :allow_blank => true
 
   validates_numericality_of :course_length, :only_integer => true , :greater_than => 0, :allow_nil => true
-
+  
   validate :cannot_be_weekly_and_have_dates
-
+  validate :will_be_listed
+  
   def cannot_be_weekly_and_have_dates
     if frequency == 1 && !dates.empty?
       errors.add(:date_array, "must be empty for weekly events")
+    end
+  end
+  
+  def will_be_listed
+    unless has_class? || has_social?
+      errors[:base] << ("Events must have either a Social or a Class, otherwise they won't be listed!")
     end
   end
 
@@ -122,6 +129,9 @@ class Event < ActiveRecord::Base
   scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
   
   scope :listing_classes, active.weekly_or_fortnightly.classes
+  scope :listing_classes_on_day, lambda { |day| listing_classes.where(day: day) }
+  scope :listing_classes_at_venue, lambda { |venue| listing_classes.where(venue_id: venue.id) }
+  scope :listing_classes_on_day_at_venue, lambda { |day, venue| listing_classes_on_day(day).where(venue_id: venue.id) }
   
   # For making sections in the Events editing screens:
   scope :current, active.non_gigs

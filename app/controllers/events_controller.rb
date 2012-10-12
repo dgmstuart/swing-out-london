@@ -19,9 +19,16 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1
-  # GET /events/1.xml
   def show
     @event = Event.findevent(params[:id])
+    
+    if !@event.has_class? && !@event.has_social?
+      @warning =  if @event.has_taster? 
+                    "This event has a taster but no class or social, so it won't show up in the listings"
+                  else
+                    "This event doesn't have class or social, so it won't show up in the listings"
+                  end
+    end
   end
 
   # GET /events/new
