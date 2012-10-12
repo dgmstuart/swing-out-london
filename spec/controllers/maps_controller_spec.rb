@@ -35,7 +35,42 @@ describe MapsController do
           expect { get :classes, day: "yesterday" }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
-    end 
+    end
+    
+    context "when there are no venues to display" do
+      def map_is_centred_on_london
+        assigns[:map_options][:center_latitude].should == 51.5264
+        assigns[:map_options][:center_longitude].should == -0.0878
+      end
+      after(:each) do
+        map_is_centred_on_london
+      end
+      context "and there is a day" do
+        before(:each) do
+          controller.stub(:get_day).and_return("Monday")
+        end
+        after(:each) do
+          get :classes, day: "Monday"
+        end
+        it "should centre map on London (empty array)" do
+          Venue.stub(:all_with_classes_listed_on_day).and_return([])
+        end
+        it "should render an empty map (nil array)" do
+          Venue.stub(:all_with_classes_listed_on_day).and_return(nil)
+        end
+      end
+      context "and there is no day" do
+        after(:each) do
+          get :classes
+        end
+        it "should centre map on London (empty array)" do
+          Venue.stub(:all_with_classes_listed).and_return([])
+        end
+        it "should render an empty map (nil array)" do
+          Venue.stub(:all_with_classes_listed).and_return(nil)
+        end
+      end      
+    end
     # it "assigns @teams" do
     #   team = Team.create
     #   get :index
