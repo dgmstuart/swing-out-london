@@ -84,8 +84,16 @@ p em { font-style: italic }
 
 q:before, q:after { content:'"'; }
 
-ul.textlist { list-style-type: disc; padding-left: 3em; }
-  ul.textlist li { padding-left: 0.5em; }
+body.website {
+  li ul { 
+    list-style-type: disc;
+    padding-left: 3em;
+    li { 
+      padding-left: 0.5em; 
+    }
+  }
+}
+
 ul.indent {list-style-type: square;}
 
 .section_heading {
@@ -516,17 +524,27 @@ h2.section_heading {
 #about_me, #about_lindy {margin-top:35px;}
 
 #colophon {
-  padding:20px;
-  margin:35px 100px; 
+  padding: 20px;
+  margin: 35px 100px; 
   border: 6px double #0F0F0F;
-  text-align:justify;
+  text-align: justify;
+  h2 {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5em;
+  }
+  li {
+    margin-bottom: 0.8em;
+    ul li {
+      margin-bottom: inherit;
+    }
+  }
 }
 @media only screen and (max-device-width: 480px){
   #colophon { margin:35px 0px; }
 }
-  #colophon h2 {margin-top:0px;}
-  #colophon li {margin-bottom:0.8em;}
-  #colophon .textlist li {margin-bottom:inherit;}
 
 #principles {
   list-style: outside decimal;
