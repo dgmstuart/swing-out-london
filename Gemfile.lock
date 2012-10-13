@@ -138,6 +138,7 @@ GEM
     rb-fsevent (0.9.1)
     rdoc (3.12)
       json (~> 1.4)
+    redcarpet (2.2.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.11.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   pry
   rails (= 3.2.8)
   rb-fsevent
+  redcarpet
   rspec-rails
   sass-rails (~> 3.2.3)
   simplecov

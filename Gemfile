@@ -8,6 +8,7 @@ gem 'thin'
 # Gems used in all environments
 gem 'haml'
 gem 'haml_rails'
+gem 'redcarpet' # markdown
 gem 'jquery-rails'
 
 gem 'twitter'

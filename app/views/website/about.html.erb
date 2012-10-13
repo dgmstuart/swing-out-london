@@ -1,19 +1,9 @@
-<div id="about_me" class="sidebar">
-	<h3 class="section_heading">About me</h3>
-	<p>I live in South London, I've been dancing Lindy since late 2009, and I love it.</p>
-	<p>I have a blog called "<%= link_to "Why I Dance...", "http://whyidance.tumblr.com/"%>" which does exactly what it says on the tin.</p>
-	<p>Leads in London don't get to meet and talk to each other so much, so I organise <%= link_to "London Lindy Leads Dinners", "http://www.facebook.com/home.php?sk=group_147221981989905"%> to try and fix that.</p>
-	<p>I dance all over town and I've tried to have lessons from each of the London swing schools. I mainly dance <%= link_to "Lindy Hop", "http://en.wikipedia.org/wiki/Lindy_Hop" %> (6 &amp; 8 count and 30's Charleston) and a little <%= link_to "Blues", "http://en.wikipedia.org/wiki/Blues_dance#Blues_dancing_in_the_contemporary_swing_dance_community" %>.</p>
-	<p>I'm keen to learn more 1920's style Charleston, and I've started a <%=link_to "1920's Partner Charleston revolution","http://www.facebook.com/home.php?sk=group_187534864606727&ap=1"%> to try and encourage more teaching in this area.</p>
-	<p>Please send any comments, corrections or listings to:<br/><%=mail_to CONTACT_EMAIL, nil, :subject => "Swing Out London"%></p>
+<div id = "about_me" class="sidebar">
+  <%= render partial: "about_me" %>
 </div>
 
-<div id="show_love" class="sidebar">
-    <h3 class="section_heading" id="show_love_header">Show some love</h3>
-
-    <p>If you like Swing Out London and find it useful, please consider linking to it from your Blog, Facebook, <%= link_to "Twitter", "http://twitter.com/swingoutlondon", :title => "Swing Out London on Twitter"%> or personal website: this really helps Google to know that people are interested and will make it easier for others to find the site. </p>
-
-    <p>It's always nice to get <%=mail_to CONTACT_EMAIL, "Email", :subject => "Swing Out London"%> as well.</p>
+<div id = "show_love" class="sidebar">
+  <%= render partial: "show_love" %>
 </div>
 
 
@@ -63,58 +53,12 @@
         </li>
   
     </ol>
-    
-    <div id="colophon">
-    	<h2 class="section_heading">Colophon</h2>
+</div>    
+<div id="colophon" >
+  <%= render partial: "colophon" %>
+</div>    
 
-    	<ul>
-    		<li>The styling of the site was inspired by vintage playbills, magazine listings and event posters. The primary font used is <%= link_to "Futura", "http://en.wikipedia.org/wiki/Futura_(typeface)", :title=>"Wikipedia - Futura" %> (falling back to Trebuchet MS on Windows) which was designed in 1927.</li>
-    		<li>The <%= link_to "vintage wallpaper", "http://zebiii.deviantart.com/art/Patterns-2-94330934", :title => "Patterns.2 by ZeBii on DeviantArt"%> in the background is by <%= link_to "ZeBii on DeviantArt", "http://zebiii.deviantart.com/" %>.</li>
-    		<li>This site was written on a Mac. These days I use <%= link_to "TextMate", "http://macromates.com/" %> and <%= link_to "Chrome", "http://www.google.com/chrome", :title => "The Google Chrome web browser" %> for development.</li>
-    		<li><a href="http://www.codestyle.org/servlets/FontStack">CodeStyle's Font Stack Builder</a> and <a href="http://www.identifont.com/similar.html">Identifont</a> came in handy for picking fonts.</li>
-    		
-    		<li>The site uses a custom-built <a href="http://rubyonrails.org/">Ruby on Rails</a> <abbr title="Content Management System">CMS</abbr>, which I wrote from scratch (Rails 3, Ruby 1.9). I use <%= link_to "Git", "http://git-scm.com/" %> for version control and there is <a href = "https://github.com/leveretweb/Swing-Out-London">a public <%=content_tag :abbr, 'repo', :title=>'repository'%> for Swing Out London on github</a>. The following resources were used:
-    		  <ul class="textlist">
-    		    <li>
-    		      <%= link_to "Haml", "http://haml.info/"%>,
-    		      <%= link_to "Sass", "http://sass-lang.com/"%> (.scss)
-    		      and <%= link_to "CoffeeScript", "http://coffeescript.org/"%>
-    		      for writing the HTML, CSS and Javascript.
-    		    </li>
-    		    <li>
-    		      <%= link_to "RSpec", "http://haml.info/"%>,
-    		      <%= link_to "Factory Girl", "https://github.com/thoughtbot/factory_girl"%>,
-    		      <%= link_to "Spork", "https://github.com/sporkrb/spork/"%>
-    		      and <%= link_to "Guard", "https://github.com/guard/guard"%>
-    		      for testing;
-    		    </li>
-    		    <li>
-    		      <%= link_to "awesome_print", "https://github.com/michaeldv/awesome_print"%>,
-    		      and <%= link_to "pry", "http://pryrepl.org/"%>,
-    		      for debugging;
-    		    </li> 
-    		    <li>The <%= link_to "twitter", "https://github.com/sferik/twitter"%> gem to retrieve the latest tweet;</li>
-    				<li><%= link_to "Google-Maps-for-Rails", "https://github.com/apneadiving/Google-Maps-for-Rails/" %> for the maps.</li>
-    			</ul>
-    		</li>
-    		<li>
-    		  <%= link_to "RailsCasts", "http://railscasts.com/"%>
-    		  and <%= link_to "Stack Overflow", "http://stackoverflow.com/" %> are invaluable development resources.
-    		</li>
-    		</li>
-    		<li>
-    		  The site is currently hosted on <%= link_to "Heroku", "http://heroku.com/"%>.
-    		  The <%= link_to "MemCachier", "http://www.memcachier.com/" %> add-on handles the caching.
-    		</li>
-    		<li>The site uses valid HTML5. The <abbr title="Cascading Style Sheets">CSS</abbr> is mostly valid, but some of the CSS3 doesn't validate at the moment.</li> 
-    		<li>
-    		  Performance monitoring is supplied by <%= link_to "NewRelic", "http://newrelic.com/"%>
-    		  and <%= link_to "Citrulu", "http://www.citrulu.com/" %> lets me know if anything breaks.
-    		</li>
-    	</ul>
-    </div>
-    
-</div>
+
 
 
 

@@ -492,6 +492,12 @@ h2.section_heading {
   width:247px;
   float:right;
   clear:right;
+  h3 {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5em;
+  }
 }
 
 @media only screen and (max-device-width: 480px){
