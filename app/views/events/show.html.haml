@@ -1,6 +1,7 @@
-%p.warning-message
-  %strong Warning:
-  = @warning
+- if @warning 
+  %p.warning-message
+    %strong Warning:
+    = @warning
 %ol.show
   %li
     %span Title:
