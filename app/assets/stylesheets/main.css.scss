@@ -84,14 +84,9 @@ p em { font-style: italic }
 
 q:before, q:after { content:'"'; }
 
-body.website {
-  li ul { 
-    list-style-type: disc;
-    padding-left: 3em;
-    li { 
-      padding-left: 0.5em; 
-    }
-  }
+ul.unstyled, ol.unstyled {
+  margin-left: 0;
+  list-style: none;
 }
 
 ul.indent {list-style-type: square;}
@@ -537,8 +532,13 @@ h2.section_heading {
   }
   li {
     margin-bottom: 0.8em;
-    ul li {
-      margin-bottom: inherit;
+  }
+  ul ul { 
+    list-style-type: disc;
+    padding-left: 3em;
+    li { 
+      padding-left: 0.5em;
+      margin-bottom: inherit; 
     }
   }
 }

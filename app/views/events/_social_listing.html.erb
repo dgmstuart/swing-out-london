@@ -1,6 +1,6 @@
 <%= date_row date %>
     <h3><%= date_header(date) %></h3>
-    <ul>
+    <ul class="unstyled">
     <% socials.each do |social| %>
         <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?%>
         <%= social_listing(social, cancelled, date) %>

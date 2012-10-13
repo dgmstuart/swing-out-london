@@ -1,7 +1,7 @@
 <%= day_row day %>
     <%= today_label if is_today(day)-%>
     <h3><%= day_header(day) -%></h3>
-    <ul>
+    <ul class="unstyled">
     <% #get all events from this day: %>
     
     <%if classes_on_day(day).empty?%>
