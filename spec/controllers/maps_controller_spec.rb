@@ -81,7 +81,6 @@ describe MapsController do
         get :classes
       end
       it "should set the zoom level to 14" do
-        puts assigns
         assigns[:map_options][:zoom].should == 14
       end
       it "should disable auto zoom" do
