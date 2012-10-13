@@ -1,9 +1,0 @@
-<% #Site navigation - used in header and footer  %>
-
-<%= content_tag :ul, :id => nav_id, :class => nav_class do %>
-	<li class="first"><%= nav_link 'Home', {:controller => "website", :action => "index"},{:rel => "start"}%></li>
-	<li><%= nav_link 'Learn', {:controller => "website", :action => "index", :anchor => "classes_today"},{:class => "internal", :rel => "subsection"} %></li>
-	<li><%= nav_link 'Dance', {:controller => "website", :action => "index", :anchor => "socials_today"},{:class => "internal", :rel => "subsection"} %></li>
-	<li class="about_link"><%= nav_link 'About', {:controller => "website", :action => "about"},{:rel => "section"} %></li>
-	<li><%= nav_link 'Listings Policy', {:controller => "website", :action => "listings_policy"},{:rel => "section"} %></li>
-<% end %>

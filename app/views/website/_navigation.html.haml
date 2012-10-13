@@ -1,0 +1,6 @@
+- #Site navigation - used in header and footer
+%ul{ id: nav_id, :class => nav_class }
+  %li.first= nav_link 'Home', "/",  { :rel => "start" }
+  %li= nav_link 'Map', "/map",      { :rel => "section" }
+  %li.about_link= nav_link 'About', { :controller => "website", :action => "about" },{ :rel => "section" }
+  %li= nav_link 'Listings Policy',  { :controller => "website", :action => "listings_policy" },{ :rel => "section" }
