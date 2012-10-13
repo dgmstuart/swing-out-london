@@ -91,12 +91,6 @@ ul.unstyled, ol.unstyled {
 
 ul.indent {list-style-type: square;}
 
-.section_heading {
-  text-transform: uppercase;
-  text-align:center;
-  line-height:1.5em;
-}
-
 h3 {
   font-size:1.2em;
 }
@@ -470,36 +464,31 @@ li.today:target {
     li.date_row .today_label:after, li.date_row .tomorrow_label:after {content:":"}
 
 /* ABOUT PAGE */
-
-
-.section_heading{
-  margin-bottom:10px;
+.content { 
+  width: 470px;
+  margin: 0 0 35px 50px;
+  float: left;
 }
-
-h1.section_heading {
-  font-size:1.8em;
-  margin-top:35px;
-}
-h2.section_heading {
-  font-size:1.5em;
-  margin-top:35px;
-}
-
-#about_swingoutlondon{ margin:35px 76px 35px 50px; }
-#policy{ margin:35px 76px 35px 50px; }
 
 .sidebar {
-  padding:20px;
-  margin:0 50px 30px 30px;
+  padding: 20px;
+  margin: 0 50px 30px 30px;
   border: 6px double #0F0F0F;
-  width:247px;
-  float:right;
-  clear:right;
+  width: 247px;
+  float: right;
+  clear: right;
   h3 {
     margin-bottom: 10px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1.5em;
+  }
+  p, ul {
+    font-family: Georgia, serif;
+    font-style:italic;
+  }
+  li {
+    margin-bottom: 1.2em;
   }
 }
 
@@ -509,16 +498,36 @@ h2.section_heading {
   .sidebar { margin:0 20px 30px 20px; width:auto; float:none; clear:none; }
 }
 
+/*style for first sidebar*/
+#about_me, #about_lindy { margin-top: 35px; }
 
-.sidebar p, .sidebar ul {
-  font-family: Georgia, serif;
-  font-style:italic;
+.content {
+  h1, h2 {
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5em;
+    margin: 35px 0 10px;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  
+  ol {
+    list-style: outside decimal;
+    margin-left: 1.7em;
+  }
+  ol, ul {
+    h3, h4 {
+      margin-bottom: 0.4em;
+    }
+  }
 }
 
-/*style for first sidebar*/
-#about_me, #about_lindy {margin-top:35px;}
-
 #colophon {
+  clear: both;
   padding: 20px;
   margin: 35px 100px; 
   border: 6px double #0F0F0F;
@@ -545,15 +554,6 @@ h2.section_heading {
 @media only screen and (max-device-width: 480px){
   #colophon { margin:35px 0px; }
 }
-
-#principles {
-  list-style: outside decimal;
-  margin-left:1.7em;
-}
-#principles h3{font-size:1.2em;}
-
-#principles h3, #listings_policy h4 {margin-bottom:0.4em;}
-#principles li, #listings_policy li {margin-bottom:1.2em;}
 
 #listings_policy p {padding-left:2em;}
 
