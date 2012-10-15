@@ -477,6 +477,9 @@ li.today:target {
   width: 247px;
   float: right;
   clear: right;
+  &.first{ 
+    margin-top: 35px;
+  }
   h3 {
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -487,19 +490,20 @@ li.today:target {
     font-family: Georgia, serif;
     font-style:italic;
   }
-  li {
-    margin-bottom: 1.2em;
+  ul {
+    list-style-type: disc;
+    padding-left: 2em;
+    li {
+      margin-bottom: 1.2em;
+    }
   }
 }
 
 @media only screen and (max-device-width: 480px){
   #about_swingoutlondon{ margin:35px 30px; }
-  #policy{ margin:35px 30px; }
+  .content{ margin:35px 30px; }
   .sidebar { margin:0 20px 30px 20px; width:auto; float:none; clear:none; }
 }
-
-/*style for first sidebar*/
-#about_me, #about_lindy { margin-top: 35px; }
 
 .content {
   h1, h2 {
@@ -522,6 +526,50 @@ li.today:target {
   ol, ul {
     h3, h4 {
       margin-bottom: 0.4em;
+    }
+  }
+  table {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+table {
+  padding-bottom: 35px;
+  th, td {
+    padding: 10px 15px 0;
+    line-height: 1.5em;
+    &.row_title {
+      font-size: 1.1em;
+      border-right: solid 1px #0F0F0F;
+    }
+  }
+  tr.first td {
+    padding-top: 20px;
+  }
+
+  th {
+    padding: 10px 15px 18px;
+    font-size: 1.3em;
+    text-align: center;
+    border-bottom: solid 1px #0F0F0F;
+  }
+  &.full-width {
+    clear: both;
+    padding: 0 50px 35px;
+  }
+  &#music_policy {
+    th, td {
+      width: 180px;
+      vertical-align: middle;
+      &.row_title {
+        width: 150px;
+      }
+    }
+  }
+  &#classes_policy, &#socials_policy{
+    th, td {
+      width: 50%;
     }
   }
 }

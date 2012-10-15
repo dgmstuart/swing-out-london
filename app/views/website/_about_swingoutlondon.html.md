@@ -46,15 +46,29 @@ I think are important to delivering a useful service. Swing Out London is:
 
     I aim to cover every regular class going on in the capital and I've got my ear to the ground -
     seeking out social dancing opportunities you won't hear about anywhere else.
-
+    
 3.  
+    ### Not just dance socials
+    
+    Swing Out London attempts to list _all_ the social dancing opportunities in town. 
+    With the recent burst of interest in Vintage in London there are a number of vintage-themed events like
+    [the Blitz party](http://www.theblitzparty.com"),
+    [the Candlelight club](www.thecandlelightclub.com/) and
+    [Die Freche Muse](http://www.diefrechemuse.co.uk/)
+    which are not aimed at swing dancers, but which play suitable music.
+    
+    These nights aren't to everyone's taste and you shouldn't expect to find dancers there, 
+    but if you Bring Your Own there's often a fun evening to be had.
+    The same applies to swing gigs.
+
+4.  
     ### Up-to-Date
 
     I'm wired into all of the mailing lists, Facebook groups and Twitter feeds,
     so if something gets cancelled, or something new comes up, you'll be the first to know.
     On other listings sites you'll still find long-dead dance events, but not here.
 
-4.  
+5.  
     ### Independent
 
     At the moment I'm just listing everything I can find, so there's no scope for bias towards any swing school
@@ -62,7 +76,7 @@ I think are important to delivering a useful service. Swing Out London is:
     obviously I have my preferences of lessons and social nights, but you should never see any of that 
     preference on the site.
 
-5.  
+6.  
     ### Sexy
 
     Whatever you think of the other listings sites, you'd have a hard time arguing that they were pretty. 
