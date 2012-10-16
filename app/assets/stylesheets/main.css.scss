@@ -521,6 +521,10 @@ li.today:target {
   em {
     font-style: italic;
   }
+  ul {
+    list-style: disc;
+    padding-left: 2em;
+  }
   ol {
     list-style: outside decimal;
     margin-left: 1.7em;

@@ -59,15 +59,19 @@ Grass Roots Swing Dance
 -----------------------
 London has a large and well-established infrastructure of Swing Dance schools, but this is augmented by a number of independent not-for profit groups who deserve kudos for their services to the scene:
 
-*   [Swing Dancers Of London](http://www.swingdancersoflondon.org/) are a great positive force for promoting the dance
-    in the capital. They occasionally organise events and the 
+*   [Swing Dancers Of London](http://www.swingdancersoflondon.org/) are a great positive force for promoting 
+    Swing Dance in the capital. They occasionally organise events and the 
     [SDOL Facebook group](https://www.facebook.com/groups/2244903317/) is _the_ hub for debate,
     rants and event promotion in the scene
+    
 *   The [London Lindy Exchange](http://londonlindyexchange.com/) is an annual event which invites dancers from 
     all over the world to come and dance here. A large number of overseas visitors are hosted by locals
+    
 *   [The Sunday Shuffle](https://www.facebook.com/pages/The-Sunday-Shuffle/135544203177994) is a Monthly not 
     for profit Balboa social dance
+    
 *   Although [Blues Revolution](http://www.bluesrevolution.co.uk/) isn't exclusively not for profit, they are 
     a driving force behind Blues dancing in London
+    
 *   [Swing Records](https://www.facebook.com/groups/201362529904972/) is a Facebook Group which promotes and 
     arranges for free and discounted entry for dancers to events
