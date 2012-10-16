@@ -518,7 +518,9 @@ li.today:target {
   h2 {
     font-size: 1.5em;
   }
-  
+  em {
+    font-style: italic;
+  }
   ol {
     list-style: outside decimal;
     margin-left: 1.7em;

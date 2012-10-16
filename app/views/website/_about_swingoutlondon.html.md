@@ -1,83 +1,73 @@
 About Swing Out London
 ======================
-This website is mainly for [Me](/#about_me). 
-There - I've said it: it presents the information I want to see, the way I want to see it and
-it's my main way of personally deciding where I want to dance. 
-If it's useful to other people as well, then I'm very glad.
+This website is designed to give dancers (or dancers-to-be) all the information they need to take advantage of London's Swing Dancing scene.
 
-We are incredibly privileged in London to have such a great range of opportunities for dancing available to us.
-The problem is finding out about those opportunities.
+London has one of the oldest [revival](http://en.wikipedia.org/wiki/Lindy_hop#Revival_.281980s_and_1990s.29) Swing Dancing scenes in Europe and probably one of the biggest. Navigating it all can be difficult: part of the reason I made Swing Out London was so that _I_ could to keep track of what's going on.
 
-Motivation
-----------
-I was frustrated when starting out that I couldn't find any comprehensive Lindy Hop listings 
-and although I later found out about existing services like 
-[Swing Junction](http://www.swingjunction.co.uk/modules/piCal/index.php?cid=1),
-[Swing Dancers Of London](http://www.swingdancersoflondon.org/) 
-and Judy's List (a regular email - ask an experienced dancer)
-they don't provide exactly what I want, so I decided to make my own site (as you do).
-
-In some respects London is quite a divided scene with a lot of dancers unaware of what's going on outside the 
-bubble of the first swing school they came across.
-
-I think that independent and community-founded organisations like
-[Swing Dancers Of London](http://www.swingdancersoflondon.org/),
-[Swing Events](http://swingevents.co.uk/) 
-and the [London Lindy Exchange](http://londonlindyexchange.com/)
-are really important and I want to follow in their footsteps by providing 
-a great service independently of any of the swing schools.
-
-Swing Out London has been live since August 2010.
-
-Principles
---------
-There are a number of principles which I try and stick to in running this site which
-I think are important to delivering a useful service. Swing Out London is:
+I try to make it useful for others by making sure that it is always:
 
 1.  
     ### Clear
 
-    I aim to make it quick and easy to decide where you want to learn and dance,
-    by providing all the information you need to make that decision up front 
-    and then passing you on to an external website which has more detail.
+    Easy to read and quick to decide where you want to learn and dance
     
 2.  
-    ### Comprehensive
-
-    I aim to cover every regular class going on in the capital and I've got my ear to the ground -
-    seeking out social dancing opportunities you won't hear about anywhere else.
+    ### Accurate and Up-to-Date
+    
+    If it's new it get's listed, if it changes it gets updated, if it's cancelled it gets flagged, if it's dead it's not listed
     
 3.  
-    ### Not just dance socials
+    ### Comprehensive
+
+    Every class and every social dancing opportunity (within certain criteria: [Listings Policy](/listings policy))  
     
-    Swing Out London attempts to list _all_ the social dancing opportunities in town. 
-    With the recent burst of interest in Vintage in London there are a number of vintage-themed events like
-    [the Blitz party](http://www.theblitzparty.com"),
-    [the Candlelight club](www.thecandlelightclub.com/) and
-    [Die Freche Muse](http://www.diefrechemuse.co.uk/)
-    which are not aimed at swing dancers, but which play suitable music.
-    
-    These nights aren't to everyone's taste and you shouldn't expect to find dancers there, 
-    but if you Bring Your Own there's often a fun evening to be had.
-    The same applies to swing gigs.
-
-4.  
-    ### Up-to-Date
-
-    I'm wired into all of the mailing lists, Facebook groups and Twitter feeds,
-    so if something gets cancelled, or something new comes up, you'll be the first to know.
-    On other listings sites you'll still find long-dead dance events, but not here.
-
 5.  
     ### Independent
+    
+    Complete and unbiased   
+    
+    
+How does it work?
+-----------------
+There's a lot of information on the site, but it's not so much work to keep it updated:
 
-    At the moment I'm just listing everything I can find, so there's no scope for bias towards any swing school
-    or promoter, but I hope to expand the scope of the site in future, so I want to lay out my colours up front:
-    obviously I have my preferences of lessons and social nights, but you should never see any of that 
-    preference on the site.
+Firstly, Swing Out London is a listing of links to other websites: the only information on the site is the minimum required to decide whether you're interested in checking out those links. Details like times, DJs and class details are best managed by the websites of the event organisers.
 
-6.  
-    ### Sexy
+Next, it only lists the next 14 days: this helps ensure that the listings are complete and accurate.
 
-    Whatever you think of the other listings sites, you'd have a hard time arguing that they were pretty. 
-    I do my best to make sure that the site is attractive and easy to read.
+I'm on all of the mailing lists, Facebook groups and Twitter feeds. I also get emailed by promoters and helpful dancers about new events, changes and cancellations. Basically I'm in as good a position as anyone to know what's going on.
+
+I've written [a system](#colophon) to manage the listings: weekly events are assumed to repeat until I hear otherwise, and I queue up the dates for less frequent events when I hear about them.
+
+
+More than just dance socials
+----------------------------
+
+Swing Out London attempts to list _all_ the social dancing opportunities in town - not just those aimed at dancer.
+With the recent burst of interest in Vintage in London there are a number of vintage-themed events like
+[the Blitz party](http://www.theblitzparty.com"),
+[the Candlelight club](www.thecandlelightclub.com/) and
+[Die Freche Muse](http://www.diefrechemuse.co.uk/)
+which are not aimed at swing dancers, but which play suitable music.
+
+These nights aren't to everyone's taste and you shouldn't expect to find dancers there, 
+but if you Bring Your Own there's often a fun evening to be had.
+The same applies to swing gigs.
+
+
+Grass Roots Swing Dance
+-----------------------
+London has a large and well-established infrastructure of Swing Dance schools, but this is augmented by a number of independent not-for profit groups who deserve kudos for their services to the scene:
+
+*   [Swing Dancers Of London](http://www.swingdancersoflondon.org/) are a great positive force for promoting the dance
+    in the capital. They occasionally organise events and the 
+    [SDOL Facebook group](https://www.facebook.com/groups/2244903317/) is _the_ hub for debate,
+    rants and event promotion in the scene
+*   The [London Lindy Exchange](http://londonlindyexchange.com/) is an annual event which invites dancers from 
+    all over the world to come and dance here. A large number of overseas visitors are hosted by locals
+*   [The Sunday Shuffle](https://www.facebook.com/pages/The-Sunday-Shuffle/135544203177994) is a Monthly not 
+    for profit Balboa social dance
+*   Although [Blues Revolution](http://www.bluesrevolution.co.uk/) isn't exclusively not for profit, they are 
+    a driving force behind Blues dancing in London
+*   [Swing Records](https://www.facebook.com/groups/201362529904972/) is a Facebook Group which promotes and 
+    arranges for free and discounted entry for dancers to events
