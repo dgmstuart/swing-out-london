@@ -40,17 +40,17 @@ I'm on all of the mailing lists, Facebook groups and Twitter feeds. I also get e
 I've written [a system](#colophon) to manage the listings: weekly events are assumed to repeat until I hear otherwise, and I queue up the dates for less frequent events when I hear about them.
 
 
-More than just dance socials
-----------------------------
+Also Listing Vintage Events
+---------------------------
 
-Swing Out London attempts to list _all_ the social dancing opportunities in town - not just those aimed at dancer.
+Swing Out London attempts to list _all_ the social dancing opportunities in town - not just those aimed at dancers.
 With the recent burst of interest in Vintage in London there are a number of vintage-themed events like
 [the Blitz party](http://www.theblitzparty.com"),
 [the Candlelight club](www.thecandlelightclub.com/) and
 [Die Freche Muse](http://www.diefrechemuse.co.uk/)
 which are not aimed at swing dancers, but which play suitable music.
 
-These nights aren't to everyone's taste and you shouldn't expect to find dancers there, 
+These nights aren't to everyone's taste and you shouldn't necessarily expect to find dancers there, 
 but if you Bring Your Own there's often a fun evening to be had.
 The same applies to swing gigs.
 

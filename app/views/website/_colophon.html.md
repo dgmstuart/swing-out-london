@@ -13,8 +13,8 @@
 * [CodeStyle's Font Stack Builder](http://www.codestyle.org/servlets/FontStack")
   and [Identifont](http://www.identifont.com/similar.html") came in handy for picking fonts. 
    
-* The site uses a custom-built [Ruby on Rails](http://rubyonrails.org/) Content Management System (CMS) 
-  which I wrote from scratch (Rails 3, Ruby 1.9). 
+* The site uses a custom-built Content Management System (CMS) 
+  which I wrote from scratch in [Ruby on Rails](http://rubyonrails.org/) (Rails 3, Ruby 1.9). 
   I use [Git](http://git-scm.com/) for version control and there is
   a [public repo for Swing Out London on github](https://github.com/leveretweb/Swing-Out-London).
   The following resources were used:
