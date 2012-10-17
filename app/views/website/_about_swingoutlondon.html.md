@@ -19,7 +19,7 @@ I try to make it useful for others by making sure that it is always:
 3.  
     ### Comprehensive
 
-    Every class and every social dancing opportunity (within certain criteria: [Listings Policy](/listings policy))  
+    Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings policy))  
     
 5.  
     ### Independent

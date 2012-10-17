@@ -1,13 +1,13 @@
 ## Colophon
 
 * The styling of the site was inspired by vintage playbills, magazine listings and event posters. 
-  The primary font used is [Futura](http://en.wikipedia.org/wiki/Futura_(typeface) "Wikipedia - Futura")
+  The primary font used is [Futura](http://en.wikipedia.org/wiki/Futura_\(typeface\) "Wikipedia - Futura")
   (falling back to Trebuchet MS on Windows) which was designed in 1927.  
   
 * The [vintage wallpaper](http://zebiii.deviantart.com/art/Patterns-2-94330934 "Patterns.2 by ZeBii on DeviantArt")
   in the background is by [ZeBii on DeviantArt](http://zebiii.deviantart.com/) 
    
-* This site was written on a Mac. These days I use [TextMate](http://macromates.com/)) 
+* This site was written on a Mac. These days I use [TextMate](http://macromates.com/) 
   and [Chrome](http://www.google.com/chrome "The Google Chrome web browser") for development. 
    
 * [CodeStyle's Font Stack Builder](http://www.codestyle.org/servlets/FontStack")
@@ -22,7 +22,7 @@
     * [Haml](http://haml.info/), 
       [Markdown](http://daringfireball.net/projects/markdown)
       (via the [Redcarpet](https://github.com/vmg/redcarpet) gem),
-      [Sass](http://sass-lang.com/)(.scss) and
+      [Sass](http://sass-lang.com/) (.scss) and
       [CoffeeScript](http://coffeescript.org/)
       for writing the HTML, CSS and Javascript;
     
