@@ -14,7 +14,7 @@ gem 'jquery-rails'
 gem 'twitter'
 
 gem 'geokit'
-gem 'gmaps4rails'
+gem 'gmaps4rails', ">= 2.0.0.pre"
 
 # Hosting on heroku
 gem 'heroku'
