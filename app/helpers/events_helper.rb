@@ -98,7 +98,7 @@ module EventsHelper
     
     content_tag :li, 
       postcode_part + " " + 
-      content_tag( :span, raw(cancelled_part + social_link(social)), :class => "social_details")
+      content_tag( :span, raw(cancelled_part + social_link(social)), :class => "details")
   end
   
   def social_link(event)    
@@ -109,7 +109,7 @@ module EventsHelper
     #Highlight socials which are monthly or more infrequent:
     event_title =  content_tag( :span, event.title, :class => "social_highlight") if event.less_frequent?
     
-    event_location = content_tag( :span, "#{event.venue_name} in #{event.venue_area}", :class => "social_info")
+    event_location = content_tag( :span, "#{event.venue_name} in #{event.venue_area}", :class => "info")
     
     #display = new_label + "#{event_title} - #{event_location}"
     display = raw(new_label + event_title + " - " + event_location)
@@ -171,7 +171,7 @@ module EventsHelper
     
     content_tag :li,
       postcode_part + " " + 
-      content_tag( :span, swingclass_link(swingclass) + swingclass_cancelledmsg(swingclass), :class => "swingclass_details")
+      content_tag( :span, swingclass_link(swingclass) + swingclass_cancelledmsg(swingclass), :class => "details")
   end
   
   def swingclass_link(event)
@@ -254,7 +254,7 @@ module EventsHelper
   end
 
   def swingclass_info(text)
-    content_tag( :span, raw(text), :class => "swingclass_info" )
+    content_tag( :span, raw(text), :class => "info" )
   end
   
   def outward_postcode(event, map_url=nil)
