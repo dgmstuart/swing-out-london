@@ -33,11 +33,8 @@ address, #valid_statement, #last_updated {
 #main_nav {
   li {
     margin-bottom: 5px;
-    a {
+    a, .current {
       display: inline-block;
-      width: 250px;
-    }
-    .current {
       width: 250px;
     }
   }
@@ -88,7 +85,7 @@ address, #valid_statement, #last_updated {
         border: none;
         padding-left: 0;
       }
-      a {
+      a, .current {
         display: inline;
       }
     }
@@ -160,7 +157,6 @@ ul.navigation{
   .current {
     padding: 8px;
     border: $double-border;
-    display: inline-block;
     // We allow the current link to be a link on the map:
     &:hover {
       border: $thick-border;
@@ -184,6 +180,7 @@ ul.navigation{
 /////////////////////////////////////////////
 #header {
   border-bottom: $basic-border;
+  padding-bottom: 30px;
 }
 
 #title { 
