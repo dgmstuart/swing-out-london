@@ -1,0 +1,37 @@
+@import "colours";
+
+$body_font_size: 14px;
+
+body {
+  font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
+  color: $text-colour;
+  font-size: $body_font_size;
+  #page{
+    background: $background-colour none;
+    margin: auto;
+  }
+}
+
+p { 
+  margin-bottom: 0.8em; 
+  em { 
+    font-style: italic;
+  }
+}
+p, li, address {
+  line-height:1.5em;
+}
+
+a:hover {
+  border-bottom: solid 2px;
+}
+
+.site_title {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  em {
+    letter-spacing: 0;
+    display: block;
+  }
+}

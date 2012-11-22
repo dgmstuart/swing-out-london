@@ -1,0 +1,221 @@
+@import "colours";
+$thin-border: 1px solid $text-colour;
+$basic-border: 3px solid $text-colour;
+$thick-border: 6px thick $text-colour;
+$double-border: 6px double $text-colour;
+
+// LAYOUT
+/////////////////////////////////////////////
+
+// MOBILE ONLY
+@media only screen and (max-width: 481px) {
+  #header {
+    margin: 0 20px;
+  }
+  .site_title {
+    font-size: 16px;
+    em {
+      font-size: 40px;
+    } 
+  }
+  #footer {
+    margin: 30px 20px 0;
+  }
+}
+
+// SMALL
+address, #valid_statement, #footer_nav {
+  margin-bottom: 20px;
+}
+address, #valid_statement, #last_updated {
+  text-align: center;
+}
+#main_nav {
+  li {
+    margin-bottom: 5px;
+    a {
+      display: inline-block;
+      width: 250px;
+    }
+    .current {
+      width: 250px;
+    }
+  }
+}
+#footer_nav {
+  li {
+    margin-bottom: 10px;
+  }
+}
+
+// AVERAGE VIEWING SIZE
+@media only screen and (min-width: 481px) {
+  #header {
+    margin: 0 60px;
+  }
+  .site_title {
+    font-size: 20px;
+    em {
+      font-size: 65px;
+    } 
+  }
+  #footer {
+    margin: 30px 40px 0;
+  }
+  #footer_nav {
+    li {
+      display: inline;
+      border-left: $thin-border;
+      margin: 0 0.5em 0 0;
+      padding: 0 0 0 1em;
+      &:first-child{
+        border: none;
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (min-width: 768px) {
+  #main_nav {
+    li {
+      display: inline;
+      border-left: $basic-border;
+      margin: 0 0.5em 0 0;
+      padding: 0 0 0 1em;
+      &:first-child{
+        border: none;
+        padding-left: 0;
+      }
+      a {
+        display: inline;
+      }
+    }
+  }
+  #footer_nav {
+    float: left;
+    text-align: left;
+    width: 400px;
+    height: 31px;
+  }
+  address, #valid_statement {
+    text-align: right;
+    margin-bottom: 0;
+  }
+  #last_updated {
+    clear: both;
+  }
+}
+
+// bigger than the page... */
+@media only screen and (min-width: 900px) {
+  body {
+    background: transparent url(image_path("flock_02_by_ZEBiii.jpg"));
+    #page{
+      width: 900px;
+    }
+  }
+}
+
+// DESKTOP */
+@media only screen and (min-width: 992px) {
+}
+
+// LARGE VIEWING SIZE
+@media only screen and (min-width: 1240px) {
+}
+
+
+// Navigation
+/////////////////////////////////////////////
+
+ul.navigation{
+  text-align: center;
+  list-style-type: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  li{
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+#main_nav{
+  clear: both; 
+  font-size: 1.14em;
+  padding-bottom: 16px;
+}
+.navigation.primary-nav {
+  a {
+    padding: 10px;
+    //added here so we can take it away when we apply the border
+    &:hover {
+      padding: 8px;
+      border: 2px solid #0F0F0F;
+    } 
+    &.internal:hover {
+     background: url(image_path("downarrow.png")) no-repeat 50% 95%;
+    }
+  }
+  .current {
+    padding: 8px;
+    border: $double-border;
+    display: inline-block;
+    // We allow the current link to be a link on the map:
+    &:hover {
+      border: $thick-border;
+    }
+  }
+}
+
+#footer_nav {
+  a:hover {
+    border-bottom: $thin-border;
+  }
+  .current {
+    padding: 5px;
+    border: $thin-border;
+  }
+}
+
+
+
+// Header
+/////////////////////////////////////////////
+#header {
+  border-bottom: $basic-border;
+}
+
+#title { 
+  padding: 20px; }
+
+.site_title {
+  padding-top: 50px;
+  margin-bottom: 30px;
+  em {
+    margin-bottom: 30px;
+  } 
+  a:hover {
+    border: none;
+  }
+}
+
+#last_updated_ago {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+// Footer
+/////////////////////////////////////////////
+#footer {
+  border-top: $basic-border;
+  padding: 30px 20px;
+  clear: both;
+  p, address {
+    a {
+      color: $link-colour;
+    }
+  }
+}

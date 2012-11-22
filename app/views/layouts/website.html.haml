@@ -24,15 +24,16 @@
     = content_for?(:page_content) ? yield(:page_content) : yield
     
     #footer
-      %p#valid_statement
-        = link_to "Valid HTML5", "http://validator.w3.org/check?uri=referer"
-
       = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav', nav_class: "navigation secondary-nav" }
+      
       %address
         Site by
         = mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"
+      
+      %p#valid_statement
+        = link_to "Valid HTML5", "http://validator.w3.org/check?uri=referer"
   
       %p#last_updated
-        &ndash; last updated at #{ @last_updated_time } on #{ @last_updated_date }
-
+        Last updated at #{ @last_updated_time } on #{ @last_updated_date }
+        
 = render :template => 'layouts/application'
