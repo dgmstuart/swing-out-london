@@ -1,8 +1,5 @@
 @import "colours";
-$thin-border: 1px solid $text-colour;
-$basic-border: 3px solid $text-colour;
-$thick-border: 6px thick $text-colour;
-$double-border: 6px double $text-colour;
+@import "borders";
 
 // LAYOUT
 /////////////////////////////////////////////
@@ -123,59 +120,6 @@ address, #valid_statement, #last_updated {
 @media only screen and (min-width: 1240px) {
 }
 
-
-// Navigation
-/////////////////////////////////////////////
-
-ul.navigation{
-  text-align: center;
-  list-style-type: none;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  li{
-    text-align: center;
-    white-space: nowrap;
-  }
-}
-#main_nav{
-  clear: both; 
-  font-size: 1.14em;
-  padding-bottom: 16px;
-}
-.navigation.primary-nav {
-  a {
-    padding: 10px;
-    //added here so we can take it away when we apply the border
-    &:hover {
-      padding: 8px;
-      border: 2px solid #0F0F0F;
-    } 
-    &.internal:hover {
-     background: url(image_path("downarrow.png")) no-repeat 50% 95%;
-    }
-  }
-  .current {
-    padding: 8px;
-    border: $double-border;
-    // We allow the current link to be a link on the map:
-    &:hover {
-      border: $thick-border;
-    }
-  }
-}
-
-#footer_nav {
-  a:hover {
-    border-bottom: $thin-border;
-  }
-  .current {
-    padding: 5px;
-    border: $thin-border;
-  }
-}
-
-
-
 // Header
 /////////////////////////////////////////////
 #header {
@@ -203,6 +147,13 @@ ul.navigation{
   margin-bottom: 10px;
 }
 
+#main_nav{
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  clear: both; 
+  font-size: 16px;
+  padding-bottom: 16px;
+}
 
 // Footer
 /////////////////////////////////////////////
@@ -214,5 +165,16 @@ ul.navigation{
     a {
       color: $link-colour;
     }
+  }
+}
+#footer_nav {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  a:hover {
+    border-bottom: $thin-border;
+  }
+  .current {
+    padding: 5px;
+    border: $thin-border;
   }
 }

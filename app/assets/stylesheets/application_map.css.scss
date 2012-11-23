@@ -1,10 +1,9 @@
 /*
 *= require reset
 *= require base
+*= require navigation
 *= require_self
 */
-
-
 body.classes, body.socials {
   a {
     color: inherit;
@@ -98,11 +97,14 @@ body.classes, body.socials {
       }
     }
     .primary-nav {
-      font-size: 1.4em;
       text-align: center;
+      //nuke the space which gets inserted in-between the elements for no good reason:
+      font-size: 0;
       a {
+        font-size: 20px;
         margin: 0 5px;
         &.current {
+          display: inline-block;
           margin: 0 3px;
         }
       }
