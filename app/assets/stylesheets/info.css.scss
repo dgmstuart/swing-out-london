@@ -81,6 +81,7 @@ table {
     clear: right;
   }
   #colophon {
+    width: auto;
     margin-left: 130px;
     margin-right: 130px;
   }
@@ -110,6 +111,9 @@ table {
   }
   h2 {
     font-size: 1.5em;
+  }
+  a {
+    color: $link-colour;
   }
   em {
     font-style: italic;
@@ -173,6 +177,9 @@ table {
   &.first{ 
     margin-top: 35px;
   }
+  a {
+    color: $link-colour;
+  }
   h3 {
     font-size: 17px;
     margin-bottom: 10px;
@@ -214,6 +221,9 @@ table {
     text-transform: uppercase;
     text-align: center;
     line-height: 1.5em;
+  }
+  a {
+    color: $link-colour;
   }
   li {
     margin-bottom: 0.8em;
