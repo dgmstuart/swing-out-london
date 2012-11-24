@@ -9,6 +9,10 @@ class Organiser < ActiveRecord::Base
   validates_length_of :shortname, :maximum => 20
   validates_uniqueness_of :shortname, :allow_nil => true, :allow_blank => true
   
+  def events
+    classes + socials
+  end
+  
   # Are there any active events associated with this organiser?
   def all_events_out_of_date?
     events.each do |event|
