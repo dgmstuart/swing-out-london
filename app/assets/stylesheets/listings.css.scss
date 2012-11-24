@@ -11,10 +11,18 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // MOBILE ONLY
+
+
+// SMALL
+#social_media, #note {
+  margin: auto;
+  margin-top: 30px;
+}
+#classes, #socials {
+  margin: 0 10px;
+}
+
 @media only screen and (max-width: 481px) {
-  #classes, #socials {
-    padding: 0 10px;
-  }
   #socials h2{ 
     padding-top: 50px;
     margin: 0 30px;
@@ -22,16 +30,17 @@ $small_font_size: 12px;
   }
 }
 
-// SMALL
-#social_media, #note {
-  margin: auto;
-  margin-top: 30px;
-}
-
 // AVERAGE VIEWING SIZE
 @media only screen and (min-width: 481px) {  
+  #classes, #socials {
+    margin: 0 30px;
+  }
+}
+
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (min-width: 768px) {
   #classes {
-    width: 421px;
+    width: 354px;
     float: left;
     position: relative;
     left: 3px;
@@ -43,8 +52,7 @@ $small_font_size: 12px;
     }
   } 
   #socials {
-    width: 422px;
-    margin-left: 448px;
+    margin-left: 381px;
     margin-right: 30px;
     .datelist{
       margin: 1.2em 0 0 0;
@@ -54,12 +62,15 @@ $small_font_size: 12px;
   }
 }
 
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-}
-
 // DESKTOP */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 900px) {
+  #classes {
+    width: 421px;
+  } 
+  #socials {
+    width: 422px;
+    margin-left: 448px;
+  }
   #social_media {
     width: 370px;
     margin-left: 410px;
