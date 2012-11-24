@@ -292,19 +292,6 @@ module EventsHelper
     end.join(",\n")
   end
   
-  # Assign a class to an event row to show whether it is out of date or not
-  def event_row_tag(event) 
-    if event.ended? || (event.out_of_date && event.one_off?)
-      class_string = "inactive"
-    elsif event.out_of_date
-      class_string = "out_of_date"
-    elsif event.near_out_of_date
-      class_string = "near_out_of_date"
-    end
-    tag :tr, {:class => class_string, :id => "event_#{event.id}"}, true
-  end
-  
-  
   # ------- #
   # SELECTS #
   # ------- #

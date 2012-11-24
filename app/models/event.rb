@@ -229,6 +229,17 @@ class Event < ActiveRecord::Base
   
   public
   
+  # For the event listing tables:
+  def status_string
+    if ended? || (out_of_date && one_off?)
+      "inactive"
+    elsif out_of_date
+      "out_of_date"
+    elsif near_out_of_date
+      "near_out_of_date"
+    end
+  end
+  
   
   # PRINT METHODS #
   

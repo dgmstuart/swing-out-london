@@ -1,9 +1,36 @@
 /*
 *= require reset
-*= require main
+*= require base
 *= require admin_bar
 *= require_self
 */
+
+
+// LAYOUT
+/////////////////////////////////////////////
+
+// SMALL
+
+
+// MOBILE ONLY
+@media only screen and (max-width: 480px) {
+}
+
+// AVERAGE VIEWING SIZE
+@media only screen and (min-width: 481px) {  
+}
+
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (min-width: 768px) {
+}
+
+// DESKTOP */
+@media only screen and (min-width: 900px) {
+}
+
+// LARGE VIEWING SIZE
+@media only screen and (min-width: 1240px) {
+}
 
 /* FONTS */
 
@@ -17,26 +44,83 @@ input, label, textarea, div.actions, ol.show li, form a{
 }
 
 /* INDEX */
-#page { width: 100%; }
 
-h1{text-align:center;font-size:3em;padding-top:1em;margin-bottom:0.5em;}
+
+h1 {text-align:center;font-size:3em;padding-top:1em;margin-bottom:0.5em;}
 h2 {text-align:center;font-size:3em;margin-bottom:0.5em;}
 p.actions_panel{text-align:center;font-size:1.5em;text-transform:uppercase;}
 
 
-table{border-collapse:collapse;margin:1.5em 1em 4em;}
+// TABLE COLUMNS
+/////////////////////////////////////////////
+
+// DESKTOP
+@media only screen and (max-width: 900px) {
+  td.actions.last {
+    display: none;
+  }
+  td.updated, th.updated {
+    display: none;
+  }
+}
+// TABLET & SMALLER LAPTOPS
+@media only screen and (max-width: 767px) {
+  td.area, th.area {
+    display: none;
+  }
+}
+// SMALL
+@media only screen and (max-width: 480px) {
+  table {
+    
+//Below doesn't work
+    table-layout: fixed;
+    width: 100%
+    td {
+      break-word: word-wrap;
+    }
+    th.name, td.name {
+      width: 100px;
+    }
+    th.venue, td.venue {
+      width: 120px;
+    }
+    th.class_org, td.class_org {
+      width: 120px;
+    }
+    th.day, td.day {
+      width: 120px;
+    }
+//Above doesn't work
+    
+    td.fq, th.fq {
+      display: none;
+    }
+    td.soc_org, th.soc_org {
+      display: none;
+    }
+  }
+}
+
+
+
+table{
+  border-collapse: collapse;
+  margin: 20px 10px 50px;
+}
 
 /*TODO: Temp?*/
-table.events td.first{width:3.5em;}
-table.events td.last{width:5.5em;}
+table.events td.actions.first{width:35px;}
+table.events td.actions.last{width:5.5em;}
 
 th, td {border:1px solid black; padding:5px;}
 th {font-weight:bold;}
-th.name, td.name {width:120px;}
 td.center {text-align:center;}
 td.actions, th.actions{ border:none; }
 
-td.lines {white-space:pre;}
+td.dates, td.updated {
+  max-width: 80px;
+}
 
 /*TODO- replace with proper colours!*/
 tr.out_of_date td.dates, tr.all_out_of_date td{
