@@ -10,9 +10,6 @@ $small_font_size: 12px;
 // LAYOUT
 /////////////////////////////////////////////
 
-// MOBILE ONLY
-
-
 // SMALL
 #social_media, #note {
   margin: auto;
@@ -22,7 +19,8 @@ $small_font_size: 12px;
   margin: 0 10px;
 }
 
-@media only screen and (max-width: 481px) {
+// MOBILE ONLY
+@media only screen and (max-width: 480px) {  
   #socials h2{ 
     padding-top: 50px;
     margin: 0 30px;
@@ -62,7 +60,7 @@ $small_font_size: 12px;
   }
 }
 
-// DESKTOP */
+// DESKTOP
 @media only screen and (min-width: 900px) {
   #classes {
     width: 421px;
