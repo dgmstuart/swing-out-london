@@ -116,8 +116,8 @@ input[type=submit], div.actions {
 }
 
 
-/* RAILS ERRORS */
-
+// Rails Errors
+/////////////////////////////////////////////
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
@@ -154,3 +154,37 @@ input[type=submit], div.actions {
   list-style: square;
 }
 
+
+// Admin Bar
+/////////////////////////////////////////////
+#admin_bar {
+  z-index: 100;
+  min-width: 800px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #464646;
+  color: #CCC;
+  font-family: Helvetica, Arial, Sans-serif;
+  background-image: -ms-linear-gradient(bottom,#373737,#464646 5px);
+  background-image: -moz-linear-gradient(bottom,#373737,#464646 5px);
+  background-image: -o-linear-gradient(bottom,#373737,#464646 5px);
+  background-image: -webkit-gradient(linear,left bottom,left top,from(#373737),to(#464646));
+  background-image: -webkit-linear-gradient(bottom,#373737,#464646 5px);
+  background-image: linear-gradient(bottom,#373737,#464646 5px);
+  li {
+    float: left;
+    border-right: 1px solid #555;
+  }
+  a {
+    color: inherit;
+    display: block;
+    padding: 8px 15px;
+    border-right: 1px solid #333;
+    &:hover{
+      border-bottom: 0;
+      background-color: #3A3A3A;
+    }
+  }
+}

@@ -3,10 +3,11 @@
   %head
     %title= content_for?(:title) ? yield(:title) : "Swing Out London - listings of Lindy Hop swing dance classes and socials"
     
-    %meta{ "http-equiv" => "Content-Type",      content: "text/html; charset=utf-8" }/
+    %meta{ "http-equiv" => "Content-Type",  content: "text/html; charset=utf-8" }/
+    %meta{ name: "viewport",    content: "width=device-width", "initial-scale" => 1 }/
     %meta{ name: "author",      content: "Duncan Stuart" }/
     %meta{ name: "description", content: content_for?(:description) ? yield(:description) : "Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" }/
-    %meta{ name: "viewport",    content: "width=device-width" }/
+
     = csrf_meta_tag
     
     = javascript_include_tag :application

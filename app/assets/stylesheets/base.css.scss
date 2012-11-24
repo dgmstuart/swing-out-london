@@ -3,6 +3,8 @@
 $body_font_size: 14px;
 
 body {
+  // Disable automatic font zooming:
+  -webkit-text-size-adjust: 100%;
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: $text-colour;
   font-size: $body_font_size;
@@ -22,6 +24,11 @@ p {
 
 a:hover {
   border-bottom: solid 2px;
+}
+
+ul.unstyled, ol.unstyled {
+  margin-left: 0;
+  list-style: none;
 }
 
 .site_title {
