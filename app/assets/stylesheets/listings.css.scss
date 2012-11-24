@@ -89,6 +89,10 @@ $small_font_size: 12px;
   a {
     text-transform: capitalize;
     font-size: 27px;
+  }
+}
+#listing_navigation, #social_media, #note, #latest_tweet {
+  a {
     color: $link-colour;
   }
 }
@@ -105,17 +109,38 @@ $small_font_size: 12px;
       border: none;
     }
   }
+  #latest_tweet{
+    text-align: left;
+    line-height: 1.5em;
+    font-size: 0.9em;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    padding: 8px;
+    border: 6px double $text-colour;
+    margin-bottom: 3px;
+    h4 {
+      display: inline;
+      font-weight: bold;
+    }
+    p {
+      display: inline;
+      font-style: italic;
+    }
+    a.tweet_created {
+      font-size: 0.8em;
+      color: $link-colour;
+    }
+  } 
 }
 #note {
   max-width: 500px;
   margin-bottom: 10px;
   p {
-    font-size: 1.1em
+    font-size: 15px
   }
   //TODO: DRY up
   a {
     text-transform: capitalize;
-    font-size: 1.3em;
+    font-size: 20px;
   }
   #caveat {
     font-size: 0.9em;
@@ -126,29 +151,6 @@ $small_font_size: 12px;
     }
   }
 }
-
-#latest_tweet{
-  text-align: left;
-  line-height: 1.5em;
-  font-size: 0.9em;
-  font-family: Georgia, Times, "Times New Roman", serif;
-  padding: 8px;
-  border: 6px double $text-colour;
-  margin-bottom: 3px;
-  h4 {
-    display: inline;
-    font-weight: bold;
-  }
-  p {
-    display: inline;
-    font-style: italic;
-  }
-  a.tweet_created {
-    font-size: 0.8em;
-    color: $link-colour;
-  }
-} 
-
 
 
 // Main listing styles
