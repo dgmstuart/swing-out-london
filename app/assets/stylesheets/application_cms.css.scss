@@ -4,7 +4,7 @@
 *= require admin_bar
 *= require_self
 */
-
+@import "colours";
 
 // LAYOUT
 /////////////////////////////////////////////
@@ -30,6 +30,13 @@
 
 // LARGE VIEWING SIZE
 @media only screen and (min-width: 1240px) {
+}
+
+body {
+  background-color: $background-colour;
+  &.events, &.venues, &.organisers{
+    margin-top: 39px
+  }
 }
 
 /* FONTS */
