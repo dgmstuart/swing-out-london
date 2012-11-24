@@ -41,6 +41,9 @@ address, #valid_statement, #last_updated {
     margin-bottom: 10px;
   }
 }
+.banner {
+  padding: 10px;
+}
 
 // AVERAGE VIEWING SIZE
 @media only screen and (min-width: 481px) {
@@ -99,6 +102,20 @@ address, #valid_statement, #last_updated {
   }
   #last_updated {
     clear: both;
+  }
+  
+  .banner {
+    padding-left: 40px;
+    padding-right: 40px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+  .non-semantic-padding{
+    //to make the page sit below the banner when it's fixed
+    height: 65px
   }
 }
 
@@ -179,3 +196,21 @@ address, #valid_statement, #last_updated {
     border: $thin-border;
   }
 }
+
+// Banner
+/////////////////////////////////////////////
+.banner {
+  background: $banner-colour;
+  text-align: center;
+  h3 {
+    font-size: 16px;
+  }
+  p {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+//body {
+//  margin-top: 65px;
+//}
