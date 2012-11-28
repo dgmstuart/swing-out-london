@@ -4,22 +4,90 @@
 *= require navigation
 *= require_self
 */
+
+// SMALL
+.map_container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .gmaps4rails_map {
+    width: 100%;
+    height: 100%;
+  }
+}
+header {
+  padding: 20px 0;  
+}
+.listings {
+  font-size: 14px;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 170px;
+  bottom: 0;
+  left: 0;
+  li a {
+    display: block;
+  }
+}
+// SMALL ONLY
+@media only screen and (max-width: 767px) {
+  .listings {
+    li {
+      a {
+        display: none;
+      }
+      .current {
+        display: block;
+      }
+    }
+  }
+}
+
+// TABLET & SMALLER LAPTOPS
+@media only screen and (min-width: 768px) {
+  .map_container {
+    left: 220px;
+    min-width: 320px;
+  }
+  .page {
+    width: 220px;
+  }
+  header {
+    font-size: 0.9em;
+  }
+}
+
+// DESKTOP
+@media only screen and (min-width: 960px) {
+  header {
+    padding: 20px;
+  }
+  .map_container {
+    left: 320px;
+  }
+  .page {
+    width: 280px;
+  }
+  .listings {
+    font-size: 18px;
+    padding: 0 20px;
+  }
+  header {
+    font-size: 1em;
+  }
+}
+
+// LARGE VIEWING SIZE
+@media only screen and (min-width: 1240px) {
+}
+
+
 body.classes, body.socials {
   a {
     color: inherit;
-  }
-  
-  .map_container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 320px;
-    min-width: 320px;
-    .gmaps4rails_map {
-      width: 100%;
-      height: 100%;
-    }
   }
 
   .venue_info {
@@ -63,11 +131,9 @@ body.classes, body.socials {
   
   .page {
     background: #FEE6B8 none;
-    width: 280px;
   }
   
   header{
-    padding: 20px;
     position: absolute;
     top: 0;
     left: 0;
@@ -111,19 +177,11 @@ body.classes, body.socials {
     }
   }
   .listings {
-    padding: 0 20px;
-    position: absolute;
-    overflow-y: auto;
-    overflow-x: hidden;
-    top: 170px;
-    bottom: 0;
-    left: 0;
     -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
     box-shadow:         9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
     li {
       text-align: center;
-      font-size: 1.3em;
       border-bottom: solid 1px #BEBEBE;
       -webkit-box-shadow: 0 1px 0 #e4e4e4;
       -moz-box-shadow:    0 1px 0 #e4e4e4;
@@ -135,9 +193,8 @@ body.classes, body.socials {
         background-color: #0F0F0F;
       }
       a {
-        display: block;
+        //display: block;
         padding: 10px;
-        
         &:hover {
           border: none;
           background-color: #E4E4E4;
@@ -150,8 +207,8 @@ body.classes, body.socials {
   }
   
   
-  body.map #classes, body.map #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left: 0;}
-  body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
-  body.map #classes .daylist{border:none; padding:0;}
-  body.map #socials .datelist{border:none; padding:0;}
+  //body.map #classes, body.map #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left: 0;}
+  //body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
+  //body.map #classes .daylist{border:none; padding:0;}
+  //body.map #socials .datelist{border:none; padding:0;}
 }
