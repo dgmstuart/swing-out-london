@@ -53,6 +53,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-livereload'
   gem 'simplecov'
+  gem 'rack-mini-profiler'
 end
 
 group :production do
