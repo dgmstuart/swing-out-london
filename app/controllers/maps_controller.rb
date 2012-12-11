@@ -31,7 +31,10 @@ class MapsController < ApplicationController
 
                 marker.infowindow render_to_string(:partial => "classes_map_info", :locals => { venue: venue, events: venue_events })
                 json_options =  { id: venue.id, title: venue.name}
-                json_options.merge!coloured_marker_json_options(:green) if venue.id.to_s == params[:id]
+                if venue.id.to_s == params[:id]
+                  @highlighted_venue = venue
+                  json_options.merge!coloured_marker_json_options(:green)
+                end
                 marker.json(json_options)
       end
     end
@@ -67,7 +70,10 @@ class MapsController < ApplicationController
         marker.infowindow render_to_string(:partial => "socials_map_info", :locals => { venue: venue, events: venue_events })
         
         json_options =  { id: venue.id, title: venue.name}
-        json_options.merge!coloured_marker_json_options(:green) if venue.id.to_s == params[:id]
+        if venue.id.to_s == params[:id]
+          @highlighted_venue = venue
+          json_options.merge!coloured_marker_json_options(:green)
+        end
         marker.json(json_options)
       end
     end
