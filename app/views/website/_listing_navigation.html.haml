@@ -42,9 +42,11 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   
-  %a.fb-like{ :href => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-send" => "true", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
+  %a.fb-like{ :href => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
   %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/swingoutlondon"} Follow @swingoutlondon
   :javascript
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-
-  
+    
+  %a{ :class => "youtube_btn", :href => "//www.youtube.com/subscription_center?add_user_id=czuwd8qU0eyts7ggWeh98Q&feature=creators_cornier-//s.ytimg.com/yt/img/creators_corner/Subscribe_to_my_videos/YT_Subscribe_123x19_red.png" }
+    %img{ :alt => "Subscribe to me on YouTube", :src => "//s.ytimg.com/yt/img/creators_corner/Subscribe_to_my_videos/YT_Subscribe_123x19_red.png" }/
+  %img{ :src => "//www.youtube-nocookie.com/gen_204?feature=creators_cornier-//s.ytimg.com/yt/img/creators_corner/Subscribe_to_my_videos/YT_Subscribe_123x19_red.png", :style => "display: none" }/

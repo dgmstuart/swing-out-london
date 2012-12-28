@@ -178,7 +178,16 @@ body.website.index #header {
     position: relative;
     top: 4px;
   }
-  .fb-like{
+  .fb-like {
+    &:hover {
+      border: none;
+    }
+  }
+  .youtube_btn {
+    img {
+      position: relative;
+      top: 4px;
+    }
     &:hover {
       border: none;
     }
