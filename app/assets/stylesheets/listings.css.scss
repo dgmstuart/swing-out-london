@@ -118,6 +118,17 @@ $small_font_size: 12px;
       border: none;
     }
   }
+  .youtube_btn {
+    img {
+      position: relative;
+      top: 4px;
+    }
+    &:hover {
+      border: none;
+    }
+  }
+  
+  
   #latest_tweet{
     text-align: left;
     line-height: 1.5em;

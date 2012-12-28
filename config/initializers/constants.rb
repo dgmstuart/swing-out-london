@@ -10,6 +10,6 @@ LOGINS={
 # How many socials should be displayed on the index page?
 INITIAL_SOCIALS=14
 
-CONTACT_EMAIL = "leveretweb@googlemail.com"
+CONTACT_EMAIL = "swingoutlondon@gmail.com"
 TWITTER_URL   = "http://www.twitter.com/swingoutlondon"
 FACEBOOK_URL  = "https://www.facebook.com/swingoutlondon"

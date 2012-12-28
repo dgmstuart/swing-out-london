@@ -11,7 +11,7 @@ gem 'haml_rails'
 gem 'redcarpet' # markdown
 gem 'jquery-rails'
 
-gem 'twitter'
+gem 'twitter', "< 4.0"
 
 gem 'geokit'
 gem 'gmaps4rails', ">= 2.0.0.pre"
