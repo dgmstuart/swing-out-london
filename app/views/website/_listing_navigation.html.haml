@@ -14,7 +14,10 @@
     Read more
     = link_to "about", :action => "about"
     it or check out the awesome
-    = link_to "map", controller: "maps", action: "socials"
+    = link_to controller: "maps", action: "socials" do
+      map
+      %small New!
+    
     
 #note
   %p

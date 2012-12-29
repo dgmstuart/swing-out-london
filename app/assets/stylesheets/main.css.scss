@@ -146,8 +146,16 @@ body.website.index #header {
   a {
     text-transform:capitalize;
     font-size: 1.4em;
+  
+    small {
+      color: #C00;
+      font-size: 0.5em;
+      font-style: italic;
+      vertical-align: super;
+    }
   }
 }
+
 
 #note {
   width: 370px;
