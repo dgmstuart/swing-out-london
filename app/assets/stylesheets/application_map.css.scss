@@ -149,7 +149,6 @@ body.classes, body.socials {
       em {
         display: block;
         font-size: 2em;
-        margin: 10px 0 15px;
         small {
           color: #CC0000;
           font-size: 0.5em;
@@ -166,6 +165,9 @@ body.classes, body.socials {
       text-align: center;
       //nuke the space which gets inserted in-between the elements for no good reason:
       font-size: 0;
+      span {
+        font-size: 20px; 
+      }
       a {
         font-size: 20px;
         margin: 0 5px;
