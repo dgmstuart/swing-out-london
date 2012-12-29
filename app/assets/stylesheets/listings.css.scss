@@ -99,6 +99,12 @@ $small_font_size: 12px;
     text-transform: capitalize;
     font-size: 27px;
   }
+  small {
+    color: #C00;
+    font-size: 0.5em;
+    font-style: italic;
+    vertical-align: super;
+  }
 }
 #listing_navigation, #social_media, #note, #latest_tweet {
   a {
