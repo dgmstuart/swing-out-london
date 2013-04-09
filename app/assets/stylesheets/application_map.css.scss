@@ -5,85 +5,7 @@
 *= require_self
 */
 
-// SMALL
-.map_container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  .gmaps4rails_map {
-    width: 100%;
-    height: 100%;
-  }
-}
-header {
-  padding: 20px 0;  
-}
-.listings {
-  font-size: 14px;
-  position: absolute;
-  overflow-y: auto;
-  overflow-x: hidden;
-  top: 170px;
-  bottom: 0;
-  left: 0;
-  li a {
-    display: block;
-  }
-}
-// SMALL ONLY
-@media only screen and (max-width: 767px) {
-  .listings {
-    li {
-      a {
-        display: none;
-      }
-      .current {
-        display: block;
-      }
-    }
-  }
-}
-
-// TABLET & SMALLER LAPTOPS
-@media only screen and (min-width: 768px) {
-  .map_container {
-    left: 220px;
-    min-width: 320px;
-  }
-  .page {
-    width: 220px;
-  }
-  header {
-    font-size: 0.9em;
-  }
-}
-
-// DESKTOP
-@media only screen and (min-width: 960px) {
-  header {
-    padding: 20px;
-  }
-  .map_container {
-    left: 320px;
-  }
-  .page {
-    width: 280px;
-  }
-  .listings {
-    font-size: 18px;
-    padding: 0 20px;
-  }
-  header {
-    font-size: 1em;
-  }
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-}
-
+@import "borders";
 
 body.classes, body.socials {
   a {
@@ -172,7 +94,6 @@ body.classes, body.socials {
         font-size: 20px;
         margin: 0 5px;
         &.current {
-          display: inline-block;
           margin: 0 3px;
         }
       }
@@ -214,4 +135,108 @@ body.classes, body.socials {
   //body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
   //body.map #classes .daylist{border:none; padding:0;}
   //body.map #socials .datelist{border:none; padding:0;}
+
+
+
+
+  // SMALL
+  .map_container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .gmaps4rails_map {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  header {
+    padding: 20px 0;  
+    font-size: 0.7em;
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+  .listings {
+    font-size: 14px;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    top: 170px;
+    bottom: 0;
+    left: 0;
+    li a {
+      display: block;
+    }
+  }
+  .page {
+    width: 164px;
+  }
+  // SMALL ONLY
+  @media only screen and (max-width: 767px) {
+    header .primary-nav {
+      //text-align: center;
+      //width: 100px;
+      display: block;
+      width: 140px;
+      margin: auto;
+      
+      a, span {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+        padding: 5px 0;
+        &:hover{
+          padding: 3px 0;
+        }
+        &.current{
+          padding: 3px 0;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  // TABLET & SMALLER LAPTOPS
+  @media only screen and (min-width: 768px) {
+    .map_container {
+      left: 220px;
+      min-width: 320px;
+    }
+    .page {
+      width: 220px;
+    }
+    header {
+      font-size: 0.9em;
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  // DESKTOP
+  @media only screen and (min-width: 960px) {
+    header {
+      padding: 20px;
+    }
+    .map_container {
+      left: 320px;
+    }
+    .page {
+      width: 280px;
+    }
+    .listings {
+      font-size: 18px;
+      padding: 0 20px;
+    }
+    header {
+      font-size: 1em;
+    }
+  }
+
+  // LARGE VIEWING SIZE
+  @media only screen and (min-width: 1240px) {
+  }
+
 }
