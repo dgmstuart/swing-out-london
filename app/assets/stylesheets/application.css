@@ -6,23 +6,3 @@
 *= require listings
 *= require info
 */
-
-/* AVERAGE VIEWING SIZE*/
-@media only screen and (min-width: 481px) {
-  @import "481up";
-}
-
-/* TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-  @import "768up";
-}
-
-/* DESKTOP */
-@media only screen and (min-width: 992px) {
-  @import "992up";
-}
-
-/*LARGE VIEWING SIZE */
-@media only screen and (min-width: 1240px) {
-  @import "1240up";
-}

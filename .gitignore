@@ -6,3 +6,4 @@ tmp/**/*
 .ruby-version
 .sass-cache/
 coverage/*
+public/assets/
