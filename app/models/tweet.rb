@@ -37,7 +37,7 @@ class Tweet < ActiveRecord::Base
   private
   
   def self.get_message(error_on_failure=nil)
-    Twitter.user_timeline("swingoutlondon").first
+    Twitter.user_timeline("swingoutlondon", count: 1).first
   rescue Exception => e  
     logger.error "[ERROR]: #{e.class} - Failed to get latest tweet with message '#{e}'"
     if error_on_failure

@@ -4,7 +4,7 @@ class String
   def twitterify!  
     changed = false
       
-    self.gsub!(/\b((http:\/\/|www\.)([A-Za-z0-9\-_=%&@\?\.\/]+))\b/) {
+    self.gsub!(/\b((http:\/\/|https:\/\/|www\.)([A-Za-z0-9\-_=%&@\?\.\/]+))\b/) {
       changed = true
       match = $1
       tail  = $3

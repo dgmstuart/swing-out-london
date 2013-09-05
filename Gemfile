@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 source 'http://gems.github.com'
 ruby '1.9.3'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 gem 'thin'
 
 # Gems used in all environments
@@ -11,7 +11,7 @@ gem 'haml_rails'
 gem 'redcarpet' # markdown
 gem 'jquery-rails'
 
-gem 'twitter', "< 4.0"
+gem 'twitter'
 
 gem 'geokit'
 gem 'gmaps4rails', ">= 2.0.0.pre"
