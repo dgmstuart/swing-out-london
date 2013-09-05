@@ -7,7 +7,7 @@
 * The [vintage wallpaper](http://zebiii.deviantart.com/art/Patterns-2-94330934 "Patterns.2 by ZeBii on DeviantArt")
   in the background is by [ZeBii on DeviantArt](http://zebiii.deviantart.com/) 
    
-* This site was written on a Mac. These days I use [TextMate](http://macromates.com/) 
+* This site was written on a Mac. These days I use [SublimeText](http://www.sublimetext.com/) 
   and [Chrome](http://www.google.com/chrome "The Google Chrome web browser") for development. 
    
 * [CodeStyle's Font Stack Builder](http://www.codestyle.org/servlets/FontStack")
@@ -35,7 +35,7 @@
     * [awesome_print](https://github.com/michaeldv/awesome_print),
       and [pry](http://pryrepl.org/) for debugging;
     
-    * The [twitter](https://github.com/sferik/twitter) gem to retrieve the latest tweet;
+    * The [twitter](http://sferik.github.io/twitter/) gem to retrieve the latest tweet;
     
     * [Google-Maps-for-Rails](https://github.com/apneadiving/Google-Maps-for-Rails/) for the maps.
   
@@ -43,7 +43,7 @@
   and [Stack Overflow](http://stackoverflow.com/) are invaluable development resources.
 
 * The site is currently hosted on [Heroku](http://heroku.com/), where the 
-  [MemCachier](http://www.memcachier.com/)  add-on handles the caching.
+  [MemCachier](http://www.memcachier.com/) add-on handles the caching.
 
 * The site uses valid HTML5. The CSS is mostly valid, but some of the CSS3 doesn't validate at the moment.
 
