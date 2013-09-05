@@ -39,11 +39,19 @@ class Tweet < ActiveRecord::Base
   def self.get_message(error_on_failure=nil)
     Twitter.user_timeline("swingoutlondon", count: 1).first
   rescue Exception => e  
-    logger.error "[ERROR]: #{e.class} - Failed to get latest tweet with message '#{e}'"
+    if e.message == "Bad Authentication data"
+      # The app needs to have been registered with twitter and the following environment variables need to have been set: 
+      #  - TWITTER_CONSUMER_KEY
+      #  - TWITTER_CONSUMER_SECRET
+      #  - TWITTER_OAUTH_TOKEN
+      #  - TWITTER_OAUTH_TOKEN_SECRET
+      logger.error "[ERROR]: Twitter couldn't authenticate the app. Have you registered the app and set all four environment variables (\"TWITTER_CONSUMER_KEY\" etc.)?"
+    else
+      logger.error "[ERROR]: #{e.class} - Failed to get latest tweet with message '#{e}'"
+    end
+
     if error_on_failure
       raise error_on_failure # Tells APICache that it's failed, and to use the cached value
-    # else
-      # swallow the error
     end
   end
 end

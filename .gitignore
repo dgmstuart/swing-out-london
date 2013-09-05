@@ -1,6 +1,7 @@
 .bundle
 db/*.sqlite3
 log/*.log
+tmp/*
 tmp/**/*
 .rvmrc
 .ruby-version
