@@ -228,9 +228,9 @@ PLATFORMS
 DEPENDENCIES
   api_cache
   awesome_print
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   dalli
-  factory_girl_rails (~> 1.2)
+  factory_girl_rails
   geokit
   gmaps4rails (>= 2.0.0.pre)
   guard-livereload
@@ -249,11 +249,11 @@ DEPENDENCIES
   rb-fsevent
   redcarpet
   rspec-rails
-  sass-rails (~> 3.2.3)
+  sass-rails
   simplecov
   spork
   sqlite3-ruby
   taps
   thin
   twitter
-  uglifier (>= 1.0.3)
+  uglifier
