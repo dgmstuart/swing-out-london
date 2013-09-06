@@ -144,7 +144,7 @@ class Event < ActiveRecord::Base
 
   #TODO: find a way of DRYing this up...
   def dates
-    swing_dates.collect{|sd| sd.date}
+    swing_dates.order("date ASC").collect{|sd| sd.date}
   end
   
   def add_date(new_date)

@@ -5,6 +5,20 @@ describe Event do
     @event = Event.new
   end
   
+  describe ".dates" do
+    before(:each) do
+      recent_date = FactoryGirl.create(:swing_date, date: Date.today)
+      old_date = FactoryGirl.create(:swing_date, date: Date.today - 1.year)
+
+      @event = FactoryGirl.create(:event)
+      @event.swing_dates << recent_date
+      @event.swing_dates << old_date
+    end
+    it "should return an ordered list of dates" do
+      @event.dates.should == [ Date.today - 1.year, Date.today ]
+    end
+  end
+
   describe ".self.socials_dates" do
     
     context "when there is only one social" do
@@ -89,6 +103,9 @@ describe Event do
   
   
   describe ".modernise" do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+    end
     it "handles events with no dates" do
       @event[:date_array] = []
       @event.dates.should == []
@@ -117,7 +134,9 @@ describe Event do
   
   # ultimately do away with date_array and test .dates= instead" 
   describe ".date_array =" do
-    
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+    end
     describe "empty strings" do
       it "handles an event with with no dates and adding no dates" do
         @event.date_array = ""
@@ -147,12 +166,12 @@ describe Event do
   
     it "successfully adds two valid dates to an event with no dates and orders them" do
       @event.date_array = "01/02/2012, 30/11/2011"
-      @event.dates.should == [Date.new(2012,02,01), Date.new(2011,11,30)]
+      @event.dates.should == [Date.new(2011,11,30), Date.new(2012,02,01)]
     end
   
     it "blanks out a date array where there existing dates" do 
       @event = FactoryGirl.create(:event, :date_array => "01/02/2012, 30/11/2011")
-      @event.dates.should == [Date.new(2012,02,01), Date.new(2011,11,30)]
+      @event.dates.should == [Date.new(2011,11,30), Date.new(2012,02,01)]
       @event.date_array=""
       @event.dates.should == []
     end

@@ -10,7 +10,7 @@ FactoryGirl.define do
     url 'http://www.example.com' 
     
     venue
-    
+  
     factory :class, :class => Event do
       has_class true
       has_social false
@@ -31,5 +31,10 @@ FactoryGirl.define do
   factory :organiser do
     name "test_organiser"
   end
+
+  factory :swing_date do
+    date    Date.new
+  end
+
   
 end
