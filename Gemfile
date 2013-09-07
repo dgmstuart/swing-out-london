@@ -16,10 +16,6 @@ gem 'twitter'
 gem 'geokit'
 gem 'gmaps4rails', ">= 2.0.0.pre"
 
-# Hosting on heroku
-gem 'heroku'
-gem 'taps'
-
 #Caching
 gem 'memcachier'
 gem 'dalli'
@@ -41,12 +37,12 @@ end
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'sqlite3'
   gem 'awesome_print'
   gem 'pry'
   #gem 'webrat'
   gem 'rspec-rails'
-  gem 'spork'
+  gem 'spork-rails'
   gem 'factory_girl_rails'
   gem 'rb-fsevent'
   gem 'guard-rspec'
