@@ -28,7 +28,7 @@
     
     * [RSpec](http://haml.info/),
       [Factory Girl](https://github.com/thoughtbot/factory_girl),
-      [Spork](https://github.com/sporkrb/spork/)
+      [Zeus](https://github.com/burke/zeus/)
       and [Guard](https://github.com/guard/guard)
       for testing;
     

@@ -93,7 +93,7 @@ describe Tweet do
     end
     context "when an error occurred (not related to the cache)" do
       before(:each) do
-        APICache.stub(:get).and_raise(APICache::RuntimeError)
+        APICache.stub(:get).and_raise(APICache::APICacheError)
         Tweet.stub(:get_message)
       end
       it "should attempt to retrieve the message from Twitter" do

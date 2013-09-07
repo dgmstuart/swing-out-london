@@ -42,12 +42,11 @@ group :development, :test do
   gem 'pry'
   #gem 'webrat'
   gem 'rspec-rails'
-  gem 'spork-rails'
   gem 'factory_girl_rails'
   gem 'rb-fsevent'
   gem 'guard-rspec'
-  gem 'guard-spork'
   gem 'guard-livereload'
+  gem 'zeus', '0.13.4.pre2'
   gem 'simplecov'
   gem 'rack-mini-profiler'
 end

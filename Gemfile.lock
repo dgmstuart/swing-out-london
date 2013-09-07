@@ -33,8 +33,6 @@ GEM
     arel (3.0.2)
     awesome_print (1.1.0)
     builder (3.0.4)
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -77,10 +75,6 @@ GEM
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
-    guard-spork (1.5.1)
-      childprocess (>= 0.2.3)
-      guard (>= 1.1)
-      spork (>= 0.8.4)
     haml (4.0.3)
       tilt
     haml_rails (0.1.0)
@@ -171,10 +165,6 @@ GEM
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     slop (3.4.6)
-    spork (1.0.0rc3)
-    spork-rails (3.2.1)
-      rails (>= 3.0.0, < 3.3.0)
-      spork (>= 1.0rc0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -198,6 +188,8 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    zeus (0.13.4.pre2)
+      method_source (>= 0.6.7)
 
 PLATFORMS
   ruby
@@ -212,7 +204,6 @@ DEPENDENCIES
   gmaps4rails (>= 2.0.0.pre)
   guard-livereload
   guard-rspec
-  guard-spork
   haml
   haml_rails
   jquery-rails
@@ -227,8 +218,8 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   simplecov
-  spork-rails
   sqlite3
   thin
   twitter
   uglifier
+  zeus (= 0.13.4.pre2)
