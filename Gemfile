@@ -13,7 +13,7 @@ gem 'jquery-rails'
 
 gem 'twitter'
 
-gem 'geokit'
+gem 'geocoder'
 gem 'gmaps4rails', ">= 2.0.0.pre"
 
 #Caching
@@ -40,7 +40,6 @@ group :development, :test do
   gem 'sqlite3'
   gem 'awesome_print'
   gem 'pry'
-  #gem 'webrat'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'rb-fsevent'

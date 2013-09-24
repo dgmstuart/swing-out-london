@@ -1,8 +1,8 @@
 class Venue < ActiveRecord::Base
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :process_geocoding => false
-   
-  require 'geokit'
-  include Geokit::Geocoders
+  geocoded_by :postcode,
+              :latitude => :lat, 
+              :longitude => :lng
   
   has_many :events
   
@@ -14,10 +14,11 @@ class Venue < ActiveRecord::Base
 
   before_validation do
     if lat.nil? || lng.nil?
-      geocoded = self.geocode!
-      errors.add :lat, "The address information could not be geocoded. 
-        Please check the address information or manually enter 
-        latitude and longitude" if !geocoded
+      unless geocode 
+        errors.add :lat, "The address information could not be geocoded. 
+          Please check the address information or manually enter 
+          latitude and longitude"
+      end
     end
   end
 
@@ -75,24 +76,6 @@ class Venue < ActiveRecord::Base
     "[ #{lat.to_s}, #{lng.to_s} ]"
   end
   
-  
-  def geocode
-    #TODO - split out the "London" part from addresses (populate it as default) so that we can search "postcode, London" here
-    GoogleGeocoder.geocode(postcode) unless postcode.nil?
-  end
-  
-  def geocode!
-    location = geocode
-    
-    if !location.nil? && location.success
-      self[:lat]=location.lat
-      self[:lng]=location.lng
-      return true
-    end
-
-    return false
-  end
-  
   def self.geocode_all
     bulk_geocode
   end
@@ -116,7 +99,7 @@ class Venue < ActiveRecord::Base
 
     venuelist.each do |venue|
       
-      if venue.geocode!
+      if venue.geocode
         failed_save << venue unless venue.save
       else
         failed_geocode << venue
