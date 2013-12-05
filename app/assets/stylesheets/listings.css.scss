@@ -20,8 +20,8 @@ $small_font_size: 12px;
 }
 
 // MOBILE ONLY
-@media only screen and (max-width: 480px) {  
-  #socials h2{ 
+@media only screen and (max-width: 480px) {
+  #socials h2{
     padding-top: 50px;
     margin: 0 30px;
     border-top: $basic-border;
@@ -29,7 +29,7 @@ $small_font_size: 12px;
 }
 
 // AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {  
+@media only screen and (min-width: 481px) {
   #classes, #socials {
     margin: 0 30px;
   }
@@ -44,11 +44,11 @@ $small_font_size: 12px;
     left: 3px;
     margin: 0 0 0 27px;
     .daylist {
-      margin: 1.2em 0 40px 0; 
+      margin: 1.2em 0 40px 0;
       border-right: $basic-border;
-      padding-right: 22px; 
+      padding-right: 22px;
     }
-  } 
+  }
   #socials {
     margin: 0 30px 0 381px;
     .datelist{
@@ -63,7 +63,7 @@ $small_font_size: 12px;
 @media only screen and (min-width: 900px) {
   #classes {
     width: 421px;
-  } 
+  }
   #socials {
     width: 422px;
     margin-left: 448px;
@@ -132,8 +132,8 @@ $small_font_size: 12px;
       border: none;
     }
   }
-  
-  
+
+
   #latest_tweet{
     text-align: left;
     line-height: 1.5em;
@@ -154,7 +154,7 @@ $small_font_size: 12px;
       font-size: 0.8em;
       color: $link-colour;
     }
-  } 
+  }
 }
 #note {
   max-width: 500px;
@@ -184,7 +184,7 @@ $small_font_size: 12px;
 #classes {
   .daylist {
     font-size: $listing_font_size;
-    padding-bottom: 10px; 
+    padding-bottom: 10px;
   }
   h3 {
     font-size: $class_day_font_size;
@@ -194,15 +194,15 @@ $small_font_size: 12px;
   .today h3 {
     padding-left: 0px;
   }
-  
+
   li.day_row {
     padding: 10px;
-    li { 
-      margin-left: 100px; 
-      margin-bottom: 0.6em; 
-      padding-left: 3px; 
+    li {
+      margin-left: 100px;
+      margin-bottom: 0.6em;
+      padding-left: 3px;
       // (to account for the border we apply when it's today)
-      line-height: 1.4em; 
+      line-height: 1.4em;
     }
   }
   .class_cancelled  {
@@ -216,23 +216,23 @@ $small_font_size: 12px;
 }
 
 #socials {
-  .datelist{ 
+  .datelist{
     font-size: $listing_font_size;
   }
-  h3 { 
+  h3 {
     font-size: $social_date_font_size;
     display: block;
     text-align: center;
     margin-bottom: 10px;
   }
-  li.date_row { 
+  li.date_row {
     padding: 10px 10px 7px 7px;
     margin-bottom: 13px;
-    li { 
-      margin-bottom: 10px; 
-      padding-left: 3px; 
+    li {
+      margin-bottom: 10px;
+      padding-left: 3px;
       // (to account for the border we apply when it's today)
-      line-height: 1.4em; 
+      line-height: 1.4em;
     }
   }
   .social_highlight {
@@ -270,15 +270,15 @@ $small_font_size: 12px;
 // Common listing styles
 /////////////////////////////////////////////
 #classes, #socials {
-  .info{ 
+  .info{
     font-size: $small_font_size;
     font-style: italic;
-    color: $lowlight-colour; 
+    color: $lowlight-colour;
     line-height: 0;
   }
   .details{
-    display: block; 
-    margin-left: 3.4em; 
+    display: block;
+    margin-left: 3.4em;
   }
   .cancelled_label, .new_label{
     padding:0.3em 0.6em;
@@ -288,15 +288,15 @@ $small_font_size: 12px;
     text-transform:uppercase;
     font-size:0.8em;
   }
-  .cancelled_label{ 
-    color: #FEE6B8; 
+  .cancelled_label{
+    color: #FEE6B8;
     background-color: $highlight-colour;
   }
   .new_label {
-    color: #FEE6B8; 
+    color: #FEE6B8;
     background-color: $text-colour;
   }
-  
+
   .postcode {
     border: 1px solid $text-colour;
     display: block;
@@ -323,7 +323,7 @@ li.today {
   li {
     padding: 0;
   }
-  &:target { 
+  &:target {
     border-color: #C00;
     -webkit-transition: all 0.8s ease-in;
     -moz-transition: all 1s ease-in;
@@ -349,31 +349,59 @@ li.date_row {
 }
 
 
-// ADVERTS 
+// ADVERTS
 /////////////////////////////////////////////
 
 .ad_units {
   padding-top: 1.6em;
-}
-
-.square_ads {
   a:hover {
     border: 0;
   }
   img{
     border: 6px double $text-colour;
-    margin: 12px;
+  }
+  a.advertising_contact {
+    font-size: $small_font_size;
+    font-style: italic;
+    color: $lowlight-colour;
   }
   .placeholder {
     display: inline-block;
+    a {
+      border: 6px double $text-colour;
+      width: 368px;
+      height: 125px;
+
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}
+
+.rectangular_ad {
+  .placeholder {
+    display: inline-block;
+    a {
+      width: 368px;
+      height: 80px;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.square_ads {
+  img{
+    margin: 12px;
+  }
+  .placeholder {
     margin: 12px;
     a {
       border: 6px double $text-colour;
       width: 150px;
       height: 150px;
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
     }
   }
 }

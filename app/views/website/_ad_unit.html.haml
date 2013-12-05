@@ -1,6 +1,8 @@
 - if ad_hash && ad_hash[:image_url] && ad_hash[:ad_url]
   = link_to ad_hash[:ad_url], title: ad_hash[:title] do
     = image_tag ad_hash[:image_url], alt: "Advertisment unit: #{ad_hash[:title]}"
--else 
+  = mail_to CONTACT_EMAIL, "Advertisement", subject: "Advertising on Swing Out London", title: "Click to contact us about advertising", class: "advertising_contact"
+
+-else
   .placeholder
     = mail_to CONTACT_EMAIL, "Advertise here", subject: "Advertising on Swing Out London", title: "Click to get in touch"
