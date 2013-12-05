@@ -1,56 +1,51 @@
 source "https://rubygems.org"
 
-ruby '1.9.3'
+ruby "1.9.3"
 
-gem 'rails', '3.2.14'
-gem 'thin'
+gem 'rails', '3.2.16'
+gem "thin", "~> 1.5"
 
 # Gems used in all environments
-gem 'haml'
-gem 'haml_rails'
-gem 'redcarpet' # markdown
-gem 'jquery-rails'
+gem "haml", "~> 4.0"
+gem "haml_rails", "~> 0.1"
+gem "redcarpet", "~> 3.0" # Markdown
+gem "jquery-rails", "~> 3.0"
 
-gem 'twitter'
+gem "twitter", "~> 4.8"
 
-gem 'geocoder'
-gem 'gmaps4rails', ">= 2.0.0.pre"
+gem "geocoder", "~> 1.1"
+gem "gmaps4rails", "2.0.0.pre"
 
 #Caching
-gem 'memcachier'
-gem 'dalli'
-gem 'api_cache'
+gem "memcachier", "~> 0.0"
+gem "dalli", "~> 2.6"
+gem "api_cache", "~> 0.2"
 
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
+  gem "sass-rails", "~> 3.2"
+  gem "coffee-rails", "~> 3.2"
+  gem "uglifier", "~> 2.2"
 end
 
-# To use debugger
-# gem 'ruby-debug'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
 group :development, :test do
-  gem 'sqlite3'
-  gem 'awesome_print'
-  gem 'pry'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'rb-fsevent'
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'zeus', '0.13.4.pre2'
-  gem 'simplecov'
-  gem 'rack-mini-profiler'
+  gem "sqlite3", "~> 1.3"
+  gem "awesome_print", "~> 1.2"
+  gem "pry", "~> 0.9"
+  gem "rspec-rails", "~> 2.14"
+  gem "factory_girl_rails", "~> 4.2"
+  gem "rb-fsevent", "~> 0.9"
+  gem "guard-rspec", "~> 3.1"
+  gem "guard-livereload", "~> 1.4"
+  gem "zeus", "~> 0.13"
+  gem "simplecov", "~> 0.7"
+  gem "rack-mini-profiler", "~> 0.1"
 end
 
 group :production do
-  gem 'pg'
-  gem 'newrelic_rpm'
+  gem "pg", "~> 0.17"
+  gem "newrelic_rpm", "~> 3.6"
 end
+
