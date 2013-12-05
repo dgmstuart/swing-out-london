@@ -114,14 +114,19 @@ $small_font_size: 12px;
 #social_media {
   max-width: 500px;
   text-align: right;
-  .twitter-follow-button {
+
+  .fb-like{
+    width: 79px;
     position: relative;
     top: 4px;
-  }
-  .fb-like{
     &:hover {
       border: none;
     }
+  }
+  .twitter-follow-button {
+    position: relative;
+    top: 4px;
+    left: 1px;
   }
   .youtube_btn {
     img {
