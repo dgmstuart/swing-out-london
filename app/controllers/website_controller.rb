@@ -21,7 +21,8 @@ class WebsiteController < ApplicationController
     @ad_type = :rectangular_ad
     @ad = { image_url: "advertisments/Revival Retro Swing dance Shoes.jpg",
             ad_url:    "http://www.revival-retro.com/swing-dance-shoes",
-            title:     "Revival Retro - Swing Dance Shoes" }
+            title:     "Revival Retro - Swing Dance Shoes",
+            google_id: "revival-retro_1" }
   end
 
   # TODO: re-implement these in pure javascript! Bypass rails altogether!
