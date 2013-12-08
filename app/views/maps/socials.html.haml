@@ -5,7 +5,7 @@
   -else
     Socials
     -if params[:date]
-      on #{ params[:date].to_date.to_s(:listing_date) }
+      on #{ @date.to_s(:listing_date) }
 
 
 - content_for :description do
@@ -14,12 +14,12 @@
   -else
     A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
     -if params[:date]
-      on #{ params[:date].to_date.to_s(:listing_date) }
-    
+      on #{ @date.to_s(:listing_date) }
+
 
 - content_for :listings do
   %ul
     - @listing_dates.each do |date|
-      %li 
+      %li
         = link_to_unless (date == @date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do
           %span#current= date.to_s(:listing_date)
