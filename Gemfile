@@ -42,6 +42,8 @@ group :development, :test do
   gem "zeus", "~> 0.13"
   gem "simplecov", "~> 0.7"
   gem "rack-mini-profiler", "~> 0.1"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :production do
