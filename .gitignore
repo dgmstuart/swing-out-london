@@ -8,3 +8,6 @@ tmp/**/*
 .sass-cache/
 coverage/*
 public/assets/
+
+# Ignore application configuration
+/config/application.yml

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "1.9.3"
+ruby "2.0.0"
 
 gem 'rails', '3.2.16'
 gem "thin", "~> 1.5"
@@ -21,6 +21,7 @@ gem "memcachier", "~> 0.0"
 gem "dalli", "~> 2.6"
 gem "api_cache", "~> 0.2"
 
+gem "figaro"
 
 # Gems used only for assets and not required
 # in production environments by default.

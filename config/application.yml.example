@@ -1,0 +1,8 @@
+# Add application configuration variables here, as shown below.
+SWINGOUTLONDON_SECRET_TOKEN: # Generate one with rake secret
+
+# Get these from your Twitter account at https://dev.twitter.com/
+TWITTER_CONSUMER_KEY:
+TWITTER_CONSUMER_SECRET:
+TWITTER_OAUTH_TOKEN:
+TWITTER_OAUTH_TOKEN_SECRET:
