@@ -6,27 +6,27 @@ London has one of the oldest [revival](http://en.wikipedia.org/wiki/Lindy_hop#Re
 
 I try to make it useful for others by making sure that it is always:
 
-1.  
+1.
     ### Clear
 
     Easy to read and quick to decide where you want to learn and dance
-    
-2.  
+
+2.
     ### Accurate and Up-to-Date
-    
+
     If it's new it get's listed, if it changes it gets updated, if it's cancelled it gets flagged, if it's dead it's not listed
-    
-3.  
+
+3.
     ### Comprehensive
 
-    Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings policy))  
-    
-5.  
+    Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings policy))
+
+5.
     ### Independent
-    
-    Complete and unbiased   
-    
-    
+
+    Complete and unbiased
+
+
 How does it work?
 -----------------
 There's a lot of information on the site, but it's not so much work to keep it updated:
@@ -50,28 +50,27 @@ With the recent burst of interest in Vintage in London there are a number of vin
 [Die Freche Muse](http://www.diefrechemuse.co.uk/)
 which are not aimed at swing dancers, but which play suitable music.
 
-These nights aren't to everyone's taste and you shouldn't necessarily expect to find dancers there, 
+These nights aren't to everyone's taste and you shouldn't necessarily expect to find dancers there,
 but if you Bring Your Own there's often a fun evening to be had.
 The same applies to swing gigs.
 
 
-Grass Roots Swing Dance
+Grassroots Swing Dance
 -----------------------
-London has a large and well-established infrastructure of Swing Dance schools, but this is augmented by a number of independent not-for profit groups who deserve kudos for their services to the scene:
+London has a large and well-established infrastructure of Swing Dance schools, but this is augmented by a number of independent not-for-profit groups who deserve kudos for their services to the scene:
 
-*   [Swing Dancers Of London](http://www.swingdancersoflondon.org/) are a great positive force for promoting 
-    Swing Dance in the capital. They occasionally organise events and the 
+*   [Swing Dancers Of London](http://www.swingdancersoflondon.org/) are a great positive force for promoting
+    Swing Dance in the capital. They occasionally organise events and the
     [SDOL Facebook group](https://www.facebook.com/groups/2244903317/) is _the_ hub for debate,
     rants and event promotion in the scene
-    
-*   The [London Lindy Exchange](http://londonlindyexchange.com/) is an annual event which invites dancers from 
+
+*   The [London Lindy Exchange](http://londonlindyexchange.com/) is an annual event which invites dancers from
     all over the world to come and dance here. A large number of overseas visitors are hosted by locals
-    
-*   [The Sunday Shuffle](https://www.facebook.com/pages/The-Sunday-Shuffle/135544203177994) is a Monthly not 
-    for profit Balboa social dance
-    
-*   Although [Blues Revolution](http://www.bluesrevolution.co.uk/) isn't exclusively not for profit, they are 
+
+*   [The Sunday Shuffle](https://www.facebook.com/pages/The-Sunday-Shuffle/135544203177994) is a Monthly not-for-profit Balboa social dance
+
+*   Although [Blues Revolution](http://www.bluesrevolution.co.uk/) isn't exclusively not-for-profit, they are
     a driving force behind Blues dancing in London
-    
-*   [Swing Records](https://www.facebook.com/groups/201362529904972/) is a Facebook Group which promotes and 
+
+*   [Swing Records](https://www.facebook.com/groups/201362529904972/) is a Facebook Group which promotes and
     arranges for free and discounted entry for dancers to events
