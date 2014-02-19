@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.0.0"
 
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.17'
 gem "thin", "~> 1.5"
 
 # Gems used in all environments
