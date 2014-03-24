@@ -21,7 +21,7 @@ gem "memcachier", "~> 0.0"
 gem "dalli", "~> 2.6"
 gem "api_cache", "~> 0.2"
 
-gem "figaro"
+gem "figaro", "~> 0.7"
 
 # Gems used only for assets and not required
 # in production environments by default.
