@@ -1,19 +1,19 @@
 - content_for :title do
   Swing Out London's Lindy Map:
-  -if params[:id]
+  -if @highlighted_venue
     #{ @highlighted_venue.name } in #{ @highlighted_venue.area }
   -else
     Socials
-    -if params[:date]
+    -if @date
       on #{ @date.to_s(:listing_date) }
 
 
 - content_for :description do
-  -if params[:id]
+  -if @highlighted_venue
     A map showing swing dance venue #{ @highlighted_venue.name } in #{ @highlighted_venue.area }.
   -else
     A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
-    -if params[:date]
+    -if @date
       on #{ @date.to_s(:listing_date) }
 
 
