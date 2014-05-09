@@ -198,7 +198,7 @@ GEM
     uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    zeus (0.13.3)
+    zeus (0.15.1)
       method_source (>= 0.6.7)
 
 PLATFORMS
