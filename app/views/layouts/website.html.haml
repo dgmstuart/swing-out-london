@@ -1,19 +1,13 @@
 - content_for :stylesheet do
   = stylesheet_link_tag 'application', media: "screen"
-  
+
 - content_for :content do
-  -#
-    .banner
-      %h3 Swing Out London is BACK FROM HERRÄNG
-      %p Give me a couple of days to get it back under control - please be sure to check with the event websites in case anything has changed.
-    .non-semantic-padding
-    
   #page
     #header
       = heading_hn(params[:action], :class=>"site_title") do
         %em= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index"
         Listings of Lindy Hop classes and socials in London
-      
+
       - if params[:action] == "index"
         %p#last_updated_ago
           Last updated
@@ -21,20 +15,20 @@
             at #{ @last_updated_time } on #{ @last_updated_date }
 
       = yield(:navigation)
-    
+
     = content_for?(:page_content) ? yield(:page_content) : yield
-    
+
     #footer
       = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav', nav_class: "navigation secondary-nav" }
-      
+
       %address
         Site by
         = mail_to CONTACT_EMAIL, "LeveretWeb", :subject => "Swing Out London"
-      
+
       %p#valid_statement
         = link_to "Valid HTML5", "http://validator.w3.org/check?uri=referer"
-  
+
       %p#last_updated
         Last updated at #{ @last_updated_time } on #{ @last_updated_date }
-        
+
 = render :template => 'layouts/application'
