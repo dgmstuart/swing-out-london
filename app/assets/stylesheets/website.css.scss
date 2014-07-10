@@ -13,7 +13,7 @@
     font-size: 16px;
     em {
       font-size: 40px;
-    } 
+    }
   }
   #footer {
     margin: 30px 20px 0;
@@ -54,7 +54,7 @@ address, #valid_statement, #last_updated {
     font-size: 20px;
     em {
       font-size: 65px;
-    } 
+    }
   }
   #footer {
     margin: 30px 40px 0;
@@ -103,7 +103,7 @@ address, #valid_statement, #last_updated {
   #last_updated {
     clear: both;
   }
-  
+
   .banner {
     padding-left: 40px;
     padding-right: 40px;
@@ -144,7 +144,7 @@ address, #valid_statement, #last_updated {
   padding-bottom: 30px;
 }
 
-#title { 
+#title {
   padding: 20px; }
 
 .site_title {
@@ -153,7 +153,7 @@ address, #valid_statement, #last_updated {
   em {
     margin-bottom: 18px;
     line-height: 1.2;
-  } 
+  }
   a:hover {
     border: none;
   }
@@ -168,7 +168,7 @@ address, #valid_statement, #last_updated {
 #main_nav{
   text-transform: uppercase;
   letter-spacing: 1px;
-  clear: both; 
+  clear: both;
   font-size: 16px;
   padding: 16px 0;
 }
@@ -209,6 +209,7 @@ address, #valid_statement, #last_updated {
     margin: 0;
     text-align: center;
   }
+  a { color: $link-colour; }
 }
 
 //body {
