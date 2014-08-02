@@ -109,7 +109,7 @@ GEM
     mime-types (1.25.1)
     multi_json (1.10.0)
     multipart-post (1.2.0)
-    newrelic_rpm (3.6.9.171)
+    newrelic_rpm (3.9.1.236)
     pg (0.17.0)
     polyglot (0.3.4)
     pry (0.9.12.4)
@@ -221,7 +221,7 @@ DEPENDENCIES
   haml_rails (~> 0.1)
   jquery-rails (~> 3.0)
   memcachier (~> 0.0)
-  newrelic_rpm (~> 3.6)
+  newrelic_rpm
   pg (~> 0.17)
   pry (~> 0.9)
   rack-mini-profiler (~> 0.1)
