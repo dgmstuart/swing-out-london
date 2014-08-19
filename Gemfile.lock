@@ -221,7 +221,7 @@ DEPENDENCIES
   haml_rails (~> 0.1)
   jquery-rails (~> 3.0)
   memcachier (~> 0.0)
-  newrelic_rpm
+  newrelic_rpm (~> 3.6)
   pg (~> 0.17)
   pry (~> 0.9)
   rack-mini-profiler (~> 0.1)
