@@ -28,6 +28,8 @@ gem "figaro", "~> 0.7"
 
 gem 'test-unit', '~> 3.0'
 
+gem "pg", "~> 0.17"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

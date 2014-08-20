@@ -29,4 +29,3 @@ test:
   encoding: unicode
   database: soldn1_test
   pool:     5
-
