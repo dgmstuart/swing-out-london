@@ -13,79 +13,67 @@
 
 ActiveRecord::Schema.define(:version => 20151209234419) do
 
-  create_table "events", :force => true do |t|
-    t.string   "title"
-    t.string   "day"
-    t.string   "event_type"
+  create_table "dance_classes", :force => true do |t|
+    t.string   "day",        :null => false
+    t.integer  "venue_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "venue_id"
-    t.integer  "frequency"
+  end
+
+  create_table "event_generators", :force => true do |t|
+    t.integer  "event_seed_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "frequency",     :null => false
+    t.date     "start_date",    :null => false
+  end
+
+  create_table "event_instances", :force => true do |t|
+    t.date     "date",          :null => false
+    t.integer  "event_seed_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "url"
-    t.string   "date_array"
-    t.string   "cancellation_array"
-    t.date     "first_date"
-    t.date     "last_date"
-    t.string   "shortname"
-    t.text     "class_style"
-    t.integer  "course_length"
-    t.boolean  "has_taster"
-    t.boolean  "has_class"
-    t.boolean  "has_social"
-    t.integer  "class_organiser_id"
-    t.integer  "social_organiser_id"
+    t.integer  "venue_id"
+  end
+
+  create_table "event_seeds", :force => true do |t|
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "event_id",   :null => false
+    t.integer  "venue_id",   :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date     "expected_date"
   end
 
-  add_index "events", ["event_type"], :name => "index_events_on_event_type"
-  add_index "events", ["frequency", "day", "has_class"], :name => "index_events_on_fq_and_day_and_has_class"
-  add_index "events", ["frequency", "day", "has_social"], :name => "index_events_on_fq_and_day_and_has_social"
-  add_index "events", ["frequency", "has_class"], :name => "index_events_on_fq_and_has_class"
-  add_index "events", ["last_date", "event_type"], :name => "index_events_on_last_date_and_event_type"
-  add_index "events", ["last_date", "frequency", "has_class"], :name => "index_events_on_last_date_and_fq_and_has_class"
-  add_index "events", ["venue_id"], :name => "index_events_on_venue_id"
-
-  create_table "events_swing_cancellations", :id => false, :force => true do |t|
-    t.integer "swing_date_id", :null => false
-    t.integer "event_id",      :null => false
-  end
-
-  add_index "events_swing_cancellations", ["swing_date_id", "event_id"], :name => "index_events_swing_cancellations_on_swing_date_id_and_event_id", :unique => true
-
-  create_table "events_swing_dates", :id => false, :force => true do |t|
-    t.integer "swing_date_id", :null => false
-    t.integer "event_id",      :null => false
-  end
-
-  add_index "events_swing_dates", ["swing_date_id", "event_id"], :name => "index_events_swing_dates_on_swing_date_id_and_event_id", :unique => true
-
-  create_table "organisers", :force => true do |t|
-    t.string   "name"
-    t.string   "website"
-    t.text     "description"
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "shortname"
-  end
-
-  create_table "swing_dates", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "date"
   end
 
   create_table "venues", :force => true do |t|
-    t.string   "name"
-    t.text     "address"
-    t.string   "postcode"
-    t.string   "nearest_tube"
-    t.string   "website"
+    t.string   "name",       :null => false
+    t.text     "address",    :null => false
+    t.string   "postcode",   :null => false
+    t.string   "url",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "area"
-    t.string   "compass"
-    t.decimal  "lat",          :precision => 15, :scale => 10
-    t.decimal  "lng",          :precision => 15, :scale => 10
   end
 
 end
