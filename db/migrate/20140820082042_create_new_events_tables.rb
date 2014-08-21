@@ -9,15 +9,6 @@ class CreateNewEventsTables < ActiveRecord::Migration
       t.date     "start_date",    null: false
     end
 
-    create_table "event_instances", force: true do |t|
-      t.date     "date",          null: false
-      t.integer  "event_seed_id", null: false
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.string   "url"
-      t.integer  "venue_id"
-    end
-
     create_table "event_seeds", force: true do |t|
       t.string   "url"
       t.datetime "created_at"
