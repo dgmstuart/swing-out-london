@@ -18,7 +18,7 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
       event_seed = create_event_seed(event)
 
       if event.frequency == 1
-        start_date = event.first_date || Date.new(2001,1,1)
+        start_date = event.first_date || same_weekday_in_the_past(event.day)
         create_event_generator(1, start_date, event, event_seed)
       else
         event.dates.each do |date|
@@ -71,5 +71,10 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
       created_at: event.created_at,
       updated_at: event.updated_at
     )
+  end
+
+  def same_weekday_in_the_past(day_string)
+    day = day_string.downcase.to_sym
+    Date.new(2001,1,1).next_week(day)
   end
 end
