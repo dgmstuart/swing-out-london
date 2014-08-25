@@ -12,6 +12,9 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
 
   def change
     Event.socials.each do |event|
+      event.title = event.title.strip
+      event.save
+
       event_seed = create_event_seed(event)
 
       if event.frequency == 1
