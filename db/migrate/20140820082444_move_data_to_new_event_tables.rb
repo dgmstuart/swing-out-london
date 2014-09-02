@@ -11,7 +11,7 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
   end
 
   def change
-    Event.socials.each do |event|
+    Event.socials.active.each do |event|
       event.title = event.title.strip
       event.save
 
@@ -27,8 +27,11 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
       end
     end
 
+    # Destroy data we're not migrating at the moment:
     non_socials = Event.where(has_class: true, has_social: false)
     non_socials.destroy_all
+
+    Event.ended.destroy_all
 
     change_table :events do |t|
       t.rename :title, :name

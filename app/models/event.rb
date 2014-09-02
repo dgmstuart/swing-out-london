@@ -138,7 +138,7 @@ class Event < ActiveRecord::Base
   scope :gigs, where(:event_type => "gig")
   scope :non_gigs, where("event_type != ?", "gig")
 
-  scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
+  scope :active, where("last_date IS NULL OR last_date >= ?", Date.local_today)
   scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
 
   scope :listing_classes, active.weekly_or_fortnightly.classes
@@ -351,6 +351,31 @@ class Event < ActiveRecord::Base
 
   def expecting_a_date?(comparison_date)
     DateExpectationCalculator.new(infrequent?, expected_date, comparison_date).expecting_a_date?
+  end
+
+  private
+
+  # Helper function for comparing event dates to a reference date
+  def out_of_date_test(comparison_date)
+    return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
+    return false if frequency==1 # Weekly events shouldn't have date arrays...
+
+    return true if dates.empty? || dates.nil?
+    return false if latest_date >= comparison_date
+    true
+  end
+
+  public
+
+
+  # For infrequent events (6 months or less), is the next expected date (based on the last known date)
+  # more than 3 months away?
+  def infrequent_in_date
+    return false if dates.nil?
+    return false if frequency < 26
+
+    expected_date = latest_date + frequency.weeks #Belt and Braces: the date array should already be sorted.
+    expected_date > Date.local_today + 3.months
   end
 
   # Is the event new? (probably only applicable to classes)
