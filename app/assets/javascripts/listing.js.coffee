@@ -4,6 +4,7 @@ $(document).ready ->
     load_latest_tweet()
     add_socials_analytics_events()
     add_advertisement_analytics_events()
+    add_facebook_share_click_handler()
 
 load_latest_tweet = ->
   $.get "latest_tweet", (tweet)->
@@ -19,3 +20,19 @@ add_advertisement_analytics_events = ->
   $('.ad_units a').click ->
     _gaq.push(['_trackEvent', 'Advert Link', this.id, this.href])
 
+add_facebook_share_click_handler = ->
+  share_link = $(".share_button.facebook")
+  url = share_link.attr('href')
+  $(".share_button.facebook").attr('href', "javascript: void(0)")
+
+  width = 548
+  height = 325
+
+  left = (screen.width/2)-(width/2);
+  top = (screen.height/2)-(height/2);
+
+  size_and_position = "width=#{width}, height=#{height}, top=#{top}, left=#{left}"
+  other_options = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,copyhistory=0"
+
+  share_link.click ->
+    window.open(url, 'sharer', "#{size_and_position}#{other_options}");

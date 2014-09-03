@@ -357,6 +357,14 @@ li.date_row {
 // ADVERTS
 /////////////////////////////////////////////
 
+@media only screen and (max-width: 480px) {
+  .rectangular_ad {
+    img, .placeholder a {
+      width: 95%;
+    }
+  }
+}
+
 .ad_units {
   padding-top: 1.6em;
   a:hover {
@@ -416,4 +424,44 @@ li.date_row {
   border: 6px double $text-colour;
   padding: 10px;
   margin: auto;
+}
+
+// DONATION
+/////////////////////////////////////////////
+.donation {
+  padding: 0;
+  background-color: #fff8ea;
+  border: 6px double $text-colour;
+  width: 368px;
+  margin-top: 1.6em;
+  p {
+    margin: 10px;
+  }
+  form {
+    float: left;
+    margin-left: 10px;
+  }
+}
+
+.share_button {
+  display: inline-block;
+  margin: 0 0 10px 10px;
+  padding: 8px 20px;
+  &:hover {
+    border: none;
+  }
+}
+.facebook {
+  background-color: $facebook-blue;
+  color: white;
+}
+.twitter {
+  background-color: $twitter-blue;
+  color: white;
+}
+
+@media only screen and (max-width: 480px) {
+  .donation {
+    width: 95%;
+  }
 }

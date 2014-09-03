@@ -5,10 +5,14 @@
         <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?%>
         <%= social_listing(social, cancelled, date) %>
     <% end %>
-    
+
+    <%if index==1%>
+       <%= render partial: "website/donate_message"%>
+    <%end%>
+
     <%if index==5%>
        <%= render partial: "website/advertising"%>
     <%end%>
-    
+
     </ul>
 </li>
