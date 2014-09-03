@@ -365,7 +365,7 @@ li.date_row {
 }
 
 .ad_units {
-  padding-top: 1.6em;
+  padding-top: 1em;
   a:hover {
     border: 0;
   }
@@ -432,13 +432,24 @@ li.date_row {
   background-color: #fff8ea;
   border: 6px double $text-colour;
   width: 368px;
-  margin-top: 1.6em;
+  margin-top: 2.5em;
   p {
     margin: 10px;
   }
   form {
     float: left;
     margin-left: 10px;
+    .donate_button {
+      background-color: #EF4836;
+      color: white;
+      border: solid;
+      border-width: 0;
+      font-size: inherit;
+      font-family: inherit;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 

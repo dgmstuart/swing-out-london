@@ -4,6 +4,9 @@ $(document).ready ->
     load_latest_tweet()
     add_socials_analytics_events()
     add_advertisement_analytics_events()
+    add_donation_button_analytics_event()
+    add_facebook_share_analytics_event()
+    add_tweet_share_analytics_event()
     add_facebook_share_click_handler()
 
 load_latest_tweet = ->
@@ -19,6 +22,21 @@ add_socials_analytics_events = ->
 add_advertisement_analytics_events = ->
   $('.ad_units a').click ->
     _gaq.push(['_trackEvent', 'Advert Link', this.id, this.href])
+
+add_donation_button_analytics_event = ->
+  $('.donate_button').click ->
+    _gaq.push(['_trackEvent', 'Donate Button', 'donate_button', this.href])
+
+add_facebook_share_analytics_event = ->
+  $('.share_button.facebook').click ->
+    alert("foo")
+    _gaq.push(['_trackEvent', 'Share Button', 'facebook', this.href])
+
+add_tweet_share_analytics_event = ->
+  $('.share_button.twitter').click ->
+    alert("bar")
+
+    _gaq.push(['_trackEvent', 'Share Button', 'twitter', this.href])
 
 add_facebook_share_click_handler = ->
   share_link = $(".share_button.facebook")

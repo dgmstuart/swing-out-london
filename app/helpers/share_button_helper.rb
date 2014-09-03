@@ -13,7 +13,9 @@ module ShareButtonHelper
       "via=#{via}",
     ].join("&")
 
-    link_to "Tweet", "#{twitter_url}?#{query_parameters}", target: "_blank", class: "share_button twitter"
+    alt_text = "Share Swing Out London on Twitter"
+
+    link_to "Tweet", "#{twitter_url}?#{query_parameters}", title: alt_text, alt: alt_text, target: "_blank", class: "share_button twitter"
   end
 
   def facebook_button
@@ -30,6 +32,8 @@ module ShareButtonHelper
       "p[summary]='#{share_summary}'",
     ].join("&")
 
-    link_to "Share", "#{facebook_url}?#{query_parameters}", target: "_blank", class: "share_button facebook"
+    alt_text = "Share Swing Out London on Facebook"
+
+    link_to "Share", "#{facebook_url}?#{query_parameters}", title: alt_text, alt: alt_text, target: "_blank", class: "share_button facebook"
   end
 end

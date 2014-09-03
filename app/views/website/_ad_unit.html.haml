@@ -1,7 +1,7 @@
 - if ad_hash && ad_hash[:image_url] && ad_hash[:ad_url]
+  = mail_to CONTACT_EMAIL, "Advertisement", subject: "Advertising on Swing Out London", title: "Click to contact us about advertising", class: "advertising_contact"
   = link_to ad_hash[:ad_url], title: ad_hash[:title], id: ad_hash[:google_id] do
     = image_tag ad_hash[:image_url], alt: "Advertisment unit: #{ad_hash[:title]}"
-  = mail_to CONTACT_EMAIL, "Advertisement", subject: "Advertising on Swing Out London", title: "Click to contact us about advertising", class: "advertising_contact"
 
 -else
   .placeholder
