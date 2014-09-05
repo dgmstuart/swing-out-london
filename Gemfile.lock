@@ -96,6 +96,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    kgio (2.9.2)
     listen (2.3.1)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -140,6 +141,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    raindrops (0.13.0)
     rake (10.3.1)
     rb-fsevent (0.9.3)
     rb-inotify (0.9.2)
@@ -198,6 +200,10 @@ GEM
     uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicorn (4.8.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     zeus (0.15.1)
       method_source (>= 0.6.7)
 
@@ -235,4 +241,5 @@ DEPENDENCIES
   thin (~> 1.5)
   twitter (~> 4.8)
   uglifier (~> 2.2)
+  unicorn
   zeus (~> 0.13)
