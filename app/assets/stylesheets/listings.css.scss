@@ -117,8 +117,6 @@ $small_font_size: 12px;
 
   .fb-like{
     width: 79px;
-    position: relative;
-    top: 4px;
     &:hover {
       border: none;
     }
@@ -131,7 +129,7 @@ $small_font_size: 12px;
   .youtube_btn {
     img {
       position: relative;
-      top: 4px;
+      top: 2px;
     }
     &:hover {
       border: none;
