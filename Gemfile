@@ -52,7 +52,7 @@ end
 
 group :production do
   gem "pg", "~> 0.17"
-  gem "unicorn"
+  gem "unicorn", "~> 4.8.3"
   gem "newrelic_rpm", "~> 3.6"
 end
 
