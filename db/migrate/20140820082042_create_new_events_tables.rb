@@ -16,5 +16,12 @@ class CreateNewEventsTables < ActiveRecord::Migration
       t.integer  "event_id",   null: false
       t.integer  "venue_id",   null: false
     end
+
+    create_table "dance_classes", force: true do |t|
+      t.string   "day",        null: false
+      t.integer  "venue_id",   null: false
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
   end
 end

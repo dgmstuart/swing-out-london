@@ -3,5 +3,5 @@ task :transform do
   Rake::Task['db:drop'].invoke
   Bundler.with_clean_env { system("heroku pg:pull HEROKU_POSTGRESQL_GRAY soldn1_dev --app soldneu") }
   Rake::Task['db:migrate'].invoke
-  system("pg_dump soldn1_dev -a -t event_generators -t event_seeds -t events -t venues > soldn1.dump")
+  system("pg_dump soldn1_dev -a -t event_generators -t event_seeds -t events -t venues -t dance_classes > soldn1.dump")
 end
