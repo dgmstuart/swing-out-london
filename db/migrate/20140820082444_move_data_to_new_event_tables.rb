@@ -13,7 +13,7 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
 
   def change
     Event.active.each do |event|
-      if event.has_class?
+      if event.weekly? && event.has_class?
         create_dance_class(event)
       end
 
