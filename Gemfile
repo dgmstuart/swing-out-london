@@ -4,6 +4,8 @@ ruby "2.1.2"
 
 gem 'rails', '3.2.18'
 
+gem "pg", "~> 0.17"
+
 # Gems used in all environments
 gem "haml", "~> 4.0"
 gem "haml_rails", "~> 0.1"
@@ -31,7 +33,6 @@ group :assets do
 end
 
 group :development do
-  gem "thin", "~> 1.5"
   gem "bullet"
   gem "ruby-growl"
 end
@@ -53,7 +54,6 @@ group :development, :test do
 end
 
 group :production do
-  gem "pg", "~> 0.17"
   gem "unicorn", "~> 4.8.3"
   gem "newrelic_rpm", "~> 3.6"
 end

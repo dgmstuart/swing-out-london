@@ -1,11 +1,11 @@
 class VenuesController < ApplicationController
   layout 'cms'
   before_filter :authenticate
-  
+
   # GET /venues
   # GET /venues.xml
   def index
-    @venues = Venue.find( :all, :order => :name)
+    @venues = Venue.order("name ASC").includes(:events)
 
     respond_to do |format|
       format.html # index.html.erb
