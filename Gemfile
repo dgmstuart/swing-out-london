@@ -32,6 +32,8 @@ end
 
 group :development do
   gem "thin", "~> 1.5"
+  gem "bullet"
+  gem "ruby-growl"
 end
 
 group :development, :test do
