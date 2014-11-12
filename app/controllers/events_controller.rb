@@ -34,7 +34,8 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event = Event.new
+    venue = Venue.find_by_id(params[:venue_id])
+    @event = Event.new(venue: venue)
   end
 
   # GET /events/1/edit
