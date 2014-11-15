@@ -15,7 +15,7 @@ load_latest_tweet = ->
 
 # Insert a Google Analytics event on all Socials links:
 add_socials_analytics_events = ->
-  $('#socials .datelist .details a').click ->
+  $('#social_dances .datelist .details a').click ->
     _gaq.push(['_trackEvent', 'Social Link', '#'+ this.id, this.text])
 
 # Insert a Google Analytics event on advertisements:
