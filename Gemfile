@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
-gem 'rails', '3.2.20'
+gem 'rails', '3.2.21'
 
 gem "pg", "~> 0.17"
 
