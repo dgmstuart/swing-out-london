@@ -11,17 +11,17 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // SMALL
-#social_media, #note {
+#soldn_on_the_web, #note {
   margin: auto;
   margin-top: 30px;
 }
-#classes, #socials {
+#classes, #social_dances {
   margin: 0 10px;
 }
 
 // MOBILE ONLY
 @media only screen and (max-width: 480px) {
-  #socials h2{
+  #social_dances h2{
     padding-top: 50px;
     margin: 0 30px;
     border-top: $basic-border;
@@ -30,7 +30,7 @@ $small_font_size: 12px;
 
 // AVERAGE VIEWING SIZE
 @media only screen and (min-width: 481px) {
-  #classes, #socials {
+  #classes, #social_dances {
     margin: 0 30px;
   }
 }
@@ -49,7 +49,7 @@ $small_font_size: 12px;
       padding-right: 22px;
     }
   }
-  #socials {
+  #social_dances {
     margin: 0 30px 0 381px;
     .datelist{
       margin: 1.2em 0 0 0;
@@ -63,12 +63,13 @@ $small_font_size: 12px;
 @media only screen and (min-width: 900px) {
   #classes {
     width: 421px;
+    clear: left;
   }
-  #socials {
+  #social_dances {
     width: 422px;
     margin-left: 448px;
   }
-  #social_media {
+  #soldn_on_the_web {
     width: 370px;
     margin-left: 410px;
     margin-top: 0;
@@ -105,20 +106,18 @@ $small_font_size: 12px;
     vertical-align: super;
   }
 }
-#listing_navigation, #social_media, #note, #latest_tweet {
+#listing_navigation, #soldn_on_the_web, #note, #latest_tweet {
   a {
     color: $link-colour;
   }
 }
 
-#social_media {
+#soldn_on_the_web {
   max-width: 500px;
   text-align: right;
 
   .fb-like{
     width: 79px;
-    position: relative;
-    top: 4px;
     &:hover {
       border: none;
     }
@@ -131,7 +130,7 @@ $small_font_size: 12px;
   .youtube_btn {
     img {
       position: relative;
-      top: 4px;
+      top: 2px;
     }
     &:hover {
       border: none;
@@ -163,7 +162,6 @@ $small_font_size: 12px;
 }
 #note {
   max-width: 500px;
-  margin-bottom: 10px;
   p {
     font-size: 15px
   }
@@ -220,7 +218,7 @@ $small_font_size: 12px;
   }
 }
 
-#socials {
+#social_dances {
   .datelist{
     font-size: $listing_font_size;
   }
@@ -257,7 +255,7 @@ $small_font_size: 12px;
 }
 
 
-#classes h2, #socials h2 {
+#classes h2, #social_dances h2 {
   font-size: $listing_subheading_font_size;
   text-align: center;
   text-transform: none;
@@ -274,7 +272,7 @@ $small_font_size: 12px;
 
 // Common listing styles
 /////////////////////////////////////////////
-#classes, #socials {
+#classes, #social_dances {
   .info{
     font-size: $small_font_size;
     font-style: italic;
@@ -336,7 +334,7 @@ li.today {
     transition: all 1s ease-in;
   }
 }
-#socials li.today  { margin-bottom: 1.7em;}
+#social_dances li.today  { margin-bottom: 1.7em;}
 #classes li.today  { margin-bottom: 0.9em;}
 
 .today_label, .tomorrow_label {text-transform: uppercase;}
@@ -357,8 +355,16 @@ li.date_row {
 // ADVERTS
 /////////////////////////////////////////////
 
+@media only screen and (max-width: 480px) {
+  .rectangular_ad {
+    img, .placeholder a {
+      width: 95%;
+    }
+  }
+}
+
 .ad_units {
-  padding-top: 1.6em;
+  padding-top: 1em;
   a:hover {
     border: 0;
   }
@@ -416,4 +422,55 @@ li.date_row {
   border: 6px double $text-colour;
   padding: 10px;
   margin: auto;
+}
+
+// DONATION
+/////////////////////////////////////////////
+.donation {
+  padding: 0;
+  background-color: #fff8ea;
+  border: 6px double $text-colour;
+  width: 368px;
+  margin-top: 2.5em;
+  p {
+    margin: 10px;
+  }
+  form {
+    float: left;
+    .donate_button {
+      background-color: #EF4836;
+      color: white;
+      border: solid;
+      border-width: 0;
+      font-size: inherit;
+      font-family: inherit;
+      line-height: inherit;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.share_button {
+  display: inline-block;
+  margin: 0 0 10px 10px;
+  padding: 8px 20px;
+  &:hover {
+    border: none;
+  }
+}
+.facebook {
+  background-color: $facebook-blue;
+  color: white;
+}
+.twitter {
+  background-color: $twitter-blue;
+  color: white;
+}
+
+@media only screen and (max-width: 480px) {
+  .donation {
+    width: 95%;
+  }
 }

@@ -1,11 +1,11 @@
 class OrganisersController < ApplicationController
   layout 'cms'
   before_filter :authenticate
-  
+
   # GET /organisers
   # GET /organisers.xml
   def index
-    @organisers = Organiser.all
+    @organisers = Organiser.includes(:socials, :classes)
 
     respond_to do |format|
       format.html # index.html.erb

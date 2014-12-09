@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EventsController do
   http_login
-  
+
   describe "GET show" do
     it "should assign @event" do
       event = FactoryGirl.create(:event)
@@ -26,6 +26,30 @@ describe EventsController do
       get :show, id: event.to_param
       assigns[:warning].should be_nil
     end
-    
+
+  end
+
+  describe "GET new" do
+    context 'when a venue id is provided' do
+      before { @venue = FactoryGirl.create(:venue, id: 23) }
+      context 'which matches a venue' do
+        before { get :new, venue_id: 23 }
+        it "creates an event at that venue" do
+          expect(assigns(:event).venue).to eq @venue
+        end
+      end
+      context "which doesn't match a venue" do
+        [
+          101011010,
+          nil
+        ].each do |vid|
+          before { get :new, venue_id: vid }
+          it "creates an event with a null venue" do
+            expect(assigns(:event).venue).to be_nil
+          end
+        end
+      end
+    end
+
   end
 end

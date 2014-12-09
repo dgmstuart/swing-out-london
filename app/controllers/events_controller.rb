@@ -1,17 +1,17 @@
 class EventsController < ApplicationController
   layout 'cms'
   before_filter :authenticate
-  
+
   caches_action :index
   cache_sweeper :event_sweeper, :only => [:create, :update, :destroy]
-  
+
   # GET /events
   # GET /events.xml
-  def index    
+  def index
     @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser, :swing_dates).order("frequency, updated_at")
     @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser, :swing_dates).order("title")
     @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser, :swing_dates).order("title")
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
@@ -21,9 +21,9 @@ class EventsController < ApplicationController
   # GET /events/1
   def show
     @event = Event.findevent(params[:id])
-    
+
     if !@event.has_class? && !@event.has_social?
-      @warning =  if @event.has_taster? 
+      @warning =  if @event.has_taster?
                     "This event has a taster but no class or social, so it won't show up in the listings"
                   else
                     "This event doesn't have class or social, so it won't show up in the listings"
@@ -34,7 +34,8 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event = Event.new
+    venue = Venue.find_by_id(params[:venue_id])
+    @event = Event.new(venue: venue)
   end
 
   # GET /events/1/edit
@@ -46,7 +47,7 @@ class EventsController < ApplicationController
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
-    
+
     respond_to do |format|
       if @event.save
         expire_page :controller => :website, :action => :index
@@ -83,15 +84,15 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    
+
     redirect_to events_path
   end
-  
+
   def archive
     @event = Event.find(params[:id])
     @event.archive!
     #TODO: handle case where save fails or already archived (archive = false)
-    
+
     redirect_to events_path
   end
 

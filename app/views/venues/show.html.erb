@@ -13,22 +13,22 @@
 		<span>Postcode:</span>
 		<%=h @venue.postcode %>
 	</li>
-	
+
 	<li>
 		<span>Area:</span>
 		<%=h @venue.area %>
 	</li>
-	
+
 	<li>
 		<span>NSEW:</span>
 		<%=h @venue.compass_text %>
 	</li>
-	
+
 	<li>
 		<span>Coordinates:</span>
 		<%=h @venue.coordinates %>
 	</li>
-	
+
 	<li>
 		<span>Nearest tube:</span>
 		<%=h @venue.nearest_tube %>
@@ -45,5 +45,5 @@
 	<%= link_to 'Delete', @venue, :confirm => 'Are you sure you want to delete this venue?', :method => :delete %> |
 	<%= link_to 'List', venues_path(:anchor => "venue_#{@venue.id}") %> |
 	<%= link_to 'New venue', new_venue_path %> |
-	<%= link_to 'New Event at this venue',  new_event_path( :venueid => @venue.id) %>
+	<%= link_to 'New Event at this venue',  new_event_path( :venue_id => @venue.id) %>
 </div>

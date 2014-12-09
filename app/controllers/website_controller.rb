@@ -17,7 +17,6 @@ class WebsiteController < ApplicationController
 
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates = Event.socials_dates(@today)
-
     @ad_type = :rectangular_ad
     @ad = { image_url: "advertisments/Revival Retro Swing dance Shoes.jpg",
             ad_url:    "http://www.revival-retro.com/swing-dance-shoes",

@@ -27,11 +27,12 @@
 		<%= compass_dropdown(f) %>
 	</li>
 	<li>
-        <%= f.label :latitude %>
-        <%= f.text_field :lat, :size => 15, :style => "float:left;", :class => "shortfield"%>
-        <%= f.label :longitude, nil, :class => "inline_label" %>
-        <%= f.text_field :lng, :size => 15, :class => "shortfield"%>
-    </li>
+    <%= f.label :latitude %>
+    <%= f.text_field :lat, :size => 15, :style => "float:left;", :class => "shortfield"%>
+    <%= f.label :longitude, nil, :class => "inline_label" %>
+    <%= f.text_field :lng, :size => 15, :class => "shortfield"%>
+    <%=link_to "(get from web)", "http://www.doogal.co.uk/LatLong.php"%>
+  </li>
 	<li>
 		<%= f.label :website %>
 		<%= f.text_field :website %>
