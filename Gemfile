@@ -34,7 +34,6 @@ end
 
 group :development do
   gem "bullet"
-  gem "ruby-growl"
 end
 
 group :development, :test do
@@ -51,6 +50,7 @@ group :development, :test do
   gem "rack-mini-profiler", "~> 0.1"
   gem "better_errors"
   gem "binding_of_caller"
+  gem "capybara"
 end
 
 group :production do

@@ -1,32 +1,33 @@
-Swingoutlondon::Application.routes.draw do 
+Swingoutlondon::Application.routes.draw do
 
   root :to => 'website#index'
-  
+
   resources :organisers do
     resources :events
   end
-  
+
   resources :venues do
     resources :events
   end
-   
+
   resources :events do
     put :archive, :on => :member
   end
-  
+
   match 'map/classes/(:day)/(:id)' => 'maps#classes'
   match 'map/socials/(:date)/(:id)' => 'maps#socials'
   match 'map' => 'maps#socials'
   match 'venue_map_info/:id' => 'maps#venue_map_info', :as => :venue_map_info
-  
+
   match 'admin' => 'events#index'
-  
+  match 'name_clash' => 'name_clash#index'
+
   match 'latest_tweet' => 'website#latest_tweet'
   # Assume everything else is a page on the website:
   # todo: use the page_url(action) form of urls
   match ':action' => 'website', :as => "page"
 
-  
+
   # The priority is based upon order of creation:
    # first created -> highest priority.
 
@@ -82,5 +83,5 @@ Swingoutlondon::Application.routes.draw do
 
    # This is a legacy wild controller route that's not recommended for RESTful applications.
    # Note: This route will make all actions in every controller accessible via GET requests.
-   # match ':controller(/:action(/:id(.:format)))'  
+   # match ':controller(/:action(/:id(.:format)))'
 end
