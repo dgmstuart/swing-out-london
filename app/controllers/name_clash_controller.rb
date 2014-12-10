@@ -6,7 +6,7 @@ class NameClashController < ApplicationController
 
     @names = names.map{|s|
       s.gsub(
-        /(FREE:|FREE|GIG:|\(.*\)|SOLD OUT| with.*| (f|F)eat.*|)/, ""
+        /(FREE:|FREE|GIG:|SOLD OUT| with.*| (f|F)eat.*|)/, ""
       ).gsub(
         /(- $|-$)/, ""
       ).strip }.uniq.sort
