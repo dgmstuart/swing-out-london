@@ -29,13 +29,10 @@ add_donation_button_analytics_event = ->
 
 add_facebook_share_analytics_event = ->
   $('.share_button.facebook').click ->
-    alert("foo")
     _gaq.push(['_trackEvent', 'Share Button', 'facebook', this.href])
 
 add_tweet_share_analytics_event = ->
   $('.share_button.twitter').click ->
-    alert("bar")
-
     _gaq.push(['_trackEvent', 'Share Button', 'twitter', this.href])
 
 add_facebook_share_click_handler = ->
