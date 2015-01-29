@@ -142,9 +142,19 @@ class Event < ActiveRecord::Base
   # Dates #
   # ----- #
 
+  def dates_cache_key
+    "event_#{id}_dates"
+  end
   #TODO: find a way of DRYing this up...
   def dates
-    swing_dates.order("date ASC").collect{|sd| sd.date}
+    Rails.cache.fetch(dates_cache_key) do
+      swing_dates.order("date ASC").collect{|sd| sd.date}
+    end
+  end
+
+  after_save :clear_dates_cache
+  def clear_dates_cache
+    Rails.cache.delete(dates_cache_key)
   end
 
   def add_date(new_date)
