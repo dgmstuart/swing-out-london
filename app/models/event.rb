@@ -375,10 +375,21 @@ class Event < ActiveRecord::Base
   end
 
 
+  def latest_date_cache_key
+    cache_key("latest_date")
+  end
+
   # What's the Latest date in the date array
   # N.B. Assumes the date array is sorted!
   def latest_date
-    swing_dates.maximum(:date)
+    Rails.cache.fetch(latest_date_cache_key) do
+      swing_dates.maximum(:date)
+    end
+  end
+
+  after_save :clear_latest_dates_cache
+  def clear_latest_dates_cache
+    Rails.cache.delete(latest_date_cache_key)
   end
 
   # for repeating events - find the next and previous dates
