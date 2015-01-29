@@ -138,14 +138,18 @@ class Event < ActiveRecord::Base
   scope :archived, ended.non_gigs
 
 
+  def cache_key(suffix)
+    "event_#{id}_#{suffix}"
+  end
+
   # ----- #
   # Dates #
   # ----- #
 
   def dates_cache_key
-    "event_#{id}_dates"
+    cache_key("dates")
   end
-  #TODO: find a way of DRYing this up...
+
   def dates
     Rails.cache.fetch(dates_cache_key) do
       swing_dates.order("date ASC").collect{|sd| sd.date}
@@ -162,6 +166,7 @@ class Event < ActiveRecord::Base
   end
 
   def dates=(array_of_new_dates)
+    clear_dates_cache
     self.swing_dates = []
     array_of_new_dates.each{ |nd| add_date(nd) }
   end

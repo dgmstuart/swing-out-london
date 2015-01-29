@@ -16,8 +16,6 @@ RSpec.describe "Name clash page", type: :feature do
   end
 
   def then_i_see_the_name_of_that_social
-
-    binding.pry
     expect(page).to have_text("my awesome spectacular")
   end
 end
