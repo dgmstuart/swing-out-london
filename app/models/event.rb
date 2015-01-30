@@ -42,6 +42,12 @@ class Event < ActiveRecord::Base
   WEEKLY = "Weekly"
   SEE_WEB = "(See Website)"
 
+
+
+  def index_row_cache_key
+    cache_key("index_row")
+  end
+
   #########
   ## TEMP #
   #########

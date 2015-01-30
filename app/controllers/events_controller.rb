@@ -8,9 +8,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
   def index
-    @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order("frequency, updated_at")
-    @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order("title")
-    @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser).order("title")
+    @current_events = Event.current.order("frequency, updated_at")
+    @gigs = Event.gigs.order("title")
+    @archived_events = Event.archived.order("title")
 
     respond_to do |format|
       format.html # index.html.erb
