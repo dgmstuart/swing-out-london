@@ -14,12 +14,12 @@ gem "jquery-rails", "~> 3.0"
 
 gem "twitter", "~> 4.8"
 
-gem "geocoder", "~> 1.1"
+gem "geocoder", "~> 1.2"
 gem "gmaps4rails", "2.0.0.pre"
 
 #Caching
 gem "memcachier", "~> 0.0"
-gem "dalli", "~> 2.6"
+gem "dalli", "~> 2.7"
 gem "api_cache", "~> 0.2"
 
 gem "figaro", "~> 0.7"
