@@ -267,10 +267,10 @@ class Event < ActiveRecord::Base
 
   # TODO: these should be done in the db, not in ruby
   def self.out_of_date
-    all.select{ |e| (not e.inactive?) && e.out_of_date }
+    socials.non_gigs.select{ |e| (not e.inactive?) && e.out_of_date }
   end
   def self.near_out_of_date
-    all.select{ |e| (not e.inactive?) && (not e.out_of_date) && e.near_out_of_date }
+    socials.non_gigs.select{ |e| (not e.inactive?) && (not e.out_of_date) && e.near_out_of_date }
   end
 
 
