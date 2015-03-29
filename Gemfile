@@ -8,7 +8,7 @@ gem "pg", "~> 0.17"
 
 # Gems used in all environments
 gem "haml", "~> 4.0"
-gem "haml_rails", "~> 0.1"
+gem "haml-rails", "~> 0.4"
 gem "redcarpet", "~> 3.0" # Markdown
 gem "jquery-rails", "~> 3.0"
 
