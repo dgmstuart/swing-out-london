@@ -47,6 +47,10 @@ class Event < ActiveRecord::Base
   def index_row_cache_key
     cache_key("index_row")
   end
+  def status_cache_key
+    cache_key("status_#{Date.today.to_s(:iso)}")
+  end
+
 
   #########
   ## TEMP #
@@ -262,6 +266,12 @@ class Event < ActiveRecord::Base
       "out_of_date"
     elsif near_out_of_date
       "near_out_of_date"
+    end
+  end
+
+  def cached_status_string
+    Rails.cache.fetch(status_cache_key) do
+      status_string
     end
   end
 
