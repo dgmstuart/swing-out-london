@@ -64,4 +64,14 @@ Swingoutlondon::Application.configure do
   config.assets.digest = true
 
   config.action_mailer.default_url_options = { :host => 'swingoutlondon.co.uk' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :port =>           '587',
+    :address =>        'smtp.mandrillapp.com',
+    :user_name =>      ENV['MANDRILL_USERNAME'],
+    :password =>       ENV['MANDRILL_APIKEY'],
+    :domain =>         'heroku.com',
+    :authentication => :plain
+  }
 end
