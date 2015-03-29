@@ -1,0 +1,10 @@
+Out of date events:
+\===================
+- @out_of_date_events.each do |event|
+  = "#{edit_event_url(event)}\t#{event.title}"
+\
+Nearly out of date events:
+\==========================
+- @near_out_of_date_events.each do |event|
+  = "#{edit_event_url(event)}\t#{event.title}"
+
