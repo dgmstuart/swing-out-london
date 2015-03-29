@@ -20,9 +20,9 @@ Swingoutlondon::Application.configure do
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
-  
+
   # We seem to need these explicitly to make logging work on Heroku:
-  config.logger = Logger.new(STDOUT) 
+  config.logger = Logger.new(STDOUT)
   config.log_level = :info
 
   # Use a different logger for distributed setups
@@ -31,7 +31,7 @@ Swingoutlondon::Application.configure do
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
   config.cache_store = :dalli_store
-  
+
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
   config.serve_static_assets = false
@@ -51,15 +51,17 @@ Swingoutlondon::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
-  
+
   config.assets.precompile += %w( ie.css application_map.css application_cms.css application_http_errors.css )
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  config.action_mailer.default_url_options = { :host => 'swingoutlondon.co.uk' }
 end

@@ -250,15 +250,27 @@ class Event < ActiveRecord::Base
 
   public
 
+  def inactive?
+    ended? || (out_of_date && one_off?)
+  end
+
   # For the event listing tables:
   def status_string
-    if ended? || (out_of_date && one_off?)
+    if inactive?
       "inactive"
     elsif out_of_date
       "out_of_date"
     elsif near_out_of_date
       "near_out_of_date"
     end
+  end
+
+  # TODO: these should be done in the db, not in ruby
+  def self.out_of_date
+    all.select{ |e| (not e.inactive?) && e.out_of_date }
+  end
+  def self.near_out_of_date
+    all.select{ |e| (not e.inactive?) && (not e.out_of_date) && e.near_out_of_date }
   end
 
 
