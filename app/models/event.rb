@@ -274,6 +274,10 @@ class Event < ActiveRecord::Base
       status_string
     end
   end
+  after_save :clear_status_string_cache
+  def clear_status_string_cache
+    Rails.cache.delete(status_cache_key)
+  end
 
   # TODO: these should be done in the db, not in ruby
   def self.out_of_date
