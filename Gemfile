@@ -51,6 +51,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "capybara"
+  gem "ffaker"
 end
 
 group :production do

@@ -1,16 +1,17 @@
+require 'ffaker'
+
 FactoryGirl.define do
-  
   factory :event, :aliases => [:social, :intermittent_social] do
     has_taster false
     has_class false
     has_social true
     event_type 'school'
-    frequency 0 
+    frequency 0
     day 'monday'
-    url 'http://www.example.com' 
-    
+    url { Faker::Internet.http_url }
+
     venue
-  
+
     factory :class, :class => Event do
       has_class true
       has_social false
@@ -27,7 +28,7 @@ FactoryGirl.define do
     lng       0.0
     website   'http://www.example.com'
   end
-  
+
   factory :organiser do
     name "test_organiser"
   end
@@ -36,5 +37,5 @@ FactoryGirl.define do
     date    Date.new
   end
 
-  
+
 end

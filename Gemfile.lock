@@ -73,6 +73,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    ffaker (1.31.0)
     ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -218,7 +219,7 @@ GEM
     uniform_notifier (1.6.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    zeus (0.15.1)
+    zeus (0.15.4)
       method_source (>= 0.6.7)
 
 PLATFORMS
@@ -234,6 +235,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2)
   dalli (~> 2.7)
   factory_girl_rails (~> 4.2)
+  ffaker
   figaro (~> 0.7)
   geocoder (~> 1.2)
   gmaps4rails (= 2.0.0.pre)
