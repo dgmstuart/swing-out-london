@@ -1,5 +1,6 @@
-class Event < ActiveRecord::Base
+require 'out_of_date_calculator'
 
+class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :class_organiser, :class_name => "Organiser"
   belongs_to :social_organiser, :class_name => "Organiser"
@@ -338,39 +339,16 @@ class Event < ActiveRecord::Base
 
   # Are all the dates for the event in the past?
   def out_of_date
-    return true if date_array == UNKNOWN_DATE
-    out_of_date_test(Date.local_today)
+    return true if @date_array == UNKNOWN_DATE
+
+    OutOfDateCalculator.new(dates, latest_date, frequency).out_of_date
   end
 
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
-    out_of_date_test(Date.local_today + INITIAL_SOCIALS)
+    OutOfDateCalculator.new(dates, latest_date, frequency).near_out_of_date
   end
 
-  private
-
-  # Helper function for comparing event dates to a reference date
-  def out_of_date_test(comparison_date)
-    return false if frequency==1 # Weekly events shouldn't have date arrays...
-    return false if infrequent_in_date # Really infrequent events shouldn't be considered out of date until they are nearly due.
-
-    return true if dates.empty? || dates.nil?
-    return false if latest_date >= comparison_date
-    true
-  end
-
-  public
-
-
-  # For infrequent events (6 months or less), is the next expected date (based on the last known date)
-  # more than 3 months away?
-  def infrequent_in_date
-    return false if dates.blank?
-    return false if frequency < 26
-
-    expected_date = latest_date + frequency.weeks #Belt and Braces: the date array should already be sorted.
-    expected_date > Date.local_today + 3.months
-  end
 
   # Is the event new? (probably only applicable to classes)
   def new?
