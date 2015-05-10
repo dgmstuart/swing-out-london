@@ -52,6 +52,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem "capybara"
   gem "ffaker"
+  gem "fuubar"
 end
 
 group :production do
