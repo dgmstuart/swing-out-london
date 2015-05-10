@@ -22,4 +22,6 @@ guard 'rspec', cmd: 'zeus rspec spec' do
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
   # Capybara request specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
+
+  watch('lib/out_of_date_calculator.rb') { "spec/models/event_date_functions_spec.rb" }
 end

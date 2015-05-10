@@ -11,7 +11,7 @@ RSpec.describe Event do
 
     context 'when the event has one date in the future' do
       let(:event) { FactoryGirl.create(:event, dates: [Date.today + 1] ) }
-      it "is true" do
+      it "is false" do
         expect(event.out_of_date).to eq false
       end
     end
@@ -30,7 +30,7 @@ RSpec.describe Event do
       end
     end
 
-    context 'when the event is out of date and more than 6 months away' do
+    context 'when the event is out of date and happens every 6 months' do
       context 'but the next expected event is more than 3 months away' do
         let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - 1]) }
         it "is false" do
@@ -38,9 +38,9 @@ RSpec.describe Event do
         end
       end
       context 'and the next expected event is less than 3 months away' do
-        let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - 13]) }
+        let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - (3.months + 2.days)]) }
         it "is true" do
-          expect(event.out_of_date).to eq false
+          expect(event.out_of_date).to eq true
         end
       end
     end
@@ -86,17 +86,17 @@ RSpec.describe Event do
       end
     end
 
-    context 'when the event is out of date and more than 6 months away' do
+    context 'when the event is out of date and happens every 6 months' do
       context 'but the next expected event is more than 3 months away' do
-        let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - 1]) }
+        let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - 1.month]) }
         it "is false" do
           expect(event.near_out_of_date).to eq false
         end
       end
       context 'and the next expected event is less than 3 months away' do
-        let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - 13]) }
+        let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - (13.weeks + 2.days)]) }
         it "is true" do
-          expect(event.near_out_of_date).to eq false
+          expect(event.near_out_of_date).to eq true
         end
       end
     end

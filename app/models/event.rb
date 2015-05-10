@@ -1,4 +1,5 @@
 require 'out_of_date_calculator'
+require 'date_expectation_calculator'
 
 class Event < ActiveRecord::Base
   belongs_to :venue
@@ -339,16 +340,30 @@ class Event < ActiveRecord::Base
 
   # Are all the dates for the event in the past?
   def out_of_date
-    return true if @date_array == UNKNOWN_DATE
-
-    OutOfDateCalculator.new(dates, latest_date, frequency).out_of_date
+    return false if weekly # Weekly events don't have date arrays, so would otherwise show as out of date
+    comparison_date = Date.local_today
+    expecting_a_date = expecting_a_date?(comparison_date)
+    OutOfDateCalculator.new(latest_date, expecting_a_date, comparison_date).out_of_date
   end
 
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
-    OutOfDateCalculator.new(dates, latest_date, frequency).near_out_of_date
+    return false if weekly # Weekly events don't have date arrays, so would otherwise show as near out of date
+
+    comparison_date = Date.local_today + INITIAL_SOCIALS
+    expecting_a_date = expecting_a_date?(comparison_date)
+    OutOfDateCalculator.new(latest_date, expecting_a_date, comparison_date).out_of_date
   end
 
+  # What date is the next event expected on? (based on the last known date)
+  def expected_date
+    return nil unless latest_date
+    latest_date + frequency.weeks
+  end
+
+  def expecting_a_date?(comparison_date)
+    DateExpectationCalculator.new(infrequent?, expected_date, comparison_date).expecting_a_date?
+  end
 
   # Is the event new? (probably only applicable to classes)
   def new?
@@ -376,8 +391,12 @@ class Event < ActiveRecord::Base
     frequency == 0 && last_date == latest_date && first_date == latest_date
   end
 
+  def weekly
+    frequency == 1
+  end
+
   def infrequent?
-    frequency > 26
+    frequency >= 26
   end
 
   def less_frequent?
