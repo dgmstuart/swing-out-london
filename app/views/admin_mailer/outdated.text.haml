@@ -1,7 +1,7 @@
 Out of date events:
 \===================
 - @out_of_date_events.each do |event|
-  = "#{edit_event_url(event)}\t#{event.title}"
+  = "#{edit_event_url(event)}\tExpected: #{event.expected_date.to_s(:listing_date)}\t#{event.title}"
 \
 Nearly out of date events:
 \==========================

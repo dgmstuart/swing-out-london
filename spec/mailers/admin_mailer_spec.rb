@@ -18,10 +18,8 @@ describe AdminMailer do
 
     context 'when there are outdated and nearly outdated events' do
       before do
-        @outdated_event = FactoryGirl.build(:event, id: 1)
-        @nearly_outdated_event = FactoryGirl.build(:event, id: 2)
-        allow(Event).to receive(:out_of_date).and_return      [ @outdated_event ]
-        allow(Event).to receive(:near_out_of_date).and_return [ @nearly_outdated_event ]
+        @outdated_event = FactoryGirl.create(:event, id: 1, frequency: 4, dates: [ Date.local_today - 4.weeks ])
+        @nearly_outdated_event = FactoryGirl.create(:event, id: 2, frequency: 4, dates: [ Date.local_today + 1.week ])
       end
       it "renders the headers" do
         mail.subject.should eq("1 event out of date, 1 event nearly out of date")
@@ -37,6 +35,10 @@ describe AdminMailer do
       it "includes links to the urls of those events" do
         mail.body.encoded.should match @outdated_event.url
         mail.body.encoded.should match @nearly_outdated_event.url
+      end
+
+      it "includes the expected dates of out-of-date events" do
+        mail.body.encoded.should match Date.local_today.to_s(:listing_date)
       end
 
       it "includes headers for the two types of outdatedness" do

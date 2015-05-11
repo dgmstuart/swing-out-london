@@ -17,10 +17,10 @@ private
   def expected_date_is_soon?
     @expected_date < @comparison_date + 3.months
   end
+end
 
-  class NoExpectedDate
-    def <(other_date)
-      false
-    end
+class NoExpectedDate
+  def <(other_date)
+    false
   end
 end
