@@ -1,4 +1,4 @@
-- if @warning 
+- if @warning
   %p.warning-message
     %strong Warning:
     = @warning
@@ -38,7 +38,7 @@
   %li
     %span Frequency:
     = @event.frequency_text
-  - unless @event.frequency ==1
+  - unless @event.weekly?
     %li
       %span Dates:
       = @event.print_dates

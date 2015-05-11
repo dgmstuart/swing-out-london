@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
   validate :will_be_listed
 
   def cannot_be_weekly_and_have_dates
-    if frequency == 1 && !dates.empty?
+    if weekly? && !dates.empty?
       errors.add(:date_array, "must be empty for weekly events")
     end
   end
@@ -316,7 +316,7 @@ class Event < ActiveRecord::Base
 
   def print_date_array(sep=',', format= :uk_date, future= false )
     # Weekly events don't have dates
-    return WEEKLY if frequency == 1
+    return WEEKLY if weekly?
     print_array_of_dates(dates, sep, format, future)
   end
 
@@ -340,7 +340,7 @@ class Event < ActiveRecord::Base
 
   # Are all the dates for the event in the past?
   def out_of_date
-    return false if weekly # Weekly events don't have date arrays, so would otherwise show as out of date
+    return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
     comparison_date = Date.local_today
     expecting_a_date = expecting_a_date?(comparison_date)
     OutOfDateCalculator.new(latest_date, expecting_a_date, comparison_date).out_of_date
@@ -348,7 +348,7 @@ class Event < ActiveRecord::Base
 
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
-    return false if weekly # Weekly events don't have date arrays, so would otherwise show as near out of date
+    return false if weekly? # Weekly events don't have date arrays, so would otherwise show as near out of date
 
     comparison_date = Date.local_today + INITIAL_SOCIALS
     expecting_a_date = expecting_a_date?(comparison_date)
@@ -391,7 +391,7 @@ class Event < ActiveRecord::Base
     frequency == 0 && last_date == latest_date && first_date == latest_date
   end
 
-  def weekly
+  def weekly?
     frequency == 1
   end
 
@@ -423,13 +423,13 @@ class Event < ActiveRecord::Base
 
   # for repeating events - find the next and previous dates
   def next_date
-    return unless frequency == 1
+    return unless weekly?
     return Date.local_today if day = Event.weekday_name(Date.local_today)
     return Date.local_today.next_week(day.downcase.to_sym)
   end
 
   def prev_date
-    return unless frequency == 1
+    return unless weekly?
     return Date.local_today if day = Event.weekday_name(Date.local_today)
     #prev_week doesn't seem to be implemented...
     return (next_date - 7.days)
@@ -453,7 +453,7 @@ class Event < ActiveRecord::Base
     return false if !last_date.nil? && last_date < Date.local_today
     # If there's already a last_date in the past, then the event should already be archived!
 
-    if frequency == 1
+    if weekly?
       self[:last_date] = prev_date
     elsif dates.nil?
       self[:last_date] = Date.new # Earliest possible ruby date
