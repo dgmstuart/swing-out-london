@@ -11,7 +11,7 @@ describe EventsHelper do
         @class = FactoryGirl.create(:class, class_organiser: nil)
       end
       it "should return an empty string" do
-        helper.school_name(@class).should be_nil
+        expect(helper.school_name(@class)).to be_nil
       end
     end
     context "when there is a class organiser" do
@@ -26,12 +26,12 @@ describe EventsHelper do
       it "should use the name if the shortname doesn't exist" do
         @organiser.name = "foo"
         @organiser.shortname = nil
-        helper.school_name(@class).should == "foo"
+        expect(helper.school_name(@class)).to eq("foo")
       end
       it "should use the shortname as an abbreviation if it exists" do
         @organiser.name = "foo"
         @organiser.shortname = "bar"
-        helper.school_name(@class).should == %(<abbr title="foo">bar</abbr>)
+        expect(helper.school_name(@class)).to eq(%(<abbr title="foo">bar</abbr>))
       end
     end
   end
