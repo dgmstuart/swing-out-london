@@ -39,7 +39,7 @@ end
 group :development, :test do
   gem "sqlite3", "~> 1.3"
   gem "awesome_print", "~> 1.2"
-  gem "pry", "~> 0.9"
+  gem "pry-rails"
   gem "rspec-rails", "~> 3.2"
   gem "factory_girl_rails", "~> 4.2"
   gem "rb-fsevent", "~> 0.9"
