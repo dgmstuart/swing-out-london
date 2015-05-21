@@ -30,6 +30,13 @@ RSpec.describe Event do
       end
     end
 
+    context 'when the event has an end date' do
+      let(:event) { FactoryGirl.create(:event, dates: [], last_date: (Date.today + 1.year)) }
+      fit "is false" do
+        expect(event.out_of_date).to eq false
+      end
+    end
+
     context 'when the event is out of date and happens every 6 months' do
       context 'but the next expected event is more than 3 months away' do
         let(:event) { FactoryGirl.create(:event, frequency: 26, dates: [Date.today - 1]) }
@@ -82,6 +89,13 @@ RSpec.describe Event do
     context 'when the event is weekly' do
       let(:event) { FactoryGirl.create(:event, frequency: 1, dates: []) }
       it "is false" do
+        expect(event.near_out_of_date).to eq false
+      end
+    end
+
+    context 'when the event has an end date' do
+      let(:event) { FactoryGirl.create(:event, dates: [], last_date: (Date.today + 1.year)) }
+      fit "is false" do
         expect(event.near_out_of_date).to eq false
       end
     end
