@@ -47,14 +47,14 @@
     = @event.print_cancellations
   %li
     %span First date:
-    = @event.first_date.to_s :listing_date
+    = @event.first_date.to_s :listing_date unless @event.first_date.nil?
   %li
     -if @event.last_date
       %span Last date:
-      = @event.last_date.to_s :listing_date
+      = @event.last_date.to_s :listing_date unless @event.last_date.nil?
     -else
       %span Next expected date:
-      = @event.expected_date.to_s :listing_date
+      = @event.expected_date.to_s :listing_date unless @event.expected_date.nil?
   %li
     %span Url:
     = link_to @event.url, @event.url
