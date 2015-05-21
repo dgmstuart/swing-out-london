@@ -339,21 +339,17 @@ class Event < ActiveRecord::Base
   # COMPARISON METHODS #
 
   # Are all the dates for the event in the past?
-  def out_of_date
+  def out_of_date(comparison_date = Date.local_today)
     return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
     return false if last_date
-    comparison_date = Date.local_today
+
     expecting_a_date = expecting_a_date?(comparison_date)
     OutOfDateCalculator.new(latest_date, expecting_a_date, comparison_date).out_of_date
   end
 
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
-    return false if weekly? # Weekly events don't have date arrays, so would otherwise show as near out of date
-    return false if last_date
-    comparison_date = Date.local_today + INITIAL_SOCIALS
-    expecting_a_date = expecting_a_date?(comparison_date)
-    OutOfDateCalculator.new(latest_date, expecting_a_date, comparison_date).out_of_date
+    out_of_date Date.local_today + INITIAL_SOCIALS
   end
 
   # What date is the next event expected on? (based on the last known date)

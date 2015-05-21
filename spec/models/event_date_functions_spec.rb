@@ -32,7 +32,7 @@ RSpec.describe Event do
 
     context 'when the event has an end date' do
       let(:event) { FactoryGirl.create(:event, dates: [], last_date: (Date.today + 1.year)) }
-      fit "is false" do
+      it "is false" do
         expect(event.out_of_date).to eq false
       end
     end
@@ -95,7 +95,7 @@ RSpec.describe Event do
 
     context 'when the event has an end date' do
       let(:event) { FactoryGirl.create(:event, dates: [], last_date: (Date.today + 1.year)) }
-      fit "is false" do
+      it "is false" do
         expect(event.near_out_of_date).to eq false
       end
     end
