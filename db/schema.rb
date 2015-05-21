@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006235904) do
+ActiveRecord::Schema.define(:version => 20150521004620) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20121006235904) do
     t.boolean  "has_social"
     t.integer  "class_organiser_id"
     t.integer  "social_organiser_id"
+    t.date     "expected_date"
   end
 
   add_index "events", ["event_type"], :name => "index_events_on_event_type"
@@ -59,32 +60,32 @@ ActiveRecord::Schema.define(:version => 20121006235904) do
   add_index "events_swing_dates", ["swing_date_id", "event_id"], :name => "index_events_swing_dates_on_swing_date_id_and_event_id", :unique => true
 
   create_table "organisers", :force => true do |t|
-    t.string    "name"
-    t.string    "website"
-    t.text      "description"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "shortname"
+    t.string   "name"
+    t.string   "website"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "shortname"
   end
 
   create_table "swing_dates", :force => true do |t|
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.date      "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "date"
   end
 
   create_table "venues", :force => true do |t|
-    t.string    "name"
-    t.text      "address"
-    t.string    "postcode"
-    t.string    "nearest_tube"
-    t.string    "website"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "area"
-    t.string    "compass"
-    t.decimal   "lat"
-    t.decimal   "lng"
+    t.string   "name"
+    t.text     "address"
+    t.string   "postcode"
+    t.string   "nearest_tube"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "area"
+    t.string   "compass"
+    t.decimal  "lat",          :precision => 15, :scale => 10
+    t.decimal  "lng",          :precision => 15, :scale => 10
   end
 
 end

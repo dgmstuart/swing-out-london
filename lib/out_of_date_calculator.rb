@@ -1,13 +1,10 @@
 class OutOfDateCalculator
-  def initialize(latest_date, expecting_a_date, comparison_date)
+  def initialize(latest_date, comparison_date)
     @latest_date = latest_date || NoLatestDate.new
-    @expecting_a_date = expecting_a_date
     @comparison_date = comparison_date
   end
 
-  def out_of_date
-    return false if not @expecting_a_date
-
+  def out_of_date?
     @latest_date < @comparison_date
   end
 

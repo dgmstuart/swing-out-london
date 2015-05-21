@@ -342,9 +342,9 @@ class Event < ActiveRecord::Base
   def out_of_date(comparison_date = Date.local_today)
     return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
     return false if last_date
+    return false if not expecting_a_date?(comparison_date)
 
-    expecting_a_date = expecting_a_date?(comparison_date)
-    OutOfDateCalculator.new(latest_date, expecting_a_date, comparison_date).out_of_date
+    OutOfDateCalculator.new(latest_date, comparison_date).out_of_date?
   end
 
   # Does an event not have any dates not already shown in the socials list?
@@ -354,6 +354,7 @@ class Event < ActiveRecord::Base
 
   # What date is the next event expected on? (based on the last known date)
   def expected_date
+    return self[:expected_date] unless self[:expected_date].nil?
     return NoExpectedDate.new unless latest_date
     latest_date + frequency.weeks
   end
