@@ -13,9 +13,9 @@ class DateExpectationCalculator
 
 private
 
-  # Is the next expected date more than 3 months away?
+  # Is the next expected date more than 6 weeks away?
   def expected_date_is_soon?
-    @expected_date < @comparison_date + 3.months
+    @expected_date < @comparison_date + 6.weeks
   end
 end
 
