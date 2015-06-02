@@ -4,6 +4,7 @@
 //= require jquery.sieve
 //= require gmaps4rails/gmaps4rails.base
 //= require gmaps4rails/gmaps4rails.googlemaps
+//= require cheet.js
 //= require_self
 //= require_tree .
 
@@ -21,4 +22,8 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function() {
   $("ul.sieve").sieve({ itemSelector: "li" });
+});
+
+cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+  window.open("https://www.youtube.com/embed/mrBLrPI7djM?autoplay=1", "popupWindow", "width=560,height=315");
 });
