@@ -25,5 +25,5 @@ $(document).ready(function() {
 });
 
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-  window.open("https://www.youtube.com/embed/mrBLrPI7djM?autoplay=1", "popupWindow", "width=560,height=315");
+  window.open("https://www.youtube.com/embed/iEaSaIhYZXg?autoplay=1", "popupWindow", "width=560,height=315");
 });
