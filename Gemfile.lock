@@ -82,7 +82,7 @@ GEM
     fuubar (2.0.0)
       rspec (~> 3.0)
       ruby-progressbar (~> 1.4)
-    geocoder (1.2.8)
+    geocoder (1.2.9)
     gmaps4rails (2.0.0.pre)
     guard (2.12.5)
       formatador (>= 0.2.4)
