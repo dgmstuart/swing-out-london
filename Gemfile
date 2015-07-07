@@ -59,5 +59,6 @@ group :production do
   gem "unicorn", "~> 4.8.3"
   gem "newrelic_rpm", "~> 3.6"
   gem "skylight"
+  gem "rack-canonical-host"
 end
 
