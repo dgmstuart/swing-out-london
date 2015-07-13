@@ -329,9 +329,9 @@ li.today {
   &:target {
     border-color: #C00;
     -webkit-transition: all 0.8s ease-in;
-    -moz-transition: all 1s ease-in;
-    -o-transition: all 1s ease-in;
-    transition: all 1s ease-in;
+    -moz-transition: all 0.8s ease-in;
+    -o-transition: all 0.8s ease-in;
+    transition: all 0.8s ease-in;
   }
 }
 #social_dances li.today  { margin-bottom: 1.7em;}
