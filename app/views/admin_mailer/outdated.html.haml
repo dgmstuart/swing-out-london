@@ -4,8 +4,9 @@
     %li
       = link_to "link", event.url
       \-
-      = link_to event.title, edit_event_url(event)
       = "Expected: #{event.expected_date.to_s(:listing_date)}"
+      = link_to event.title, edit_event_url(event)
+
 
 %h1 Nearly out of date events:
 %ul

@@ -19,8 +19,16 @@ private
   end
 end
 
+# Null Object
 class NoExpectedDate
-  def <(other_date)
-    false
+  include Comparable
+  def to_s(format=:default)
+    "Unknown"
+  end
+  def <=>(other)
+    1 # Treat it as after every other date
+  end
+  def coerce(other)
+    [other, Float::INFINITY]
   end
 end

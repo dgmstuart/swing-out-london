@@ -534,12 +534,4 @@ class Event < ActiveRecord::Base
     end_date = start_date + (INITIAL_SOCIALS-1)
     (start_date..end_date).to_a
   end
-
-
-end
-
-class NoExpectedDate
-  def to_s(format=:default)
-    "Unknown"
-  end
 end
