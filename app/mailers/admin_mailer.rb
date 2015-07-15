@@ -2,7 +2,7 @@ class AdminMailer < ActionMailer::Base
   default from: "swingoutlondon@gmail.com"
 
   def outdated
-    @out_of_date_events       = Event.out_of_date.sort_by(&:expected_date).reverse
+    @out_of_date_events       = Event.out_of_date.sort_by(&:expected_date)
     @near_out_of_date_events  = Event.near_out_of_date.sort_by(&:title)
 
     subject  = "All events in date"
