@@ -206,8 +206,6 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
-    skylight (0.6.0)
-      activesupport (>= 3.0.0)
     slop (3.6.0)
     sprockets (2.2.3)
       hike (~> 1.2)
@@ -273,7 +271,6 @@ DEPENDENCIES
   rspec-rails (~> 3.2)
   sass-rails (~> 3.2)
   simplecov (~> 0.7)
-  skylight
   test-unit (~> 3.0)
   twitter (~> 4.8)
   uglifier (~> 2.2)
