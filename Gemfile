@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.1.2"
+ruby "2.2.2"
 
 gem 'rails', '3.2.22'
 
@@ -37,14 +37,12 @@ group :development do
 end
 
 group :development, :test do
-  gem "sqlite3", "~> 1.3"
   gem "awesome_print", "~> 1.2"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.2"
   gem "factory_girl_rails", "~> 4.2"
   gem "rb-fsevent", "~> 0.9"
   gem "guard-rspec"
-  gem "guard-livereload", "~> 1.4"
   gem "zeus", "~> 0.13"
   gem "simplecov", "~> 0.7"
   gem "rack-mini-profiler", "~> 0.1"
@@ -53,6 +51,10 @@ group :development, :test do
   gem "capybara"
   gem "ffaker"
   gem "fuubar"
+end
+
+group :test do
+  gem 'test-unit', '~> 3.0'
 end
 
 group :production do
