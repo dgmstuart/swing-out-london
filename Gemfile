@@ -24,6 +24,8 @@ gem "api_cache", "~> 0.2"
 
 gem "figaro", "~> 0.7"
 
+gem 'test-unit', '~> 3.0'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -51,10 +53,6 @@ group :development, :test do
   gem "capybara"
   gem "ffaker"
   gem "fuubar"
-end
-
-group :test do
-  gem 'test-unit', '~> 3.0'
 end
 
 group :production do
