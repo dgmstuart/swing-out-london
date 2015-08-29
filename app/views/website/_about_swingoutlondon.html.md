@@ -6,25 +6,21 @@ London has one of the oldest [revival](http://en.wikipedia.org/wiki/Lindy_hop#Re
 
 I try to make it useful for others by making sure that it is always:
 
-1.
-    ### Clear
+### 1. Clear
 
-    Easy to read and quick to decide where you want to learn and dance
+Easy to read and quick to decide where you want to learn and dance
 
-2.
-    ### Accurate and Up-to-Date
+### 2. Accurate and Up-to-Date
 
-    If it's new it get's listed, if it changes it gets updated, if it's cancelled it gets flagged, if it's dead it's not listed
+If it's new it get's listed, if it changes it gets updated, if it's cancelled it gets flagged, if it's dead it's not listed
 
-3.
-    ### Comprehensive
+### 3. Comprehensive
 
-    Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings policy))
+Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings policy))
 
-5.
-    ### Independent
+### 5. Independent
 
-    Complete and unbiased
+Complete and unbiased
 
 
 How does it work?
