@@ -1,5 +1,6 @@
 require 'out_of_date_calculator'
 require 'date_expectation_calculator'
+require 'dates_string_parser'
 
 class Event < ActiveRecord::Base
   belongs_to :venue
@@ -209,23 +210,10 @@ class Event < ActiveRecord::Base
     date_string.nil? || date_string.empty? || date_string == UNKNOWN_DATE || date_string == WEEKLY
   end
 
-  #TODO - move to better_dates.rb?
   def self.parse_date_string( date_string )
-    return [] if empty_date_string(date_string)
-
-    output_dates = []
-
-    date_string.split(',').each do |ds|
-      begin
-        date = ds.to_date
-        #to_date is defined in config/initializers/better_dates.rb, which extends String.
-      rescue Exception => msg
-        #TODO
-      else
-        output_dates << date
-      end
-    end
-    return output_dates
+    date_string = "" if self.empty_date_string(date_string)
+    parser = DatesStringParser.new
+    parser.parse(date_string)
   end
 
   # READ METHODS #
