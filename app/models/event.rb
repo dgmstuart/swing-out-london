@@ -428,7 +428,7 @@ class Event < ActiveRecord::Base
 
   def prev_date
     return unless weekly?
-    return Date.local_today if day = Event.weekday_name(Date.local_today)
+    return Date.local_today if day == Event.weekday_name(Date.local_today)
     #prev_week doesn't seem to be implemented...
     return (next_date - 7.days)
   end
