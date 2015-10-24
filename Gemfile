@@ -47,7 +47,7 @@ group :development, :test do
   gem "guard-rspec"
   gem "zeus", "~> 0.13"
   gem "simplecov", "~> 0.7"
-  gem "rack-mini-profiler", "~> 0.1"
+  gem "rack-mini-profiler", ">= 0.9.1"
   gem "better_errors"
   gem "binding_of_caller"
   gem "capybara"
