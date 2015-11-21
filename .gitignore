@@ -4,7 +4,6 @@ log/*.log
 tmp/*
 tmp/**/*
 .rvmrc
-.ruby-version
 .sass-cache/
 coverage/*
 public/assets/
