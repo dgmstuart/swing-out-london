@@ -343,6 +343,8 @@ class Event < ActiveRecord::Base
   # What date is the next event expected on? (based on the last known date)
   def expected_date
     return self[:expected_date] unless self[:expected_date].nil?
+    return NoExpectedDate.new if weekly?
+    return NoExpectedDate.new if frequency == 0
     return NoExpectedDate.new unless latest_date
     latest_date + frequency.weeks
   end
