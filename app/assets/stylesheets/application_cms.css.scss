@@ -190,13 +190,14 @@ textarea.narrow {
     font-size: 1.2em;
   }
 }
-
-label, ol.show span {
-	font-weight:bold;
-	width:9.5em;
-	float:left;
-	text-align:right;
-	padding-right:1.5em
+form{
+  label, ol.show span {
+          font-weight:bold;
+          width:9.5em;
+          float:left;
+          text-align:right;
+          padding-right:1.5em
+  }
 }
 
 ol.show li { clear:left; }

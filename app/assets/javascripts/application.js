@@ -22,6 +22,10 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function() {
   $("ul.sieve").sieve({ itemSelector: "li" });
+  $("table.events").sieve({
+    itemSelector: "tr",
+    searchTemplate: "<div style='text-align: center'><label>Filter: <input type='text'></label></div>"
+  });
 });
 
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
