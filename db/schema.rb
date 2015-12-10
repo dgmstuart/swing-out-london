@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150521004620) do
+ActiveRecord::Schema.define(:version => 20151209234419) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
     t.string   "day"
     t.string   "event_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "venue_id"
     t.integer  "frequency"
     t.string   "url"
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20150521004620) do
     t.date     "expected_date"
   end
 
-  add_index "events", ["event_type", "title"], :name => "index_events_on_event_type_and_title"
   add_index "events", ["event_type"], :name => "index_events_on_event_type"
   add_index "events", ["frequency", "day", "has_class"], :name => "index_events_on_fq_and_day_and_has_class"
   add_index "events", ["frequency", "day", "has_social"], :name => "index_events_on_fq_and_day_and_has_social"
@@ -64,14 +63,14 @@ ActiveRecord::Schema.define(:version => 20150521004620) do
     t.string   "name"
     t.string   "website"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "shortname"
   end
 
   create_table "swing_dates", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date     "date"
   end
 
@@ -81,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20150521004620) do
     t.string   "postcode"
     t.string   "nearest_tube"
     t.string   "website"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "area"
     t.string   "compass"
     t.decimal  "lat",          :precision => 15, :scale => 10
