@@ -1,0 +1,11 @@
+@import "colours";
+
+body.imports {
+  padding: 10%;
+  h3 {
+    font-size: 18px;
+  }
+  em {
+    color: $highlight_colour;
+  }
+}

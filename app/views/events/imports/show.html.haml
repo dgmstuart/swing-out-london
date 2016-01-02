@@ -1,0 +1,15 @@
+- if @imported_events.any?
+  %h1 Dates which can be imported
+  - @imported_events.each do |event|
+    %h3= event.name
+    %p= event.dates_to_import
+
+  =button_to "Save", action: "save"
+
+- if @failed_imports.any?
+  %h2 The following dates will not be imported:
+  - @failed_imports.each do |import|
+    %h3= import.url
+    %p
+      = import.dates
+      %em= "(#{import.reason})"

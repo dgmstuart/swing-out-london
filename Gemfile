@@ -17,6 +17,8 @@ gem "twitter", "~> 5.15"
 gem "geocoder", "~> 1.2"
 gem "gmaps4rails", "2.0.0.pre"
 
+gem "strong_parameters"
+
 #Caching
 gem "memcachier", "~> 0.0"
 gem "dalli", "~> 2.7"

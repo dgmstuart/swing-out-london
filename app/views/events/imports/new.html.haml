@@ -1,0 +1,5 @@
+%h1 Import events from csv
+%p Paste the csv data here:
+=form_for @events_import do |f|
+  =f.text_area :csv
+  =f.submit "Import"
