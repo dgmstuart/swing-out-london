@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe MapsController do
   describe "GET classes" do
@@ -36,7 +36,7 @@ describe MapsController do
         end
       end
     end
-    
+
     context "when there are no venues to display" do
       def map_is_centred_on_london
         expect(assigns[:map_options][:center_latitude]).to eq(51.5264)
@@ -69,7 +69,7 @@ describe MapsController do
         it "should render an empty map (nil array)" do
           allow(Venue).to receive(:all_with_classes_listed).and_return(nil)
         end
-      end   
+      end
     end
     context "when there is exactly one venue" do
       before(:each) do
@@ -92,26 +92,26 @@ describe MapsController do
     #   get :index
     #   assigns(:teams).should eq([team])
     # end
-    # 
+    #
     # it "renders the index template" do
     #   get :index
     #   response.should render_template("index")
     # end
   end
-  
+
   describe "GET socials" do
     it "should assign an array of dates to @listings dates" do
       #Stub out irrelevant logic:
       allow(controller).to receive(:get_date)
       allow(Event).to receive(:socials_dates).and_return([])
-      
+
       allow(Event).to receive(:listing_dates).and_return([Date.new])
-      
+
       get :socials
       expect(assigns[:listing_dates]).to be_an(Array)
       expect(assigns[:listing_dates][0]).to be_a(Date)
     end
-    
+
     describe "assigns dates correctly:" do
       before(:each) do
         allow(Event).to receive(:socials_on_date).and_return([])
@@ -128,14 +128,14 @@ describe MapsController do
         end
         it "@date should be a date if that date is in the listing dates" do
           allow(Event).to receive(:listing_dates).and_return([@date])
-          get :socials, date: @date_string 
+          get :socials, date: @date_string
           expect(assigns[:date]).to eq(@date)
         end
         it "should raise a 404 if the date is not in the listing dates" do
           allow(Event).to receive(:listing_dates).and_return([])
           expect { get :socials, date: @date_string }.to raise_error(ActiveRecord::RecordNotFound)
         end
-      end    
+      end
       context "when the url contains a date described in words" do
         before(:each) do
           @date = Date.today

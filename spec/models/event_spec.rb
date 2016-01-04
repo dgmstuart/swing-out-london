@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Event do
   before(:each) do
@@ -245,8 +245,6 @@ describe Event do
 
     pending "test with multiple cancellations, different orders, whitespace"
   end
-
-  require File.dirname(__FILE__) + '/../spec_helper'
 
   describe "active.classes" do
     it "should return classes with no 'last date'" do

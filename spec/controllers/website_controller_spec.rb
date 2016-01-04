@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe WebsiteController do
   describe "GET index" do
@@ -11,7 +11,7 @@ describe WebsiteController do
       stub_classes
       allow(Event).to receive(:socials_dates).and_return []
     end
-      
+
     it "should assign the 'last updated' strings" do
       stub_event_methods
       get :index
@@ -42,11 +42,11 @@ describe WebsiteController do
       get :index
       expect(assigns[:socials_dates][0][1][0]).to be_an(Event)
     end
-    
+
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates
   end
-  
+
   describe "GET about" do
     it "should assign the last updated times" do
       get :about
@@ -54,7 +54,7 @@ describe WebsiteController do
       expect(assigns[:last_updated_date]).not_to be_blank
     end
   end
-  
+
   describe "GET listings_policy" do
     it "should assign the last updated times" do
       get :listings_policy
@@ -62,14 +62,14 @@ describe WebsiteController do
       expect(assigns[:last_updated_date]).not_to be_blank
     end
   end
-  
+
   describe "GET latest_tweet" do
     before(:each) do
       allow(Tweet).to receive(:message).and_return("Foo")
     end
     it "should assign the latest_tweet" do
       get :latest_tweet
-      expect(assigns[:tweet]).to be_a (String)      
+      expect(assigns[:tweet]).to be_a (String)
     end
   end
 end

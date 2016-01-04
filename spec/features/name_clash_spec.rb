@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe "Name clash page", type: :feature do
   it "displays a list of social names" do

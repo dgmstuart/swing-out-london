@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe DateExpectationCalculator do
   describe "#expecting_a_date?" do
