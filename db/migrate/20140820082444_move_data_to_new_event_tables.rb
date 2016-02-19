@@ -4,7 +4,10 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
     belongs_to :event
     belongs_to :venue
   end
-  class EventGenerator < ActiveRecord::Base
+  class EventPeriod < ActiveRecord::Base
+    belongs_to :event_seed
+  end
+  class EventInstance < ActiveRecord::Base
     belongs_to :event_seed
   end
   class DanceClass < ActiveRecord::Base
@@ -25,10 +28,10 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
 
         if event.frequency == 1
           start_date = event.first_date || same_weekday_in_the_past(event.day)
-          create_event_generator(1, start_date, event, event_seed)
+          create_event_period(1, start_date, event, event_seed)
         else
           event.dates.each do |date|
-            create_event_generator(0, date, event, event_seed)
+            create_event_instance(date, event, event_seed)
           end
         end
       end
@@ -48,11 +51,11 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
       t.remove :day
       t.remove :event_type
       t.remove :venue_id            #-> EventSeed
-      t.remove :frequency           #-> EventGenerator
+      t.remove :frequency           #-> EventPeriod
       t.remove :url                 #-> EventSeed
       t.remove :date_array
       t.remove :cancellation_array
-      t.remove :first_date          #-> EventGenerator
+      t.remove :first_date          #-> EventPeriod
       t.remove :last_date
       t.remove :shortname
       t.remove :class_style
@@ -66,11 +69,20 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
     end
   end
 
-  def create_event_generator(frequency, start_date, event, event_seed)
-    EventGenerator.create(
+  def create_event_period(frequency, start_date, event, event_seed)
+    EventPeriod.create(
       event_seed: event_seed,
       frequency: frequency,
       start_date: start_date,
+      created_at: event.created_at,
+      updated_at: event.updated_at
+    )
+  end
+
+  def create_event_instance(date, event, event_seed)
+    EventInstance.create(
+      event_seed: event_seed,
+      date: date,
       created_at: event.created_at,
       updated_at: event.updated_at
     )

@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(:version => 20151209234419) do
     t.datetime "updated_at"
   end
 
-  create_table "event_generators", :force => true do |t|
-    t.integer  "event_seed_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "frequency",     :null => false
-    t.date     "start_date",    :null => false
-  end
-
   create_table "event_instances", :force => true do |t|
     t.date     "date",          :null => false
     t.integer  "event_seed_id", :null => false
@@ -35,6 +27,14 @@ ActiveRecord::Schema.define(:version => 20151209234419) do
     t.datetime "updated_at"
     t.string   "url"
     t.integer  "venue_id"
+  end
+
+  create_table "event_periods", :force => true do |t|
+    t.integer  "event_seed_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "frequency",     :null => false
+    t.date     "start_date",    :null => false
   end
 
   create_table "event_seeds", :force => true do |t|
