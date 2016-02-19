@@ -62,6 +62,7 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
       t.remove :has_social
       t.remove :class_organiser_id
       t.remove :social_organiser_id
+      t.remove :expected_date
     end
   end
 

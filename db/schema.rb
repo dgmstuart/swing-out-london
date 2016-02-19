@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20151209234419) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "expected_date"
   end
 
   create_table "users", :force => true do |t|
