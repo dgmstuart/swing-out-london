@@ -26,10 +26,10 @@ class MoveDataToNewEventTables < ActiveRecord::Migration
 
         event_seed = create_event_seed(event)
 
-        if event.frequency == 1
-          start_date = event.first_date || same_weekday_in_the_past(event.day)
-          create_event_period(1, start_date, event, event_seed)
-        else
+        start_date = event.first_date || same_weekday_in_the_past(event.day)
+        create_event_period(event.frequency, start_date, event, event_seed)
+
+        if event.frequency != 1
           event.dates.each do |date|
             create_event_instance(date, event, event_seed)
           end
