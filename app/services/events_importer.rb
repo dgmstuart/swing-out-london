@@ -9,7 +9,7 @@ class EventsImporter
   end
 
   def import(csv)
-    rows = CSV.parse(csv, col_sep: "\t")
+    rows = CSV.parse(csv, col_sep: ",")
     rows.inject(EventsImporter::Result.new) do |result, row|
       import_row(result, row)
       result

@@ -4,7 +4,7 @@ require 'app/services/events_importer.rb'
 RSpec.describe EventsImporter do
   describe "import" do
     it "takes a CSV and returns the names of the relevant events" do
-      csv = "www.wibble.com/silentbleep\tbollocks\nwww.frank.com/beefheart\tmorebollocks"
+      csv = "www.wibble.com/silentbleep,bollocks\nwww.frank.com/beefheart,morebollocks"
 
       resource_klass = class_double("Event")
       silentbleep = instance_double("Event", id: 1, title: "Silent Bleep", url: "www.wibble.com/silentbleep")
@@ -20,7 +20,7 @@ RSpec.describe EventsImporter do
     end
 
     it "takes a CSV and returns the dates of the relevant events" do
-      csv = "www.wibble.com/silentbleep\t23/12/2012, 30/12/2012"
+      csv = "www.wibble.com/silentbleep,\"23/12/2012, 30/12/2012\""
 
       resource_klass = class_double("Event")
       silentbleep = instance_double("Event", id: 3, title: "Silent Bleep", url: "www.wibble.com/silentbleep")
@@ -33,7 +33,7 @@ RSpec.describe EventsImporter do
     end
 
     it "handles non-matching urls" do
-      csv = "www.wibble.com/silentbleep\t23/12/2012, 30/12/2012"
+      csv = "www.wibble.com/silentbleep,\"23/12/2012, 30/12/2012\""
 
       resource_klass = class_double("Event")
       allow(resource_klass).to receive(:find_by_url).with("www.wibble.com/silentbleep").and_return(nil)
