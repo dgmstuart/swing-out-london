@@ -2,16 +2,15 @@ class AdminMailer < ActionMailer::Base
   default from: "swingoutlondon@gmail.com"
 
   def outdated
-    @out_of_date_events       = Event.out_of_date.sort_by(&:expected_date)
-    @near_out_of_date_events  = Event.near_out_of_date.sort_by(&:title)
+    report = OutdatedEventReport.new
+    @out_of_date_events       = report.out_of_date_events
+    @near_out_of_date_events  = report.near_out_of_date_events
 
-    subject  = "All events in date"
-
-    if  @out_of_date_events.empty? && @near_out_of_date_events.empty?
+    if report.all_in_date?
+      subject  = "All events in date"
       template = "all_in_date"
     else
-      subject = "#{@out_of_date_events.count} #{'event'.pluralize(@out_of_date_events.count)} out of date" unless @out_of_date_events.empty?
-      subject += ", #{@near_out_of_date_events.count} #{'event'.pluralize(@near_out_of_date_events.count)} nearly out of date" unless @near_out_of_date_events.empty?
+      subject = report.summary
       template = "outdated"
     end
 
