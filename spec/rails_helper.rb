@@ -20,5 +20,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   require File.expand_path("../support/macros/auth_helper.rb", __FILE__)
-  config.extend AuthHelper, :type => :controller
+  require File.expand_path("../support/macros/feature_auth_helper.rb", __FILE__)
+  config.extend AuthHelper, type: :controller
+  config.include FeatureAuthHelper, type: :feature
 end

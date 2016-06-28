@@ -47,12 +47,4 @@ RSpec.feature "csv import" do
   def csv_data
     "http://www.swingpatrol.co.uk/boogaloo-bounce/,\"09/01/2016, 23/01/2016, 06/02/2016, 20/02/2016, 05/03/2016, 19/03/2016, 02/04/2016, 16/04/2016, 07/05/2016, 21/05/2016, 04/06/2016, 18/06/2016, 02/07/2016, 16/07/2016, 06/08/2016, 20/08/2016, 03/09/2016, 17/09/2016, 01/10/2016, 15/10/2016, 05/11/2016, 19/11/2016, 03/12/2016, 17/12/2016\"\nhttp://www.swingpatrol.co.uk/book-club-blues/,\"10/01/2016, 13/03/2016, 10/04/2016, 08/05/2016, 12/06/2016, 10/07/2016, 14/08/2016, 11/09/2016, 09/10/2016, 13/11/2016, 11/12/2016\""
   end
-
-  def login
-    user = 'foo'
-    pw = 'bar'
-    stub_const("LOGINS", { user => Digest::MD5.hexdigest("#{pw}") })
-
-    page.driver.browser.basic_authorize(user, pw)
-  end
 end
