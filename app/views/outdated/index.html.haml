@@ -1,0 +1,19 @@
+%h1= @report.summary
+
+%h2 Out of date events:
+%ul
+  - @report.out_of_date_events.each do |event|
+    %li
+      = link_to "link", event.url
+      \-
+      = "Expected: #{event.expected_date.to_s(:listing_date)}"
+      = link_to event.title, edit_event_url(event)
+
+
+%h2 Nearly out of date events:
+%ul
+  - @report.near_out_of_date_events.each do |event|
+    %li
+      = link_to "link", event.url
+      \-
+      = link_to event.title, edit_event_url(event)

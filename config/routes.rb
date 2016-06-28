@@ -26,6 +26,7 @@ Swingoutlondon::Application.routes.draw do
 
   match 'admin' => 'events#index'
   match 'name_clash' => 'name_clash#index'
+  match 'outdated' => 'outdated#index'
 
   match 'latest_tweet' => 'website#latest_tweet'
   # Assume everything else is a page on the website:
