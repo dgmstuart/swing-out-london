@@ -1,0 +1,14 @@
+@import "colours";
+
+body.outdated {
+  table {
+    margin: auto;
+    a {
+      color: $link-colour;
+    }
+    td.past {
+      background-color: $highlight-colour;
+      color: $background-colour;
+    }
+  }
+}
