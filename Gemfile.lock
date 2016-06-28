@@ -121,6 +121,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     kgio (2.9.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -291,6 +293,7 @@ DEPENDENCIES
   haml (~> 4.0)
   haml-rails (~> 0.4)
   jquery-rails (~> 3.0)
+  launchy
   memcachier (~> 0.0)
   newrelic_rpm (~> 3.6)
   pg (~> 0.17)
@@ -310,5 +313,8 @@ DEPENDENCIES
   unicorn (~> 4.8.3)
   zeus (~> 0.13)
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5

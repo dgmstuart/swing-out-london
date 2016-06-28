@@ -53,6 +53,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "capybara"
+  gem "launchy"
   gem "ffaker"
   gem "fuubar"
 end
