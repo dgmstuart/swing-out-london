@@ -13,6 +13,12 @@
   = stylesheet_link_tag 'application', media: "screen"
 
 - content_for :content do
+
+  - if ENV['BANNER_HEAD']
+    .banner
+      %h3= ENV['BANNER_HEAD']
+      %p=  ENV['BANNER_BODY']
+
   #page
     #header
       = heading_hn(params[:action], :class=>"site_title") do
