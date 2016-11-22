@@ -41,9 +41,8 @@ Also Listing Vintage Events
 
 Swing Out London attempts to list _all_ the social dancing opportunities in town - not just those aimed at dancers.
 With the recent burst of interest in Vintage in London there are a number of vintage-themed events like
-[the Blitz party](http://www.theblitzparty.com"),
-[the Candlelight club](www.thecandlelightclub.com/) and
-[Die Freche Muse](http://www.diefrechemuse.co.uk/)
+[the Blitz party](http://www.theblitzparty.com") and
+[the Candlelight club](http://www.thecandlelightclub.com/)
 which are not aimed at swing dancers, but which play suitable music.
 
 These nights aren't to everyone's taste and you shouldn't necessarily expect to find dancers there,
