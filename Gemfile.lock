@@ -141,14 +141,12 @@ GEM
     naught (1.1.0)
     nenv (0.2.0)
     newrelic_rpm (3.9.1.236)
-    nokogiri (1.6.8)
+    nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.17.0)
-    pkg-config (1.1.7)
     polyglot (0.3.5)
     power_assert (0.2.2)
     pry (0.10.2)
@@ -319,4 +317,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.12.5
+   1.14.3
