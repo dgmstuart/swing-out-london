@@ -75,7 +75,7 @@ module EventsHelper
 
 
   def classes_on_day(day)
-    @classes.select {|e| e.day == day}.sort{|e,v| e.venue.area <=> v.venue.area}
+    @classes.select {|e| e.day == day}.sort{|e,v| e.venue_area <=> v.venue_area}
   end
 
 

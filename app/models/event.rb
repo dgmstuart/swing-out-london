@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   serialize :cancellation_array
 
   validates :url, format: URI::regexp(%w(http https))
+  validates :venue, presence: true
 
   validates_presence_of :event_type, :frequency, :url, :day
 
@@ -40,7 +41,6 @@ class Event < ActiveRecord::Base
   # display constants:
   NOTAPPLICABLE = "n/a"
   UNKNOWN_DATE = "Unknown"
-  UNKNOWN_VENUE = "Venue Unknown"
   UNKNOWN_ORGANISER = "Unknown"
   WEEKLY = "Weekly"
   SEE_WEB = "(See Website)"
@@ -76,19 +76,11 @@ class Event < ActiveRecord::Base
 
   # We shouldn't have any blank fields, but if we do, then display as much as possible:
   def venue_name
-    if venue.nil? || venue.name.nil?
-      blank_venue
-    else
-      venue.name
-    end
+    venue.name
   end
 
   def venue_area
-    if venue.nil? || venue.area.nil?
-      blank_venue
-    else
-      venue.area
-    end
+    venue.area
   end
 
   # --------- #

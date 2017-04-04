@@ -298,6 +298,12 @@ describe Event do
     it "should be valid if it has a social but no taster or class (and everything else is OK)" do
       expect(FactoryGirl.build(:event, has_taster: false, has_social: true, has_class: false)).to be_valid
     end
+
+    it 'should be invalid with no venue' do
+      event = FactoryGirl.build(:event, venue_id: nil)
+      event.valid?
+      expect(event.errors.messages).to eq(venue: ["can't be blank"])
+    end
   end
 
 
