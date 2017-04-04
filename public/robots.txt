@@ -6,3 +6,6 @@
 
 User-Agent: *
 Disallow: /name_clash
+
+User-Agent: *
+Disallow: /map/socials/*
