@@ -146,6 +146,7 @@ GEM
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oj (2.12.14)
     pg (0.17.0)
     polyglot (0.3.5)
     power_assert (0.2.2)
@@ -190,6 +191,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     redcarpet (3.3.2)
+    rollbar (2.14.0)
+      multi_json
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -296,6 +299,7 @@ DEPENDENCIES
   launchy
   memcachier (~> 0.0)
   newrelic_rpm (~> 3.6)
+  oj (~> 2.12.14)
   pg (~> 0.17)
   pry-rails
   rack-canonical-host
@@ -303,6 +307,7 @@ DEPENDENCIES
   rails (< 4)
   rb-fsevent (~> 0.9)
   redcarpet (~> 3.0)
+  rollbar
   rspec-rails (~> 3.2)
   sass-rails (~> 3.2)
   simplecov (~> 0.7)

@@ -61,6 +61,8 @@ end
 group :production do
   gem "unicorn", "~> 4.8.3"
   gem "newrelic_rpm", "~> 3.6"
+  gem "rollbar"
+  gem 'oj', '~> 2.12.14' # For Rollbar
   gem "rack-canonical-host"
 end
 
