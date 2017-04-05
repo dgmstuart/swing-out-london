@@ -121,8 +121,8 @@ class MapsController < ApplicationController
           :yellow,
           :purple,
           :green].include?(colour)
-      { picture: "http://maps.google.com/mapfiles/marker_#{colour.to_s}.png",
-        shadow_picture: 'http://maps.google.com/mapfiles/shadow50.png',
+      { picture: "https://maps.google.com/mapfiles/marker_#{colour.to_s}.png",
+        shadow_picture: 'https://maps.google.com/mapfiles/shadow50.png',
         shadow_width: 37,
         shadow_height: 34,
         shadow_anchor: [10,34], # Icon is 20x34, and the anchor is in the middle (10px) at the bottom (34px)

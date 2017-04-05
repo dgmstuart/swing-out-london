@@ -11,5 +11,5 @@ LOGINS={
 INITIAL_SOCIALS=14
 
 CONTACT_EMAIL = "swingoutlondon@gmail.com"
-TWITTER_URL   = "http://www.twitter.com/swingoutlondon"
+TWITTER_URL   = "https://www.twitter.com/swingoutlondon"
 FACEBOOK_URL  = "https://www.facebook.com/swingoutlondon"

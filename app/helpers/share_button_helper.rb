@@ -1,5 +1,5 @@
 module ShareButtonHelper
-  SHARE_LINK = "http://swingoutlondon.co.uk"
+  SHARE_LINK = "https://swingoutlondon.co.uk"
 
   def twitter_button
     twitter_url = "https://twitter.com/intent/tweet"
@@ -19,7 +19,7 @@ module ShareButtonHelper
   end
 
   def facebook_button
-    facebook_url = "http://www.facebook.com/sharer/sharer.php"
+    facebook_url = "https://www.facebook.com/sharer/sharer.php"
 
     share_title = "Swing Out London - Lindy Hop Listings"
     share_summary = "Swing Out London is a listing of all the swing dance classes in London, and all the places you can go to dance."
