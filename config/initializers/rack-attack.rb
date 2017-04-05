@@ -18,7 +18,7 @@ class Rack::Attack
   dodgy_ips.each{ |ip| puts ip }
 
   blocklist('block dodgy IP addresses') do |req|
-    dodgy_ips.include req.ip?
+    dodgy_ips.include? req.ip
   end
 end
 
