@@ -34,7 +34,7 @@ module Events
           event.date_array = success.dates_to_import.join(", ")
           event.save!
         end
-        redirect_to '/admin'
+        redirect_to '/events'
       else
         raise "No cached result found!!"
       end
