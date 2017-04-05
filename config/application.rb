@@ -53,5 +53,8 @@ module Swingoutlondon
 
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
+
+    # Rate limiting and IP blocks
+    config.middleware.use Rack::Attack
   end
 end

@@ -24,6 +24,7 @@ gem "memcachier", "~> 0.0"
 gem "dalli", "~> 2.7"
 gem "api_cache", "~> 0.2"
 
+gem "rack-attack"
 gem "figaro", "~> 0.7"
 
 gem 'test-unit', '~> 3.0'
