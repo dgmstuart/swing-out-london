@@ -28,7 +28,6 @@ Swingoutlondon::Application.routes.draw do
   match 'outdated' => 'outdated#index'
 
   match 'latest_tweet' => 'website#latest_tweet'
-  # Assume everything else is a page on the website:
-  # todo: use the page_url(action) form of urls
-  match ':action' => 'website', :as => "page"
+  match 'about' => 'website#about'
+  match 'listings_policy' => 'website#listings_policy'
 end
