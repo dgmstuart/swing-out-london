@@ -30,4 +30,8 @@ Swingoutlondon::Application.routes.draw do
   match 'latest_tweet' => 'website#latest_tweet'
   match 'about' => 'website#about'
   match 'listings_policy' => 'website#listings_policy'
+
+  match 'apple-touch-icon-precomposed' => 'application#not_found'
+  match 'apple-touch-icon-(:size)-precomposed' => 'application#not_found'
+  match 'apple-app-site-association' => 'application#not_found'
 end
