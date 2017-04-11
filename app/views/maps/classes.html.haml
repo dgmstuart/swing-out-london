@@ -17,6 +17,10 @@
       on #{ @day.pluralize },
     also classes in other swing dance styles: Charleston, Balboa, Blues, Authentic Jazz and Collegiate Shag
 
+- content_for :head do
+  -if @day
+    %meta{ name: "robots", content: "noindex" }/
+
 - content_for :listings do
   %ul
     - DAYNAMES.each do |day|

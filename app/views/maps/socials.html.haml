@@ -16,6 +16,9 @@
     -if @date
       on #{ @date.to_s(:listing_date) }
 
+- content_for :head do
+  -if @date
+    %meta{ name: "robots", content: "noindex" }/
 
 - content_for :listings do
   %ul
