@@ -93,7 +93,7 @@ module EventsHelper
     cancelled_part = ""
     cancelled_part = cancelled_label + " " if cancelled
 
-    map_url = "map/socials/#{date.to_s(:db)}/#{social.venue_id}" unless (social.venue.lat.nil? || social.venue.lng.nil?)
+    map_url = "map/socials/#{date.to_s(:db)}?venue_id=#{social.venue_id}" unless (social.venue.lat.nil? || social.venue.lng.nil?)
     postcode_part = outward_postcode(social, map_url)
 
     content_tag :li,
@@ -166,7 +166,7 @@ module EventsHelper
   end
 
   def swingclass_listing(swingclass, day)
-    map_url = "map/classes/#{day}/#{swingclass.venue_id}" unless (swingclass.venue.lat.nil? || swingclass.venue.lng.nil?)
+    map_url = "map/classes/#{day}?venue_id=#{swingclass.venue_id}" unless (swingclass.venue.lat.nil? || swingclass.venue.lng.nil?)
     postcode_part = outward_postcode(swingclass, map_url)
 
     content_tag :li,
