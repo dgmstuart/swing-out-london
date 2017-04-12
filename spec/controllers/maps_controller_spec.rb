@@ -17,7 +17,7 @@ describe MapsController do
         expect(assigns[:day]).to eq("Tuesday")
       end
       it "should raise a 404 if the url contained a string which was a day name" do
-        expect { get :classes, day: "fuseday" }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { get :classes, day: "fuseday" }.to raise_error(ActionController::RoutingError)
       end
       context "when the day is described in words" do
         before(:each) do
@@ -32,7 +32,7 @@ describe MapsController do
           expect(assigns[:day]).to eq("Friday")
         end
         it "should raise a 404 if the url contained 'yesterday'" do
-          expect { get :classes, day: "yesterday" }.to raise_error(ActiveRecord::RecordNotFound)
+          expect { get :classes, day: "yesterday" }.to raise_error(ActionController::RoutingError)
         end
       end
     end
@@ -133,7 +133,7 @@ describe MapsController do
         end
         it "should raise a 404 if the date is not in the listing dates" do
           allow(Event).to receive(:listing_dates).and_return([])
-          expect { get :socials, date: @date_string }.to raise_error(ActiveRecord::RecordNotFound)
+          expect { get :socials, date: @date_string }.to raise_error(ActionController::RoutingError)
         end
       end
       context "when the url contains a date described in words" do
@@ -150,11 +150,11 @@ describe MapsController do
           expect(assigns[:date]).to eq(@date + 1)
         end
         it "should raise a 404 if the description is 'yesterday'" do
-          expect { get :socials, date: "yesterday" }.to raise_error(ActiveRecord::RecordNotFound)
+          expect { get :socials, date: "yesterday" }.to raise_error(ActionController::RoutingError)
         end
       end
       it "should raise a 404 if the url contains as string which doesn't represent a date" do
-        expect { get :socials, date: "asfasfasf" }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { get :socials, date: "asfasfasf" }.to raise_error(ActionController::RoutingError)
       end
     end
     context "when there is exactly one venue" do

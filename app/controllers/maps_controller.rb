@@ -89,14 +89,15 @@ class MapsController < ApplicationController
   # Return a Capitalised string IF the input refers to a valid listing day
   def get_day(day_string)
     return unless day_string
+    day = day_string.titlecase
 
-    case day_string
-    when "today"      then Event.weekday_name(today)
-    when "tomorrow"   then Event.weekday_name(today + 1)
+    case day
+    when "Today"      then Event.weekday_name(today)
+    when "Tomorrow"   then Event.weekday_name(today + 1)
+    when *DAYNAMES
+      day
     else
-      day = day_string.titlecase
-      raise ActiveRecord::RecordNotFound unless DAYNAMES.include?(day)
-      return day
+      raise ActionController::RoutingError.new('Not a recognised day')
     end
   end
 
@@ -108,7 +109,7 @@ class MapsController < ApplicationController
     when "tomorrow"   then today + 1
     else
       date = date_string.to_date rescue nil
-      raise ActiveRecord::RecordNotFound unless @listing_dates.include?(date)
+      raise ActionController::RoutingError.new('Not a date in the visible range') unless @listing_dates.include?(date)
       return date
     end
   end
