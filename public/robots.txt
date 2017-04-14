@@ -1,4 +1,3 @@
 User-Agent: *
 Disallow: /name_clash
 Disallow: /map/socials/*
-Disallow: /map/classes/*
