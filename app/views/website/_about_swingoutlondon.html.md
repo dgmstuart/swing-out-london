@@ -16,7 +16,7 @@ If it's new it get's listed, if it changes it gets updated, if it's cancelled it
 
 ### 3. Comprehensive
 
-Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings policy))
+Every class and every social dancing opportunity (within certain criteria: see [Listings Policy](/listings_policy))
 
 ### 5. Independent
 
