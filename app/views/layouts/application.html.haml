@@ -17,6 +17,8 @@
     /[if lte IE 7 ]
       = stylesheet_link_tag 'ie'
 
+    %meta{ name: "msapplication-config", content: "none" }
+
     = yield :head
 
   = content_tag( :body, :class => "#{@controller_name} #{@action_name}") do
