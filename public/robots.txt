@@ -1,3 +1,6 @@
 User-Agent: *
 Disallow: /name_clash
 Disallow: /map/socials/*
+
+User-Agent: AhrefsBot
+Disallow: /map/classes/*
