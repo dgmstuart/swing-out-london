@@ -4,3 +4,6 @@ Disallow: /map/socials/*
 
 User-Agent: AhrefsBot
 Disallow: /map/classes/*
+
+User-agent: BLEXBot
+Disallow: /
