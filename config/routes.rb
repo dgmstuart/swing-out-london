@@ -24,6 +24,10 @@ Swingoutlondon::Application.routes.draw do
   match 'map' => 'maps#socials'
   match 'venue_map_info/:id' => 'maps#venue_map_info', :as => :venue_map_info
 
+  # legacy routes:
+  get 'map/classes/:day/:venue_id', to: redirect('/map/classes/%{day}?venue_id=%{venue_id}')
+  get 'map/socials/:date/:venue_id', to: redirect('/map/socials/%{date}?venue_id=%{venue_id}')
+
   match 'name_clash' => 'name_clash#index'
   match 'outdated' => 'outdated#index'
 
