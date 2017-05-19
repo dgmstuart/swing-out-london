@@ -19,6 +19,9 @@
 
 - content_for :listings do
   %ul
+    - if flash.any?
+      - flash.each do |_level, message|
+        %li.banner= message
     - DAYNAMES.each do |day|
       %li
         = link_to_unless (day == @day), day.pluralize, day: day, anchor: "current" do

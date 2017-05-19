@@ -22,6 +22,9 @@
 
 - content_for :listings do
   %ul
+    - if flash.any?
+      - flash.each do |_level, message|
+        %li.banner= message
     - @listing_dates.each do |date|
       %li
         = link_to_unless (date == @date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do

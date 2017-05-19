@@ -8,7 +8,15 @@ class MapsController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
     # Days are stored in the database in titlecase - also in the DAYNAMES constant
-    @day = get_day(params[:day])
+    begin
+      @day = get_day(params[:day])
+    rescue NonDayError
+      flash[:warn] = 'We can only show you classes for days of the week'
+      logger.warn("Not a recognised day: #{@day}")
+      redirect_to map_classes_path
+      return
+    end
+
     venues =  if @day
                 Venue.all_with_classes_listed_on_day(@day)
               else
@@ -48,11 +56,18 @@ class MapsController < ApplicationController
     @listing_dates = Event.listing_dates(today)
     @date = get_date(params[:date])
 
-    events =  if @date
-                Event.socials_on_date(@date)
-              else
-                Event.socials_dates(today).map{ |s| s[1] }.flatten
-              end
+    if @date
+      if @listing_dates.include?(@date)
+        events =  Event.socials_on_date(@date)
+      else
+        flash[:warn] = 'We can only show you events for the next 14 days'
+        logger.warn("Not a date in the visible range: #{@date}")
+        redirect_to map_socials_path
+        return
+      end
+    else
+      events = Event.socials_dates(today).map{ |s| s[1] }.flatten
+    end
 
     if events.nil?
       empty_map
@@ -86,6 +101,7 @@ class MapsController < ApplicationController
 
   # TODO: get_day and get_date maybe don't belong here...
 
+  class NonDayError < StandardError; end
   # Return a Capitalised string IF the input refers to a valid listing day
   def get_day(day_string)
     return unless day_string
@@ -97,7 +113,7 @@ class MapsController < ApplicationController
     when *DAYNAMES
       day
     else
-      raise ActionController::RoutingError.new('Not a recognised day')
+      raise NonDayError.new("Not a recognised day: #{day}")
     end
   end
 
@@ -108,9 +124,7 @@ class MapsController < ApplicationController
     when "today"      then today
     when "tomorrow"   then today + 1
     else
-      date = date_string.to_date rescue nil
-      raise ActionController::RoutingError.new('Not a date in the visible range') unless @listing_dates.include?(date)
-      return date
+      date_string.to_date rescue nil
     end
   end
 

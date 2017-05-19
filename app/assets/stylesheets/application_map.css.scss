@@ -29,7 +29,7 @@ body.classes, body.socials {
     margin-top: 15px;
     li {
       /* padding to allow for the bottom border applied to the link it contains on hover */
-      padding-bottom: 1px; 
+      padding-bottom: 1px;
     }
     .social_date {
       display: block;
@@ -50,11 +50,11 @@ body.classes, body.socials {
     font-size: 0.9em;
     color: #666;
   }
-  
+
   .page {
     background: #FEE6B8 none;
   }
-  
+
   header{
     position: absolute;
     top: 0;
@@ -88,7 +88,7 @@ body.classes, body.socials {
       //nuke the space which gets inserted in-between the elements for no good reason:
       font-size: 0;
       span {
-        font-size: 20px; 
+        font-size: 20px;
       }
       a {
         font-size: 20px;
@@ -99,6 +99,13 @@ body.classes, body.socials {
       }
     }
   }
+
+  .banner {
+    background-color: $banner-colour;
+    padding: 5px;
+    font-size: 90%;
+  }
+
   .listings {
     -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
@@ -129,8 +136,8 @@ body.classes, body.socials {
     padding: 30px 15px 20px;
     font-size: 14px;
   }
-  
-  
+
+
   //body.map #classes, body.map #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left: 0;}
   //body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
   //body.map #classes .daylist{border:none; padding:0;}
@@ -152,7 +159,7 @@ body.classes, body.socials {
     }
   }
   header {
-    padding: 20px 0;  
+    padding: 20px 0;
     font-size: 0.7em;
     h1 {
       margin-bottom: 10px;
@@ -181,7 +188,7 @@ body.classes, body.socials {
       display: block;
       width: 140px;
       margin: auto;
-      
+
       a, span {
         display: block;
         font-size: 16px;
@@ -238,5 +245,4 @@ body.classes, body.socials {
   // LARGE VIEWING SIZE
   @media only screen and (min-width: 1240px) {
   }
-
 }

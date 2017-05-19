@@ -9,23 +9,23 @@
       = link_to "Swing Out London's", :controller => "website", :action => "index"
       %em
         Lindy Map#{ mail_to CONTACT_EMAIL, content_tag(:small, ' Beta'), :subject => "Feedback on the Lindy Map" }
-      
+
     .navigation.primary-nav<
       = link_to_unless_current "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") do
         %span.current Socials
       = link_to_unless_current "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") do
         %span.current Classes
-      
+
   .listings.page
     = yield :listings
-  
+
   = yield :scripts
   :javascript
-    Gmaps.map.callback = function() {  
+    Gmaps.map.callback = function() {
       //var layer = new google.maps.BicyclingLayer();
       //var layer = new google.maps.TransitLayer();
       //layer.setMap(Gmaps.map.serviceObject);
-      
+
       //var transitOptions = {
       //  getTileUrl: function (coord, zoom)
       //  {
@@ -39,5 +39,5 @@
       //var transitMapType = new google.maps.ImageMapType(transitOptions);
       //Gmaps.map.serviceObject.overlayMapTypes.insertAt(0, transitMapType);
     }
-  
+
 = render template: 'layouts/application'

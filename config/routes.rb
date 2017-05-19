@@ -19,8 +19,8 @@ Swingoutlondon::Application.routes.draw do
     end
   end
 
-  match 'map/classes/(:day)' => 'maps#classes'
-  match 'map/socials/(:date)' => 'maps#socials'
+  match 'map/classes/(:day)' => 'maps#classes', as: :map_classes
+  match 'map/socials/(:date)' => 'maps#socials', as: :map_socials
   match 'map' => 'maps#socials'
   match 'venue_map_info/:id' => 'maps#venue_map_info', :as => :venue_map_info
 
