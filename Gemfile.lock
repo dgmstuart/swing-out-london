@@ -141,7 +141,7 @@ GEM
     naught (1.1.0)
     nenv (0.2.0)
     newrelic_rpm (3.9.1.236)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     notiffany (0.0.8)
       nenv (~> 0.1)
