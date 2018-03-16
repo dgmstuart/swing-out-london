@@ -116,8 +116,46 @@ $small_font_size: 12px;
   max-width: 500px;
   text-align: right;
 
+  #latest_tweet {
+    text-align: left;
+    line-height: 1.5em;
+    font-size: 0.9em;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    padding: 8px;
+    border: 6px double $text-colour;
+    margin-bottom: 1rem;
+    h4 {
+      display: inline;
+      font-weight: bold;
+    }
+    p {
+      display: inline;
+      font-style: italic;
+    }
+    a.tweet_created {
+      font-size: 0.8em;
+      color: $link-colour;
+    }
+  }
+
+  #llx_advert {
+    border: 6px double #0f0f0f;
+    margin-bottom: 1rem;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  #social_links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
   .fb-like{
-    width: 79px;
     &:hover {
       border: none;
     }
@@ -137,28 +175,6 @@ $small_font_size: 12px;
     }
   }
 
-
-  #latest_tweet{
-    text-align: left;
-    line-height: 1.5em;
-    font-size: 0.9em;
-    font-family: Georgia, Times, "Times New Roman", serif;
-    padding: 8px;
-    border: 6px double $text-colour;
-    margin-bottom: 3px;
-    h4 {
-      display: inline;
-      font-weight: bold;
-    }
-    p {
-      display: inline;
-      font-style: italic;
-    }
-    a.tweet_created {
-      font-size: 0.8em;
-      color: $link-colour;
-    }
-  }
 }
 #note {
   max-width: 500px;
