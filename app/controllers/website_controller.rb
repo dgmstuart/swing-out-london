@@ -17,11 +17,13 @@ class WebsiteController < ApplicationController
 
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates = Event.socials_dates(@today)
-    @ad_type = :rectangular_ad
-    @ad = { image_url: "advertisments/Revival Retro Swing dance Shoes.jpg",
-            ad_url:    "http://www.revival-retro.com/swing-dance-shoes",
-            title:     "Revival Retro - Swing Dance Shoes",
-            google_id: "revival-retro_1" }
+
+    @ad = OpenStruct.new(
+      image_url: "https://justafish.github.io/londonlindyexchange/images/llx-banner.jpg",
+      ad_url:    "http://londonlindyexchange.com/register",
+      title:     "London Lindy Exchange information",
+      google_id: "llx-1"
+    )
   end
 
   # TODO: re-implement these in pure javascript! Bypass rails altogether!

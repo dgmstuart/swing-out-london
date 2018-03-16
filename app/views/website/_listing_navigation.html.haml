@@ -30,8 +30,9 @@
     The listings shown are only a guide. You should always check the source website before making any plans
 
 #soldn_on_the_web
-  #latest_tweet
-    Loading the latest tweet...
+  #advert
+    = link_to ad.ad_url, title: ad.title, id: ad.google_id do
+      = image_tag ad.image_url, alt: "Advertisment unit: #{ad.title}"
 
   - # Foo for the facebook like button:
   #fb-root
@@ -44,10 +45,11 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-  %a.fb-like{ :href => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
-  %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/swingoutlondon"} Follow @swingoutlondon
-  :javascript
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  #social_links
+    %a.fb-like{ :href => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
+    %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/swingoutlondon"} Follow @swingoutlondon
+    :javascript
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-  =javascript_include_tag "https://apis.google.com/js/platform.js"
-  .g-ytsubscribe{ "data-channel" => "swingoutlondon", "data-layout" => "default", "data-count" => "default" }
+    =javascript_include_tag "https://apis.google.com/js/platform.js"
+    .g-ytsubscribe{ "data-channel" => "swingoutlondon", "data-layout" => "default", "data-count" => "default" }
