@@ -59,6 +59,10 @@ group :development, :test do
   gem "fuubar"
 end
 
+group :test do
+  gem 'timecop'
+end
+
 gem "rollbar"
 group :production do
   gem "unicorn", "~> 4.8.3"
