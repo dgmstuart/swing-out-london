@@ -16,9 +16,18 @@ describe MapsController do
         get :classes, day: "tuesday"
         expect(assigns[:day]).to eq("Tuesday")
       end
-      it "should raise a 404 if the url contained a string which was a day name" do
-        expect { get :classes, day: "fuseday" }.to raise_error(ActionController::RoutingError)
+
+      context 'when the url contains a string which is not a day name' do
+        it "should redirect to the main classes page" do
+          expect(get :classes, day: "fuseday").to redirect_to('/map/classes')
+        end
+
+        it "should show a flash message" do
+          get :classes, day: "fuseday"
+          expect(flash[:warn]).to eq 'We can only show you classes for days of the week'
+        end
       end
+
       context "when the day is described in words" do
         before(:each) do
           allow(controller).to receive(:today).and_return(Date.new(2012,10,11)) # A thursday
@@ -31,8 +40,16 @@ describe MapsController do
           get :classes, day: "tomorrow"
           expect(assigns[:day]).to eq("Friday")
         end
-        it "should raise a 404 if the url contained 'yesterday'" do
-          expect { get :classes, day: "yesterday" }.to raise_error(ActionController::RoutingError)
+
+        context "the url contained 'yesterday'" do
+          it "should redirect to the main classes page" do
+            expect(get :classes, day: "yesterday").to redirect_to('/map/classes')
+          end
+
+          it "should show a flash message" do
+            get :classes, day: "fuseday"
+            expect(flash[:warn]).to eq 'We can only show you classes for days of the week'
+          end
         end
       end
     end
@@ -131,11 +148,21 @@ describe MapsController do
           get :socials, date: @date_string
           expect(assigns[:date]).to eq(@date)
         end
-        it "should raise a 404 if the date is not in the listing dates" do
-          allow(Event).to receive(:listing_dates).and_return([])
-          expect { get :socials, date: @date_string }.to raise_error(ActionController::RoutingError)
+
+        context 'when the date is not in the listing dates' do
+          it "redirects to the main socials page" do
+            allow(Event).to receive(:listing_dates).and_return([])
+            expect(get :socials, date: @date_string).to redirect_to('/map/socials')
+          end
+
+          it 'shows a flash message' do
+            allow(Event).to receive(:listing_dates).and_return([])
+            get :socials, date: @date_string
+            expect(flash[:warn]).to eq 'We can only show you events for the next 14 days'
+          end
         end
       end
+
       context "when the url contains a date described in words" do
         before(:each) do
           @date = Date.today
@@ -149,14 +176,9 @@ describe MapsController do
           get :socials, date: "tomorrow"
           expect(assigns[:date]).to eq(@date + 1)
         end
-        it "should raise a 404 if the description is 'yesterday'" do
-          expect { get :socials, date: "yesterday" }.to raise_error(ActionController::RoutingError)
-        end
-      end
-      it "should raise a 404 if the url contains as string which doesn't represent a date" do
-        expect { get :socials, date: "asfasfasf" }.to raise_error(ActionController::RoutingError)
       end
     end
+
     context "when there is exactly one venue" do
       before(:each) do
         event = FactoryGirl.create(:social)
