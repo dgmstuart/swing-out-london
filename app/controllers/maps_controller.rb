@@ -54,9 +54,13 @@ class MapsController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
     @listing_dates = Event.listing_dates(today)
-    @date = get_date(params[:date])
 
-    if @date
+    if params[:date].blank?
+      # show events for all dates
+      events = Event.socials_dates(today).map{ |s| s[1] }.flatten
+    else
+      @date = get_date(params[:date])
+
       if @listing_dates.include?(@date)
         events =  Event.socials_on_date(@date)
       else
@@ -65,8 +69,6 @@ class MapsController < ApplicationController
         redirect_to map_socials_path
         return
       end
-    else
-      events = Event.socials_dates(today).map{ |s| s[1] }.flatten
     end
 
     if events.nil?

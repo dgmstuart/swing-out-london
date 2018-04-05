@@ -176,6 +176,28 @@ describe MapsController do
           get :socials, date: "tomorrow"
           expect(assigns[:date]).to eq(@date + 1)
         end
+
+        context "when the description is 'yesterday'" do
+          it "redirects to the main socials page" do
+            expect(get :socials, date: 'yesterday').to redirect_to('/map/socials')
+          end
+
+          it 'shows a flash message' do
+            get :socials, date: 'yesterday'
+            expect(flash[:warn]).to eq 'We can only show you events for the next 14 days'
+          end
+        end
+      end
+
+      context "when the url string doesn't represent a date" do
+        it "redirects to the main socials page" do
+          expect(get :socials, date: "asfasfasf").to redirect_to('/map/socials')
+        end
+
+        it 'shows a flash message' do
+          get :socials, date: 'asfasfasf'
+          expect(flash[:warn]).to eq 'We can only show you events for the next 14 days'
+        end
       end
     end
 
