@@ -66,7 +66,7 @@ class MapsController < ApplicationController
       else
         flash[:warn] = 'We can only show you events for the next 14 days'
         logger.warn("Not a date in the visible range: #{@date}")
-        redirect_to map_socials_path
+        redirect_to map_socials_index_path
         return
       end
     end
