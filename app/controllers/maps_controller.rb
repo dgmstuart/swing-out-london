@@ -40,12 +40,12 @@ class MapsController < ApplicationController
                 marker.infowindow render_to_string(:partial => "classes_map_info", :locals => { venue: venue, events: venue_events })
                 json_options =  { id: venue.id, title: venue.name}
                 if venue.id.to_s == params[:venue_id]
-                  # N.B. If the given ID doesn't match any of those venues, just ignore it #TODO - should maybe be 404 instead?
-                  @highlighted_venue = venue
                   json_options.merge!coloured_marker_json_options(:green)
                 end
                 marker.json(json_options)
       end
+
+      @highlighted_venue = Venue.find(params[:venue_id]) if params[:venue_id]
     end
   end
 
@@ -89,15 +89,14 @@ class MapsController < ApplicationController
 
         json_options =  { id: venue.id, title: venue.name}
         if venue.id.to_s == params[:venue_id]
-          # N.B. If the given ID doesn't match any of those venues, just ignore it #TODO - should maybe be 404 instead?
-          @highlighted_venue = venue
           json_options.merge!coloured_marker_json_options(:green)
         end
         marker.json(json_options)
       end
+
+      @highlighted_venue = Venue.find(params[:venue_id]) if params[:venue_id]
     end
   end
-
 
   private
 
