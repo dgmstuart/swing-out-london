@@ -167,7 +167,7 @@ class Event < ActiveRecord::Base
   end
 
   def add_date(new_date)
-    self.swing_dates << SwingDate.find_or_initialize_by_date(new_date)
+    self.swing_dates << SwingDate.find_or_initialize_by(date: new_date)
   end
 
   def dates=(array_of_new_dates)
@@ -191,7 +191,7 @@ class Event < ActiveRecord::Base
   end
 
   def add_cancellation(new_cancellation)
-    self.swing_cancellations << SwingDate.find_or_initialize_by_date(new_cancellation)
+    self.swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
   def cancellation_array=(date_string)
