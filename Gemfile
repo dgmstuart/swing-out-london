@@ -18,6 +18,8 @@ gem "gmaps4rails", "2.0.0.pre"
 #Caching
 gem "memcachier"
 gem "dalli"
+gem "actionpack-action_caching" # to support pre rails-4 style action caching
+gem "rails-observers" # to support pre rails-4 style cache sweeping
 
 gem "rack-attack"
 gem "figaro"
