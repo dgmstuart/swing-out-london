@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   layout 'cms'
   before_filter :authenticate
 
-  caches_action :index
+  caches_action :index, cache_path: 'events#index'
   cache_sweeper :event_sweeper, :only => [:create, :update, :destroy, :archive]
 
   # GET /events
