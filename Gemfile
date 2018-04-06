@@ -15,8 +15,6 @@ gem "jquery-rails"
 gem "geocoder"
 gem "gmaps4rails", "2.0.0.pre"
 
-gem "strong_parameters"
-
 #Caching
 gem "memcachier"
 gem "dalli"
