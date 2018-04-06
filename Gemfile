@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.3"
 
-gem 'rails', '< 4'
+gem 'rails', '>= 4.0.0', '< 4.1'
 
 gem "pg", '< 1.0'
 
@@ -26,13 +26,9 @@ gem "figaro"
 
 gem 'test-unit'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem "sass-rails"
-  gem "coffee-rails"
-  gem "uglifier"
-end
+gem "sass-rails"
+gem "coffee-rails"
+gem "uglifier"
 
 group :development do
   gem "bullet", '< 5'
