@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :event_type, :frequency, :url, :day
 
-  validates_format_of :shortname, :with => /^[a-z]*$/, :message => "can only contain lowercase characters (no spaces)"
+  validates_format_of :shortname, :with => /\A[a-z]*\z/, :message => "can only contain lowercase characters (no spaces)"
   validates_length_of :shortname, :maximum => 20
   validates_uniqueness_of :shortname, :allow_nil => true, :allow_blank => true
 
@@ -517,3 +517,4 @@ class Event < ActiveRecord::Base
     (start_date..end_date).to_a
   end
 end
+
