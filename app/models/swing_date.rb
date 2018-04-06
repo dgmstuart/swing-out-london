@@ -1,6 +1,6 @@
 class SwingDate < ActiveRecord::Base
-  has_and_belongs_to_many :events, :uniq => true
-  has_and_belongs_to_many :cancelled_events, :class_name => "Event", :join_table => "events_swing_cancellations", :uniq => true
+  has_and_belongs_to_many :events, -> { uniq(true) }
+  has_and_belongs_to_many :cancelled_events, -> { uniq(true) }, :class_name => "Event", :join_table => "events_swing_cancellations"
 
   validates_uniqueness_of :date
 
