@@ -9,10 +9,6 @@ $(document).ready ->
     add_tweet_share_analytics_event()
     add_facebook_share_click_handler()
 
-load_latest_tweet = ->
-  $.get "latest_tweet", (tweet)->
-    $("#latest_tweet").html(tweet)
-
 # Insert a Google Analytics event on all Socials links:
 add_socials_analytics_events = ->
   $('#social_dances .datelist .details a').click ->

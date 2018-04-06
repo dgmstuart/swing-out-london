@@ -62,14 +62,4 @@ describe WebsiteController do
       expect(assigns[:last_updated_date]).not_to be_blank
     end
   end
-
-  describe "GET latest_tweet" do
-    before(:each) do
-      allow(Tweet).to receive(:message).and_return("Foo")
-    end
-    it "should assign the latest_tweet" do
-      get :latest_tweet
-      expect(assigns[:tweet]).to be_a (String)
-    end
-  end
 end

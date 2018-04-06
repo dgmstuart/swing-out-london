@@ -1,7 +1,4 @@
 class WebsiteController < ApplicationController
-  require 'rubygems'
-  require 'twitter'
-
   layout "info", :except => :index
 
   caches_action :index, :layout => true, :expires_in => 1.hour, :race_condition_ttl => 10
@@ -24,13 +21,6 @@ class WebsiteController < ApplicationController
       title:     "London Lindy Exchange information",
       google_id: "llx-1"
     )
-  end
-
-  # TODO: re-implement these in pure javascript! Bypass rails altogether!
-  # In the meantime Maybe these two actions (and associated views and roots) belong as a single action, to reduce the number of http requests...
-  def latest_tweet
-    @tweet = Tweet.message
-    render layout: false
   end
 
   private
