@@ -122,25 +122,25 @@ class Event < ActiveRecord::Base
   end
 
   # scopes to get different types of event:
-  scope :classes, where(has_class: true)
-  scope :socials, where(has_social: true)
-  scope :weekly, where(frequency: 1)
-  scope :weekly_or_fortnightly, where(frequency: [1,2])
+  scope :classes, -> { where(has_class: true) }
+  scope :socials, -> { where(has_social: true) }
+  scope :weekly, -> { where(frequency: 1) }
+  scope :weekly_or_fortnightly, -> { where(frequency: [1,2]) }
 
-  scope :gigs, where(:event_type => "gig")
-  scope :non_gigs, where("event_type != ?", "gig")
+  scope :gigs, -> { where(:event_type => "gig") }
+  scope :non_gigs, -> { where("event_type != ?", "gig") }
 
-  scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
-  scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
+  scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.local_today) }
+  scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.local_today) }
 
-  scope :listing_classes, active.weekly_or_fortnightly.classes
-  scope :listing_classes_on_day, lambda { |day| listing_classes.where(day: day) }
-  scope :listing_classes_at_venue, lambda { |venue| listing_classes.where(venue_id: venue.id) }
-  scope :listing_classes_on_day_at_venue, lambda { |day, venue| listing_classes_on_day(day).where(venue_id: venue.id) }
+  scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
+  scope :listing_classes_on_day, ->(day) { listing_classes.where(day: day) }
+  scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
+  scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
   # For making sections in the Events editing screens:
-  scope :current, active.non_gigs
-  scope :archived, ended.non_gigs
+  scope :current, -> { active.non_gigs }
+  scope :archived, -> { ended.non_gigs }
 
 
   def cache_key(suffix)
@@ -422,7 +422,7 @@ class Event < ActiveRecord::Base
     (last_date.nil? || last_date >= date)
   end
 
-  scope :active_on, lambda{ |date| where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
+  scope :active_on, ->(date) { where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
 
 
   ###########
