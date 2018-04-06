@@ -129,7 +129,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     oj (2.12.14)
-    pg (0.17.0)
+    pg (0.21.0)
     polyglot (0.3.5)
     power_assert (0.2.2)
     pry (0.10.2)
@@ -268,7 +268,7 @@ DEPENDENCIES
   memcachier (~> 0.0)
   newrelic_rpm (~> 3.6)
   oj (~> 2.12.14)
-  pg (~> 0.17)
+  pg (< 1.0)
   pry-rails
   rack-attack
   rack-canonical-host

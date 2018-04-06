@@ -4,7 +4,7 @@ ruby "2.3.3"
 
 gem 'rails', '< 4'
 
-gem "pg", "~> 0.17"
+gem "pg", '< 1.0'
 
 # Gems used in all environments
 gem "haml", "~> 4.0"
