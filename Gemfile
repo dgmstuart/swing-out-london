@@ -35,7 +35,7 @@ group :assets do
 end
 
 group :development do
-  gem "bullet"
+  gem "bullet", '< 5'
 end
 
 group :development, :test do
