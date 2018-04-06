@@ -44,8 +44,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "rb-fsevent"
-  gem "guard-rspec"
-  gem "zeus"
   gem "simplecov"
   gem "rack-mini-profiler"
   gem "better_errors"
