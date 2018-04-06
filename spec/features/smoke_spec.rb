@@ -65,7 +65,7 @@ RSpec.feature 'Adding a new event' do
     Timecop.freeze('01/01/1937') do
       click_on 'Update'
 
-      visit '/'
+      click_on 'Swing Out London'
     end
 
     venue_id = Venue.first.id
