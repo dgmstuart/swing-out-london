@@ -98,10 +98,10 @@ describe MapsController do
         get :classes
       end
       it "should set the zoom level to 14" do
-        expect(assigns[:map_options][:zoom]).to eq(14)
+        expect(assigns["map_options"]["zoom"]).to eq(14)
       end
       it "should disable auto zoom" do
-        expect(assigns[:map_options][:auto_zoom]).to eq(false)
+        expect(assigns["map_options"]["auto_zoom"]).to eq(false)
       end
     end
     # it "assigns @teams" do
@@ -208,12 +208,11 @@ describe MapsController do
         get :socials
       end
       it "should set the zoom level to 14" do
-        expect(assigns[:map_options][:zoom]).to eq(14)
+        expect(assigns["map_options"]["zoom"]).to eq(14)
       end
       it "should disable auto zoom" do
-        expect(assigns[:map_options][:auto_zoom]).to eq(false)
+        expect(assigns["map_options"]["auto_zoom"]).to eq(false)
       end
     end
   end
-
 end
