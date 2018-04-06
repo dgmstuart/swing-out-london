@@ -39,7 +39,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rb-fsevent"
   gem "simplecov"
-  gem "rack-mini-profiler"
+  gem "rack-mini-profiler", require: false
   gem "better_errors"
   gem "binding_of_caller"
   gem "capybara"
