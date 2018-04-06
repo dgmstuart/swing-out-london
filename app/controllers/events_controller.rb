@@ -46,7 +46,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
 
     respond_to do |format|
       if @event.save
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
         expire_page :controller => :website, :action => :index
         flash[:notice] = 'Event was successfully updated.'
         format.html { redirect_to(@event) }
@@ -96,4 +96,29 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  private
+
+  def event_params
+    params.require(:event).permit(
+      :title,
+      :shortname,
+      :venue_id,
+      :social_organiser_id,
+      :class_organiser_id,
+      :event_type,
+      :has_taster,
+      :has_class,
+      :has_social,
+      :class_style,
+      :course_length,
+      :day,
+      :frequency,
+      :date_array,
+      :cancellation_array,
+      :first_date,
+      :expected_date,
+      :last_date,
+      :url,
+    )
+  end
 end

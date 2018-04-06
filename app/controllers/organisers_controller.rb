@@ -43,7 +43,7 @@ class OrganisersController < ApplicationController
   # POST /organisers
   # POST /organisers.xml
   def create
-    @organiser = Organiser.new(params[:organiser])
+    @organiser = Organiser.new(organiser_params)
 
     respond_to do |format|
       if @organiser.save
@@ -64,7 +64,7 @@ class OrganisersController < ApplicationController
     @organiser = Organiser.find(params[:id])
 
     respond_to do |format|
-      if @organiser.update_attributes(params[:organiser])
+      if @organiser.update_attributes(organiser_params)
         expire_page :controller => :website, :action => :index
         flash[:notice] = 'Organiser was successfully updated.'
         format.html { redirect_to(@organiser) }
@@ -86,5 +86,11 @@ class OrganisersController < ApplicationController
       format.html { redirect_to(organisers_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def organiser_params
+    params.require(:organiser).permit(:name, :shortname, :website, :description)
   end
 end
