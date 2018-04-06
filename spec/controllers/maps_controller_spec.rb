@@ -90,7 +90,7 @@ describe MapsController do
     end
     context "when there is exactly one venue" do
       before(:each) do
-        venue = FactoryGirl.create(:venue)
+        venue = FactoryBot.create(:venue)
         allow(Venue).to receive(:all_with_classes_listed).and_return([venue])
         relation = double("Array")
         allow(relation).to receive(:includes)
@@ -203,7 +203,7 @@ describe MapsController do
 
     context "when there is exactly one venue" do
       before(:each) do
-        event = FactoryGirl.create(:social)
+        event = FactoryBot.create(:social)
         allow(Event).to receive(:socials_dates).and_return([[nil,event]])
         get :socials
       end

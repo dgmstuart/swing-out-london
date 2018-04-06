@@ -8,8 +8,8 @@ RSpec.feature "Outdated events" do
   end
 
   scenario 'when there are outdated and nearly outdated events' do
-    outdated_event = FactoryGirl.create(:event, id: 1, frequency: 4, dates: [ Date.local_today - 4.weeks ])
-    nearly_outdated_event = FactoryGirl.create(:event, id: 2, frequency: 4, dates: [ Date.local_today + 1.week ])
+    outdated_event = FactoryBot.create(:event, id: 1, frequency: 4, dates: [ Date.local_today - 4.weeks ])
+    nearly_outdated_event = FactoryBot.create(:event, id: 2, frequency: 4, dates: [ Date.local_today + 1.week ])
 
     login
     visit 'outdated'

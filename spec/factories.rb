@@ -1,6 +1,6 @@
 require 'ffaker'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event, :aliases => [:social, :intermittent_social] do
     has_taster false
     has_class false

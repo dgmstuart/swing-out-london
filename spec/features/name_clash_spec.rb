@@ -8,7 +8,7 @@ RSpec.describe "Name clash page", type: :feature do
   end
 
   def given_a_social
-    FactoryGirl.create(:social, title: "my awesome spectacular")
+    FactoryBot.create(:social, title: "my awesome spectacular")
   end
 
   def when_i_visit_the_name_clash_page

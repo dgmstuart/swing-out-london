@@ -42,7 +42,7 @@ group :development, :test do
   gem "awesome_print", "~> 1.2"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.2"
-  gem "factory_girl_rails", "~> 4.2"
+  gem "factory_bot_rails"
   gem "rb-fsevent", "~> 0.9"
   gem "guard-rspec"
   gem "zeus", "~> 0.13"

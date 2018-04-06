@@ -18,8 +18,8 @@ describe AdminMailer do
 
     context 'when there are outdated and nearly outdated events' do
       before do
-        @outdated_event = FactoryGirl.create(:event, id: 1, frequency: 4, dates: [ Date.local_today - 4.weeks ])
-        @nearly_outdated_event = FactoryGirl.create(:event, id: 2, frequency: 4, dates: [ Date.local_today + 1.week ])
+        @outdated_event = FactoryBot.create(:event, id: 1, frequency: 4, dates: [ Date.local_today - 4.weeks ])
+        @nearly_outdated_event = FactoryBot.create(:event, id: 2, frequency: 4, dates: [ Date.local_today + 1.week ])
       end
       it "renders the headers" do
         expect(mail.subject).to eq("1 event out of date, 1 event nearly out of date")

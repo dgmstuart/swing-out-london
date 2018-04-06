@@ -5,24 +5,24 @@ describe EventsController do
 
   describe "GET show" do
     it "should assign @event" do
-      event = FactoryGirl.create(:event)
+      event = FactoryBot.create(:event)
       get :show, :id => event.to_param
       expect(assigns[:event]).to eq(event)
     end
     it "should set a message if there is no taster, class or social" do
-      event = FactoryGirl.build(:event, has_taster: false, has_class: false, has_social: false)
+      event = FactoryBot.build(:event, has_taster: false, has_class: false, has_social: false)
       event.save(:validate => false)
       get :show, :id => event.to_param
       expect(assigns[:warning]).not_to be_blank
     end
     it "should set a message if there is a taster but no class or social" do
-      event = FactoryGirl.build(:event, has_taster: true, has_class: false, has_social: false)
+      event = FactoryBot.build(:event, has_taster: true, has_class: false, has_social: false)
       event.save(:validate => false)
       get :show, :id => event.to_param
       expect(assigns[:warning]).not_to be_blank
     end
     it "should assign no message if there is a class or social" do
-      event = FactoryGirl.create(:class)
+      event = FactoryBot.create(:class)
       get :show, id: event.to_param
       expect(assigns[:warning]).to be_nil
     end
@@ -31,7 +31,7 @@ describe EventsController do
 
   describe "GET new" do
     context 'when a venue id is provided' do
-      before { @venue = FactoryGirl.create(:venue, id: 23) }
+      before { @venue = FactoryBot.create(:venue, id: 23) }
       context 'which matches a venue' do
         before { get :new, venue_id: 23 }
         it "creates an event at that venue" do
