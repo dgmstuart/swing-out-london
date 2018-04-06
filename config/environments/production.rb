@@ -77,4 +77,6 @@ Swingoutlondon::Application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
+
+  config.eager_load = true
 end

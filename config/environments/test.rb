@@ -41,4 +41,6 @@ Swingoutlondon::Application.configure do
   config.active_record.mass_assignment_sanitizer = :strict
 
   config.action_mailer.default_url_options = { :host => 'swingoutlondon.co.uk' }
+
+  config.eager_load = false
 end

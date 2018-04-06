@@ -48,5 +48,6 @@ Swingoutlondon::Application.configure do
     Bullet.add_footer = true
   end
 
+  config.eager_load = false
 end
 
