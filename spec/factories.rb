@@ -8,7 +8,7 @@ FactoryGirl.define do
     event_type 'school'
     frequency 0
     day 'monday'
-    url { Faker::Internet.http_url }
+    url { FFaker::Internet.http_url }
 
     venue
 
