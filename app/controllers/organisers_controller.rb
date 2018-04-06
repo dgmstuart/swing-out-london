@@ -47,7 +47,6 @@ class OrganisersController < ApplicationController
 
     respond_to do |format|
       if @organiser.save
-        expire_page :controller => :website, :action => :index
         flash[:notice] = 'Organiser was successfully created.'
         format.html { redirect_to(@organiser) }
         format.xml  { render :xml => @organiser, :status => :created, :location => @organiser }
@@ -65,7 +64,6 @@ class OrganisersController < ApplicationController
 
     respond_to do |format|
       if @organiser.update_attributes(organiser_params)
-        expire_page :controller => :website, :action => :index
         flash[:notice] = 'Organiser was successfully updated.'
         format.html { redirect_to(@organiser) }
         format.xml  { head :ok }
