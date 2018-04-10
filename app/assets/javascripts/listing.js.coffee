@@ -1,7 +1,6 @@
 $(document).ready ->
   if($('body').hasClass('website') && $('body').hasClass('index'))
     $("time.timeago").timeago()
-    load_latest_tweet()
     add_socials_analytics_events()
     add_advertisement_analytics_events()
     add_donation_button_analytics_event()

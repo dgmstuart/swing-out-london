@@ -31,7 +31,6 @@ Swingoutlondon::Application.routes.draw do
   match 'name_clash' => 'name_clash#index'
   match 'outdated' => 'outdated#index'
 
-  match 'latest_tweet' => 'website#latest_tweet'
   match 'about' => 'website#about'
   match 'listings_policy' => 'website#listings_policy'
 

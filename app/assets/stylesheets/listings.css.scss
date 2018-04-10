@@ -106,7 +106,7 @@ $small_font_size: 12px;
     vertical-align: super;
   }
 }
-#listing_navigation, #soldn_on_the_web, #note, #latest_tweet {
+#listing_navigation, #soldn_on_the_web, #note {
   a {
     color: $link-colour;
   }
@@ -115,28 +115,6 @@ $small_font_size: 12px;
 #soldn_on_the_web {
   max-width: 500px;
   text-align: right;
-
-  #latest_tweet {
-    text-align: left;
-    line-height: 1.5em;
-    font-size: 0.9em;
-    font-family: Georgia, Times, "Times New Roman", serif;
-    padding: 8px;
-    border: 6px double $text-colour;
-    margin-bottom: 1rem;
-    h4 {
-      display: inline;
-      font-weight: bold;
-    }
-    p {
-      display: inline;
-      font-style: italic;
-    }
-    a.tweet_created {
-      font-size: 0.8em;
-      color: $link-colour;
-    }
-  }
 
   #advert {
     border: 6px double #0f0f0f;
