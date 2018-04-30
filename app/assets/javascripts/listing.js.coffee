@@ -15,7 +15,7 @@ add_socials_analytics_events = ->
 
 # Insert a Google Analytics event on advertisements:
 add_advertisement_analytics_events = ->
-  $('.ad_units a').click ->
+  $('#advert a').click ->
     _gaq.push(['_trackEvent', 'Advert Link', this.id, this.href])
 
 add_donation_button_analytics_event = ->
