@@ -14,13 +14,6 @@ class WebsiteController < ApplicationController
 
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates = Event.socials_dates(@today)
-
-    @ad = OpenStruct.new(
-      image_url: "https://justafish.github.io/londonlindyexchange/images/llx-banner.jpg",
-      ad_url:    "http://londonlindyexchange.com/register",
-      title:     "London Lindy Exchange information",
-      google_id: "llx-1"
-    )
   end
 
   private
