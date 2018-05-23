@@ -22,7 +22,6 @@ gem "actionpack-action_caching" # to support pre rails-4 style action caching
 gem "rails-observers" # to support pre rails-4 style cache sweeping
 
 gem "rack-attack"
-gem "figaro"
 
 gem 'test-unit'
 
@@ -36,6 +35,7 @@ end
 
 group :development, :test do
   gem "awesome_print"
+  gem "dotenv-rails"
   gem "pry-rails"
   gem "rspec-rails"
   gem "factory_bot_rails"
