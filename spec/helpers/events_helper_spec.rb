@@ -4,7 +4,7 @@ describe EventsHelper do
   describe "school_name" do
     it "should fail if called on a non-class" do
       event = FactoryBot.create(:event, has_class: false)
-      expect { helper.school_name(event) }.to raise_error
+      expect { helper.school_name(event) }.to raise_error(RuntimeError)
     end
     context "when there is no organiser" do
       before(:each) do
@@ -21,7 +21,7 @@ describe EventsHelper do
       end
       it "should raise an error if the organiser's name is blank" do
         @organiser.name = nil
-        expect { helper.school_name(@class) }.to raise_error
+        expect { helper.school_name(@class) }.to raise_error(RuntimeError)
       end
       it "should use the name if the shortname doesn't exist" do
         @organiser.name = "foo"

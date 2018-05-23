@@ -29,5 +29,5 @@
 
         %td.actions.last
           = link_to 'Edit', edit_event_path(event)
-          = link_to 'Delete', event, :confirm => 'Are you sure you want to delete this event?', :method => :delete
+          = link_to 'Delete', event, data: { confirm: 'Are you sure you want to delete this event?' }, method: :delete
           = link_to 'Archive', archive_event_path(event), :method => :put
