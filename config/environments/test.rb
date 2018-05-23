@@ -31,7 +31,7 @@ Swingoutlondon::Application.configure do
   config.active_support.deprecation = :stderr
 
   # Configure static asset server for tests with Cache-Control for performance
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
 
   config.action_mailer.default_url_options = { :host => 'swingoutlondon.co.uk' }
