@@ -17,7 +17,7 @@ RSpec.describe Event do
     end
 
     context 'when the event has one date in the past' do
-      let(:event) { FactoryBot.create(:event, dates: [Date.today - 1]) }
+      let(:event) { FactoryBot.create(:event, dates: [Date.today - 2]) }
       it "is true" do
         expect(event.out_of_date).to eq true
       end
