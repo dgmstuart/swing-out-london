@@ -6,16 +6,16 @@ describe Event do
   end
 
   describe ".dates" do
-    before(:each) do
+    it "returns an ordered list of dates" do
       recent_date = FactoryBot.create(:swing_date, date: Date.today)
       old_date = FactoryBot.create(:swing_date, date: Date.today - 1.year)
 
-      @event = FactoryBot.create(:event)
-      @event.swing_dates << recent_date
-      @event.swing_dates << old_date
-    end
-    it "should return an ordered list of dates" do
-      expect(@event.dates).to eq([ Date.today - 1.year, Date.today ])
+      event = FactoryBot.create(:event)
+      event.swing_dates << recent_date
+      event.swing_dates << old_date
+      event.save!
+
+      expect(event.reload.dates).to eq([ Date.today - 1.year, Date.today ])
     end
   end
 
