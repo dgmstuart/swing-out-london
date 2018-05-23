@@ -6,6 +6,8 @@ gem 'rails', '>= 4.0.0', '< 4.1'
 
 gem "pg", '< 1.0'
 
+gem "puma"
+
 # Gems used in all environments
 gem "haml"
 gem "haml-rails"
@@ -56,7 +58,6 @@ end
 
 gem "rollbar"
 group :production do
-  gem "unicorn"
   gem 'oj' # For Rollbar
   gem "rack-canonical-host"
 end
