@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.3"
 
-gem 'rails', '>= 4.1.16', '< 4.2'
+gem 'rails', '>= 4.2.5', '< 4.3'
 
 gem "pg", '< 1.0'
 
@@ -46,7 +46,7 @@ group :development, :test do
   gem "rack-mini-profiler", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "capybara"
+  gem "capybara", "< 3.0"
   gem "launchy"
   gem "ffaker"
   gem "fuubar"
