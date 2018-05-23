@@ -111,7 +111,6 @@ GEM
     mini_portile2 (2.3.0)
     minitest (4.7.5)
     multi_json (1.13.1)
-    newrelic_rpm (5.0.0.342)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     oj (3.5.0)
@@ -240,7 +239,6 @@ DEPENDENCIES
   jquery-rails
   launchy
   memcachier
-  newrelic_rpm
   oj
   pg (< 1.0)
   pry-rails

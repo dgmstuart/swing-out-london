@@ -57,7 +57,6 @@ end
 gem "rollbar"
 group :production do
   gem "unicorn"
-  gem "newrelic_rpm"
   gem 'oj' # For Rollbar
   gem "rack-canonical-host"
 end
