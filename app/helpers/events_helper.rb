@@ -297,7 +297,7 @@ module EventsHelper
   # ------- #
 
   def venue_select
-    Venue.all(:order => "name").collect{ |v| [v.name_and_area,v.id] }
+    Venue.order(name: :asc).collect{ |v| [v.name_and_area,v.id] }
   end
 
   def organiser_select
