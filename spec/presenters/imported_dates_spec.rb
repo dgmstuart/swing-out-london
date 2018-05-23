@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'date'
 require 'app/presenters/imported_dates'
 
 RSpec.describe ImportedDates do
