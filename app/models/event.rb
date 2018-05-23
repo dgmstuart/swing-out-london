@@ -504,7 +504,7 @@ class Event < ActiveRecord::Base
 
     return if socials_on_that_date.blank?
 
-    socials_on_that_date.sort!{|a,b| a.title <=> b.title}
+    socials_on_that_date.sort_by(&:title)
   end
 
   def self.cancelled_events_on_date(date)
