@@ -1,8 +1,5 @@
 module Events
-  class ImportsController < ApplicationController
-    before_filter :authenticate
-    layout 'cms'
-
+  class ImportsController < CMSBaseController
     def new
       @events_import = EventsImport.new
     end

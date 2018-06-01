@@ -1,7 +1,4 @@
-class OutdatedController < ApplicationController
-  before_filter :authenticate
-  layout 'cms'
-
+class OutdatedController < CMSBaseController
   def index
     @report = OutdatedEventReport.new
     if @report.all_in_date?

@@ -1,7 +1,4 @@
-class VenuesController < ApplicationController
-  layout 'cms'
-  before_filter :authenticate
-
+class VenuesController < CMSBaseController
   # GET /venues
   # GET /venues.xml
   def index

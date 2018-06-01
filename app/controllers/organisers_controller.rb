@@ -1,7 +1,4 @@
-class OrganisersController < ApplicationController
-  layout 'cms'
-  before_filter :authenticate
-
+class OrganisersController < CMSBaseController
   # GET /organisers
   # GET /organisers.xml
   def index

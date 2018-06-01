@@ -22,18 +22,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate
-    session[:authenticated] =nil
-     authenticate_or_request_with_http_basic do |username, password|
-      session[:authenticated] =( LOGINS[username] == Digest::MD5.hexdigest(password) )
-    end
-  end
-
   before_filter :get_controller_and_action
 
   def get_controller_and_action
     @controller_name = controller_name
     @action_name     = action_name
   end
-
 end
