@@ -6,19 +6,21 @@ describe EventsController do
   describe "GET show" do
     it "should assign @event" do
       event = FactoryBot.create(:event)
-      get :show, :id => event.to_param
+      get :show, id: event.to_param
       expect(assigns[:event]).to eq(event)
     end
+
     it "should set a message if there is no taster, class or social" do
       event = FactoryBot.build(:event, has_taster: false, has_class: false, has_social: false)
-      event.save(:validate => false)
-      get :show, :id => event.to_param
+      event.save(validate: false)
+      get :show, id: event.to_param
       expect(assigns[:warning]).not_to be_blank
     end
+
     it "should set a message if there is a taster but no class or social" do
       event = FactoryBot.build(:event, has_taster: true, has_class: false, has_social: false)
-      event.save(:validate => false)
-      get :show, :id => event.to_param
+      event.save(validate: false)
+      get :show, id: event.to_param
       expect(assigns[:warning]).not_to be_blank
     end
     it "should assign no message if there is a class or social" do
