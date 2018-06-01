@@ -1,5 +1,5 @@
 class CMSBaseController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   layout 'cms'
 

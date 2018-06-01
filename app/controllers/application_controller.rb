@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  before_filter :get_controller_and_action
+  before_action :get_controller_and_action
 
   def get_controller_and_action
     @controller_name = controller_name
