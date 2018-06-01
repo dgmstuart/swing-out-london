@@ -32,7 +32,7 @@ gem "coffee-rails"
 gem "uglifier"
 
 group :development do
-  gem "bullet", '< 5'
+  gem "bullet"
 end
 
 group :development, :test do
