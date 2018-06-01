@@ -54,6 +54,7 @@ end
 
 group :test do
   gem 'timecop'
+  gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this
 end
 
 gem "rollbar"
