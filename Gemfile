@@ -33,6 +33,7 @@ gem "uglifier"
 
 group :development do
   gem "bullet"
+  gem "listen"
 end
 
 group :development, :test do
