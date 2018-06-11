@@ -1,4 +1,4 @@
-class Organiser < ActiveRecord::Base
+class Organiser < ApplicationRecord
   has_many :classes, class_name: "Event", foreign_key: "class_organiser_id"
   has_many :socials, class_name: "Event", foreign_key: "social_organiser_id"
 
