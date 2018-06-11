@@ -4,6 +4,9 @@ SWINGOUTLONDON_SECRET_TOKEN: # Generate one with rake secret
 SOLDN_USERNAME:
 SOLDN_PASSWORD_HASH: # MD5 hash of the password
 
+# Optional support user credentials
+SOLDN_SUPPORT_USER_1_USERNAME:
+SOLDN_SUPPORT_USER_1_PASSWORD_HASH: # MD5 hash of the password
 
 # Get these from your Twitter account at https://dev.twitter.com/
 TWITTER_CONSUMER_KEY:
