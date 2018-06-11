@@ -5,6 +5,7 @@ COMPASS_POINTS = %w( C N S E W NE NW SE SW )
 
 LOGINS={
   ENV["SOLDN_USERNAME"] => ENV["SOLDN_PASSWORD_HASH"],
+  ENV["SOLDN_SUPPORT_USER_1_USERNAME"] => ENV["SOLDN_SUPPORT_USER_1_PASSWORD_HASH"],
 }
 
 # How many socials should be displayed on the index page?
