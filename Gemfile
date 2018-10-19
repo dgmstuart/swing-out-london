@@ -31,6 +31,8 @@ gem "sass-rails"
 gem "coffee-rails"
 gem "uglifier"
 
+gem "bootsnap"
+
 group :development do
   gem "bullet"
   gem "listen"
