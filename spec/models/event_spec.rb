@@ -302,7 +302,7 @@ describe Event do
     it 'should be invalid with no venue' do
       event = FactoryBot.build(:event, venue_id: nil)
       event.valid?
-      expect(event.errors.messages).to eq(venue: ["can't be blank"])
+      expect(event.errors.messages).to eq(venue: ["must exist"])
     end
   end
 

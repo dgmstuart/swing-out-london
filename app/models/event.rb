@@ -4,8 +4,8 @@ require 'dates_string_parser'
 
 class Event < ApplicationRecord
   belongs_to :venue
-  belongs_to :class_organiser, :class_name => "Organiser"
-  belongs_to :social_organiser, :class_name => "Organiser"
+  belongs_to :class_organiser, :class_name => "Organiser", optional: true
+  belongs_to :social_organiser, :class_name => "Organiser", optional: true
   has_and_belongs_to_many :swing_dates, -> { distinct(true) }
   has_and_belongs_to_many :swing_cancellations, -> { distinct(true) }, :class_name => "SwingDate", :join_table => "events_swing_cancellations"
 
@@ -13,7 +13,6 @@ class Event < ApplicationRecord
   serialize :cancellation_array
 
   validates :url, format: URI::regexp(%w(http https))
-  validates :venue, presence: true
 
   validates_presence_of :event_type, :frequency, :url, :day
 
