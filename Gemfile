@@ -49,7 +49,7 @@ group :development, :test do
   gem "rack-mini-profiler", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "capybara", "< 3.0"
+  gem "capybara"
   gem "launchy"
   gem "ffaker"
   gem "fuubar"
