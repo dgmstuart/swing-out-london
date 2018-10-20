@@ -27,7 +27,7 @@ gem "rack-attack"
 
 gem 'test-unit'
 
-gem "sass-rails"
+gem "sassc-rails"
 gem "coffee-rails"
 gem "uglifier"
 
