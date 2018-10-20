@@ -53,6 +53,7 @@ group :development, :test do
   gem "launchy"
   gem "ffaker"
   gem "fuubar"
+  gem "rubocop-rspec"
 end
 
 group :test do
