@@ -4,7 +4,7 @@ ruby "2.5.1"
 
 gem 'rails', '5.2.1'
 
-gem "pg", '< 1.0'
+gem "pg"
 
 gem "puma"
 
