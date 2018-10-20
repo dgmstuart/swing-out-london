@@ -23,7 +23,7 @@ class MapsController < ApplicationController
                Venue.all_with_classes_listed_on_day(@day)
              else
                Venue.all_with_classes_listed
-              end
+             end
 
     if venues.blank?
       empty_map
@@ -36,7 +36,7 @@ class MapsController < ApplicationController
                          Event.listing_classes_on_day_at_venue(@day, venue).includes(:class_organiser, :swing_cancellations)
                        else
                          Event.listing_classes_at_venue(venue).includes(:class_organiser, :swing_cancellations)
-                        end
+                       end
 
         marker.infowindow render_to_string(partial: 'classes_map_info', locals: { venue: venue, events: venue_events })
         json_options = { id: venue.id, title: venue.name }
@@ -83,7 +83,7 @@ class MapsController < ApplicationController
                          [Event.socials_on_date(@date, venue), Event.cancelled_events_on_date(@date)]
                        else
                          Event.socials_dates(today, venue)
-                        end
+                       end
 
         marker.infowindow render_to_string(partial: 'socials_map_info', locals: { venue: venue, events: venue_events })
 

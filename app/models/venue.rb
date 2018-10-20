@@ -29,20 +29,19 @@ class Venue < ApplicationRecord
 
   # TODO: legacy
   def compass_text
-    title = case compass
-            when 'C' then 'Central London'
-            when 'N' then 'North London'
-            when 'S' then 'South London'
-            when 'E' then 'East London'
-            when 'W' then 'West London'
-            when 'NE' then 'North East London'
-            when 'NW' then 'North West London'
-            when 'SE' then 'South East London'
-            when 'SW' then 'South West London'
-            else
-              UNKNOWN_AREA
+    case compass
+    when 'C' then 'Central London'
+    when 'N' then 'North London'
+    when 'S' then 'South London'
+    when 'E' then 'East London'
+    when 'W' then 'West London'
+    when 'NE' then 'North East London'
+    when 'NW' then 'North West London'
+    when 'SE' then 'South East London'
+    when 'SW' then 'South West London'
+    else
+      UNKNOWN_AREA
     end
-    title
   end
 
   def outward_postcode
