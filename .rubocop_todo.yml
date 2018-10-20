@@ -829,12 +829,6 @@ Rails/Validation:
     - 'app/models/swing_date.rb'
     - 'app/models/venue.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Security/YAMLLoad:
-  Exclude:
-    - 'app/controllers/events/imports_controller.rb'
-
 # Offense count: 4
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: inline, group
