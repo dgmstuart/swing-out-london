@@ -98,7 +98,7 @@ class Event < ApplicationRecord
   end
 
   def one_off?
-    frequency == 0
+    frequency.zero?
   end
 
   # ---------- #
@@ -330,8 +330,7 @@ class Event < ApplicationRecord
   # What date is the next event expected on? (based on the last known date)
   def expected_date
     return self[:expected_date] if self[:expected_date] && !((latest_date && self[:expected_date] <= latest_date))
-    return NoExpectedDate.new if weekly?
-    return NoExpectedDate.new if frequency == 0
+    return NoExpectedDate.new if frequency.nil? || weekly? || frequency.zero?
     return NoExpectedDate.new unless latest_date
 
     latest_date + frequency.weeks
@@ -363,11 +362,11 @@ class Event < ApplicationRecord
   end
 
   def intermittent?
-    frequency == 0 && last_date != latest_date
+    frequency.zero? && last_date != latest_date
   end
 
   def one_off?
-    frequency == 0 && last_date == latest_date && first_date == latest_date
+    frequency.zero? && last_date == latest_date && first_date == latest_date
   end
 
   def weekly?
@@ -379,7 +378,7 @@ class Event < ApplicationRecord
   end
 
   def less_frequent?
-    frequency == 0 || frequency >= 4
+    frequency.zero? || frequency >= 4
   end
 
   def latest_date_cache_key
@@ -450,7 +449,7 @@ class Event < ApplicationRecord
   # Allows urls like "/event/blackcotton"
   def self.findevent(input)
     # If to_i is called on a character string, 0 is returned
-    if input.to_i == 0
+    if input.to_i.zero?
       e = first(conditions: ['shortname = ?', input])
       if e.nil?
         raise ActiveRecord::RecordNotFound, "Couldn't find Event with Shortname=\"#{input}\""
