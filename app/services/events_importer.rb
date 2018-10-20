@@ -37,16 +37,16 @@ class EventsImporter
 
     event
   end
-end
 
-class EventsImporter::Result
-  attr_accessor :successes, :failures
+  class Result
+    attr_accessor :successes, :failures
 
-  def initialize
-    @successes = []
-    @failures = []
+    def initialize
+      @successes = []
+      @failures = []
+    end
   end
-end
 
-EventsImporter::Success = Struct.new(:event_id, :name, :dates_to_import)
-EventsImporter::Failure = Struct.new(:url, :dates, :reason)
+  Success = Struct.new(:event_id, :name, :dates_to_import)
+  Failure = Struct.new(:url, :dates, :reason)
+end
