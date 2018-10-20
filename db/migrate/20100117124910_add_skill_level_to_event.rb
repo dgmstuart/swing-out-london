@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSkillLevelToEvent < ActiveRecord::Migration
   def self.up
     add_column :events, :skill_level, :integer

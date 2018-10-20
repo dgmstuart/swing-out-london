@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActionView
   module Template::Handlers
     class Markdown
@@ -5,10 +7,9 @@ module ActionView
       self.default_format = Mime[:html]
 
       def call(template)
-        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
         markdown.render(template.source).inspect + '.html_safe'
       end
-
     end
   end
 end

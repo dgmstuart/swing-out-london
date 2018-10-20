@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class EventsController < CMSBaseController
   caches_action :index, cache_path: 'events#index'
-  cache_sweeper :event_sweeper, :only => [:create, :update, :destroy, :archive]
+  cache_sweeper :event_sweeper, only: %i[create update destroy archive]
 
   # GET /events
   # GET /events.xml
   def index
-    @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order("frequency, updated_at")
-    @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order("title")
-    @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser).order("title")
+    @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order('frequency, updated_at')
+    @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order('title')
+    @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser).order('title')
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @events }
+      format.xml  { render xml: @events }
     end
   end
 
@@ -31,7 +33,7 @@ class EventsController < CMSBaseController
   # GET /events/new
   # GET /events/new.xml
   def new
-    venue = Venue.find_by_id(params[:venue_id])
+    venue = Venue.find_by(id: params[:venue_id])
     @event = Event.new(venue: venue)
   end
 
@@ -49,10 +51,10 @@ class EventsController < CMSBaseController
       if @event.save
         flash[:notice] = 'Event was successfully created.'
         format.html { redirect_to(@event) }
-        format.xml  { render :xml => @event, :status => :created, :location => @event }
+        format.xml  { render xml: @event, status: :created, location: @event }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,13 +65,13 @@ class EventsController < CMSBaseController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(event_params)
+      if @event.update(event_params)
         flash[:notice] = 'Event was successfully updated.'
         format.html { redirect_to(@event) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,7 +88,7 @@ class EventsController < CMSBaseController
   def archive
     @event = Event.find(params[:id])
     @event.archive!
-    #TODO: handle case where save fails or already archived (archive = false)
+    # TODO: handle case where save fails or already archived (archive = false)
 
     redirect_to events_path
   end
@@ -113,7 +115,7 @@ class EventsController < CMSBaseController
       :first_date,
       :expected_date,
       :last_date,
-      :url,
+      :url
     )
   end
 end

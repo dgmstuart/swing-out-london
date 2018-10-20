@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventSweeper < ActionController::Caching::Sweeper
   observe Event, Venue, Organiser
 
@@ -7,12 +9,10 @@ class EventSweeper < ActionController::Caching::Sweeper
 
   def after_save(record)
     expire_cache
-    if record.is_a?(Event)
-      @base.expire_fragment(record.index_row_cache_key)
-    end
+    @base.expire_fragment(record.index_row_cache_key) if record.is_a?(Event)
   end
 
-  def after_destroy(record)
+  def after_destroy(_record)
     expire_cache
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddForeignKeyIndexes < ActiveRecord::Migration
   def self.up
     add_index :events, :venue_id

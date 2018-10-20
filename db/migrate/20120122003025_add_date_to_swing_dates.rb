@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDateToSwingDates < ActiveRecord::Migration
   def self.up
     add_column :swing_dates, :date, :date

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module MapsHelper
-  
   def map(controller_map_options, json)
     map_options = { max_zoom: 15,
-                    raw:<<-END
+                    raw: <<-END
                         {
                           zoomControl: true,
                           zoomControlOptions: {
@@ -15,13 +16,12 @@ module MapsHelper
                             opened:true
                           },
                         }
-                        END
-                  } 
+                    END
+                  }
     map_options.merge!(controller_map_options) if controller_map_options
     gmaps(
       map_options: map_options,
-      markers: { "data" => json }
+      markers: { 'data' => json }
     )
   end
-
 end

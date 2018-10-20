@@ -1,7 +1,9 @@
-desc "Populate the new columns whch hold class and social information"
-task :redefine_event_types => :environment do
+# frozen_string_literal: true
+
+desc 'Populate the new columns whch hold class and social information'
+task redefine_event_types: :environment do
   unknowns = {}
-  
+
   Event.all.each do |e|
     case e.event_type
     when 'class'
@@ -39,7 +41,7 @@ task :redefine_event_types => :environment do
       e.has_class = false
       e.has_social = true
       e.event_type = :festival
-    # Ignore events which have already been changed: 
+    # Ignore events which have already been changed:
     when 'school'
     when 'dance_club'
     when 'vintage_club'
@@ -49,9 +51,9 @@ task :redefine_event_types => :environment do
       e.has_class = false
       e.has_social = false
       e.event_type = :unknown
-      unknowns.merge({e.id => e.event_type})
+      unknowns.merge(e.id => e.event_type)
     end
     e.save!
   end
-  unknowns.each{|k,v| puts "Unknown event type for event id#{e.id}: #{e.event_type.inspect}"}
+  unknowns.each { |_k, _v| puts "Unknown event type for event id#{e.id}: #{e.event_type.inspect}" }
 end

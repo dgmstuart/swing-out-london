@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OutdatedController < CMSBaseController
   def index
     @report = OutdatedEventReport.new

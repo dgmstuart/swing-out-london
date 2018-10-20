@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddClassStyleToEvents < ActiveRecord::Migration
   def self.up
     add_column :events, :class_style, :text

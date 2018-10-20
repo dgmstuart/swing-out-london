@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOrganisers < ActiveRecord::Migration
   def self.up
     create_table :organisers do |t|

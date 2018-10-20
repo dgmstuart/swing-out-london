@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class EventsImporter
@@ -9,28 +11,28 @@ class EventsImporter
   end
 
   def import(csv)
-    rows = CSV.parse(csv, col_sep: ",")
-    rows.inject(EventsImporter::Result.new) do |result, row|
+    rows = CSV.parse(csv, col_sep: ',')
+    rows.each_with_object(EventsImporter::Result.new) do |row, result|
       import_row(result, row)
-      result
     end
   end
 
   private def import_row(result, row)
     result.successes << import_dates(row[0], row[1])
   rescue NotFoundError
-    result.failures << Failure.new(row[0], row[1], "Url not found")
+    result.failures << Failure.new(row[0], row[1], 'Url not found')
   end
 
   private def import_dates(url, dates_string)
     event = find_event(url)
-    dates = dates_string.split(", ")
+    dates = dates_string.split(', ')
     Success.new(event.id, event.title, dates)
   end
 
   private def find_event(url)
-    event = @resource_klass.find_by_url(url)
+    event = @resource_klass.find_by(url: url)
     raise NotFoundError unless event
+
     event
   end
 end

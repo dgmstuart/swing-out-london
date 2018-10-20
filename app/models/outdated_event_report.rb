@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OutdatedEventReport
   attr_reader :out_of_date_events, :near_out_of_date_events
 

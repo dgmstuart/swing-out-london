@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddHasSocialClassTasterToEvents < ActiveRecord::Migration
   def self.up
     add_column :events, :has_taster, :boolean

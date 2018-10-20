@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddOrganiserIdToEvent < ActiveRecord::Migration
   def self.up
     add_column :events, :organiser_id, :integer

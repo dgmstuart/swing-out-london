@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStartTimeToActivities < ActiveRecord::Migration
   def self.up
     add_column :activities, :start_hours, :integer

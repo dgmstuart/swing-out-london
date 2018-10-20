@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStartEndTimesToEvent < ActiveRecord::Migration
   def self.up
     add_column :events, :start_hours, :integer
