@@ -44,7 +44,6 @@ group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capybara'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'ffaker'
@@ -59,7 +58,9 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'
   gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this
+  gem 'selenium-webdriver'
   gem 'timecop'
 end
 

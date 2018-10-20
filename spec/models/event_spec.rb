@@ -75,6 +75,7 @@ describe Event do
 
       # class_with_social = FactoryBot.create(:class, :event_type =>"class_with_social", :day => "Tuesday")
 
+      # rubocop:disable RSpec/ExampleLength
       it 'returns the correct array with a bunch of classes and socials' do
         # create one class for each day, starting on monday. None of these should be included
         FactoryBot.create_list(:class, 7)
@@ -99,6 +100,7 @@ describe Event do
           ]
         )
       end
+      # rubocop:enable RSpec/ExampleLength
     end
   end
 
@@ -265,6 +267,7 @@ describe Event do
       expect(described_class.active.classes).to eq([])
     end
 
+    # rubocop:disable RSpec/ExampleLength
     it 'returns the correct list of classes' do
       FactoryBot.create(:social, last_date: nil)
       FactoryBot.create(:class, last_date: Date.today - 5)
@@ -281,6 +284,7 @@ describe Event do
       expect(returned).to include(described_class.active.classes[1])
       expect(returned).to include(described_class.active.classes[2])
     end
+    # rubocop:enable RSpec/ExampleLength
   end
 
   pending "test existing events functionality #{__FILE__}"

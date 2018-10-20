@@ -141,31 +141,11 @@ RSpec/ContextWording:
     - 'spec/models/event_date_functions_spec.rb'
     - 'spec/models/event_spec.rb'
 
-# Offense count: 4
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/features/csv_import_spec.rb'
-    - 'spec/features/map_spec.rb'
-    - 'spec/features/outdated_events_spec.rb'
-    - 'spec/features/smoke_spec.rb'
-
 # Offense count: 1
 # Configuration parameters: CustomIncludeMethods.
 RSpec/EmptyExampleGroup:
   Exclude:
     - 'spec/models/events_import_spec.rb'
-
-# Offense count: 20
-# Configuration parameters: Max.
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/controllers/maps_controller_spec.rb'
-    - 'spec/features/csv_import_spec.rb'
-    - 'spec/features/outdated_events_spec.rb'
-    - 'spec/features/smoke_spec.rb'
-    - 'spec/models/date_string_parser_spec.rb'
-    - 'spec/models/event_spec.rb'
-    - 'spec/services/events_importer_spec.rb'
 
 # Offense count: 67
 # Configuration parameters: AssignmentOnly.
