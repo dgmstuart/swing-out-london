@@ -87,8 +87,8 @@ describe Event do
         # included events:
         event_d1 = FactoryBot.create(:intermittent_social, :dates => [d(1)])
         event_d10_d11 = FactoryBot.create(:social, :frequency => 4, :dates => [d(10),d(11)])
-        event_1_d8 = FactoryBot.create(:social, :frequency => 4, :dates => [d(8)])
-        event_2_d8 = FactoryBot.create(:social, :frequency => 2, :dates => [d(8)])
+        event_1_d8 = FactoryBot.create(:social, :frequency => 4, :dates => [d(8)], title: "A")
+        event_2_d8 = FactoryBot.create(:social, :frequency => 2, :dates => [d(8)], title: "Z")
 
         expect(Event.socials_dates(Date.today)).to eq([
           [d(1),[event_d1],[]],
