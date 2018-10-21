@@ -42,8 +42,8 @@
 
 <div class="actions">
 	<%= link_to 'Edit', edit_venue_path(@venue) %>  |
-	<%= link_to 'Delete', @venue, :confirm => 'Are you sure you want to delete this venue?', :method => :delete %> |
-	<%= link_to 'List', venues_path(:anchor => "venue_#{@venue.id}") %> |
+	<%= link_to 'Delete', @venue, data: { confirm: 'Are you sure you want to delete this venue?' }, method: :delete %> |
+	<%= link_to 'List', venues_path(anchor: "venue_#{@venue.id}") %> |
 	<%= link_to 'New venue', new_venue_path %> |
-	<%= link_to 'New Event at this venue',  new_event_path( :venue_id => @venue.id) %>
+	<%= link_to 'New Event at this venue',  new_event_path( venue_id: @venue.id) %>
 </div>

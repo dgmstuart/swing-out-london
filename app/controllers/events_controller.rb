@@ -1,8 +1,5 @@
-class EventsController < ApplicationController
-  layout 'cms'
-  before_filter :authenticate
-
-  caches_action :index
+class EventsController < CMSBaseController
+  caches_action :index, cache_path: 'events#index'
   cache_sweeper :event_sweeper, :only => [:create, :update, :destroy, :archive]
 
   # GET /events
@@ -46,11 +43,10 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
 
     respond_to do |format|
       if @event.save
-        expire_page :controller => :website, :action => :index
         flash[:notice] = 'Event was successfully created.'
         format.html { redirect_to(@event) }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
@@ -67,8 +63,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
-        expire_page :controller => :website, :action => :index
+      if @event.update_attributes(event_params)
         flash[:notice] = 'Event was successfully updated.'
         format.html { redirect_to(@event) }
         format.xml  { head :ok }
@@ -96,4 +91,29 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  private
+
+  def event_params
+    params.require(:event).permit(
+      :title,
+      :shortname,
+      :venue_id,
+      :social_organiser_id,
+      :class_organiser_id,
+      :event_type,
+      :has_taster,
+      :has_class,
+      :has_social,
+      :class_style,
+      :course_length,
+      :day,
+      :frequency,
+      :date_array,
+      :cancellation_array,
+      :first_date,
+      :expected_date,
+      :last_date,
+      :url,
+    )
+  end
 end

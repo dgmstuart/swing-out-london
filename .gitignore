@@ -9,7 +9,7 @@ coverage/*
 public/assets/
 
 # Ignore application configuration
-/config/application.yml
+.env
 
 # Maybe these will be included at some point, but not now:
 .bowery

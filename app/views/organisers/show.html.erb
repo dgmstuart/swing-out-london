@@ -21,8 +21,8 @@
 
 <div class="actions">
 	<%= link_to 'Edit', edit_organiser_path(@organiser) %> |
-	<%= link_to 'Delete', @organiser, :confirm => 'Are you sure you want to delete this organiser?', :method => :delete %> |
-	<%= link_to 'List', organisers_path(:anchor => "organiser_#{@organiser.id}")%> |
+        <%= link_to 'Delete', @organiser, data: { confirm: 'Are you sure you want to delete this organiser?' }, method: :delete %> |
+	<%= link_to 'List', organisers_path(anchor: "organiser_#{@organiser.id}")%> |
 	<%= link_to 'New organiser', new_organiser_path %> |
-	<%= link_to 'New Event by this organiser',  new_event_path( :organiserid => @organiser.id) %>
+	<%= link_to 'New Event by this organiser',  new_event_path( organiserid: @organiser.id) %>
 </div>

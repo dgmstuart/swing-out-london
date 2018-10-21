@@ -2,22 +2,21 @@ require 'out_of_date_calculator'
 require 'date_expectation_calculator'
 require 'dates_string_parser'
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   belongs_to :venue
-  belongs_to :class_organiser, :class_name => "Organiser"
-  belongs_to :social_organiser, :class_name => "Organiser"
-  has_and_belongs_to_many :swing_dates, :uniq => true
-  has_and_belongs_to_many :swing_cancellations, :class_name => "SwingDate", :join_table => "events_swing_cancellations", :uniq => true
+  belongs_to :class_organiser, :class_name => "Organiser", optional: true
+  belongs_to :social_organiser, :class_name => "Organiser", optional: true
+  has_and_belongs_to_many :swing_dates, -> { distinct(true) }
+  has_and_belongs_to_many :swing_cancellations, -> { distinct(true) }, :class_name => "SwingDate", :join_table => "events_swing_cancellations"
 
   serialize :date_array
   serialize :cancellation_array
 
   validates :url, format: URI::regexp(%w(http https))
-  validates :venue, presence: true
 
   validates_presence_of :event_type, :frequency, :url, :day
 
-  validates_format_of :shortname, :with => /^[a-z]*$/, :message => "can only contain lowercase characters (no spaces)"
+  validates_format_of :shortname, :with => /\A[a-z]*\z/, :message => "can only contain lowercase characters (no spaces)"
   validates_length_of :shortname, :maximum => 20
   validates_uniqueness_of :shortname, :allow_nil => true, :allow_blank => true
 
@@ -122,25 +121,25 @@ class Event < ActiveRecord::Base
   end
 
   # scopes to get different types of event:
-  scope :classes, where(has_class: true)
-  scope :socials, where(has_social: true)
-  scope :weekly, where(frequency: 1)
-  scope :weekly_or_fortnightly, where(frequency: [1,2])
+  scope :classes, -> { where(has_class: true) }
+  scope :socials, -> { where(has_social: true) }
+  scope :weekly, -> { where(frequency: 1) }
+  scope :weekly_or_fortnightly, -> { where(frequency: [1,2]) }
 
-  scope :gigs, where(:event_type => "gig")
-  scope :non_gigs, where("event_type != ?", "gig")
+  scope :gigs, -> { where(:event_type => "gig") }
+  scope :non_gigs, -> { where("event_type != ?", "gig") }
 
-  scope :active, where("last_date IS NULL OR last_date > ?", Date.local_today)
-  scope :ended, where("last_date IS NOT NULL AND last_date < ?", Date.local_today)
+  scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.local_today) }
+  scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.local_today) }
 
-  scope :listing_classes, active.weekly_or_fortnightly.classes
-  scope :listing_classes_on_day, lambda { |day| listing_classes.where(day: day) }
-  scope :listing_classes_at_venue, lambda { |venue| listing_classes.where(venue_id: venue.id) }
-  scope :listing_classes_on_day_at_venue, lambda { |day, venue| listing_classes_on_day(day).where(venue_id: venue.id) }
+  scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
+  scope :listing_classes_on_day, ->(day) { listing_classes.where(day: day) }
+  scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
+  scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
   # For making sections in the Events editing screens:
-  scope :current, active.non_gigs
-  scope :archived, ended.non_gigs
+  scope :current, -> { active.non_gigs }
+  scope :archived, -> { ended.non_gigs }
 
 
   def cache_key(suffix)
@@ -167,7 +166,7 @@ class Event < ActiveRecord::Base
   end
 
   def add_date(new_date)
-    self.swing_dates << SwingDate.find_or_initialize_by_date(new_date)
+    self.swing_dates << SwingDate.find_or_initialize_by(date: new_date)
   end
 
   def dates=(array_of_new_dates)
@@ -191,7 +190,7 @@ class Event < ActiveRecord::Base
   end
 
   def add_cancellation(new_cancellation)
-    self.swing_cancellations << SwingDate.find_or_initialize_by_date(new_cancellation)
+    self.swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
   def cancellation_array=(date_string)
@@ -422,7 +421,7 @@ class Event < ActiveRecord::Base
     (last_date.nil? || last_date >= date)
   end
 
-  scope :active_on, lambda{ |date| where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
+  scope :active_on, ->(date) { where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
 
 
   ###########
@@ -504,7 +503,7 @@ class Event < ActiveRecord::Base
 
     return if socials_on_that_date.blank?
 
-    socials_on_that_date.sort!{|a,b| a.title <=> b.title}
+    socials_on_that_date.sort_by(&:title)
   end
 
   def self.cancelled_events_on_date(date)

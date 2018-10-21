@@ -6,16 +6,16 @@ describe Event do
   end
 
   describe ".dates" do
-    before(:each) do
+    it "returns an ordered list of dates" do
       recent_date = FactoryBot.create(:swing_date, date: Date.today)
       old_date = FactoryBot.create(:swing_date, date: Date.today - 1.year)
 
-      @event = FactoryBot.create(:event)
-      @event.swing_dates << recent_date
-      @event.swing_dates << old_date
-    end
-    it "should return an ordered list of dates" do
-      expect(@event.dates).to eq([ Date.today - 1.year, Date.today ])
+      event = FactoryBot.create(:event)
+      event.swing_dates << recent_date
+      event.swing_dates << old_date
+      event.save!
+
+      expect(event.reload.dates).to eq([ Date.today - 1.year, Date.today ])
     end
   end
 
@@ -87,8 +87,8 @@ describe Event do
         # included events:
         event_d1 = FactoryBot.create(:intermittent_social, :dates => [d(1)])
         event_d10_d11 = FactoryBot.create(:social, :frequency => 4, :dates => [d(10),d(11)])
-        event_1_d8 = FactoryBot.create(:social, :frequency => 4, :dates => [d(8)])
-        event_2_d8 = FactoryBot.create(:social, :frequency => 2, :dates => [d(8)])
+        event_1_d8 = FactoryBot.create(:social, :frequency => 4, :dates => [d(8)], title: "A")
+        event_2_d8 = FactoryBot.create(:social, :frequency => 2, :dates => [d(8)], title: "Z")
 
         expect(Event.socials_dates(Date.today)).to eq([
           [d(1),[event_d1],[]],
@@ -302,7 +302,7 @@ describe Event do
     it 'should be invalid with no venue' do
       event = FactoryBot.build(:event, venue_id: nil)
       event.valid?
-      expect(event.errors.messages).to eq(venue: ["can't be blank"])
+      expect(event.errors.messages).to eq(venue: ["must exist"])
     end
   end
 

@@ -1,7 +1,4 @@
-class OrganisersController < ApplicationController
-  layout 'cms'
-  before_filter :authenticate
-
+class OrganisersController < CMSBaseController
   # GET /organisers
   # GET /organisers.xml
   def index
@@ -43,11 +40,10 @@ class OrganisersController < ApplicationController
   # POST /organisers
   # POST /organisers.xml
   def create
-    @organiser = Organiser.new(params[:organiser])
+    @organiser = Organiser.new(organiser_params)
 
     respond_to do |format|
       if @organiser.save
-        expire_page :controller => :website, :action => :index
         flash[:notice] = 'Organiser was successfully created.'
         format.html { redirect_to(@organiser) }
         format.xml  { render :xml => @organiser, :status => :created, :location => @organiser }
@@ -64,8 +60,7 @@ class OrganisersController < ApplicationController
     @organiser = Organiser.find(params[:id])
 
     respond_to do |format|
-      if @organiser.update_attributes(params[:organiser])
-        expire_page :controller => :website, :action => :index
+      if @organiser.update_attributes(organiser_params)
         flash[:notice] = 'Organiser was successfully updated.'
         format.html { redirect_to(@organiser) }
         format.xml  { head :ok }
@@ -86,5 +81,11 @@ class OrganisersController < ApplicationController
       format.html { redirect_to(organisers_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def organiser_params
+    params.require(:organiser).permit(:name, :shortname, :website, :description)
   end
 end

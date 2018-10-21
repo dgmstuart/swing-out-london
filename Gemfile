@@ -1,10 +1,12 @@
 source "https://rubygems.org"
 
-ruby "2.3.3"
+ruby "2.5.1"
 
-gem 'rails', '< 4'
+gem 'rails', '5.2.1'
 
-gem "pg", '< 1.0'
+gem "pg"
+
+gem "puma"
 
 # Gems used in all environments
 gem "haml"
@@ -15,37 +17,36 @@ gem "jquery-rails"
 gem "geocoder"
 gem "gmaps4rails", "2.0.0.pre"
 
-gem "strong_parameters"
-
 #Caching
 gem "memcachier"
 gem "dalli"
+gem "actionpack-action_caching" # to support pre rails-4 style action caching
+gem "rails-observers" # to support pre rails-4 style cache sweeping
 
 gem "rack-attack"
-gem "figaro"
 
 gem 'test-unit'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem "sass-rails"
-  gem "coffee-rails"
-  gem "uglifier"
-end
+gem "sassc-rails"
+gem "coffee-rails"
+gem "uglifier"
+
+gem "bootsnap"
 
 group :development do
-  gem "bullet", '< 5'
+  gem "bullet"
+  gem "listen"
 end
 
 group :development, :test do
   gem "awesome_print"
+  gem "dotenv-rails"
   gem "pry-rails"
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "rb-fsevent"
   gem "simplecov"
-  gem "rack-mini-profiler"
+  gem "rack-mini-profiler", require: false
   gem "better_errors"
   gem "binding_of_caller"
   gem "capybara"
@@ -56,12 +57,11 @@ end
 
 group :test do
   gem 'timecop'
+  gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this
 end
 
 gem "rollbar"
 group :production do
-  gem "unicorn"
-  gem "newrelic_rpm"
   gem 'oj' # For Rollbar
   gem "rack-canonical-host"
 end
