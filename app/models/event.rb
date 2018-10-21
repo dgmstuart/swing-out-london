@@ -28,15 +28,15 @@ class Event < ApplicationRecord
   validate :will_be_listed
 
   def cannot_be_weekly_and_have_dates
-    if weekly? && !dates.empty?
-      errors.add(:date_array, 'must be empty for weekly events')
-    end
+    return unless weekly? && !dates.empty?
+
+    errors.add(:date_array, 'must be empty for weekly events')
   end
 
   def will_be_listed
-    unless has_class? || has_social?
-      errors[:base] << "Events must have either a Social or a Class, otherwise they won't be listed!"
-    end
+    return if has_class? || has_social?
+
+    errors[:base] << "Events must have either a Social or a Class, otherwise they won't be listed!"
   end
 
   # display constants:
