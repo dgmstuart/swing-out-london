@@ -1,12 +1,15 @@
 language: ruby
 cache: bundler
-
 services:
-  - postrgesql
-
+- postrgesql
 env:
-  - IP_BLOCKLIST=1.1.1.1
-
+- IP_BLOCKLIST=1.1.1.1
 before_script:
-  - RAILS_ENV=test bundle exec rake db:setup
+- RAILS_ENV=test bundle exec rake db:setup
+deploy:
+  provider: heroku
+  api_key:
+    secure: Fxf3V9+4b02QWgBxj64LXQLVbnI6naLUmn0ZxxSUVhGQA3hsSdbwgnZw7LlTbMbPC1QsWX0eC5/Bw71s59WlUBrm10+Anhj45V2ozm7oywkNxI4EZ3TSrRteJvGFlnhPoSb9M7icwu0mAJo6H92Y8sBJVfJvUsU/DqBWS+gcsU8eIqPJmbGr7vYyUBtAcgyy2I4w1Sxy1eu+F66mErRPKyusu0X7Jh+pLfFUOEF0SrhXr52NeYFYuYjGH3F74mM86rpT8oQZ/oH9D8KXmVL0t8SMheC9XlVxcXkP8lWoNSGcPapDRnslttHmxvn6SI2DhdORdaXH/MBUJgRyVwrM+6i+xIqCaxr2k9edR9SV3Y/NeC/w5ebKXiYHhY4pTArqOJ/O+2xud3MKdxrQ2+dxIXQ8N5NaFnEPTV4PGtnOe+qAuY9iUwWHoZnJuua7CuTm69HtXjfFwdVzLV9AKUbVfe648ASb9NCsjKH/e7aKtzWd+FpOUR11WsqF5pHGpOhtKHRkXDfNUJcTucAeNTfVZaehki9/4ZwMFFFlaEKOstd25CvaFLgRSmXe/dCd/jjzaXRuseHqpVJT9NZBJYP2aFO8vVNGLj7o/zn/0jGdlP8CoUoDru/7CeMuV7nKmi5HhhZ4C0arL5h8uLoF307OyhWvLRlNl2oNMjKlPP+zjlM=
+  app:
+    master: soldn-staging
 
