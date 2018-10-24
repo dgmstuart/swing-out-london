@@ -7,12 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# Configuration parameters: AllowSafeAssignment.
-Lint/AssignmentInCondition:
-  Exclude:
-    - 'app/models/event.rb'
-
-# Offense count: 1
 Lint/DuplicateMethods:
   Exclude:
     - 'app/models/event.rb'

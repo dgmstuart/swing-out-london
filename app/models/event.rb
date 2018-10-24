@@ -401,7 +401,7 @@ class Event < ApplicationRecord
   # for repeating events - find the next and previous dates
   def next_date
     return unless weekly?
-    return Date.local_today if day = Event.weekday_name(Date.local_today)
+    return Date.local_today if day == Event.weekday_name(Date.local_today)
 
     Date.local_today.next_week(day.downcase.to_sym)
   end
