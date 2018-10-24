@@ -119,12 +119,6 @@ RSpec/ContextWording:
     - 'spec/models/event_date_functions_spec.rb'
     - 'spec/models/event_spec.rb'
 
-# Offense count: 1
-# Configuration parameters: CustomIncludeMethods.
-RSpec/EmptyExampleGroup:
-  Exclude:
-    - 'spec/models/events_import_spec.rb'
-
 # Offense count: 67
 # Configuration parameters: AssignmentOnly.
 RSpec/InstanceVariable:
