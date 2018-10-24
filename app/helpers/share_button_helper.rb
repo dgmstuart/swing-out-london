@@ -17,7 +17,12 @@ module ShareButtonHelper
 
     alt_text = 'Share Swing Out London on Twitter'
 
-    link_to 'Tweet', "#{twitter_url}?#{query_parameters}", title: alt_text, alt: alt_text, target: '_blank', class: 'share_button twitter'
+    link_to 'Tweet',
+            "#{twitter_url}?#{query_parameters}",
+            title: alt_text,
+            alt: alt_text,
+            target: '_blank',
+            class: 'share_button twitter'
   end
 
   def facebook_button
@@ -36,6 +41,11 @@ module ShareButtonHelper
 
     alt_text = 'Share Swing Out London on Facebook'
 
-    link_to 'Share', "#{facebook_url}?#{query_parameters}", title: alt_text, alt: alt_text, target: '_blank', class: 'share_button facebook'
+    link_to 'Share',
+            "#{facebook_url}?#{query_parameters}",
+            title: alt_text,
+            alt: alt_text,
+            target: '_blank',
+            class: 'share_button facebook'
   end
 end

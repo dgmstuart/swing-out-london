@@ -61,7 +61,9 @@ class Event < ApplicationRecord
   # Convert the old, fragile way of storing dates (serialised as an array) into the new one (stored in a table)
   def modernise
     self.date_array = self[:date_array].collect { |ds| ds.to_date.to_s }.join(', ') unless Event.empty_date_string(self[:date_array])
-    self.cancellation_array = self[:cancellation_array].collect { |ds| ds.to_date.to_s }.join(', ') unless Event.empty_date_string(self[:cancellation_array])
+    unless Event.empty_date_string(self[:cancellation_array])
+      self.cancellation_array = self[:cancellation_array].collect { |ds| ds.to_date.to_s }.join(', ')
+    end
   end
 
   # ----- #
