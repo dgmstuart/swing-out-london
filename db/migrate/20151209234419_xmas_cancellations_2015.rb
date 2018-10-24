@@ -13,7 +13,7 @@ class XmasCancellations2015 < ActiveRecord::Migration
     end
   end
 
-  DATES_CSV = <<~EOF
+  DATES_CSV = <<~CSV
     id,Old url,New Url,Cancelled dates
     171,http://www.swingpatrol.co.uk/venues/angel/,http://www.swingpatrol.co.uk/class/angel,"15/12/2015, 22/12/2015, 29/12/2015"
     772,http://www.swingpatrol.co.uk/venues/swing-patrol-archway/,http://www.swingpatrol.co.uk/class/archway,"16/12/2015, 23/12/2015, 30/12/2015"
@@ -48,5 +48,5 @@ class XmasCancellations2015 < ActiveRecord::Migration
     748,http://www.swingpatrol.co.uk/class/west-dulwich,http://www.swingpatrol.co.uk/class/west-dulwich,"22/12/2015, 29/12/2015"
     663,http://www.swingpatrol.co.uk/venues/wimbledon/,http://www.swingpatrol.co.uk/class/wimbledon,"21/12/2015, 28/12/2015"
     854,http://www.swingpatrol.co.uk/swing-den-bishopsgate-institute/,http://www.swingpatrol.co.uk/swing-den-bishopsgate-institute/,"15/01/2016, 26/02/2016"
-  EOF
+  CSV
 end
