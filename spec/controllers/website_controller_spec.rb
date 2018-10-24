@@ -5,7 +5,7 @@ require 'rails_helper'
 describe WebsiteController do
   describe 'GET index' do
     def stub_classes
-      relation = double('ActiveRecord::Relation')
+      relation = instance_double('ActiveRecord::Relation')
       allow(relation).to receive(:includes)
       allow(Event).to receive(:listing_classes).and_return relation
     end

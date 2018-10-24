@@ -105,7 +105,7 @@ describe MapsController do
       before do
         venue = FactoryBot.create(:venue)
         allow(Venue).to receive(:all_with_classes_listed).and_return([venue])
-        relation = double('Array')
+        relation = instance_double('ActiveDirectory::Relation')
         allow(relation).to receive(:includes)
         allow(Event).to receive(:listing_classes_at_venue).and_return(relation)
         get :classes
@@ -118,16 +118,6 @@ describe MapsController do
         expect(assigns['map_options']['auto_zoom']).to eq(false)
       end
     end
-    # it "assigns @teams" do
-    #   team = Team.create
-    #   get :index
-    #   assigns(:teams).should eq([team])
-    # end
-    #
-    # it "renders the index template" do
-    #   get :index
-    #   response.should render_template("index")
-    # end
   end
 
   describe 'GET socials' do

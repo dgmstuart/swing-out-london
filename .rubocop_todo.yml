@@ -115,13 +115,6 @@ RSpec/NestedGroups:
   Max: 5
 
 # Offense count: 2
-# Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/controllers/maps_controller_spec.rb'
-    - 'spec/controllers/website_controller_spec.rb'
-
-# Offense count: 2
 # Configuration parameters: Database, Include.
 # SupportedDatabases: mysql, postgresql
 # Include: db/migrate/*.rb
