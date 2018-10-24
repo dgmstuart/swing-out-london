@@ -17,11 +17,6 @@ Lint/DuplicateMethods:
   Exclude:
     - 'app/models/event.rb'
 
-# Offense count: 4
-Lint/EmptyWhen:
-  Exclude:
-    - 'lib/tasks/redefine_event_types.rake'
-
 # Offense count: 1
 Lint/HandleExceptions:
   Exclude:
@@ -30,12 +25,6 @@ Lint/HandleExceptions:
 # Offense count: 16
 Metrics/AbcSize:
   Max: 47
-
-# Offense count: 39
-# Configuration parameters: CountComments, ExcludedMethods.
-# ExcludedMethods: refine
-Metrics/BlockLength:
-  Max: 269
 
 # Offense count: 2
 # Configuration parameters: CountComments.
