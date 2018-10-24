@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  before_action :get_controller_and_action
+  before_action :set_controller_and_action_name
 
-  def get_controller_and_action
+  def set_controller_and_action_name
     @controller_name = controller_name
     @action_name     = action_name
   end

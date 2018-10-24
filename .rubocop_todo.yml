@@ -61,11 +61,6 @@ Metrics/PerceivedComplexity:
   Max: 11
 
 # Offense count: 1
-Naming/AccessorMethodName:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
-
-# Offense count: 1
 Naming/BinaryOperatorParameterName:
   Exclude:
     - 'lib/out_of_date_calculator.rb'
