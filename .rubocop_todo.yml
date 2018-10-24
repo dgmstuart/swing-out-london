@@ -27,12 +27,6 @@ Lint/HandleExceptions:
   Exclude:
     - 'lib/dates_string_parser.rb'
 
-# Offense count: 1
-# Configuration parameters: ContextCreatingMethods, MethodCreatingMethods.
-Lint/UselessAccessModifier:
-  Exclude:
-    - 'lib/out_of_date_calculator.rb'
-
 # Offense count: 16
 Metrics/AbcSize:
   Max: 47

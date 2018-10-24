@@ -10,8 +10,6 @@ class OutOfDateCalculator
     @latest_date < @comparison_date
   end
 
-  private
-
   class NoLatestDate
     def <(_other_date)
       true
