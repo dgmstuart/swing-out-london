@@ -62,18 +62,18 @@ describe MapsController do
     context 'when there are no venues to display' do
       RSpec::Matchers.define :have_no_markers do
         match do |actual|
-          actual[:json] == {}
+          actual.json == {}
         end
       end
 
       RSpec::Matchers.define :be_centered_on_london do
         match do |actual|
-          actual[:map_options][:center_latitude] == 51.5264 &&
-            actual[:map_options][:center_longitude] == -0.0878
+          actual.options[:center_latitude] == 51.5264 &&
+            actual.options[:center_longitude] == -0.0878
         end
       end
 
-      subject(:map) { assigns }
+      subject(:map) { assigns[:map] }
 
       context 'and there is a day' do
         it 'renders an empty map centred on London (empty array)' do
@@ -127,10 +127,11 @@ describe MapsController do
       end
 
       it 'sets the zoom level to 14' do
-        expect(assigns['map_options']['zoom']).to eq(14)
+        expect(assigns['map'].options['zoom']).to eq(14)
       end
+
       it 'disables auto zoom' do
-        expect(assigns['map_options']['auto_zoom']).to eq(false)
+        expect(assigns['map'].options['auto_zoom']).to eq(false)
       end
     end
   end
@@ -231,11 +232,11 @@ describe MapsController do
       end
 
       it 'sets the zoom level to 14' do
-        expect(assigns['map_options']['zoom']).to eq(14)
+        expect(assigns['map'].options['zoom']).to eq(14)
       end
 
       it 'disables auto zoom' do
-        expect(assigns['map_options']['auto_zoom']).to eq(false)
+        expect(assigns['map'].options['auto_zoom']).to eq(false)
       end
     end
   end

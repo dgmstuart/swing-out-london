@@ -30,11 +30,11 @@ class MapsController < ApplicationController
              end
 
     if venues.blank?
-      empty_map
+      @map = EmptyMap.new
     else
-      @map_options = { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
+      map_options = { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
 
-      @json = venues.to_gmaps4rails do |venue, marker|
+      json = venues.to_gmaps4rails do |venue, marker|
         # TODO: ADD IN CANCELLATIONS!
         venue_events = if @day
                          Event.listing_classes_on_day_at_venue(@day, venue).includes(:class_organiser, :swing_cancellations)
@@ -51,6 +51,8 @@ class MapsController < ApplicationController
         end
         marker.json(json_options)
       end
+
+      @map = Map.new(json, map_options)
     end
   end
 
@@ -77,12 +79,12 @@ class MapsController < ApplicationController
     end
 
     if events.nil?
-      empty_map
+      @map = EmptyMap.new
     else
       venues = events.map(&:venue).uniq
-      @map_options = { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
+      map_options = { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
 
-      @json = venues.to_gmaps4rails do |venue, marker|
+      json = venues.to_gmaps4rails do |venue, marker|
         venue_events = if @date
                          [Event.socials_on_date(@date, venue), Event.cancelled_events_on_date(@date)]
                        else
@@ -99,6 +101,8 @@ class MapsController < ApplicationController
         end
         marker.json(json_options)
       end
+
+      @map = Map.new(json, map_options)
     end
   end
 
@@ -171,10 +175,18 @@ class MapsController < ApplicationController
     end
   end
 
-  def empty_map
-    @json = {}
-    @map_options = { center_latitude: 51.5264,
-                     center_longitude: -0.0878,
-                     zoom: 11 }
+  Map = Struct.new(:json, :options)
+  class EmptyMap
+    def json
+      {}
+    end
+
+    def options
+      {
+        center_latitude: 51.5264,
+        center_longitude: -0.0878,
+        zoom: 11
+      }
+    end
   end
 end
