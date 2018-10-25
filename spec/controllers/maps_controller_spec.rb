@@ -60,43 +60,58 @@ describe MapsController do
     end
 
     context 'when there are no venues to display' do
-      def map_is_centred_on_london
-        expect(assigns[:map_options][:center_latitude]).to eq(51.5264)
-        expect(assigns[:map_options][:center_longitude]).to eq(-0.0878)
+      RSpec::Matchers.define :have_no_markers do
+        match do |actual|
+          actual[:json] == {}
+        end
       end
 
-      after do
-        map_is_centred_on_london
+      RSpec::Matchers.define :be_centered_on_london do
+        match do |actual|
+          actual[:map_options][:center_latitude] == 51.5264 &&
+            actual[:map_options][:center_longitude] == -0.0878
+        end
       end
+
+      subject(:map) { assigns }
 
       context 'and there is a day' do
-        before do
-          allow(controller).to receive(:get_day).and_return('Monday')
-        end
-
-        after do
-          get :classes, params: { day: 'Monday' }
-        end
-
-        it 'centres map on London (empty array)' do
+        it 'renders an empty map centred on London (empty array)' do
           allow(Venue).to receive(:all_with_classes_listed_on_day).and_return([])
+
+          get :classes, params: { day: 'Monday' }
+
+          expect(map).to have_no_markers
+          expect(map).to be_centered_on_london
         end
 
-        it 'renders an empty map (nil array)' do
+        it 'renders an empty map centred on London (nil array)' do
           allow(Venue).to receive(:all_with_classes_listed_on_day).and_return(nil)
+
+          get :classes, params: { day: 'Monday' }
+
+          expect(map).to have_no_markers
+          expect(map).to be_centered_on_london
         end
       end
 
       context 'and there is no day' do
-        after do
+        it 'renders an empty map centred on London (empty array)' do
+          allow(Venue).to receive(:all_with_classes_listed).and_return([])
+
           get :classes
+
+          expect(map).to have_no_markers
+          expect(map).to be_centered_on_london
         end
 
-        it 'centres map on London (empty array)' do
-          allow(Venue).to receive(:all_with_classes_listed).and_return([])
-        end
-        it 'renders an empty map (nil array)' do
+        it 'renders an empty map centred on London (nil array)' do
           allow(Venue).to receive(:all_with_classes_listed).and_return(nil)
+
+          get :classes
+
+          expect(map).to have_no_markers
+          expect(map).to be_centered_on_london
         end
       end
     end
