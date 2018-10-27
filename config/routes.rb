@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'website#about'
   get 'listings_policy' => 'website#listings_policy'
+  get 'privacy' => 'website#privacy'
 
   get 'apple-touch-icon-precomposed' => 'application#not_found'
   get 'apple-touch-icon-(:size)-precomposed' => 'application#not_found'
