@@ -6,9 +6,6 @@ SimpleCov.start 'rails'
 require 'spec_helper'
 require 'securerandom'
 
-# Env variables which must exist before initializers are run:
-ENV['IP_BLOCKLIST'] = '1.1.1.1'
-
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
