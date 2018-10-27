@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start 'rails'
 
@@ -5,14 +7,13 @@ require 'spec_helper'
 require 'securerandom'
 
 # Env variables which must exist before initializers are run:
-ENV["IP_BLOCKLIST"] = '1.1.1.1'
-ENV["SWINGOUTLONDON_SECRET_TOKEN"] = SecureRandom.hex(64)
-ENV["SWINGOUTLONDON_SECRET_KEY_BASE"] = SecureRandom.hex(64)
+ENV['IP_BLOCKLIST'] = '1.1.1.1'
+ENV['SWINGOUTLONDON_SECRET_TOKEN'] = SecureRandom.hex(64)
+ENV['SWINGOUTLONDON_SECRET_KEY_BASE'] = SecureRandom.hex(64)
 
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
-require 'capybara/rspec'
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
@@ -24,8 +25,8 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
-  require File.expand_path("../support/macros/auth_helper.rb", __FILE__)
-  require File.expand_path("../support/macros/feature_auth_helper.rb", __FILE__)
-  config.extend AuthHelper, type: :controller
-  config.include FeatureAuthHelper, type: :feature
+  require File.expand_path('support/controller/auth_helper.rb', __dir__)
+  require File.expand_path('support/system/auth_helper.rb', __dir__)
+  config.extend Controller::AuthHelper, type: :controller
+  config.include System::AuthHelper, type: :system
 end

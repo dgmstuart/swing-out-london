@@ -1,6 +1,7 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
-  root :to => 'website#index'
+Rails.application.routes.draw do
+  root to: 'website#index'
 
   resources :organisers do
     resources :events
@@ -11,9 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :events do
-    put :archive, :on => :member
+    put :archive, on: :member
     collection do
-      resources :imports, only: [:new, :create], as: "events_imports", :controller => "events/imports" do
+      resources :imports, only: %i[new create], as: 'events_imports', controller: 'events/imports' do
         collection { post 'save' }
       end
     end

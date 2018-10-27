@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAreaToVenues < ActiveRecord::Migration
   def self.up
     add_column :venues, :area, :string

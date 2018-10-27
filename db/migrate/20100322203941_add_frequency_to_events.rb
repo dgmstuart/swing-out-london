@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFrequencyToEvents < ActiveRecord::Migration
   def self.up
     add_column :events, :frequency, :integer

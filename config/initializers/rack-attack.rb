@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DodgyIPs
   attr_reader :ip_list
 
@@ -12,13 +14,14 @@ class DodgyIPs
   end
 end
 
-class Rack::Attack
-  dodgy_ips = DodgyIPs.new.ip_list
-  puts 'Rack::Attack Will block the following IPs:'
-  dodgy_ips.each{ |ip| puts ip }
+module Rack
+  class Attack
+    dodgy_ips = DodgyIPs.new.ip_list
+    puts 'Rack::Attack Will block the following IPs:'
+    dodgy_ips.each { |ip| puts ip }
 
-  blocklist('block dodgy IP addresses') do |req|
-    dodgy_ips.include? req.ip
+    blocklist('block dodgy IP addresses') do |req|
+      dodgy_ips.include? req.ip
+    end
   end
 end
-

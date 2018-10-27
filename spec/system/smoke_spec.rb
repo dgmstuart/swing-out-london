@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature 'Adding a new event' do
-  scenario 'with a dance class' do
+RSpec.describe 'Adding a new event' do
+  it 'with a dance class' do
     password_hash = Digest::MD5.hexdigest('my_password')
-    stub_const('LOGINS', { 'my_username' => password_hash })
+    stub_const('LOGINS', 'my_username' => password_hash)
     page.driver.browser.authorize('my_username', 'my_password')
 
     visit '/events'
@@ -17,7 +19,7 @@ RSpec.feature 'Adding a new event' do
     fill_in 'Nearest tube', with: '145 St'
     select 'N', from: 'Compass'
     fill_in 'Latitude', with: '40.817529'
-    fill_in 'Longitude'  , with: '73.938456'
+    fill_in 'Longitude', with: '73.938456'
     fill_in 'Website', with: 'https://www.savoyballroom.com'
 
     click_on 'Create'

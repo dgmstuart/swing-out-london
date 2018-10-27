@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AdminMailer < ActionMailer::Base
-  default from: "swingoutlondon@gmail.com"
+  default from: 'swingoutlondon@gmail.com'
 
   def outdated
     report = OutdatedEventReport.new
@@ -7,13 +9,13 @@ class AdminMailer < ActionMailer::Base
     @near_out_of_date_events  = report.near_out_of_date_events
 
     if report.all_in_date?
-      subject  = "All events in date"
-      template = "all_in_date"
+      subject  = 'All events in date'
+      template = 'all_in_date'
     else
       subject = report.summary
-      template = "outdated"
+      template = 'outdated'
     end
 
-    mail to: "swingoutlondon@gmail.com", subject: subject, template_name: template
+    mail to: 'swingoutlondon@gmail.com', subject: subject, template_name: template
   end
 end

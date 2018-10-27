@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventsImport
   include ActiveModel::Conversion
   extend ActiveModel::Naming

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrganisersController < CMSBaseController
   # GET /organisers
   # GET /organisers.xml
@@ -6,7 +8,7 @@ class OrganisersController < CMSBaseController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @organisers }
+      format.xml  { render xml: @organisers }
     end
   end
 
@@ -17,7 +19,7 @@ class OrganisersController < CMSBaseController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @organiser }
+      format.xml  { render xml: @organiser }
     end
   end
 
@@ -28,7 +30,7 @@ class OrganisersController < CMSBaseController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @organiser }
+      format.xml  { render xml: @organiser }
     end
   end
 
@@ -46,10 +48,10 @@ class OrganisersController < CMSBaseController
       if @organiser.save
         flash[:notice] = 'Organiser was successfully created.'
         format.html { redirect_to(@organiser) }
-        format.xml  { render :xml => @organiser, :status => :created, :location => @organiser }
+        format.xml  { render xml: @organiser, status: :created, location: @organiser }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @organiser.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @organiser.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,13 +62,13 @@ class OrganisersController < CMSBaseController
     @organiser = Organiser.find(params[:id])
 
     respond_to do |format|
-      if @organiser.update_attributes(organiser_params)
+      if @organiser.update(organiser_params)
         flash[:notice] = 'Organiser was successfully updated.'
         format.html { redirect_to(@organiser) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @organiser.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @organiser.errors, status: :unprocessable_entity }
       end
     end
   end

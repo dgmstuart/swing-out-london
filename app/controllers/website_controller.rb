@@ -1,9 +1,11 @@
-class WebsiteController < ApplicationController
-  layout "info", :except => :index
+# frozen_string_literal: true
 
-  caches_action :index, cache_path: 'website#index', :layout => true, :expires_in => 1.hour, :race_condition_ttl => 10
-  cache_sweeper :event_sweeper, :only => :index
-  before_action :set_cache_control_on_static_pages, only: [:about, :listings_policy]
+class WebsiteController < ApplicationController
+  layout 'info', except: :index
+
+  caches_action :index, cache_path: 'website#index', layout: true, expires_in: 1.hour, race_condition_ttl: 10
+  cache_sweeper :event_sweeper, only: :index
+  before_action :set_cache_control_on_static_pages, only: %i[about listings_policy]
   before_action :assign_last_updated_times
 
   def index

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class VenuesController < CMSBaseController
   # GET /venues
   # GET /venues.xml
   def index
-    @venues = Venue.order("name ASC").includes(:events)
+    @venues = Venue.order('name ASC').includes(:events)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @venues }
+      format.xml  { render xml: @venues }
     end
   end
 
@@ -17,7 +19,7 @@ class VenuesController < CMSBaseController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @venue }
+      format.xml  { render xml: @venue }
     end
   end
 
@@ -28,7 +30,7 @@ class VenuesController < CMSBaseController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @venue }
+      format.xml  { render xml: @venue }
     end
   end
 
@@ -46,10 +48,10 @@ class VenuesController < CMSBaseController
       if @venue.save
         flash[:notice] = 'Venue was successfully created.'
         format.html { redirect_to(@venue) }
-        format.xml  { render :xml => @venue, :status => :created, :location => @venue }
+        format.xml  { render xml: @venue, status: :created, location: @venue }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @venue.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.xml  { render xml: @venue.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,13 +62,13 @@ class VenuesController < CMSBaseController
     @venue = Venue.find(params[:id])
 
     respond_to do |format|
-      if @venue.update_attributes(venue_params)
+      if @venue.update(venue_params)
         flash[:notice] = 'Venue was successfully updated.'
         format.html { redirect_to(@venue) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @venue.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @venue.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -95,7 +97,7 @@ class VenuesController < CMSBaseController
       :compass,
       :lat,
       :lng,
-      :website,
+      :website
     )
   end
 end

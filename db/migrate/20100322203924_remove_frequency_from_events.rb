@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveFrequencyFromEvents < ActiveRecord::Migration
   def self.up
     remove_column :events, :frequency

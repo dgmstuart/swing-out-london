@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OutdatedEventReport
   attr_reader :out_of_date_events, :near_out_of_date_events
 
@@ -7,12 +9,22 @@ class OutdatedEventReport
   end
 
   def summary
-    subject = "#{@out_of_date_events.count} #{'event'.pluralize(@out_of_date_events.count)} out of date" unless @out_of_date_events.empty?
-    subject += ", #{@near_out_of_date_events.count} #{'event'.pluralize(@near_out_of_date_events.count)} nearly out of date" unless @near_out_of_date_events.empty?
+    subject = out_of_date_message(@out_of_date_events.count) unless @out_of_date_events.empty?
+    subject += near_out_of_date_message(@near_out_of_date_events.count) unless @near_out_of_date_events.empty?
     subject
   end
 
   def all_in_date?
     @out_of_date_events.empty? && @near_out_of_date_events.empty?
+  end
+
+  private
+
+  def out_of_date_message(count)
+    "#{count} #{'event'.pluralize(count)} out of date"
+  end
+
+  def near_out_of_date_message(count)
+    ", #{count} #{'event'.pluralize(count)} nearly out of date"
   end
 end

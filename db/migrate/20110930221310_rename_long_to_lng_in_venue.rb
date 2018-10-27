@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RenameLongToLngInVenue < ActiveRecord::Migration
   def self.up
     rename_column :venues, :long, :lng

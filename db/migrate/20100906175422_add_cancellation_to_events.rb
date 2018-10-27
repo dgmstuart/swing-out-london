@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCancellationToEvents < ActiveRecord::Migration
   def self.up
     add_column :events, :cancellation_array, :string

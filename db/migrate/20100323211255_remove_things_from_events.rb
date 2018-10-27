@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveThingsFromEvents < ActiveRecord::Migration
   def self.up
     remove_column :events, :popularity
@@ -11,6 +13,5 @@ class RemoveThingsFromEvents < ActiveRecord::Migration
     remove_column :events, :week_in_month
   end
 
-  def self.down
-  end
+  def self.down; end
 end

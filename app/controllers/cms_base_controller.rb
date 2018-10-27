@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CMSBaseController < ApplicationController
   before_action :authenticate
 
@@ -6,9 +8,9 @@ class CMSBaseController < ApplicationController
   private
 
   def authenticate
-    session[:authenticated] =nil
+    session[:authenticated] = nil
     authenticate_or_request_with_http_basic do |username, password|
-      session[:authenticated] =( LOGINS[username] == Digest::MD5.hexdigest(password) )
+      session[:authenticated] = (LOGINS[username] == Digest::MD5.hexdigest(password))
     end
   end
 end
