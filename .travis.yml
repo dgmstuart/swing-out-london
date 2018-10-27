@@ -4,9 +4,6 @@ cache: bundler
 services:
   - postrgesql
 
-env:
-  - IP_BLOCKLIST=1.1.1.1
-
 before_script:
   - RAILS_ENV=test bundle exec rake db:setup
 

@@ -1,31 +1,22 @@
-Setup
-------
+## Development
 
-Because Swing Out London's source is available on Github, a number of secret items live outside it in environment variables:
+### Environment Variables
 
-### 1. Secret token
+This project uses [.env](https://github.com/bkeepers/dotenv) to manage
+environment variables. In development you can copy the .env.example file,
+which contains instructions on how to set these.:
 
-First you'll need to generate a secret token (this lives outside the app):
+    cp .env.example .env
 
-    % rake secret
-    % >> ba66a824fff6ff0ea2d8...
+## Production
 
-Set this to the relevant environment variable - I suggest adding this to your `.rvmrc` if you're using RVM:
+### Environment Variables
 
-    % export SWINGOUTLONDON_SECRET_TOKEN="ba66a824fff6ff0ea2d8..."
+The following variables are only required in the production environment:
 
-You'll also need to set these wherever you're deploying the site. For Heroku you'd run:
-
-    % heroku config:set SWINGOUTLONDON_SECRET_TOKEN="ba66a824fff6ff0ea2d8..."
-    
-### 2. Twitter api key
-
-In order to use the twitter gem you'll need to [register your app](https://dev.twitter.com/apps/new) and 
-set the twitter api keys in your environment. 
-
-    % export TWITTER_CONSUMER_KEY="..."
-    % export TWITTER_CONSUMER_SECRET="..."
-    % export TWITTER_OAUTH_TOKEN="..."
-    % export TWITTER_OAUTH_TOKEN_SECRET="..."
-    
-As above, you'll also need to set these in your deployment environment
+  - `IP_BLOCKLIST` (optional) A comma-separated list of IP addresses which
+    should be blocked (e.g. spambots, attackers). _Example:
+    `119.29.55.93,62.210.111.122`_
+  - `ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN` [Rollbar](https://rollbar.com/) is
+    used for exception reporting. This value can be found in Account Settings
+    => Account Access Tokens in your Rollbar account.
