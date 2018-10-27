@@ -5,7 +5,7 @@ class WebsiteController < ApplicationController
 
   caches_action :index, cache_path: 'website#index', layout: true, expires_in: 1.hour, race_condition_ttl: 10
   cache_sweeper :event_sweeper, only: :index
-  before_action :set_cache_control_on_static_pages, only: %i[about listings_policy]
+  before_action :set_cache_control_on_static_pages, only: %i[about listings_policy privacy]
   before_action :assign_last_updated_times
 
   def index
