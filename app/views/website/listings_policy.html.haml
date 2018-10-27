@@ -21,12 +21,12 @@
 
     %h2 Classes
     %p
-      I'd love to be able to list the many one-off workshops happening in London,
-      but keeping track of them is much more than I can handle.
+      We'd love to be able to list the many one-off workshops happening in London,
+      but keeping track of them is much more than we can handle.
     %p
-      However, I do sometimes mention particularly interesting workshops on the
+      However, we do sometimes mention particularly interesting workshops on the
       = succeed ',' do
-        = link_to "Facebook page", FACEBOOK_URL, :title => "Swing Out London on Facebook"
+        = link_to "Facebook page", Rails.configuration.x.facebook.url, :title => "Swing Out London on Facebook"
       especially those involving international teachers.
 
 
