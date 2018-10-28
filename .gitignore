@@ -8,10 +8,5 @@ tmp/**/*
 node_modules/
 coverage/*
 public/assets/
-
-# Ignore application configuration
+spec/examples.txt
 .env
-
-# Maybe these will be included at some point, but not now:
-.bowery
-Dockerfile
