@@ -14,6 +14,6 @@ class CMSBaseController < ApplicationController
   end
 
   def logged_in?
-    LoginSession.new(session).logged_in?
+    LoginSession.new(request).logged_in?
   end
 end

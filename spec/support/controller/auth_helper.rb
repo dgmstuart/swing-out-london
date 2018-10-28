@@ -3,7 +3,7 @@
 module Controller
   module AuthHelper
     def login
-      LoginSession.new(controller.session).log_in!
+      LoginSession.new(controller.request).log_in!
     end
   end
 end

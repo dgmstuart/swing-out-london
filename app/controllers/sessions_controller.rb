@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    LoginSession.new(session).log_in!
+    LoginSession.new(request).log_in!
     redirect_to events_path
   end
 end
