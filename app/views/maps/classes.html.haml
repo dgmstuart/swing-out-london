@@ -1,15 +1,15 @@
 - content_for :title do
   Swing Out London's Lindy Map:
-  -if @highlighted_venue
-    #{ @highlighted_venue.name } in #{ @highlighted_venue.area }
+  -if @map.highlighted_venue
+    #{ @map.highlighted_venue.name } in #{ @map.highlighted_venue.area }
   -else
     Classes
     -if @day
       on #{ @day.pluralize }
 
 - content_for :description do
-  -if @highlighted_venue
-    A map showing the swing dance venue #{ @highlighted_venue.name } in #{ @highlighted_venue.area }. Classes on #{ @day.pluralize }.
+  -if @map.highlighted_venue
+    A map showing the swing dance venue #{ @map.highlighted_venue.name } in #{ @map.highlighted_venue.area }. Classes on #{ @day.pluralize }.
   -else
     -# This just about fits on a google search result:
     A map of all the Lindy Hop classes in London

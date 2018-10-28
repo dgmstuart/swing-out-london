@@ -29,29 +29,18 @@ class MapsController < ApplicationController
                Venue.all_with_classes_listed
              end
 
-    if venues.blank?
-      empty_map
-    else
-      @map_options = { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
-
-      @json = venues.to_gmaps4rails do |venue, marker|
-        # TODO: ADD IN CANCELLATIONS!
-        venue_events = if @day
-                         Event.listing_classes_on_day_at_venue(@day, venue).includes(:class_organiser, :swing_cancellations)
-                       else
-                         Event.listing_classes_at_venue(venue).includes(:class_organiser, :swing_cancellations)
-                       end
-
-        marker.infowindow render_to_string(partial: 'classes_map_info', locals: { venue: venue, events: venue_events })
-        json_options = { id: venue.id, title: venue.name }
-        if venue.id.to_s == params[:venue_id]
-          # N.B. If the given ID doesn't match any of those venues, just ignore it #TODO - should maybe be 404 instead?
-          @highlighted_venue = venue
-          json_options.merge!coloured_marker_json_options(:green)
-        end
-        marker.json(json_options)
+    @map =
+      if venues.blank?
+        EmptyMap.new
+      else
+        Map.new(
+          venues: venues,
+          highlighted_venue_id: params[:venue_id],
+          event_finder: ClassesFinderFromVenue.new(day: @day),
+          info_window_partial: 'classes_map_info',
+          renderer: self
+        )
       end
-    end
   end
 
   def socials
@@ -76,30 +65,19 @@ class MapsController < ApplicationController
       end
     end
 
-    if events.nil?
-      empty_map
-    else
-      venues = events.map(&:venue).uniq
-      @map_options = { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
-
-      @json = venues.to_gmaps4rails do |venue, marker|
-        venue_events = if @date
-                         [Event.socials_on_date(@date, venue), Event.cancelled_events_on_date(@date)]
-                       else
-                         Event.socials_dates(today, venue)
-                       end
-
-        marker.infowindow render_to_string(partial: 'socials_map_info', locals: { venue: venue, events: venue_events })
-
-        json_options = { id: venue.id, title: venue.name }
-        if venue.id.to_s == params[:venue_id]
-          # N.B. If the given ID doesn't match any of those venues, just ignore it #TODO - should maybe be 404 instead?
-          @highlighted_venue = venue
-          json_options.merge!coloured_marker_json_options(:green)
-        end
-        marker.json(json_options)
+    @map =
+      if events.nil?
+        EmptyMap.new
+      else
+        venues = events.map(&:venue).uniq
+        Map.new(
+          venues: venues,
+          highlighted_venue_id: params[:venue_id],
+          event_finder: SocialsFinderFromVenue.new(date: @date, today: today),
+          info_window_partial: 'socials_map_info',
+          renderer: self
+        )
       end
-    end
   end
 
   private
@@ -139,42 +117,104 @@ class MapsController < ApplicationController
     end
   end
 
-  def coloured_marker_json_options(colour)
-    if %i[black
-          grey
-          white
-          orange
-          yellow
-          purple
-          green].include?(colour)
-      { picture: "https://maps.google.com/mapfiles/marker_#{colour}.png",
-        shadow_picture: 'https://maps.google.com/mapfiles/shadow50.png',
-        shadow_width: 37,
-        shadow_height: 34,
-        shadow_anchor: [10, 34] } # Icon is 20x34, and the anchor is in the middle (10px) at the bottom (34px)
-    elsif [:blue,
-           :ltblue,
-           #:red # Black outline
-           #:green, # A lighter green
-           #:yellow, # A lighter yellow
-           #:purple, # A lighter purple
-           :pink].include?(colour)
-      { picture: "https://maps.gstatic.com/mapfiles/ms2/micons/#{colour}-dot.png",
-        width: 32,
-        height: 32,
-        shadow_picture: 'https://maps.gstatic.com/mapfiles/ms2/micons/msmarker.shadow.png',
-        shadow_width: 59,
-        shadow_height: 32,
-        shadow_anchor: [16, 32] }
-    else
-      raise "Tried to created a marker with an invalid colour: #{colour}"
+  class Map
+    attr_reader :highlighted_venue
+
+    def initialize(venues:, highlighted_venue_id:, event_finder:, info_window_partial:, renderer:)
+      @venues = venues
+      @highlighted_venue_id = highlighted_venue_id
+      @event_finder = event_finder
+      @info_window_partial = info_window_partial
+      @renderer = renderer
+    end
+
+    def options
+      { 'zoom' => 14, 'auto_zoom' => false } if venues.count == 1
+    end
+
+    def json
+      venues.to_gmaps4rails do |venue, marker|
+        marker.infowindow render_info_window(venue)
+
+        # N.B. If the given ID doesn't match any of those venues, just ignore it #TODO - should maybe be 404 instead?
+        @highlighted_venue = venue if venue_is_highlighted?(venue)
+        marker.json(marker_json(venue))
+      end
+    end
+
+    private
+
+    attr_reader :venues, :highlighted_venue_id, :event_finder, :info_window_partial, :renderer
+
+    def marker_json(venue)
+      { id: venue.id, title: venue.name }.tap do |json_options|
+        highlighted_marker = 'https://maps.google.com/mapfiles/marker_purple.png'
+        json_options[:picture] = highlighted_marker if venue_is_highlighted?(venue)
+      end
+    end
+
+    def venue_is_highlighted?(venue)
+      venue.id.to_s == highlighted_venue_id
+    end
+
+    def render_info_window(venue)
+      renderer.render_to_string(partial: info_window_partial, locals: { venue: venue, events: event_finder.find(venue) })
     end
   end
 
-  def empty_map
-    @json = {}
-    @map_options = { center_latitude: 51.5264,
-                     center_longitude: -0.0878,
-                     zoom: 11 }
+  class ClassesFinderFromVenue
+    def initialize(day:)
+      @day = day
+    end
+
+    def find(venue)
+      # TODO: ADD IN CANCELLATIONS!
+      if day
+        Event.listing_classes_on_day_at_venue(day, venue).includes(:class_organiser, :swing_cancellations)
+      else
+        Event.listing_classes_at_venue(venue).includes(:class_organiser, :swing_cancellations)
+      end
+    end
+
+    private
+
+    attr_reader :day
+  end
+
+  class SocialsFinderFromVenue
+    def initialize(date:, today:)
+      @date = date
+      @today = today
+    end
+
+    def find(venue)
+      if date
+        [Event.socials_on_date(date, venue), Event.cancelled_events_on_date(date)]
+      else
+        Event.socials_dates(today, venue)
+      end
+    end
+
+    private
+
+    attr_reader :date, :today
+  end
+
+  class EmptyMap
+    def json
+      {}
+    end
+
+    def options
+      {
+        center_latitude: 51.5264,
+        center_longitude: -0.0878,
+        zoom: 11
+      }
+    end
+
+    def highlighted_venue
+      nil
+    end
   end
 end
