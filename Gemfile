@@ -6,64 +6,51 @@ ruby '2.5.1'
 
 gem 'rails', '5.2.1'
 
-gem 'pg'
-
-gem 'puma'
-
-# Gems used in all environments
-gem 'haml'
-gem 'haml-rails'
-gem 'jquery-rails'
-gem 'redcarpet' # Markdown
-
+gem 'actionpack-action_caching' # to support pre rails-4 style action caching
+gem 'bootsnap'
+gem 'coffee-rails'
+gem 'dalli'
 gem 'geocoder'
 gem 'gmaps4rails', '2.0.0.pre'
-
-# Caching
-gem 'actionpack-action_caching' # to support pre rails-4 style action caching
-gem 'dalli'
+gem 'haml-rails'
+gem 'jquery-rails'
 gem 'memcachier'
-gem 'rails-observers' # to support pre rails-4 style cache sweeping
-
+gem 'pg'
+gem 'puma'
 gem 'rack-attack'
-
-gem 'test-unit'
-
-gem 'coffee-rails'
+gem 'rails-observers' # to support pre rails-4 style cache sweeping
+gem 'redcarpet' # Markdown
+gem 'rollbar'
 gem 'sassc-rails'
+gem 'test-unit'
 gem 'uglifier'
-
-gem 'bootsnap'
 
 group :development do
   gem 'bullet'
   gem 'listen'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development, :test do
-  gem 'awesome_print'
-  gem 'binding_of_caller'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'ffaker'
-  gem 'fuubar'
-  gem 'launchy'
   gem 'pry-rails'
-  gem 'rack-mini-profiler', require: false
   gem 'rb-fsevent'
   gem 'rspec-rails'
-  gem 'rubocop-rspec'
-  gem 'simplecov'
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do
   gem 'capybara'
+  gem 'fuubar'
+  gem 'launchy'
   gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'timecop'
 end
 
-gem 'rollbar'
 group :production do
   gem 'oj' # For Rollbar
   gem 'rack-canonical-host'
