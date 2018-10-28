@@ -51,6 +51,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'timecop'
+  gem 'webmock'
 end
 
 group :production do
