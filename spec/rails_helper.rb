@@ -14,8 +14,8 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
-  require File.expand_path('support/controller/auth_helper.rb', __dir__)
-  require File.expand_path('support/system/auth_helper.rb', __dir__)
+  require 'support/controller/auth_helper'
+  require 'support/system/auth_helper.rb'
   config.extend Controller::AuthHelper, type: :controller
   config.include System::AuthHelper, type: :system
 end
