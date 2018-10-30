@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'ffaker'
+require 'faker'
 
 FactoryBot.define do
   factory :event, aliases: %i[social intermittent_social] do
@@ -10,7 +10,7 @@ FactoryBot.define do
     event_type { 'school' }
     frequency { 0 }
     day { 'monday' }
-    url { FFaker::Internet.http_url }
+    url { Faker::Internet.url }
 
     venue
 
