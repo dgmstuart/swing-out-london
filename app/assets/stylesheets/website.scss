@@ -9,12 +9,15 @@
   #header {
     margin: 0 20px;
   }
+
   .site_title {
     font-size: 16px;
+
     em {
       font-size: 40px;
     }
   }
+
   #footer {
     margin: 30px 20px 0;
   }
@@ -24,23 +27,28 @@
 address, #valid_statement, #footer_nav {
   margin-bottom: 20px;
 }
+
 address, #valid_statement, #last_updated {
   text-align: center;
 }
+
 #main_nav {
   li {
     margin-bottom: 5px;
+
     a, .current {
       display: inline-block;
       width: 250px;
     }
   }
 }
+
 #footer_nav {
   li {
     margin-bottom: 10px;
   }
 }
+
 .banner {
   padding: 10px;
 }
@@ -50,22 +58,27 @@ address, #valid_statement, #last_updated {
   #header {
     margin: 0 60px;
   }
+
   .site_title {
     font-size: 20px;
+
     em {
       font-size: 65px;
     }
   }
+
   #footer {
     margin: 30px 40px 0;
   }
+
   #footer_nav {
     li {
       display: inline;
       border-left: $thin-border;
       margin: 0 0.5em 0 0;
       padding: 0 0 0 1em;
-      &:first-child{
+
+      &:first-child {
         border: none;
         padding-left: 0;
       }
@@ -81,25 +94,30 @@ address, #valid_statement, #last_updated {
       border-left: $basic-border;
       margin: 0 0.5em 0 0;
       padding: 0 0 0 1em;
-      &:first-child{
+
+      &:first-child {
         border: none;
         padding-left: 0;
       }
+
       a, .current {
         display: inline;
       }
     }
   }
+
   #footer_nav {
     float: left;
     text-align: left;
     width: 400px;
     height: 31px;
   }
+
   address, #valid_statement {
     text-align: right;
     margin-bottom: 0;
   }
+
   #last_updated {
     clear: both;
   }
@@ -113,9 +131,10 @@ address, #valid_statement, #last_updated {
     left: 0;
     z-index: 1030;
   }
-  .non-semantic-padding{
+
+  .non-semantic-padding {
     //to make the page sit below the banner when it's fixed
-    height: 65px
+    height: 65px;
   }
 }
 
@@ -123,7 +142,8 @@ address, #valid_statement, #last_updated {
 @media only screen and (min-width: 900px) {
   body {
     background: transparent url(image_path("flock_02_by_ZEBiii.jpg"));
-    #page{
+
+    #page {
       width: 900px;
     }
   }
@@ -145,15 +165,18 @@ address, #valid_statement, #last_updated {
 }
 
 #title {
-  padding: 20px; }
+  padding: 20px;
+}
 
 .site_title {
   padding-top: 45px;
   margin-bottom: 25px;
+
   em {
     margin-bottom: 18px;
     line-height: 1.2;
   }
+
   a:hover {
     border: none;
   }
@@ -165,7 +188,7 @@ address, #valid_statement, #last_updated {
   margin-bottom: 10px;
 }
 
-#main_nav{
+#main_nav {
   text-transform: uppercase;
   letter-spacing: 1px;
   clear: both;
@@ -179,18 +202,22 @@ address, #valid_statement, #last_updated {
   border-top: $basic-border;
   padding: 30px 20px;
   clear: both;
+
   p, address {
     a {
       color: $link-colour;
     }
   }
 }
+
 #footer_nav {
   text-transform: uppercase;
   letter-spacing: 1px;
+
   a:hover {
     border-bottom: $thin-border;
   }
+
   .current {
     padding: 5px;
     border: $thin-border;
@@ -202,9 +229,11 @@ address, #valid_statement, #last_updated {
 .banner {
   background: $banner-colour;
   text-align: center;
+
   h3 {
     font-size: 16px;
   }
+
   p {
     margin: 0;
     text-align: center;

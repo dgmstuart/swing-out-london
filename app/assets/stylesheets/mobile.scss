@@ -2,14 +2,15 @@
 body {
   margin-bottom: 48px;
 }
+
 .secondary-nav {
-  position: fixed; 
+  position: fixed;
   bottom: 0;
   display: block;
   height: 48px;
   width: 100%;
   background-color: #0f0f0f;
-  
+
   li {
     position: relative;
     display: block;
@@ -32,19 +33,21 @@ body {
       height: 48px;
       background-image: url(image_path("icons.png"));
       background-repeat: no-repeat;
-      &.ii-calendar {background-position:50% -3936px;}
-      &.ii-compass  {background-position:50% -3360px;}
-      &.ii-chat     {background-position:50% -336px;}
-      &.ii-book     {background-position:50% -4560px;}
+      &.ii-calendar { background-position: 50% -3936px; }
+      &.ii-compass { background-position: 50% -3360px; }
+      &.ii-chat { background-position: 50% -336px; }
+      &.ii-book { background-position: 50% -4560px; }
+
       width: 100% !important;
       top: -6px;
       //left:0;
     }
-    a, span{
+
+    a, span {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       display: block;
       width: 100%;
-      color: #ccc;  
+      color: #ccc;
       font-size: 10px;
       text-align: center;
       height: 48px;

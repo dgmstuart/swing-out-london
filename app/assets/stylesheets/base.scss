@@ -9,16 +9,19 @@ body {
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: $text-colour;
   font-size: $body_font_size;
-  #page{
+
+  #page {
     background: $background-colour none;
     margin: auto;
   }
+
   line-height: 1.5;
 }
 
-p { 
-  margin-bottom: 0.8em; 
-  em { 
+p {
+  margin-bottom: 0.8em;
+
+  em {
     font-style: italic;
   }
 }
@@ -36,6 +39,7 @@ ul.unstyled, ol.unstyled {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
+
   em {
     letter-spacing: 0;
     display: block;

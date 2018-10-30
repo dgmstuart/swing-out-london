@@ -16,83 +16,99 @@ body.classes, body.socials {
     h3 {
       font-size: 1.2em;
     }
+
     .adr {
       font-style: italic;
       font-size: 0.9em;
       margin-top: 0.3em;
+
       p {
         margin-bottom: 0;
       }
     }
   }
+
   ul.listing_info {
     margin-top: 15px;
+
     li {
       /* padding to allow for the bottom border applied to the link it contains on hover */
       padding-bottom: 1px;
     }
+
     .social_date {
       display: block;
       float: left;
       width: 190px;
     }
+
     .event_details {
       display: block;
       margin-left: 190px;
       max-width: 400px;
     }
+
     .day {
       margin-right: 5px;
     }
   }
+
   .nota_bene {
-    margin: 15px 0 0 0 ;
+    margin: 15px 0 0 0;
     font-size: 0.9em;
     color: #666;
   }
 
   .page {
-    background: #FEE6B8 none;
+    background: #fee6b8 none;
   }
 
-  header{
+  header {
     position: absolute;
     top: 0;
     left: 0;
     height: 130px;
     -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow:    9px 9px 12px rgba(50, 50, 50, 0.75);
-    box-shadow:         9px 9px 12px rgba(50, 50, 50, 0.75);
-    h1{
+    -moz-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
+    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
+
+    h1 {
       text-transform: uppercase;
       font-size: 1.1em;
-      text-align:center;
+      text-align: center;
       margin-bottom: 20px;
+
       em {
         display: block;
         font-size: 2em;
+
         small {
-          color: #CC0000;
+          color: #c00;
           font-size: 0.5em;
           font-style: italic;
           text-transform: none;
           vertical-align: top;
         }
+
         a:hover {
           border: none;
         }
       }
     }
+
     .primary-nav {
       text-align: center;
       //nuke the space which gets inserted in-between the elements for no good reason:
       font-size: 0;
+
       span {
         font-size: 20px;
       }
+
       a {
         font-size: 20px;
         margin: 0 5px;
+
         &.current {
           margin: 0 3px;
         }
@@ -108,30 +124,35 @@ body.classes, body.socials {
 
   .listings {
     -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow:    9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
-    box-shadow:         9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+
     li {
       text-align: center;
-      border-bottom: solid 1px #BEBEBE;
+      border-bottom: solid 1px #bebebe;
       -webkit-box-shadow: 0 1px 0 #e4e4e4;
-      -moz-box-shadow:    0 1px 0 #e4e4e4;
+      -moz-box-shadow: 0 1px 0 #e4e4e4;
       box-shadow: 0 1px 0 #e4e4e4;
+
       span#current {
         display: block;
         padding: 10px;
-        color: #FEE6B8;
-        background-color: #0F0F0F;
+        color: #fee6b8;
+        background-color: #0f0f0f;
       }
+
       a {
         //display: block;
         padding: 10px;
+
         &:hover {
           border: none;
-          background-color: #E4E4E4;
+          background-color: #e4e4e4;
         }
       }
     }
   }
+
   .note {
     padding: 30px 15px 20px;
     font-size: 14px;
@@ -153,18 +174,22 @@ body.classes, body.socials {
     right: 0;
     bottom: 0;
     left: 0;
+
     .gmaps4rails_map {
       width: 100%;
       height: 100%;
     }
   }
+
   header {
     padding: 20px 0;
     font-size: 0.7em;
+
     h1 {
       margin-bottom: 10px;
     }
   }
+
   .listings {
     font-size: 14px;
     position: absolute;
@@ -173,10 +198,12 @@ body.classes, body.socials {
     top: 170px;
     bottom: 0;
     left: 0;
+
     li a {
       display: block;
     }
   }
+
   .page {
     width: 164px;
   }
@@ -194,10 +221,12 @@ body.classes, body.socials {
         font-size: 16px;
         margin-bottom: 5px;
         padding: 5px 0;
-        &:hover{
+
+        &:hover {
           padding: 3px 0;
         }
-        &.current{
+
+        &.current {
           padding: 3px 0;
           margin-bottom: 5px;
         }
@@ -211,11 +240,14 @@ body.classes, body.socials {
       left: 220px;
       min-width: 320px;
     }
+
     .page {
       width: 220px;
     }
+
     header {
       font-size: 0.9em;
+
       h1 {
         margin-bottom: 20px;
       }
@@ -227,16 +259,20 @@ body.classes, body.socials {
     header {
       padding: 20px;
     }
+
     .map_container {
       left: 320px;
     }
+
     .page {
       width: 280px;
     }
+
     .listings {
       font-size: 18px;
       padding: 0 20px;
     }
+
     header {
       font-size: 1em;
     }
