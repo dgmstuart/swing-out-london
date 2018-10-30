@@ -7,7 +7,8 @@
 
 @import "borders";
 
-body.classes, body.socials {
+body.classes,
+body.socials {
   a {
     color: inherit;
   }
@@ -158,15 +159,6 @@ body.classes, body.socials {
     font-size: 14px;
   }
 
-
-  //body.map #classes, body.map #socials {margin:0; padding: 0 20px; width:auto; float: none; position:static; left: 0;}
-  //body.map #socials h2{ margin:0 30px; padding-top:50px; border-top: 3px solid #0F0F0F; }
-  //body.map #classes .daylist{border:none; padding:0;}
-  //body.map #socials .datelist{border:none; padding:0;}
-
-
-
-
   // SMALL
   .map_container {
     position: absolute;
@@ -216,7 +208,8 @@ body.classes, body.socials {
       width: 140px;
       margin: auto;
 
-      a, span {
+      a,
+      span {
         display: block;
         font-size: 16px;
         margin-bottom: 5px;
@@ -280,5 +273,6 @@ body.classes, body.socials {
 
   // LARGE VIEWING SIZE
   @media only screen and (min-width: 1240px) {
+    // placeholder
   }
 }

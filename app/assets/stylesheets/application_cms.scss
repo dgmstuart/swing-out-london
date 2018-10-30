@@ -1,43 +1,19 @@
 /*
-*= require reset
-*= require base
-*= require admin_bar
-*= require csv_import
-*= require outdated
-*= require_self
-*/
+ *= require reset
+ *= require base
+ *= require admin_bar
+ *= require csv_import
+ *= require outdated
+ *= require_self
+ */
 @import "colours";
-
-// LAYOUT
-/////////////////////////////////////////////
-
-// SMALL
-
-
-// MOBILE ONLY
-@media only screen and (max-width: 480px) {
-}
-
-// AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {
-}
-
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-}
-
-// DESKTOP */
-@media only screen and (min-width: 900px) {
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-}
 
 body {
   background-color: $background-colour;
 
-  &.events, &.venues, &.organisers {
+  &.events,
+  &.venues,
+  &.organisers {
     margin-top: 39px;
   }
 }
@@ -48,18 +24,36 @@ table {
   font-size: 0.857em;
 }
 
-input, label, textarea, div.actions, ol.show li, form a {
+input,
+label,
+textarea,
+div.actions,
+ol.show li,
+form a {
   font-size: inherit;
   font-family: inherit;
 }
 
 /* INDEX */
 
+h1 {
+  text-align: center;
+  font-size: 3em;
+  padding-top: 1em;
+  margin-bottom: 0.5em;
+}
 
-h1 { text-align: center;font-size: 3em;padding-top: 1em;margin-bottom: 0.5em; }
-h2 { text-align: center;font-size: 3em;margin-bottom: 0.5em; }
-p.actions_panel { text-align: center;font-size: 1.5em;text-transform: uppercase; }
+h2 {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
 
+p.actions_panel {
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
 
 // TABLE COLUMNS
 /////////////////////////////////////////////
@@ -70,13 +64,15 @@ p.actions_panel { text-align: center;font-size: 1.5em;text-transform: uppercase;
     display: none;
   }
 
-  td.updated, th.updated {
+  td.updated,
+  th.updated {
     display: none;
   }
 }
 // TABLET & SMALLER LAPTOPS
 @media only screen and (max-width: 767px) {
-  td.area, th.area {
+  td.area,
+  th.area {
     display: none;
   }
 }
@@ -86,40 +82,44 @@ p.actions_panel { text-align: center;font-size: 1.5em;text-transform: uppercase;
 
     //Below doesn't work
     table-layout: fixed;
-    width:
-      100%
-      td      {
-      break-word: word-wrap;
+    width: 100%;
+
+    td {
+      word-break: word-wrap;
     }
 
-    th.name, td.name {
+    th.name,
+    td.name {
       width: 100px;
     }
 
-    th.venue, td.venue {
+    th.venue,
+    td.venue {
       width: 120px;
     }
 
-    th.class_org, td.class_org {
+    th.class_org,
+    td.class_org {
       width: 120px;
     }
 
-    th.day, td.day {
+    th.day,
+    td.day {
       width: 120px;
     }
     //Above doesn't work
 
-    td.fq, th.fq {
+    td.fq,
+    th.fq {
       display: none;
     }
 
-    td.soc_org, th.soc_org {
+    td.soc_org,
+    th.soc_org {
       display: none;
     }
   }
 }
-
-
 
 table {
   border-collapse: collapse;
@@ -130,21 +130,32 @@ table {
 table.events td.actions.first { width: 35px; }
 table.events td.actions.last { width: 5.5em; }
 
-th, td { border: 1px solid black; padding: 5px; }
-th { font-weight: bold; }
-td.center { text-align: center; }
-td.actions, th.actions { border: none; }
+th,
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
 
-td.dates, td.updated {
+th { font-weight: bold; }
+
+td.center { text-align: center; }
+
+td.actions,
+th.actions { border: none; }
+
+td.dates,
+td.updated {
   max-width: 80px;
 }
 
 /* TODO- replace with proper colours! */
-tr.out_of_date td.dates, tr.all_out_of_date td {
+tr.out_of_date td.dates,
+tr.all_out_of_date td {
   background-color: #f00;
 }
 
-tr.near_out_of_date td.dates, tr.all_nearly_out_of_date td {
+tr.near_out_of_date td.dates,
+tr.all_nearly_out_of_date td {
   background-color: #ffa500;
 }
 
@@ -205,7 +216,8 @@ textarea.narrow {
   }
 }
 
-form label, ol.show span {
+form label,
+ol.show span {
   font-weight: bold;
   width: 9.5em;
   float: left;
@@ -215,12 +227,12 @@ form label, ol.show span {
 
 ol.show li { clear: left; }
 
-input[type=submit], div.actions {
+input[type=submit],
+div.actions {
   margin-left: 11em;
   line-height: 1.5;
   clear: left;
 }
-
 
 // Rails Errors
 /////////////////////////////////////////////

@@ -16,20 +16,10 @@ body {
     display: block;
     width: 25%;
     float: left;
-    //height: 48px !important;
-    //&.active {
-    //    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi/v//fyxAgAEACWgDXjXePfkAAAAASUVORK5CYII=);
-    //    background:rgba(255, 255, 255, 0.1);
-    //    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#45FFFFFF, endColorstr=#45FFFFFF);   
-    //    a{
-    //        color:#fff; 
-    //        text-shadow: #fff 0px 0px 2px;
-    //    }
-    //}
+
     i {
       position: absolute;
       display: block;
-      width: 48px;
       height: 48px;
       background-image: url(image_path("icons.png"));
       background-repeat: no-repeat;
@@ -40,10 +30,10 @@ body {
 
       width: 100% !important;
       top: -6px;
-      //left:0;
     }
 
-    a, span {
+    a,
+    span {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       display: block;
       width: 100%;

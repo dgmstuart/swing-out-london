@@ -11,12 +11,14 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // SMALL
-#soldn_on_the_web, #note {
+#soldn_on_the_web,
+#note {
   margin: auto;
   margin-top: 30px;
 }
 
-#classes, #social_dances {
+#classes,
+#social_dances {
   margin: 0 10px;
 }
 
@@ -31,7 +33,8 @@ $small_font_size: 12px;
 
 // AVERAGE VIEWING SIZE
 @media only screen and (min-width: 481px) {
-  #classes, #social_dances {
+  #classes,
+  #social_dances {
     margin: 0 30px;
   }
 }
@@ -90,8 +93,8 @@ $small_font_size: 12px;
 
 // LARGE VIEWING SIZE
 @media only screen and (min-width: 1240px) {
+  // placeholder
 }
-
 
 // Header
 /////////////////////////////////////////////
@@ -117,7 +120,9 @@ $small_font_size: 12px;
   }
 }
 
-#listing_navigation, #soldn_on_the_web, #note {
+#listing_navigation,
+#soldn_on_the_web,
+#note {
   a {
     color: $link-colour;
   }
@@ -192,7 +197,6 @@ $small_font_size: 12px;
     }
   }
 }
-
 
 // Main listing styles
 /////////////////////////////////////////////
@@ -277,8 +281,8 @@ $small_font_size: 12px;
   }
 }
 
-
-#classes h2, #social_dances h2 {
+#classes h2,
+#social_dances h2 {
   font-size: $listing_subheading_font_size;
   text-align: center;
   text-transform: none;
@@ -296,7 +300,8 @@ $small_font_size: 12px;
 
 // Common listing styles
 /////////////////////////////////////////////
-#classes, #social_dances {
+#classes,
+#social_dances {
   .info {
     font-size: $small_font_size;
     font-style: italic;
@@ -309,7 +314,8 @@ $small_font_size: 12px;
     margin-left: 3.4em;
   }
 
-  .cancelled_label, .new_label {
+  .cancelled_label,
+  .new_label {
     padding: 0.3em 0.6em;
     margin-right: 0.2em;
     position: relative;
@@ -369,7 +375,8 @@ li.today {
 #social_dances li.today { margin-bottom: 1.7em; }
 #classes li.today { margin-bottom: 0.9em; }
 
-.today_label, .tomorrow_label { text-transform: uppercase; }
+.today_label,
+.tomorrow_label { text-transform: uppercase; }
 
 li.day_row .today_label {
   display: block;
@@ -381,17 +388,20 @@ li.day_row .today_label {
 }
 
 li.date_row {
-  .today_label, .tomorrow_label { letter-spacing: 0.1em; }
-  .today_label::after, .tomorrow_label::after { content: ":"; }
-}
+  .today_label,
+  .tomorrow_label { letter-spacing: 0.1em; }
 
+  .today_label::after,
+  .tomorrow_label::after { content: ":"; }
+}
 
 // ADVERTS
 /////////////////////////////////////////////
 
 @media only screen and (max-width: 480px) {
   .rectangular_ad {
-    img, .placeholder a {
+    img,
+    .placeholder a {
       width: 95%;
     }
   }

@@ -39,6 +39,7 @@
 
 // MOBILE ONLY
 @media only screen and (max-width: 480px) {
+  // placeholder
 }
 
 // AVERAGE VIEWING SIZE
@@ -63,12 +64,6 @@
     top: 0;
     right: 0;
     left: 0;
-    background-image: -ms-linear-gradient(bottom, #373737, #464646 5px);
-    background-image: -moz-linear-gradient(bottom, #373737, #464646 5px);
-    background-image: -o-linear-gradient(bottom, #373737, #464646 5px);
-    background-image: -webkit-gradient(linear, left bottom, left top, from(#373737), to(#464646));
-    background-image: -webkit-linear-gradient(bottom, #373737, #464646 5px);
-    background-image: linear-gradient(bottom, #373737, #464646 5px);
 
     li {
       float: left;
@@ -94,8 +89,10 @@
 
 // DESKTOP */
 @media only screen and (min-width: 900px) {
+  // placeholder
 }
 
 // LARGE VIEWING SIZE
 @media only screen and (min-width: 1240px) {
+  // placeholder
 }
