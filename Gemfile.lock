@@ -319,6 +319,7 @@ GEM
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
     uniform_notifier (1.12.1)
+    vcr (4.0.0)
     webmock (3.4.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -374,6 +375,7 @@ DEPENDENCIES
   test-unit
   timecop
   uglifier
+  vcr
   webmock
 
 RUBY VERSION
