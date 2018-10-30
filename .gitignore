@@ -5,6 +5,7 @@ tmp/*
 tmp/**/*
 .rvmrc
 .sass-cache/
+node_modules/
 coverage/*
 public/assets/
 
