@@ -5,6 +5,7 @@ require 'vcr'
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   c.hook_into :webmock
+  c.filter_sensitive_data('<FACEBOOK_API_AUTH_TOKEN>') { ENV['FACEBOOK_API_AUTH_TOKEN'] }
 end
 
 VCR.turn_off!
