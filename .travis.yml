@@ -1,10 +1,15 @@
 language: ruby
-cache: bundler
+cache:
+  bundler: true
+  yarn: true
+  directories:
+    - node_modules
 
 services:
   - postrgesql
 
 before_script:
+  - yarn install
   - RAILS_ENV=test bundle exec rake db:setup
 
 deploy:

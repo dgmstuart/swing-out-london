@@ -3,10 +3,12 @@
 .navigation {
   text-align: center;
   list-style-type: none;
-  li{
+
+  li {
     text-align: center;
     white-space: nowrap;
   }
+
   &.primary-nav {
     a {
       padding: 10px;
@@ -14,11 +16,13 @@
       &:hover {
         padding: 8px;
         border: $nav-border;
-      } 
+      }
+
       &.internal:hover {
-       background: url(image_path("downarrow.png")) no-repeat 50% 95%;
+        background: url(image_path("downarrow.png")) no-repeat 50% 95%;
       }
     }
+
     .current {
       padding: 8px;
       border: $double-border;

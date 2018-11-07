@@ -1,12 +1,17 @@
-## Dependencies
+## Setup
 
-Dependencies are listed in `.tool-versions`.
+### Prerequisites
+
+[Yarn](https://yarnpkg.com/en/docs/install/) is used in development.
+
+Other dependencies (including ruby) are listed in
+[`.tool-versions`](.tool-versions).
 
 We recommend using [asdf](https://github.com/asdf-vm/asdf) and running `asdf
 install` to install these. If you're already managing dependencies in a
-different way, then that shouldn't be a problem.
+different way, ensure that you install the versions listed in
+`.tool_versions`.
 
-## Setup
 
 Set up the app from scratch:
 

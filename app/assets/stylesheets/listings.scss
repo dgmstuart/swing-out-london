@@ -11,17 +11,20 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // SMALL
-#soldn_on_the_web, #note {
+#soldn_on_the_web,
+#note {
   margin: auto;
   margin-top: 30px;
 }
-#classes, #social_dances {
+
+#classes,
+#social_dances {
   margin: 0 10px;
 }
 
 // MOBILE ONLY
 @media only screen and (max-width: 480px) {
-  #social_dances h2{
+  #social_dances h2 {
     padding-top: 50px;
     margin: 0 30px;
     border-top: $basic-border;
@@ -30,7 +33,8 @@ $small_font_size: 12px;
 
 // AVERAGE VIEWING SIZE
 @media only screen and (min-width: 481px) {
-  #classes, #social_dances {
+  #classes,
+  #social_dances {
     margin: 0 30px;
   }
 }
@@ -43,15 +47,18 @@ $small_font_size: 12px;
     position: relative;
     left: 3px;
     margin: 0 0 0 27px;
+
     .daylist {
       margin: 1.2em 0 40px 0;
       border-right: $basic-border;
       padding-right: 22px;
     }
   }
+
   #social_dances {
     margin: 0 30px 0 381px;
-    .datelist{
+
+    .datelist {
       margin: 1.2em 0 0 0;
       border-left: $basic-border;
       padding-left: 22px;
@@ -65,15 +72,18 @@ $small_font_size: 12px;
     width: 421px;
     clear: left;
   }
+
   #social_dances {
     width: 422px;
     margin-left: 448px;
   }
+
   #soldn_on_the_web {
     width: 370px;
     margin-left: 410px;
     margin-top: 0;
   }
+
   #note {
     width: 370px;
     float: left;
@@ -83,30 +93,36 @@ $small_font_size: 12px;
 
 // LARGE VIEWING SIZE
 @media only screen and (min-width: 1240px) {
+  // placeholder
 }
-
 
 // Header
 /////////////////////////////////////////////
 #listing_navigation {
   margin: 25px 0 35px;
+
   p {
     font-size: 20px;
     line-height: 33px;
     margin-bottom: 18px;
   }
+
   a {
     text-transform: capitalize;
     font-size: 27px;
   }
+
   small {
-    color: #C00;
+    color: #c00;
     font-size: 0.5em;
     font-style: italic;
     vertical-align: super;
   }
 }
-#listing_navigation, #soldn_on_the_web, #note {
+
+#listing_navigation,
+#soldn_on_the_web,
+#note {
   a {
     color: $link-colour;
   }
@@ -118,7 +134,6 @@ $small_font_size: 12px;
   #advert {
     border: 6px double #0f0f0f;
     margin-bottom: 1rem;
-
     text-align: center;
     text-transform: uppercase;
     padding: 15px;
@@ -136,47 +151,52 @@ $small_font_size: 12px;
     align-items: flex-end;
   }
 
-  .fb-like{
-    &:hover {
-      border: none;
-    }
-  }
-  .twitter-follow-button {
-    position: relative;
-    top: 4px;
-    left: 1px;
-  }
-  .youtube_btn {
-    img {
-      position: relative;
-      top: 2px;
-    }
+  .fb-like {
     &:hover {
       border: none;
     }
   }
 
+  .twitter-follow-button {
+    position: relative;
+    top: 4px;
+    left: 1px;
+  }
+
+  .youtube_btn {
+    img {
+      position: relative;
+      top: 2px;
+    }
+
+    &:hover {
+      border: none;
+    }
+  }
 }
+
 #note {
   max-width: 500px;
+
   p {
-    font-size: 15px
+    font-size: 15px;
   }
   //TODO: DRY up
   a {
     text-transform: capitalize;
     font-size: 20px;
   }
+
   #caveat {
     font-size: 0.9em;
     font-style: italic;
+
     strong {
       font-size: 1.2em;
-      color: #C00;
+      color: #c00;
     }
   }
 }
-
 
 // Main listing styles
 /////////////////////////////////////////////
@@ -186,17 +206,20 @@ $small_font_size: 12px;
     font-size: $listing_font_size;
     padding-bottom: 10px;
   }
+
   h3 {
     font-size: $class_day_font_size;
     padding-left: 3px;
     float: left;
   }
+
   .today h3 {
-    padding-left: 0px;
+    padding-left: 0;
   }
 
   li.day_row {
     padding: 10px;
+
     li {
       margin-left: 100px;
       margin-bottom: 0.6em;
@@ -205,7 +228,8 @@ $small_font_size: 12px;
       line-height: 1.4em;
     }
   }
-  .class_cancelled  {
+
+  .class_cancelled {
     font-size: $small_font_size;
     display: block;
     font-style: italic;
@@ -216,18 +240,21 @@ $small_font_size: 12px;
 }
 
 #social_dances {
-  .datelist{
+  .datelist {
     font-size: $listing_font_size;
   }
+
   h3 {
     font-size: $social_date_font_size;
     display: block;
     text-align: center;
     margin-bottom: 10px;
   }
+
   li.date_row {
     padding: 10px 10px 7px 7px;
     margin-bottom: 13px;
+
     li {
       margin-bottom: 10px;
       padding-left: 3px;
@@ -235,15 +262,18 @@ $small_font_size: 12px;
       line-height: 1.4em;
     }
   }
+
   .social_highlight {
     background: url(image_path("highlight_icon.png")) no-repeat 0 0.15em;
-    padding-left: 20px
+    padding-left: 20px;
   }
+
   .note {
     margin: 10px 35px 30px;
     font-style: italic;
     font-size: 15px;
   }
+
   #key {
     margin: 20px 30px;
     font-size: 17px;
@@ -251,13 +281,14 @@ $small_font_size: 12px;
   }
 }
 
-
-#classes h2, #social_dances h2 {
+#classes h2,
+#social_dances h2 {
   font-size: $listing_subheading_font_size;
   text-align: center;
   text-transform: none;
   margin-top: 35px;
   line-height: 1;
+
   em {
     text-transform: uppercase;
     font-size: $listing_heading_font_size;
@@ -269,31 +300,37 @@ $small_font_size: 12px;
 
 // Common listing styles
 /////////////////////////////////////////////
-#classes, #social_dances {
-  .info{
+#classes,
+#social_dances {
+  .info {
     font-size: $small_font_size;
     font-style: italic;
     color: $lowlight-colour;
     line-height: 0;
   }
-  .details{
+
+  .details {
     display: block;
     margin-left: 3.4em;
   }
-  .cancelled_label, .new_label{
-    padding:0.3em 0.6em;
-    margin-right:0.2em;
-    position:relative;
-    bottom:0.1em;
-    text-transform:uppercase;
-    font-size:0.8em;
+
+  .cancelled_label,
+  .new_label {
+    padding: 0.3em 0.6em;
+    margin-right: 0.2em;
+    position: relative;
+    bottom: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8em;
   }
-  .cancelled_label{
-    color: #FEE6B8;
+
+  .cancelled_label {
+    color: #fee6b8;
     background-color: $highlight-colour;
   }
+
   .new_label {
-    color: #FEE6B8;
+    color: #fee6b8;
     background-color: $text-colour;
   }
 
@@ -302,17 +339,19 @@ $small_font_size: 12px;
     display: block;
     float: left;
     width: 3.5em;
-    /*N.B. Longest displaying postcode is NW1W. This won't fit in this space, but we don't have any postcodes in that area a.t.m.*/
+
+    /* N.B. Longest displaying postcode is NW1W. This won't fit in this space, but we don't have any postcodes in that area a.t.m. */
     position: relative;
     bottom: 0.1em;
     padding-left: 0.3em;
     text-transform: uppercase;
     font-size: 0.7em;
   }
+
   a.postcode:hover {
-    border: 1px solid #384F6E;
-    background-color: #384F6E;
-    color: #FEE6B8;
+    border: 1px solid #384f6e;
+    background-color: #384f6e;
+    color: #fee6b8;
   }
 }
 
@@ -320,21 +359,25 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 li.today {
   border: 3px dashed $text-colour;
+
   li {
     padding: 0;
   }
+
   &:target {
-    border-color: #C00;
+    border-color: #c00;
     -webkit-transition: all 0.8s ease-in;
     -moz-transition: all 0.8s ease-in;
     -o-transition: all 0.8s ease-in;
     transition: all 0.8s ease-in;
   }
 }
-#social_dances li.today  { margin-bottom: 1.7em;}
-#classes li.today  { margin-bottom: 0.9em;}
+#social_dances li.today { margin-bottom: 1.7em; }
+#classes li.today { margin-bottom: 0.9em; }
 
-.today_label, .tomorrow_label {text-transform: uppercase;}
+.today_label,
+.tomorrow_label { text-transform: uppercase; }
+
 li.day_row .today_label {
   display: block;
   text-align: center;
@@ -343,18 +386,22 @@ li.day_row .today_label {
   padding-left: 0.7em;
   padding-bottom: 0.3em;
 }
-li.date_row {
-  .today_label, .tomorrow_label { letter-spacing: 0.1em; }
-  .today_label:after, .tomorrow_label:after { content:":"; }
-}
 
+li.date_row {
+  .today_label,
+  .tomorrow_label { letter-spacing: 0.1em; }
+
+  .today_label::after,
+  .tomorrow_label::after { content: ":"; }
+}
 
 // ADVERTS
 /////////////////////////////////////////////
 
 @media only screen and (max-width: 480px) {
   .rectangular_ad {
-    img, .placeholder a {
+    img,
+    .placeholder a {
       width: 95%;
     }
   }
@@ -362,24 +409,28 @@ li.date_row {
 
 .ad_units {
   padding-top: 1em;
+
   a:hover {
     border: 0;
   }
-  img{
+
+  img {
     border: 6px double $text-colour;
   }
+
   a.advertising_contact {
     font-size: $small_font_size;
     font-style: italic;
     color: $lowlight-colour;
   }
+
   .placeholder {
     display: inline-block;
+
     a {
       border: 6px double $text-colour;
       width: 368px;
       height: 125px;
-
       display: table-cell;
       vertical-align: middle;
       text-align: center;
@@ -390,6 +441,7 @@ li.date_row {
 .rectangular_ad {
   .placeholder {
     display: inline-block;
+
     a {
       width: 368px;
       height: 80px;
@@ -401,11 +453,13 @@ li.date_row {
 }
 
 .square_ads {
-  img{
+  img {
     margin: 12px;
   }
+
   .placeholder {
     margin: 12px;
+
     a {
       border: 6px double $text-colour;
       width: 150px;
@@ -414,7 +468,7 @@ li.date_row {
   }
 }
 
-#googleAd div{
+#googleAd div {
   width: 254px;
   border: 6px double $text-colour;
   padding: 10px;
@@ -429,19 +483,23 @@ li.date_row {
   border: 6px double $text-colour;
   width: 368px;
   margin-top: 2.5em;
+
   p {
     margin: 10px;
   }
+
   form {
     float: left;
+
     .donate_button {
-      background-color: #EF4836;
+      background-color: #ef4836;
       color: white;
       border: solid;
       border-width: 0;
       font-size: inherit;
       font-family: inherit;
       line-height: inherit;
+
       &:hover {
         cursor: pointer;
       }
@@ -453,14 +511,17 @@ li.date_row {
   display: inline-block;
   margin: 0 0 10px 10px;
   padding: 8px 20px;
+
   &:hover {
     border: none;
   }
 }
+
 .facebook {
   background-color: $facebook-blue;
   color: white;
 }
+
 .twitter {
   background-color: $twitter-blue;
   color: white;

@@ -5,143 +5,123 @@
 /////////////////////////////////////////////
 
 // SMALL
-.content, #colophon{ 
+.content,
+#colophon {
   margin: 0 20px 35px;
 }
-table.full-width { 
+
+table.full-width {
   margin: 0 5px 35px;
 }
-.sidebar { 
+
+.sidebar {
   margin: 0 20px 30px;
-}
-table {
-  font-size: 0.9em;
-}
+  padding: 20px;
+  border: $double-border;
 
-// MOBILE ONLY
-@media only screen and (max-width: 481px) {
-  table {
-    &.full-width{
-      font-size: 0.8em;
+  &.first {
+    margin-top: 35px;
+  }
+
+  a {
+    color: $link-colour;
+  }
+
+  h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5em;
+  }
+
+  p,
+  ul {
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 2em;
+
+    li {
+      margin-bottom: 1.2em;
     }
-    th, td {
-      padding: 10px 5px 0;
-    }
   }
 }
-
-// AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) { 
-  .content, .sidebar, #colophon { 
-    margin-left: 60px;
-    margin-right: 60px;
-  }
-  table {
-    font-size: 1em;
-  }
-  table, table.full-width {
-    margin-left: 20px;
-    margin-right: 20px;
-    th, td {
-      padding: 10px 15px 0;
-    }
-  }
-}
-
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-  .content { 
-    width: 580px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .sidebar, #colophon { 
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-// Page 
-@media only screen and (min-width: 900px) {
-  .content { 
-    width: 470px;
-    margin-left: 50px;
-    margin-right: 0;
-    float: left;
-  }
-  table.full-width {
-    clear: both;
-    margin: 0 50px 35px;
-  }
-  .sidebar {
-    margin: 0 50px 30px 30px;
-    width: 247px;
-    float: right;
-    clear: right;
-  }
-  #colophon {
-    width: auto;
-    margin-left: 130px;
-    margin-right: 130px;
-  }
-}
-
-
-// DESKTOP */
-@media only screen and (min-width: 992px) {
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-}
-
 
 // MAIN CONTENT
 /////////////////////////////////////////////
 .content {
-  h1, h2 {
+  h1,
+  h2 {
     text-transform: uppercase;
     text-align: center;
     line-height: 1.5em;
     margin: 35px 0 10px;
   }
+
   h1 {
     font-size: 1.8em;
   }
+
   h2 {
     font-size: 1.5em;
   }
+
   a {
     color: $link-colour;
   }
+
   em {
     font-style: italic;
   }
+
   ul {
     list-style: disc;
     padding-left: 2em;
   }
+
   ol {
     list-style: outside decimal;
     margin-left: 1.7em;
   }
-  ol, ul {
-    h3, h4 {
+
+  ol,
+  ul {
+    h3,
+    h4 {
       margin-bottom: 0.4em;
     }
   }
 }
 
+#about_lindy {
+  ul {
+    margin: 0 0 0.8em 1em;
+  }
+
+  li {
+    list-style: outside disc;
+    margin: 0 0 0.5em 1em;
+  }
+}
+
 table {
+  font-size: 0.9em;
   padding-bottom: 35px;
-  th, td {
+
+  th,
+  td {
     line-height: 1.5em;
+
     &.row_title {
       font-size: 1.1em;
       border-right: $thin-border;
     }
   }
+
   tr.first td {
     padding-top: 20px;
   }
@@ -152,62 +132,119 @@ table {
     text-align: center;
     border-bottom: $thin-border;
   }
+
   &#music_policy {
-    th, td {
+    th,
+    td {
       width: 180px;
       vertical-align: middle;
+
       &.row_title {
         width: 150px;
       }
     }
   }
-  &#classes_policy, &#socials_policy{
-    th, td {
+
+  &#classes_policy,
+  &#socials_policy {
+    th,
+    td {
       width: 50%;
     }
   }
 }
 
+// MOBILE ONLY
+@media only screen and (max-width: 481px) {
+  table {
+    &.full-width {
+      font-size: 0.8em;
+    }
 
-// SIDEBARS
-/////////////////////////////////////////////
-.sidebar {
-  padding: 20px;
-  border: $double-border;
-  &.first{ 
-    margin-top: 35px;
-  }
-  a {
-    color: $link-colour;
-  }
-  h3 {
-    font-size: 17px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.5em;
-  }
-  p, ul {
-    font-family: Georgia, serif;
-    font-style:italic;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 2em;
-    li {
-      margin-bottom: 1.2em;
+    th,
+    td {
+      padding: 10px 5px 0;
     }
   }
 }
 
-#about_lindy {
-  ul {
-    margin: 0 0 0.8em 1em;
+// AVERAGE VIEWING SIZE
+@media only screen and (min-width: 481px) {
+  .content,
+  .sidebar,
+  #colophon {
+    margin-left: 60px;
+    margin-right: 60px;
   }
-  li{
-    list-style: outside disc;
-    margin: 0 0 0.5em 1em;
+
+  table {
+    font-size: 1em;
   }
+
+  table,
+  table.full-width {
+    margin-left: 20px;
+    margin-right: 20px;
+
+    th,
+    td {
+      padding: 10px 15px 0;
+    }
+  }
+}
+
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (min-width: 768px) {
+  .content {
+    width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sidebar,
+  #colophon {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Page
+@media only screen and (min-width: 900px) {
+  .content {
+    width: 470px;
+    margin-left: 50px;
+    margin-right: 0;
+    float: left;
+  }
+
+  table.full-width {
+    clear: both;
+    margin: 0 50px 35px;
+  }
+
+  .sidebar {
+    margin: 0 50px 30px 30px;
+    width: 247px;
+    float: right;
+    clear: right;
+  }
+
+  #colophon {
+    width: auto;
+    margin-left: 130px;
+    margin-right: 130px;
+  }
+}
+
+// DESKTOP */
+@media only screen and (min-width: 992px) {
+  // placeholder
+}
+
+// LARGE VIEWING SIZE
+@media only screen and (min-width: 1240px) {
+  // placeholder
 }
 
 #colophon {
@@ -215,6 +252,7 @@ table {
   padding: 20px;
   border: $double-border;
   text-align: justify;
+
   h2 {
     font-size: 1.5em;
     margin: 0 0 10px;
@@ -222,18 +260,22 @@ table {
     text-align: center;
     line-height: 1.5em;
   }
+
   a {
     color: $link-colour;
   }
+
   li {
     margin-bottom: 0.8em;
   }
-  ul ul { 
+
+  ul ul {
     list-style-type: disc;
     padding-left: 3em;
-    li { 
+
+    li {
       padding-left: 0.5em;
-      margin-bottom: inherit; 
+      margin-bottom: inherit;
     }
   }
 }

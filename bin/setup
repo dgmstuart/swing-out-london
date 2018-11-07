@@ -16,6 +16,8 @@ class Setup
       system! 'gem install bundler --conservative'
       system('bundle check') || system!('bundle install')
 
+      system('bin/yarn')
+
       puts "\n== Copying example .env file =="
       if File.exist?('.env')
         puts "\n.env file already exists - not overwriting with .env.example"

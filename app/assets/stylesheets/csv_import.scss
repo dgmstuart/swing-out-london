@@ -2,13 +2,16 @@
 
 body.imports {
   padding: 10%;
+
   h3 {
     font-size: 18px;
   }
+
   em {
     color: $highlight_colour;
   }
-  textarea{
+
+  textarea {
     width: 100%;
     height: inherit;
   }
@@ -19,6 +22,7 @@ body.imports {
     background: $highlight_colour;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
+
     &:hover {
       background: #db4c4c;
       text-decoration: none;
@@ -26,5 +30,4 @@ body.imports {
 
     margin-left: 0;
   }
-
 }

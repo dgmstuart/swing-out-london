@@ -1,64 +1,59 @@
 /*
-*= require reset
-*= require base
-*= require admin_bar
-*= require csv_import
-*= require outdated
-*= require_self
-*/
+ *= require reset
+ *= require base
+ *= require admin_bar
+ *= require csv_import
+ *= require outdated
+ *= require_self
+ */
 @import "colours";
-
-// LAYOUT
-/////////////////////////////////////////////
-
-// SMALL
-
-
-// MOBILE ONLY
-@media only screen and (max-width: 480px) {
-}
-
-// AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {  
-}
-
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-}
-
-// DESKTOP */
-@media only screen and (min-width: 900px) {
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-}
 
 body {
   background-color: $background-colour;
-  &.events, &.venues, &.organisers{
-    margin-top: 39px
+
+  &.events,
+  &.venues,
+  &.organisers {
+    margin-top: 39px;
   }
 }
 
 /* FONTS */
 
-table{
-	font-size:0.857em;
+table {
+  font-size: 0.857em;
 }
 
-input, label, textarea, div.actions, ol.show li, form a{
-	font-size:inherit;
-	font-family:inherit;
+input,
+label,
+textarea,
+div.actions,
+ol.show li,
+form a {
+  font-size: inherit;
+  font-family: inherit;
 }
 
 /* INDEX */
 
+h1 {
+  text-align: center;
+  font-size: 3em;
+  padding-top: 1em;
+  margin-bottom: 0.5em;
+}
 
-h1 {text-align:center;font-size:3em;padding-top:1em;margin-bottom:0.5em;}
-h2 {text-align:center;font-size:3em;margin-bottom:0.5em;}
-p.actions_panel{text-align:center;font-size:1.5em;text-transform:uppercase;}
+h2 {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
 
+p.actions_panel {
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
 
 // TABLE COLUMNS
 /////////////////////////////////////////////
@@ -68,147 +63,176 @@ p.actions_panel{text-align:center;font-size:1.5em;text-transform:uppercase;}
   td.actions.last {
     display: none;
   }
-  td.updated, th.updated {
+
+  td.updated,
+  th.updated {
     display: none;
   }
 }
 // TABLET & SMALLER LAPTOPS
 @media only screen and (max-width: 767px) {
-  td.area, th.area {
+  td.area,
+  th.area {
     display: none;
   }
 }
 // SMALL
 @media only screen and (max-width: 480px) {
   table {
-    
-//Below doesn't work
+
+    //Below doesn't work
     table-layout: fixed;
-    width: 100%
+    width: 100%;
+
     td {
-      break-word: word-wrap;
+      word-break: word-wrap;
     }
-    th.name, td.name {
+
+    th.name,
+    td.name {
       width: 100px;
     }
-    th.venue, td.venue {
+
+    th.venue,
+    td.venue {
       width: 120px;
     }
-    th.class_org, td.class_org {
+
+    th.class_org,
+    td.class_org {
       width: 120px;
     }
-    th.day, td.day {
+
+    th.day,
+    td.day {
       width: 120px;
     }
-//Above doesn't work
-    
-    td.fq, th.fq {
+    //Above doesn't work
+
+    td.fq,
+    th.fq {
       display: none;
     }
-    td.soc_org, th.soc_org {
+
+    td.soc_org,
+    th.soc_org {
       display: none;
     }
   }
 }
 
-
-
-table{
+table {
   border-collapse: collapse;
   margin: 20px 10px 50px;
 }
 
-/*TODO: Temp?*/
-table.events td.actions.first{width:35px;}
-table.events td.actions.last{width:5.5em;}
+/* TODO: Temp? */
+table.events td.actions.first { width: 35px; }
+table.events td.actions.last { width: 5.5em; }
 
-th, td {border:1px solid black; padding:5px;}
-th {font-weight:bold;}
-td.center {text-align:center;}
-td.actions, th.actions{ border:none; }
+th,
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
 
-td.dates, td.updated {
+th { font-weight: bold; }
+
+td.center { text-align: center; }
+
+td.actions,
+th.actions { border: none; }
+
+td.dates,
+td.updated {
   max-width: 80px;
 }
 
-/*TODO- replace with proper colours!*/
-tr.out_of_date td.dates, tr.all_out_of_date td{
-	background-color:#F00;
-}
-tr.near_out_of_date td.dates, tr.all_nearly_out_of_date td{
-	background-color:#FFA500;
+/* TODO- replace with proper colours! */
+tr.out_of_date td.dates,
+tr.all_out_of_date td {
+  background-color: #f00;
 }
 
-tr.inactive td.dates{
-	background-color:#999;
+tr.near_out_of_date td.dates,
+tr.all_nearly_out_of_date td {
+  background-color: #ffa500;
+}
+
+tr.inactive td.dates {
+  background-color: #999;
 }
 
 tr td.actions {
-  background-color:transparent;
+  background-color: transparent;
 }
 
-/* NEW / EDIT / SHOW*/
+/* NEW / EDIT / SHOW */
 
 form li {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 input[type="text"] {
-	width:30em;
+  width: 30em;
 }
 
-label.inline_label{
+label.inline_label {
   width: inherit;
-  float:none;
+  float: none;
   padding-left: 2em;
 }
-input.shortfield{
-	width:inherit;
+
+input.shortfield {
+  width: inherit;
 }
+
 textarea {
-	white-space:pre;
-	width:30em;
-	height:5em;
+  white-space: pre;
+  width: 30em;
+  height: 5em;
 }
 
 textarea.deep {
-	height:10em
+  height: 10em;
 }
 
 textarea.narrow {
-	width:10em;
+  width: 10em;
 }
 
 .warning-message {
-  color: #B94A48;
-  background-color: #F2DEDE;
+  color: #b94a48;
+  background-color: #f2dede;
   padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
-  border: 1px solid #EED3D7;
+  border: 1px solid #eed3d7;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+
   strong {
     font-size: 1.2em;
   }
 }
 
-form label, ol.show span {
-	font-weight:bold;
-	width:9.5em;
-	float:left;
-	text-align:right;
-	padding-right:1.5em
+form label,
+ol.show span {
+  font-weight: bold;
+  width: 9.5em;
+  float: left;
+  text-align: right;
+  padding-right: 1.5em;
 }
 
-ol.show li { clear:left; }
+ol.show li { clear: left; }
 
-input[type=submit], div.actions {
-	margin-left:11em;
-	line-height:1.5;
-	clear:left;
+input[type=submit],
+div.actions {
+  margin-left: 11em;
+  line-height: 1.5;
+  clear: left;
 }
-
 
 // Rails Errors
 /////////////////////////////////////////////
