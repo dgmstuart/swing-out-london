@@ -44,6 +44,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'elabs_matchers'
   gem 'fuubar'
   gem 'launchy'
   gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this

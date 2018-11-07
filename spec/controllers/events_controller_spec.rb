@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe EventsController do
-  http_login
+  before { login }
 
   describe 'GET show' do
     it 'assigns @event' do

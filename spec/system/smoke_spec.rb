@@ -4,11 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Adding a new event' do
   it 'with a dance class' do
-    password_hash = Digest::MD5.hexdigest('my_password')
-    stub_const('LOGINS', 'my_username' => password_hash)
-    page.driver.browser.authorize('my_username', 'my_password')
-
     visit '/events'
+
+    click_on 'Log in with Facebook'
 
     click_on 'New Venue'
 

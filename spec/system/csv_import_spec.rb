@@ -7,7 +7,7 @@ RSpec.describe 'csv import' do
     FactoryBot.create(:event, title: 'Boogaloo Bounce', url: 'http://www.swingpatrol.co.uk/boogaloo-bounce/')
     FactoryBot.create(:event, title: 'Book Club Blues', url: 'http://www.swingpatrol.co.uk/book-club-blues/')
 
-    login
+    skip_login
     visit '/events/imports/new'
     fill_in 'events_import_csv', with: csv_data
     click_on 'Import'
@@ -33,7 +33,7 @@ RSpec.describe 'csv import' do
   end
 
   it "with a url which doesn't match anything in the database" do
-    login
+    skip_login
     visit '/events/imports/new'
     fill_in 'events_import_csv', with: csv_data
     click_on 'Import'

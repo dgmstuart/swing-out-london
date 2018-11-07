@@ -16,6 +16,6 @@ RSpec.configure do |config|
 
   require 'support/controller/auth_helper'
   require 'support/system/auth_helper.rb'
-  config.extend Controller::AuthHelper, type: :controller
+  config.include Controller::AuthHelper, type: :controller
   config.include System::AuthHelper, type: :system
 end

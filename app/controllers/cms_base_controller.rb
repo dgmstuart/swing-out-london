@@ -8,9 +8,12 @@ class CMSBaseController < ApplicationController
   private
 
   def authenticate
-    session[:authenticated] = nil
-    authenticate_or_request_with_http_basic do |username, password|
-      session[:authenticated] = (LOGINS[username] == Digest::MD5.hexdigest(password))
-    end
+    return true if logged_in?
+
+    redirect_to login_path
+  end
+
+  def logged_in?
+    LoginSession.new(session).logged_in?
   end
 end
