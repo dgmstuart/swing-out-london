@@ -34,7 +34,7 @@ end
 group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'ffaker'
+  gem 'faker'
   gem 'pry-rails'
   gem 'rb-fsevent'
   gem 'rspec-rails'
