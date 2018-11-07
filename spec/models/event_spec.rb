@@ -287,8 +287,6 @@ describe Event do
     # rubocop:enable RSpec/ExampleLength
   end
 
-  pending "test existing events functionality #{__FILE__}"
-
   describe '(validations)' do
     it 'is invalid if it has neither a class nor a social nor a taster' do
       expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
