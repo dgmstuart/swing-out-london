@@ -4,11 +4,13 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Login' do
   it 'admins can log out' do
+    stub_auth_hash(name: 'Al Minns')
+
     visit '/events'
 
     click_on 'Log in with Facebook'
 
-    click_on 'Account'
+    click_on 'Al Minns'
 
     click_on 'Log out'
     expect(page).to have_content('Log in with Facebook')

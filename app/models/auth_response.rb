@@ -9,6 +9,10 @@ class AuthResponse
     auth_hash.fetch('uid')
   end
 
+  def name
+    auth_hash.fetch('info').fetch('name')
+  end
+
   private
 
   def auth_hash

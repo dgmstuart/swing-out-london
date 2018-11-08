@@ -8,12 +8,14 @@ class CMSBaseController < ApplicationController
   private
 
   def authenticate
-    return true if logged_in?
+    @current_user = login_session.user
+
+    return true if @current_user.logged_in?
 
     redirect_to login_path
   end
 
-  def logged_in?
-    LoginSession.new(request).logged_in?
+  def login_session
+    LoginSession.new(request)
   end
 end
