@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       redirect_to events_path
     else
       flash.alert = 'We didn\'t recognise your facebook account'
+      logger.warn("Auth id #{user.id} tried to log in, but was not in the allowed list")
       redirect_to action: :new
     end
   end
