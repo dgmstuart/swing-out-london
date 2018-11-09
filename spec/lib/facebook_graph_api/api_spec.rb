@@ -12,5 +12,14 @@ RSpec.describe FacebookGraphApi::Api do
 
       expect(http_client).to have_received(:delete).with('/1234567/permissions')
     end
+
+    context 'when the user id is nil' do
+      it 'raises an error' do
+        api = described_class.new(double)
+
+        expect { api.revoke_login(nil) }
+          .to raise_error(ArgumentError, 'missing user id')
+      end
+    end
   end
 end

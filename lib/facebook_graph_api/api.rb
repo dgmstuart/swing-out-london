@@ -9,6 +9,8 @@ module FacebookGraphApi
     end
 
     def revoke_login(user_id)
+      raise ArgumentError, 'missing user id' if user_id.nil?
+
       http_client.delete("/#{user_id}/permissions")
     end
 
