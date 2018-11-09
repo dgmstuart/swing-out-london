@@ -7,13 +7,19 @@ module System
     include OmniAuthHelper
     RSpec.configure do |config|
       config.before(:each, type: :system) do
+        stub_login
         driven_by :rack_test
-        stub_auth_hash
       end
 
       config.before(:each, type: :system, js: true) do
         driven_by :selenium_chrome_headless
       end
+    end
+
+    def stub_login(name: Faker::Name.name)
+      id = Faker::Number.number(17)
+      stub_auth_hash(id: id, name: name)
+      Rails.application.config.x.facebook.admin_user_ids = [id]
     end
 
     def skip_login

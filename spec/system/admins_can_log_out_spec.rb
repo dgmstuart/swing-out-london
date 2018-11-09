@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Login' do
   it 'admins can log out' do
-    stub_auth_hash(name: 'Al Minns')
+    stub_login(name: 'Al Minns')
 
     visit '/events'
 
