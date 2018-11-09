@@ -3,6 +3,7 @@
 module System
   module OmniAuthHelper
     OmniAuth.config.test_mode = true
+    OmniAuth.config.logger = Logger.new('/dev/null')
 
     def stub_auth_hash(
       id: Faker::Number.number(17),

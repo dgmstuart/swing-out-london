@@ -9,19 +9,45 @@ RSpec.describe LoginSession do
     it 'sets an identifier for the user in the session' do
       session = {}
       request = instance_double('ActionDispatch::Request', session: session)
-      described_class.new(request).log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker')
+
+      login_session = described_class.new(request, logger: fake_logger)
+      login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker')
 
       expect(session[:user]['auth_id']).to eq 12345678901234567
       expect(session[:user]['name']).to eq 'Willa Mae Ricker'
+    end
+
+    it 'logs that the user logged in' do
+      logger = instance_double('Logger', info: true)
+      request = instance_double('ActionDispatch::Request', session: {})
+
+      login_session = described_class.new(request, logger: logger)
+      login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker')
+
+      expect(logger).to have_received(:info).with('Logged in as auth id 12345678901234567')
     end
   end
 
   describe 'log_out!' do
     it 'resets the session' do
-      request = instance_double('ActionDispatch::Request', reset_session: double)
-      described_class.new(request).log_out!
+      session = { user: { 'auth_id' => double } }
+      request = instance_double('ActionDispatch::Request', session: session, reset_session: double)
+
+      login_session = described_class.new(request, logger: fake_logger)
+      login_session.log_out!
 
       expect(request).to have_received(:reset_session)
+    end
+
+    it 'logs that the user logged out' do
+      logger = instance_double('Logger', info: true)
+      session = { user: { 'auth_id' => 12345678901234567 } }
+      request = instance_double('ActionDispatch::Request', session: session, reset_session: double)
+
+      login_session = described_class.new(request, logger: logger)
+      login_session.log_out!
+
+      expect(logger).to have_received(:info).with('Logged out as auth id 12345678901234567')
     end
   end
 
@@ -31,7 +57,8 @@ RSpec.describe LoginSession do
         session = { user: { auth_id: 12345678901234567 } }
         request = instance_double('ActionDispatch::Request', session: session)
 
-        expect(described_class.new(request).user.logged_in?).to eq true
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.logged_in?).to eq true
       end
     end
 
@@ -39,7 +66,8 @@ RSpec.describe LoginSession do
       it 'is false' do
         request = instance_double('ActionDispatch::Request', session: {})
 
-        expect(described_class.new(request).user.logged_in?).to eq false
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.logged_in?).to eq false
       end
     end
   end
@@ -50,7 +78,8 @@ RSpec.describe LoginSession do
         session = { user: { 'name' => 'Leon James' } }
         request = instance_double('ActionDispatch::Request', session: session)
 
-        expect(described_class.new(request).user.name).to eq 'Leon James'
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.name).to eq 'Leon James'
       end
     end
 
@@ -58,8 +87,34 @@ RSpec.describe LoginSession do
       it 'is guest' do
         request = instance_double('ActionDispatch::Request', session: {})
 
-        expect(described_class.new(request).user.name).to eq 'Guest'
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.name).to eq 'Guest'
       end
     end
+  end
+
+  describe '#user.auth_id' do
+    context 'when the session has been set' do
+      it 'is the name from the session' do
+        session = { user: { 'auth_id' => 76543210987654321 } }
+        request = instance_double('ActionDispatch::Request', session: session)
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.auth_id).to eq 76543210987654321
+      end
+    end
+
+    context 'when the session has not been set' do
+      it 'is guest' do
+        request = instance_double('ActionDispatch::Request', session: {})
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.auth_id).to eq 'NO ID'
+      end
+    end
+  end
+
+  def fake_logger
+    instance_double('Logger', info: true)
   end
 end
