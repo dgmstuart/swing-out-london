@@ -9,4 +9,9 @@ class SessionsController < ApplicationController
     LoginSession.new(request).log_in!
     redirect_to events_path
   end
+
+  def destroy
+    LoginSession.new(request).log_out!
+    redirect_to action: :new
+  end
 end

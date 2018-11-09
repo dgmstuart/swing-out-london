@@ -38,6 +38,9 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new'
   get 'auth/facebook/callback' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy', as: 'logout'
+
+  resource :account, only: %i[show], controller: :users
 
   get 'apple-touch-icon-precomposed' => 'application#not_found'
   get 'apple-touch-icon-(:size)-precomposed' => 'application#not_found'
