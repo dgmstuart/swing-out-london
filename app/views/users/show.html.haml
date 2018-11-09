@@ -1,2 +1,9 @@
-%h1 Account
-= link_to 'Log out', logout_path, method: :delete
+%section.account
+  %h1 Account
+
+  = link_to 'Log out', logout_path, method: :delete, class: 'button'
+
+  %h2 Revoke login permissions
+  %p When you logged in for the first time, you told Facebook to allow Swing Out London permission to access some basic details from your acount, so that we can identify you. You can revoke those permissions either from within Facebook, or by clicking the button below.
+  %p If you later decide to log in again, you'll be asked to grant Swing Out London those permissions again.
+  = link_to 'Disable my login', account_path, method: :delete, class: 'button button-danger'

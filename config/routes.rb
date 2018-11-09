@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   get 'auth/failure' => 'sessions#failure'
   delete 'logout' => 'sessions#destroy', as: 'logout'
 
-  resource :account, only: %i[show], controller: :users
+  resource :account, only: %i[show destroy], controller: :users
 
   get 'apple-touch-icon-precomposed' => 'application#not_found'
   get 'apple-touch-icon-(:size)-precomposed' => 'application#not_found'
