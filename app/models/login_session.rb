@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
 class LoginSession
-  def initialize(request)
+  def initialize(request, logger: Rails.logger)
     @request = request
+    @logger = logger
   end
 
   def log_in!(auth_id:, name:)
     request.session[:user] = { 'auth_id' => auth_id, 'name' => name }
+    logger.info("Logged in as auth id #{auth_id}")
   end
 
   def log_out!
     request.reset_session
+    logger.info("Logged out as auth id #{user.auth_id}")
   end
 
   def user
@@ -23,7 +26,7 @@ class LoginSession
 
   private
 
-  attr_reader :request
+  attr_reader :request, :logger
 
   class User
     def initialize(user)
@@ -38,6 +41,10 @@ class LoginSession
       user.fetch('name')
     end
 
+    def auth_id
+      user.fetch('auth_id')
+    end
+
     private
 
     attr_reader :user
@@ -50,6 +57,10 @@ class LoginSession
 
     def name
       'Guest'
+    end
+
+    def auth_id
+      'NO ID'
     end
   end
 end
