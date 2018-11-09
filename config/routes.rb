@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new'
   get 'auth/facebook/callback' => 'sessions#create'
+  get 'auth/failure' => 'sessions#failure'
   delete 'logout' => 'sessions#destroy', as: 'logout'
 
   resource :account, only: %i[show], controller: :users

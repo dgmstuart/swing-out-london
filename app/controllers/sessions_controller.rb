@@ -21,6 +21,13 @@ class SessionsController < ApplicationController
     redirect_to action: :new
   end
 
+  def failure
+    flash.alert = 'There was a problem with your login to Facebook'
+    logger.warn("Authorisation failed with: #{params[:message]}")
+
+    redirect_to action: :new
+  end
+
   private
 
   def authorised?(auth_id)

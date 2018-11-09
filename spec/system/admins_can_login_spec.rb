@@ -35,4 +35,17 @@ RSpec.describe 'Admin Login' do
       expect(page).not_to have_header('Events')
     end
   end
+
+  context 'when authentication failed' do
+    it 'displays an alert' do
+      OmniAuth.config.mock_auth[:facebook] = :no_authorisation_code
+
+      visit '/events'
+
+      click_on 'Log in with Facebook'
+
+      expect(page).to have_content('There was a problem with your login to Facebook')
+      expect(page).not_to have_header('Events')
+    end
+  end
 end
