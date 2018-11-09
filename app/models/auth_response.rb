@@ -13,6 +13,10 @@ class AuthResponse
     auth_hash.fetch('info').fetch('name')
   end
 
+  def token
+    auth_hash.fetch('credentials').fetch('token')
+  end
+
   private
 
   def auth_hash
