@@ -6,15 +6,17 @@ require 'active_support/core_ext/object/blank'
 
 RSpec.describe LoginSession do
   describe 'log_in!' do
-    it 'sets an identifier for the user in the session' do
+    it 'sets user data in the session' do
       session = {}
       request = instance_double('ActionDispatch::Request', session: session)
+      token = double
 
       login_session = described_class.new(request, logger: fake_logger)
-      login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker')
+      login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker', token: token)
 
       expect(session[:user]['auth_id']).to eq 12345678901234567
       expect(session[:user]['name']).to eq 'Willa Mae Ricker'
+      expect(session[:user]['token']).to eq token
     end
 
     it 'logs that the user logged in' do
@@ -22,7 +24,7 @@ RSpec.describe LoginSession do
       request = instance_double('ActionDispatch::Request', session: {})
 
       login_session = described_class.new(request, logger: logger)
-      login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker')
+      login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker', token: double)
 
       expect(logger).to have_received(:info).with('Logged in as auth id 12345678901234567')
     end
@@ -95,7 +97,7 @@ RSpec.describe LoginSession do
 
   describe '#user.auth_id' do
     context 'when the session has been set' do
-      it 'is the name from the session' do
+      it 'is the id from the session' do
         session = { user: { 'auth_id' => 76543210987654321 } }
         request = instance_double('ActionDispatch::Request', session: session)
 
@@ -105,11 +107,33 @@ RSpec.describe LoginSession do
     end
 
     context 'when the session has not been set' do
-      it 'is guest' do
+      it 'is a string representing that there is no id' do
         request = instance_double('ActionDispatch::Request', session: {})
 
         login_session = described_class.new(request, logger: fake_logger)
         expect(login_session.user.auth_id).to eq 'NO ID'
+      end
+    end
+  end
+
+  describe '#user.token' do
+    context 'when the session has been set' do
+      it 'is the token from the session' do
+        token = double
+        session = { user: { 'token' => token } }
+        request = instance_double('ActionDispatch::Request', session: session)
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.token).to eq token
+      end
+    end
+
+    context 'when the session has not been set' do
+      it 'is a string representing that there is no token' do
+        request = instance_double('ActionDispatch::Request', session: {})
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.token).to eq 'NO TOKEN'
       end
     end
   end
