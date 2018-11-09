@@ -36,6 +36,13 @@ Rails.application.routes.draw do
   get 'listings_policy' => 'website#listings_policy'
   get 'privacy' => 'website#privacy'
 
+  get 'login' => 'sessions#new'
+  get 'auth/facebook/callback' => 'sessions#create'
+  get 'auth/failure' => 'sessions#failure'
+  delete 'logout' => 'sessions#destroy', as: 'logout'
+
+  resource :account, only: %i[show], controller: :users
+
   get 'apple-touch-icon-precomposed' => 'application#not_found'
   get 'apple-touch-icon-(:size)-precomposed' => 'application#not_found'
   get 'apple-app-site-association' => 'application#not_found'

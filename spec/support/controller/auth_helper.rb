@@ -2,13 +2,8 @@
 
 module Controller
   module AuthHelper
-    def http_login
-      before do
-        user = 'foo'
-        pw = 'bar'
-        stub_const('LOGINS', user => Digest::MD5.hexdigest(pw.to_s))
-        request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user, pw)
-      end
+    def login(auth_id: Faker::Number.number(17), name: Faker::Name.name)
+      LoginSession.new(controller.request).log_in!(auth_id: auth_id, name: name)
     end
   end
 end

@@ -15,6 +15,7 @@ gem 'gmaps4rails', '2.0.0.pre'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'memcachier'
+gem 'omniauth-facebook'
 gem 'pg'
 gem 'puma'
 gem 'rack-attack'
@@ -43,6 +44,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'elabs_matchers'
   gem 'fuubar'
   gem 'launchy'
   gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this

@@ -13,3 +13,5 @@
     %li>
       .navlink>= link_to "Import csv", new_events_import_path
       .navlink>= link_to "Outdated", outdated_path
+    %li.account
+      .navlink>= link_to @current_user.name, account_path

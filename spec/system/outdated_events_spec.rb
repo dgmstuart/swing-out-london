@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Outdated events' do
   it 'when there are no outdated events' do
-    login
+    skip_login
     visit 'outdated'
     expect(page).to have_content 'All events are in date!'
   end
@@ -13,7 +13,7 @@ RSpec.describe 'Outdated events' do
     outdated_event = FactoryBot.create(:event, id: 1, frequency: 4, dates: [Date.local_today - 4.weeks])
     nearly_outdated_event = FactoryBot.create(:event, id: 2, frequency: 4, dates: [Date.local_today + 1.week])
 
-    login
+    skip_login
     visit 'outdated'
 
     expect(page).to have_content('1 event out of date, 1 event nearly out of date')
