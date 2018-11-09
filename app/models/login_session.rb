@@ -12,8 +12,9 @@ class LoginSession
   end
 
   def log_out!
+    auth_id = user.auth_id
     request.reset_session
-    logger.info("Logged out as auth id #{user.auth_id}")
+    logger.info("Logged out as auth id #{auth_id}")
   end
 
   def user
