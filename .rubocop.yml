@@ -80,3 +80,4 @@ RSpec/ExampleLength:
   Max: 10
   Exclude:
     - spec/system/**/*_spec.rb
+    - spec/models/auth_response_spec.rb

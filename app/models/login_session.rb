@@ -5,8 +5,8 @@ class LoginSession
     @request = request
   end
 
-  def log_in!
-    request.session[:logged_in] = true
+  def log_in!(auth_id)
+    request.session[:auth_id] = auth_id
   end
 
   def log_out!
@@ -14,7 +14,7 @@ class LoginSession
   end
 
   def logged_in?
-    request.session[:logged_in] == true
+    request.session[:auth_id].present?
   end
 
   private

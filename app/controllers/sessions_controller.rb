@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    LoginSession.new(request).log_in!
+    auth_id = AuthResponse.new(request.env).id
+    LoginSession.new(request).log_in!(auth_id)
     redirect_to events_path
   end
 
