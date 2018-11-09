@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     user = AuthResponse.new(request.env)
     if authorised?(user.id)
-      LoginSession.new(request).log_in!(auth_id: user.id, name: user.name)
+      login_session.log_in!(auth_id: user.id, name: user.name)
       redirect_to events_path
     else
       flash.alert = 'We didn\'t recognise your facebook account'
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    LoginSession.new(request).log_out!
+    login_session.log_out!
     redirect_to action: :new
   end
 
@@ -33,5 +33,9 @@ class SessionsController < ApplicationController
 
   def authorised?(auth_id)
     Rails.application.config.x.facebook.admin_user_ids.include?(auth_id)
+  end
+
+  def login_session
+    LoginSession.new(request)
   end
 end
