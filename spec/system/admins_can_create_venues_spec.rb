@@ -26,5 +26,10 @@ RSpec.describe 'Admins can create venues' do
     expect(page).to have_content('Area: Oxford Street')
     expect(page).to have_content('Website: https://www.the100club.co.uk/')
     expect(page).to have_content('Coordinates: [ 51.5161046, -0.1353113 ]')
+
+    audit = Audited::Audit.last
+    expect(audit.auditable_type).to eq('Venue')
+    expect(audit.audited_changes['name']).to eq('The 100 Club')
+    expect(audit.user).to eq('auth_id' => 12345678901234567, 'name' => 'Al Minns')
   end
 end
