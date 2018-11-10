@@ -24,6 +24,7 @@ Security/YAMLLoad:
 
 Style/NumericLiterals:
   Exclude:
+    - lib/omniauth_test_response_builder.rb
     # Files where this picks up a lot of false positives
     - spec/**/*_spec.rb
     - spec/support/**/*.rb
@@ -81,3 +82,4 @@ RSpec/ExampleLength:
   Exclude:
     - spec/system/**/*_spec.rb
     - spec/models/auth_response_spec.rb
+    - spec/lib/omniauth_test_response_builder_spec.rb
