@@ -101,9 +101,6 @@ GEM
     faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
-    fuubar (2.3.2)
-      rspec-core (~> 3.0)
-      ruby-progressbar (~> 1.4)
     geocoder (1.5.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -344,7 +341,6 @@ DEPENDENCIES
   elabs_matchers
   factory_bot_rails
   faker
-  fuubar
   geocoder
   gmaps4rails (= 2.0.0.pre)
   haml-rails
