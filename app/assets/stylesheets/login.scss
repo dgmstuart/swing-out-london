@@ -1,8 +1,4 @@
 @import "colours";
-@import "borders";
-
-// LAYOUT
-/////////////////////////////////////////////
 
 // SMALL
 .login {
@@ -10,25 +6,6 @@
 
   h2 {
     font-size: 30px;
-  }
-
-  a.button {
-    display: inline-block;
-    padding: 15px 20px;
-    background-color: $facebook-blue;
-    margin: 6px 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-    transition: all 0.2s;
-  }
-
-  a.button:hover {
-    color: #000;
-    background-color: $facebook-blue-highlight;
-    border-bottom: none;
   }
 
   .alert {
@@ -42,9 +19,5 @@
   @media only screen and (min-width: 481px) {
     margin-left: 70px;
     margin-right: 70px;
-
-    a.button {
-      display: inline-block;
-    }
   }
 }

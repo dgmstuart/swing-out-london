@@ -1,0 +1,35 @@
+@import "colours";
+
+.button {
+  display: block;
+  padding: 15px 20px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: white;
+  background-color: $button-colour;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.2s;
+
+  &.facebook-button {
+    color: white;
+    background-color: $facebook-blue;
+  }
+}
+
+.button:hover {
+  color: $text-colour;
+  background-color: $button-active-colour;
+  border-bottom: none;
+
+  &.facebook-button {
+    color: black;
+    background-color: $facebook-blue-highlight;
+  }
+
+@media only screen and (min-width: 481px) {
+  a.button {
+    display: inline-block;
+  }
+}
