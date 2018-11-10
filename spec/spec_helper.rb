@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'support/webmock'
+
 RSpec.configure do |config|
   # If any specs have a "focus" tag - only run those specs
   config.filter_run focus: true

@@ -13,6 +13,7 @@ gem 'dalli'
 gem 'geocoder'
 gem 'gmaps4rails', '2.0.0.pre'
 gem 'haml-rails'
+gem 'http'
 gem 'jquery-rails'
 gem 'memcachier'
 gem 'omniauth-facebook'
@@ -51,6 +52,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'timecop'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do

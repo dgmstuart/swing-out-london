@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://graph.facebook.com/12345678901234567/permissions?appsecret_proof=<APPSECRET_PROOF>
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <FACEBOOK_API_AUTH_TOKEN>
+      Connection:
+      - close
+      Host:
+      - graph.facebook.com
+      User-Agent:
+      - http.rb/4.0.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.2
+      X-Fb-Trace-Id:
+      - B0fHNMSEyyp
+      X-Fb-Rev:
+      - '4510031'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fb-Debug:
+      - 98FZFVHAThzgAsiulCDZIzGUANuqcwZ+S3EXCvA2yevvJLf7/8HHoLVBkiRw1WaOK2PKgJf83TfIsprqijLsxw==
+      Date:
+      - Wed, 07 Nov 2018 20:09:13 GMT
+      Connection:
+      - close
+      Content-Length:
+      - '16'
+    body:
+      encoding: UTF-8
+      string: '{"success":true}'
+    http_version:
+  recorded_at: Wed, 07 Nov 2018 20:09:13 GMT
+recorded_with: VCR 4.0.0

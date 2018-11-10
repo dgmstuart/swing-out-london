@@ -6,8 +6,8 @@ class LoginSession
     @logger = logger
   end
 
-  def log_in!(auth_id:, name:)
-    request.session[:user] = { 'auth_id' => auth_id, 'name' => name }
+  def log_in!(auth_id:, name:, token:)
+    request.session[:user] = { 'auth_id' => auth_id, 'name' => name, 'token' => token }
     logger.info("Logged in as auth id #{auth_id}")
   end
 
@@ -46,6 +46,10 @@ class LoginSession
       user.fetch('auth_id')
     end
 
+    def token
+      user.fetch('token')
+    end
+
     private
 
     attr_reader :user
@@ -62,6 +66,10 @@ class LoginSession
 
     def auth_id
       'NO ID'
+    end
+
+    def token
+      'NO TOKEN'
     end
   end
 end
