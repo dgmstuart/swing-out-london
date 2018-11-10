@@ -8,11 +8,20 @@
     font-size: 30px;
   }
 
-  .alert {
+  .alert,
+  .notice {
     padding: 20px;
+    margin-bottom: 15px;
+  }
+
+  .alert {
     background-color: $alert-colour;
     color: white;
-    margin-bottom: 15px;
+  }
+
+  .notice {
+    background-color: $notice-colour;
+    color: white;
   }
 
   // AVERAGE VIEWING SIZE

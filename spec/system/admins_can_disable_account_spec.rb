@@ -24,6 +24,7 @@ RSpec.describe 'Admin Login Revocation' do
     end
 
     expect(page).to have_header('Admin Login')
+    expect(page).to have_content('Your login permissions have been revoked in Facebook')
     expect(page).to have_link('Log in with Facebook')
 
     visit '/events'
