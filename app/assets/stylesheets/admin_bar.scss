@@ -35,6 +35,16 @@
       border-bottom: 0;
     }
   }
+
+  .navlink.navlink-right {
+    border-right: none;
+    border-left: 1px solid #555;
+
+    a {
+      border-left: 1px solid #333;
+      border-right: none;
+    }
+  }
 }
 
 // MOBILE ONLY
@@ -85,7 +95,7 @@
       }
     }
 
-    .account {
+    .account-link {
       float: right;
     }
   }
