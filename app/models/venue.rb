@@ -5,6 +5,7 @@ class Venue < ApplicationRecord
   geocoded_by :postcode,
               latitude: :lat,
               longitude: :lng
+  audited
 
   has_many :events
 

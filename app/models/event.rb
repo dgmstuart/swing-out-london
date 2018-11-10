@@ -5,6 +5,8 @@ require 'date_expectation_calculator'
 require 'dates_string_parser'
 
 class Event < ApplicationRecord
+  audited
+
   belongs_to :venue
   belongs_to :class_organiser, class_name: 'Organiser', optional: true
   belongs_to :social_organiser, class_name: 'Organiser', optional: true
