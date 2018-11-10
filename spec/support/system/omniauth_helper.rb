@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'omniauth_test_response_builder'
+
 module System
   module OmniAuthHelper
     OmniAuth.config.test_mode = true
