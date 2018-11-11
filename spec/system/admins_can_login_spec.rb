@@ -21,7 +21,7 @@ RSpec.describe 'Admin Login' do
   end
 
   context "when the user isn't in the approved list" do
-    it 'disallows the user from signing in' do
+    it 'disallows the user from signing in, but shows them their Facebook ID' do
       stub_auth_hash(id: 76543210987654321, name: 'Fred Astaire')
       allow(Rails.application.config.x.facebook)
         .to receive(:admin_user_ids)
@@ -31,7 +31,7 @@ RSpec.describe 'Admin Login' do
 
       click_on 'Log in with Facebook'
 
-      expect(page).to have_content('We didn\'t recognise your facebook account')
+      expect(page).to have_content('Your Facebook ID for Swing Out London (76543210987654321) isn\'t in the approved list')
       expect(page).not_to have_header('Events')
     end
   end

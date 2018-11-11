@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
       login_session.log_in!(auth_id: user.id, name: user.name, token: user.token)
       redirect_to events_path
     else
-      flash.alert = 'We didn\'t recognise your facebook account'
+      flash.alert = "Your Facebook ID for Swing Out London (#{user.id}) isn't in the approved list.\n" \
+        "If you've been invited to become an admin, please contact the main site admins and get them to add this ID"
       logger.warn("Auth id #{user.id} tried to log in, but was not in the allowed list")
       redirect_to action: :new
     end
