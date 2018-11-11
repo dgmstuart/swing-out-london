@@ -26,5 +26,8 @@ RSpec.describe 'Admins can create venues' do
     expect(page).to have_content('Area: Oxford Street')
     expect(page).to have_content('Website: https://www.the100club.co.uk/')
     expect(page).to have_content('Coordinates: [ 51.5161046, -0.1353113 ]')
+
+    audit_record = PaperTrail::Version.last
+    expect(audit_record.item.name).to eq 'The 100 Club'
   end
 end

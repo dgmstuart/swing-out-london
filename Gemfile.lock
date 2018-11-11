@@ -180,6 +180,9 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
+    paper_trail (10.0.1)
+      activerecord (>= 4.2, < 5.3)
+      request_store (~> 1.1)
     parallel (1.12.1)
     parser (2.5.3.0)
       ast (~> 2.4.0)
@@ -240,6 +243,8 @@ GEM
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
     regexp_parser (1.2.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     rollbar (2.18.0)
       multi_json
     rspec-core (3.8.0)
@@ -351,6 +356,7 @@ DEPENDENCIES
   memcachier
   oj
   omniauth-facebook
+  paper_trail
   pg
   pry-rails
   puma
