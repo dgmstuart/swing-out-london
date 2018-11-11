@@ -5,7 +5,7 @@ require 'date_expectation_calculator'
 require 'dates_string_parser'
 
 class Event < ApplicationRecord
-  has_paper_trail
+  has_paper_trail(meta: { dates: :print_dates })
 
   belongs_to :venue
   belongs_to :class_organiser, class_name: 'Organiser', optional: true
@@ -28,6 +28,13 @@ class Event < ApplicationRecord
 
   validate :cannot_be_weekly_and_have_dates
   validate :will_be_listed
+
+  after_validation :force_updated_at_on_every_save
+  def force_updated_at_on_every_save
+    # rubocop:disable Rails/SkipsModelValidations
+    touch if !changed?
+    # rubocop:enable Rails/SkipsModelValidations
+  end
 
   def cannot_be_weekly_and_have_dates
     return unless weekly? && !dates.empty?

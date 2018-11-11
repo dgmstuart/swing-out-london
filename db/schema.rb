@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_004446) do
+ActiveRecord::Schema.define(version: 2018_11_11_203111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 2018_11_11_004446) do
     t.jsonb "object_changes"
     t.datetime "created_at"
     t.string "user_name"
+    t.string "dates"
+    t.string "cancellations"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
