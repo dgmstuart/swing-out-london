@@ -10,6 +10,10 @@ class CMSBaseController < ApplicationController
     login_session.user.auth_id
   end
 
+  def info_for_paper_trail
+    { user_name: login_session.user.name }
+  end
+
   private
 
   def authenticate
