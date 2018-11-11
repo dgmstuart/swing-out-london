@@ -30,5 +30,6 @@ RSpec.describe 'Admin Login' do
     audit_record = PaperTrail::Version.last
     expect(audit_record.item.name).to eq 'The 100 Club'
     expect(audit_record.whodunnit).to eq '12345678901234567'
+    expect(audit_record.user_name).to eq 'Al Minns'
   end
 end
