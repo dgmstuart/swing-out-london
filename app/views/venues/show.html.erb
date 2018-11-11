@@ -1,8 +1,4 @@
-<p class='last-updated'>
-  Last updated by
-  <em><%= @editor.name %></em> (<%= @editor.auth_id %>)
-  <%= @venue.updated_at.to_s(:human_timestamp) %>
-</p>
+<%= render partial: 'shared/last_updated_by', locals: { editor: @editor, updated_at: @venue.updated_at } %>
 
 <ol class="show">
   <li>
