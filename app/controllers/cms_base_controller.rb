@@ -2,8 +2,13 @@
 
 class CMSBaseController < ApplicationController
   before_action :authenticate
+  before_action :set_paper_trail_whodunnit
 
   layout 'cms'
+
+  def user_for_paper_trail
+    login_session.user.auth_id
+  end
 
   private
 
