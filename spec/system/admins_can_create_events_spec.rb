@@ -50,5 +50,7 @@ RSpec.describe 'Admins can create events' do
       .and have_content('Cancelled: Unknown')
       .and have_content('First date:')
       .and have_content('Url: http://www.lsds.co.uk/stompin')
+
+    expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
 end

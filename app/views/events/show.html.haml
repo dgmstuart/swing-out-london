@@ -1,3 +1,6 @@
+
+= render partial: 'shared/last_updated_by', locals: { editor: @editor, updated_at: @event.updated_at }
+
 - if @warning
   %p.warning-message
     %strong Warning:

@@ -12,6 +12,7 @@ class EventsController < CMSBaseController
 
   def show
     @event = Event.findevent(params[:id])
+    @editor = Editor.build(@event.audits.last)
 
     if !@event.has_class? && !@event.has_social?
       @warning = if @event.has_taster?
