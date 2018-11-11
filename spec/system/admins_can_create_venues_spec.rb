@@ -29,5 +29,6 @@ RSpec.describe 'Admins can create venues' do
 
     audit_record = PaperTrail::Version.last
     expect(audit_record.item.name).to eq 'The 100 Club'
+    expect(audit_record.whodunnit).to eq '12345678901234567'
   end
 end
