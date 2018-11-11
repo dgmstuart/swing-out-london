@@ -1,3 +1,9 @@
+<p class='last-updated'>
+  Last updated by
+  <em><%= @editor.name %></em> (<%= @editor.auth_id %>)
+  <%= @venue.updated_at.to_s(:human_timestamp) %>
+</p>
+
 <ol class="show">
   <li>
     <span>Name:</span>

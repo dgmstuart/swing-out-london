@@ -7,6 +7,7 @@ class VenuesController < CMSBaseController
 
   def show
     @venue = Venue.find(params[:id])
+    @editor = Editor.build(@venue.versions.last)
   end
 
   def new

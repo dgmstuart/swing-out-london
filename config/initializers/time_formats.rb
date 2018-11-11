@@ -21,3 +21,4 @@ Time::DATE_FORMATS[:uk_datetime] = '%d/%m/%Y %H:%M'
 Time::DATE_FORMATS[:timepart] = '%H:%M'
 Time::DATE_FORMATS[:short_date] = ->(date) { date.strftime("#{date.day.ordinalize} %b") }
 Time::DATE_FORMATS[:listing_date] = ->(date) { date.strftime("%A #{date.day.ordinalize} %B") }
+Time::DATE_FORMATS[:human_timestamp] = ->(time) { time.strftime("on %A #{time.day.ordinalize} %B %Y at %H:%M:%S") }

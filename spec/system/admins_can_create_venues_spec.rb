@@ -16,8 +16,10 @@ RSpec.describe 'Admins can create venues' do
     fill_in 'Postcode', with: 'W1D 1LL'
     fill_in 'Area', with: 'Oxford Street'
     fill_in 'Website', with: 'https://www.the100club.co.uk/'
-    VCR.use_cassette('geocode_100_club') do
-      click_on 'Create'
+    Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
+      VCR.use_cassette('geocode_100_club') do
+        click_on 'Create'
+      end
     end
 
     expect(page).to have_content('Name: The 100 Club')
@@ -27,9 +29,6 @@ RSpec.describe 'Admins can create venues' do
     expect(page).to have_content('Website: https://www.the100club.co.uk/')
     expect(page).to have_content('Coordinates: [ 51.5161046, -0.1353113 ]')
 
-    audit_record = PaperTrail::Version.last
-    expect(audit_record.item.name).to eq 'The 100 Club'
-    expect(audit_record.whodunnit).to eq '12345678901234567'
-    expect(audit_record.user_name).to eq 'Al Minns'
+    expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
 end
