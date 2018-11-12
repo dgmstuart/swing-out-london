@@ -31,9 +31,17 @@ class Event < ApplicationRecord
 
   after_validation :force_updated_at_on_every_save
   def force_updated_at_on_every_save
+    return if changed?
+
     # rubocop:disable Rails/SkipsModelValidations
-    touch if !changed?
+    touch if changed_dates?
     # rubocop:enable Rails/SkipsModelValidations
+  end
+
+  def changed_dates?
+    return false if versions.empty? && dates.empty?
+
+    print_dates != versions.last.dates
   end
 
   def cannot_be_weekly_and_have_dates

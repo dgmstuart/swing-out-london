@@ -6,10 +6,17 @@ RSpec.describe 'Admins can edit events' do
   it 'adding dates' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
     FactoryBot.create(:event, dates: ['12/12/2012', '13/12/2012'])
-    PaperTrail::Version.delete_all # So that we can be sure that the audit was for the edit
 
     visit '/login'
     click_on 'Log in with Facebook'
+
+    click_on 'Edit', match: :first
+
+    fill_in 'Title', with: 'FOO'
+
+    Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
+      click_on 'Update'
+    end
 
     click_on 'Edit', match: :first
 
