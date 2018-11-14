@@ -7,6 +7,7 @@ class OrganisersController < CMSBaseController
 
   def show
     @organiser = Organiser.find(params[:id])
+    @editor = Editor.build(@organiser.versions.last)
   end
 
   def new
