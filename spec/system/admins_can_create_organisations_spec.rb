@@ -24,5 +24,7 @@ RSpec.describe 'Admins can create organisers' do
       .and have_content('Shortname: LSDS')
       .and have_content('Description: A long-running business')
       .and have_content('Website: http://www.lsds.co.uk')
+
+    expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
 end
