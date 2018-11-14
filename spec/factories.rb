@@ -4,12 +4,15 @@ require 'faker'
 
 FactoryBot.define do
   factory :event, aliases: %i[social intermittent_social] do
+    title { Faker::Hipster.word }
+    shortname { '' }
+    class_style { '' }
     has_taster { false }
     has_class { false }
     has_social { true }
     event_type { 'school' }
     frequency { 0 }
-    day { 'monday' }
+    day { 'Monday' }
     url { Faker::Internet.url }
 
     venue

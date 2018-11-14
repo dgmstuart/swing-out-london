@@ -1,49 +1,49 @@
 <ol class="show">
-	<li>
-		<span>Name:</span>
-		<%=h @venue.name %>
-	</li>
+  <li>
+    <span>Name:</span>
+    <%=h @venue.name %>
+  </li>
 
-	<li>
-		<span>Address:</span>
-		<%=h @venue.address %>
-	</li>
+  <li>
+    <span>Address:</span>
+    <%=h @venue.address %>
+  </li>
 
-	<li>
-		<span>Postcode:</span>
-		<%=h @venue.postcode %>
-	</li>
+  <li>
+    <span>Postcode:</span>
+    <%=h @venue.postcode %>
+  </li>
 
-	<li>
-		<span>Area:</span>
-		<%=h @venue.area %>
-	</li>
+  <li>
+    <span>Area:</span>
+    <%=h @venue.area %>
+  </li>
 
-	<li>
-		<span>NSEW:</span>
-		<%=h @venue.compass_text %>
-	</li>
+  <li>
+    <span>NSEW:</span>
+    <%=h @venue.compass_text %>
+  </li>
 
-	<li>
-		<span>Coordinates:</span>
-		<%=h @venue.coordinates %>
-	</li>
+  <li>
+    <span>Coordinates:</span>
+    <%=h @venue.coordinates %>
+  </li>
 
-	<li>
-		<span>Nearest tube:</span>
-		<%=h @venue.nearest_tube %>
-	</li>
+  <li>
+    <span>Nearest tube:</span>
+    <%=h @venue.nearest_tube %>
+  </li>
 
-	<li>
-		<span>Website:</span>
-		<%= link_to @venue.website %>
-	</li>
+  <li>
+    <span>Website:</span>
+    <%= link_to @venue.website %>
+  </li>
 </ol>
 
 <div class="actions">
-	<%= link_to 'Edit', edit_venue_path(@venue) %>  |
-	<%= link_to 'Delete', @venue, data: { confirm: 'Are you sure you want to delete this venue?' }, method: :delete %> |
-	<%= link_to 'List', venues_path(anchor: "venue_#{@venue.id}") %> |
-	<%= link_to 'New venue', new_venue_path %> |
-	<%= link_to 'New Event at this venue',  new_event_path( venue_id: @venue.id) %>
+  <%= link_to 'Edit', edit_venue_path(@venue) %>  |
+  <%= link_to 'Delete', @venue, data: { confirm: 'Are you sure you want to delete this venue?' }, method: :delete %> |
+  <%= link_to 'List', venues_path(anchor: "venue_#{@venue.id}") %> |
+  <%= link_to 'New venue', new_venue_path %> |
+  <%= link_to 'New Event at this venue',  new_event_path( venue_id: @venue.id) %>
 </div>

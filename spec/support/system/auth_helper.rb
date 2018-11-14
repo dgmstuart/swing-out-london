@@ -16,8 +16,7 @@ module System
       end
     end
 
-    def stub_login(name: Faker::Name.name)
-      id = Faker::Number.number(17)
+    def stub_login(id: Faker::Number.number(17), name: Faker::Name.name)
       stub_auth_hash(id: id, name: name)
       Rails.application.config.x.facebook.admin_user_ids = [id]
     end
