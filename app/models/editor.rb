@@ -3,13 +3,14 @@
 class Editor
   def self.build(audit)
     return UnknownEditor.new unless audit
+    return MissingEditor.new unless audit.username
 
-    RealEditor.new(audit)
+    RealEditor.new(audit.username)
   end
 
   class RealEditor
-    def initialize(audit)
-      @audit = audit
+    def initialize(user)
+      @user = user
     end
 
     def name
@@ -22,11 +23,7 @@ class Editor
 
     private
 
-    attr_reader :audit
-
-    def user
-      audit.username
-    end
+    attr_reader :user
   end
 
   class UnknownEditor
@@ -36,6 +33,16 @@ class Editor
 
     def auth_id
       'Unknown auth id'
+    end
+  end
+
+  class MissingEditor
+    def name
+      'Missing name'
+    end
+
+    def auth_id
+      'Missing auth id'
     end
   end
 end

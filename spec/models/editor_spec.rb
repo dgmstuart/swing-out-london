@@ -16,6 +16,14 @@ RSpec.describe Editor do
         expect(described_class.build(nil).name).to eq 'Unknown name'
       end
     end
+
+    context 'when there is no user stored on the audit' do
+      it 'returns a default' do
+        audit = instance_double('Audit', username: nil)
+
+        expect(described_class.build(audit).name).to eq 'Missing name'
+      end
+    end
   end
 
   describe 'auth_id' do
@@ -28,6 +36,14 @@ RSpec.describe Editor do
     context 'when there are no audits' do
       it 'returns a default' do
         expect(described_class.build(nil).auth_id).to eq 'Unknown auth id'
+      end
+    end
+
+    context 'when there is no user stored on the audit' do
+      it 'returns a default' do
+        audit = instance_double('Audit', username: nil)
+
+        expect(described_class.build(audit).auth_id).to eq 'Missing auth id'
       end
     end
   end
