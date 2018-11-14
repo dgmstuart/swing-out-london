@@ -2,8 +2,6 @@
 db/*.sqlite3
 log/*
 tmp/*
-tmp/**/*
-.rvmrc
 .sass-cache/
 node_modules/
 coverage/*
