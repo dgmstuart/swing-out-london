@@ -9,7 +9,7 @@ class LastUpdate
   delegate :name, :auth_id, to: :editor
 
   def time_in_words
-    resource.updated_at.to_s(:human_timestamp)
+    updated_at.to_s(:human_timestamp)
   end
 
   private
@@ -17,6 +17,14 @@ class LastUpdate
   attr_reader :resource, :editor_builder
 
   def editor
-    editor_builder.build(resource.audits.last)
+    editor_builder.build(last_audit)
+  end
+
+  def updated_at
+    last_audit&.created_at || resource.updated_at
+  end
+
+  def last_audit
+    resource.audits.last
   end
 end
