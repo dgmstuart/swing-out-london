@@ -4,7 +4,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :event, aliases: %i[social intermittent_social] do
-    title { Faker::Hipster.word }
+    title { Faker::Company.social_dance }
     shortname { '' }
     class_style { '' }
     has_taster { false }
@@ -18,6 +18,7 @@ FactoryBot.define do
     venue
 
     factory :class, class: Event do
+      title { '' }
       has_class { true }
       has_social { false }
       frequency { 1 }
