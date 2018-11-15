@@ -16,13 +16,13 @@ module System
       end
     end
 
-    def stub_login(id: Faker::Number.number(17), name: Faker::Name.name)
+    def stub_login(id: Faker::Number.number(17), name: Faker::Name.lindy_hop_name)
       stub_auth_hash(id: id, name: name)
       Rails.application.config.x.facebook.admin_user_ids = [id]
     end
 
     def skip_login
-      user = instance_double(LoginSession::User, name: Faker::Name.name, logged_in?: true)
+      user = instance_double(LoginSession::User, name: Faker::Name.lindy_hop_name, logged_in?: true)
       login_session = instance_double(LoginSession, 'Fake login', user: user)
       allow(LoginSession).to receive(:new).and_return(login_session)
     end

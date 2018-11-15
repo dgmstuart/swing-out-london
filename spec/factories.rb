@@ -35,7 +35,7 @@ FactoryBot.define do
   end
 
   factory :organiser do
-    name { 'test_organiser' }
+    name { Faker::Name.lindy_hop_name }
   end
 
   factory :swing_date do
