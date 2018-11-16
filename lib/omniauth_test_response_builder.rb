@@ -9,7 +9,7 @@ class OmniauthTestResponseBuilder
   end
 
   def stub_auth_hash(
-    id: Faker::Number.number(17),
+    id: Faker::Facebook.uid,
     name: Faker::Name.lindy_hop_name,
     token: SecureRandom.hex
   )
