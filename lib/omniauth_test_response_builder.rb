@@ -9,8 +9,8 @@ class OmniauthTestResponseBuilder
   end
 
   def stub_auth_hash(
-    id: Faker::Number.number(17),
-    name: Faker::Name.name,
+    id: Faker::Facebook.uid,
+    name: Faker::Name.lindy_hop_name,
     token: SecureRandom.hex
   )
     raise "Can't stub authentication in production" if Rails.env.production?
