@@ -11,7 +11,7 @@ RSpec.describe EventParamsCommenter do
         update_params = { date_array: '11/04/2011' }
         comment = described_class.new.comment(event, update_params)
 
-        expect(comment).to eq(audit_comment: 'Updated dates')
+        expect(comment).to eq(audit_comment: 'Updated dates: (old: 12/04/2011) (new: 11/04/2011)')
       end
     end
 
@@ -31,7 +31,21 @@ RSpec.describe EventParamsCommenter do
         update_params = { cancellation_array: '11/04/2011' }
         comment = described_class.new.comment(event, update_params)
 
-        expect(comment).to eq(audit_comment: 'Updated dates')
+        expect(comment).to eq(audit_comment: 'Updated cancellations: (old: 12/04/2011) (new: 11/04/2011)')
+      end
+    end
+
+    context 'when there are changes to both dates and cancellations' do
+      it 'returns an audit comment' do
+        event = instance_double('Event', print_dates: '12/04/2011', print_cancellations: '12/04/2011')
+        update_params = { date_array: '11/04/2011', cancellation_array: '11/04/2011' }
+        comment = described_class.new.comment(event, update_params)
+
+        expect(comment).to eq(
+          audit_comment:
+          'Updated dates: (old: 12/04/2011) (new: 11/04/2011)' \
+          'Updated cancellations: (old: 12/04/2011) (new: 11/04/2011)'
+        )
       end
     end
 
