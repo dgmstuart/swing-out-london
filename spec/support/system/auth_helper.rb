@@ -23,7 +23,10 @@ module System
     end
 
     def skip_login
-      user = instance_double(LoginSession::User, name: Faker::Name.lindy_hop_name, logged_in?: true)
+      user = instance_double(LoginSession::User,
+                             name: Faker::Name.lindy_hop_name,
+                             auth_id: Faker::Facebook.uid,
+                             logged_in?: true)
       login_session = instance_double(LoginSession, 'Fake login', user: user)
       allow(LoginSession).to receive(:new).and_return(login_session)
     end

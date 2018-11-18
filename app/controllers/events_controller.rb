@@ -12,6 +12,7 @@ class EventsController < CMSBaseController
 
   def show
     @event = Event.findevent(params[:id])
+    @last_update = LastUpdate.new(@event)
 
     if !@event.has_class? && !@event.has_social?
       @warning = if @event.has_taster?
@@ -45,9 +46,10 @@ class EventsController < CMSBaseController
   def update
     @event = Event.find(params[:id])
 
-    if @event.update(event_params)
+    result = UpdateEvent.new.update(@event, event_params)
+    if result.success?
       flash[:notice] = 'Event was successfully updated.'
-      redirect_to(@event)
+      redirect_to(result.updated_event)
     else
       render action: 'edit'
     end

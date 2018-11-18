@@ -7,6 +7,7 @@ ruby '2.5.1'
 gem 'rails', '5.2.1'
 
 gem 'actionpack-action_caching' # to support pre rails-4 style action caching
+gem 'audited'
 gem 'bootsnap'
 gem 'coffee-rails'
 gem 'dalli'

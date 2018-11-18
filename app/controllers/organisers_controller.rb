@@ -7,6 +7,7 @@ class OrganisersController < CMSBaseController
 
   def show
     @organiser = Organiser.find(params[:id])
+    @last_update = LastUpdate.new(@organiser)
   end
 
   def new

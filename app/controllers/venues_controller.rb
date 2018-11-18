@@ -7,6 +7,7 @@ class VenuesController < CMSBaseController
 
   def show
     @venue = Venue.find(params[:id])
+    @last_update = LastUpdate.new(@venue)
   end
 
   def new

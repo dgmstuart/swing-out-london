@@ -48,6 +48,8 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     ast (2.4.0)
+    audited (4.8.0)
+      activerecord (>= 4.0, < 5.3)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -332,6 +334,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack-action_caching
+  audited
   bootsnap
   bullet
   capybara
