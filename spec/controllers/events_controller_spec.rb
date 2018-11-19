@@ -9,7 +9,7 @@ describe EventsController do
     it 'assigns @event' do
       event = FactoryBot.create(:event)
       get :show, params: { id: event.to_param }
-      expect(assigns[:event]).to eq(event)
+      expect(assigns[:event].title).to eq(event.title)
     end
 
     it 'sets a message if there is no taster, class or social' do

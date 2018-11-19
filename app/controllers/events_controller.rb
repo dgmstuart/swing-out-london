@@ -8,16 +8,10 @@ class EventsController < CMSBaseController
   end
 
   def show
-    @event = Event.find(params[:id])
-    @last_update = LastUpdate.new(@event)
-
-    if !@event.has_class? && !@event.has_social?
-      @warning = if @event.has_taster?
-                   "This event has a taster but no class or social, so it won't show up in the listings"
-                 else
-                   "This event doesn't have class or social, so it won't show up in the listings"
-                 end
-    end
+    event = Event.find(params[:id])
+    @last_update = LastUpdate.new(event)
+    @event = ShowEvent.new(event)
+    @warning = @event.warning
   end
 
   def new
