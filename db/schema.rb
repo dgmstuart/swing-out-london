@@ -37,20 +37,20 @@ ActiveRecord::Schema.define(version: 2018_11_18_151929) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "title"
-    t.string "day"
-    t.string "event_type"
+  create_table "events", id: :serial, force: :cascade do |t|
+    t.string "title", limit: 255
+    t.string "day", limit: 255
+    t.string "event_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "venue_id"
     t.integer "frequency"
-    t.string "url"
-    t.string "date_array"
-    t.string "cancellation_array"
+    t.string "url", limit: 255
+    t.string "date_array", limit: 255
+    t.string "cancellation_array", limit: 255
     t.date "first_date"
     t.date "last_date"
-    t.string "shortname"
+    t.string "shortname", limit: 255
     t.text "class_style"
     t.integer "course_length"
     t.boolean "has_taster"
@@ -80,31 +80,31 @@ ActiveRecord::Schema.define(version: 2018_11_18_151929) do
     t.index ["swing_date_id", "event_id"], name: "index_events_swing_dates_on_swing_date_id_and_event_id", unique: true
   end
 
-  create_table "organisers", force: :cascade do |t|
-    t.string "name"
-    t.string "website"
+  create_table "organisers", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "website", limit: 255
     t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "shortname"
+    t.string "shortname", limit: 255
   end
 
-  create_table "swing_dates", force: :cascade do |t|
+  create_table "swing_dates", id: :serial, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date "date"
   end
 
-  create_table "venues", force: :cascade do |t|
-    t.string "name"
+  create_table "venues", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
     t.text "address"
-    t.string "postcode"
-    t.string "nearest_tube"
-    t.string "website"
+    t.string "postcode", limit: 255
+    t.string "nearest_tube", limit: 255
+    t.string "website", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "area"
-    t.string "compass"
+    t.string "area", limit: 255
+    t.string "compass", limit: 255
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lng", precision: 15, scale: 10
   end
