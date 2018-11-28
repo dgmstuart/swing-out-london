@@ -21,7 +21,7 @@ class LastUpdate
   end
 
   def updated_at
-    last_audit&.created_at || resource.updated_at
+    resource.updated_at
   end
 
   def last_audit

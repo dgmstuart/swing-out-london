@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class EventsController < CMSBaseController
-  caches_action :index, cache_path: 'events#index'
-  cache_sweeper :event_sweeper, only: %i[create update destroy archive]
-
   def index
     @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order('frequency, updated_at')
     @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order('title')
