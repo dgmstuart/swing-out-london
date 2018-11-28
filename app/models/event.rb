@@ -51,11 +51,11 @@ class Event < ApplicationRecord
   SEE_WEB = '(See Website)'
 
   def index_row_cache_key
-    cache_key('index_row')
+    caching_key('index_row')
   end
 
   def status_cache_key
-    cache_key("status_#{Date.today.to_s(:iso)}")
+    caching_key("status_#{Date.today.to_s(:iso)}")
   end
 
   #########
@@ -144,7 +144,7 @@ class Event < ApplicationRecord
   scope :current, -> { active.non_gigs }
   scope :archived, -> { ended.non_gigs }
 
-  def cache_key(suffix)
+  def caching_key(suffix)
     "event_#{id}_#{suffix}"
   end
 
@@ -153,7 +153,7 @@ class Event < ApplicationRecord
   # ----- #
 
   def dates_cache_key
-    cache_key('dates')
+    caching_key('dates')
   end
 
   def dates
@@ -249,16 +249,6 @@ class Event < ApplicationRecord
     elsif near_out_of_date
       'near_out_of_date'
     end
-  end
-
-  def cached_status_string
-    Rails.cache.fetch(status_cache_key) do
-      status_string
-    end
-  end
-  after_save :clear_status_string_cache
-  def clear_status_string_cache
-    Rails.cache.delete(status_cache_key)
   end
 
   # TODO: these should be done in the db, not in ruby
@@ -388,7 +378,7 @@ class Event < ApplicationRecord
   end
 
   def latest_date_cache_key
-    cache_key('latest_date')
+    caching_key('latest_date')
   end
 
   # What's the Latest date in the date array
