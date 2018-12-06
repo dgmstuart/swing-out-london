@@ -62,15 +62,18 @@ p.actions_panel {
 
 // DESKTOP
 @media only screen and (max-width: 900px) {
-  td.actions.last {
-    display: none;
-  }
+  table {
+    td.actions.last {
+      display: none;
+    }
 
-  td.updated,
-  th.updated {
-    display: none;
+    td.updated,
+    th.updated {
+      display: none;
+    }
   }
 }
+
 // TABLET & SMALLER LAPTOPS
 @media only screen and (max-width: 767px) {
   td.area,
@@ -90,30 +93,29 @@ p.actions_panel {
       word-break: word-wrap;
     }
 
-    th.name,
-    td.name {
+    th.name {
       width: 100px;
     }
 
-    th.venue,
-    td.venue {
+    th.venue {
       width: 120px;
     }
 
-    th.class_org,
-    td.class_org {
+    th.class_org {
       width: 120px;
     }
 
-    th.day,
-    td.day {
-      width: 120px;
+    th.day {
+      width: 30px;
     }
-    //Above doesn't work
 
     td.fq,
     th.fq {
       display: none;
+    }
+
+    th.dates {
+      width: 68px;
     }
 
     td.soc_org,
@@ -128,9 +130,15 @@ table {
   margin: 20px 10px 50px;
 }
 
-/* TODO: Temp? */
-table.events td.actions.first { width: 35px; }
-table.events td.actions.last { width: 5.5em; }
+table.events {
+  .actions.first {
+    width: 35px;
+  }
+
+  .actions.last {
+    width: 5.5em;
+  }
+}
 
 th,
 td {

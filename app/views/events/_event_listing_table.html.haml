@@ -1,14 +1,16 @@
 %table.events
-  %tr
-    %th.actions= link_to 'New event', new_event_path
-    %th.name      Event Name
-    %th.venue     Venue
-    %th.area      Area
-    %th.class_org Class Organiser
-    %th.soc_org   Social Organiser
-    %th.day       Day
-    %th.fq        Fq.
-    %th.dates     Dates
-    %th.updated   Last updated
+  %thead
+    %tr
+      %th.actions.first
+      %th.name      Event Name
+      %th.venue     Venue
+      %th.area      Area
+      %th.class_org Class Organiser
+      %th.soc_org   Social Organiser
+      %th.day       Day
+      %th.fq        Fq.
+      %th.dates     Dates
+      %th.updated   Last updated
 
-  = render partial: 'events/event_listing_table_row', collection: events, as: :event
+  %tbody
+    = render partial: 'events/event_listing_table_row', collection: events, as: :event
