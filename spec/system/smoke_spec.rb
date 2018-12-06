@@ -43,7 +43,6 @@ RSpec.describe 'Adding a new event' do
     click_on 'New Event'
 
     fill_in 'Title', with: 'Stompin at the Savoy'
-    fill_in 'Shortname', with: ''
     select 'The Savoy Ballroom', from: 'Venue'
     select 'Herbert White', from: 'Social organiser'
     select 'Frankie Manning', from: 'Class organiser'

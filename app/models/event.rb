@@ -22,10 +22,6 @@ class Event < ApplicationRecord
 
   validates :event_type, :frequency, :url, :day, presence: true
 
-  validates :shortname, format: { with: /\A[a-z]*\z/, message: 'can only contain lowercase characters (no spaces)' }
-  validates :shortname, length: { maximum: 20 }
-  validates :shortname, uniqueness: { allow_nil: true, allow_blank: true }
-
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validate :cannot_be_weekly_and_have_dates
@@ -441,21 +437,6 @@ class Event < ApplicationRecord
   #################
   # CLASS METHODS #
   #################
-
-  # Allows urls like "/event/blackcotton"
-  def self.findevent(input)
-    # If to_i is called on a character string, 0 is returned
-    if input.to_i.zero?
-      e = first(conditions: ['shortname = ?', input])
-      if e.nil?
-        raise ActiveRecord::RecordNotFound, "Couldn't find Event with Shortname=\"#{input}\""
-      else
-        e
-      end
-    else
-      find(input)
-    end
-  end
 
   # Find the datetime of the most recently updated event
   def self.last_updated_datetime

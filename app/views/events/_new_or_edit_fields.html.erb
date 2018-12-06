@@ -8,10 +8,6 @@
         <%= f.text_field :title %>
     </li>
     <li>
-        <%= f.label :shortname %>
-        <%= f.text_field :shortname %>
-    </li>
-    <li>
         <%= f.label :venue_id, 'Venue' %>
         <%= f.select :venue_id, venue_select, {:include_blank => true} %>
         <%= link_to 'New Venue', new_venue_path %>

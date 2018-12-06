@@ -14,7 +14,6 @@ RSpec.describe 'Admins can create events' do
     click_on 'New event', match: :first
 
     fill_in 'Title', with: 'Stompin\''
-    fill_in 'Shortname', with: ''
     select 'The 100 Club', from: 'Venue'
     select 'The London Swing Dance Society', from: 'Social organiser'
     select 'The London Swing Dance Society', from: 'Class organiser'
@@ -36,7 +35,6 @@ RSpec.describe 'Admins can create events' do
     end
 
     expect(page).to have_content('Title: Stompin\'')
-      .and have_content('Shortname: ')
       .and have_content('Venue: The 100 Club')
       .and have_content('Social Organiser: The London Swing Dance Society')
       .and have_content('Class Organiser: The London Swing Dance Society')
