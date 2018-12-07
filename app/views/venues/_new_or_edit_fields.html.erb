@@ -22,11 +22,7 @@
 		<%= f.label :nearest_tube %>
 		<%= f.text_field :nearest_tube %>
 	</li>
-	<li>
-		<%= f.label :compass %>
-		<%= compass_dropdown(f) %>
-	</li>
-	<li>
+  <li>
     <%= f.label :lat, 'Latitude' %>
     <%= f.text_field :lat, :size => 15, :style => "float:left;", :class => "shortfield"%>
     <%= f.label :lng, 'Longitude', :class => "inline_label" %>

@@ -15,7 +15,6 @@ RSpec.describe 'Adding a new event' do
     fill_in 'Postcode', with: 'WC2R 0EZ'
     fill_in 'Area', with: 'Harlem'
     fill_in 'Nearest tube', with: '145 St'
-    select 'N', from: 'Compass'
     fill_in 'Latitude', with: '40.817529'
     fill_in 'Longitude', with: '73.938456'
     fill_in 'Website', with: 'https://www.savoyballroom.com'

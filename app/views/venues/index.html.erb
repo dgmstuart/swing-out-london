@@ -6,8 +6,7 @@
     <th>Name</th>
     <th>Address</th>
     <th>Postcode</th>
-	<th>Area</th>
-	<th>NSEW</th>
+    <th>Area</th>
     <th>Nearest tube</th>
   </tr>
 
@@ -16,14 +15,13 @@
     <td class="name"><%= link_to venue.name, venue.website%></td>
     <td><%=h venue.address %></td>
     <td style="width:70px"><%=h venue.postcode %></td>
-	<td style="width:180px"><%=h venue.area %></td>
-	<td class="center"><%=h venue.compass%></td>
+    <td style="width:180px"><%=h venue.area %></td>
     <td><%=h venue.nearest_tube %></td>
     <td class="actions">
-		<%= link_to 'Show', venue %>
-    	<%= link_to 'Edit', edit_venue_path(venue) %>
-		<%= link_to 'Destroy', venue, :confirm => 'Are you sure?', :method => :delete %>
-	</td>
+      <%= link_to 'Show', venue %>
+      <%= link_to 'Edit', edit_venue_path(venue) %>
+      <%= link_to 'Destroy', venue, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

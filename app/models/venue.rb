@@ -25,25 +25,7 @@ class Venue < ApplicationRecord
     end
   end
 
-  UNKNOWN_AREA = 'Unknown Area'
   UNKNOWN_POSTCODE = '???'
-
-  # TODO: legacy
-  def compass_text
-    case compass
-    when 'C' then 'Central London'
-    when 'N' then 'North London'
-    when 'S' then 'South London'
-    when 'E' then 'East London'
-    when 'W' then 'West London'
-    when 'NE' then 'North East London'
-    when 'NW' then 'North West London'
-    when 'SE' then 'South East London'
-    when 'SW' then 'South West London'
-    else
-      UNKNOWN_AREA
-    end
-  end
 
   def outward_postcode
     return UNKNOWN_POSTCODE if postcode.blank?
