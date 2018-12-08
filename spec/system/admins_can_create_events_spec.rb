@@ -31,7 +31,7 @@ RSpec.describe 'Admins can create events' do
     fill_in 'Url', with: 'http://www.lsds.co.uk/stompin'
 
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-      click_on 'Update'
+      click_on 'Create'
     end
 
     expect(page).to have_content('Title: Stompin\'')

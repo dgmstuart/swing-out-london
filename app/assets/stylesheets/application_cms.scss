@@ -179,15 +179,31 @@ tr td.actions {
 
 /* NEW / EDIT / SHOW */
 
-form .form-group {
-  margin-bottom: 0.5em;
+form {
+  .form-group {
+    margin-bottom: 0.5em;
+  }
+
+  .form-group-title {
+    font-size: 20px;
+    margin: 20px 0 5px 155px;
+  }
+
+  .help {
+    font-style: italic;
+    color: $lowlight-colour;
+  }
+
+  p.help {
+    margin-left: 155px;
+  }
 }
 
 input[type="text"] {
   width: 30em;
 }
 
-label.inline_label {
+label.inline-label {
   width: inherit;
   float: none;
   padding-left: 2em;
@@ -229,17 +245,17 @@ textarea.narrow {
 form label,
 ol.show span {
   font-weight: bold;
-  width: 9.5em;
+  width: 135px;
   float: left;
   text-align: right;
-  padding-right: 1.5em;
+  padding-right: 20px;
 }
 
 ol.show li { clear: left; }
 
 input[type=submit],
 div.actions {
-  margin-left: 11em;
+  margin-left: 155px;
   line-height: 1.5;
   clear: left;
 }

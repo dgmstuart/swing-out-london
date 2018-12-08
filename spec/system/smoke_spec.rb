@@ -56,12 +56,12 @@ RSpec.describe 'Adding a new event' do
     fill_in 'Dates', with: ''
     fill_in 'Cancelled dates', with: '11/10/1958'
     fill_in 'First date', with: '12/03/1926'
-    fill_in 'Next expected date', with: ''
+    fill_in 'Next expected', with: ''
     fill_in 'Last date', with: ''
     fill_in 'Url', with: 'https://www.savoyballroom.com/stompin'
 
     Timecop.freeze('01/01/1937') do
-      click_on 'Update'
+      click_on 'Create'
 
       click_on 'Swing Out London'
     end
