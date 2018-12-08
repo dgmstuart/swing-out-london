@@ -1,40 +1,38 @@
 <%= form_for(@venue) do |f| %>
-<%= render "shared/error_messages", :target => @venue %>
+  <%= render "shared/error_messages", :target => @venue %>
 
-<ol>
-	<li>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-	</li>
-	<li>
-		<%= f.label :address %>
-		<%= f.text_area :address %>
-	</li>
-	<li>
-		<%= f.label :postcode %>
-		<%= f.text_field :postcode %>
-	</li>
-	<li>
-		<%= f.label :area %>
-		<%= f.text_field :area %>
-	</li>
-	<li>
-		<%= f.label :nearest_tube %>
-		<%= f.text_field :nearest_tube %>
-	</li>
-  <li>
+  <div class='form-group'>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :address %>
+    <%= f.text_area :address %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :postcode %>
+    <%= f.text_field :postcode %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :area %>
+    <%= f.text_field :area %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :nearest_tube %>
+    <%= f.text_field :nearest_tube %>
+  </div>
+  <div class='form-group'>
     <%= f.label :lat, 'Latitude' %>
     <%= f.text_field :lat, :size => 15, :style => "float:left;", :class => "shortfield"%>
     <%= f.label :lng, 'Longitude', :class => "inline_label" %>
     <%= f.text_field :lng, :size => 15, :class => "shortfield"%>
     <%=link_to "(get from web)", "http://www.doogal.co.uk/LatLong.php"%>
-  </li>
-	<li>
-		<%= f.label :website %>
-		<%= f.text_field :website %>
-	</li>
-	<li>
-		<%= f.submit action %>
-	</li>
-</ol>
+  </div>
+  <div class='form-group'>
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </div>
+  <div class='form-group'>
+    <%= f.submit action %>
+  </div>
 <% end %>
