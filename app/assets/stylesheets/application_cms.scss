@@ -2,10 +2,11 @@
  *= require reset
  *= require base
  *= require buttons
- *= require admin_bar
- *= require csv_import
- *= require outdated
- *= require account
+ *= require cms/admin_bar
+ *= require cms/forms
+ *= require cms/csv_import
+ *= require cms/outdated
+ *= require cms/account
  *= require_self
  */
 @import "colours";
@@ -177,72 +178,6 @@ tr td.actions {
   background-color: transparent;
 }
 
-/* NEW / EDIT / SHOW */
-
-form {
-  .form-group {
-    margin-bottom: 0.5em;
-  }
-
-  .form-group-title {
-    font-size: 20px;
-    margin: 20px 0 5px 155px;
-  }
-
-  .help {
-    font-style: italic;
-    color: $lowlight-colour;
-  }
-
-  p.help {
-    margin-left: 155px;
-  }
-}
-
-input[type="text"] {
-  width: 30em;
-}
-
-label.inline-label {
-  width: inherit;
-  float: none;
-  padding-left: 2em;
-}
-
-input.shortfield {
-  width: inherit;
-}
-
-textarea {
-  white-space: pre;
-  width: 30em;
-  height: 5em;
-}
-
-textarea.deep {
-  height: 10em;
-}
-
-textarea.narrow {
-  width: 10em;
-}
-
-.warning-message {
-  color: #b94a48;
-  background-color: #f2dede;
-  padding: 8px 35px 8px 14px;
-  margin-bottom: 20px;
-  border: 1px solid #eed3d7;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-
-  strong {
-    font-size: 1.2em;
-  }
-}
-
-form label,
 ol.show span {
   font-weight: bold;
   width: 135px;
@@ -253,53 +188,8 @@ ol.show span {
 
 ol.show li { clear: left; }
 
-input[type=submit],
-div.actions {
-  margin-left: 155px;
-  line-height: 1.5;
-  clear: left;
-}
-
 .last-updated {
   padding-top: 20px;
   font-style: italic;
   margin-left: 11em;
-}
-
-// Rails Errors
-/////////////////////////////////////////////
-.fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#errorExplanation {
-  width: 400px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-}
-
-#errorExplanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00;
-  color: #fff;
-}
-
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
-}
-
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
 }
