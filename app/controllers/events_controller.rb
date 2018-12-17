@@ -8,7 +8,7 @@ class EventsController < CMSBaseController
   end
 
   def show
-    @event = Event.findevent(params[:id])
+    @event = Event.find(params[:id])
     @last_update = LastUpdate.new(@event)
 
     if !@event.has_class? && !@event.has_social?
@@ -26,7 +26,7 @@ class EventsController < CMSBaseController
   end
 
   def edit
-    @event = Event.findevent(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def create
@@ -72,7 +72,6 @@ class EventsController < CMSBaseController
   def event_params
     params.require(:event).permit(
       :title,
-      :shortname,
       :venue_id,
       :social_organiser_id,
       :class_organiser_id,

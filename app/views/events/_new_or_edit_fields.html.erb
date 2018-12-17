@@ -1,78 +1,89 @@
 <%= form_for(@event) do |f| %>
-<%= render "shared/error_messages", :target => @event %>
+  <%= render "shared/error_messages", :target => @event %>
 
-<ol>
-    <!-- WHAT? -->
-    <li>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-    </li>
-    <li>
-        <%= f.label :shortname %>
-        <%= f.text_field :shortname %>
-    </li>
-    <li>
-        <%= f.label :venue_id, 'Venue' %>
-        <%= f.select :venue_id, venue_select, {:include_blank => true} %>
-        <%= link_to 'New Venue', new_venue_path %>
-    </li>
-    <li>
-        <%= f.label :social_organiser_id, 'Social organiser' %>
-        <%= f.select :social_organiser_id, organiser_select, {:include_blank => true} %>
-        <%= link_to 'New Organiser', new_organiser_path %>
-    </li>
-    <li>
-        <%= f.label :class_organiser_id, 'Class organiser' %>
-        <%= f.select :class_organiser_id, organiser_select, {:include_blank => true} %>
-    </li>
-    <li>
-        <%= f.label :event_type %>
-        <%= f.select :event_type, Event::EVENT_TYPES, {:include_blank => true} %>
-        <%= f.label :has_taster, "Has a taster?", :class => 'inline_label'  %>
-        <%= f.check_box :has_taster  %>
-        <%= f.label :has_class, "Has a class?", :class => 'inline_label'   %>
-        <%= f.check_box :has_class  %>
-        <%= f.label :has_social, "Has social?", :class => 'inline_label'   %>
-        <%= f.check_box :has_social  %>
-    </li>
-    <li>
-        <%= f.label :class_style %>
-        <%= f.text_field :class_style %>
-    </li>
-    <li>
-        <%= f.label :course_length %>
-        <%= f.text_field :course_length, :size => 2, :class =>"shortfield" %> weeks
-    </li>
+  <div class='form-group'>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :venue_id, 'Venue' %>
+    <%= f.select :venue_id, venue_select, {:include_blank => true} %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :event_type %>
+    <%= f.select :event_type, Event::EVENT_TYPES, {:include_blank => true} %>
+  </div>
 
-    <!-- WHEN? -->
-    <li>
-        <%= f.label :day %>
-        <%= f.select :day, DAYNAMES %>
-        every <%= f.text_field :frequency, :size => 2, :class =>"shortfield" %> weeks
-    </li>
-    <li>
-        <%= f.label :date_array, 'Dates' %>
-        <%= f.text_field :date_array, :value => @event.print_dates %>
-    </li>
-    <li>
-        <%= f.label :cancellation_array, 'Cancelled dates' %>
-        <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
-    </li>
-    <li>
-        <%= f.label :first_date %>
-        <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :style => "float:left;", :class =>"shortfield" %>
-        <%= f.label :expected_date, 'Next expected date', :class => "inline_label" %>
-        <%= f.text_field :expected_date, value: @event.expected_date.to_s, :size => 10, :class =>"shortfield"%>
-        <%= f.label :last_date, nil, :class => "inline_label" %>
-        <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
-    </li>
+  <h3 class='form-group-title'>Social details</h3>
+  <div class='form-group'>
+    <%= f.label :has_social, "Has social?" %>
+    <%= f.check_box :has_social  %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <p class='help'>Classes don't have names - just locations</p>
+  </div>
+  <div class='form-group'>
+    <%= f.label :social_organiser_id, 'Social organiser' %>
+    <%= f.select :social_organiser_id, organiser_select, {:include_blank => true} %>
+  </div>
 
-    <li>
-        <%= f.label :url %>
-        <%= f.text_field :url %>
-    </li>
-    <li>
-        <%= f.submit action %>
-    </li>
-</ol>
+  <h3 class='form-group-title'>Class details</h3>
+  <div class='form-group'>
+    <%= f.label :has_class, "Has a class?" %>
+    <%= f.check_box :has_class  %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :has_taster, "Has a taster?" %>
+    <%= f.check_box :has_taster  %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :class_organiser_id, 'Class organiser' %>
+    <%= f.select :class_organiser_id, organiser_select, {:include_blank => true} %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :class_style %>
+    <%= f.text_field :class_style %>
+    <p class='help'>Leave blank if Lindy Hop or general swing</p>
+  </div>
+  <div class='form-group'>
+    <%= f.label :course_length %>
+    <%= f.text_field :course_length, :size => 2, :class =>"shortfield" %> weeks
+  </div>
+
+  <h3 class='form-group-title'>When?</h3>
+  <div class='form-group'>
+    <%= f.label :day %>
+    <%= f.select :day, DAYNAMES %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :frequency %>
+    every <%= f.text_field :frequency, :size => 2, :class =>"shortfield" %> weeks
+    <span class='help'>(For one-off or intermittent events, use 0)</span>
+  </div>
+  <div class='form-group'>
+    <%= f.label :date_array, 'Dates' %>
+    <%= f.text_field :date_array, :value => @event.print_dates %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :cancellation_array, 'Cancelled dates' %>
+    <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :first_date %>
+    <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :class =>"shortfield" %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :expected_date, 'Next expected' %>
+    <%= f.text_field :expected_date, value: @event.expected_date.to_s, :size => 10, :class =>"shortfield"%>
+  </div>
+  <div class='form-group'>
+    <%= f.label :last_date %>
+    <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit action, class: 'button' %>
+  </div>
 <% end %>

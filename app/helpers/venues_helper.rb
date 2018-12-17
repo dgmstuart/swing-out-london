@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module VenuesHelper
-  def compass_dropdown(f)
-    f.select :compass, COMPASS_POINTS, include_blank: true
-  end
-
   # Assign a class to a venue row to show whether it has events in date or not
   def venue_row_tag(venue)
     if venue.all_events_out_of_date?

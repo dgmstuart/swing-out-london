@@ -56,7 +56,6 @@ class VenuesController < CMSBaseController
       :postcode,
       :area,
       :nearest_tube,
-      :compass,
       :lat,
       :lng,
       :website
