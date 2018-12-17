@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'memcachier'
 gem 'omniauth-facebook'
 gem 'pg'
+gem 'pry-rails'
 gem 'puma'
 gem 'rack-attack'
 gem 'rails-observers' # to support pre rails-4 style cache sweeping
@@ -38,7 +39,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'pry-rails'
   gem 'rb-fsevent'
   gem 'rspec-rails'
   gem 'rubocop-rspec', require: false
