@@ -8,3 +8,4 @@
     %span{ class: 'action'}= audit.action
     %span{ class: 'record'}= "#{audit.auditable_type}(#{audit.auditable_id})"
     %span{ class: 'changes'}= audit.audited_changes.to_json
+    %span{ class: 'changes'}= audit.comment
