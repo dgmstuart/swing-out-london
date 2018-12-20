@@ -8,6 +8,7 @@
   <div class='form-group'>
     <%= f.label :shortname %>
     <%= f.text_field :shortname %>
+    <span class='help'>Use this if the organiser name is really long and we want to use an abbreviation</span>
   </div>
   <div class='form-group'>
     <%= f.label :website %>
@@ -16,6 +17,7 @@
   <div class='form-group'>
     <%= f.label :description %>
     <%= f.text_area :description %>
+    <span class='help'>(this is just for our own reference)</span>
   </div>
   <div class='form-group'>
     <%= f.submit action %>

@@ -22,7 +22,6 @@
   <div class='form-group'>
     <%= f.label :title %>
     <%= f.text_field :title %>
-    <p class='help'>Classes don't have names - just locations</p>
   </div>
   <div class='form-group'>
     <%= f.label :social_organiser_id, 'Social organiser' %>
@@ -38,6 +37,7 @@
     <%= f.label :has_taster, "Has a taster?" %>
     <%= f.check_box :has_taster  %>
   </div>
+  <p class='help'>Note: classes don't have names - just locations</p>
   <div class='form-group'>
     <%= f.label :class_organiser_id, 'Class organiser' %>
     <%= f.select :class_organiser_id, organiser_select, {:include_blank => true} %>
@@ -65,22 +65,27 @@
   <div class='form-group'>
     <%= f.label :date_array, 'Dates' %>
     <%= f.text_field :date_array, :value => @event.print_dates %>
+    <span class='help'>DD/MM/YYYY, separated by commas</span>
   </div>
   <div class='form-group'>
     <%= f.label :cancellation_array, 'Cancelled dates' %>
     <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
+    <span class='help'>DD/MM/YYYY, separated by commas</span>
   </div>
   <div class='form-group'>
     <%= f.label :first_date %>
     <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :class =>"shortfield" %>
+    <span class='help'>(only needs to be set for new events, or events starting in the future)</span>
   </div>
   <div class='form-group'>
     <%= f.label :expected_date, 'Next expected' %>
     <%= f.text_field :expected_date, value: @event.expected_date.to_s, :size => 10, :class =>"shortfield"%>
+    <span class='help'>If you leave this blank then it will be calculated based on the dates and frequency</span>
   </div>
   <div class='form-group'>
     <%= f.label :last_date %>
     <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
+    <span class='help'>The event will stop showing up on the site after this date</span>
   </div>
 
   <div class='form-group'>

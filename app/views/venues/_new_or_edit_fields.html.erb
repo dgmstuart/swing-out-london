@@ -16,12 +16,14 @@
   <div class='form-group'>
     <%= f.label :area %>
     <%= f.text_field :area %>
+    <p class='help'>For Area, use the nearest tube station unless there's something better</p>
   </div>
   <div class='form-group'>
     <%= f.label :nearest_tube %>
     <%= f.text_field :nearest_tube %>
   </div>
   <div class='form-group'>
+    <p class='help'>If you leave Latitude and Longitude blank, they will be automatically calculated based on postcode</p>
     <%= f.label :lat, 'Latitude' %>
     <%= f.text_field :lat, :size => 15, :style => "float:left;", :class => "shortfield"%>
     <%= f.label :lng, 'Longitude', :class => "inline_label" %>
