@@ -30,8 +30,7 @@
     The listings shown are only a guide. You should always check the source website before making any plans
 
 #soldn_on_the_web
-  %aside#advert
-    = mail_to "swingoutlondon@gmail.com", "Advertise here"
+  = render partial: 'advert', locals: { advert: ad }
 
   - # Foo for the facebook like button:
   #fb-root

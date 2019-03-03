@@ -1,0 +1,7 @@
+%aside#advert
+  - if advert
+    = link_to advert.url, title: advert.title, id: advert.google_id do
+      = image_tag advert.image_url, alt: "Advertisment: #{advert.title}"
+  - else
+    .text
+      = mail_to "swingoutlondon@gmail.com", "Advertise here"
