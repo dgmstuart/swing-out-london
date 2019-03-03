@@ -130,13 +130,18 @@ $small_font_size: 12px;
 
 #soldn_on_the_web {
   max-width: 500px;
+  text-align: right;
 
   #advert {
     border: 6px double #0f0f0f;
     margin-bottom: 1rem;
     text-align: center;
     text-transform: uppercase;
-    padding: 15px;
+
+    .text {
+      display: inline-block;
+      padding: 15px;
+    }
 
     img {
       display: block;

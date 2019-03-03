@@ -16,6 +16,8 @@ class WebsiteController < ApplicationController
 
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
     @socials_dates = Event.socials_dates(@today)
+
+    @ad = Advert.current
   end
 
   private
