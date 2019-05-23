@@ -43,10 +43,12 @@ class EventsController < CMSBaseController
   def update
     @event = Event.find(params[:id])
 
-    result = UpdateEvent.new.update(@event, event_params)
-    if result.success?
+    audit_comment = EventParamsCommenter.new.comment(@event, event_params)
+    update_params = event_params.merge!(audit_comment)
+
+    if @event.update(update_params)
       flash[:notice] = 'Event was successfully updated.'
-      redirect_to(result.updated_event)
+      redirect_to(@event)
     else
       render action: 'edit'
     end

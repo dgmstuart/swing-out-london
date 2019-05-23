@@ -48,6 +48,35 @@ RSpec.describe 'Admins can edit events' do
     expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
 
+  it 'with invalid data' do
+    stub_login(id: 12345678901234567, name: 'Al Minns')
+    FactoryBot.create(:event)
+
+    visit '/login'
+    click_on 'Log in with Facebook'
+
+    click_on 'Edit', match: :first
+
+    select '', from: 'Venue'
+    select '', from: 'Event type'
+    uncheck 'Has a class?'
+    uncheck 'Has a taster?'
+    uncheck 'Has social?'
+    fill_in 'event_frequency', with: '1'
+    fill_in 'Dates', with: '12/12/2012'
+    fill_in 'Url', with: ''
+
+    click_on 'Update'
+
+    expect(page).to have_content('6 errors prohibited this record from being saved:')
+      .and have_content('Venue must exist')
+      .and have_content('Url is invalid')
+      .and have_content("Url can't be blank")
+      .and have_content("Event type can't be blank")
+      .and have_content('Date array must be empty for weekly events')
+      .and have_content("Events must have either a Social or a Class, otherwise they won't be listed!")
+  end
+
   it 'adding dates' do
     FactoryBot.create(:event, dates: ['12/12/2012', '13/12/2012'])
     stub_login(id: 12345678901234567, name: 'Al Minns')
