@@ -134,17 +134,17 @@ describe Event do
 
     it 'successfully adds one valid date to an event' do
       @event.date_array = '01/02/2012'
-      expect(@event.dates).to eq([Date.new(2012, 0o2, 0o1)])
+      expect(@event.dates).to eq([Date.new(2012, 2, 1)])
     end
 
     it 'successfully adds two valid dates to an event with no dates and orders them' do
       @event.date_array = '01/02/2012, 30/11/2011'
-      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 0o2, 0o1)])
+      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
     end
 
     it 'blanks out a date array where there existing dates' do
       @event = FactoryBot.create(:event, date_array: '01/02/2012, 30/11/2011')
-      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 0o2, 0o1)])
+      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
       @event.date_array = ''
       expect(@event.dates).to eq([])
     end
@@ -156,7 +156,7 @@ describe Event do
       event2 = FactoryBot.create(:event)
       event2.date_array = '05/05/2005'
       event2.save!
-      expect(SwingDate.where(date: Date.new(2005, 0o5, 0o5)).length).to eq(1)
+      expect(SwingDate.where(date: Date.new(2005, 5, 5)).length).to eq(1)
     end
 
     pending 'multiple valid dates, one invalid date on the end'
@@ -194,17 +194,17 @@ describe Event do
 
     it 'successfully adds one valid cancellation to an event with no cancellations' do
       @event.cancellation_array = '01/02/2012'
-      expect(@event.cancellations).to eq([Date.new(2012, 0o2, 0o1)])
+      expect(@event.cancellations).to eq([Date.new(2012, 2, 1)])
     end
 
     it 'successfully adds two valid cancellations to an event with no cancellations and orders them' do
       @event.cancellation_array = '01/02/2012, 30/11/2011'
-      expect(@event.cancellations).to eq([Date.new(2012, 0o2, 0o1), Date.new(2011, 11, 30)])
+      expect(@event.cancellations).to eq([Date.new(2012, 2, 1), Date.new(2011, 11, 30)])
     end
 
     it 'blanks out a cancellation array where there existing dates' do
       event = FactoryBot.create(:event, cancellation_array: '01/02/2012')
-      expect(event.cancellations).to eq([Date.new(2012, 0o2, 0o1)])
+      expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
       event.cancellation_array = ''
       expect(event.cancellations).to eq([])
     end
