@@ -104,37 +104,6 @@ describe Event do
     end
   end
 
-  describe '.modernise' do
-    before do
-      @event = FactoryBot.create(:event)
-    end
-
-    it 'handles events with no dates' do
-      @event[:date_array] = []
-      expect(@event.dates).to eq([])
-      @event.modernise
-      expect(@event.dates).to eq([])
-    end
-
-    it 'takes a date_array of strings and saves swing_dates' do
-      @event[:date_array] = ['09/04/2011', '14/05/2011', '11/06/2011']
-      expect(@event.dates).to eq([])
-      @event[:cancellation_array] = ['14/05/2011']
-      @event.modernise
-      expect(@event.dates).to eq([Date.new(2011, 4, 9), Date.new(2011, 5, 14), Date.new(2011, 6, 11)])
-      expect(@event.cancellations).to eq([Date.new(2011, 5, 14)])
-    end
-
-    it 'takes a date_array of dates and saves swing_dates' do
-      @event[:date_array] = [Date.new(2011, 4, 9), Date.new(2011, 5, 14), Date.new(2011, 6, 11)]
-      expect(@event.dates).to eq([])
-      @event[:cancellation_array] = [Date.new(2011, 6, 11)]
-      @event.modernise
-      expect(@event.dates).to eq([Date.new(2011, 4, 9), Date.new(2011, 5, 14), Date.new(2011, 6, 11)])
-      expect(@event.cancellations).to eq([Date.new(2011, 6, 11)])
-    end
-  end
-
   # ultimately do away with date_array and test .dates= instead"
   describe '.date_array =' do
     before do
