@@ -31,9 +31,12 @@ RSpec.describe DatesStringParser do
       expect(parse('5/2/2014 06/10/2012')).to eq [Date.new(2014, 2, 5)]
     end
 
-    it 'BUG: Accepts duplicated dates' do
-      expect(parse('5/6/2014, 05/06/2014')).to eq [Date.new(2014, 6, 5), Date.new(2014, 6, 5)]
-      expect(parse('05/06/2014, 05/06/2014')).to eq [Date.new(2014, 6, 5), Date.new(2014, 6, 5)]
+    it 'ignores duplicated dates' do
+      expect(parse('05/06/2014, 05/06/2014')).to eq [Date.new(2014, 6, 5)]
+    end
+
+    it 'ignores duplicated dates with different formatting' do
+      expect(parse('5/6/2014, 05/06/2014')).to eq [Date.new(2014, 6, 5)]
     end
 
     it 'returns an empty string when the string is not parseable as a date' do
