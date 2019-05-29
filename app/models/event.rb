@@ -142,7 +142,7 @@ class Event < ApplicationRecord
   end
 
   def date_array=(date_string)
-    self.dates = Event.parse_date_string(date_string)
+    self.dates = DatesStringParser.new.parse(date_string)
   end
 
   def cancellations
@@ -159,11 +159,7 @@ class Event < ApplicationRecord
   end
 
   def cancellation_array=(date_string)
-    self.cancellations = Event.parse_date_string(date_string)
-  end
-
-  def self.parse_date_string(date_string)
-    DatesStringParser.new.parse(date_string)
+    self.cancellations = DatesStringParser.new.parse(date_string)
   end
 
   # READ METHODS #
