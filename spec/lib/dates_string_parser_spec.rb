@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe DatesStringParser do
+RSpec.describe DatesStringParser do
   describe '#parse' do
     def parse(string)
       DatesStringParser.new.parse(string)
