@@ -41,9 +41,7 @@ class Event < ApplicationRecord
 
   # display constants:
   NOTAPPLICABLE = 'n/a'
-  UNKNOWN_DATE = 'Unknown'
   UNKNOWN_ORGANISER = 'Unknown'
-  WEEKLY = 'Weekly'
   SEE_WEB = '(See Website)'
 
   def index_row_cache_key
@@ -164,14 +162,8 @@ class Event < ApplicationRecord
     self.cancellations = Event.parse_date_string(date_string)
   end
 
-  def self.empty_date_string(date_string)
-    date_string.blank? || date_string == UNKNOWN_DATE || date_string == WEEKLY
-  end
-
   def self.parse_date_string(date_string)
-    date_string = '' if empty_date_string(date_string)
-    parser = DatesStringParser.new
-    parser.parse(date_string)
+    DatesStringParser.new.parse(date_string)
   end
 
   # READ METHODS #
@@ -251,9 +243,6 @@ class Event < ApplicationRecord
   # -- Helper functions for Print:
 
   def print_date_array(sep = ',', format = :uk_date, future = false)
-    # Weekly events don't have dates
-    return WEEKLY if weekly?
-
     print_array_of_dates(dates, sep, format, future)
   end
 
@@ -265,8 +254,6 @@ class Event < ApplicationRecord
 
   # Given an array of dates, return a formatted string
   def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future = false)
-    return UNKNOWN_DATE if input_dates.blank?
-
     input_dates = filter_future(input_dates) if future
     input_dates.collect { |d| d.to_s(format) }.join(sep)
   end

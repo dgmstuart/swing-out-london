@@ -122,13 +122,12 @@ describe Event do
       end
 
       it 'handles an event with no dates and adding unknown dates' do
-        @event.date_array = Event::UNKNOWN_DATE
+        @event.date_array = 'Unknown'
         expect(@event.swing_dates).to eq([])
       end
 
       it 'handles an event with no dates and a weekly event' do
-        @event.date_array = Event::WEEKLY
-        expect(@event.swing_dates).to eq([])
+        @event.date_array = 'Weekly'
       end
     end
 
@@ -182,12 +181,12 @@ describe Event do
       end
 
       it 'handles an event with no cancellations and adding unknown cancellations' do
-        @event.cancellation_array = Event::UNKNOWN_DATE
+        @event.cancellation_array = 'Unknown'
         expect(@event.swing_cancellations).to eq([])
       end
 
       it 'handles an event with no cancellations and a weekly event' do
-        @event.cancellation_array = Event::WEEKLY
+        @event.cancellation_array = 'Weekly'
         expect(@event.swing_cancellations).to eq([])
       end
     end
