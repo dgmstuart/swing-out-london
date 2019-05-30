@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/omniauth/omniauth-rails
+  revision: 8ef80e7da0b4b12dd403ba579b0a34dd6efebdae
+  branch: CVE-2015-9284
+  specs:
+    omniauth-rails (1.0.0)
+      omniauth (~> 1.0)
+      rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -356,6 +365,7 @@ DEPENDENCIES
   memcachier
   oj
   omniauth-facebook
+  omniauth-rails!
   pg
   pry-rails
   puma
