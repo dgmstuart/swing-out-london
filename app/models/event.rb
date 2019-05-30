@@ -15,9 +15,6 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  serialize :date_array
-  serialize :cancellation_array
-
   validates :url, format: URI.regexp(%w[http https])
 
   validates :event_type, :frequency, :url, :day, presence: true
