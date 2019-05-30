@@ -7,8 +7,8 @@ module EventsHelper
 
   # move somewhere general?
 
-  def day_row(d)
-    html_options = if is_today(d)
+  def day_row(date, today)
+    html_options = if is_today(date, today)
                      { class: 'day_row today', id: 'classes_today' }
                    else
                      { class: 'day_row' }
@@ -17,8 +17,8 @@ module EventsHelper
     tag :li, html_options, true
   end
 
-  def date_row(d)
-    html_options = if is_today(d)
+  def date_row(date, today)
+    html_options = if is_today(date, today)
                      { class: 'date_row today', id: 'socials_today' }
                    else
                      { class: 'date_row' }
@@ -34,10 +34,10 @@ module EventsHelper
     link_to day, url_options, title: "Click to view this day's weekly classes on a map"
   end
 
-  def date_header(date)
+  def date_header(date, today)
     display = ''
-    display = "#{today_label} " if is_today(date)
-    display = "#{tomorrow_label} " if is_tomorrow(date)
+    display = "#{today_label} " if is_today(date, today)
+    display = "#{tomorrow_label} " if is_tomorrow(date, today)
     display += date.to_s(:listing_date)
 
     url_options = { controller: :maps,
@@ -47,22 +47,22 @@ module EventsHelper
   end
 
   # if there are no socials on this day, we need to add a class
-  def socialsh2(&block)
-    if @socials_dates.empty?
+  def socialsh2(socials_dates, &block)
+    if socials_dates.empty?
       content_tag :h2, id: 'socials_today', &block
     else
       content_tag :h2, &block
     end
   end
 
-  def is_today(d)
-    d.class == String && Event.weekday_name(@today) == d ||
-      d.class == Date && d == @today
+  def is_today(d, today)
+    d.class == String && Event.weekday_name(today) == d ||
+      d.class == Date && d == today
   end
 
-  def is_tomorrow(d)
-    d.class == String && Event.weekday_name(@today + 1) == d ||
-      d.class == Date && d == @today + 1
+  def is_tomorrow(d, today)
+    d.class == String && Event.weekday_name(today + 1) == d ||
+      d.class == Date && d == today + 1
   end
 
   def today_label
@@ -73,8 +73,8 @@ module EventsHelper
     content_tag :strong, 'Tomorrow', class: 'tomorrow_label'
   end
 
-  def classes_on_day(day)
-    @classes.select { |e| e.day == day }.sort_by(&:venue_area)
+  def classes_on_day(classes, day)
+    classes.select { |e| e.day == day }.sort_by(&:venue_area)
   end
 
   # ---------------- #
