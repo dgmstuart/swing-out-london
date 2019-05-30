@@ -85,6 +85,6 @@ class ShowEvent
   attr_reader :event
 
   def print_dates(dates)
-    dates.map { |date| date.to_s(:uk_date) }.join(',')
+    dates.map { |date| date.to_s(:uk_date) }.join(', ')
   end
 end

@@ -92,7 +92,7 @@ RSpec.describe 'Admins can edit events' do
       click_on 'Update'
     end
 
-    expect(page).to have_content('Dates: 12/12/2012,12/01/2013')
+    expect(page).to have_content('Dates: 12/12/2012, 12/01/2013')
 
     expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16')
   end

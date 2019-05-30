@@ -18,7 +18,7 @@ RSpec.describe ShowEvent do
     it 'prints out a list of dates' do
       event = instance_double('Event', cancellations: [Date.new(2011, 5, 14), Date.new(2015, 6, 24)])
 
-      expect(described_class.new(event).cancellations).to eq '14/05/2011,24/06/2015'
+      expect(described_class.new(event).cancellations).to eq '14/05/2011, 24/06/2015'
     end
 
     context 'when there are no dates' do
@@ -50,7 +50,7 @@ RSpec.describe ShowEvent do
     it 'prints out a list of dates' do
       event = instance_double('Event', dates: [Date.new(2011, 5, 14), Date.new(2015, 6, 24)], weekly?: false)
 
-      expect(described_class.new(event).dates).to eq '14/05/2011,24/06/2015'
+      expect(described_class.new(event).dates).to eq '14/05/2011, 24/06/2015'
     end
 
     context 'when there are no dates' do
