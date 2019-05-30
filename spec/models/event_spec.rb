@@ -104,37 +104,6 @@ describe Event do
     end
   end
 
-  describe '.modernise' do
-    before do
-      @event = FactoryBot.create(:event)
-    end
-
-    it 'handles events with no dates' do
-      @event[:date_array] = []
-      expect(@event.dates).to eq([])
-      @event.modernise
-      expect(@event.dates).to eq([])
-    end
-
-    it 'takes a date_array of strings and saves swing_dates' do
-      @event[:date_array] = ['09/04/2011', '14/05/2011', '11/06/2011']
-      expect(@event.dates).to eq([])
-      @event[:cancellation_array] = ['14/05/2011']
-      @event.modernise
-      expect(@event.dates).to eq([Date.new(2011, 4, 9), Date.new(2011, 5, 14), Date.new(2011, 6, 11)])
-      expect(@event.cancellations).to eq([Date.new(2011, 5, 14)])
-    end
-
-    it 'takes a date_array of dates and saves swing_dates' do
-      @event[:date_array] = [Date.new(2011, 4, 9), Date.new(2011, 5, 14), Date.new(2011, 6, 11)]
-      expect(@event.dates).to eq([])
-      @event[:cancellation_array] = [Date.new(2011, 6, 11)]
-      @event.modernise
-      expect(@event.dates).to eq([Date.new(2011, 4, 9), Date.new(2011, 5, 14), Date.new(2011, 6, 11)])
-      expect(@event.cancellations).to eq([Date.new(2011, 6, 11)])
-    end
-  end
-
   # ultimately do away with date_array and test .dates= instead"
   describe '.date_array =' do
     before do
@@ -153,29 +122,28 @@ describe Event do
       end
 
       it 'handles an event with no dates and adding unknown dates' do
-        @event.date_array = Event::UNKNOWN_DATE
+        @event.date_array = 'Unknown'
         expect(@event.swing_dates).to eq([])
       end
 
       it 'handles an event with no dates and a weekly event' do
-        @event.date_array = Event::WEEKLY
-        expect(@event.swing_dates).to eq([])
+        @event.date_array = 'Weekly'
       end
     end
 
     it 'successfully adds one valid date to an event' do
       @event.date_array = '01/02/2012'
-      expect(@event.dates).to eq([Date.new(2012, 0o2, 0o1)])
+      expect(@event.dates).to eq([Date.new(2012, 2, 1)])
     end
 
     it 'successfully adds two valid dates to an event with no dates and orders them' do
       @event.date_array = '01/02/2012, 30/11/2011'
-      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 0o2, 0o1)])
+      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
     end
 
     it 'blanks out a date array where there existing dates' do
       @event = FactoryBot.create(:event, date_array: '01/02/2012, 30/11/2011')
-      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 0o2, 0o1)])
+      expect(@event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
       @event.date_array = ''
       expect(@event.dates).to eq([])
     end
@@ -187,7 +155,7 @@ describe Event do
       event2 = FactoryBot.create(:event)
       event2.date_array = '05/05/2005'
       event2.save!
-      expect(SwingDate.where(date: Date.new(2005, 0o5, 0o5)).length).to eq(1)
+      expect(SwingDate.where(date: Date.new(2005, 5, 5)).length).to eq(1)
     end
 
     pending 'multiple valid dates, one invalid date on the end'
@@ -213,29 +181,29 @@ describe Event do
       end
 
       it 'handles an event with no cancellations and adding unknown cancellations' do
-        @event.cancellation_array = Event::UNKNOWN_DATE
+        @event.cancellation_array = 'Unknown'
         expect(@event.swing_cancellations).to eq([])
       end
 
       it 'handles an event with no cancellations and a weekly event' do
-        @event.cancellation_array = Event::WEEKLY
+        @event.cancellation_array = 'Weekly'
         expect(@event.swing_cancellations).to eq([])
       end
     end
 
     it 'successfully adds one valid cancellation to an event with no cancellations' do
       @event.cancellation_array = '01/02/2012'
-      expect(@event.cancellations).to eq([Date.new(2012, 0o2, 0o1)])
+      expect(@event.cancellations).to eq([Date.new(2012, 2, 1)])
     end
 
     it 'successfully adds two valid cancellations to an event with no cancellations and orders them' do
       @event.cancellation_array = '01/02/2012, 30/11/2011'
-      expect(@event.cancellations).to eq([Date.new(2012, 0o2, 0o1), Date.new(2011, 11, 30)])
+      expect(@event.cancellations).to eq([Date.new(2012, 2, 1), Date.new(2011, 11, 30)])
     end
 
     it 'blanks out a cancellation array where there existing dates' do
       event = FactoryBot.create(:event, cancellation_array: '01/02/2012')
-      expect(event.cancellations).to eq([Date.new(2012, 0o2, 0o1)])
+      expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
       event.cancellation_array = ''
       expect(event.cancellations).to eq([])
     end

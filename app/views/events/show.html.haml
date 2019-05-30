@@ -19,10 +19,10 @@
     = organiser_link(@event.social_organiser)
   %li
     %span Event type:
-    = @event.event_type,
-    ="has taster: #{@event.has_taster},"
-    ="has class: #{@event.has_class},"
-    ="has social: #{@event.has_social}"
+    = @event.event_type
+    ="has taster: #{@event.has_taster?},"
+    ="has class: #{@event.has_class?},"
+    ="has social: #{@event.has_social?}"
   - unless @event.course_length.nil?
     %li
       %span Course_length:
@@ -36,24 +36,24 @@
     = @event.day
   %li
     %span Frequency:
-    = @event.frequency_text
+    = @event.frequency
   - unless @event.weekly?
     %li
       %span Dates:
-      = @event.print_dates
+      = @event.dates
   %li
     %span Cancelled:
-    = @event.print_cancellations
+    = @event.cancellations
   %li
     %span First date:
-    = @event.first_date.to_s :listing_date unless @event.first_date.nil?
+    = @event.first_date
   %li
     -if @event.last_date
       %span Last date:
-      = @event.last_date.to_s :listing_date unless @event.last_date.nil?
+      = @event.last_date
     -else
       %span Next expected date:
-      = @event.expected_date.to_s :listing_date unless @event.expected_date.nil?
+      = @event.expected_date
   %li
     %span Url:
     = link_to @event.url, @event.url
@@ -63,6 +63,6 @@
   |
   = link_to 'Delete', @event, data: { confirm: 'Are you sure you want to delete this event?' }, method: :delete
   |
-  = link_to 'List', events_path(anchor: "event_#{@event.id}")
+  = link_to 'List', events_path(anchor: @event.anchor)
   |
   = link_to 'New event', new_event_path

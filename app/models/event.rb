@@ -15,9 +15,6 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  serialize :date_array
-  serialize :cancellation_array
-
   validates :url, format: URI.regexp(%w[http https])
 
   validates :event_type, :frequency, :url, :day, presence: true
@@ -41,9 +38,7 @@ class Event < ApplicationRecord
 
   # display constants:
   NOTAPPLICABLE = 'n/a'
-  UNKNOWN_DATE = 'Unknown'
   UNKNOWN_ORGANISER = 'Unknown'
-  WEEKLY = 'Weekly'
   SEE_WEB = '(See Website)'
 
   def index_row_cache_key
@@ -52,18 +47,6 @@ class Event < ApplicationRecord
 
   def status_cache_key
     caching_key("status_#{Date.today.to_s(:iso)}")
-  end
-
-  #########
-  ## TEMP #
-  #########
-
-  # Convert the old, fragile way of storing dates (serialised as an array) into the new one (stored in a table)
-  def modernise
-    self.date_array = self[:date_array].collect { |ds| ds.to_date.to_s }.join(', ') unless Event.empty_date_string(self[:date_array])
-    unless Event.empty_date_string(self[:cancellation_array])
-      self.cancellation_array = self[:cancellation_array].collect { |ds| ds.to_date.to_s }.join(', ')
-    end
   end
 
   # ----- #
@@ -80,24 +63,6 @@ class Event < ApplicationRecord
   delegate :name, to: :venue, prefix: true
 
   delegate :area, to: :venue, prefix: true
-
-  # --------- #
-  # Frequency #
-  # --------- #
-
-  def frequency_text
-    case frequency
-    when 0 then 'One-off or intermittent'
-    when 1 then 'Weekly'
-    when 2 then 'Fortnightly'
-    when 4..5 then 'Monthly'
-    when 8 then 'Bi-Monthly'
-    when 26 then 'Twice-yearly'
-    when 52 then 'Yearly'
-    when 1..100 then "Every #{frequency} weeks"
-    else 'Unknown'
-    end
-  end
 
   def one_off?
     frequency.zero?
@@ -174,7 +139,7 @@ class Event < ApplicationRecord
   end
 
   def date_array=(date_string)
-    self.dates = Event.parse_date_string(date_string)
+    self.dates = DatesStringParser.new.parse(date_string)
   end
 
   def cancellations
@@ -191,17 +156,7 @@ class Event < ApplicationRecord
   end
 
   def cancellation_array=(date_string)
-    self.cancellations = Event.parse_date_string(date_string)
-  end
-
-  def self.empty_date_string(date_string)
-    date_string.blank? || date_string == UNKNOWN_DATE || date_string == WEEKLY
-  end
-
-  def self.parse_date_string(date_string)
-    date_string = '' if empty_date_string(date_string)
-    parser = DatesStringParser.new
-    parser.parse(date_string)
+    self.cancellations = DatesStringParser.new.parse(date_string)
   end
 
   # READ METHODS #
@@ -281,9 +236,6 @@ class Event < ApplicationRecord
   # -- Helper functions for Print:
 
   def print_date_array(sep = ',', format = :uk_date, future = false)
-    # Weekly events don't have dates
-    return WEEKLY if weekly?
-
     print_array_of_dates(dates, sep, format, future)
   end
 
@@ -295,8 +247,6 @@ class Event < ApplicationRecord
 
   # Given an array of dates, return a formatted string
   def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future = false)
-    return UNKNOWN_DATE if input_dates.blank?
-
     input_dates = filter_future(input_dates) if future
     input_dates.collect { |d| d.to_s(format) }.join(sep)
   end

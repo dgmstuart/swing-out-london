@@ -93,11 +93,6 @@ RSpec/InstanceVariable:
     - 'spec/mailers/admin_mailer_spec.rb'
     - 'spec/models/event_spec.rb'
 
-# Offense count: 1
-RSpec/MultipleDescribes:
-  Exclude:
-    - 'spec/models/date_string_parser_spec.rb'
-
 # Offense count: 33
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
