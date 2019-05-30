@@ -22,7 +22,7 @@ module ShareButtonHelper
             title: alt_text,
             alt: alt_text,
             target: '_blank',
-            class: 'share_button twitter'
+            class: 'share_button twitter', rel: 'noopener'
   end
 
   def facebook_button
@@ -46,6 +46,6 @@ module ShareButtonHelper
             title: alt_text,
             alt: alt_text,
             target: '_blank',
-            class: 'share_button facebook'
+            class: 'share_button facebook', rel: 'noopener'
   end
 end
