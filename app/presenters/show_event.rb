@@ -10,7 +10,7 @@ class ShowEvent
   end
 
   def cancellations
-    return 'Unknown' if event.cancellations.empty?
+    return 'None' if event.cancellations.empty?
 
     print_dates(event.cancellations)
   end

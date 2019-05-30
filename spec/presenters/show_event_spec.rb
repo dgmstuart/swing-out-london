@@ -25,7 +25,7 @@ RSpec.describe ShowEvent do
       it 'displays a default string' do
         event = instance_double('Event', cancellations: [])
 
-        expect(described_class.new(event).cancellations).to eq 'Unknown'
+        expect(described_class.new(event).cancellations).to eq 'None'
       end
     end
   end

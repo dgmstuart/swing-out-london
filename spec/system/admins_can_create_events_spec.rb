@@ -45,7 +45,7 @@ RSpec.describe 'Admins can create events' do
       .and have_content('Day: Wednesday')
       .and have_content('Frequency: One-off or intermittent')
       .and have_content('Dates: 12/12/2012, 19/12/2012')
-      .and have_content('Cancelled: Unknown')
+      .and have_content('Cancelled: None')
       .and have_content('First date:')
       .and have_content('Url: http://www.lsds.co.uk/stompin')
 
