@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/omniauth/omniauth-rails
+  revision: 8ef80e7da0b4b12dd403ba579b0a34dd6efebdae
+  branch: CVE-2015-9284
+  specs:
+    omniauth-rails (1.0.0)
+      omniauth (~> 1.0)
+      rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -118,7 +127,7 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hashdiff (0.3.7)
-    hashie (3.5.7)
+    hashie (3.6.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -175,8 +184,8 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     oj (3.7.0)
-    omniauth (1.8.1)
-      hashie (>= 3.4.6, < 3.6.0)
+    omniauth (1.9.0)
+      hashie (>= 3.4.6, < 3.7.0)
       rack (>= 1.6.2, < 3)
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
@@ -356,6 +365,7 @@ DEPENDENCIES
   memcachier
   oj
   omniauth-facebook
+  omniauth-rails!
   pg
   pry-rails
   puma
