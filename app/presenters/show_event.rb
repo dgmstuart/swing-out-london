@@ -75,6 +75,7 @@ class ShowEvent
            :has_taster?,
            :social_organiser,
            :title,
+           :to_param,
            :url,
            :venue,
            :weekly?,

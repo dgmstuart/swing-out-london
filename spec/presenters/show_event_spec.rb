@@ -215,6 +215,14 @@ RSpec.describe ShowEvent do
     end
   end
 
+  describe '#to_param' do
+    it 'delegates to the event' do
+      event = instance_double('Event', to_param: '123')
+
+      expect(described_class.new(event).to_param).to eq '123'
+    end
+  end
+
   describe '#url' do
     it 'delegates to the event' do
       event = instance_double('Event', url: 'https://www.blackcotton.com')
