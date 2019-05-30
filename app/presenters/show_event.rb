@@ -33,6 +33,14 @@ class ShowEvent
     event.last_date&.to_s(:listing_date)
   end
 
+  def event_type
+    activities = []
+    activities << 'social' if event.has_social?
+    activities << 'taster' if event.has_taster?
+    activities << 'class' if event.has_class?
+    "#{event.event_type}, with #{activities.join(' and ')}"
+  end
+
   def expected_date
     event.expected_date&.to_s(:listing_date)
   end
@@ -69,10 +77,6 @@ class ShowEvent
            :class_style,
            :course_length,
            :day,
-           :event_type,
-           :has_class?,
-           :has_social?,
-           :has_taster?,
            :social_organiser,
            :title,
            :url,

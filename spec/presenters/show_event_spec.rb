@@ -96,35 +96,21 @@ RSpec.describe ShowEvent do
     end
   end
 
-  describe '#has_class?' do
-    it 'delegates to the event' do
-      event = instance_double('Event', has_class?: false)
-
-      expect(described_class.new(event).has_class?).to eq false
-    end
-  end
-
-  describe '#has_social?' do
-    it 'delegates to the event' do
-      event = instance_double('Event', has_social?: true)
-
-      expect(described_class.new(event).has_social?).to eq true
-    end
-  end
-
-  describe '#has_taster?' do
-    it 'delegates to the event' do
-      event = instance_double('Event', has_taster?: false)
-
-      expect(described_class.new(event).has_taster?).to eq false
-    end
-  end
-
   describe '#event_type' do
-    it 'delegates to the event' do
-      event = instance_double('Event', event_type: 'Club')
+    context 'when the event is a class' do
+      it 'combines event type and class' do
+        event = instance_double('Event', event_type: 'school', has_social?: false, has_taster?: false, has_class?: true)
 
-      expect(described_class.new(event).event_type).to eq 'Club'
+        expect(described_class.new(event).event_type).to eq 'school, with class'
+      end
+    end
+
+    context 'when the event is a club with a taster' do
+      it 'combines event type, social and taster' do
+        event = instance_double('Event', event_type: 'dance_club', has_social?: true, has_taster?: true, has_class?: false)
+
+        expect(described_class.new(event).event_type).to eq 'dance_club, with social and taster'
+      end
     end
   end
 
