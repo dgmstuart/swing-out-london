@@ -20,9 +20,6 @@
   %li
     %span Event type:
     = @event.event_type
-    ="has taster: #{@event.has_taster?},"
-    ="has class: #{@event.has_class?},"
-    ="has social: #{@event.has_social?}"
   - unless @event.course_length.nil?
     %li
       %span Course_length:

@@ -10,7 +10,7 @@ class ShowEvent
   end
 
   def cancellations
-    return 'Unknown' if event.cancellations.empty?
+    return 'None' if event.cancellations.empty?
 
     print_dates(event.cancellations)
   end
@@ -31,6 +31,14 @@ class ShowEvent
 
   def last_date
     event.last_date&.to_s(:listing_date)
+  end
+
+  def event_type
+    activities = []
+    activities << 'social' if event.has_social?
+    activities << 'taster' if event.has_taster?
+    activities << 'class' if event.has_class?
+    "#{event.event_type}, with #{activities.join(' and ')}"
   end
 
   def expected_date
@@ -69,10 +77,6 @@ class ShowEvent
            :class_style,
            :course_length,
            :day,
-           :event_type,
-           :has_class?,
-           :has_social?,
-           :has_taster?,
            :social_organiser,
            :title,
            :to_param,
@@ -86,6 +90,6 @@ class ShowEvent
   attr_reader :event
 
   def print_dates(dates)
-    dates.map { |date| date.to_s(:uk_date) }.join(',')
+    dates.map { |date| date.to_s(:uk_date) }.join(', ')
   end
 end
