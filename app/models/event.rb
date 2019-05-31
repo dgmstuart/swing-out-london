@@ -91,6 +91,7 @@ class Event < ApplicationRecord
 
   scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.local_today) }
   scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.local_today) }
+  scope :active_on, ->(date) { where('(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)', date, date) }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
   scope :listing_classes_on_day, ->(day) { listing_classes.where(day: day) }
@@ -335,30 +336,6 @@ class Event < ApplicationRecord
   def clear_latest_dates_cache
     Rails.cache.delete(latest_date_cache_key)
   end
-
-  # for repeating events - find the next and previous dates
-  def next_date
-    return unless weekly?
-    return Date.local_today if day == Event.weekday_name(Date.local_today)
-
-    Date.local_today.next_week(day.downcase.to_sym)
-  end
-
-  def prev_date
-    return unless weekly?
-    return Date.local_today if day == Event.weekday_name(Date.local_today)
-
-    # prev_week doesn't seem to be implemented...
-    (next_date - 7.days)
-  end
-
-  # is/was/will the event active on a particular date?
-  def active_on(date)
-    (first_date.nil? || first_date <= date) &&
-      (last_date.nil? || last_date >= date)
-  end
-
-  scope :active_on, ->(date) { where('(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)', date, date) }
 
   ###########
   # ACTIONS #
