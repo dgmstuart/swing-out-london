@@ -80,10 +80,6 @@ class Event < ApplicationRecord
     festival
   ].freeze
 
-  def is_gig?
-    event_type == 'gig'
-  end
-
   # scopes to get different types of event:
   scope :classes, -> { where(has_class: true) }
   scope :socials, -> { where(has_social: true) }
