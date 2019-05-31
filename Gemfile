@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.6.2'
 
 gem 'rails', '5.2.3'
 
@@ -42,6 +42,7 @@ group :development, :test do
   gem 'faker'
   gem 'rb-fsevent'
   gem 'rspec-rails'
+  gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
 

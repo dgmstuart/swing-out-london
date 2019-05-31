@@ -144,7 +144,7 @@ GEM
     http_parser.rb (0.6.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    jaro_winkler (1.5.1)
+    jaro_winkler (1.5.2)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -192,12 +192,11 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    parallel (1.12.1)
-    parser (2.5.3.0)
+    parallel (1.17.0)
+    parser (2.6.3.0)
       ast (~> 2.4.0)
     pg (1.1.3)
     power_assert (1.1.3)
-    powerpack (0.1.2)
     pry (0.12.0)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -271,17 +270,19 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.60.0)
+    rubocop (0.71.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.5, != 2.5.1.1)
-      powerpack (~> 0.1)
+      parser (>= 2.6)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.4.0)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-rails (2.0.0)
+      rack (>= 2.0)
+      rubocop (>= 0.70.0)
     rubocop-rspec (1.30.1)
       rubocop (>= 0.60.0)
-    ruby-progressbar (1.10.0)
+    ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
@@ -326,7 +327,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    unicode-display_width (1.4.0)
+    unicode-display_width (1.6.0)
     uniform_notifier (1.12.1)
     vcr (4.0.0)
     webmock (3.4.2)
@@ -379,6 +380,7 @@ DEPENDENCIES
   redcarpet
   rollbar
   rspec-rails
+  rubocop-rails
   rubocop-rspec
   sassc-rails
   selenium-webdriver
@@ -390,7 +392,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.6.2p47
 
 BUNDLED WITH
    1.17.3

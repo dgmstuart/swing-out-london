@@ -11,7 +11,7 @@ class Organiser < ApplicationRecord
   validates :name, presence: true
 
   validates :shortname, length: { maximum: 20 }
-  validates :shortname, uniqueness: { allow_nil: true, allow_blank: true }
+  validates :shortname, uniqueness: { allow_blank: true }
 
   def events
     classes + socials
