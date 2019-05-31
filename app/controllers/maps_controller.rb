@@ -92,8 +92,8 @@ class MapsController < ApplicationController
     day = day_string.titlecase
 
     case day
-    when 'Today'      then Event.weekday_name(today)
-    when 'Tomorrow'   then Event.weekday_name(today + 1)
+    when 'Today'      then DayNames.name(today)
+    when 'Tomorrow'   then DayNames.name(today + 1)
     when *DAYNAMES
       day
     else

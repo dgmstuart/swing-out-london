@@ -7,8 +7,8 @@ module EventsHelper
 
   # move somewhere general?
 
-  def day_row(date, today)
-    html_options = if is_today(date, today)
+  def day_row(day, today)
+    html_options = if DayNames.same_weekday?(day, today)
                      { class: 'day_row today', id: 'classes_today' }
                    else
                      { class: 'day_row' }
@@ -18,7 +18,7 @@ module EventsHelper
   end
 
   def date_row(date, today)
-    html_options = if is_today(date, today)
+    html_options = if date == today
                      { class: 'date_row today', id: 'socials_today' }
                    else
                      { class: 'date_row' }
@@ -35,15 +35,23 @@ module EventsHelper
   end
 
   def date_header(date, today)
-    display = ''
-    display = "#{today_label} " if is_today(date, today)
-    display = "#{tomorrow_label} " if is_tomorrow(date, today)
-    display += date.to_s(:listing_date)
+    display = date_header_label_prefix(date, today) + date.to_s(:listing_date)
 
     url_options = { controller: :maps,
                     action: :socials,
                     date: date.to_s(:db) }
     link_to raw(display), url_options, title: "Click to view this date's events on a map"
+  end
+
+  def date_header_label_prefix(date, today)
+    case date
+    when today
+      "#{today_label} "
+    when today + 1
+      "#{tomorrow_label} "
+    else
+      ''
+    end
   end
 
   # if there are no socials on this day, we need to add a class
@@ -53,16 +61,6 @@ module EventsHelper
     else
       content_tag :h2, &block
     end
-  end
-
-  def is_today(d, today)
-    d.class == String && Event.weekday_name(today) == d ||
-      d.class == Date && d == today
-  end
-
-  def is_tomorrow(d, today)
-    d.class == String && Event.weekday_name(today + 1) == d ||
-      d.class == Date && d == today + 1
   end
 
   def today_label

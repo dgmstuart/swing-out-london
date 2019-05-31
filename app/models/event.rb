@@ -3,6 +3,7 @@
 require 'out_of_date_calculator'
 require 'date_expectation_calculator'
 require 'dates_string_parser'
+require 'day_names'
 
 class Event < ApplicationRecord
   audited
@@ -98,7 +99,7 @@ class Event < ApplicationRecord
   scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
-  scope :on_same_day_of_week, ->(date) { where(day: Event.weekday_name(date)) }
+  scope :on_same_day_of_week, ->(date) { where(day: DayNames.name(date)) }
 
   # For making sections in the Events editing screens:
   scope :current, -> { active.non_gigs }
@@ -369,11 +370,6 @@ class Event < ApplicationRecord
     return Time.at(0) if first.nil?
 
     maximum(:updated_at)
-  end
-
-  # TODO: should put these somewhere extending Date class
-  def self.weekday_name(date)
-    I18n.l(date, format: '%A')
   end
 
   def self.socials_dates(start_date, venue = nil)
