@@ -370,8 +370,8 @@ class Event < ApplicationRecord
   end
 
   # TODO: should put these somewhere extending Date class
-  def self.weekday_name(d)
-    Date::DAYNAMES[d.wday]
+  def self.weekday_name(date)
+    I18n.l(date, format: '%A')
   end
 
   def self.socials_dates(start_date, venue = nil)
