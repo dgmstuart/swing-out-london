@@ -98,6 +98,8 @@ class Event < ApplicationRecord
   scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
+  scope :on_same_day_of_week, ->(date) { where(day: Event.weekday_name(date)) }
+
   # For making sections in the Events editing screens:
   scope :current, -> { active.non_gigs }
   scope :archived, -> { ended.non_gigs }
@@ -387,14 +389,13 @@ class Event < ApplicationRecord
   end
 
   def self.socials_on_date(date, venue = nil)
-    day = weekday_name(date)
     swing_date = SwingDate.find_by(date: date)
 
     if venue
-      socials_on_that_date = weekly.socials.where(venue_id: venue.id).active_on(date).where(day: day)
+      socials_on_that_date = weekly.socials.active_on(date).on_same_day_of_week(date).where(venue_id: venue.id)
       socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
     else
-      socials_on_that_date = weekly.socials.includes(:venue).active_on(date).where(day: day)
+      socials_on_that_date = weekly.socials.active_on(date).on_same_day_of_week(date).includes(:venue)
       socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
     end
 
