@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Venue < ApplicationRecord
-  acts_as_gmappable lat: 'lat', lng: 'lng', process_geocoding: false
   geocoded_by :postcode,
               latitude: :lat,
               longitude: :lng

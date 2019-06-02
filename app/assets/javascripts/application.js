@@ -2,8 +2,6 @@
 //= require jquery_ujs
 //= require jquery.timeago
 //= require jquery.sieve
-//= require gmaps4rails/gmaps4rails.base
-//= require gmaps4rails/gmaps4rails.googlemaps
 //= require cheet.js
 //= require listing
 //= require_self
