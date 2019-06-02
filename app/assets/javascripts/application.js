@@ -5,8 +5,8 @@
 //= require gmaps4rails/gmaps4rails.base
 //= require gmaps4rails/gmaps4rails.googlemaps
 //= require cheet.js
+//= require listing
 //= require_self
-//= require_tree .
 
 var _gaq = _gaq || [];
 var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';

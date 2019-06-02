@@ -1,21 +1,14 @@
 - content_for :title do
   Swing Out London's Lindy Map:
-  -if @map.highlighted_venue
-    #{ @map.highlighted_venue.name } in #{ @map.highlighted_venue.area }
-  -else
-    Classes
-    -if @day
-      on #{ @day.pluralize }
+  -if @day
+    on #{ @day.pluralize }
 
 - content_for :description do
-  -if @map.highlighted_venue
-    A map showing the swing dance venue #{ @map.highlighted_venue.name } in #{ @map.highlighted_venue.area }. Classes on #{ @day.pluralize }.
-  -else
-    -# This just about fits on a google search result:
-    A map of all the Lindy Hop classes in London
-    -if @day
-      on #{ @day.pluralize },
-    also classes in other swing dance styles: Charleston, Balboa, Blues, Authentic Jazz and Collegiate Shag
+  -# This just about fits on a google search result:
+  A map of all the Lindy Hop classes in London
+  -if @day
+    on #{ @day.pluralize },
+  also classes in other swing dance styles: Charleston, Balboa, Blues, Authentic Jazz and Collegiate Shag
 
 - content_for :listings do
   %ul

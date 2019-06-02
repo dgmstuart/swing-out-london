@@ -2,7 +2,7 @@
   = stylesheet_link_tag 'application_map', media: "screen"
 
 - content_for :content do
-  = map(@map.options, @map.json)
+  #map{ data: { markers: @map.markers.to_json } }
 
   %header.page
     %h1
@@ -20,5 +20,7 @@
     = yield :listings
 
   = yield :scripts
+  = javascript_include_tag('application_map')
+  = javascript_include_tag("https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY']}&callback=initMap", async: true, defer: true)
 
 = render template: 'layouts/application'

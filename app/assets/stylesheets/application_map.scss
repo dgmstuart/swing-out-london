@@ -7,6 +7,18 @@
 
 @import "borders";
 
+#map {
+  height: 100%;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body.classes,
 body.socials {
   a {
@@ -201,6 +213,10 @@ body.socials {
   }
   // SMALL ONLY
   @media only screen and (max-width: 767px) {
+    #map {
+      margin-left: 164px;
+    }
+
     header .primary-nav {
       //text-align: center;
       //width: 100px;
@@ -229,9 +245,8 @@ body.socials {
 
   // TABLET & SMALLER LAPTOPS
   @media only screen and (min-width: 768px) {
-    .map_container {
-      left: 220px;
-      min-width: 320px;
+    #map {
+      margin-left: 220px;
     }
 
     .page {
@@ -249,12 +264,12 @@ body.socials {
 
   // DESKTOP
   @media only screen and (min-width: 960px) {
-    header {
-      padding: 20px;
+    #map {
+      margin-left: 320px;
     }
 
-    .map_container {
-      left: 320px;
+    header {
+      padding: 20px;
     }
 
     .page {
