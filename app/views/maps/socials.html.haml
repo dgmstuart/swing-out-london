@@ -20,5 +20,4 @@
         %li.banner= message
     - @map_dates.listing_dates.each do |date|
       %li
-        = link_to_unless (date == @map_dates.selected_date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do
-          %span#current= date.to_s(:listing_date)
+        = link_to date.to_s(:listing_date), { date: date.to_s(:db) }, { class: ["js-update-map", (:selected if date == @map_dates.selected_date)], data: { url: map_socials_path(date, format: :json) } }

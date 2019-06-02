@@ -39,6 +39,7 @@ module Maps
     def info_window_content(venue)
       renderer.render_to_string(
         partial: info_window_partial,
+        formats: [:html],
         locals: {
           venue: venue,
           events: event_finder.find(venue)

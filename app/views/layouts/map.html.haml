@@ -11,10 +11,8 @@
         Lindy Map#{ mail_to CONTACT_EMAIL, content_tag(:small, ' Beta'), :subject => "Feedback on the Lindy Map" }
 
     .navigation.primary-nav<
-      = link_to_unless_current "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") do
-        %span.current Socials
-      = link_to_unless_current "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") do
-        %span.current Classes
+      = link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials")
+      = link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes")
 
   .listings.page
     = yield :listings

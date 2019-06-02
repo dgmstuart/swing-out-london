@@ -31,5 +31,7 @@ function createMarkers(map, venues) {
       infoWindow.open(map, marker);
       activeInfoWindow = infoWindow;
     });
+
+    markers.push(marker)
   }
 }

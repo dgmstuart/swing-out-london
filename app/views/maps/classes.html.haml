@@ -17,7 +17,6 @@
         %li.banner= message
     - DAYNAMES.each do |day|
       %li
-        = link_to_unless (day == @day), day.pluralize, day: day, anchor: "current" do
-          %span#current= day.pluralize
+        = link_to day.pluralize, { day: day }, { class: ["js-update-map", (:selected if day == @day)], data: { url: map_classes_path(day, format: :json) } }
   %p.note
     %em Unless otherwise stated all classes are primarily Lindy Hop

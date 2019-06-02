@@ -1,32 +1,23 @@
-function initMap() {
-  mapElement = document.getElementById('map');
-  var markers = JSON.parse(mapElement.dataset.markers);
+function setupMap(map, venues) {
+  createMarkers(map, venues);
 
-  var mapControlOptions = {
-    zoomControl: true,
-    zoomControlOptions: {
-      style: google.maps.ZoomControlStyle.LARGE,
-      position: google.maps.ControlPosition.RIGHT_TOP
-    },
-    fullscreenControl: false,
-    mapTypeControl: false
+  var updateControls = document.getElementsByClassName('js-update-map')
+
+  Array.from(updateControls).forEach(setupUpdateControl)
+
+  function setupUpdateControl(updateControl) {
+    updateControl.addEventListener('click', function(event) {
+      event.preventDefault();
+      removeSelected();
+      updateControl.classList.add('selected');
+      updateMap(updateControl, map, markers);
+    });
   }
 
-  var barNightjar = {lat: 51.526532, lng: -0.087777}
-
-  var mapBasicOptions = {
-    center: barNightjar,
-    zoom: 11,
-    maxZoom: 19,
+  function removeSelected() {
+    highlighted = Array.from(document.getElementsByClassName('js-update-map selected'))
+    highlighted.forEach(function(element) {
+      element.classList.remove('selected');
+    })
   }
-
-  var mapOptions = Object.assign({},
-    mapControlOptions,
-    mapBasicOptions
-  );
-
-  var map = new google.maps.Map(mapElement, mapOptions);
-  var activeInfoWindow;
-
-  createMarkers(markers);
 }

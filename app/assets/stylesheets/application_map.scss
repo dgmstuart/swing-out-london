@@ -147,7 +147,8 @@ body.socials {
       -moz-box-shadow: 0 1px 0 #e4e4e4;
       box-shadow: 0 1px 0 #e4e4e4;
 
-      span#current {
+      span#selected,
+      a.selected {
         display: block;
         padding: 10px;
         color: #fee6b8;
@@ -211,8 +212,7 @@ body.socials {
       width: 140px;
       margin: auto;
 
-      a,
-      span {
+      a {
         display: block;
         font-size: 16px;
         margin-bottom: 5px;
