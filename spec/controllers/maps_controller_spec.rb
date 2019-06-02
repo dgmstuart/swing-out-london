@@ -137,77 +137,32 @@ describe MapsController do
   end
 
   describe 'GET socials' do
-    it 'assigns an array of dates to @listings dates' do
-      # Stub out irrelevant logic:
-      allow(controller).to receive(:get_date)
-      allow(Event).to receive(:socials_dates).and_return([])
+    describe '@map_dates.selected_date' do
+      subject(:selected_date) { assigns[:map_dates].selected_date }
 
-      allow(Event).to receive(:listing_dates).and_return([Date.new])
+      context 'when the url contained no date' do
+        it 'is nil' do
+          get :socials
 
-      get :socials
-      expect(assigns[:listing_dates]).to be_an(Array)
-      expect(assigns[:listing_dates][0]).to be_a(Date)
-    end
-
-    describe 'assigns dates correctly:' do
-      before do
-        allow(Event).to receive(:socials_on_date).and_return([])
-        allow(Event).to receive(:socials_dates).and_return([])
+          expect(selected_date).to be_nil
+        end
       end
 
-      it '@date should be nil if the url contained no date' do
-        get :socials
-        expect(assigns[:day]).to be_nil
-      end
-      context 'when the url contains a string representing a date' do
-        before do
-          @date_string = '2012-12-23'
-          @date = Date.new(2012, 12, 23)
-        end
+      context 'when the url contains a date within the displayed range' do
+        it 'exposes that date' do
+          Timecop.freeze(Date.new(2012, 12, 20)) do
+            get :socials, params: { date: '2012-12-23' }
 
-        it '@date should be a date if that date is in the listing dates' do
-          allow(Event).to receive(:listing_dates).and_return([@date])
-          get :socials, params: { date: @date_string }
-          expect(assigns[:date]).to eq(@date)
-        end
-
-        context 'when the date is not in the listing dates' do
-          it 'redirects to the main socials page' do
-            allow(Event).to receive(:listing_dates).and_return([])
-            expect(get(:socials, params: { date: @date_string })).to redirect_to('/map/socials')
-          end
-
-          it 'shows a flash message' do
-            allow(Event).to receive(:listing_dates).and_return([])
-            get :socials, params: { date: @date_string }
-            expect(flash[:warn]).to eq 'We can only show you events for the next 14 days'
+            expect(selected_date).to eq(Date.new(2012, 12, 23))
           end
         end
       end
 
-      context 'when the url contains a date described in words' do
-        before do
-          @date = Date.today
-          allow(controller).to receive(:today).and_return(@date)
-        end
-
-        it "@date should be today's date if the description is 'today'" do
-          get :socials, params: { date: 'today' }
-          expect(assigns[:date]).to eq(@date)
-        end
-        it "@date should be tomorrow's date if the description is 'tomorrow'" do
-          get :socials, params: { date: 'tomorrow' }
-          expect(assigns[:date]).to eq(@date + 1)
-        end
-
-        context "when the description is 'yesterday'" do
-          it 'redirects to the main socials page' do
-            expect(get(:socials, params: { date: 'yesterday' })).to redirect_to('/map/socials')
-          end
-
-          it 'shows a flash message' do
-            get :socials, params: { date: 'yesterday' }
-            expect(flash[:warn]).to eq 'We can only show you events for the next 14 days'
+      context 'when the url contains a date outside the displayed range' do
+        it 'redirects to the main socials page' do
+          Timecop.freeze(Date.new(2012, 12, 20)) do
+            expect(get(:socials, params: { date: '2013-12-23' }))
+              .to redirect_to('/map/socials')
           end
         end
       end
@@ -221,22 +176,6 @@ describe MapsController do
           get :socials, params: { date: 'asfasfasf' }
           expect(flash[:warn]).to eq 'We can only show you events for the next 14 days'
         end
-      end
-    end
-
-    context 'when there is exactly one venue' do
-      before do
-        event = FactoryBot.create(:social)
-        allow(Event).to receive(:socials_dates).and_return([[nil, event]])
-        get :socials
-      end
-
-      it 'sets the zoom level to 14' do
-        expect(assigns['map'].options['zoom']).to eq(14)
-      end
-
-      it 'disables auto zoom' do
-        expect(assigns['map'].options['auto_zoom']).to eq(false)
       end
     end
   end

@@ -13,20 +13,8 @@ class MapsController < ApplicationController
     # Varnish will cache the page for 3600 seconds = 1 hour:
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
-    begin
-      @day = Maps::Classes::DayParser.parse(params[:day], today)
-    rescue Maps::Classes::DayParser::NonDayError
-      flash[:warn] = 'We can only show you classes for days of the week'
-      logger.warn("Not a recognised day: #{@day}")
-      redirect_to map_classes_path
-      return
-    end
-
-    venues = if @day
-               Venue.all_with_classes_listed_on_day(@day)
-             else
-               Venue.all_with_classes_listed
-             end
+    @day = Maps::Classes::DayParser.parse(params[:day], today)
+    venues = Maps::Classes::VenueQuery.new(@day).venues
 
     @map =
       if venues.blank?
@@ -40,35 +28,23 @@ class MapsController < ApplicationController
           renderer: self
         )
       end
+  rescue Maps::Classes::DayParser::NonDayError
+    flash[:warn] = 'We can only show you classes for days of the week'
+    logger.warn("Not a recognised day: #{@day}")
+    redirect_to map_classes_path
   end
 
   def socials
     # Varnish will cache the page for 3600 seconds = 1 hour:
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
-    @listing_dates = Event.listing_dates(today)
-
-    if params[:date].blank?
-      # show events for all dates
-      events = Event.socials_dates(today).map { |s| s[1] }.flatten
-    else
-      @date = Maps::Socials::DateParser.parse(params[:date], today)
-
-      if @listing_dates.include?(@date)
-        events = Event.socials_on_date(@date)
-      else
-        flash[:warn] = 'We can only show you events for the next 14 days'
-        logger.warn("Not a date in the visible range: #{@date}")
-        redirect_to map_socials_path
-        return
-      end
-    end
+    @map_dates = Maps::Socials::Dates.new(params[:date], today)
+    venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
 
     @map =
-      if events.nil?
+      if venues.empty?
         Maps::EmptyMap.new
       else
-        venues = events.map(&:venue).uniq
         Maps::GmapsMap.new(
           venues: venues,
           highlighted_venue_id: params[:venue_id],
@@ -77,5 +53,9 @@ class MapsController < ApplicationController
           renderer: self
         )
       end
+  rescue Maps::Socials::Dates::DateOutOfRangeError
+    flash[:warn] = 'We can only show you events for the next 14 days'
+    logger.warn("Not a date in the visible range: #{@date}")
+    redirect_to map_socials_path
   end
 end
