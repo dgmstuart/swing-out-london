@@ -8,7 +8,7 @@
     %h1
       = link_to "Swing Out London's", :controller => "website", :action => "index"
       %em
-        Lindy Map#{ mail_to CONTACT_EMAIL, content_tag(:small, ' Beta'), :subject => "Feedback on the Lindy Map" }
+        Lindy Map
 
     .navigation.primary-nav<
       = link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials")
