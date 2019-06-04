@@ -3,7 +3,6 @@
 %ul.listing_info
   - events.each do |event|
     %li
-      - unless @day
-        %span.day= "#{event.day.pluralize}:" 
+      %span.day= "#{event.day.pluralize}:"
       = mapinfo_swingclass_link(event)
       = swingclass_cancelledmsg(event)

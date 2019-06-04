@@ -17,17 +17,13 @@ class MapsController < ApplicationController
     venues = Maps::Classes::VenueQuery.new(@day).venues
 
     @map =
-      if venues.blank?
-        Maps::EmptyMap.new
-      else
-        Maps::GmapsMap.new(
-          venues: venues,
-          highlighted_venue_id: params[:venue_id],
-          event_finder: Maps::Classes::FinderFromVenue.new(day: @day),
-          info_window_partial: 'classes_map_info',
-          renderer: self
-        )
-      end
+      Maps::Map.new(
+        venues: venues,
+        highlighted_venue_id: params[:venue_id].to_i,
+        event_finder: Maps::Classes::FinderFromVenue.new(day: @day),
+        info_window_partial: 'classes_map_info',
+        renderer: self
+      )
   rescue Maps::Classes::DayParser::NonDayError
     flash[:warn] = 'We can only show you classes for days of the week'
     logger.warn("Not a recognised day: #{@day}")
@@ -42,17 +38,13 @@ class MapsController < ApplicationController
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
 
     @map =
-      if venues.empty?
-        Maps::EmptyMap.new
-      else
-        Maps::GmapsMap.new(
-          venues: venues,
-          highlighted_venue_id: params[:venue_id],
-          event_finder: Maps::Socials::FinderFromVenue.new(date: @date, today: today),
-          info_window_partial: 'socials_map_info',
-          renderer: self
-        )
-      end
+      Maps::Map.new(
+        venues: venues,
+        highlighted_venue_id: params[:venue_id].to_i,
+        event_finder: Maps::Socials::FinderFromVenue.new(date: @date, today: today),
+        info_window_partial: 'socials_map_info',
+        renderer: self
+      )
   rescue Maps::Socials::Dates::DateOutOfRangeError
     flash[:warn] = 'We can only show you events for the next 14 days'
     logger.warn("Not a date in the visible range: #{@date}")

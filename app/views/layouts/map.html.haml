@@ -2,7 +2,7 @@
   = stylesheet_link_tag 'application_map', media: "screen"
 
 - content_for :content do
-  = map(@map.options, @map.json)
+  #map{ data: { markers: @map.markers.to_json } }
 
   %header.page
     %h1
@@ -11,14 +11,14 @@
         Lindy Map#{ mail_to CONTACT_EMAIL, content_tag(:small, ' Beta'), :subject => "Feedback on the Lindy Map" }
 
     .navigation.primary-nav<
-      = link_to_unless_current "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") do
-        %span.current Socials
-      = link_to_unless_current "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") do
-        %span.current Classes
+      = link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials")
+      = link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes")
 
   .listings.page
     = yield :listings
 
   = yield :scripts
+  = javascript_include_tag('application_map')
+  = javascript_include_tag("https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY']}&callback=initMap", async: true, defer: true)
 
 = render template: 'layouts/application'

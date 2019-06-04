@@ -1,20 +1,13 @@
 - content_for :title do
-  Swing Out London's Lindy Map:
-  -if @highlighted_venue
-    #{ @highlighted_venue.name } in #{ @highlighted_venue.area }
-  -else
-    Socials
-    -if @map_dates.selected_date
-      on #{ @map_dates.selected_date.to_s(:listing_date) }
+  Swing Out London's Lindy Map: Socials
+  -if @map_dates.selected_date
+    on #{ @map_dates.selected_date.to_s(:listing_date) }
 
 
 - content_for :description do
-  -if @highlighted_venue
-    A map showing swing dance venue #{ @highlighted_venue.name } in #{ @highlighted_venue.area }.
-  -else
-    A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
-    -if @map_dates.selected_date
-      on #{ @map_dates.selected_date.to_s(:listing_date) }
+  A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
+  -if @map_dates.selected_date
+    on #{ @map_dates.selected_date.to_s(:listing_date) }
 
 - content_for :head do
   -if @map_dates.selected_date
@@ -27,5 +20,4 @@
         %li.banner= message
     - @map_dates.listing_dates.each do |date|
       %li
-        = link_to_unless (date == @map_dates.selected_date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do
-          %span#current= date.to_s(:listing_date)
+        = link_to date.to_s(:listing_date), { date: date.to_s(:db) }, { class: ["js-update-map", (:selected if date == @map_dates.selected_date)], data: { url: map_socials_path(date, format: :json) } }

@@ -116,7 +116,6 @@ GEM
     geocoder (1.5.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    gmaps4rails (2.0.0.pre)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -145,6 +144,8 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.2)
+    jbuilder (2.9.1)
+      activesupport (>= 4.2.0)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -357,9 +358,9 @@ DEPENDENCIES
   factory_bot_rails
   faker
   geocoder
-  gmaps4rails (= 2.0.0.pre)
   haml-rails
   http
+  jbuilder
   jquery-rails
   launchy
   listen
