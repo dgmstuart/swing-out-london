@@ -104,6 +104,44 @@ describe Event do
     end
   end
 
+  describe '.socials_on_date' do
+    it 'returns intermittent socials on a given date' do
+      date = Date.current
+      social = FactoryBot.create(:intermittent_social, dates: [date])
+
+      socials = described_class.socials_on_date(date)
+
+      expect(socials).to eq [social]
+    end
+
+    it 'returns weekly socials on the same day as a given date' do
+      date = Date.current.next_occurring(:thursday)
+      social = FactoryBot.create(:weekly_social, day: 'Thursday')
+
+      socials = described_class.socials_on_date(date)
+
+      expect(socials).to eq [social]
+    end
+
+    it 'returns nil if there are no socials on that date' do
+      date = Date.current
+
+      socials = described_class.socials_on_date(date)
+
+      expect(socials).to be_nil
+    end
+
+    it 'sorts the results by title' do
+      date = Date.current.next_occurring(:thursday)
+      FactoryBot.create(:intermittent_social, dates: [date], title: 'Casablanca')
+      FactoryBot.create(:weekly_social, day: 'Thursday', title: 'Alhambra')
+      FactoryBot.create(:intermittent_social, dates: [date], title: 'Boogaloo')
+      socials = described_class.socials_on_date(date)
+
+      expect(socials.pluck(:title)).to eq %w[Alhambra Boogaloo Casablanca]
+    end
+  end
+
   # ultimately do away with date_array and test .dates= instead"
   describe '.date_array =' do
     before do
