@@ -382,7 +382,7 @@ class Event < ApplicationRecord
 
     listing_dates(start_date).each do |date|
       socials_on_date = socials_on_date(date, venue)
-      output << [date, socials_on_date, cancelled_events_on_date(date)] if socials_on_date
+      output << [date, socials_on_date, cancelled_events_on_date(date)] unless socials_on_date.empty?
     end
 
     output
@@ -391,15 +391,14 @@ class Event < ApplicationRecord
   def self.socials_on_date(date, venue = nil)
     swing_date = SwingDate.find_by(date: date)
 
+    weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
     if venue
-      socials_on_that_date = weekly.socials.active_on(date).on_same_day_of_week(date).where(venue_id: venue.id)
+      socials_on_that_date = weekly_socials.where(venue_id: venue.id)
       socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
     else
-      socials_on_that_date = weekly.socials.active_on(date).on_same_day_of_week(date).includes(:venue)
+      socials_on_that_date = weekly_socials.includes(:venue)
       socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
     end
-
-    return if socials_on_that_date.blank?
 
     socials_on_that_date.sort_by(&:title)
   end

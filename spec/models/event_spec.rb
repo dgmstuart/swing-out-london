@@ -128,7 +128,7 @@ describe Event do
 
       socials = described_class.socials_on_date(date)
 
-      expect(socials).to be_nil
+      expect(socials).to be_empty
     end
 
     it 'sorts the results by title' do
