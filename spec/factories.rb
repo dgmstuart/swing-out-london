@@ -25,6 +25,11 @@ FactoryBot.define do
       # generate classes for different days of the week:
       sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
     end
+
+    factory :weekly_social do
+      frequency { 1 }
+      sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
+    end
   end
 
   factory :venue do

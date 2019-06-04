@@ -3,6 +3,7 @@
 require 'out_of_date_calculator'
 require 'date_expectation_calculator'
 require 'dates_string_parser'
+require 'day_names'
 
 class Event < ApplicationRecord
   audited
@@ -80,10 +81,6 @@ class Event < ApplicationRecord
     festival
   ].freeze
 
-  def is_gig?
-    event_type == 'gig'
-  end
-
   # scopes to get different types of event:
   scope :classes, -> { where(has_class: true) }
   scope :socials, -> { where(has_social: true) }
@@ -95,11 +92,14 @@ class Event < ApplicationRecord
 
   scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.local_today) }
   scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.local_today) }
+  scope :active_on, ->(date) { where('(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)', date, date) }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
   scope :listing_classes_on_day, ->(day) { listing_classes.where(day: day) }
   scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
+
+  scope :on_same_day_of_week, ->(date) { where(day: DayNames.name(date)) }
 
   # For making sections in the Events editing screens:
   scope :current, -> { active.non_gigs }
@@ -340,30 +340,6 @@ class Event < ApplicationRecord
     Rails.cache.delete(latest_date_cache_key)
   end
 
-  # for repeating events - find the next and previous dates
-  def next_date
-    return unless weekly?
-    return Date.local_today if day == Event.weekday_name(Date.local_today)
-
-    Date.local_today.next_week(day.downcase.to_sym)
-  end
-
-  def prev_date
-    return unless weekly?
-    return Date.local_today if day == Event.weekday_name(Date.local_today)
-
-    # prev_week doesn't seem to be implemented...
-    (next_date - 7.days)
-  end
-
-  # is/was/will the event active on a particular date?
-  def active_on(date)
-    (first_date.nil? || first_date <= date) &&
-      (last_date.nil? || last_date >= date)
-  end
-
-  scope :active_on, ->(date) { where('(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)', date, date) }
-
   ###########
   # ACTIONS #
   ###########
@@ -396,36 +372,29 @@ class Event < ApplicationRecord
     maximum(:updated_at)
   end
 
-  # TODO: should put these somewhere extending Date class
-  def self.weekday_name(d)
-    Date::DAYNAMES[d.wday]
-  end
-
   def self.socials_dates(start_date, venue = nil)
     # build up an array of events occuring on each date
     output = []
 
     listing_dates(start_date).each do |date|
       socials_on_date = socials_on_date(date, venue)
-      output << [date, socials_on_date, cancelled_events_on_date(date)] if socials_on_date
+      output << [date, socials_on_date, cancelled_events_on_date(date)] unless socials_on_date.empty?
     end
 
     output
   end
 
   def self.socials_on_date(date, venue = nil)
-    day = weekday_name(date)
     swing_date = SwingDate.find_by(date: date)
 
+    weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
     if venue
-      socials_on_that_date = weekly.socials.where(venue_id: venue.id).active_on(date).where(day: day)
+      socials_on_that_date = weekly_socials.where(venue_id: venue.id)
       socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
     else
-      socials_on_that_date = weekly.socials.includes(:venue).active_on(date).where(day: day)
+      socials_on_that_date = weekly_socials.includes(:venue)
       socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
     end
-
-    return if socials_on_that_date.blank?
 
     socials_on_that_date.sort_by(&:title)
   end

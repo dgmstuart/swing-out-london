@@ -4,8 +4,8 @@
     #{ @highlighted_venue.name } in #{ @highlighted_venue.area }
   -else
     Socials
-    -if @date
-      on #{ @date.to_s(:listing_date) }
+    -if @map_dates.selected_date
+      on #{ @map_dates.selected_date.to_s(:listing_date) }
 
 
 - content_for :description do
@@ -13,11 +13,11 @@
     A map showing swing dance venue #{ @highlighted_venue.name } in #{ @highlighted_venue.area }.
   -else
     A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
-    -if @date
-      on #{ @date.to_s(:listing_date) }
+    -if @map_dates.selected_date
+      on #{ @map_dates.selected_date.to_s(:listing_date) }
 
 - content_for :head do
-  -if @date
+  -if @map_dates.selected_date
     %meta{ name: "robots", content: "noindex" }/
 
 - content_for :listings do
@@ -25,7 +25,7 @@
     - if flash.any?
       - flash.each do |_level, message|
         %li.banner= message
-    - @listing_dates.each do |date|
+    - @map_dates.listing_dates.each do |date|
       %li
-        = link_to_unless (date == @date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do
+        = link_to_unless (date == @map_dates.selected_date), date.to_s(:listing_date), date: date.to_s(:db), anchor: "current" do
           %span#current= date.to_s(:listing_date)
