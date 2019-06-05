@@ -49,4 +49,37 @@ RSpec.describe 'Admins can create events' do
 
     expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
+
+  it 'with missing data' do
+    stub_login(id: 12345678901234567, name: 'Al Minns')
+    FactoryBot.create(:venue, name: 'The 100 Club')
+
+    visit '/login'
+    click_on 'Log in with Facebook'
+
+    click_on 'New event', match: :first
+
+    click_on 'Create'
+
+    expect(page).to have_content('6 errors prohibited this record from being saved')
+      .and have_content('Venue must exist')
+      .and have_content('Url is invalid')
+      .and have_content("Url can't be blank")
+      .and have_content("Event type can't be blank")
+      .and have_content("Frequency can't be blank")
+      .and have_content('Events must have either a Social or a Class')
+
+    select 'The 100 Club', from: 'Venue'
+    select 'school', from: 'Event type'
+    check 'Has social?'
+    fill_in 'event_frequency', with: '1'
+    fill_in 'Url', with: 'http://www.lsds.co.uk/stompin'
+
+    click_on 'Create'
+
+    expect(page).to have_content('Venue: The 100 Club')
+      .and have_content('school, with social')
+      .and have_content('Frequency: Weekly')
+      .and have_content('Url: http://www.lsds.co.uk/stompin')
+  end
 end
