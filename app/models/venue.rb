@@ -6,7 +6,7 @@ class Venue < ApplicationRecord
               longitude: :lng
   audited
 
-  has_many :events
+  has_many :events, dependent: :restrict_with_exception
 
   scope :all_with_classes_listed, -> { where(id: Event.listing_classes.select('distinct venue_id')) }
   scope :all_with_classes_listed_on_day, ->(day) { where(id: Event.listing_classes_on_day(day).select('distinct venue_id')) }
