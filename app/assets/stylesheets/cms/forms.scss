@@ -81,6 +81,11 @@ div.actions {
   margin-left: 155px;
   line-height: 1.5;
   clear: left;
+
+  .inactive {
+    color: $lowlight-colour;
+    font-style: italic;
+  }
 }
 
 // Rails Errors

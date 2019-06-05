@@ -20,7 +20,9 @@
     <td class="actions">
       <%= link_to 'Show', venue %>
       <%= link_to 'Edit', edit_venue_path(venue) %>
-      <%= link_to 'Destroy', venue, :confirm => 'Are you sure?', :method => :delete %>
+      <% if venue.can_delete? %>
+        <%= link_to 'Delete', venue, confirm: 'Are you sure?', method: :delete %>
+      <% end %>
     </td>
   </tr>
 <% end %>

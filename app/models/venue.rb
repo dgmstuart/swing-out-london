@@ -23,7 +23,6 @@ class Venue < ApplicationRecord
       end
     end
   end
-
   UNKNOWN_POSTCODE = '???'
 
   def outward_postcode
@@ -54,6 +53,10 @@ class Venue < ApplicationRecord
 
   def coordinates
     "[ #{lat}, #{lng} ]"
+  end
+
+  def can_delete?
+    events.empty?
   end
 
   def self.geocode_all
