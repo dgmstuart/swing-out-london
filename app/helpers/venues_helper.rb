@@ -10,4 +10,11 @@ module VenuesHelper
     end
     tag :tr, { class: class_string, id: "venue_#{venue.id}" }, true
   end
+
+  def conditional_delete_tag(venue)
+    confirmation = 'Are you sure you want to delete this venue?'
+    link_to_if venue.can_delete?, 'Delete', venue, confirm: confirmation, method: :delete do
+      content_tag :span, "Can't be deleted: has associated events", class: 'inactive'
+    end
+  end
 end

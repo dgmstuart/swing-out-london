@@ -7,6 +7,7 @@ class VenuesController < CMSBaseController
 
   def show
     @venue = Venue.find(params[:id])
+    @associated_events = @venue.events.map { |event| AssociatedEvent.new(event) }
     @last_update = LastUpdate.new(@venue)
   end
 

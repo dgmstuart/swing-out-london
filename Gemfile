@@ -53,6 +53,7 @@ group :test do
   gem 'launchy'
   gem 'rails-controller-testing' # TODO: refactor tests so that we don't need this
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'timecop'
   gem 'vcr'
