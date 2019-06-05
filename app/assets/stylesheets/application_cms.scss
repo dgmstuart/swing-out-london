@@ -188,6 +188,30 @@ ol.show span {
 
 ol.show li { clear: left; }
 
+ol.show li ul {
+  display: inline-block;
+
+  li {
+    list-style-type: disc;
+  }
+}
+
+.venues.show {
+  section {
+    margin: 20px 0 20px 155px;
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-position: inside;
+      list-style-type: disc;
+    }
+  }
+}
+
 .last-updated {
   padding-top: 20px;
   font-style: italic;

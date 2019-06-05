@@ -37,6 +37,17 @@
   </li>
 </ol>
 
+<% if @associated_events.any? %>
+  <section>
+    <h3>Associated Events</h3>
+    <ul>
+      <% @associated_events.each do |event| %>
+        <li><%= link_to event.summary, event.link %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
 <div class="actions">
   <%= link_to 'Edit', edit_venue_path(@venue) %>  |
   <%= conditional_delete_tag(@venue) %> |
