@@ -5,24 +5,24 @@ require 'rails_helper'
 RSpec.describe 'Users can view a map of upcoming events' do
   describe 'socials page' do
     it 'viewing the page' do
-      visit '/map/socials'
-
-      Timecop.freeze(Date.new(1943, 4, 1)) do
-        expect(page).to have_content('Tuesday 4th June')
-          .and have_content('Wednesday 5th June')
-          .and have_content('Thursday 6th June')
-          .and have_content('Friday 7th June')
-          .and have_content('Saturday 8th June')
-          .and have_content('Sunday 9th June')
-          .and have_content('Monday 10th June')
-          .and have_content('Tuesday 11th June')
-          .and have_content('Wednesday 12th June')
-          .and have_content('Thursday 13th June')
-          .and have_content('Friday 14th June')
-          .and have_content('Saturday 15th June')
-          .and have_content('Sunday 16th June')
-          .and have_content('Monday 17th June')
+      Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
+        visit '/map/socials'
       end
+
+      expect(page).to have_content('Tuesday 4th June')
+        .and have_content('Wednesday 5th June')
+        .and have_content('Thursday 6th June')
+        .and have_content('Friday 7th June')
+        .and have_content('Saturday 8th June')
+        .and have_content('Sunday 9th June')
+        .and have_content('Monday 10th June')
+        .and have_content('Tuesday 11th June')
+        .and have_content('Wednesday 12th June')
+        .and have_content('Thursday 13th June')
+        .and have_content('Friday 14th June')
+        .and have_content('Saturday 15th June')
+        .and have_content('Sunday 16th June')
+        .and have_content('Monday 17th June')
     end
 
     it 'looking at a date in the past' do
