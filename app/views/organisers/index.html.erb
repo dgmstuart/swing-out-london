@@ -8,17 +8,19 @@
     <th>Description</th>
   </tr>
 
-<% @organisers.each do |organiser| %>
-  <%= organiser_row_tag(organiser) %>
+  <% @organisers.each do |organiser| %>
+    <%= organiser_row_tag(organiser) %>
     <td><%= link_to_unless organiser.website.nil?, organiser.name, organiser.website %></td>
     <td><%=h organiser.description %></td>
     <td class="actions">
-		<%= link_to 'Show', organiser %>
-	    <%= link_to 'Edit', edit_organiser_path(organiser) %>
-	    <%= link_to 'Destroy', organiser, :confirm => 'Are you sure?', :method => :delete %>
-	</td>
-  </tr>
-<% end %>
+      <%= link_to 'Show', organiser %>
+      <%= link_to 'Edit', edit_organiser_path(organiser) %>
+      <% if organiser.can_delete? %>
+        <%= link_to 'Delete', organiser, confirm: 'Are you sure?', method: :delete %>
+      <% end %>
+    </td>
+    </tr>
+  <% end %>
 </table>
 
 <br />

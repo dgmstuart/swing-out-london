@@ -3,8 +3,8 @@
 class Organiser < ApplicationRecord
   audited
 
-  has_many :classes, class_name: 'Event', foreign_key: 'class_organiser_id'
-  has_many :socials, class_name: 'Event', foreign_key: 'social_organiser_id'
+  has_many :classes, class_name: 'Event', foreign_key: 'class_organiser_id', dependent: :restrict_with_exception
+  has_many :socials, class_name: 'Event', foreign_key: 'social_organiser_id', dependent: :restrict_with_exception
 
   default_scope -> { order(name: :asc) } # sets default search order
 
@@ -14,25 +14,20 @@ class Organiser < ApplicationRecord
   validates :shortname, uniqueness: { allow_blank: true }
 
   def events
-    classes + socials
+    Event
+      .where(class_organiser_id: id)
+      .or(Event.where(social_organiser_id: id))
   end
 
-  # Are there any active events associated with this organiser?
   def all_events_out_of_date?
-    events.each do |event|
-      # not out of date means there is at least one event which has current dates...
-      return false unless event.out_of_date
-    end
-
-    true
+    events.all?(&:out_of_date)
   end
 
   def all_events_nearly_out_of_date?
-    events.each do |event|
-      # not out of date means there is at least one event which has current dates...
-      return false unless event.near_out_of_date
-    end
+    events.all?(&:near_out_of_date)
+  end
 
-    true
+  def can_delete?
+    events.empty?
   end
 end

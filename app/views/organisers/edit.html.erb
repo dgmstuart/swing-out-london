@@ -1,9 +1,9 @@
 <h1>Editing organiser</h1>
 
-<%=render :partial => "new_or_edit_fields", :locals => {:action => "Update" } %>
+<%= render partial: "new_or_edit_fields", locals: {action: "Update" } %>
 
 <div class="actions">
-	<%= link_to 'Show', @organiser %> |
-	<%= link_to 'Back', organisers_path %> |
-	<%= link_to 'Delete', @organiser, :confirm => 'Are you sure you want to delete this organiser?', :method => :delete %>
+  <%= link_to 'Show', @organiser %> |
+  <%= link_to 'Back', organisers_path %> |
+  <%= conditional_delete_tag(@organiser) %> |
 </div>
