@@ -52,7 +52,7 @@ module ListingsHelper
     end
   end
 
-  def mapinfo_social_listing(social, cancelled, date = nil)
+  def mapinfo_social_listing(social, cancelled, date)
     if social.title.blank?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return
@@ -70,12 +70,8 @@ module ListingsHelper
     end
 
     capture do
-      if date
-        concat date_info
-        concat wrapped_social_details
-      else
-        concat social_details
-      end
+      concat date_info
+      concat wrapped_social_details
     end
   end
 
