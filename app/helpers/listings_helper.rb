@@ -63,11 +63,11 @@ module ListingsHelper
         concat cancelled_label
         concat ' '
       end
-      concat mapinfo_social_link(social)
-      if social.has_class? || social.has_taster?
+      if social.new?
+        concat new_event_label
         concat ' '
-        concat mapinfo_class_info_tag(social)
       end
+      concat mapinfo_social_link(social)
     end
   end
 
@@ -99,16 +99,16 @@ module ListingsHelper
     end
   end
 
-  def mapinfo_social_link(event)
+  def mapinfo_social_link(social)
     text = capture do
-      if event.new?
-        concat new_event_label
+      concat social.title
+      if social.has_class? || social.has_taster?
         concat ' '
+        concat mapinfo_class_info_tag(social)
       end
-      concat event.title
     end
 
-    link_to_unless event.url.nil?, text, event.url
+    link_to_unless social.url.nil?, text, social.url
   end
 
   def swingclass_listing(swingclass, day)
