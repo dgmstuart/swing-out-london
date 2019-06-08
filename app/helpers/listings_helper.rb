@@ -52,30 +52,12 @@ module ListingsHelper
     end
   end
 
-  def mapinfo_social_listing(social, cancelled, date)
+  def mapinfo_social_listing(social, cancelled)
     if social.title.blank?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return
     end
 
-    date_info = tag.span class: 'social_date' do
-      concat link_to date.to_s(:listing_date), date: date.to_s(:db)
-      concat ': '
-    end
-
-    social_details = mapinfo_social_details(social, cancelled)
-
-    wrapped_social_details = tag.span class: 'event_details' do
-      concat social_details
-    end
-
-    capture do
-      concat date_info
-      concat wrapped_social_details
-    end
-  end
-
-  def mapinfo_social_details(social, cancelled)
     capture do
       if cancelled
         concat cancelled_label
