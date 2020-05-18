@@ -405,24 +405,6 @@ li.date_row {
   p {
     margin: 10px;
   }
-
-  form {
-    float: left;
-
-    .donate_button {
-      background-color: #ef4836;
-      color: white;
-      border: solid;
-      border-width: 0;
-      font-size: inherit;
-      font-family: inherit;
-      line-height: inherit;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
 }
 
 .share_button {
@@ -442,6 +424,11 @@ li.date_row {
 
 .twitter {
   background-color: $twitter-blue;
+  color: white;
+}
+
+.donate_button {
+  background-color: #ef4836;
   color: white;
 }
 

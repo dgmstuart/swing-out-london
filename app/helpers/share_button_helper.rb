@@ -48,4 +48,15 @@ module ShareButtonHelper
             target: '_blank',
             class: 'share_button facebook', rel: 'noopener'
   end
+
+  def donate_button
+    alt_text = 'Donate to help keep Swing Out London running'
+
+    link_to 'Donate',
+            ENV['DONATE_LINK'],
+            title: alt_text,
+            alt: alt_text,
+            target: '_blank',
+            class: 'share_button donate_button', rel: 'noopener'
+  end
 end
