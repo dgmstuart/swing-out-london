@@ -89,9 +89,9 @@ class Venue < ApplicationRecord
     end
 
     if failed_save.empty? && failed_geocode.empty?
-      return true
+      true
     else
-      return { failed_save: failed_save, failed_geocode: failed_geocode }
+      { failed_save: failed_save, failed_geocode: failed_geocode }
     end
   end
 end

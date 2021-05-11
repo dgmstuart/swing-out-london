@@ -12,7 +12,7 @@ Lint/DuplicateMethods:
     - 'app/models/event.rb'
 
 # Offense count: 1
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - 'lib/dates_string_parser.rb'
 
@@ -63,7 +63,7 @@ Naming/PredicateName:
 # Offense count: 9
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
 # AllowedNames: io, id, to, by, on, in, at, ip, db
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Exclude:
     - 'app/helpers/events_helper.rb'
     - 'app/helpers/venues_helper.rb'
@@ -193,5 +193,5 @@ Style/GuardClause:
 # Offense count: 246
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
-Metrics/LineLength:
+Layout/LineLength:
   Max: 148
