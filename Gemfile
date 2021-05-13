@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.7'
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2.6'
 
 gem 'actionpack-action_caching' # to support pre rails-4 style action caching
 gem 'audited'
