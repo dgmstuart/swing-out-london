@@ -2,7 +2,7 @@
 
 require File.expand_path('config/application', __dir__)
 
-task :lint_styles do
+task lint_styles: :environment do
   system('yarn run stylelint app/assets/stylesheets')
 end
 

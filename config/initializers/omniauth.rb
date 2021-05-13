@@ -11,7 +11,7 @@ if Rails.env.development?
   login_user_id = ENV.fetch('DEVELOPMENT_USER_LOGIN_ID', Faker::Facebook.uid)
 
   # Our locale files haven't been loaded yet so we need to do it ourselves here:
-  I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+  I18n.load_path += Dir[Rails.root.join('config/locales/*.{rb,yml}').to_s]
 
   OmniauthTestResponseBuilder.new.stub_auth_hash(id: login_user_id)
 end

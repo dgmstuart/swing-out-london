@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_151929) do
+ActiveRecord::Schema.define(version: 2021_05_13_192925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,12 +87,14 @@ ActiveRecord::Schema.define(version: 2018_11_18_151929) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "shortname", limit: 255
+    t.index ["shortname"], name: "index_organisers_on_shortname", unique: true
   end
 
   create_table "swing_dates", id: :serial, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date "date"
+    t.index ["date"], name: "index_swing_dates_on_date", unique: true
   end
 
   create_table "venues", id: :serial, force: :cascade do |t|

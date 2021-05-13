@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'spec/support/time_formats_helper'
 require 'active_support/core_ext/module/delegation'
-require 'active_support/core_ext/time/zones.rb'
+require 'active_support/core_ext/time/zones'
 require 'app/presenters/last_update'
 
 RSpec.describe LastUpdate do

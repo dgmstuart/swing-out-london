@@ -24,18 +24,15 @@ RSpec.describe 'Adding a new event' do
     click_on 'New Organiser'
 
     fill_in 'Name', with: 'Herbert White'
-    fill_in 'Shortname', with: ''
-    fill_in 'Website', with: ''
-    fill_in 'Description', with: ''
+    fill_in 'Shortname', with: 'Whitey'
+    fill_in 'Website', with: 'https://hoppingmainacs.org'
+    fill_in 'Description', with: "Architect of Whitey's Lindy Hoppers"
 
     click_on 'Update'
 
     click_on 'New Organiser'
 
     fill_in 'Name', with: 'Frankie Manning'
-    fill_in 'Shortname', with: ''
-    fill_in 'Website', with: ''
-    fill_in 'Description', with: ''
 
     click_on 'Update'
 

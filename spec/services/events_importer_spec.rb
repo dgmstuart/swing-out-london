@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'app/services/events_importer.rb'
+require 'app/services/events_importer'
 
 RSpec.describe EventsImporter do
   describe 'import' do

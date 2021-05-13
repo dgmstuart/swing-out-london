@@ -12,15 +12,13 @@ class Venue < ApplicationRecord
   scope :all_with_classes_listed_on_day, ->(day) { where(id: Event.listing_classes_on_day(day).select('distinct venue_id')) }
 
   validates :name, :area, presence: true
-  validates :website, format: URI.regexp(%w[http https])
+  validates :website, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   before_validation do
-    if lat.nil? || lng.nil?
-      unless geocode
-        errors.add :lat, "The address information could not be geocoded.
+    if (lat.nil? || lng.nil?) && !geocode
+      errors.add :lat, "The address information could not be geocoded.
           Please check the address information or manually enter
           latitude and longitude"
-      end
     end
   end
   UNKNOWN_POSTCODE = '???'
@@ -34,7 +32,7 @@ class Venue < ApplicationRecord
   end
 
   def name_and_area
-    name + ' - ' + area
+    "#{name} - #{area}"
   end
 
   # Are there any active events associated with this venue?

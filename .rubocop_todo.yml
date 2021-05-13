@@ -167,7 +167,6 @@ Rails/Output:
 # Offense count: 11
 Rails/OutputSafety:
   Exclude:
-    - 'app/helpers/events_helper.rb'
     - 'app/helpers/page_helper.rb'
 
 # Offense count: 1

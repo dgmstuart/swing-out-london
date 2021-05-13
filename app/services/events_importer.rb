@@ -4,6 +4,7 @@ require 'csv'
 
 class EventsImporter
   class Error < StandardError; end
+
   class NotFoundError < Error; end
 
   def initialize(resource_klass = Event)

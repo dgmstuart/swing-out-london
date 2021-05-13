@@ -12,6 +12,6 @@ class NameClashController < ApplicationController
       ).gsub(
         /(- $|-$)/, ''
       ).strip
-    end .uniq.sort
+    end.uniq.sort
   end
 end

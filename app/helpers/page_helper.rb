@@ -16,13 +16,13 @@ module PageHelper
   def nav_link(name, options = {}, html_options = {})
     icon_class = html_options.delete(:icon_class)
     content = ''
-    content += content_tag(:i, nil, class: icon_class) if icon_class
+    content += tag.i(nil, class: icon_class) if icon_class
     content += name
 
     # Render the link...
     link_to_unless_current(raw(content), options, html_options) do
       # ...but if the page was current, render a span instead
-      content_tag :span, raw(content), class: 'current'
+      tag.span(raw(content), class: 'current')
     end
   end
 end

@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  validates :url, format: URI.regexp(%w[http https])
+  validates :url, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   validates :event_type, :frequency, :url, :day, presence: true
 
@@ -161,18 +161,18 @@ class Event < ApplicationRecord
 
   # READ METHODS #
 
-  def date_array(future = false)
-    return_array_of_dates(dates, future)
+  def date_array(future: false)
+    return_array_of_dates(dates, future: future)
   end
 
-  def cancellation_array(future = false)
-    return_array_of_dates(cancellations, future)
+  def cancellation_array(future: false)
+    return_array_of_dates(cancellations, future: future)
   end
 
   private
 
   # Given an array of dates, return an appropriately filtered array
-  def return_array_of_dates(input_dates, future = true)
+  def return_array_of_dates(input_dates, future:)
     return [] if input_dates.blank?
 
     input_dates = filter_future(input_dates) if future
@@ -226,7 +226,7 @@ class Event < ApplicationRecord
   end
 
   def pretty_cancelled_dates
-    print_cancellation_array(', ', :short_date, true)
+    print_cancellation_array(', ', :short_date, future: true)
   end
 
   def cancelled_dates_rows
@@ -235,18 +235,18 @@ class Event < ApplicationRecord
 
   # -- Helper functions for Print:
 
-  def print_date_array(sep = ',', format = :uk_date, future = false)
-    print_array_of_dates(dates, sep, format, future)
+  def print_date_array(sep = ',', format = :uk_date, future: false)
+    print_array_of_dates(dates, sep, format, future: future)
   end
 
-  def print_cancellation_array(sep = ',', format = :uk_date, future = false)
-    print_array_of_dates(cancellations, sep, format, future)
+  def print_cancellation_array(sep = ',', format = :uk_date, future: false)
+    print_array_of_dates(cancellations, sep, format, future: future)
   end
 
   private
 
   # Given an array of dates, return a formatted string
-  def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future = false)
+  def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future: false)
     input_dates = filter_future(input_dates) if future
     input_dates.collect { |d| d.to_s(format) }.join(sep)
   end
