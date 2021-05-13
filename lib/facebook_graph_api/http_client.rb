@@ -7,8 +7,7 @@ module FacebookGraphApi
     class ResponseError < RuntimeError; end
 
     def initialize(
-      base_url: Rails.configuration.x.facebook.api_base!,
-      auth_token:,
+      auth_token:, base_url: Rails.configuration.x.facebook.api_base!,
       proof_generator: FacebookGraphApi::AppsecretProofGenerator.new
     )
       @base_url = base_url

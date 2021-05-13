@@ -14,9 +14,11 @@ RSpec.describe LoginSession do
       login_session = described_class.new(request, logger: fake_logger)
       login_session.log_in!(auth_id: 12345678901234567, name: 'Willa Mae Ricker', token: token)
 
-      expect(session[:user]['auth_id']).to eq 12345678901234567
-      expect(session[:user]['name']).to eq 'Willa Mae Ricker'
-      expect(session[:user]['token']).to eq token
+      aggregate_failures do
+        expect(session[:user]['auth_id']).to eq 12345678901234567
+        expect(session[:user]['name']).to eq 'Willa Mae Ricker'
+        expect(session[:user]['token']).to eq token
+      end
     end
 
     it 'logs that the user logged in' do

@@ -43,7 +43,7 @@ RSpec.describe EventParamsCommenter do
 
         expect(comment).to eq(
           audit_comment:
-          'Updated dates: (old: 12/04/2011) (new: 11/04/2011)' \
+          'Updated dates: (old: 12/04/2011) (new: 11/04/2011) ' \
           'Updated cancellations: (old: 12/04/2011) (new: 11/04/2011)'
         )
       end

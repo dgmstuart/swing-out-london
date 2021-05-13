@@ -5,6 +5,7 @@ class EventsImport
   extend ActiveModel::Naming
 
   attr_reader :csv
+
   def persisted?
     false
   end

@@ -4,7 +4,7 @@ class NameClashController < ApplicationController
   layout 'name_clash'
 
   def index
-    names = Event.socials.where('event_type <> ?', 'gig').pluck(:title)
+    names = Event.socials.non_gigs.pluck(:title)
 
     @names = names.map do |s|
       s.gsub(
@@ -12,6 +12,6 @@ class NameClashController < ApplicationController
       ).gsub(
         /(- $|-$)/, ''
       ).strip
-    end .uniq.sort
+    end.uniq.sort
   end
 end

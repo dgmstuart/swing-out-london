@@ -12,15 +12,13 @@ class Venue < ApplicationRecord
   scope :all_with_classes_listed_on_day, ->(day) { where(id: Event.listing_classes_on_day(day).select('distinct venue_id')) }
 
   validates :name, :area, presence: true
-  validates :website, format: URI.regexp(%w[http https])
+  validates :website, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   before_validation do
-    if lat.nil? || lng.nil?
-      unless geocode
-        errors.add :lat, "The address information could not be geocoded.
+    if (lat.nil? || lng.nil?) && !geocode
+      errors.add :lat, "The address information could not be geocoded.
           Please check the address information or manually enter
           latitude and longitude"
-      end
     end
   end
   UNKNOWN_POSTCODE = '???'
@@ -34,7 +32,7 @@ class Venue < ApplicationRecord
   end
 
   def name_and_area
-    name + ' - ' + area
+    "#{name} - #{area}"
   end
 
   # Are there any active events associated with this venue?
@@ -57,41 +55,5 @@ class Venue < ApplicationRecord
 
   def can_delete?
     events.empty?
-  end
-
-  def self.geocode_all
-    bulk_geocode
-  end
-
-  def self.geocode_all_non_geocoded
-    bulk_geocode(non_geocoded)
-  end
-
-  def self.geocoded
-    all.reject { |_v| sv.position.nil? }
-  end
-
-  def self.non_geocoded
-    all.select { |v| v.position.nil? }
-  end
-
-  def self.bulk_geocode(venuelist = all)
-    failed_save = []
-    failed_geocode = []
-
-    venuelist.each do |venue|
-      if venue.geocode
-        failed_save << venue unless venue.save
-      else
-        failed_geocode << venue
-      end
-      sleep 0.05 # need to sleep so that Google doesn't get all overwhelmed
-    end
-
-    if failed_save.empty? && failed_geocode.empty?
-      return true
-    else
-      return { failed_save: failed_save, failed_geocode: failed_geocode }
-    end
   end
 end

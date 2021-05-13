@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.6.3'
+ruby '2.6.7'
 
 gem 'rails', '~> 5.2.3'
 
@@ -18,7 +18,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'memcachier'
 gem 'omniauth-facebook'
-gem 'omniauth-rails', git: 'https://github.com/omniauth/omniauth-rails', branch: 'CVE-2015-9284'
+gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'pry-rails'
 gem 'puma'
@@ -43,6 +43,8 @@ group :development, :test do
   gem 'faker'
   gem 'rb-fsevent'
   gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-faker', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end

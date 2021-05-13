@@ -107,7 +107,9 @@ RSpec.describe ShowEvent do
 
     context 'when the event is a club with a taster' do
       it 'combines event type, social and taster' do
-        event = instance_double('Event', event_type: 'dance_club', has_social?: true, has_taster?: true, has_class?: false)
+        event = instance_double(
+          'Event', event_type: 'dance_club', has_social?: true, has_taster?: true, has_class?: false
+        )
 
         expect(described_class.new(event).event_type).to eq 'dance_club, with social and taster'
       end

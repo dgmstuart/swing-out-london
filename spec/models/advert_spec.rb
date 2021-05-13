@@ -16,10 +16,12 @@ RSpec.describe Advert do
 
       advert = described_class.current(env: env)
 
-      expect(advert.url).to eq 'https://myevent.co.uk'
-      expect(advert.image_url).to eq 'https://myevent.co.uk/banner'
-      expect(advert.title).to eq 'My Event'
-      expect(advert.google_id).to eq 'me-1'
+      aggregate_failures do
+        expect(advert.url).to eq 'https://myevent.co.uk'
+        expect(advert.image_url).to eq 'https://myevent.co.uk/banner'
+        expect(advert.title).to eq 'My Event'
+        expect(advert.google_id).to eq 'me-1'
+      end
     end
 
     context 'when the advert is disabled' do

@@ -9,7 +9,7 @@ module ActionView
 
         def call(template)
           markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
-          markdown.render(template.source).inspect + '.html_safe'
+          "#{markdown.render(template.source).inspect}.html_safe"
         end
       end
     end

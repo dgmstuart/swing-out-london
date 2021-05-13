@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  validates :url, format: URI.regexp(%w[http https])
+  validates :url, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   validates :event_type, :frequency, :url, :day, presence: true
 
@@ -41,14 +41,6 @@ class Event < ApplicationRecord
   NOTAPPLICABLE = 'n/a'
   UNKNOWN_ORGANISER = 'Unknown'
   SEE_WEB = '(See Website)'
-
-  def index_row_cache_key
-    caching_key('index_row')
-  end
-
-  def status_cache_key
-    caching_key("status_#{Date.today.to_s(:iso)}")
-  end
 
   # ----- #
   # Venue #
@@ -88,7 +80,7 @@ class Event < ApplicationRecord
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
 
   scope :gigs, -> { where(event_type: 'gig') }
-  scope :non_gigs, -> { where('event_type != ?', 'gig') }
+  scope :non_gigs, -> { where.not(event_type: 'gig') }
 
   scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.local_today) }
   scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.local_today) }
@@ -161,18 +153,18 @@ class Event < ApplicationRecord
 
   # READ METHODS #
 
-  def date_array(future = false)
-    return_array_of_dates(dates, future)
+  def date_array(future: false)
+    return_array_of_dates(dates, future: future)
   end
 
-  def cancellation_array(future = false)
-    return_array_of_dates(cancellations, future)
+  def cancellation_array(future: false)
+    return_array_of_dates(cancellations, future: future)
   end
 
   private
 
   # Given an array of dates, return an appropriately filtered array
-  def return_array_of_dates(input_dates, future = true)
+  def return_array_of_dates(input_dates, future:)
     return [] if input_dates.blank?
 
     input_dates = filter_future(input_dates) if future
@@ -226,7 +218,7 @@ class Event < ApplicationRecord
   end
 
   def pretty_cancelled_dates
-    print_cancellation_array(', ', :short_date, true)
+    print_cancellation_array(', ', :short_date, future: true)
   end
 
   def cancelled_dates_rows
@@ -235,18 +227,18 @@ class Event < ApplicationRecord
 
   # -- Helper functions for Print:
 
-  def print_date_array(sep = ',', format = :uk_date, future = false)
-    print_array_of_dates(dates, sep, format, future)
+  def print_date_array(sep = ',', format = :uk_date, future: false)
+    print_array_of_dates(dates, sep, format, future: future)
   end
 
-  def print_cancellation_array(sep = ',', format = :uk_date, future = false)
-    print_array_of_dates(cancellations, sep, format, future)
+  def print_cancellation_array(sep = ',', format = :uk_date, future: false)
+    print_array_of_dates(cancellations, sep, format, future: future)
   end
 
   private
 
   # Given an array of dates, return a formatted string
-  def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future = false)
+  def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future: false)
     input_dates = filter_future(input_dates) if future
     input_dates.collect { |d| d.to_s(format) }.join(sep)
   end
@@ -367,7 +359,7 @@ class Event < ApplicationRecord
   # Find the datetime of the most recently updated event
   def self.last_updated_datetime
     # if the db is empty, return the beginning of the epoch:
-    return Time.at(0) if first.nil?
+    return Time.zone.at(0) if first.nil?
 
     maximum(:updated_at)
   end

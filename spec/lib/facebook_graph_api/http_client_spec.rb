@@ -32,17 +32,18 @@ RSpec.describe FacebookGraphApi::HttpClient do
     context 'when the response was not successful' do
       it 'raises an error' do
         error_json = {
-          'error': {
-            'message': 'An access token is required to request this resource.',
-            'type': 'OAuthException',
-            'code': 104,
-            'fbtrace_id': 'HZNbuD4fi8u'
+          error: {
+            message: 'An access token is required to request this resource.',
+            type: 'OAuthException',
+            code: 104,
+            fbtrace_id: 'HZNbuD4fi8u'
           }
         }.to_json
         stub_request(:delete, 'https://example.com/path')
           .with(query: { appsecret_proof: 'app-secret-proof-token' })
           .to_return(status: 400, body: error_json)
-        proof_generator = instance_double('FacebookGraphApi::AppsecretProofGenerator', generate: 'app-secret-proof-token')
+        proof_generator = instance_double('FacebookGraphApi::AppsecretProofGenerator',
+                                          generate: 'app-secret-proof-token')
 
         client = described_class.new(
           base_url: 'https://example.com/',

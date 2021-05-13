@@ -45,20 +45,14 @@ RSpec.describe Event do
     end
 
     context 'when the event is out of date and happens every 6 months' do
-      context 'but the next expected event is more than 6 weeks away' do
-        let(:event) { FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - 1]) }
-
-        it 'is false' do
-          expect(event.out_of_date).to eq false
-        end
+      it 'is false if the next expected event is more than 6 weeks away' do
+        event = FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - 1])
+        expect(event.out_of_date).to eq false
       end
 
-      context 'and the next expected event is less than 6 weeks away' do
-        let(:event) { FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - (20.weeks + 2.days)]) }
-
-        it 'is true' do
-          expect(event.out_of_date).to eq true
-        end
+      it 'is true if the next expected event is less than 6 weeks away' do
+        event = FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - (20.weeks + 2.days)])
+        expect(event.out_of_date).to eq true
       end
     end
   end
@@ -117,20 +111,14 @@ RSpec.describe Event do
     end
 
     context 'when the event is out of date and happens every 6 months' do
-      context 'but the next expected event is more than 6 weeks away' do
-        let(:event) { FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - 1.month]) }
-
-        it 'is false' do
-          expect(event.near_out_of_date).to eq false
-        end
+      it 'is false if the next expected event is more than 6 weeks away' do
+        event = FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - 1.month])
+        expect(event.near_out_of_date).to eq false
       end
 
-      context 'and the next expected event is less than 6 weeks away' do
-        let(:event) { FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - (20.weeks + 2.days)]) }
-
-        it 'is true' do
-          expect(event.near_out_of_date).to eq true
-        end
+      it 'is true if the next expected event is less than 6 weeks away' do
+        event = FactoryBot.create(:event, frequency: 26, dates: [Time.zone.today - (20.weeks + 2.days)])
+        expect(event.near_out_of_date).to eq true
       end
     end
   end

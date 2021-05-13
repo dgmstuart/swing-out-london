@@ -3,13 +3,8 @@
 class EventSweeper < ActionController::Caching::Sweeper
   observe Event, Venue, Organiser
 
-  def initialize
-    @base = ActionController::Base.new
-  end
-
-  def after_save(record)
+  def after_save(_record)
     expire_cache
-    @base.expire_fragment(record.index_row_cache_key) if record.is_a?(Event)
   end
 
   def after_destroy(_record)
@@ -19,7 +14,7 @@ class EventSweeper < ActionController::Caching::Sweeper
   private
 
   def expire_cache
-    @base.expire_fragment('events#index')
-    @base.expire_fragment('website#index')
+    @controller ||= ActionController::Base.new
+    expire_fragment('website#index')
   end
 end

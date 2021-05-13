@@ -15,7 +15,7 @@ module FacebookGraphApi
     attr_reader :app_secret
 
     def digest
-      OpenSSL::Digest::SHA256.new
+      OpenSSL::Digest.new('SHA256')
     end
   end
 end

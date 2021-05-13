@@ -45,7 +45,7 @@ class ShowEvent
     event.expected_date&.to_s(:listing_date)
   end
 
-  def frequency
+  def frequency # rubocop:disable Metrics/MethodLength
     case event.frequency
     when 0 then 'One-off or intermittent'
     when 1 then 'Weekly'

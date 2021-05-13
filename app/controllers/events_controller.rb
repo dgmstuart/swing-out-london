@@ -67,24 +67,26 @@ class EventsController < CMSBaseController
 
   def event_params
     params.require(:event).permit(
-      :title,
-      :venue_id,
-      :social_organiser_id,
-      :class_organiser_id,
-      :event_type,
-      :has_taster,
-      :has_class,
-      :has_social,
-      :class_style,
-      :course_length,
-      :day,
-      :frequency,
-      :date_array,
-      :cancellation_array,
-      :first_date,
-      :expected_date,
-      :last_date,
-      :url
+      %i[
+        title
+        venue_id
+        social_organiser_id
+        class_organiser_id
+        event_type
+        has_taster
+        has_class
+        has_social
+        class_style
+        course_length
+        day
+        frequency
+        date_array
+        cancellation_array
+        first_date
+        expected_date
+        last_date
+        url
+      ]
     )
   end
 end
