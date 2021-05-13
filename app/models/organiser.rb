@@ -3,8 +3,10 @@
 class Organiser < ApplicationRecord
   audited
 
-  has_many :classes, class_name: 'Event', foreign_key: 'class_organiser_id', dependent: :restrict_with_exception
-  has_many :socials, class_name: 'Event', foreign_key: 'social_organiser_id', dependent: :restrict_with_exception
+  has_many :classes,
+           class_name: 'Event', foreign_key: 'class_organiser_id', inverse_of: :class_organiser, dependent: :restrict_with_exception
+  has_many :socials,
+           class_name: 'Event', foreign_key: 'social_organiser_id', inverse_of: :social_organiser, dependent: :restrict_with_exception
 
   default_scope -> { order(name: :asc) } # sets default search order
 

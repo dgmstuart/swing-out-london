@@ -7,8 +7,8 @@ class DatesStringParser
 
   private
 
-  def safe_parse_date(ds)
-    ds.to_date
+  def safe_parse_date(date_string)
+    date_string.to_date
   rescue ArgumentError
     # TODO: Log?
   end

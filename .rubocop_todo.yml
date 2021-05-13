@@ -19,24 +19,13 @@ Metrics/AbcSize:
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
-  Max: 256
+  Exclude:
+    - 'app/models/event.rb'
 
 # Offense count: 2
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:
   Max: 9
-
-# Offense count: 1
-# Configuration parameters: CountComments, CountAsOne.
-Metrics/ModuleLength:
-  Max: 198
-
-# Offense count: 1
-# Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
-# AllowedNames: at, by, db, id, in, io, ip, of, on, os, pp, to
-Naming/MethodParameterName:
-  Exclude:
-    - 'lib/dates_string_parser.rb'
 
 # Offense count: 7
 # Configuration parameters: Prefixes.
@@ -73,32 +62,12 @@ Rails/HasAndBelongsToMany:
   Exclude:
     - 'app/models/swing_date.rb'
 
-# Offense count: 2
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/InverseOf:
-  Exclude:
-    - 'app/models/organiser.rb'
-
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: app/controllers/**/*.rb
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - 'app/controllers/website_controller.rb'
-
-# Offense count: 2
-Rails/OutputSafety:
-  Exclude:
-    - 'app/helpers/page_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: strict, flexible
-Rails/TimeZone:
-  Exclude:
-    - 'app/models/event.rb'
 
 # Offense count: 33
 # Configuration parameters: AllowedConstants.

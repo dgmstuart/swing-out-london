@@ -84,6 +84,11 @@ Metrics/BlockLength:
     - spec/**/*_spec.rb
     - spec/factories.rb
 
+Metrics/ModuleLength:
+  Exclude:
+    # Files where the methods are basically html templates:
+    - app/helpers/listings_helper.rb
+
 Metrics/MethodLength:
   CountAsOne: ['array', 'hash', 'heredoc']
   Exclude:
