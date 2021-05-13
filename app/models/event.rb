@@ -42,14 +42,6 @@ class Event < ApplicationRecord
   UNKNOWN_ORGANISER = 'Unknown'
   SEE_WEB = '(See Website)'
 
-  def index_row_cache_key
-    caching_key('index_row')
-  end
-
-  def status_cache_key
-    caching_key("status_#{Date.today.to_s(:iso)}")
-  end
-
   # ----- #
   # Venue #
   # ----- #
