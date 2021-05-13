@@ -53,7 +53,7 @@ module ShareButtonHelper
     alt_text = 'Donate to help keep Swing Out London running'
 
     link_to 'Donate',
-            ENV['DONATE_LINK'],
+            Rails.application.config.x.donate_link,
             title: alt_text,
             alt: alt_text,
             target: '_blank',

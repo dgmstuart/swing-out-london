@@ -8,3 +8,5 @@ INITIAL_SOCIALS = 14
 
 CONTACT_EMAIL = 'swingoutlondon@gmail.com'
 TWITTER_URL   = 'https://www.twitter.com/swingoutlondon'
+
+Rails.application.config.x.donate_link = ENV['DONATE_LINK']

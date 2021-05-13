@@ -80,7 +80,7 @@ class Event < ApplicationRecord
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
 
   scope :gigs, -> { where(event_type: 'gig') }
-  scope :non_gigs, -> { where('event_type != ?', 'gig') }
+  scope :non_gigs, -> { where.not(event_type: 'gig') }
 
   scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.local_today) }
   scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.local_today) }
