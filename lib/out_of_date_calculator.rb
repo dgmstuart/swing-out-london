@@ -11,7 +11,7 @@ class OutOfDateCalculator
   end
 
   class NoLatestDate
-    def <(_other_date)
+    def <(_other)
       true
     end
   end

@@ -16,9 +16,11 @@ RSpec.describe EventsImporter do
 
       result = described_class.new(resource_klass).import(csv)
 
-      expect(result.successes.length).to eq 2
-      expect(result.successes[0].name).to eq 'Silent Bleep'
-      expect(result.successes[1].name).to eq 'Beefheart'
+      aggregate_failures do
+        expect(result.successes.length).to eq 2
+        expect(result.successes[0].name).to eq 'Silent Bleep'
+        expect(result.successes[1].name).to eq 'Beefheart'
+      end
     end
 
     it 'takes a CSV and returns the dates of the relevant events' do
@@ -30,8 +32,10 @@ RSpec.describe EventsImporter do
 
       result = described_class.new(resource_klass).import(csv)
 
-      expect(result.successes.length).to eq 1
-      expect(result.successes.first.dates_to_import).to eq ['23/12/2012', '30/12/2012']
+      aggregate_failures do
+        expect(result.successes.length).to eq 1
+        expect(result.successes.first.dates_to_import).to eq ['23/12/2012', '30/12/2012']
+      end
     end
 
     it 'handles non-matching urls' do
@@ -42,11 +46,13 @@ RSpec.describe EventsImporter do
 
       result = described_class.new(resource_klass).import(csv)
 
-      expect(result.successes.length).to eq 0
-      expect(result.failures.length).to eq 1
-      expect(result.failures.first.url).to eq 'www.wibble.com/silentbleep'
-      expect(result.failures.first.dates).to eq '23/12/2012, 30/12/2012'
-      expect(result.failures.first.reason).to eq 'Url not found'
+      aggregate_failures do
+        expect(result.successes.length).to eq 0
+        expect(result.failures.length).to eq 1
+        expect(result.failures.first.url).to eq 'www.wibble.com/silentbleep'
+        expect(result.failures.first.dates).to eq '23/12/2012, 30/12/2012'
+        expect(result.failures.first.reason).to eq 'Url not found'
+      end
     end
   end
 end

@@ -14,7 +14,8 @@ RSpec.describe ImportedDates do
 
   describe '#dates_to_import' do
     it 'formats the dates nicely' do
-      presenter = described_class.new(instance_double('EventsImporter::Success', dates_to_import: ['03/01/2016', '10/01/2016']))
+      import_result = instance_double('EventsImporter::Success', dates_to_import: ['03/01/2016', '10/01/2016'])
+      presenter = described_class.new(import_result)
       expect(presenter.dates_to_import).to eq 'Sunday 3 Jan 2016, Sunday 10 Jan 2016'
     end
   end

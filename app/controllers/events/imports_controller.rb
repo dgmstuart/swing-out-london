@@ -26,17 +26,26 @@ module Events
     def save
       cached_result = Rails.cache.fetch('latest_import_csv_data')
 
-      if cached_result
-        import_result = YAML.load(cached_result)
-        import_result.successes.each do |success|
-          event = Event.find(success.event_id)
-          event.date_array = success.dates_to_import.join(', ')
-          event.save!
-        end
+      if update_events(cached_result)  # rubocop:disable Style/GuardClause
         redirect_to '/events'
       else
         raise 'No cached result found!!'
       end
+    end
+
+    private
+
+    def update_events(imported_data)
+      return false unless imported_data
+
+      import_result = YAML.load(imported_data)
+      import_result.successes.each do |success|
+        event = Event.find(success.event_id)
+        event.date_array = success.dates_to_import.join(', ')
+        event.save!
+      end
+
+      true
     end
   end
 end

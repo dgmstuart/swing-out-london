@@ -42,7 +42,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
         stub_request(:delete, 'https://example.com/path')
           .with(query: { appsecret_proof: 'app-secret-proof-token' })
           .to_return(status: 400, body: error_json)
-        proof_generator = instance_double('FacebookGraphApi::AppsecretProofGenerator', generate: 'app-secret-proof-token')
+        proof_generator = instance_double('FacebookGraphApi::AppsecretProofGenerator',
+                                          generate: 'app-secret-proof-token')
 
         client = described_class.new(
           base_url: 'https://example.com/',

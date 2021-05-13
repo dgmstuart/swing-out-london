@@ -56,40 +56,4 @@ class Venue < ApplicationRecord
   def can_delete?
     events.empty?
   end
-
-  def self.geocode_all
-    bulk_geocode
-  end
-
-  def self.geocode_all_non_geocoded
-    bulk_geocode(non_geocoded)
-  end
-
-  def self.geocoded
-    all.reject { |_v| sv.position.nil? }
-  end
-
-  def self.non_geocoded
-    all.select { |v| v.position.nil? }
-  end
-
-  def self.bulk_geocode(venuelist = all)
-    failed_save = []
-    failed_geocode = []
-
-    venuelist.each do |venue|
-      if venue.geocode
-        failed_save << venue unless venue.save
-      else
-        failed_geocode << venue
-      end
-      sleep 0.05 # need to sleep so that Google doesn't get all overwhelmed
-    end
-
-    if failed_save.empty? && failed_geocode.empty?
-      true
-    else
-      { failed_save: failed_save, failed_geocode: failed_geocode }
-    end
-  end
 end

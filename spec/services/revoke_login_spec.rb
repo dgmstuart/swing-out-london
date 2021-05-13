@@ -17,8 +17,10 @@ RSpec.describe RevokeLogin do
       service = described_class.new(http_client_builder: http_client_builder, api_builder: api_builder, logger: logger)
       service.revoke!(user)
 
-      expect(http_client_builder).to have_received(:new).with(auth_token: auth_token)
-      expect(api_builder).to have_received(:new).with(http_client)
+      aggregate_failures do
+        expect(http_client_builder).to have_received(:new).with(auth_token: auth_token)
+        expect(api_builder).to have_received(:new).with(http_client)
+      end
     end
 
     it 'makes a call to the Facebook API' do

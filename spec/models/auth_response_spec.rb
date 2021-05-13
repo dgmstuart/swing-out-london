@@ -14,8 +14,15 @@ RSpec.describe AuthResponse do
         'omniauth.auth' => {
           'provider' => 'facebook',
           'uid' => '72432833316128378',
-          'info' => { 'name' => 'Felipe Goyette Jr.', 'image' => 'http://graph.facebook.com/v2.10/72432833316128378/picture' },
-          'credentials' => { 'token' => '0469a691b47c1df413e95edabd336ca3', 'expires_at' => 1546086985, 'expires' => true },
+          'info' => {
+            'name' => 'Felipe Goyette Jr.',
+            'image' => 'http://graph.facebook.com/v2.10/72432833316128378/picture'
+          },
+          'credentials' => {
+            'token' => '0469a691b47c1df413e95edabd336ca3',
+            'expires_at' => 1546086985,
+            'expires' => true
+          },
           'extra' => {
             'raw_info' => { 'name' => '72432833316128378', 'id' => '72432833316128378' }
           }
@@ -34,8 +41,15 @@ RSpec.describe AuthResponse do
         'omniauth.auth' => {
           'provider' => 'facebook',
           'uid' => '72432833316128378',
-          'info' => { 'name' => 'Felipe Goyette Jr.', 'image' => 'http://graph.facebook.com/v2.10/72432833316128378/picture' },
-          'credentials' => { 'token' => '0469a691b47c1df413e95edabd336ca3', 'expires_at' => 1546086985, 'expires' => true },
+          'info' => {
+            'name' => 'Felipe Goyette Jr.',
+            'image' => 'http://graph.facebook.com/v2.10/72432833316128378/picture'
+          },
+          'credentials' => {
+            'token' => '0469a691b47c1df413e95edabd336ca3',
+            'expires_at' => 1546086985,
+            'expires' => true
+          },
           'extra' => {
             'raw_info' => { 'name' => '72432833316128378', 'id' => '72432833316128378' }
           }
@@ -54,8 +68,15 @@ RSpec.describe AuthResponse do
         'omniauth.auth' => {
           'provider' => 'facebook',
           'uid' => '72432833316128378',
-          'info' => { 'name' => 'Felipe Goyette Jr.', 'image' => 'http://graph.facebook.com/v2.10/72432833316128378/picture' },
-          'credentials' => { 'token' => '0469a691b47c1df413e95edabd336ca3', 'expires_at' => 1546086985, 'expires' => true },
+          'info' => {
+            'name' => 'Felipe Goyette Jr.',
+            'image' => 'http://graph.facebook.com/v2.10/72432833316128378/picture'
+          },
+          'credentials' => {
+            'token' => '0469a691b47c1df413e95edabd336ca3',
+            'expires_at' => 1546086985,
+            'expires' => true
+          },
           'extra' => {
             'raw_info' => { 'name' => '72432833316128378', 'id' => '72432833316128378' }
           }

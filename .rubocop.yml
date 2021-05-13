@@ -26,6 +26,13 @@ Security/YAMLLoad:
     # Loading yaml from the cache containing serialized object:
     - app/controllers/events/imports_controller.rb
 
+Style/Documentation:
+  Exclude:
+    - app/controllers/**/*.rb
+    - app/helpers/**/*.rb
+    - app/models/**/*.rb
+    - db/migrate/**/*.rb
+
 Style/NumericLiterals:
   Exclude:
     - lib/omniauth_test_response_builder.rb
@@ -77,6 +84,13 @@ Metrics/BlockLength:
     - spec/**/*_spec.rb
     - spec/factories.rb
 
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+  Exclude:
+    - db/**/*.rb
+    # Files where the methods are basically html templates:
+    - app/helpers/listings_helper.rb
+
 RSpec/DescribeClass:
   Exclude:
     - spec/system/**/*_spec.rb
@@ -89,8 +103,17 @@ RSpec/ExampleLength:
     - spec/models/advert_spec.rb
     - spec/lib/facebook_graph_api/http_client_spec.rb
     - spec/lib/omniauth_test_response_builder_spec.rb
+    - spec/services/events_importer_spec.rb
     - spec/services/revoke_login_spec.rb
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/system/**/*_spec.rb
 
 Rails/CreateTableWithTimestamps:
   Exclude:
     - db/migrate/20181110201028_install_audited.rb
+
+Rails/Output:
+  Exclude:
+    - db/migrate/201*.rb
