@@ -93,6 +93,10 @@ address,
 
 // TABLET & SMALLER LAPTOPS */
 @media only screen and (min-width: 768px) {
+  #header {
+    padding-bottom: 30px;
+  }
+
   #main_nav {
     li {
       display: inline;
@@ -170,7 +174,6 @@ address,
 /////////////////////////////////////////////
 #header {
   border-bottom: $basic-border;
-  padding-bottom: 30px;
 }
 
 #title {
@@ -189,12 +192,6 @@ address,
   a:hover {
     border: none;
   }
-}
-
-#last_updated_ago {
-  font-style: italic;
-  text-align: center;
-  margin-bottom: 10px;
 }
 
 #main_nav {
