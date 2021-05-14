@@ -33,6 +33,7 @@ RSpec.describe 'Adding a new event' do
     click_on 'New Organiser'
 
     fill_in 'Name', with: 'Frankie Manning'
+    fill_in 'Shortname', with: 'Frankie'
 
     click_on 'Update'
 
@@ -83,9 +84,13 @@ RSpec.describe 'Adding a new event' do
       within page.all('.day_row')[5] do
         expect(page).to have_content 'Saturday'
         expect(page).to have_link 'WC2R', href: "map/classes/Saturday?venue_id=#{venue_id}"
-        expect(page).to have_link 'Harlem (Savoy Style) at Stompin at the Savoy with Frankie Manning', href: 'https://www.savoyballroom.com/stompin'
+        expect(page).to have_link 'Harlem (Savoy Style) at Stompin at the Savoy with Frankie', href: 'https://www.savoyballroom.com/stompin'
         expect(page).to have_content 'Cancelled on 11th Oct'
       end
     end
+
+    expect(page).not_to have_content('<')
+    expect(page).not_to have_content('>')
+    expect(page).not_to have_content('abbr title=')
   end
 end

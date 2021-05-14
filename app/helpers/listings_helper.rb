@@ -94,17 +94,30 @@ module ListingsHelper
   end
 
   def mapinfo_class_info_tag(social)
-    class_info = []
-    class_info << social.class_style if social.class_style.present?
-    class_info << if social.has_class?
-                    'class'
-                  else
-                    'taster'
-                  end
-    class_info << "by #{school_name(social)}" if school_name(social)
+    class_info = capture do
+      if social.class_style.present?
+        concat social.class_style
+        concat ' '
+      end
+
+      class_type =
+        if social.has_class?
+          'class'
+        else
+          'taster'
+        end
+      concat class_type
+
+      if school_name(social)
+        concat ' by '
+        concat school_name(social)
+      end
+    end
 
     tag.span class: 'info' do
-      "(#{class_info.join(' ')})"
+      concat '('
+      concat class_info
+      concat ')'
     end
   end
 
@@ -136,13 +149,9 @@ module ListingsHelper
   end
 
   def swingclass_link(event)
-    info = swingclass_info(event)
     text = capture do
       concat swingclass_details(event)
-      if info.any?
-        concat ' '
-        concat tag.span info.join(' '), class: 'info'
-      end
+      concat tag.span swingclass_info(event), class: 'info' if swingclass_info(event)
     end
 
     if event.url.nil?
@@ -163,20 +172,23 @@ module ListingsHelper
   end
 
   def swingclass_info(event)
-    swingclass_info = []
-    swingclass_info << "at #{event.title}" if event.has_social?
-    swingclass_info << "with #{school_name(event)}" if school_name(event)
-    swingclass_info
+    capture do
+      if event.has_social?
+        concat ' '
+        concat "at #{event.title}"
+      end
+
+      if school_name(event)
+        concat ' with '
+        concat school_name(event)
+      end
+    end
   end
 
   def mapinfo_swingclass_link(event)
-    info = swingclass_info(event)
     text = capture do
       concat mapinfo_swingclass_details(event)
-      if info.any?
-        concat ' '
-        concat tag.span info.join(' '), class: 'info'
-      end
+      concat tag.span swingclass_info(event), class: 'info' if swingclass_info(event)
     end
 
     if event.url.nil?
