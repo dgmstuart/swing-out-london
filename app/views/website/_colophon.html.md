@@ -8,13 +8,7 @@
   in the background is by [ZeBii on DeviantArt](http://zebiii.deviantart.com/)
 
 * The site uses a custom-built Content Management System (CMS)
-  which I wrote from scratch in [Ruby on Rails](http://rubyonrails.org/) (Rails 3).
-  I use [Git](http://git-scm.com/) for version control and there is
-  a [public repo for Swing Out London on github](https://github.com/leveretweb/Swing-Out-London)
-  where you can see all the technical details.
-
-* A [rebuild of the site](https://github.com/dgmstuart/swingoutlondon2) in
-  Rails 5 is currently in progress. One of the main aims is to be able to
-  highlight bands more easily and make the site easier to maintain.
+  which Duncan wrote from scratch in [Ruby on Rails](http://rubyonrails.org/).
+  The source code is available in a [public GitHub repo](https://github.com/leveretweb/swing-out-london).
 
 * The site is hosted on [Heroku](http://heroku.com/)
