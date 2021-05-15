@@ -16,6 +16,10 @@
   = render partial: "listing_navigation", locals: { ad: @ad }
 
 - content_for :page_content do
+  %p#caveat
+    %strong Please note:
+    The listings below are only a guide. Always check the source website before making any plans
+
   #classes
     %h2
       %em Learn!

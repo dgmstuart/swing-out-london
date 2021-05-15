@@ -1,21 +1,15 @@
-#listing_navigation
+#site_intro
   %p
     Swing Out London lists all of the regular
-    = link_to "swing dance classes", {:anchor => "classes_today"}, {:rel =>"subsection"}
+    = link_to "Swing Dance classes", {:anchor => "classes_today"}, {:rel =>"subsection"}
     in London which teach
     = succeed "," do
-      = link_to "Lindy Hop", {:action => "listings_policy", :anchor=> "about_lindy"}, {:rel =>"subsection"}
-    Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz
+      = link_to "Lindy Hop", {:action => "about", :anchor=> "about_lindy"}, {:rel =>"subsection"}
+    Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
   %p
     It also lists all of the opportunities for
     = link_to "social dancing", {:anchor => "socials_today"}, {:rel =>"subsection"}
-    to Swing, Hot Jazz, Trad Jazz and Manouche.
-
-    Read more
-    = link_to "about", :action => "about"
-    it or check out the awesome
-    = link_to controller: "maps", action: "socials" do
-      map
+    to vintage jazz music.
 
 #note
   %p
@@ -24,9 +18,6 @@
     (but check the
     =link_to "listings policy", :action => "listings_policy"
     first)
-  %p#caveat
-    %strong Please note:
-    The listings shown are only a guide. You should always check the source website before making any plans
 
 #soldn_on_the_web
   = render partial: 'advert', locals: { advert: ad }
@@ -43,10 +34,6 @@
     }(document, 'script', 'facebook-jssdk'));
 
   #social_links
-    %a.fb-like{ :href => "http://www.swingoutlondon.co.uk", "data-action" => "like", "data-layout" => "button_count", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
-    %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/swingoutlondon"} Follow @swingoutlondon
-    :javascript
-      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    %a.fb-like{ :href => "https://www.swingoutlondon.co.uk", "data-action" => "like", "data-share" => "true", "data-layout" => "button_count", "data-font" => "trebuchet ms" } Like Swing Out London on Facebook
 
-    =javascript_include_tag "https://apis.google.com/js/platform.js"
-    .g-ytsubscribe{ "data-channel" => "swingoutlondon", "data-layout" => "default", "data-count" => "default" }
+= render :partial => 'website/navigation', :locals => { :nav_id => 'main_nav', nav_class: "navigation primary-nav" }

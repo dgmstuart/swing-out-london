@@ -11,10 +11,30 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // SMALL
+#last_updated_ago {
+  margin-bottom: 20px;
+}
+
+#site_intro,
 #soldn_on_the_web,
-#note {
+#note,
+#caveat {
   margin: auto;
-  margin-top: 30px;
+}
+
+#caveat {
+  margin-top: 15px;
+  text-align: center;
+}
+
+#soldn_on_the_web,
+#note,
+#caveat {
+  max-width: 500px;
+}
+
+#caveat {
+  padding: 0 10px;
 }
 
 #classes,
@@ -33,6 +53,10 @@ $small_font_size: 12px;
 
 // AVERAGE VIEWING SIZE
 @media only screen and (min-width: 481px) {
+  #caveat {
+    padding: 0 30px;
+  }
+
   #classes,
   #social_dances {
     margin: 0 30px;
@@ -41,6 +65,10 @@ $small_font_size: 12px;
 
 // TABLET & SMALLER LAPTOPS */
 @media only screen and (min-width: 768px) {
+  #caveat {
+    padding: 0 27px;
+  }
+
   #classes {
     width: 354px;
     float: left;
@@ -68,6 +96,10 @@ $small_font_size: 12px;
 
 // DESKTOP
 @media only screen and (min-width: 900px) {
+  #caveat {
+    max-width: 100%;
+  }
+
   #classes {
     width: 421px;
     clear: left;
@@ -78,16 +110,15 @@ $small_font_size: 12px;
     margin-left: 448px;
   }
 
+  #note,
   #soldn_on_the_web {
     width: 370px;
     margin-left: 410px;
-    margin-top: 0;
   }
 
-  #note {
+  #site_intro {
     width: 370px;
     float: left;
-    margin-top: 0;
   }
 }
 
@@ -98,22 +129,37 @@ $small_font_size: 12px;
 
 // Header
 /////////////////////////////////////////////
-#listing_navigation {
-  margin: 25px 0 35px;
+#last_updated_ago {
+  font-style: italic;
+  text-align: center;
+}
 
+#site_intro {
   p {
-    font-size: 20px;
-    line-height: 33px;
+    font-size: 18px;
+  }
+}
+
+#note {
+  p {
+    font-size: 15px;
+  }
+}
+
+#note,
+#site_intro {
+  p {
+    line-height: 1.5;
     margin-bottom: 18px;
   }
 
   a {
     text-transform: capitalize;
-    font-size: 27px;
+    font-size: 1.1em;
   }
 }
 
-#listing_navigation,
+#site_intro,
 #soldn_on_the_web,
 #note {
   a {
@@ -122,9 +168,6 @@ $small_font_size: 12px;
 }
 
 #soldn_on_the_web {
-  max-width: 500px;
-  text-align: right;
-
   #advert {
     border: 6px double #0f0f0f;
     margin-bottom: 1rem;
@@ -143,56 +186,18 @@ $small_font_size: 12px;
     }
   }
 
-  #social_links {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
   .fb-like {
-    &:hover {
-      border: none;
-    }
-  }
-
-  .twitter-follow-button {
-    position: relative;
-    top: 4px;
-    left: 1px;
-  }
-
-  .youtube_btn {
-    img {
-      position: relative;
-      top: 2px;
-    }
-
     &:hover {
       border: none;
     }
   }
 }
 
-#note {
-  max-width: 500px;
+#caveat {
+  font-style: italic;
 
-  p {
-    font-size: 15px;
-  }
-  //TODO: DRY up
-  a {
-    text-transform: capitalize;
-    font-size: 20px;
-  }
-
-  #caveat {
-    font-size: 0.9em;
-    font-style: italic;
-
-    strong {
-      font-size: 1.2em;
-      color: #c00;
-    }
+  strong {
+    color: #c00;
   }
 }
 
