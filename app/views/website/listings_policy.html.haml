@@ -1,23 +1,31 @@
 %section.content
   %h1 Listings Policy
   %p
-    This page is aimed at promoters and event organisers. I get a lot of requests to list events which
-    aren't really a good fit for the site.
-    The policy below is designed to pre-empt some of these by trying to codify the criteria that I use.
+    This page is aimed at promoters and event organisers.
+    We get a lot of requests to list events which aren't really a good fit for the site.
+    The policy below is intended to pre-empt some of these by trying to codify the criteria that we use.
   %p
-    Lindy Hop is a street dance: it has no clear definition and isn't governed by any authority.
-    The figures, style and aesthetics of the dance are a matter of personal preference,
-    as is the music that it is danced to.
+    Lindy Hop and the other vintage swing dances are not formalised dances:
+    they have no clear definition and are not governed by any authority.
+    The figures, style and aesthetics of these dances are a matter of personal preference,
+    as is the music that they are danced to.
+  %p
     Swing Out London lists events based upon one particular view of the dance -
     largely informed by the big European swing dance camps.
   %p
     Its hard to say no, so please read this page carefully and if you're unclear on anything, please ask.
-    If your event doesn't fit into the criteria below I'll be happy to give you a list of other
-    listings sites and services which have a broader policy.
+    If your event doesn't fit into the criteria below we'll be happy to point you to some other
+    sites which might be interested in your event.
+  %p
+    If you're confident that your event meets these criteria, please send an email to
+    = mail_to CONTACT_EMAIL, "swingoutlondon@gmail.com", :subject => "Event listing"
+    and we'll have a look. Please bear in mind that Swing Out London is run by volunteers,
+    so we're usually not able to respond at short notice.
 
   %h2 Location
   %p
-    Swing Out London only lists events on the core London transport network (i.e. places you can easily get a night bus home from!). Check out the #{ link_to "map", "/map" }: if its further out than the outlying events shown, its probably too far.
+    Swing Out London only lists events on the core London transport network (i.e. places you can easily get a night bus home from!).
+    Check out the #{ link_to "map", map_path }: if its further out than the outlying events shown, its probably too far.
 
     %h2 Classes
     %p
@@ -28,7 +36,6 @@
       = succeed ',' do
         = link_to "Facebook page", Rails.configuration.x.facebook.url, :title => "Swing Out London on Facebook"
       especially those involving international teachers.
-
 
     %table#classes_policy
       %thead
@@ -62,15 +69,11 @@
 
     %h2 Social Dancing
     %p
-      For non-weekly events, to ensure the accuracy of listings I only list dates which are definitely confirmed:
-      I think its better to miss listing an event than to assume it will be happening and risk a disappointed dancer turning up to find it cancelled, changed or moved.
+      For non-weekly events, to ensure the accuracy of listings we only list dates which are definitely confirmed:
+      we think its better to miss listing an event than to assume it will be happening and risk a disappointed dancer turning up to find it cancelled, changed or moved.
     %p
       A number of music venues regularly host swing bands but don't really have enough space
-      for more than one or two couples. These events aren't listed. Examples are
-      = link_to "The Quecumbar", "http://www.quecumbar.co.uk/"
-      and
-      = succeed '.' do
-        = link_to "Round Midnight", "http://www.roundmidnightbar.com/"
+      for more than one or two couples. These events aren't listed.
 
     %table#socials_policy
       %thead
@@ -97,7 +100,7 @@
   %h2 Music
   %p
     The table below is just a guideline: a lot of the terms don't have a clear definition
-    and I don't claim a deep understanding of what they all mean.
+    and we don't claim a deep understanding of what they all mean.
     If you're a band and you're not sure whether you fit into this,
     feel free to send me a recording and I'll let you know.
 
