@@ -5,5 +5,5 @@ Swing Out London was built by Duncan Stuart and run by him between 2010 and
 
 The site was handed over to a team of volunteers when Duncan left the city and
 this team continue to maintain the listings. If you'd like to get in touch
-with us team, please send an email to
+with us, please send an email to
 [swingoutlondon@gmail.com](mailto:swingoutlondon@gmail.com).

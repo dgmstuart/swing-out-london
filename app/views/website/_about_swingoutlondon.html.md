@@ -15,7 +15,7 @@ Our goals
 
 ### 1. Dancer-focused
 
-We provided a service for dancers, rather than an advertising platform for
+We provide a service for dancers, rather than an advertising platform for
 promoters. We aim to list events we think our core audience will enjoy, and
 sometimes that means saying no to a listing.
 
@@ -29,7 +29,7 @@ banner advertising.
 
 We only show the next 14 days of events on the site, and we try to make sure
 that everything within that window is correct. Sometimes that can be
-difficult, so always check with the event organiser's site.
+difficult, so please always check with the event organiser's site.
 
 ### 4. Comprehensive
 
@@ -78,6 +78,8 @@ novelty, but as a living breathing artform.
 We list gigs by bands who play good music for our kind of dances, but only if
 there's enough space to dance. Sometimes these gigs are aimed at dancers,
 sometimes not.
+
+### Getting in touch with the scene
 
 The main forum for the Swing Dance Scene in London is
 [Swing Dancers Of London Facebook group](https://www.facebook.com/groups/2244903317/).
