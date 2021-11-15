@@ -27,4 +27,21 @@ RSpec.describe 'Admins can create organisers' do
 
     expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
+
+  it 'with an emtpy shortname' do
+    FactoryBot.create(:organiser, shortname: '')
+    stub_login
+
+    visit '/login'
+    click_on 'Log in with Facebook'
+
+    click_on 'New Organiser'
+
+    fill_in 'Name', with: 'The London Swing Dance Society'
+    fill_in 'Shortname', with: ''
+
+    click_on 'Update'
+
+    expect(page).to have_content('Last updated by')
+  end
 end

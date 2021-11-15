@@ -15,6 +15,14 @@ class Organiser < ApplicationRecord
   validates :shortname, length: { maximum: 20 }
   validates :shortname, uniqueness: { allow_blank: true }
 
+  def shortname=(value)
+    if value.blank?
+      super(nil)
+    else
+      super
+    end
+  end
+
   def events
     Event
       .where(class_organiser_id: id)
