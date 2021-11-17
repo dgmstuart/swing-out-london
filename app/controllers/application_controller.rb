@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def sign_out; end
 
   def not_found
-    head 404, 'content_type' => 'text/plain'
+    head :not_found, 'content_type' => 'text/plain'
   end
 
   protected

@@ -5,7 +5,7 @@ require 'facebook_graph_api/appsecret_proof_generator'
 
 RSpec.describe FacebookGraphApi::AppsecretProofGenerator do
   describe '#generate' do
-    it 'generates a proof token based on the app secret and auth token ' do
+    it 'generates a proof token based on the app secret and auth token' do
       digest = instance_double(OpenSSL::Digest::SHA256)
       allow(OpenSSL::Digest).to receive(:new).with('SHA256').and_return(digest)
       allow(OpenSSL::HMAC).to receive(:hexdigest)

@@ -215,7 +215,7 @@ describe Event do
     pending 'test with multiple dates, different orders, whitespace'
   end
 
-  describe '.cancellation_array = ' do
+  describe '.cancellation_array =' do
     describe 'empty strings' do
       it 'handles an event with with no cancellations and adding no cancellations' do
         event = described_class.new
