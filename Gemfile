@@ -10,7 +10,6 @@ gem 'actionpack-action_caching' # to support pre rails-4 style action caching
 gem 'audited'
 gem 'bootsnap'
 gem 'coffee-rails'
-gem 'dalli'
 gem 'geocoder'
 gem 'haml-rails'
 gem 'http'
@@ -64,6 +63,8 @@ group :test do
 end
 
 group :production do
+  gem 'connection_pool'
+  gem 'dalli'
   gem 'oj' # For Rollbar
   gem 'rack-canonical-host'
 end
