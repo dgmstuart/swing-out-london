@@ -38,7 +38,7 @@ class ShowEvent
     activities << 'social' if event.has_social?
     activities << 'taster' if event.has_taster?
     activities << 'class' if event.has_class?
-    "#{event.event_type}, with #{activities.join(' and ')}"
+    "#{event.event_type.humanize}, with #{activities.join(' and ')}"
   end
 
   def expected_date

@@ -65,14 +65,6 @@ class Event < ApplicationRecord
   # Event Type #
   # ---------- #
 
-  EVENT_TYPES = %w[
-    school
-    dance_club
-    vintage_club
-    gig
-    festival
-  ].freeze
-
   # scopes to get different types of event:
   scope :classes, -> { where(has_class: true) }
   scope :socials, -> { where(has_social: true) }
