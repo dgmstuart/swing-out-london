@@ -101,7 +101,7 @@ RSpec.describe ShowEvent do
       it 'combines event type and class' do
         event = instance_double('Event', event_type: 'school', has_social?: false, has_taster?: false, has_class?: true)
 
-        expect(described_class.new(event).event_type).to eq 'school, with class'
+        expect(described_class.new(event).event_type).to eq 'School, with class'
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe ShowEvent do
           'Event', event_type: 'dance_club', has_social?: true, has_taster?: true, has_class?: false
         )
 
-        expect(described_class.new(event).event_type).to eq 'dance_club, with social and taster'
+        expect(described_class.new(event).event_type).to eq 'Dance club, with social and taster'
       end
     end
   end

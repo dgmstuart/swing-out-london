@@ -18,7 +18,7 @@ RSpec.describe 'Admins can edit events' do
     select 'The 100 Club', from: 'Venue'
     select 'The London Swing Dance Society', from: 'Social organiser'
     select 'The London Swing Dance Society', from: 'Class organiser'
-    select 'school', from: 'Event type'
+    select 'School', from: 'Event type'
     check 'Has a taster?'
     check 'Has social?'
     fill_in 'Class style', with: ''
@@ -36,7 +36,7 @@ RSpec.describe 'Admins can edit events' do
       .and have_content('Venue: The 100 Club')
       .and have_content('Social Organiser: The London Swing Dance Society')
       .and have_content('Class Organiser: The London Swing Dance Society')
-      .and have_content('school, with social and taster')
+      .and have_content('School, with social and taster')
       .and have_content('Class style:')
       .and have_content('Day: Wednesday')
       .and have_content('Frequency: One-off or intermittent')
