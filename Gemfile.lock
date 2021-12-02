@@ -76,6 +76,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -380,6 +381,7 @@ DEPENDENCIES
   capybara
   climate_control
   coffee-rails
+  connection_pool
   dalli
   dotenv-rails
   elabs_matchers
