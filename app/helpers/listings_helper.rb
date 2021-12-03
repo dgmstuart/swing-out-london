@@ -52,44 +52,22 @@ module ListingsHelper
     end
   end
 
-  def mapinfo_social_listing(social, cancelled, date = nil)
-    if social.title.blank?
+  def mapinfo_social_listing(social_listing)
+    if social_listing.event.title.blank?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return
     end
 
-    date_info = tag.span class: 'social_date' do
-      concat link_to date.to_s(:listing_date), date: date.to_s(:db)
-      concat ': '
-    end
-
-    social_details = mapinfo_social_details(social, cancelled)
-
-    wrapped_social_details = tag.span class: 'event_details' do
-      concat social_details
-    end
-
     capture do
-      if date
-        concat date_info
-        concat wrapped_social_details
-      else
-        concat social_details
-      end
-    end
-  end
-
-  def mapinfo_social_details(social, cancelled)
-    capture do
-      if cancelled
+      if social_listing.cancelled?
         concat cancelled_label
         concat ' '
       end
-      concat mapinfo_social_link(social)
-      if social.has_class? || social.has_taster?
+      if social_listing.event.new?
+        concat new_event_label
         concat ' '
-        concat mapinfo_class_info_tag(social)
       end
+      concat mapinfo_social_link(social_listing.event)
     end
   end
 
@@ -121,16 +99,16 @@ module ListingsHelper
     end
   end
 
-  def mapinfo_social_link(event)
+  def mapinfo_social_link(social)
     text = capture do
-      if event.new?
-        concat new_event_label
+      concat social.title
+      if social.has_class? || social.has_taster?
         concat ' '
+        concat mapinfo_class_info_tag(social)
       end
-      concat event.title
     end
 
-    link_to_unless event.url.nil?, text, event.url
+    link_to_unless social.url.nil?, text, social.url
   end
 
   def swingclass_listing(swingclass, day)
@@ -187,15 +165,13 @@ module ListingsHelper
 
   def mapinfo_swingclass_link(event)
     text = capture do
+      concat 'Class'
+      concat ' '
       concat mapinfo_swingclass_details(event)
       concat tag.span swingclass_info(event), class: 'info' if swingclass_info(event)
     end
 
-    if event.url.nil?
-      text
-    else
-      link_to text, event.url
-    end
+    link_to_unless event.url.nil?, text, event.url
   end
 
   def mapinfo_swingclass_details(event)
