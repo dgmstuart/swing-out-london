@@ -187,15 +187,13 @@ module ListingsHelper
 
   def mapinfo_swingclass_link(event)
     text = capture do
+      concat 'Class'
+      concat ' '
       concat mapinfo_swingclass_details(event)
       concat tag.span swingclass_info(event), class: 'info' if swingclass_info(event)
     end
 
-    if event.url.nil?
-      text
-    else
-      link_to text, event.url
-    end
+    link_to_unless event.url.nil?, text, event.url
   end
 
   def mapinfo_swingclass_details(event)
