@@ -154,8 +154,11 @@ $small_font_size: 12px;
   }
 
   a {
-    text-transform: capitalize;
     font-size: 1.1em;
+
+    &:not([href^="mailto"]) {
+      text-transform: capitalize;
+    }
   }
 }
 
