@@ -54,7 +54,7 @@ module ListingsHelper
 
   def mapinfo_social_listing(social_listing)
     if social_listing.event.title.blank?
-      logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
+      logger.error "[ERROR]: tried to display Event (id = #{social_listing.event.id}) without a title"
       return
     end
 
