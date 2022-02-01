@@ -57,6 +57,18 @@ RSpec.describe 'Users can view a map of upcoming events' do
       expect(page).to have_content('Lindy Map')
       expect(page).to have_content('We can only show you events for the next 14 days')
     end
+
+    context 'when a social has no title (regression test)' do
+      it "silently doesn't render it" do
+        FactoryBot.create(:social, title: nil, dates: [Date.new(2019, 6, 8)])
+
+        Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
+          expect do
+            visit '/map/socials'
+          end.not_to raise_error
+        end
+      end
+    end
   end
 
   describe 'classes page' do
