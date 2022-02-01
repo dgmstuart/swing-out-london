@@ -72,6 +72,7 @@ RSpec.describe 'Admins can create events' do
     select 'The 100 Club', from: 'Venue'
     select 'school', from: 'Event type'
     check 'Has social?'
+    fill_in 'Title', with: 'Stompin\''
     fill_in 'event_frequency', with: '1'
     fill_in 'Url', with: 'http://www.lsds.co.uk/stompin'
 

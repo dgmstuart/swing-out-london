@@ -330,6 +330,16 @@ describe Event do
       event.valid?
       expect(event.errors.messages).to eq(venue: ['must exist'])
     end
+
+    it "is valid if it's a class without a title" do
+      expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: true, title: nil)).to be_valid
+    end
+
+    it "is invalid if it's a social without a title" do
+      event = FactoryBot.build(:event, has_taster: false, has_social: true, has_class: true, title: nil)
+      event.valid?
+      expect(event.errors.messages).to eq(title: ['must be present for social dances'])
+    end
   end
 
   describe 'expected_date' do

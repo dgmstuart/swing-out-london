@@ -59,8 +59,10 @@ RSpec.describe 'Users can view a map of upcoming events' do
     end
 
     context 'when a social has no title (regression test)' do
+      # TODO: delete this and the related functionality when all records have been fixed on production.
       it "silently doesn't render it" do
-        FactoryBot.create(:social, title: nil, dates: [Date.new(2019, 6, 8)])
+        social = FactoryBot.create(:social, dates: [Date.new(2019, 6, 8)])
+        social.update_attribute(:title, nil) # rubocop:disable Rails/SkipsModelValidations
 
         Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
           expect do
