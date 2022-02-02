@@ -23,6 +23,7 @@ class Event < ApplicationRecord
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validate :cannot_be_weekly_and_have_dates
+  validate :socials_must_have_titles
   validate :will_be_listed
 
   def cannot_be_weekly_and_have_dates
@@ -35,6 +36,13 @@ class Event < ApplicationRecord
     return if has_class? || has_social?
 
     errors[:base] << "Events must have either a Social or a Class, otherwise they won't be listed!"
+  end
+
+  def socials_must_have_titles
+    return unless has_social?
+    return if title.present?
+
+    errors.add(:title, 'must be present for social dances')
   end
 
   # display constants:
