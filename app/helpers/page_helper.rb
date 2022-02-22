@@ -28,4 +28,8 @@ module PageHelper
       { text: 'Listings Policy', path: listings_policy_path, class: nil }
     ]
   end
+
+  def privacy_policy_link
+    { text: 'Privacy', path: privacy_path, class: nil }
+  end
 end
