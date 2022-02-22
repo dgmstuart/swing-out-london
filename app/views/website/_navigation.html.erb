@@ -1,0 +1,11 @@
+<% #Site navigation - used in header and footer %>
+<ul class="<%= nav_class %>" id="<%= nav_id %>">
+  <li class="first">
+    <%= nav_link 'Listings', root_path,  { :rel => "start" } %>
+  </li>
+  <% links.each do |link| %>
+    <li class="<%=link.fetch(:class) %>">
+      <%= nav_link link.fetch(:text), link.fetch(:path), { :rel => "section" } %>
+    </li>
+  <% end %>
+</ul>

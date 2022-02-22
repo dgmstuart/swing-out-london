@@ -20,4 +20,16 @@ module PageHelper
       tag.span(name, class: 'current')
     end
   end
+
+  def main_navigation_links
+    [
+      { text: 'Map', path: map_path, class: nil },
+      { text: 'About', path: about_path, class: 'about_link' },
+      { text: 'Listings Policy', path: listings_policy_path, class: nil }
+    ]
+  end
+
+  def privacy_policy_link
+    { text: 'Privacy', path: privacy_path, class: nil }
+  end
 end
