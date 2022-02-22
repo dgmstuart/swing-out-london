@@ -37,7 +37,7 @@
     = content_for?(:page_content) ? yield(:page_content) : yield
 
     #footer
-      = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav', nav_class: "navigation secondary-nav" }
+      = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links }
 
       %address
         Site by

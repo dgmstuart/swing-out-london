@@ -1,12 +1,4 @@
 <% #Site navigation - used in header and footer %>
-<%
-  links = [
-   { text: 'Map', path: map_path, class: nil },
-   { text: 'About', path: about_path, class: 'about_link' },
-   { text: 'Listings Policy', path: listings_policy_path, class: nil },
-  ]
-%>
-
 <ul class="<%= nav_class %>" id="<%= nav_id %>">
   <li class="first">
     <%= nav_link 'Listings', root_path,  { :rel => "start" } %>
