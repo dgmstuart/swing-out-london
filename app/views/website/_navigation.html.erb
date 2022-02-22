@@ -1,15 +1,19 @@
 <% #Site navigation - used in header and footer %>
+<%
+  links = [
+   { text: 'Map', path: map_path, class: nil },
+   { text: 'About', path: about_path, class: 'about_link' },
+   { text: 'Listings Policy', path: listings_policy_path, class: nil },
+  ]
+%>
+
 <ul class="<%= nav_class %>" id="<%= nav_id %>">
   <li class="first">
     <%= nav_link 'Listings', root_path,  { :rel => "start" } %>
   </li>
-  <li>
-    <%= nav_link 'Map', map_path, { :rel => "section" } %>
-  </li>
-  <li class="about_link">
-    <%= nav_link 'About', about_path, { :rel => "section" } %>
-  </li>
-  <li>
-    <%= nav_link 'Listings Policy', listings_policy_path, { :rel => "section" } %>
-  </li>
+  <% links.each do |link| %>
+    <li class="<%=link.fetch(:class) %>">
+      <%= nav_link link.fetch(:text), link.fetch(:path), { :rel => "section" } %>
+    </li>
+  <% end %>
 </ul>
