@@ -9,7 +9,10 @@ RSpec.describe 'Audit Log RSS feed', type: :request do
     FactoryBot.create(:venue, name: 'The Alhambra')
     FactoryBot.create(:event, title: 'The Wednesday Stomp')
 
-    get '/audit_log.rss'
+    ClimateControl.modify(AUDIT_LOG_USER: 'user', AUDIT_LOG_PASSWORD: 'pass') do
+      headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials('user', 'pass') }
+      get '/audit_log.rss', headers: headers
+    end
 
     expect(response.content_type).to eq('application/rss+xml')
   end

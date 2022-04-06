@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AuditLogsController < ApplicationController
+  before_action :http_authenticate
+
   def show
     @audits = Audit.all.order(created_at: :desc)
     respond_to do |format|
@@ -42,5 +44,11 @@ class AuditLogsController < ApplicationController
       'Venue' => -> { venue_url(Venue.find(id)) },
       'Organiser' => -> { organiser_url(Organiser.find(id)) }
     }.fetch(auditable_type).call
+  end
+
+  def http_authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV.fetch('AUDIT_LOG_USER') && password == ENV.fetch('AUDIT_LOG_PASSWORD')
+    end
   end
 end
