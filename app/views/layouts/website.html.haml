@@ -14,7 +14,7 @@
 
 - content_for :content do
 
-  - if ENV['BANNER_HEAD']
+  - if ENV['BANNER_HEAD'].present?
     .banner
       %h3= ENV['BANNER_HEAD']
       %p=  ENV['BANNER_BODY']
