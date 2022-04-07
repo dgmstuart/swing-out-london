@@ -11,9 +11,9 @@ RSpec.describe 'Audit Log RSS feed', type: :request do
 
     ClimateControl.modify(AUDIT_LOG_USER: 'user', AUDIT_LOG_PASSWORD: 'pass') do
       headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials('user', 'pass') }
-      get '/audit_log.rss', headers: headers
+      get '/audit_log.atom', headers: headers
     end
 
-    expect(response.content_type).to eq('application/rss+xml')
+    expect(response.content_type).to eq('application/atom+xml')
   end
 end

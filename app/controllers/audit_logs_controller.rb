@@ -7,17 +7,17 @@ class AuditLogsController < ApplicationController
     @audits = Audit.all.order(created_at: :desc)
     respond_to do |format|
       format.html
-      format.rss { render xml: audits_rss(@audits).to_xml }
+      format.atom { render xml: audits_rss(@audits).to_xml }
     end
   end
 
   require 'rss'
 
   def audits_rss(audits) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    RSS::Maker.make('2.0') do |maker|
+    RSS::Maker.make('atom') do |maker|
       maker.channel.author = 'Swing Out London'
       maker.channel.updated = Audit.maximum(:created_at).iso8601
-      maker.channel.link = 'https://www.swingoutlondon.com'
+      maker.channel.id = 'https://www.swingoutlondon.com/'
       maker.channel.title = 'Swing Out London Audit Log'
       maker.channel.description = 'Audit Log for Swing Out London'
 
