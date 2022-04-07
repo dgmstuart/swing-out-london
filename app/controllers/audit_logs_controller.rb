@@ -26,7 +26,7 @@ class AuditLogsController < ApplicationController
         maker.items.new_item do |item|
           item.link = audit_show_link(audit.auditable_type, audit.auditable_id)
           item.title = audit_title(audit)
-          item.date = audit.created_at.iso8601
+          item.updated = audit.created_at.iso8601
           item.author = editor.name
           item.description = JSON.pretty_generate(audit.as_json)
         end
