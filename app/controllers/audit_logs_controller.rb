@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AuditLogsController < ApplicationController
-  before_action :http_authenticate
+  before_action :authenticate
 
   def show
     @audits = Audit.all.order(created_at: :desc)
@@ -18,6 +18,7 @@ class AuditLogsController < ApplicationController
       maker.channel.author = 'Swing Out London'
       maker.channel.updated = Audit.maximum(:created_at).iso8601
       maker.channel.id = 'https://www.swingoutlondon.com/'
+      maker.channel.link = 'https://www.swingoutlondon.com/audit_log.atom'
       maker.channel.title = 'Swing Out London Audit Log'
       maker.channel.description = 'Audit Log for Swing Out London'
 
@@ -46,9 +47,7 @@ class AuditLogsController < ApplicationController
     }.fetch(auditable_type).call
   end
 
-  def http_authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV.fetch('AUDIT_LOG_USER') && password == ENV.fetch('AUDIT_LOG_PASSWORD')
-    end
+  def authenticate
+    head :unauthorized unless params[:password] == ENV.fetch('AUDIT_LOG_PASSWORD')
   end
 end

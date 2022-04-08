@@ -9,9 +9,8 @@ RSpec.describe 'Audit Log RSS feed', type: :request do
     FactoryBot.create(:venue, name: 'The Alhambra')
     FactoryBot.create(:event, title: 'The Wednesday Stomp')
 
-    ClimateControl.modify(AUDIT_LOG_USER: 'user', AUDIT_LOG_PASSWORD: 'pass') do
-      headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials('user', 'pass') }
-      get '/audit_log.atom', headers: headers
+    ClimateControl.modify(AUDIT_LOG_PASSWORD: 'pass') do
+      get '/audit_log.atom?password=pass'
     end
 
     expect(response.content_type).to eq('application/atom+xml')

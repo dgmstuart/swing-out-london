@@ -13,9 +13,8 @@ RSpec.describe 'Admins can view an audit log' do
     FactoryBot.create(:venue)
     FactoryBot.create(:organiser)
 
-    ClimateControl.modify(AUDIT_LOG_USER: 'user', AUDIT_LOG_PASSWORD: 'pass') do
-      page.driver.browser.authorize('user', 'pass')
-      visit '/audit_log'
+    ClimateControl.modify(AUDIT_LOG_PASSWORD: 'pass') do
+      visit '/audit_log?password=pass'
     end
 
     expect(page).to have_content('Audit Log')
