@@ -29,6 +29,7 @@ class AuditLogsController < ApplicationController
         auditable = record(audit.auditable_type, audit.auditable_id)
         maker.items.new_item do |item|
           item.link = audit_show_link(auditable)
+          item.id = "#{audit_show_link(auditable)}?action=#{audit.action}&updated_at=#{audit.created_at.to_i}"
           item.title = audit_title(audit.action, auditable)
           item.updated = audit.created_at.iso8601
           item.author = editor.name
