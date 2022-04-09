@@ -26,9 +26,10 @@ class AuditLogsController < ApplicationController
 
       audits.each do |audit|
         editor = Editor.build(audit)
+        auditable = record(audit.auditable_type, audit.auditable_id)
         maker.items.new_item do |item|
-          item.link = audit_show_link(audit.auditable_type, audit.auditable_id)
-          item.title = audit_title(audit)
+          item.link = audit_show_link(auditable)
+          item.title = audit_title(audit.action, auditable)
           item.updated = audit.created_at.iso8601
           item.author = editor.name
           item.description = JSON.pretty_generate(audit.as_json)
@@ -37,16 +38,32 @@ class AuditLogsController < ApplicationController
     end
   end
 
-  def audit_title(audit)
-    "#{audit.action} #{audit.auditable_type}(#{audit.auditable_id})"
+  def audit_title(action, record)
+    "#{action.capitalize} #{record.class}: \"#{auditable_name(record)}\" (id: #{record.id})"
   end
 
-  def audit_show_link(auditable_type, id)
+  def record(class_name, id)
     {
-      'Event' => -> { event_url(Event.find(id)) },
-      'Venue' => -> { venue_url(Venue.find(id)) },
-      'Organiser' => -> { organiser_url(Organiser.find(id)) }
-    }.fetch(auditable_type).call
+      'Event' => -> { Event.find(id) },
+      'Venue' => -> { Venue.find(id) },
+      'Organiser' => -> { Organiser.find(id) }
+    }.fetch(class_name).call
+  end
+
+  def auditable_name(record)
+    {
+      'Event' => -> { record.title },
+      'Venue' => -> { record.name },
+      'Organiser' => -> { record.name }
+    }.fetch(record.class.name).call
+  end
+
+  def audit_show_link(record)
+    {
+      'Event' => -> { event_url(record) },
+      'Venue' => -> { venue_url(record) },
+      'Organiser' => -> { organiser_url(record) }
+    }.fetch(record.class.name).call
   end
 
   def authenticate
