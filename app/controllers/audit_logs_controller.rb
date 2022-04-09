@@ -42,7 +42,7 @@ class AuditLogsController < ApplicationController
     if action == 'destroy'
       "Delete #{record.class} (id: #{record.id})"
     else
-      "#{action.capitalize} #{record.class}: \"#{auditable_name(record)}\" (id: #{record.id})"
+      "#{action.capitalize} #{auditable_name(record)} (id: #{record.id})"
     end
   end
 
@@ -56,10 +56,18 @@ class AuditLogsController < ApplicationController
 
   def auditable_name(record)
     {
-      'Event' => -> { record.title },
-      'Venue' => -> { record.name },
-      'Organiser' => -> { record.name }
+      'Event' => -> { auditable_event_name(record) },
+      'Venue' => -> { "Venue: \"#{record.name}\"" },
+      'Organiser' => -> { "Organiser: \"#{record.name}\"" }
     }.fetch(record.class.name).call
+  end
+
+  def auditable_event_name(record)
+    if record.title.blank? && record.has_class? && !record.has_social?
+      'Class'
+    else
+      "Event: \"#{record.title}\""
+    end
   end
 
   def audit_show_link(record)
