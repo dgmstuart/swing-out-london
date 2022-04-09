@@ -39,14 +39,18 @@ class AuditLogsController < ApplicationController
   end
 
   def audit_title(action, record)
-    "#{action.capitalize} #{record.class}: \"#{auditable_name(record)}\" (id: #{record.id})"
+    if action == 'destroy'
+      "Delete #{record.class} (id: #{record.id})"
+    else
+      "#{action.capitalize} #{record.class}: \"#{auditable_name(record)}\" (id: #{record.id})"
+    end
   end
 
   def record(class_name, id)
     {
-      'Event' => -> { Event.find(id) },
-      'Venue' => -> { Venue.find(id) },
-      'Organiser' => -> { Organiser.find(id) }
+      'Event' => -> { Event.find_by(id: id) || Event.new(id: id) },
+      'Venue' => -> { Venue.find_by(id: id) || Venue.new(id: id) },
+      'Organiser' => -> { Organiser.find_by(id: id) || Organiser.find(id: id) }
     }.fetch(class_name).call
   end
 
