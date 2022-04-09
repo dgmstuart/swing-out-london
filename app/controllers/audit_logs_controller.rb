@@ -18,7 +18,9 @@ class AuditLogsController < ApplicationController
       maker.channel.author = 'Swing Out London'
       maker.channel.updated = Audit.maximum(:created_at).iso8601
       maker.channel.id = 'https://www.swingoutlondon.com/'
-      maker.channel.link = 'https://www.swingoutlondon.com/audit_log.atom'
+      link = maker.channel.links.new_link
+      link.href = 'https://www.swingoutlondon.com/audit_log.atom'
+      link.rel = 'self'
       maker.channel.title = 'Swing Out London Audit Log'
       maker.channel.description = 'Audit Log for Swing Out London'
 
