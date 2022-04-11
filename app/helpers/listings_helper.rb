@@ -128,6 +128,7 @@ module ListingsHelper
 
   def swingclass_link(event)
     text = capture do
+      concat new_event_label if event.new?
       concat swingclass_details(event)
       concat tag.span swingclass_info(event), class: 'info' if swingclass_info(event)
     end
@@ -141,7 +142,6 @@ module ListingsHelper
 
   def swingclass_details(event)
     details = []
-    details << new_event_label if event.new?
     details << event.venue_area
     details << "(from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
     details << "(#{event.class_style})" if event.class_style.present?
