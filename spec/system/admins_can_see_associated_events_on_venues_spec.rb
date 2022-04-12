@@ -5,10 +5,10 @@ require 'rails_helper'
 RSpec.describe 'Admins can see associated events on venues' do
   it 'when there are associated events' do
     stub_login
-    venue = FactoryBot.create(:venue)
-    organiser = FactoryBot.create(:organiser, name: 'Ron and Christine')
-    dance_class = FactoryBot.create(:class, class_organiser: organiser, day: 'Wednesday', venue: venue)
-    social = FactoryBot.create(:social, title: 'The Sunday Stomp', venue: venue)
+    venue = create(:venue)
+    organiser = create(:organiser, name: 'Ron and Christine')
+    dance_class = create(:class, class_organiser: organiser, day: 'Wednesday', venue: venue)
+    social = create(:social, title: 'The Sunday Stomp', venue: venue)
 
     visit '/login'
     click_on 'Log in with Facebook'
@@ -24,7 +24,7 @@ RSpec.describe 'Admins can see associated events on venues' do
 
   it 'when there are no associated events' do
     stub_login
-    FactoryBot.create(:venue)
+    create(:venue)
 
     visit '/login'
     click_on 'Log in with Facebook'

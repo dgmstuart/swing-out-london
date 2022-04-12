@@ -16,16 +16,16 @@ RSpec.describe Venue do
 
   describe 'can_delete?' do
     it 'is true if there are no associated events' do
-      venue = FactoryBot.build(:venue)
+      venue = build(:venue)
 
-      expect(venue.can_delete?).to eq true
+      expect(venue.can_delete?).to be true
     end
 
     it 'is false if there are associated events' do
-      venue = FactoryBot.create(:venue)
-      FactoryBot.create(:event, venue: venue)
+      venue = create(:venue)
+      create(:event, venue: venue)
 
-      expect(venue.can_delete?).to eq false
+      expect(venue.can_delete?).to be false
     end
   end
 end

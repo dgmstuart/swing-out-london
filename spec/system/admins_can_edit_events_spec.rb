@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe 'Admins can edit events' do
   it 'with valid data' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
-    FactoryBot.create(:event)
-    FactoryBot.create(:venue, name: 'The 100 Club')
-    FactoryBot.create(:organiser, name: 'The London Swing Dance Society')
+    create(:event)
+    create(:venue, name: 'The 100 Club')
+    create(:organiser, name: 'The London Swing Dance Society')
 
     visit '/login'
     click_on 'Log in with Facebook'
@@ -48,7 +48,7 @@ RSpec.describe 'Admins can edit events' do
 
   it 'with invalid data' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
-    FactoryBot.create(:event)
+    create(:event)
 
     visit '/login'
     click_on 'Log in with Facebook'
@@ -76,7 +76,7 @@ RSpec.describe 'Admins can edit events' do
   end
 
   it 'adding dates' do
-    FactoryBot.create(:event, dates: ['12/12/2012', '13/12/2012'])
+    create(:event, dates: ['12/12/2012', '13/12/2012'])
     stub_login(id: 12345678901234567, name: 'Al Minns')
 
     visit '/login'
@@ -96,7 +96,7 @@ RSpec.describe 'Admins can edit events' do
   end
 
   it 'adding cancellations' do
-    FactoryBot.create(:event, dates: ['12/12/2012'])
+    create(:event, dates: ['12/12/2012'])
     stub_login(id: 12345678901234567, name: 'Al Minns')
 
     visit '/login'

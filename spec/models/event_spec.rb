@@ -5,10 +5,10 @@ require 'rails_helper'
 describe Event do
   describe '.dates' do
     it 'returns an ordered list of dates' do
-      recent_date = FactoryBot.create(:swing_date, date: Time.zone.today)
-      old_date = FactoryBot.create(:swing_date, date: Time.zone.today - 1.year)
+      recent_date = create(:swing_date, date: Time.zone.today)
+      old_date = create(:swing_date, date: Time.zone.today - 1.year)
 
-      event = FactoryBot.create(:event)
+      event = create(:event)
       event.swing_dates << recent_date
       event.swing_dates << old_date
       event.save!
@@ -21,7 +21,7 @@ describe Event do
     context 'when there is only one social' do
       it 'returns the correct array when that social has only one date in the future' do
         one_date = Time.zone.today + 7
-        event = FactoryBot.create(:intermittent_social, dates: [one_date])
+        event = create(:intermittent_social, dates: [one_date])
 
         aggregate_failures do
           expect(described_class.socials_dates(Time.zone.today).length).to eq(1)
@@ -33,7 +33,7 @@ describe Event do
       it 'returns the correct array when that social has two dates in the future' do
         later_date = Time.zone.today + 7
         earlier_date = Time.zone.today + 1
-        event = FactoryBot.create(:intermittent_social, dates: [later_date, earlier_date])
+        event = create(:intermittent_social, dates: [later_date, earlier_date])
 
         aggregate_failures do
           expect(described_class.socials_dates(Time.zone.today).length).to eq(2)
@@ -48,7 +48,7 @@ describe Event do
         lower_limit_date = Time.zone.today
         upper_limit_date = Time.zone.today + 13
         outside_limit_date = Time.zone.today + 14
-        event = FactoryBot.create(:intermittent_social, dates: [upper_limit_date, outside_limit_date, lower_limit_date])
+        event = create(:intermittent_social, dates: [upper_limit_date, outside_limit_date, lower_limit_date])
 
         aggregate_failures do
           expect(described_class.socials_dates(Time.zone.today).length).to eq(2)
@@ -61,7 +61,7 @@ describe Event do
       it 'returns the correct array when that social has one date in the future and one in the past' do
         past_date = Time.zone.today - 1.month
         future_date = Time.zone.today + 5
-        event = FactoryBot.create(:intermittent_social, dates: [past_date, future_date])
+        event = create(:intermittent_social, dates: [past_date, future_date])
 
         aggregate_failures do
           expect(described_class.socials_dates(Time.zone.today).length).to eq(1)
@@ -85,18 +85,18 @@ describe Event do
       # rubocop:disable RSpec/ExampleLength
       it 'returns the correct array with a bunch of classes and socials' do
         # create one class for each day, starting on monday. None of these should be included
-        FactoryBot.create_list(:class, 7)
+        create_list(:class, 7)
 
         # not included events:
-        FactoryBot.create(:intermittent_social, dates: [date(-10)])
-        FactoryBot.create(:intermittent_social, dates: [date(-370)])
-        FactoryBot.create(:intermittent_social, dates: [date(20)])
+        create(:intermittent_social, dates: [date(-10)])
+        create(:intermittent_social, dates: [date(-370)])
+        create(:intermittent_social, dates: [date(20)])
 
         # included events:
-        event_d1 = FactoryBot.create(:intermittent_social, dates: [date(1)])
-        event_d10_d11 = FactoryBot.create(:social, frequency: 4, dates: [date(10), date(11)])
-        event_1_d8 = FactoryBot.create(:social, frequency: 4, dates: [date(8)], title: 'A')
-        event_2_d8 = FactoryBot.create(:social, frequency: 2, dates: [date(8)], title: 'Z')
+        event_d1 = create(:intermittent_social, dates: [date(1)])
+        event_d10_d11 = create(:social, frequency: 4, dates: [date(10), date(11)])
+        event_1_d8 = create(:social, frequency: 4, dates: [date(8)], title: 'A')
+        event_2_d8 = create(:social, frequency: 2, dates: [date(8)], title: 'Z')
 
         expect(described_class.socials_dates(Time.zone.today)).to eq(
           [
@@ -114,7 +114,7 @@ describe Event do
   describe '.socials_on_date' do
     it 'returns intermittent socials on a given date' do
       date = Date.current
-      social = FactoryBot.create(:intermittent_social, dates: [date])
+      social = create(:intermittent_social, dates: [date])
 
       socials = described_class.socials_on_date(date)
 
@@ -123,7 +123,7 @@ describe Event do
 
     it 'returns weekly socials on the same day as a given date' do
       date = Date.current.next_occurring(:thursday)
-      social = FactoryBot.create(:weekly_social, day: 'Thursday')
+      social = create(:weekly_social, day: 'Thursday')
 
       socials = described_class.socials_on_date(date)
 
@@ -140,9 +140,9 @@ describe Event do
 
     it 'sorts the results by title' do
       date = Date.current.next_occurring(:thursday)
-      FactoryBot.create(:intermittent_social, dates: [date], title: 'Casablanca')
-      FactoryBot.create(:weekly_social, day: 'Thursday', title: 'Alhambra')
-      FactoryBot.create(:intermittent_social, dates: [date], title: 'Boogaloo')
+      create(:intermittent_social, dates: [date], title: 'Casablanca')
+      create(:weekly_social, day: 'Thursday', title: 'Alhambra')
+      create(:intermittent_social, dates: [date], title: 'Boogaloo')
       socials = described_class.socials_on_date(date)
 
       expect(socials.pluck(:title)).to eq %w[Alhambra Boogaloo Casablanca]
@@ -153,53 +153,53 @@ describe Event do
   describe '.date_array =' do
     describe 'empty strings' do
       it 'handles an event with with no dates and adding no dates' do
-        event = FactoryBot.create(:event)
+        event = create(:event)
         event.date_array = ''
         expect(event.swing_dates).to eq([])
       end
 
       it 'handles an event with with no dates and adding nil dates' do
-        event = FactoryBot.create(:event)
+        event = create(:event)
         event.date_array = nil
         expect(event.swing_dates).to eq([])
       end
 
       it 'handles an event with no dates and adding unknown dates' do
-        event = FactoryBot.create(:event)
+        event = create(:event)
         event.date_array = 'Unknown'
         expect(event.swing_dates).to eq([])
       end
 
       it 'handles an event with no dates and a weekly event' do
-        event = FactoryBot.create(:event)
+        event = create(:event)
         event.date_array = 'Weekly'
       end
     end
 
     it 'successfully adds one valid date to an event' do
-      event = FactoryBot.create(:event)
+      event = create(:event)
       event.date_array = '01/02/2012'
       expect(event.dates).to eq([Date.new(2012, 2, 1)])
     end
 
     it 'successfully adds two valid dates to an event with no dates and orders them' do
-      event = FactoryBot.create(:event)
+      event = create(:event)
       event.date_array = '01/02/2012, 30/11/2011'
       expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
     end
 
     it 'blanks out a date array where there existing dates' do # rubocop:disable RSpec/MultipleExpectations
-      event = FactoryBot.create(:event, date_array: '01/02/2012, 30/11/2011')
+      event = create(:event, date_array: '01/02/2012, 30/11/2011')
       expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
       event.date_array = ''
       expect(event.dates).to eq([])
     end
 
     it 'does not create multiple instances of the same date' do
-      event1 = FactoryBot.create(:event)
+      event1 = create(:event)
       event1.date_array = '05/05/2005'
       event1.save!
-      event2 = FactoryBot.create(:event)
+      event2 = create(:event)
       event2.date_array = '05/05/2005'
       event2.save!
       expect(SwingDate.where(date: Date.new(2005, 5, 5)).length).to eq(1)
@@ -255,7 +255,7 @@ describe Event do
     end
 
     it 'blanks out a cancellation array where there existing dates' do # rubocop:disable RSpec/MultipleExpectations
-      event = FactoryBot.create(:event, cancellation_array: '01/02/2012')
+      event = create(:event, cancellation_array: '01/02/2012')
       expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
       event.cancellation_array = ''
       expect(event.cancellations).to eq([])
@@ -272,32 +272,32 @@ describe Event do
 
   describe 'active.classes' do
     it "returns classes with no 'last date'" do
-      event = FactoryBot.create(:class, last_date: nil)
+      event = create(:class, last_date: nil)
       expect(described_class.active.classes).to eq([event])
     end
 
     it "does not return classes with a 'last date' in the past" do
-      FactoryBot.create(:class, last_date: Time.zone.today - 1)
+      create(:class, last_date: Time.zone.today - 1)
       expect(described_class.active.classes).to eq([])
     end
 
     it 'does not return non-classes' do
-      FactoryBot.create(:event, last_date: nil, has_class: 'false')
-      FactoryBot.create(:event, last_date: nil, has_taster: 'true')
+      create(:event, last_date: nil, has_class: 'false')
+      create(:event, last_date: nil, has_taster: 'true')
 
       expect(described_class.active.classes).to eq([])
     end
 
     it 'returns the correct list of classes' do # rubocop:disable RSpec/ExampleLength
-      FactoryBot.create(:social, last_date: nil)
-      FactoryBot.create(:class, last_date: Time.zone.today - 5)
+      create(:social, last_date: nil)
+      create(:class, last_date: Time.zone.today - 5)
       returned = [
-        FactoryBot.create(:class),
-        FactoryBot.create(:class, last_date: nil),
-        FactoryBot.create(:class, last_date: Time.zone.today + 1)
+        create(:class),
+        create(:class, last_date: nil),
+        create(:class, last_date: Time.zone.today + 1)
       ]
-      FactoryBot.create(:social)
-      FactoryBot.create(:event, has_class: 'false', has_taster: 'true')
+      create(:social)
+      create(:event, has_class: 'false', has_taster: 'true')
 
       aggregate_failures do
         expect(described_class.active.classes.length).to eq(returned.length)
@@ -310,33 +310,33 @@ describe Event do
 
   describe '(validations)' do
     it 'is invalid if it has neither a class nor a social nor a taster' do
-      expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
+      expect(build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
     end
 
     it 'is invalid if it has a taster but no class or social' do
-      expect(FactoryBot.build(:event, has_taster: true, has_social: false, has_class: false)).not_to be_valid
+      expect(build(:event, has_taster: true, has_social: false, has_class: false)).not_to be_valid
     end
 
     it 'is valid if it has a class but no taster or social (and everything else is OK)' do
-      expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: true)).to be_valid
+      expect(build(:event, has_taster: false, has_social: false, has_class: true)).to be_valid
     end
 
     it 'is valid if it has a social but no taster or class (and everything else is OK)' do
-      expect(FactoryBot.build(:event, has_taster: false, has_social: true, has_class: false)).to be_valid
+      expect(build(:event, has_taster: false, has_social: true, has_class: false)).to be_valid
     end
 
     it 'is invalid with no venue' do
-      event = FactoryBot.build(:event, venue_id: nil)
+      event = build(:event, venue_id: nil)
       event.valid?
       expect(event.errors.messages).to eq(venue: ['must exist'])
     end
 
     it "is valid if it's a class without a title" do
-      expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: true, title: nil)).to be_valid
+      expect(build(:event, has_taster: false, has_social: false, has_class: true, title: nil)).to be_valid
     end
 
     it "is invalid if it's a social without a title" do
-      event = FactoryBot.build(:event, has_taster: false, has_social: true, has_class: true, title: nil)
+      event = build(:event, has_taster: false, has_social: true, has_class: true, title: nil)
       event.valid?
       expect(event.errors.messages).to eq(title: ['must be present for social dances'])
     end
@@ -344,31 +344,31 @@ describe Event do
 
   describe 'expected_date' do
     it 'is a month after the previous date for monthly events' do
-      event = FactoryBot.build(:event, frequency: 4)
+      event = build(:event, frequency: 4)
       # FIXME: EVIL!!!: Stubbing object under test
       allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
       expect(event.expected_date).to eq Date.new(1970, 1, 29)
     end
 
     it 'is a year after the previous date for monthly events' do
-      event = FactoryBot.build(:event, frequency: 52)
+      event = build(:event, frequency: 52)
       # FIXME: EVIL!!!: Stubbing object under test
       allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
       expect(event.expected_date).to eq Date.new(1970, 12, 31)
     end
 
     it 'is after a far-future date if there are no dates' do
-      event = FactoryBot.build(:event, frequency: 4) # No dates by default
+      event = build(:event, frequency: 4) # No dates by default
       expect(event.expected_date).to be > Time.zone.today + 1.year
     end
 
     it 'is after a far-future date if the event is weekly' do
-      event = FactoryBot.build(:event, frequency: 1)
+      event = build(:event, frequency: 1)
       expect(event.expected_date).to be > Time.zone.today + 1.year
     end
 
     it 'is after a far-future date if the event has frequency 0 and other dates' do
-      event = FactoryBot.build(:event, frequency: 0)
+      event = build(:event, frequency: 0)
       # FIXME: EVIL!!!: Stubbing object under test
       allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
       expect(event.expected_date).to be > Time.zone.today + 1.year

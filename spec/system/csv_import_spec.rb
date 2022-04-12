@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'csv import' do
   it 'with valid csv' do
-    FactoryBot.create(:event, title: 'Boogaloo Bounce', url: 'http://www.swingpatrol.co.uk/boogaloo-bounce/')
-    FactoryBot.create(:event, title: 'Book Club Blues', url: 'http://www.swingpatrol.co.uk/book-club-blues/')
+    create(:event, title: 'Boogaloo Bounce', url: 'http://www.swingpatrol.co.uk/boogaloo-bounce/')
+    create(:event, title: 'Book Club Blues', url: 'http://www.swingpatrol.co.uk/book-club-blues/')
 
     skip_login
     visit '/events/imports/new'

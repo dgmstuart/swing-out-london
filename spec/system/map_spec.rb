@@ -5,13 +5,13 @@ require 'rails_helper'
 RSpec.describe 'Users can view a map of upcoming events' do
   describe 'socials page' do
     it 'viewing the page' do
-      venue = FactoryBot.create(
+      venue = create(
         :venue,
         name: 'The Boudoir Club',
         address: '22 Night Street',
         postcode: 'ZZ2 2ZZ'
       )
-      FactoryBot.create(
+      create(
         :social,
         venue: venue,
         title: 'Bedroom Bounce',
@@ -61,7 +61,7 @@ RSpec.describe 'Users can view a map of upcoming events' do
     context 'when a social has no title (regression test)' do
       # TODO: delete this and the related functionality when all records have been fixed on production.
       it "silently doesn't render it" do
-        social = FactoryBot.create(:social, dates: [Date.new(2019, 6, 8)])
+        social = create(:social, dates: [Date.new(2019, 6, 8)])
         social.update_attribute(:title, nil) # rubocop:disable Rails/SkipsModelValidations
 
         Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
@@ -75,14 +75,14 @@ RSpec.describe 'Users can view a map of upcoming events' do
 
   describe 'classes page' do
     it 'viewing the page' do
-      venue = FactoryBot.create(
+      venue = create(
         :venue,
         name: 'The Daylight Centre',
         address: '9 Mornington Crescent',
         postcode: 'DA7 1GH'
       )
-      organiser = FactoryBot.create(:organiser, name: 'Morning Swing')
-      FactoryBot.create(
+      organiser = create(:organiser, name: 'Morning Swing')
+      create(
         :class,
         venue: venue,
         class_organiser: organiser,

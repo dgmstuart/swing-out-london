@@ -27,7 +27,7 @@ class EventsController < CMSBaseController
     @event = Event.new(event_params)
 
     if @event.save
-      flash[:notice] = 'Event was successfully created.'
+      flash[:notice] = t('flash.success', model: 'Event', action: 'created')
       redirect_to(@event)
     else
       render action: 'new'
@@ -41,7 +41,7 @@ class EventsController < CMSBaseController
     update_params = event_params.merge!(audit_comment)
 
     if @event.update(update_params)
-      flash[:notice] = 'Event was successfully updated.'
+      flash[:notice] = t('flash.success', model: 'Event', action: 'updated')
       redirect_to(@event)
     else
       render action: 'edit'

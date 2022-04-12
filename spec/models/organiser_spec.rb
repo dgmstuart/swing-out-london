@@ -16,7 +16,7 @@ RSpec.describe Organiser do
   describe 'shortname=' do
     context 'when the value was not blank' do
       it 'sets the value' do
-        organiser = FactoryBot.build(:organiser)
+        organiser = build(:organiser)
 
         organiser.shortname = 'foo'
 
@@ -26,7 +26,7 @@ RSpec.describe Organiser do
 
     context 'when the value was nil' do
       it 'sets the value' do
-        organiser = FactoryBot.build(:organiser)
+        organiser = build(:organiser)
 
         organiser.shortname = nil
 
@@ -36,7 +36,7 @@ RSpec.describe Organiser do
 
     context 'when the value was empty' do
       it 'sets the value to nil' do
-        organiser = FactoryBot.build(:organiser)
+        organiser = build(:organiser)
 
         organiser.shortname = ''
 
@@ -47,16 +47,16 @@ RSpec.describe Organiser do
 
   describe 'can_delete?' do
     it 'is true if there are no associated events' do
-      organiser = FactoryBot.build(:organiser)
+      organiser = build(:organiser)
 
-      expect(organiser.can_delete?).to eq true
+      expect(organiser.can_delete?).to be true
     end
 
     it 'is false if there are associated events' do
-      organiser = FactoryBot.create(:organiser)
-      FactoryBot.create(:event, social_organiser: organiser)
+      organiser = create(:organiser)
+      create(:event, social_organiser: organiser)
 
-      expect(organiser.can_delete?).to eq false
+      expect(organiser.can_delete?).to be false
     end
   end
 end

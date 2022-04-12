@@ -22,7 +22,7 @@ class OrganisersController < CMSBaseController
     @organiser = Organiser.new(organiser_params)
 
     if @organiser.save
-      flash[:notice] = 'Organiser was successfully created.'
+      flash[:notice] = t('flash.success', model: 'Organiser', action: 'created')
       redirect_to(@organiser)
     else
       render action: 'new'
@@ -33,7 +33,7 @@ class OrganisersController < CMSBaseController
     @organiser = Organiser.find(params[:id])
 
     if @organiser.update(organiser_params)
-      flash[:notice] = 'Organiser was successfully updated.'
+      flash[:notice] = t('flash.success', model: 'Organiser', action: 'updated')
       redirect_to(@organiser)
     else
       render action: 'edit'

@@ -23,7 +23,7 @@ class VenuesController < CMSBaseController
     @venue = Venue.new(venue_params)
 
     if @venue.save
-      flash[:notice] = 'Venue was successfully created.'
+      flash[:notice] = t('flash.success', model: 'Venue', action: 'created')
       redirect_to(@venue)
     else
       render action: 'new'
@@ -34,7 +34,8 @@ class VenuesController < CMSBaseController
     @venue = Venue.find(params[:id])
 
     if @venue.update(venue_params)
-      flash[:notice] = 'Venue was successfully updated.'
+      flash[:notice] = t('flash.success', model: 'Venue', action: 'updated')
+
       redirect_to(@venue)
     else
       render action: 'edit'

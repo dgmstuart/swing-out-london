@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Admins can delete venues' do
   it 'when the venue has no associated events' do
     stub_login
-    FactoryBot.create(:venue, name: "Bobby McGee's")
+    create(:venue, name: "Bobby McGee's")
 
     visit '/login'
     click_on 'Log in with Facebook'
@@ -21,8 +21,8 @@ RSpec.describe 'Admins can delete venues' do
 
   it 'when the venue has associated events' do
     stub_login
-    venue = FactoryBot.create(:venue)
-    FactoryBot.create(:event, venue: venue)
+    venue = create(:venue)
+    create(:event, venue: venue)
 
     visit '/login'
     click_on 'Log in with Facebook'

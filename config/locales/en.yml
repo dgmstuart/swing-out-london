@@ -1,4 +1,10 @@
 en:
+  flash:
+    success: "%{model} was successfully %{action}"
+    map:
+      days_of_week: 'We can only show you classes for days of the week'
+      14_days: 'We can only show you events for the next 14 days'
+
   faker:
     name:
       lindy_hop_name:

@@ -28,7 +28,7 @@ class MapsController < ApplicationController
         renderer: self
       )
   rescue Maps::Classes::DayParser::NonDayError
-    flash[:warn] = 'We can only show you classes for days of the week'
+    flash[:warn] = t('flash.map.days_of_week')
     logger.warn("Not a recognised day: #{@day}")
     redirect_to map_classes_path
   end
@@ -52,7 +52,7 @@ class MapsController < ApplicationController
         renderer: self
       )
   rescue Maps::Socials::Dates::DateOutOfRangeError
-    flash[:warn] = 'We can only show you events for the next 14 days'
+    flash[:warn] = t('flash.map.14_days')
     logger.warn("Not a date in the visible range: #{@date}")
     redirect_to map_socials_path
   end

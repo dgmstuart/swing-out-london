@@ -258,7 +258,7 @@ RSpec.describe ShowEvent do
     it 'delegates to the event' do
       event = instance_double('Event', weekly?: false)
 
-      expect(described_class.new(event).weekly?).to eq false
+      expect(described_class.new(event).weekly?).to be false
     end
   end
 end

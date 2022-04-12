@@ -9,9 +9,9 @@ RSpec.describe 'Admins can view an audit log' do
     visit '/login'
     click_on 'Log in with Facebook'
 
-    FactoryBot.create(:event)
-    FactoryBot.create(:venue)
-    FactoryBot.create(:organiser)
+    create(:event)
+    create(:venue)
+    create(:organiser)
 
     ClimateControl.modify(AUDIT_LOG_PASSWORD: 'pass') do
       visit '/audit_log?password=pass'

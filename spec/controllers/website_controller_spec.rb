@@ -39,7 +39,7 @@ describe WebsiteController do
     it 'assigns a list of events to @classes' do
       # CALLS MODEL
       allow(Event).to receive(:socials_dates).and_return []
-      FactoryBot.create(:class)
+      create(:class)
       get :index
       expect(assigns[:classes][0]).to be_an(Event)
     end
@@ -47,7 +47,7 @@ describe WebsiteController do
     it 'assigns an array containing a list of events to @socials_dates' do
       # CALLS MODEL
       stub_classes
-      FactoryBot.create(:social, frequency: 1, day: 'Monday')
+      create(:social, frequency: 1, day: 'Monday')
       get :index
       expect(assigns[:socials_dates][0][1][0]).to be_an(Event)
     end

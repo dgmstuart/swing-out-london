@@ -10,7 +10,7 @@ RSpec.describe 'Name clash page' do
   end
 
   def given_a_social
-    FactoryBot.create(:social, title: 'my awesome spectacular')
+    create(:social, title: 'my awesome spectacular')
   end
 
   def when_i_visit_the_name_clash_page

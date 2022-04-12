@@ -29,7 +29,7 @@ RSpec.describe 'Admins can create organisers' do
   end
 
   it 'with an emtpy shortname' do
-    FactoryBot.create(:organiser, shortname: '')
+    create(:organiser, shortname: '')
     stub_login
 
     visit '/login'

@@ -7,11 +7,11 @@ class Date
 
   def self.local_tomorrow
     # For some reason, Time.tomorrow doesn't seem to be implemented
-    (Time.zone.now + 1.day).to_date
+    1.day.from_now.to_date
   end
 
   def self.local_yesterday
-    (Time.zone.now - 1.day).to_date
+    1.day.ago.to_date
   end
 end
 

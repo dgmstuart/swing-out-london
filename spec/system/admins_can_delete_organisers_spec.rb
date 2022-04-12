@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Admins can delete organisers' do
   it 'when the organiser has no associated events' do
     stub_login
-    FactoryBot.create(:organiser, name: 'Herbert White')
+    create(:organiser, name: 'Herbert White')
 
     visit '/login'
     click_on 'Log in with Facebook'
@@ -21,8 +21,8 @@ RSpec.describe 'Admins can delete organisers' do
 
   it 'when the organiser has associated events' do
     stub_login
-    organiser = FactoryBot.create(:organiser)
-    FactoryBot.create(:event, social_organiser: organiser)
+    organiser = create(:organiser)
+    create(:event, social_organiser: organiser)
 
     visit '/login'
     click_on 'Log in with Facebook'

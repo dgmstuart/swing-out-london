@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe 'Admins can create events' do
   it 'with valid data' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
-    FactoryBot.create(:venue, name: 'The 100 Club')
-    FactoryBot.create(:organiser, name: 'The London Swing Dance Society')
+    create(:venue, name: 'The 100 Club')
+    create(:organiser, name: 'The London Swing Dance Society')
 
     visit '/login'
     click_on 'Log in with Facebook'
@@ -52,7 +52,7 @@ RSpec.describe 'Admins can create events' do
 
   it 'with missing data' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
-    FactoryBot.create(:venue, name: 'The 100 Club')
+    create(:venue, name: 'The 100 Club')
 
     visit '/login'
     click_on 'Log in with Facebook'

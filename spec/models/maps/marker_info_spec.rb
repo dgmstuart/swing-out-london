@@ -73,7 +73,7 @@ RSpec.describe Maps::MarkerInfo do
 
         marker_info = described_class.new(venue: double, events: [event_listing_data])
 
-        expect(marker_info.social_listings.first.cancelled?).to eq(true)
+        expect(marker_info.social_listings.first.cancelled?).to be(true)
       end
     end
 
@@ -84,7 +84,7 @@ RSpec.describe Maps::MarkerInfo do
 
         marker_info = described_class.new(venue: double, events: [event_listing_data])
 
-        expect(marker_info.social_listings.first.cancelled?).to eq(false)
+        expect(marker_info.social_listings.first.cancelled?).to be(false)
       end
     end
   end

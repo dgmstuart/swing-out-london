@@ -62,7 +62,7 @@ RSpec.describe LoginSession do
         request = instance_double('ActionDispatch::Request', session: session)
 
         login_session = described_class.new(request, logger: fake_logger)
-        expect(login_session.user.logged_in?).to eq true
+        expect(login_session.user.logged_in?).to be true
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe LoginSession do
         request = instance_double('ActionDispatch::Request', session: {})
 
         login_session = described_class.new(request, logger: fake_logger)
-        expect(login_session.user.logged_in?).to eq false
+        expect(login_session.user.logged_in?).to be false
       end
     end
   end
