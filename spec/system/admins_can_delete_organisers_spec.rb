@@ -36,7 +36,6 @@ RSpec.describe 'Admins can delete organisers' do
 
     expect(page).to have_no_content('Destroy')
     expect(page).to have_no_content('Delete')
-    expect(page).to have_content("Can't be deleted: has associated events")
 
     click_on 'Edit'
 

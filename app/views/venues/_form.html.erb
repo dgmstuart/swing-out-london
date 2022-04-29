@@ -30,7 +30,9 @@
     <%= f.label :website %>
     <%= f.text_field :website %>
   </div>
-  <div class='form-group'>
-    <%= f.submit action %>
+  <div class='form-group actions'>
+    <%= f.submit action, class: "button" %>
+    <%= link_to 'Cancel', cancel_path, class: "button button-secondary" %>
+    <%= conditional_delete_tag(@venue) %>
   </div>
 <% end %>

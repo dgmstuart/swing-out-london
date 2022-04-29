@@ -44,9 +44,6 @@
 <% end %>
 
 <div class="actions">
-  <%= link_to 'Edit', edit_venue_path(@venue) %>  |
-  <%= conditional_delete_tag(@venue) %> |
-  <%= link_to 'List', venues_path(anchor: "venue_#{@venue.id}") %> |
-  <%= link_to 'New venue', new_venue_path %> |
-  <%= link_to 'New Event at this venue',  new_event_path( venue_id: @venue.id) %>
+  <%= link_to 'Edit', edit_venue_path(@venue), class: "button" %>
+  <%= link_to 'New Event at this venue', new_event_path( venue_id: @venue.id), class: "button button-secondary" %>
 </div>

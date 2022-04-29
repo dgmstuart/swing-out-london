@@ -19,8 +19,9 @@
     <%= f.text_area :description %>
     <span class='help'>(this is just for our own reference)</span>
   </div>
-  <div class='form-group'>
-    <%= f.submit action %>
+  <div class='form-group actions'>
+    <%= f.submit action, class: 'button' %>
+    <%= link_to 'Cancel', cancel_path, class: "button button-secondary" %>
+    <%= conditional_delete_tag(@organiser) %>
   </div>
-
 <% end %>

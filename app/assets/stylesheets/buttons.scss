@@ -20,6 +20,11 @@
   &.button-danger {
     background-color: $button-danger-colour;
   }
+
+  &.button-secondary {
+    color: $text-colour;
+    background-color: $button-secondary-colour;
+  }
 }
 
 .button:hover {
@@ -34,6 +39,10 @@
 
   &.button-danger {
     background-color: $button-danger-active-colour;
+  }
+
+  &.button-secondary {
+    background-color: $button-secondary-active-colour;
   }
 }
 
