@@ -7,7 +7,8 @@ form {
 
   .form-group-title {
     font-size: 20px;
-    margin: 20px 0 5px 155px;
+    margin-top: 20px;
+    margin-bottom: 5px;
   }
 
   .help {
@@ -15,22 +16,29 @@ form {
     color: $lowlight-colour;
   }
 
-  p.help {
-    margin-left: 155px;
+  label {
+    font-weight: bold;
   }
 
   input[type="text"] {
     width: 30em;
   }
 
-  label.inline-label {
-    width: inherit;
-    float: none;
-    padding-left: 2em;
-  }
-
   input.shortfield {
     width: inherit;
+  }
+}
+
+form.new_organiser,
+form.edit_organiser,
+form.new_venue,
+form.edit_venue {
+  .form-group-title {
+    margin-left: 155px;
+  }
+
+  p.help {
+    margin-left: 155px;
   }
 
   textarea {
@@ -47,23 +55,7 @@ form {
     width: 10em;
   }
 
-  .warning-message {
-    color: #b94a48;
-    background-color: #f2dede;
-    padding: 8px 35px 8px 14px;
-    margin-bottom: 20px;
-    border: 1px solid #eed3d7;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-
-    strong {
-      font-size: 1.2em;
-    }
-  }
-
   label {
-    font-weight: bold;
     width: 135px;
     float: left;
     text-align: right;
@@ -73,6 +65,29 @@ form {
   input[type=submit] {
     line-height: 1.5;
     clear: left;
+  }
+}
+
+form.new_event,
+form.edit_event {
+  margin: 0 10px;
+
+  @media only screen and (min-width: 481px) {
+    margin: 0 40px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-family: sans-serif;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group-title {
+    margin: 20px 0 5px;
   }
 }
 
