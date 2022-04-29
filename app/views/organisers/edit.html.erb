@@ -1,9 +1,3 @@
 <h1>Editing organiser</h1>
 
-<%= render partial: "form", locals: {action: "Update" } %>
-
-<div class="actions">
-  <%= link_to 'Show', @organiser %> |
-  <%= link_to 'Back', organisers_path %> |
-  <%= conditional_delete_tag(@organiser) %> |
-</div>
+<%= render partial: "form", locals: { action: "Update", cancel_path: organiser_path(@organiser) } %>

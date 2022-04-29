@@ -17,7 +17,7 @@ RSpec.describe 'Admins can create organisers' do
     fill_in 'Website', with: 'http://www.lsds.co.uk'
 
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-      click_on 'Update'
+      click_on 'Create'
     end
 
     expect(page).to have_content('Name: The London Swing Dance Society')
@@ -28,7 +28,7 @@ RSpec.describe 'Admins can create organisers' do
     expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
 
-  it 'with an emtpy shortname' do
+  it 'with an empty shortname' do
     create(:organiser, shortname: '')
     stub_login
 
@@ -40,7 +40,7 @@ RSpec.describe 'Admins can create organisers' do
     fill_in 'Name', with: 'The London Swing Dance Society'
     fill_in 'Shortname', with: ''
 
-    click_on 'Update'
+    click_on 'Create'
 
     expect(page).to have_content('Last updated by')
   end

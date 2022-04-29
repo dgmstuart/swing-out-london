@@ -71,7 +71,6 @@ form {
   }
 
   input[type=submit] {
-    margin-left: 155px;
     line-height: 1.5;
     clear: left;
   }
@@ -85,6 +84,10 @@ div.actions {
   .inactive {
     color: $lowlight-colour;
     font-style: italic;
+  }
+
+  input[type=submit] {
+    display: inline-block;
   }
 }
 

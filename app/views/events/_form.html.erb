@@ -89,7 +89,8 @@
     <span class='help'>The event will stop showing up on the site after this date</span>
   </div>
 
-  <div class='form-group'>
+  <div class='form-group actions'>
     <%= f.submit action, class: 'button' %>
+    <%= link_to 'Cancel', cancel_path, class: "button button-secondary" %>
   </div>
 <% end %>

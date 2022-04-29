@@ -1,9 +1,3 @@
 <h1>Editing event</h1>
 
-<%=render :partial => "form", :locals => {:action => "Update" } %>
-
-<div class="actions">
-	<%= link_to 'Show', @event %> |
-	<%= link_to 'Cancel', events_path %> |
-	<%= link_to 'Delete', @event, :confirm => 'Are you sure you want to delete this event?', :method => :delete %>
-</div>
+<%=render partial: "form", locals: { action: "Update", cancel_path: event_path(@event) } %>

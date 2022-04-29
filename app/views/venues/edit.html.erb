@@ -1,9 +1,3 @@
 <h1>Editing venue</h1>
 
-<%= render :partial => 'form', :locals => { :action => 'Update' }%>
-
-<div class="actions">
-  <%= link_to 'Show', @venue %> |
-  <%= link_to 'Back', venues_path %> |
-  <%= conditional_delete_tag(@venue) %>
-</div>
+<%= render partial: 'form', locals: { action: 'Update', cancel_path: venue_path(@venue) }%>
