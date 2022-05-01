@@ -13,6 +13,6 @@ RSpec.describe 'Audit Log RSS feed', type: :request do
       get '/audit_log.atom?password=pass'
     end
 
-    expect(response.content_type).to eq('application/atom+xml')
+    expect(response.media_type).to eq('application/atom+xml')
   end
 end
