@@ -12,6 +12,7 @@
   &.primary-nav {
     a {
       padding: 10px;
+
       //added here so we can take it away when we apply the border
       &:hover {
         padding: 8px;
@@ -27,6 +28,7 @@
       padding: 8px;
       border: $double-border;
     }
+
     // We allow the current link to be a link on the map:
     a.current:hover {
       border: $thick-border;

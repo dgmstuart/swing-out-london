@@ -16,11 +16,11 @@ body.imports {
     height: inherit;
   }
 
-  input[type=submit] {
+  input[type="submit"] {
     color: $background-colour;
     font-size: 20px;
     background: $highlight_colour;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     text-decoration: none;
 
     &:hover {

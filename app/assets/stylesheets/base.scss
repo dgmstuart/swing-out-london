@@ -4,8 +4,8 @@ $body_font_size: 14px;
 
 body {
   // Disable automatic font zooming:
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  text-size-adjust: 100%;
   font-family: Futura, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: $text-colour;
   font-size: $body_font_size;
