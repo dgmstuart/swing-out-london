@@ -7,9 +7,9 @@ module ActionView
         class_attribute :default_format
         self.default_format = Mime[:html]
 
-        def call(template)
+        def call(_template, source)
           markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
-          "#{markdown.render(template.source).inspect}.html_safe"
+          "#{markdown.render(source).inspect}.html_safe"
         end
       end
     end
