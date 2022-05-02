@@ -8,6 +8,7 @@
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
     "alpha-value-notation": "number",
-    "color-function-notation": "legacy"
+    "color-function-notation": "legacy",
+    "function-url-quotes": null
   }
 }
