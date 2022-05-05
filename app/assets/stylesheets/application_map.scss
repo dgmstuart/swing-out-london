@@ -81,9 +81,7 @@ body.socials {
     top: 0;
     left: 0;
     height: 130px;
-    box-shadow: 9px 9px 12px rgb(50 50 50 / 75%);
-    box-shadow: 9px 9px 12px rgb(50 50 50 / 75%);
-    box-shadow: 9px 9px 12px rgb(50 50 50 / 75%);
+    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
 
     h1 {
       text-transform: uppercase;
@@ -125,15 +123,11 @@ body.socials {
   }
 
   .listings {
-    box-shadow: 9px 9px 12px rgb(50 50 50 / 75%), inset 0 18px 20px -20px rgb(50 50 50 / 75%);
-    box-shadow: 9px 9px 12px rgb(50 50 50 / 75%), inset 0 18px 20px -20px rgb(50 50 50 / 75%);
-    box-shadow: 9px 9px 12px rgb(50 50 50 / 75%), inset 0 18px 20px -20px rgb(50 50 50 / 75%);
+    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
 
     li {
       text-align: center;
       border-bottom: solid 1px #bebebe;
-      box-shadow: 0 1px 0 #e4e4e4;
-      box-shadow: 0 1px 0 #e4e4e4;
       box-shadow: 0 1px 0 #e4e4e4;
 
       span#selected,

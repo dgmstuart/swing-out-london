@@ -6,6 +6,8 @@
   "ignoreFiles": ["app/assets/stylesheets/reset.css"],
   "rules": {
     "no-descending-specificity": null,
-    "no-duplicate-selectors": null
+    "no-duplicate-selectors": null,
+    "alpha-value-notation": "number",
+    "color-function-notation": "legacy"
   }
 }
