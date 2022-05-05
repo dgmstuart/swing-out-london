@@ -144,7 +144,7 @@ address,
   }
 
   .non-semantic-padding {
-    //to make the page sit below the banner when it's fixed
+    // to make the page sit below the banner when it's fixed
     height: 65px;
   }
 }
@@ -162,12 +162,12 @@ address,
 
 // DESKTOP */
 @media only screen and (min-width: 992px) {
-  //placeholder
+  // placeholder
 }
 
 // LARGE VIEWING SIZE
 @media only screen and (min-width: 1240px) {
-  //placeholder
+  // placeholder
 }
 
 // Header
@@ -247,7 +247,3 @@ address,
   }
   a { color: $link-colour; }
 }
-
-//body {
-//  margin-top: 65px;
-//}

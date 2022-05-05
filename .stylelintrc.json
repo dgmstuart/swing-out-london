@@ -1,8 +1,22 @@
 {
-  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "extends": "stylelint-config-standard-scss",
   "ignoreFiles": ["app/assets/stylesheets/reset.css"],
   "rules": {
     "no-descending-specificity": null,
-    "no-duplicate-selectors": null
+    "no-duplicate-selectors": null,
+    "alpha-value-notation": "number",
+    "color-function-notation": "legacy",
+    "function-url-quotes": null,
+    "selector-id-pattern": null,
+    "selector-class-pattern": null,
+    "scss/dollar-variable-pattern": [
+      "^([a-z][a-z0-9]*)([-_][a-z0-9]+)*$",
+      {
+        "message": "Expected variable to be kebab-case or snake_case"
+      }
+    ]
   }
 }

@@ -67,7 +67,7 @@ body.socials {
   }
 
   .nota_bene {
-    margin: 15px 0 0 0;
+    margin: 15px 0 0;
     font-size: 0.9em;
     color: #666;
   }
@@ -81,8 +81,6 @@ body.socials {
     top: 0;
     left: 0;
     height: 130px;
-    -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
     box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
 
     h1 {
@@ -99,7 +97,8 @@ body.socials {
 
     .primary-nav {
       text-align: center;
-      //nuke the space which gets inserted in-between the elements for no good reason:
+
+      // nuke the space which gets inserted in-between the elements for no good reason:
       font-size: 0;
 
       span {
@@ -124,15 +123,11 @@ body.socials {
   }
 
   .listings {
-    -webkit-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
     box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
 
     li {
       text-align: center;
       border-bottom: solid 1px #bebebe;
-      -webkit-box-shadow: 0 1px 0 #e4e4e4;
-      -moz-box-shadow: 0 1px 0 #e4e4e4;
       box-shadow: 0 1px 0 #e4e4e4;
 
       span#selected,
@@ -144,7 +139,6 @@ body.socials {
       }
 
       a {
-        //display: block;
         padding: 10px;
 
         &:hover {
@@ -187,6 +181,7 @@ body.socials {
   .page {
     width: 164px;
   }
+
   // SMALL ONLY
   @media only screen and (max-width: 767px) {
     #map {
@@ -194,8 +189,6 @@ body.socials {
     }
 
     header .primary-nav {
-      //text-align: center;
-      //width: 100px;
       display: block;
       width: 140px;
       margin: auto;
