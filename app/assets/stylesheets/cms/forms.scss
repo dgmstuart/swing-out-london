@@ -29,6 +29,20 @@ form {
   }
 }
 
+div.actions {
+  line-height: 1.5;
+  clear: left;
+
+  .inactive {
+    color: $lowlight-colour;
+    font-style: italic;
+  }
+
+  input[type="submit"] {
+    display: inline-block;
+  }
+}
+
 form.new_organiser,
 form.edit_organiser,
 form.new_venue,
@@ -66,6 +80,10 @@ form.edit_venue {
     line-height: 1.5;
     clear: left;
   }
+
+  div.actions {
+    margin-left: 155px;
+  }
 }
 
 form.new_event,
@@ -88,21 +106,6 @@ form.edit_event {
 
   .form-group-title {
     margin: 20px 0 5px;
-  }
-}
-
-div.actions {
-  margin-left: 155px;
-  line-height: 1.5;
-  clear: left;
-
-  .inactive {
-    color: $lowlight-colour;
-    font-style: italic;
-  }
-
-  input[type="submit"] {
-    display: inline-block;
   }
 }
 
