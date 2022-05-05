@@ -13,7 +13,7 @@
     a {
       padding: 10px;
 
-      //added here so we can take it away when we apply the border
+      // added here so we can take it away when we apply the border
       &:hover {
         padding: 8px;
         border: $nav-border;

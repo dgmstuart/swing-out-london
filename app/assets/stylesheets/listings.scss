@@ -349,7 +349,8 @@ $small_font_size: 12px;
     float: left;
     width: 3.5em;
 
-    /* N.B. Longest displaying postcode is NW1W. This won't fit in this space, but we don't have any postcodes in that area a.t.m. */
+    // N.B. Longest displaying postcode is NW1W. This won't fit in this space,
+    // but we don't have any postcodes in that area a.t.m.
     position: relative;
     bottom: 0.1em;
     padding-left: 0.3em;
@@ -375,9 +376,6 @@ li.today {
 
   &:target {
     border-color: #c00;
-    transition: all 0.8s ease-in;
-    transition: all 0.8s ease-in;
-    transition: all 0.8s ease-in;
     transition: all 0.8s ease-in;
   }
 }

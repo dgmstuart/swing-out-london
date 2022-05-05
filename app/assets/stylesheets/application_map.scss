@@ -98,7 +98,7 @@ body.socials {
     .primary-nav {
       text-align: center;
 
-      //nuke the space which gets inserted in-between the elements for no good reason:
+      // nuke the space which gets inserted in-between the elements for no good reason:
       font-size: 0;
 
       span {
@@ -139,7 +139,6 @@ body.socials {
       }
 
       a {
-        //display: block;
         padding: 10px;
 
         &:hover {
@@ -190,8 +189,6 @@ body.socials {
     }
 
     header .primary-nav {
-      //text-align: center;
-      //width: 100px;
       display: block;
       width: 140px;
       margin: auto;
