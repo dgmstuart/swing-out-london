@@ -1,7 +1,8 @@
-# frozen_string_literal: true
-
 # This file is used by Rack-based servers to start the application.
 
-require ::File.expand_path('config/environment', __dir__)
+require_relative "config/environment"
+
 use Rack::CanonicalHost, ENV['CANONICAL_HOST'] if ENV['CANONICAL_HOST']
+
 run Rails.application
+Rails.application.load_server
