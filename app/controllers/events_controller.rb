@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EventsController < CMSBaseController
+class EventsController < CmsBaseController
   def index
     @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order('frequency, updated_at')
     @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order('title')

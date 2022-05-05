@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CMSBaseController < ApplicationController
+class CmsBaseController < ApplicationController
   before_action :authenticate
 
   layout 'cms'

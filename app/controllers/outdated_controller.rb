@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OutdatedController < CMSBaseController
+class OutdatedController < CmsBaseController
   def index
     @report = OutdatedEventReport.new
     if @report.all_in_date?

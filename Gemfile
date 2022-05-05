@@ -2,9 +2,9 @@
 
 source 'https://rubygems.org'
 
-ruby '2.6.7'
+ruby '2.7.4'
 
-gem 'rails', '~> 5.2.6', '>= 5.2.6.2'
+gem 'rails', '~> 6.0.4', '>= 6.0.4.8 '
 
 gem 'actionpack-action_caching' # to support pre rails-4 style action caching
 gem 'audited'
@@ -29,7 +29,6 @@ gem 'rss'
 gem 'sassc-rails'
 gem 'sprockets', '< 4'
 gem 'test-unit'
-gem 'uglifier'
 
 group :development do
   gem 'bullet'
@@ -43,10 +42,10 @@ group :development, :test do
   gem 'faker'
   gem 'rb-fsevent'
   gem 'rspec-rails'
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 1.27.0', require: false
   gem 'rubocop-faker', require: false
   gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
+  gem 'rubocop-rspec', '~> 2.9.0', require: false
 end
 
 group :test do

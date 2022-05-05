@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Events
-  class ImportsController < CMSBaseController
+  class ImportsController < CmsBaseController
     def new
       @events_import = EventsImport.new
     end
