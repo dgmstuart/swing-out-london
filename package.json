@@ -4,6 +4,11 @@
     "stylelint-config-standard-scss": "^3.0.0"
   },
   "scripts": {
-    "style-fix": "stylelint --fix app/assets/stylesheets"
+    "style-fix": "stylelint --fix app/assets/stylesheets",
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
   }
 }
