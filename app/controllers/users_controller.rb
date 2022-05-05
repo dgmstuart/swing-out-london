@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersController < CMSBaseController
+class UsersController < CmsBaseController
   layout 'cms'
 
   def show; end

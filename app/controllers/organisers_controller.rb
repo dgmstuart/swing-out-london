@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrganisersController < CMSBaseController
+class OrganisersController < CmsBaseController
   def index
     @organisers = Organiser.includes(:socials, :classes)
   end

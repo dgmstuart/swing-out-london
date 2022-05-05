@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class VenuesController < CMSBaseController
+class VenuesController < CmsBaseController
   def index
     @venues = Venue.order('name ASC').includes(:events)
   end
