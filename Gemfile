@@ -29,7 +29,6 @@ gem 'rss'
 gem 'sassc-rails'
 gem 'sprockets', '< 4'
 gem 'test-unit'
-gem 'uglifier'
 
 group :development do
   gem 'bullet'

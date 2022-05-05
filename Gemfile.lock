@@ -354,8 +354,6 @@ GEM
     timecop (0.9.5)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.1)
@@ -426,7 +424,6 @@ DEPENDENCIES
   sprockets (< 4)
   test-unit
   timecop
-  uglifier
   vcr
   webmock
 

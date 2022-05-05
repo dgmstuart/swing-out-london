@@ -12,6 +12,3 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w[ie.css application_map.css application_cms.css application_map.js]
-
-# Enable ES6
-Rails.application.config.assets.js_compressor = Uglifier.new(harmony: true)
