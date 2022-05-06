@@ -27,7 +27,7 @@ gem 'redcarpet' # Markdown
 gem 'rollbar'
 gem 'rss'
 gem 'sassc-rails'
-gem 'sprockets', '< 4'
+gem 'sprockets'
 gem 'test-unit'
 
 group :development do
