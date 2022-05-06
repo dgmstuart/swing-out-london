@@ -1,3 +1,5 @@
+require('../../../vendor/javascript/jquery.timeago')
+
 (function() {
   var add_advertisement_analytics_events, add_donation_button_analytics_event, add_facebook_share_analytics_event, add_facebook_share_click_handler, add_socials_analytics_events, add_tweet_share_analytics_event;
 

@@ -1,8 +1,8 @@
-//= require jquery.timeago
-//= require jquery.sieve
-//= require cheet.js
-//= require listing
-//= require_self
+require('./application/listing')
+
+global.jQuery = require('jquery');
+var $ = global.jQuery;
+window.$ = $;
 
 var _gaq = _gaq || [];
 var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
@@ -16,6 +16,7 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
+require('../../vendor/javascript/jquery.sieve')
 $(document).ready(function() {
   $("ul.sieve").sieve({ itemSelector: "li" });
   $("table.events").sieve({
@@ -24,6 +25,9 @@ $(document).ready(function() {
   });
 });
 
+var cheet = require('cheet.js')
+
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
   window.open("https://www.youtube.com/embed/iEaSaIhYZXg?autoplay=1", "popupWindow", "width=560,height=315");
 });
+
