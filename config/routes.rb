@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :external_events, only: %i[edit]
+
   get 'map/classes/(:day)' => 'maps#classes', as: :map_classes
   get 'map/socials/(:date)' => 'maps#socials', as: :map_socials
   get 'map' => 'maps#socials'
