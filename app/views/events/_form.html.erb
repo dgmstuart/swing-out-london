@@ -14,6 +14,16 @@
     <%= f.select :event_type, event_type_select, {:include_blank => true} %>
   </div>
 
+  <% if @event.persisted? %>
+    <h3 class='form-group-title'>Organiser edit link</h3>
+    <% if @event.organiser_token %>
+      <%= edit_external_event_url(@event.organiser_token) %>
+    <% else %>
+      No organiser edit link exists for this event
+    <% end %>
+    <p class='help'>This is a link you can share with an organiser to allow them to add dates and change details</span>
+  <% end %>
+
   <h3 class='form-group-title'>Social details</h3>
   <div class='form-group'>
     <%= f.label :has_social, "Has social?" %>
