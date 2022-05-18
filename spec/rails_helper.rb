@@ -22,6 +22,8 @@ RSpec.configure do |config|
 
   require 'support/controller/auth_helper'
   require 'support/system/auth_helper'
+  require 'support/system/drivers'
   config.include Controller::AuthHelper, type: :controller
   config.include System::AuthHelper, type: :system
+  config.include System::Drivers, type: :system
 end

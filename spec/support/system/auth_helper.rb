@@ -6,14 +6,10 @@ require 'faker/facebook'
 module System
   module AuthHelper
     include OmniAuthHelper
+
     RSpec.configure do |config|
       config.before(:each, type: :system) do
         stub_login
-        driven_by :rack_test
-      end
-
-      config.before(:each, type: :system, js: true) do
-        driven_by :selenium_chrome_headless
       end
     end
 
