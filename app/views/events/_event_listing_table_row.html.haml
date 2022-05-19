@@ -1,6 +1,6 @@
 - cache [event, event.venue, event.social_organiser, event.class_organiser] do
   %tr{ :class => event.status_string, :id => "event_#{event.id}" }
-    %td.actions.first= link_to 'Show', event
+    %td.actions.first= link_to 'Edit', edit_event_path(event)
 
     %td.name= link_to event.title, event.url
     %td.venue
@@ -17,6 +17,6 @@
     %td.updated= event.updated_at.to_s(:uk_date)
 
     %td.actions.last
-      = link_to 'Edit', edit_event_path(event)
+      = link_to 'Show', event
       = link_to 'Delete', event, data: { confirm: 'Are you sure you want to delete this event?' }, method: :delete
       = link_to 'Archive', archive_event_path(event), :method => :put
