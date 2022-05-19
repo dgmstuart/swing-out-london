@@ -16,12 +16,15 @@
 
   <% if @event.persisted? %>
     <h3 class='form-group-title'>Organiser edit link</h3>
-    <% if @event.organiser_token %>
-      <%= edit_external_event_url(@event.organiser_token) %>
-    <% else %>
-      No organiser edit link exists for this event
-    <% end %>
-    <p class='help'>This is a link you can share with an organiser to allow them to add dates and change details</span>
+    <p id='organiser-token'>
+      <% if @event.organiser_token %>
+        <%= edit_external_event_url(@event.organiser_token) %>
+      <% else %>
+        No organiser edit link exists for this event
+      <% end %>
+    </p>
+    <p class='help'>This is a link you can share with an organiser to allow them to add dates and change details</p>
+    <%= link_to('New link', event_organiser_tokens_path(@event), method: :post, remote: true, class: 'button')  %>
   <% end %>
 
   <h3 class='form-group-title'>Social details</h3>
