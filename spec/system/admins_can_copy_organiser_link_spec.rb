@@ -17,10 +17,11 @@ RSpec.describe 'Admins can copy an organiser link' do
     end
   end
 
-  context 'when an organiser token does not exist' do
-    it 'shows a message' do
+  context 'when an organiser token does not exist', :js do
+    it 'allows one to be generated' do
       stub_login(id: 12345678901234567, name: 'Al Minns')
       create(:event, organiser_token: nil)
+      allow(SecureRandom).to receive(:hex).and_return('abc123'.dup)
 
       visit '/login'
       click_on 'Log in with Facebook'
@@ -28,6 +29,12 @@ RSpec.describe 'Admins can copy an organiser link' do
       click_on 'Edit', match: :first
 
       expect(page).to have_content('No organiser edit link exists for this event')
+
+      click_on 'New link'
+
+      page.driver.browser.switch_to.alert.accept
+
+      expect(page).to have_content('/external_events/abc123/edit')
     end
   end
 end

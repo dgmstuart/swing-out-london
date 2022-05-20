@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         collection { post 'save' }
       end
     end
+    resources :organiser_tokens, only: %i[create]
   end
 
   resources :external_events, only: %i[edit]

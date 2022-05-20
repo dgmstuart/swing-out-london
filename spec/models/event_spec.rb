@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'support/shoulda_matchers'
 
 describe Event do
   describe '.dates' do
@@ -340,6 +341,8 @@ describe Event do
       event.valid?
       expect(event.errors.messages).to eq(title: ['must be present for social dances'])
     end
+
+    it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
   end
 
   describe 'expected_date' do
