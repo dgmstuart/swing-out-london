@@ -32,6 +32,8 @@ RSpec.describe 'Admins can copy an organiser link' do
 
       click_on 'New link'
 
+      page.driver.browser.switch_to.alert.accept
+
       expect(page).to have_content('/external_events/abc123/edit')
     end
   end
