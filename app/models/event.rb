@@ -22,6 +22,8 @@ class Event < ApplicationRecord
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
+  validates :organiser_token, uniqueness: true, allow_nil: true
+
   validate :cannot_be_weekly_and_have_dates
   validate :socials_must_have_titles
   validate :will_be_listed

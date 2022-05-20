@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_16_205058) do
+ActiveRecord::Schema.define(version: 2022_05_20_135448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2022_05_16_205058) do
     t.index ["frequency", "has_class"], name: "index_events_on_fq_and_has_class"
     t.index ["last_date", "event_type"], name: "index_events_on_last_date_and_event_type"
     t.index ["last_date", "frequency", "has_class"], name: "index_events_on_last_date_and_fq_and_has_class"
+    t.index ["organiser_token"], name: "index_events_on_organiser_token", unique: true
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
