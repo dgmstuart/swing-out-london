@@ -1,11 +1,14 @@
-require('../../../vendor/javascript/jquery.timeago')
+import { format } from 'timeago.js'
 
 (function() {
   var add_advertisement_analytics_events, add_donation_button_analytics_event, add_facebook_share_analytics_event, add_facebook_share_click_handler, add_socials_analytics_events, add_tweet_share_analytics_event;
 
+  var $ = require('jquery');
+
   $(document).ready(function() {
     if ($('body').hasClass('website') && $('body').hasClass('index')) {
-      $("time.timeago").timeago();
+      var timeago = document.querySelector('time.timeago')
+      timeago.innerHTML = format(timeago.getAttribute('datetime'));
       add_socials_analytics_events();
       add_advertisement_analytics_events();
       add_donation_button_analytics_event();
