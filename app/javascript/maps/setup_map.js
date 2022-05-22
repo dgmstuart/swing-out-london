@@ -1,4 +1,7 @@
-function setupMap(map, venues) {
+import { createMarkers } from './create_markers'
+import { updateMap } from './update_map'
+
+export function setupMap(map, venues) {
   createMarkers(map, venues);
 
   var updateControls = document.getElementsByClassName('js-update-map')
@@ -15,7 +18,7 @@ function setupMap(map, venues) {
   }
 
   function removeSelected() {
-    highlighted = Array.from(document.getElementsByClassName('js-update-map selected'))
+    var highlighted = Array.from(document.getElementsByClassName('js-update-map selected'))
     highlighted.forEach(function(element) {
       element.classList.remove('selected');
     })

@@ -1,4 +1,4 @@
-function createMarkers(map, venues) {
+export function createMarkers(map, venues) {
   if (!venues.length) { return true }
 
   var bounds = new google.maps.LatLngBounds();
@@ -27,11 +27,11 @@ function createMarkers(map, venues) {
     });
 
     marker.addListener('click', function() {
-      if (activeInfoWindow) { activeInfoWindow.close();}
+      if (window.activeInfoWindow) { window.activeInfoWindow.close();}
       infoWindow.open(map, marker);
-      activeInfoWindow = infoWindow;
+      window.activeInfoWindow = infoWindow;
     });
 
-    markers.push(marker)
+    window.markers.push(marker)
   }
 }

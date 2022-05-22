@@ -1,15 +1,17 @@
-function updateMap(updateControl, map) {
+import { createMarkers } from './create_markers'
+
+export function updateMap(updateControl, map) {
   var url = updateControl.dataset.url
 
-  if (activeInfoWindow) { activeInfoWindow.close();}
+  if (window.activeInfoWindow) { window.activeInfoWindow.close();}
 
   clearAllMarkers();
   createNewMarkers(url);
 
-  return markers;
+  return window.markers;
 
   function clearAllMarkers() {
-    markers.forEach(clearMarker)
+    window.markers.forEach(clearMarker)
   }
 
   function clearMarker(marker) {
