@@ -1,5 +1,7 @@
 require('./application/listing')
 
+require("@rails/ujs").start()
+
 global.jQuery = require('jquery');
 var $ = global.jQuery;
 window.$ = $;

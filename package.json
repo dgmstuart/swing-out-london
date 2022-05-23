@@ -8,6 +8,7 @@
     "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
+    "@rails/ujs": "^6.0.5",
     "cheet.js": "^0.3.3",
     "jquery": "^3.6.0",
     "timeago.js": "^4.0.2",
