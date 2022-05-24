@@ -1,18 +1,19 @@
 {
-  "devDependencies": {
-    "stylelint": "^14.0.1",
-    "stylelint-config-standard-scss": "^3.0.0"
-  },
   "scripts": {
     "style-fix": "stylelint --fix app/assets/stylesheets",
     "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
+    "accessible-autocomplete": "^2.0.4",
     "@rails/ujs": "^6.0.5",
     "cheet.js": "^0.3.3",
     "jquery": "^3.6.0",
     "timeago.js": "^4.0.2",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "stylelint": "^14.0.1",
+    "stylelint-config-standard-scss": "^3.0.0"
   }
 }

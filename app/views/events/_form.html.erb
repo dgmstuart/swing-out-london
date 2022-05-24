@@ -5,6 +5,7 @@
     <%= f.label :url %>
     <%= f.text_field :url %>
   </div>
+
   <div class='form-group'>
     <%= f.label :venue_id, 'Venue' %>
     <%= f.select :venue_id, venue_select, {:include_blank => true} %>
@@ -39,7 +40,7 @@
   </div>
   <div class='form-group'>
     <%= f.label :social_organiser_id, 'Social organiser' %>
-    <%= f.select :social_organiser_id, organiser_select, {:include_blank => true} %>
+    <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' } %>
   </div>
 
   <h3 class='form-group-title'>Class details</h3>
@@ -54,7 +55,7 @@
   <p class='help'>Note: classes don't have names - just locations</p>
   <div class='form-group'>
     <%= f.label :class_organiser_id, 'Class organiser' %>
-    <%= f.select :class_organiser_id, organiser_select, {:include_blank => true} %>
+    <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' } %>
   </div>
   <div class='form-group'>
     <%= f.label :class_style %>
