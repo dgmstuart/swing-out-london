@@ -7,6 +7,8 @@
  *= require cms/csv_import
  *= require cms/outdated
  *= require cms/account
+ *= require accessible-autocomplete/dist/accessible-autocomplete.min.css
+ *= require cms/accessible-autocomplete-overrides
  *= require_self
  */
 @import "shared/colours";

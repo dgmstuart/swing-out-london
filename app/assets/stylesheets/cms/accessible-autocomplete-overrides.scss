@@ -1,0 +1,13 @@
+.autocomplete__wrapper {
+  max-width: 550px;
+}
+
+form input[type="text"].autocomplete__input {
+  width: 100%;
+}
+
+.autocomplete__hint,
+.autocomplete__input,
+.autocomplete__option {
+  font-size: inherit;
+}

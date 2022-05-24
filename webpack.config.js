@@ -6,7 +6,8 @@ module.exports = {
   devtool: "source-map",
   entry: {
     application: "./app/javascript/application.js",
-    application_map: "./app/javascript/application_map.js"
+    application_map: "./app/javascript/application_map.js",
+    application_cms: "./app/javascript/application_cms.js"
   },
   output: {
     filename: "[name].js",
