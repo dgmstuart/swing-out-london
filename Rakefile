@@ -3,7 +3,7 @@
 require File.expand_path('config/application', __dir__)
 
 task lint_styles: :environment do
-  system('yarn run stylelint app/assets/stylesheets')
+  system('yarn run stylelint app/assets/stylesheets') || exit($CHILD_STATUS.exitstatus)
 end
 
 if Rails.env.test?
