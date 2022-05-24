@@ -4,6 +4,15 @@
     "stylelint-config-standard-scss": "^3.0.0"
   },
   "scripts": {
-    "style-fix": "stylelint --fix app/assets/stylesheets"
+    "style-fix": "stylelint --fix app/assets/stylesheets",
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "@rails/ujs": "^6.0.5",
+    "cheet.js": "^0.3.3",
+    "jquery": "^3.6.0",
+    "timeago.js": "^4.0.2",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
   }
 }

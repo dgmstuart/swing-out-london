@@ -16,6 +16,7 @@ before_install:
 
 before_script:
   - yarn install
+  - yarn build
   - RAILS_ENV=test bundle exec rake db:setup
 
 deploy:

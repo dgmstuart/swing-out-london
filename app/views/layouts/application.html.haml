@@ -13,10 +13,7 @@
 
     = javascript_include_tag :application
     = yield :script
-
     = yield :stylesheet
-    /[if lte IE 7 ]
-      = stylesheet_link_tag 'ie'
 
     %meta{ name: "msapplication-config", content: "none" }
 

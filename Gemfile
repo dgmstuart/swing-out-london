@@ -14,7 +14,7 @@ gem 'geocoder'
 gem 'haml-rails'
 gem 'http'
 gem 'jbuilder'
-gem 'jquery-rails'
+gem 'jsbundling-rails'
 gem 'memcachier'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
@@ -27,7 +27,7 @@ gem 'redcarpet' # Markdown
 gem 'rollbar'
 gem 'rss'
 gem 'sassc-rails'
-gem 'sprockets', '< 4'
+gem 'sprockets'
 gem 'test-unit'
 
 group :development do

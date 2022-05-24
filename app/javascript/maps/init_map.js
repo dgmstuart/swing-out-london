@@ -1,3 +1,5 @@
+import { setupMap } from './setup_map'
+
 function initMap() {
   var mapElement = document.getElementById('map');
   var venues = JSON.parse(mapElement.dataset.markers);
@@ -29,3 +31,5 @@ function initMap() {
 
   setupMap(map, venues);
 }
+
+window.initMap = initMap;

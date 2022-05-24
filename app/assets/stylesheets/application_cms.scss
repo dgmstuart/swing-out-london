@@ -1,7 +1,7 @@
 /*
- *= require reset
- *= require base
- *= require buttons
+ *= require shared/reset
+ *= require shared/base
+ *= require shared/buttons
  *= require cms/admin_bar
  *= require cms/forms
  *= require cms/csv_import
@@ -9,7 +9,7 @@
  *= require cms/account
  *= require_self
  */
-@import "colours";
+@import "shared/colours";
 
 body {
   background-color: $background-colour;
