@@ -1,0 +1,22 @@
+<h1><%= @event.title%></h1>
+
+
+<%= form_for(@event, url: external_event_path(@event.organiser_token)) do |f| %>
+  <% if flash.any? %>
+    <ul>
+      <% flash.each do |level, message| %>
+        <li class='flash <%= level %>'><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= render "shared/error_messages", target: @event %>
+
+  <div class='form-group'>
+    <%= f.label :venue_id, 'Venue' %>
+    <%= f.select :venue_id, venue_select, {:include_blank => true} %>
+  </div>
+  <div class='form-group actions'>
+    <%= f.submit 'Update', class: 'button' %>
+  </div>
+<% end %>

@@ -219,3 +219,13 @@ ol.show li ul {
   font-style: italic;
   margin-left: 11em;
 }
+
+.flash {
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 550px;
+
+  &.success {
+    background-color: $success-colour;
+  }
+}
