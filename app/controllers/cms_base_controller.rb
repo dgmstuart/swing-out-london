@@ -19,7 +19,7 @@ class CmsBaseController < ApplicationController
   end
 
   def audit_user
-    { 'auth_id' => login_session.user.auth_id, 'name' => login_session.user.name }
+    { 'auth_id' => current_user.auth_id, 'name' => current_user.name }
   end
 
   def login_session
