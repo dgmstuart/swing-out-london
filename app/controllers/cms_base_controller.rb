@@ -5,6 +5,9 @@ class CmsBaseController < ApplicationController
 
   layout 'cms'
 
+  helper_method :current_user
+  attr_reader :current_user
+
   private
 
   def authenticate
