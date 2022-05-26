@@ -36,6 +36,9 @@ class ExternalEventsController < CmsBaseController
     params.require(:event).permit(
       %i[
         venue_id
+        date_array
+        cancellation_array
+        last_date
       ]
     )
   end
