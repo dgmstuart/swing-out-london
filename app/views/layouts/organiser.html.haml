@@ -1,0 +1,8 @@
+- content_for :stylesheet do
+  = stylesheet_link_tag 'application_cms', media: "screen"
+
+- content_for :content do
+  = content_for?(:content) ? yield(:content) : yield
+  = javascript_include_tag('application_cms')
+
+= render :template => 'layouts/application'

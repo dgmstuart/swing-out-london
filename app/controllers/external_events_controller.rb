@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ExternalEventsController < CmsBaseController
+  layout 'organiser'
+
   def edit
     @event = Event.find_by!(organiser_token: params[:id])
   end
