@@ -38,6 +38,15 @@ RSpec.describe 'Organisers can edit events' do
       expect(Audit.last.username).to eq('name' => 'Organiser (abc123)', 'auth_id' => 'abc123')
     end
 
+    it 'shows a sensible title for classes' do
+      organiser = create(:organiser, name: 'Herbert White')
+      create(:class, organiser_token: 'abc123', class_organiser: organiser)
+
+      visit('/external_events/abc123/edit')
+
+      expect(page).to have_content('Dance class by Herbert White')
+    end
+
     it 'does not allow organisers to access other pages' do
       event = create(:social, organiser_token: 'abc123', title: 'Midtown stomp')
 

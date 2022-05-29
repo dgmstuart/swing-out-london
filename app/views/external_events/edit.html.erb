@@ -1,4 +1,4 @@
-<h1><%= @event.title%></h1>
+<h1><%= @event.has_social? ? @event.title : "Dance class by #{ @event.class_organiser.name }" %></h1>
 
 <%= form_for(@event, url: external_event_path(@event.organiser_token)) do |f| %>
   <% if flash.any? %>
