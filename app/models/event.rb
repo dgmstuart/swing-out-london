@@ -52,6 +52,55 @@ class Event < ApplicationRecord
   UNKNOWN_ORGANISER = 'Unknown'
   SEE_WEB = '(See Website)'
 
+  class << self
+    # Find the datetime of the most recently updated event
+    def last_updated_datetime
+      # if the db is empty, return the beginning of the epoch:
+      return Time.zone.at(0) if first.nil?
+
+      maximum(:updated_at)
+    end
+
+    def socials_dates(start_date, venue = nil)
+      # build up an array of events occuring on each date
+      output = []
+
+      listing_dates(start_date).each do |date|
+        socials_on_date = socials_on_date(date, venue)
+        output << [date, socials_on_date, cancelled_events_on_date(date)] unless socials_on_date.empty?
+      end
+
+      output
+    end
+
+    def socials_on_date(date, venue = nil)
+      swing_date = SwingDate.find_by(date: date)
+
+      weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
+      if venue
+        socials_on_that_date = weekly_socials.where(venue_id: venue.id)
+        socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
+      else
+        socials_on_that_date = weekly_socials.includes(:venue)
+        socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
+      end
+
+      socials_on_that_date.sort_by(&:title)
+    end
+
+    def cancelled_events_on_date(date)
+      swing_date = SwingDate.find_by(date: date)
+      return [] unless swing_date
+
+      swing_date.cancelled_events.pluck :id
+    end
+
+    def listing_dates(start_date)
+      end_date = start_date + (INITIAL_SOCIALS - 1)
+      (start_date..end_date).to_a
+    end
+  end
+
   # ----- #
   # Venue #
   # ----- #
@@ -344,7 +393,7 @@ class Event < ApplicationRecord
     # If there's already a last_date in the past, then the event should already be archived!
 
     self[:last_date] = if weekly?
-                         prev_date
+                         Date.local_today.prev_occurring(day.downcase.to_sym)
                        elsif dates.nil?
                          Date.new # Earliest possible ruby date
                        else
@@ -352,56 +401,5 @@ class Event < ApplicationRecord
                        end
 
     return true if save!
-  end
-
-  #################
-  # CLASS METHODS #
-  #################
-
-  # Find the datetime of the most recently updated event
-  def self.last_updated_datetime
-    # if the db is empty, return the beginning of the epoch:
-    return Time.zone.at(0) if first.nil?
-
-    maximum(:updated_at)
-  end
-
-  def self.socials_dates(start_date, venue = nil)
-    # build up an array of events occuring on each date
-    output = []
-
-    listing_dates(start_date).each do |date|
-      socials_on_date = socials_on_date(date, venue)
-      output << [date, socials_on_date, cancelled_events_on_date(date)] unless socials_on_date.empty?
-    end
-
-    output
-  end
-
-  def self.socials_on_date(date, venue = nil)
-    swing_date = SwingDate.find_by(date: date)
-
-    weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
-    if venue
-      socials_on_that_date = weekly_socials.where(venue_id: venue.id)
-      socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
-    else
-      socials_on_that_date = weekly_socials.includes(:venue)
-      socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
-    end
-
-    socials_on_that_date.sort_by(&:title)
-  end
-
-  def self.cancelled_events_on_date(date)
-    swing_date = SwingDate.find_by(date: date)
-    return [] unless swing_date
-
-    swing_date.cancelled_events.pluck :id
-  end
-
-  def self.listing_dates(start_date)
-    end_date = start_date + (INITIAL_SOCIALS - 1)
-    (start_date..end_date).to_a
   end
 end
