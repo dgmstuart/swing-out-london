@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :organiser_tokens, only: %i[create]
   end
 
-  resources :external_events, only: %i[edit]
+  resources :external_events, only: %i[edit update]
 
   get 'map/classes/(:day)' => 'maps#classes', as: :map_classes
   get 'map/socials/(:date)' => 'maps#socials', as: :map_socials
