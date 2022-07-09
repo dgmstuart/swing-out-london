@@ -20,7 +20,8 @@ RSpec.describe 'Admins can create events', :js do
     select 'School', from: 'Event type'
     check 'Has a taster?'
     check 'Has social?'
-    fill_in 'Class style', with: ''
+    choose 'Other (balboa, shag etc)'
+    fill_in 'Dance style', with: 'Balboa'
     fill_in 'Course length', with: ''
     select 'Wednesday', from: 'Day'
     fill_in 'event_frequency', with: '0'
@@ -39,7 +40,7 @@ RSpec.describe 'Admins can create events', :js do
       .and have_content("Social Organiser:\nThe London Swing Dance Society")
       .and have_content("Class Organiser:\nThe London Swing Dance Society")
       .and have_content('School, with social and taster')
-      .and have_content('Class style:')
+      .and have_content("Class style:\nBalboa")
       .and have_content("Day:\nWednesday")
       .and have_content("Frequency:\nOne-off or intermittent")
       .and have_content("Dates:\n12/12/2012, 19/12/2012")

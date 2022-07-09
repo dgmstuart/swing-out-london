@@ -4,6 +4,9 @@ en:
     map:
       days_of_week: 'We can only show you classes for days of the week'
       14_days: 'We can only show you events for the next 14 days'
+  forms:
+    events:
+      default_class_style: Lindy Hop or general swing
 
   faker:
     name:
