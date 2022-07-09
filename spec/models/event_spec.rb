@@ -4,6 +4,36 @@ require 'rails_helper'
 require 'support/shoulda_matchers'
 
 describe Event do
+  describe '#title' do
+    it 'strips whitespace before saving' do
+      event = build(:event, title: " \tDance time! ")
+
+      event.valid?
+
+      expect(event.title).to eq('Dance time!')
+    end
+  end
+
+  describe '#shortname' do
+    it 'strips whitespace before saving' do
+      event = build(:event, shortname: " \tDance! ")
+
+      event.valid?
+
+      expect(event.shortname).to eq('Dance!')
+    end
+  end
+
+  describe '#url' do
+    it 'strips whitespace before saving' do
+      event = build(:event, url: " \thttps://dancetime.co.uk ")
+
+      event.valid?
+
+      expect(event.url).to eq('https://dancetime.co.uk')
+    end
+  end
+
   describe '.dates' do
     it 'returns an ordered list of dates' do
       recent_date = create(:swing_date, date: Time.zone.today)

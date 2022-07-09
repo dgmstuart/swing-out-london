@@ -16,6 +16,8 @@ class Venue < ApplicationRecord
   validates :name, presence: true
   validates :website, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
+  strip_attributes only: %i[name postcode area website]
+
   before_validation do
     if (lat.nil? || lng.nil?) && !geocode
       errors.add :lat, "The address information could not be geocoded.
