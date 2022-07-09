@@ -347,6 +347,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    strip_attributes (1.13.0)
+      activemodel (>= 3.0, < 8.0)
     temple (0.8.2)
     test-unit (3.5.3)
       power_assert
@@ -426,6 +428,7 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   sprockets
+  strip_attributes
   test-unit
   timecop
   vcr

@@ -28,6 +28,7 @@ gem 'rollbar'
 gem 'rss'
 gem 'sassc-rails'
 gem 'sprockets'
+gem 'strip_attributes'
 gem 'test-unit'
 
 group :development do

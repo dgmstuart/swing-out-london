@@ -13,14 +13,35 @@ RSpec.describe Organiser do
     it { is_expected.to validate_uniqueness_of(:shortname) }
   end
 
+  describe '#name' do
+    it 'strips whitespace before saving' do
+      organiser = build(:organiser, name: " \tHerbert White ")
+
+      organiser.valid?
+
+      expect(organiser.name).to eq('Herbert White')
+    end
+  end
+
+  describe '#website' do
+    it 'strips whitespace before saving' do
+      organiser = build(:organiser, website: " \thttps://whitey.com ")
+
+      organiser.valid?
+
+      expect(organiser.website).to eq('https://whitey.com')
+    end
+  end
+
   describe 'shortname=' do
     context 'when the value was not blank' do
-      it 'sets the value' do
+      it 'strips whitespace before saving' do
         organiser = build(:organiser)
+        organiser.shortname = ' Whitey '
 
-        organiser.shortname = 'foo'
+        organiser.valid?
 
-        expect(organiser.shortname).to eq 'foo'
+        expect(organiser.shortname).to eq 'Whitey'
       end
     end
 

@@ -14,6 +14,46 @@ RSpec.describe Venue do
     it { is_expected.to validate_presence_of(:name) }
   end
 
+  describe '#name' do
+    it 'strips whitespace before saving' do
+      venue = build(:venue, name: " \tThe Alhambra ")
+
+      venue.valid?
+
+      expect(venue.name).to eq('The Alhambra')
+    end
+  end
+
+  describe '#area' do
+    it 'strips whitespace before saving' do
+      venue = build(:venue, area: " \tNewington Green ")
+
+      venue.valid?
+
+      expect(venue.area).to eq('Newington Green')
+    end
+  end
+
+  describe '#postcode' do
+    it 'strips whitespace before saving' do
+      venue = build(:venue, postcode: " \tN16 9RZ ")
+
+      venue.valid?
+
+      expect(venue.postcode).to eq('N16 9RZ')
+    end
+  end
+
+  describe '#website' do
+    it 'strips whitespace before saving' do
+      venue = build(:venue, website: " \thttps://alhambra.com ")
+
+      venue.valid?
+
+      expect(venue.website).to eq('https://alhambra.com')
+    end
+  end
+
   describe 'can_delete?' do
     it 'is true if there are no associated events' do
       venue = build(:venue)

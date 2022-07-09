@@ -15,6 +15,8 @@ class Organiser < ApplicationRecord
   validates :shortname, length: { maximum: 20 }
   validates :shortname, uniqueness: { allow_blank: true }
 
+  strip_attributes only: %i[name shortname website]
+
   def shortname=(value)
     if value.blank?
       super(nil)
