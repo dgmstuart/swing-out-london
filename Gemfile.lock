@@ -99,6 +99,7 @@ GEM
     crass (1.0.6)
     dalli (3.2.1)
     diff-lcs (1.5.0)
+    digest (3.1.0)
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -156,6 +157,7 @@ GEM
     http-form_data (2.3.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    io-wait (0.2.1)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -185,6 +187,13 @@ GEM
     msgpack (1.5.1)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    net-protocol (0.1.2)
+      io-wait
+      timeout
+    net-smtp (0.3.1)
+      digest
+      net-protocol
+      timeout
     nio4r (2.5.8)
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
@@ -355,6 +364,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timecop (0.9.5)
+    timeout (0.2.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -403,6 +413,7 @@ DEPENDENCIES
   launchy
   listen
   memcachier
+  net-smtp
   oj
   omniauth-facebook
   omniauth-rails_csrf_protection
@@ -436,7 +447,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.7

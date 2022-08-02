@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.7.6'
+ruby '3.1.2'
 
 gem 'rails', '~> 6.1.5', '>= 6.1.5.1'
 
@@ -16,6 +16,7 @@ gem 'http'
 gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'memcachier'
+gem 'net-smtp', require: false
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 gem 'pg'
