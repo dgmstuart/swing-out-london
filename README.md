@@ -1,3 +1,8 @@
+# Swing Out London
+
+[Swing Out London](https://www.swingoutlondon.co.uk) is a swing dance listings
+website based on a custom CMS for listing links to dance events.
+
 ## Setup
 
 ### Prerequisites
