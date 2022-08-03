@@ -16,6 +16,8 @@ gem 'http'
 gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'memcachier'
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 gem 'net-smtp', require: false
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
