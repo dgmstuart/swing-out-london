@@ -1,3 +1,2 @@
-ruby 2.7.6
-postgres 10.5
+ruby 3.1.2
 yarn 1.22.19

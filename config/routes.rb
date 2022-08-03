@@ -13,11 +13,6 @@ Rails.application.routes.draw do
 
   resources :events do
     put :archive, on: :member
-    collection do
-      resources :imports, only: %i[new create], as: 'events_imports', controller: 'events/imports' do
-        collection { post 'save' }
-      end
-    end
     resources :organiser_tokens, only: %i[create]
   end
 
