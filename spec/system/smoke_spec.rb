@@ -46,7 +46,7 @@ RSpec.describe 'Adding a new event' do
     uncheck 'Has a taster?'
     check 'Has a class?'
     check 'Has social?'
-    fill_in 'Class style', with: 'Savoy Style'
+    fill_in 'Dance style', with: 'Savoy Style'
     fill_in 'Course length', with: ''
     select 'Saturday', from: 'Day'
     fill_in 'event_frequency', with: 1

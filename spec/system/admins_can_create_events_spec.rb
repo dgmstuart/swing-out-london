@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admins can create events' do
+RSpec.describe 'Admins can create events', :js do
   it 'with valid data' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
     create(:venue, name: 'The 100 Club')
@@ -14,13 +14,14 @@ RSpec.describe 'Admins can create events' do
     click_on 'New event', match: :first
 
     fill_in 'Title', with: 'Stompin\''
-    select 'The 100 Club', from: 'Venue'
-    select 'The London Swing Dance Society', from: 'Social organiser'
-    select 'The London Swing Dance Society', from: 'Class organiser'
+    autocomplete_select 'The 100 Club', from: 'Venue'
+    autocomplete_select 'The London Swing Dance Society', from: 'Social organiser'
+    autocomplete_select 'The London Swing Dance Society', from: 'Class organiser'
     select 'School', from: 'Event type'
     check 'Has a taster?'
     check 'Has social?'
-    fill_in 'Class style', with: ''
+    choose 'Other (balboa, shag etc)'
+    fill_in 'Dance style', with: 'Balboa'
     fill_in 'Course length', with: ''
     select 'Wednesday', from: 'Day'
     fill_in 'event_frequency', with: '0'
@@ -34,18 +35,18 @@ RSpec.describe 'Admins can create events' do
       click_on 'Create'
     end
 
-    expect(page).to have_content('Title: Stompin\'')
-      .and have_content('Venue: The 100 Club')
-      .and have_content('Social Organiser: The London Swing Dance Society')
-      .and have_content('Class Organiser: The London Swing Dance Society')
+    expect(page).to have_content("Title:\nStompin\'")
+      .and have_content("Venue:\nThe 100 Club")
+      .and have_content("Social Organiser:\nThe London Swing Dance Society")
+      .and have_content("Class Organiser:\nThe London Swing Dance Society")
       .and have_content('School, with social and taster')
-      .and have_content('Class style:')
-      .and have_content('Day: Wednesday')
-      .and have_content('Frequency: One-off or intermittent')
-      .and have_content('Dates: 12/12/2012, 19/12/2012')
-      .and have_content('Cancelled: None')
+      .and have_content("Class style:\nBalboa")
+      .and have_content("Day:\nWednesday")
+      .and have_content("Frequency:\nOne-off or intermittent")
+      .and have_content("Dates:\n12/12/2012, 19/12/2012")
+      .and have_content("Cancelled:\nNone")
       .and have_content('First date:')
-      .and have_content('Url: http://www.lsds.co.uk/stompin')
+      .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
     expect(page).to have_content('Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16')
   end
@@ -69,7 +70,7 @@ RSpec.describe 'Admins can create events' do
       .and have_content("Frequency can't be blank")
       .and have_content('Events must have either a Social or a Class')
 
-    select 'The 100 Club', from: 'Venue'
+    autocomplete_select 'The 100 Club', from: 'Venue'
     select 'school', from: 'Event type'
     check 'Has social?'
     fill_in 'Title', with: 'Stompin\''
@@ -78,9 +79,9 @@ RSpec.describe 'Admins can create events' do
 
     click_on 'Create'
 
-    expect(page).to have_content('Venue: The 100 Club')
+    expect(page).to have_content("Venue:\nThe 100 Club")
       .and have_content('School, with social')
-      .and have_content('Frequency: Weekly')
-      .and have_content('Url: http://www.lsds.co.uk/stompin')
+      .and have_content("Frequency:\nWeekly")
+      .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
   end
 end

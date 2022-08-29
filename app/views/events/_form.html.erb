@@ -57,10 +57,21 @@
     <%= f.label :class_organiser_id, 'Class organiser' %>
     <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' } %>
   </div>
-  <div class='form-group'>
-    <%= f.label :class_style %>
-    <%= f.text_field :class_style %>
-    <p class='help'>Leave blank if Lindy Hop or general swing</p>
+
+  <h4 class='form-subgroup-title'>Class style</h3>
+  <div class='form-subgroup' id="class-style-selection">
+    <div class='radio-group'>
+      <%= radio_button_tag 'class_style_option', 'lindy', @event.class_style.blank? %>
+      <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
+    </div>
+    <div class='radio-group'>
+      <%= radio_button_tag 'class_style_option', 'other', !@event.class_style.blank?, data: { target: 'class-style-group' }%>
+      <%= label_tag 'class_style_option_other', 'Other (balboa, shag etc)' %>
+    </div>
+    <div class='form-group form-group-nested <%= 'hidden' if @event.class_style.blank? %>' id="class-style-group">
+      <%= f.label :class_style, "Dance style:" %>
+      <%= f.text_field :class_style %>
+    </div>
   </div>
   <div class='form-group'>
     <%= f.label :course_length %>

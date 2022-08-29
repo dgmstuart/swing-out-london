@@ -27,7 +27,7 @@
       weeks
   %li
     %span Class style:
-    = @event.class_style
+    = @event.class_style.presence || t('forms.events.default_class_style')
   %li
     %span Day:
     = @event.day

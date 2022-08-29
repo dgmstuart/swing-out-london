@@ -1,7 +1,8 @@
 {
   "scripts": {
     "style-fix": "stylelint --fix app/assets/stylesheets",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch"
   },
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
