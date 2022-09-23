@@ -2,6 +2,8 @@ import accessibleAutocomplete from 'accessible-autocomplete'
 
 accessibleAutocomplete.enhanceSelectElement({
   selectElement: document.querySelector('#event_venue_id'),
+  defaultValue: '',
+  preserveNullOptions: true,
   showAllValues: true
 })
 accessibleAutocomplete.enhanceSelectElement({
