@@ -14,16 +14,6 @@ describe Event do
     end
   end
 
-  describe '#shortname' do
-    it 'strips whitespace before saving' do
-      event = build(:event, shortname: " \tDance! ")
-
-      event.valid?
-
-      expect(event.shortname).to eq('Dance!')
-    end
-  end
-
   describe '#url' do
     it 'strips whitespace before saving' do
       event = build(:event, url: " \thttps://dancetime.co.uk ")

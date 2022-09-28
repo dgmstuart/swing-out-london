@@ -28,7 +28,7 @@ class Event < ApplicationRecord
   validate :socials_must_have_titles
   validate :will_be_listed
 
-  strip_attributes only: %i[title shortname url]
+  strip_attributes only: %i[title url]
 
   def cannot_be_weekly_and_have_dates
     return unless weekly? && !dates.empty?
