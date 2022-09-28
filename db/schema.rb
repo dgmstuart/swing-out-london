@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_20_135448) do
+ActiveRecord::Schema.define(version: 2022_09_28_222048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2022_05_20_135448) do
     t.string "cancellation_array", limit: 255
     t.date "first_date"
     t.date "last_date"
-    t.string "shortname", limit: 255
     t.text "class_style"
     t.integer "course_length"
     t.boolean "has_taster"
