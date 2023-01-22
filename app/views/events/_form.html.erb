@@ -89,14 +89,14 @@
     <span class='help'>(For one-off or intermittent events, use 0)</span>
   </div>
   <div class='form-group'>
-    <%= f.label :date_array, 'Dates' %>
+    <%= f.label :date_array, 'Upcoming dates' %>
+    <p class='help'><%= t('forms.help.dates') %></p>
     <%= f.text_field :date_array, :value => @event.print_dates %>
-    <span class='help'>DD/MM/YYYY, separated by commas</span>
   </div>
   <div class='form-group'>
     <%= f.label :cancellation_array, 'Cancelled dates' %>
+    <p class='help'><%= t('forms.help.dates') %></p>
     <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
-    <span class='help'>DD/MM/YYYY, separated by commas</span>
   </div>
   <div class='form-group'>
     <%= f.label :first_date %>

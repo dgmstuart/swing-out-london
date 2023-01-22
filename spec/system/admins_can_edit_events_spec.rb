@@ -62,7 +62,7 @@ RSpec.describe 'Admins can edit events', :js do
     # uncheck 'Has a taster?'
     # uncheck 'Has social?'
     fill_in 'event_frequency', with: '1'
-    fill_in 'Dates', with: '12/12/2012'
+    fill_in 'Upcoming dates', with: '12/12/2012'
     fill_in 'Url', with: ''
 
     click_on 'Update'
@@ -85,7 +85,7 @@ RSpec.describe 'Admins can edit events', :js do
 
     click_on 'Edit', match: :first
 
-    fill_in 'Dates', with: '12/12/2012, 12/01/2013'
+    fill_in 'Upcoming dates', with: '12/12/2012, 12/01/2013'
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
       click_on 'Update'

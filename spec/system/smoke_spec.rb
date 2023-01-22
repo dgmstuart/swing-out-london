@@ -50,7 +50,7 @@ RSpec.describe 'Adding a new event' do
     fill_in 'Course length', with: ''
     select 'Saturday', from: 'Day'
     fill_in 'event_frequency', with: 1
-    fill_in 'Dates', with: ''
+    fill_in 'Upcoming dates', with: ''
     fill_in 'Cancelled dates', with: '11/10/1958'
     fill_in 'First date', with: '12/03/1926'
     fill_in 'Next expected', with: ''

@@ -25,7 +25,7 @@ RSpec.describe 'Admins can create events', :js do
     fill_in 'Course length', with: ''
     select 'Wednesday', from: 'Day'
     fill_in 'event_frequency', with: '0'
-    fill_in 'Dates', with: '12/12/2012, 19/12/2012'
+    fill_in 'Upcoming dates', with: '12/12/2012, 19/12/2012'
     # TODO: Make this work:
     # fill_in 'Cancelled dates', with: '12/12/2012'
     fill_in 'First date', with: ''
