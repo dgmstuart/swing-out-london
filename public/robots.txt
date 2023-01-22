@@ -1,4 +1,5 @@
 User-Agent: *
+Disallow: /login
 Disallow: /name_clash
 Disallow: /audit_log
 Disallow: /map/socials/*
