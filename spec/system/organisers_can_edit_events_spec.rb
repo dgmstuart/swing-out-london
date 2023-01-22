@@ -22,14 +22,14 @@ RSpec.describe 'Organisers can edit events' do
         .and have_content("Day\nWednesday")
 
       select 'The 100 Club', from: 'Venue'
-      fill_in 'Dates', with: '12/12/2012, 12/01/2013'
+      fill_in 'Upcoming dates', with: '12/12/2012, 12/01/2013'
       fill_in 'Cancelled dates', with: '12/12/2012'
       fill_in 'Last date', with: '12/01/2013'
       click_on 'Update'
 
       aggregate_failures do
         expect(page).to have_select('Venue', selected: 'The 100 Club - central')
-        expect(page).to have_field('Dates', with: '12/12/2012,12/01/2013')
+        expect(page).to have_field('Upcoming dates', with: '12/12/2012,12/01/2013')
         expect(page).to have_field('Cancelled dates', with: '12/12/2012')
         expect(page).to have_field('Last date', with: '12/01/2013')
         expect(page).to have_content('Event was successfully updated')
