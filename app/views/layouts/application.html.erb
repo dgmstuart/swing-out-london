@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB">
   <head>
+    <%= yield(:analytics) %>
     <title>
       <%= content_for?(:title) ? yield(:title) : "Swing Out London - listings of Lindy Hop swing dance classes and socials" %>
     </title>
