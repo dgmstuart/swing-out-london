@@ -4,3 +4,5 @@
 
 import { application } from "./application"
 
+import OrganiserLinkController from "./organiser_link_controller"
+application.register("organiser-link", OrganiserLinkController)
