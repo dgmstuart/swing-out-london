@@ -31,6 +31,7 @@ gem 'rollbar'
 gem 'rss'
 gem 'sassc-rails'
 gem 'sprockets'
+gem 'stimulus-rails'
 gem 'strip_attributes'
 gem 'test-unit'
 

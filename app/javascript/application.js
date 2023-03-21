@@ -27,3 +27,4 @@ cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
   window.open("https://www.youtube.com/embed/iEaSaIhYZXg?autoplay=1", "popupWindow", "width=560,height=315");
 });
 
+import "./controllers"
