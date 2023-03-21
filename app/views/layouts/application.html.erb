@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <%= yield(:analytics) %>
+    <title>
+      <%= content_for?(:title) ? yield(:title) : "Swing Out London - listings of Lindy Hop swing dance classes and socials" %>
+    </title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="initial-scale=1" name="viewport"/>
+    <meta content="Duncan Stuart" name="author"/>
+    <meta content="<%= content_for?(:description) ? yield(:description) : "Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" %>" name="description"/>
+    <link href="humans.txt" rel="author">/</link>
+    <%= csrf_meta_tag %>
+    <%= javascript_include_tag :application %>
+    <%= yield :script %>
+    <%= yield :stylesheet %>
+    <meta content="none" name="msapplication-config"/>
+    <%= yield :head %>
+  </head>
+  <%= content_tag( :body, :class => "#{@controller_name} #{@action_name}") do %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
+  <% end %>
+</html>
