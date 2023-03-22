@@ -26,6 +26,7 @@ class Event < ApplicationRecord
 
   validate :cannot_be_weekly_and_have_dates
   validate :socials_must_have_titles
+  validate :classes_must_have_organisers
   validate :will_be_listed
 
   strip_attributes only: %i[title url]
@@ -47,6 +48,12 @@ class Event < ApplicationRecord
     return if title.present?
 
     errors.add(:title, 'must be present for social dances')
+  end
+
+  def classes_must_have_organisers
+    return unless has_class? && class_organiser_id.nil?
+
+    errors.add(:class_organiser_id, 'must be present for classes')
   end
 
   # display constants:
