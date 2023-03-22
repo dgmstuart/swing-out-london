@@ -1,0 +1,35 @@
+<% content_for :analytics do %>
+  <%= render "website/google_analytics" %>
+<% end %>
+
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'application', media: "screen" %>
+<% end %>
+
+<% content_for :content do %>
+  <div id="map" data-markers='<%= @map.markers.to_json %>'></div>
+
+  <header class="page">
+    <h1>
+      <%= link_to "Swing Out London's", :controller => "website", :action => "index" %>
+      <em>
+        Lindy Map
+      </em>
+    </h1>
+    <div class="navigation primary-nav">
+      <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
+      <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
+    </div>
+  </header>
+
+  <div class="listings page">
+    <%= yield :listings %>
+  </div>
+
+  <%= yield :scripts %>
+  <%= javascript_include_tag('application_map') %>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>
+
+<% end %>
+
+<%= render template: 'layouts/application' %>
