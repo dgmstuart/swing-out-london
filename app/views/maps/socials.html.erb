@@ -1,0 +1,37 @@
+<% content_for :title do %>
+  Swing Out London's Lindy Map: Socials
+  <% if @map_dates.selected_date %>
+    on <%= @map_dates.selected_date.to_s(:listing_date) %>
+  <% end %>
+<% end %>
+
+<% content_for :description do %>
+  A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
+  <% if @map_dates.selected_date %>
+    on <%= @map_dates.selected_date.to_s(:listing_date) %>
+  <% end %>
+<% end %>
+
+<% content_for :head do %>
+  <% if @map_dates.selected_date %>
+    <meta content="unavailable_after: <%= (@map_dates.selected_date + 13).to_s(:db) %>" name="robots"/>
+  <% end %>
+<% end %>
+
+<% content_for :listings do %>
+  <ul>
+    <% if flash.any? %>
+      <% flash.each do |_level, message| %>
+        <li class="banner">
+          <%= message %>
+        </li>
+      <% end %>
+    <% end %>
+
+    <% @map_dates.listing_dates.each do |date| %>
+      <li>
+        <%= link_to date.to_s(:listing_date), { date: date.to_s(:db) }, { class: ["js-update-map", (:selected if date == @map_dates.selected_date)], data: { url: map_socials_path(date, format: :json) } } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
