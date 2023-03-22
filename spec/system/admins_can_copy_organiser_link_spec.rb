@@ -39,7 +39,7 @@ RSpec.describe 'Admins can copy an organiser link' do
 
       expect(page).to have_content('No organiser edit link exists for this event')
 
-      click_on 'New link'
+      click_on 'Generate link'
 
       page.driver.browser.switch_to.alert.accept
 
