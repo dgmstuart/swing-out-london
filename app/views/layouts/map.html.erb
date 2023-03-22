@@ -28,7 +28,8 @@
 
   <%= yield :scripts %>
   <%= javascript_include_tag('application_map') %>
-  <%= javascript_include_tag("https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY']}&callback=initMap", async: true, defer: true) %>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>
+
 <% end %>
 
 <%= render template: 'layouts/application' %>
