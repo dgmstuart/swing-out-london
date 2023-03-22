@@ -1,19 +1,28 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'spec/support/system/clipboard_helper'
 
 RSpec.describe 'Admins can copy an organiser link' do
-  context 'when an organiser token exists' do
+  include System::ClipboardHelper
+
+  context 'when an organiser token exists', :js do
     it 'shows a url which will allow an organiser to edit an event' do
       stub_login(id: 12345678901234567, name: 'Al Minns')
       create(:event, organiser_token: 'abc123')
+      grant_clipboard_permissions
 
       visit '/login'
       click_on 'Log in with Facebook'
 
       click_on 'Edit', match: :first
 
-      expect(page).to have_content('http://www.example.com/external_events/abc123/edit')
+      url = URI.join(page.server_url, '/external_events/abc123/edit').to_s
+      expect(page).to have_content(url)
+
+      click_on 'Copy'
+
+      expect(clipboard_text).to eq(url)
     end
   end
 

@@ -27,6 +27,11 @@
   }
 }
 
+.button-smaller {
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
 .button:hover {
   color: $text-colour;
   background-color: $button-active-colour;
