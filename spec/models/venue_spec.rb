@@ -56,7 +56,7 @@ RSpec.describe Venue do
 
   describe 'can_delete?' do
     it 'is true if there are no associated events' do
-      venue = build(:venue)
+      venue = create(:venue)
 
       expect(venue.can_delete?).to be true
     end
@@ -66,6 +66,14 @@ RSpec.describe Venue do
       create(:event, venue: venue)
 
       expect(venue.can_delete?).to be false
+    end
+
+    it 'raises an exception if the venue is not persisted yet)' do
+      venue = build(:venue)
+
+      expect { venue.can_delete? }.to raise_error(
+        RuntimeError, "Can't delete a Venue which is not persisted"
+      )
     end
   end
 end

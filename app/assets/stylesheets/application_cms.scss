@@ -127,6 +127,11 @@ p.actions_panel {
   }
 }
 
+.organisers.index .button,
+.venues.index .button {
+  margin: 0 10px;
+}
+
 table {
   border-collapse: collapse;
   margin: 20px 10px 50px;
