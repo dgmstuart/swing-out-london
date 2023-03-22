@@ -40,6 +40,8 @@ class Organiser < ApplicationRecord
   end
 
   def can_delete?
+    raise "Can't delete an Organiser which is not persisted" unless persisted?
+
     events.empty?
   end
 end

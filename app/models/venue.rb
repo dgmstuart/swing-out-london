@@ -58,6 +58,8 @@ class Venue < ApplicationRecord
   end
 
   def can_delete?
+    raise "Can't delete a Venue which is not persisted" unless persisted?
+
     events.empty?
   end
 end

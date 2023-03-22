@@ -68,7 +68,8 @@ RSpec.describe Organiser do
 
   describe 'can_delete?' do
     it 'is true if there are no associated events' do
-      organiser = build(:organiser)
+      organiser = create(:organiser)
+      create(:event, social_organiser: nil)
 
       expect(organiser.can_delete?).to be true
     end
@@ -78,6 +79,15 @@ RSpec.describe Organiser do
       create(:event, social_organiser: organiser)
 
       expect(organiser.can_delete?).to be false
+    end
+
+    it 'raises an exception if the organiser id is nil (not persisted yet)' do
+      organiser = build(:organiser)
+      create(:event, social_organiser: nil)
+
+      expect { organiser.can_delete? }.to raise_error(
+        RuntimeError, "Can't delete an Organiser which is not persisted"
+      )
     end
   end
 end
