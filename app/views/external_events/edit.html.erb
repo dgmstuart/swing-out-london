@@ -17,13 +17,13 @@
   </div>
 
   <div class='form-group'>
-    <label>Day</label>
-    <p><%= @event.day %></p>
+    <%= f.label :venue_id, 'Venue' %>
+    <%= f.select :venue_id, venue_select, {:include_blank => true} %>
   </div>
 
   <div class='form-group'>
-    <%= f.label :venue_id, 'Venue' %>
-    <%= f.select :venue_id, venue_select, {:include_blank => true} %>
+    <label>Day</label>
+    <p><%= @event.day %></p>
   </div>
 
   <div class='form-group'>
