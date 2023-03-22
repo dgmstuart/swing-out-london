@@ -11,11 +11,6 @@ form {
     margin-bottom: 5px;
   }
 
-  .form-subgroup-title {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
   .form-group-nested {
     margin-left: 25px;
 
@@ -133,21 +128,28 @@ form.edit_event {
     }
   }
 
-  .form-group {
-    margin-bottom: 10px;
+  .form-group,
+  .form-subgroup {
+    margin-bottom: 15px;
   }
 
   .form-group-title {
-    margin: 0 0 5px;
+    margin: 3px 0 5px;
+  }
+
+  .form-subgroup-title {
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 5px;
   }
 
   section {
-    padding: 10px;
+    padding: 10px 15px 5px;
     margin: 20px 0;
     border: 1px solid;
   }
 }
-
 
 // Rails Errors
 /////////////////////////////////////////////
