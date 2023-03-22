@@ -17,20 +17,26 @@
   </div>
 
   <div class='form-group'>
-    <label>Day</label>
-    <p><%= @event.day %></p>
-  </div>
-
-  <div class='form-group'>
     <%= f.label :venue_id, 'Venue' %>
     <%= f.select :venue_id, venue_select, {:include_blank => true} %>
   </div>
 
   <div class='form-group'>
-    <%= f.label :date_array, 'Upcoming dates' %>
-    <p class='help'><%= t('forms.help.dates') %></p>
-    <%= f.text_field :date_array, :value => @event.print_dates %>
+    <label>Frequency</label>
+    <% if @event.weekly? %>
+      <p>Every <%= @event.day %></p>
+    <% else %>
+      <p>Occasional</p>
+    <% end %>
   </div>
+
+  <% unless @event.weekly? %>
+    <div class='form-group'>
+      <%= f.label :date_array, 'Upcoming dates' %>
+      <p class='help'><%= t('forms.help.dates') %></p>
+      <%= f.text_field :date_array, :value => @event.print_dates %>
+    </div>
+  <% end %>
 
   <div class='form-group'>
     <%= f.label :cancellation_array, 'Cancelled dates' %>
