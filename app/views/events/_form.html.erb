@@ -1,19 +1,21 @@
 <%= form_for(@event) do |f| %>
   <%= render "shared/error_messages", :target => @event %>
 
-  <div class='form-group'>
-    <%= f.label :url %>
-    <%= f.text_field :url %>
-  </div>
+  <section>
+    <div class='form-group'>
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
 
-  <div class='form-group'>
-    <%= f.label :venue_id, 'Venue' %>
-    <%= f.select :venue_id, venue_select, {:include_blank => true} %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :event_type %>
-    <%= f.select :event_type, event_type_select, {:include_blank => true} %>
-  </div>
+    <div class='form-group'>
+      <%= f.label :venue_id, 'Venue' %>
+      <%= f.select :venue_id, venue_select, {:include_blank => true} %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :event_type %>
+      <%= f.select :event_type, event_type_select, {:include_blank => true} %>
+    </div>
+  </section>
 
   <% if @event.persisted? %>
     <section data-controller="organiser-link">
@@ -40,91 +42,99 @@
     </section>
   <% end %>
 
-  <h3 class='form-group-title'>Social details</h3>
-  <div class='form-group'>
-    <%= f.label :has_social, "Has social?" %>
-    <%= f.check_box :has_social  %>
-    <span class='help'>Events with a social dance *must* have a title: this is what gets displayed in the listing</span>
-  </div>
-  <div class='form-group'>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :social_organiser_id, 'Social organiser' %>
-    <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' } %>
-  </div>
-
-  <h3 class='form-group-title'>Class details</h3>
-  <div class='form-group'>
-    <%= f.label :has_class, "Has a class?" %>
-    <%= f.check_box :has_class  %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :has_taster, "Has a taster?" %>
-    <%= f.check_box :has_taster  %>
-  </div>
-  <p class='help'>Note: classes don't have names - just locations</p>
-  <div class='form-group'>
-    <%= f.label :class_organiser_id, 'Class organiser' %>
-    <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' } %>
-  </div>
-
-  <h4 class='form-subgroup-title'>Class style</h3>
-  <div class='form-subgroup' id="class-style-selection">
-    <div class='radio-group'>
-      <%= radio_button_tag 'class_style_option', 'lindy', @event.class_style.blank? %>
-      <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
+  <section>
+    <h3 class='form-group-title'>Social details</h3>
+    <div class='form-group'>
+      <%= f.label :has_social, "Has social?" %>
+      <%= f.check_box :has_social  %>
+      <span class='help'>Events with a social dance *must* have a title: this is what gets displayed in the listing</span>
     </div>
-    <div class='radio-group'>
-      <%= radio_button_tag 'class_style_option', 'other', !@event.class_style.blank?, data: { target: 'class-style-group' }%>
-      <%= label_tag 'class_style_option_other', 'Other (balboa, shag etc)' %>
+    <div class='form-group'>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
     </div>
-    <div class='form-group form-group-nested <%= 'hidden' if @event.class_style.blank? %>' id="class-style-group">
-      <%= f.label :class_style, "Dance style:" %>
-      <%= f.text_field :class_style %>
+    <div class='form-group'>
+      <%= f.label :social_organiser_id, 'Social organiser' %>
+      <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' } %>
     </div>
-  </div>
-  <div class='form-group'>
-    <%= f.label :course_length %>
-    <%= f.text_field :course_length, :size => 2, :class =>"shortfield" %> weeks
-  </div>
+  </section>
 
-  <h3 class='form-group-title'>When?</h3>
-  <div class='form-group'>
-    <%= f.label :day %>
-    <%= f.select :day, DAYNAMES %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :frequency %>
-    every <%= f.text_field :frequency, :size => 2, :class =>"shortfield" %> weeks
-    <span class='help'>(For one-off or intermittent events, use 0)</span>
-  </div>
-  <div class='form-group'>
-    <%= f.label :date_array, 'Upcoming dates' %>
-    <p class='help'><%= t('forms.help.dates') %></p>
-    <%= f.text_field :date_array, :value => @event.print_dates %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :cancellation_array, 'Cancelled dates' %>
-    <p class='help'><%= t('forms.help.dates') %></p>
-    <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :first_date %>
-    <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :class =>"shortfield" %>
-    <span class='help'>(only needs to be set for new events, or events starting in the future)</span>
-  </div>
-  <div class='form-group'>
-    <%= f.label :expected_date, 'Next expected' %>
-    <%= f.text_field :expected_date, value: @event.expected_date.to_s, :size => 10, :class =>"shortfield"%>
-    <span class='help'>If you leave this blank then it will be calculated based on the dates and frequency</span>
-  </div>
-  <div class='form-group'>
-    <%= f.label :last_date %>
-    <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
-    <span class='help'>The event will stop showing up on the site after this date</span>
-  </div>
+  <section>
+    <h3 class='form-group-title'>Class details</h3>
+    <div class='form-group'>
+      <%= f.label :has_class, "Has a class?" %>
+      <%= f.check_box :has_class  %>
+      <span class='help'>Events with a class *must* have a class organiser</span>
+    </div>
+    <div class='form-group'>
+      <%= f.label :has_taster, "Has a taster?" %>
+      <%= f.check_box :has_taster  %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :class_organiser_id, 'Class organiser' %>
+      <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' } %>
+      <p class='help'>Note: classes don't have names - just locations and organisers</p>
+      <p class='help'>The location and organiser name are displayed in the listings.</>
+    </div>
+
+    <h4 class='form-subgroup-title'>Class style</h3>
+    <div class='form-subgroup' id="class-style-selection">
+      <div class='radio-group'>
+        <%= radio_button_tag 'class_style_option', 'lindy', @event.class_style.blank? %>
+        <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
+      </div>
+      <div class='radio-group'>
+        <%= radio_button_tag 'class_style_option', 'other', !@event.class_style.blank?, data: { target: 'class-style-group' }%>
+        <%= label_tag 'class_style_option_other', 'Other (balboa, shag etc)' %>
+      </div>
+      <div class='form-group form-group-nested <%= 'hidden' if @event.class_style.blank? %>' id="class-style-group">
+        <%= f.label :class_style, "Dance style:" %>
+        <%= f.text_field :class_style %>
+      </div>
+    </div>
+    <div class='form-group'>
+      <%= f.label :course_length %>
+      <%= f.text_field :course_length, :size => 2, :class =>"shortfield" %> weeks
+    </div>
+  </section>
+
+  <section>
+    <h3 class='form-group-title'>When?</h3>
+    <div class='form-group'>
+      <%= f.label :day %>
+      <%= f.select :day, DAYNAMES %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :frequency %>
+      every <%= f.text_field :frequency, :size => 2, :class =>"shortfield" %> weeks
+      <span class='help'>(For one-off or intermittent events, use 0)</span>
+    </div>
+    <div class='form-group'>
+      <%= f.label :date_array, 'Upcoming dates' %>
+      <p class='help'><%= t('forms.help.dates') %></p>
+      <%= f.text_field :date_array, :value => @event.print_dates %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :cancellation_array, 'Cancelled dates' %>
+      <p class='help'><%= t('forms.help.dates') %></p>
+      <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :first_date %>
+      <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :class =>"shortfield" %>
+      <span class='help'>(only needs to be set for new events, or events starting in the future)</span>
+    </div>
+    <div class='form-group'>
+      <%= f.label :expected_date, 'Next expected' %>
+      <%= f.text_field :expected_date, value: @event.expected_date.to_s, :size => 10, :class =>"shortfield"%>
+      <span class='help'>If you leave this blank then it will be calculated based on the dates and frequency</span>
+    </div>
+    <div class='form-group'>
+      <%= f.label :last_date %>
+      <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
+      <span class='help'>The event will stop showing up on the site after this date</span>
+    </div>
+  </section>
 
   <div class='form-group actions'>
     <%= f.submit action, class: 'button' %>
