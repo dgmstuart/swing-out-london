@@ -138,9 +138,16 @@ form.edit_event {
   }
 
   .form-group-title {
-    margin: 20px 0 5px;
+    margin: 0 0 5px;
+  }
+
+  section {
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid;
   }
 }
+
 
 // Rails Errors
 /////////////////////////////////////////////
