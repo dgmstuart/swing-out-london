@@ -14,7 +14,7 @@
 
 <% content_for :head do %>
   <% if @map_dates.selected_date %>
-    <meta content="noindex" name="robots"/>
+    <meta content="unavailable_after: <%= (@map_dates.selected_date + 13).to_s(:db) %>" name="robots"/>
   <% end %>
 <% end %>
 

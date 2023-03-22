@@ -2,7 +2,8 @@ User-Agent: *
 Disallow: /login
 Disallow: /name_clash
 Disallow: /audit_log
-Disallow: /map/socials/*
+Disallow: /map?
+Disallow: /map/socials/*?
 Disallow: /map/classes/*/*
 Disallow: /map/classes/*?
 
