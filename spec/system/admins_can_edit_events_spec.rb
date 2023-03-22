@@ -48,7 +48,7 @@ RSpec.describe 'Admins can edit events', :js do
 
   it 'with invalid data' do
     stub_login(id: 12345678901234567, name: 'Al Minns')
-    create(:event, has_class: true)
+    create(:class)
 
     visit '/login'
     click_on 'Log in with Facebook'
