@@ -10,4 +10,8 @@ module VenuesHelper
     end
     tag :tr, { class: class_string, id: "venue_#{venue.id}" }, true
   end
+
+  def google_maps_url(lat, lng, zoom = 15)
+    "https://www.google.co.uk/maps/place/#{lat},#{lng}/@#{lat},#{lng},#{zoom}z"
+  end
 end
