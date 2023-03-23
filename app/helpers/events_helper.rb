@@ -34,8 +34,6 @@ module EventsHelper
   end
 
   def venue_link(event)
-    return event.blank_venue if event.venue.nil?
-
     link_to_unless event.venue.website.nil?, event.venue.name, event.venue.website
   end
 

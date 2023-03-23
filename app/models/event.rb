@@ -114,20 +114,8 @@ class Event < ApplicationRecord
   # Venue #
   # ----- #
 
-  def blank_venue
-    return SEE_WEB unless url.nil?
-
-    UNKNOWN_VENUE
-  end
-
-  # We shouldn't have any blank fields, but if we do, then display as much as possible:
   delegate :name, to: :venue, prefix: true
-
   delegate :area, to: :venue, prefix: true
-
-  def one_off?
-    frequency.zero?
-  end
 
   # ---------- #
   # Event Type #
@@ -211,6 +199,10 @@ class Event < ApplicationRecord
     self.cancellations = DatesStringParser.new.parse(date_string)
   end
 
+  def future_cancellations
+    filter_future(cancellations)
+  end
+
   # READ METHODS #
 
   def date_array(future: false)
@@ -266,41 +258,25 @@ class Event < ApplicationRecord
   # PRINT METHODS #
 
   def print_dates
-    print_date_array
+    date_printer.print(dates)
   end
 
   def print_dates_rows
-    print_date_array(",\n")
+    date_rows_printer.print(dates)
   end
 
   def print_cancellations
-    print_cancellation_array
-  end
-
-  def pretty_cancelled_dates
-    print_cancellation_array(', ', :short_date, future: true)
-  end
-
-  def cancelled_dates_rows
-    print_cancellation_array(",\n")
-  end
-
-  # -- Helper functions for Print:
-
-  def print_date_array(sep = ',', format = :uk_date, future: false)
-    print_array_of_dates(dates, sep, format, future: future)
-  end
-
-  def print_cancellation_array(sep = ',', format = :uk_date, future: false)
-    print_array_of_dates(cancellations, sep, format, future: future)
+    date_printer.print(cancellations)
   end
 
   private
 
-  # Given an array of dates, return a formatted string
-  def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future: false)
-    input_dates = filter_future(input_dates) if future
-    input_dates.collect { |d| d.to_s(format) }.join(sep)
+  def date_printer
+    DatePrinter.new
+  end
+
+  def date_rows_printer
+    DatePrinter.new(separator: ', ')
   end
 
   public
@@ -353,10 +329,6 @@ class Event < ApplicationRecord
     return false if last_date.nil?
 
     last_date < Date.local_today
-  end
-
-  def intermittent?
-    frequency.zero? && last_date != latest_date
   end
 
   def one_off?

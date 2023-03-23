@@ -9,10 +9,6 @@ module Maps
         I18n.l(date, format: '%A')
       end
 
-      def self.same_weekday?(day_name, date)
-        day_name == name(date)
-      end
-
       def self.parse(day_string, today)
         return unless day_string
 

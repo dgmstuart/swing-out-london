@@ -224,6 +224,9 @@ module ListingsHelper
   def swingclass_cancelledmsg(swingclass)
     return '' if swingclass.cancellation_array(future: true).empty?
 
-    tag.em("Cancelled on #{swingclass.pretty_cancelled_dates}", class: 'class_cancelled')
+    date_printer = DatePrinter.new(separator: ', ', format: :short_date)
+    cancellations = date_printer.print(swingclass.future_cancellations)
+
+    tag.em("Cancelled on #{cancellations}", class: 'class_cancelled')
   end
 end
