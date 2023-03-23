@@ -117,10 +117,6 @@ class Event < ApplicationRecord
   delegate :name, to: :venue, prefix: true
   delegate :area, to: :venue, prefix: true
 
-  def one_off?
-    frequency.zero?
-  end
-
   # ---------- #
   # Event Type #
   # ---------- #
@@ -333,10 +329,6 @@ class Event < ApplicationRecord
     return false if last_date.nil?
 
     last_date < Date.local_today
-  end
-
-  def intermittent?
-    frequency.zero? && last_date != latest_date
   end
 
   def one_off?

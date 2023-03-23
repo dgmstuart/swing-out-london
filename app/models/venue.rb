@@ -48,11 +48,6 @@ class Venue < ApplicationRecord
     events.all?(&:near_out_of_date)
   end
 
-  # Map-related methods:
-  def position
-    [lat, lng] unless lat.nil? || lng.nil?
-  end
-
   def coordinates
     "[ #{lat}, #{lng} ]"
   end
