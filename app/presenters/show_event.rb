@@ -3,6 +3,7 @@
 class ShowEvent
   def initialize(event)
     @event = event
+    @date_printer = DatePrinter.new(separator: ', ')
   end
 
   def anchor
@@ -12,7 +13,7 @@ class ShowEvent
   def cancellations
     return 'None' if event.cancellations.empty?
 
-    print_dates(event.cancellations)
+    date_printer.print(event.cancellations)
   end
 
   def dates
@@ -21,7 +22,7 @@ class ShowEvent
     elsif event.dates.empty?
       'Unknown'
     else
-      print_dates(event.dates)
+      date_printer.print(event.dates)
     end
   end
 
@@ -87,9 +88,5 @@ class ShowEvent
 
   private
 
-  attr_reader :event
-
-  def print_dates(dates)
-    dates.map { |date| date.to_s(:uk_date) }.join(', ')
-  end
+  attr_reader :event, :date_printer
 end

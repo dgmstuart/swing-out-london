@@ -211,6 +211,10 @@ class Event < ApplicationRecord
     self.cancellations = DatesStringParser.new.parse(date_string)
   end
 
+  def future_cancellations
+    filter_future(cancellations)
+  end
+
   # READ METHODS #
 
   def date_array(future: false)
@@ -266,41 +270,25 @@ class Event < ApplicationRecord
   # PRINT METHODS #
 
   def print_dates
-    print_date_array
+    date_printer.print(dates)
   end
 
   def print_dates_rows
-    print_date_array(",\n")
+    date_rows_printer.print(dates)
   end
 
   def print_cancellations
-    print_cancellation_array
-  end
-
-  def pretty_cancelled_dates
-    print_cancellation_array(', ', :short_date, future: true)
-  end
-
-  def cancelled_dates_rows
-    print_cancellation_array(",\n")
-  end
-
-  # -- Helper functions for Print:
-
-  def print_date_array(sep = ',', format = :uk_date, future: false)
-    print_array_of_dates(dates, sep, format, future: future)
-  end
-
-  def print_cancellation_array(sep = ',', format = :uk_date, future: false)
-    print_array_of_dates(cancellations, sep, format, future: future)
+    date_printer.print(cancellations)
   end
 
   private
 
-  # Given an array of dates, return a formatted string
-  def print_array_of_dates(input_dates, sep = ',', format = :uk_date, future: false)
-    input_dates = filter_future(input_dates) if future
-    input_dates.collect { |d| d.to_s(format) }.join(sep)
+  def date_printer
+    DatePrinter.new
+  end
+
+  def date_rows_printer
+    DatePrinter.new(separator: ', ')
   end
 
   public
