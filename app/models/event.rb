@@ -114,15 +114,7 @@ class Event < ApplicationRecord
   # Venue #
   # ----- #
 
-  def blank_venue
-    return SEE_WEB unless url.nil?
-
-    UNKNOWN_VENUE
-  end
-
-  # We shouldn't have any blank fields, but if we do, then display as much as possible:
   delegate :name, to: :venue, prefix: true
-
   delegate :area, to: :venue, prefix: true
 
   def one_off?
