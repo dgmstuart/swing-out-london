@@ -23,12 +23,12 @@
 
   <li>
     <span>Coordinates:</span>
-    <%=h @venue.coordinates %>
+    <%= link_to @venue.coordinates, google_maps_url(@venue.lat, @venue.lng) %>
   </li>
 
   <li>
     <span>Website:</span>
-    <%= link_to @venue.website %>
+    <%= link_to @venue.website, @venue.website %>
   </li>
 </ol>
 
