@@ -36,6 +36,12 @@ import { format } from 'timeago.js'
     });
   };
 
+  add_tweet_share_analytics_event = function() {
+    return $('.share_button.twitter').click(function() {
+      return _gaq.push(['_trackEvent', 'Share Button', 'twitter', this.href]);
+    });
+  };
+
   add_facebook_share_analytics_event = function() {
     return $('.share_button.facebook').click(function() {
       return _gaq.push(['_trackEvent', 'Share Button', 'facebook', this.href]);
