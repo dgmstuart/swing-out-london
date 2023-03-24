@@ -1,6 +1,6 @@
 <ul class="datelist unstyled">
 <% reset_cycle "row_cycle"%>
 <% @socials_dates.each_with_index do |(date,socials,cancelled_ids),index| %>
-  <%= render :partial => "events/social_listing", :locals => {:date => date, :socials => socials, :cancelled_ids => cancelled_ids, :index => index} %>
+  <%= render "listings/social_listing", date: date, socials: socials, cancelled_ids: cancelled_ids, index: index %>
 <% end %>
 </ul>

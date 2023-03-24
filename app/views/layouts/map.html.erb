@@ -1,5 +1,5 @@
 <% content_for :analytics do %>
-  <%= render "website/google_analytics" %>
+  <%= render "layouts/google_analytics" %>
 <% end %>
 
 <% content_for :stylesheet do %>
@@ -11,7 +11,7 @@
 
   <header class="page">
     <h1>
-      <%= link_to "Swing Out London's", :controller => "website", :action => "index" %>
+      <%= link_to "Swing Out London's", root_path %>
       <em>
         Lindy Map
       </em>
