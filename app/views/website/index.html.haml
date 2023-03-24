@@ -1,6 +1,6 @@
 - content_for :head do
   -# FaceBook and twitter js
-  %script{:src => "https://platform.twitter.com/widgets.js", :type => "text/javascript"}
+  %script{ src: "https://platform.twitter.com/widgets.js", type: "text/javascript" }
 
   -# Facebook open graph tags
   %meta{ property: "og:title",        content: "Swing Out London - Lindy Hop Listings" }/
@@ -13,7 +13,7 @@
   %meta{ property: "fb:admins",       content: "dgmstuart" }/
 
 - content_for :navigation do
-  = render partial: "website/listing_navigation", locals: { ad: @ad }
+  = render "website/listing_navigation", ad: @ad
 
 - content_for :page_content do
   %p#caveat
@@ -24,7 +24,7 @@
     %h2
       %em Learn!
       Weekly Classes
-    = render :partial => "events/class_listings"
+    = render "events/class_listings"
   #social_dances
     = socialsh2(@socials_dates) do
       %em Dance!
@@ -33,6 +33,6 @@
     %p#key
       N.B. Infrequent events are prefixed with a
       = image_tag "highlight_icon.png", alt: "asterisk"
-    = render :partial => "events/social_listings"
+    = render "events/social_listings"
 
     %p.note Swing Out London lists the next 14 days of events
