@@ -4,7 +4,7 @@
     = link_to "Swing Dance classes", {:anchor => "classes_today"}, {:rel =>"subsection"}
     in London which teach
     = succeed "," do
-      = link_to "Lindy Hop", {:action => "about", :anchor=> "about_lindy"}, {:rel =>"subsection"}
+      = link_to "Lindy Hop", about_path(anchor: "about_lindy"), {:rel =>"subsection"}
     Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
   %p
     It also lists all of the opportunities for
@@ -16,11 +16,11 @@
     If you think something is missing or incorrect please email
     = mail_to CONTACT_EMAIL, "#{CONTACT_EMAIL}", :subject => "Swing Out London"
     (but check the
-    =link_to "listings policy", :action => "listings_policy"
+    =link_to "listings policy", listings_policy_path
     first)
 
 #soldn_on_the_web
-  = render partial: 'advert', locals: { advert: ad }
+  = render partial: 'website/advert', locals: { advert: ad }
 
   - # Foo for the facebook like button:
   #fb-root

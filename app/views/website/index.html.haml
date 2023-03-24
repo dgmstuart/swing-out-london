@@ -13,7 +13,7 @@
   %meta{ property: "fb:admins",       content: "dgmstuart" }/
 
 - content_for :navigation do
-  = render partial: "listing_navigation", locals: { ad: @ad }
+  = render partial: "website/listing_navigation", locals: { ad: @ad }
 
 - content_for :page_content do
   %p#caveat
