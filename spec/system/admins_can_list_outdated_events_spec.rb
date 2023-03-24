@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Outdated events' do
+RSpec.describe 'Admins can see outdated events' do
   it 'when there are no outdated events' do
     skip_login
     visit 'outdated'
