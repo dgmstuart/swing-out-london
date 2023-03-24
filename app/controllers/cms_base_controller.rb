@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-class CmsBaseController < ApplicationController
+class CmsBaseController < ActionController::Base # rubocop:disable Rails/ApplicationController
   before_action :authenticate
+  before_action :set_controller_and_action_name
 
   layout 'cms'
 
@@ -24,5 +25,10 @@ class CmsBaseController < ApplicationController
 
   def login_session
     LoginSession.new(request)
+  end
+
+  def set_controller_and_action_name
+    @controller_name = controller_name
+    @action_name     = action_name
   end
 end
