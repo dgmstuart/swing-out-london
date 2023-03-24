@@ -18,7 +18,6 @@
     <%= yield :listings %>
   </div>
 
-  <%= yield :scripts %>
   <%= javascript_include_tag('application_map') %>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>
 
