@@ -13,9 +13,8 @@ class WebsiteController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
     @today = today
-
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
-    @socials_dates = Event.socials_dates(@today)
+    @socials_dates = Event.socials_dates(today)
 
     @ad = Advert.current
   end
