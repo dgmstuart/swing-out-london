@@ -90,6 +90,13 @@ class Event < ApplicationRecord
       swing_date.events.socials
     end
 
+    def less_frequent_socials_on(date)
+      swing_date = SwingDate.find_by(date:)
+      return none unless swing_date
+
+      swing_date.events.socials.less_frequent
+    end
+
     def cancelled_on_date(date)
       swing_date = SwingDate.find_by(date:)
       return [] unless swing_date
@@ -116,6 +123,7 @@ class Event < ApplicationRecord
   scope :socials, -> { where(has_social: true) }
   scope :weekly, -> { where(frequency: 1) }
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
+  scope :less_frequent, -> { where(frequency: 0).or(where(frequency: 4..52)) }
 
   scope :gigs, -> { where(event_type: "gig") }
   scope :non_gigs, -> { where.not(event_type: "gig") }
