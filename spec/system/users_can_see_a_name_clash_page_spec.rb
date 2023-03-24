@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Name clash page' do
+RSpec.describe 'Users can see a name clash page' do
   it 'displays a list of social names' do
     given_a_social
     when_i_visit_the_name_clash_page

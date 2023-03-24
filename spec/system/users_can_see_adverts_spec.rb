@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Advertising' do
+RSpec.describe 'Users can see adverts' do
   it 'when no advert is enabled' do
     ClimateControl.modify(
       ADVERT_ENABLED: 'false'

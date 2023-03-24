@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Legal policy pages' do
+RSpec.describe 'Users can see legal policy pages' do
   it 'Shows a privacy policy page' do
     visit 'privacy'
 
