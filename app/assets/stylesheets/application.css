@@ -8,4 +8,5 @@
 *= require website/info
 *= require website/login
 *= require website/map
+*= require name_clash
 */
