@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <%= render "layouts/google_analytics" %>
+    <title>
+      Swing Out London - Organiser Edit page
+    </title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="initial-scale=1" name="viewport"/>
+    <meta content="Duncan Stuart" name="author"/>
+    <link href="humans.txt" rel="author"></link>
+    <meta name="robots" content="noindex">
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag 'application_cms', media: "screen" %>
+  </head>
+  <body>
+    <%= yield %>
+    <%= javascript_include_tag :application %>
+    <%= javascript_include_tag :application_cms %>
+  </body>
+</html>
