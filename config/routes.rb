@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'website#index'
+  root to: 'listings#index'
 
   resources :organisers do
     resources :events
@@ -26,9 +26,9 @@ Rails.application.routes.draw do
   get 'name_clash' => 'name_clash#index'
   get 'outdated' => 'outdated#index'
 
-  get 'about' => 'website#about'
-  get 'listings_policy' => 'website#listings_policy'
-  get 'privacy' => 'website#privacy'
+  get 'about' => 'info#about'
+  get 'listings_policy' => 'info#listings_policy'
+  get 'privacy' => 'info#privacy'
 
   get 'login' => 'sessions#new'
   get 'auth/facebook/callback' => 'sessions#create'

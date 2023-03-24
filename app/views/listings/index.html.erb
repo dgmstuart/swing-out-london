@@ -11,7 +11,14 @@
 <% end %>
 
 <% content_for :navigation do %>
-  <%= render "website/listing_navigation", ad: @ad %>
+  <p id="last_updated_ago">
+    Last updated
+    <time class="timeago" datetime="<%= @last_updated_datetime.getutc.iso8601 %>">
+      at <%= @last_updated_time %> on <%= @last_updated_date %>
+    </time>
+  </p>
+
+  <%= render "navigation", ad: @ad %>
 <% end %>
 
 <% content_for :page_content do %>
@@ -25,7 +32,7 @@
       <em>Learn!</em>
       Weekly Classes
     </h2>
-    <%= render "events/class_listings" %>
+    <%= render "class_listings" %>
   </div>
 
   <div id="social_dances">
@@ -37,7 +44,7 @@
       N.B. Infrequent events are prefixed with a
       <%= image_tag "highlight_icon.png", alt: "asterisk" %>
     </p>
-    <%= render "events/social_listings" %>
+    <%= render "social_listings" %>
     <p class="note">Swing Out London lists the next 14 days of events</p>
   </div>
 <% end %>
