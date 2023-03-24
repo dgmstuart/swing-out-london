@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <title>
+      Swing Out London - Admin
+    </title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="initial-scale=1" name="viewport"/>
+    <meta content="Duncan Stuart" name="author"/>
+    <link href="humans.txt" rel="author"></link>
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag 'application_cms', media: "screen" %>
+  </head>
+  <body class="<%= "#{@controller_name} #{@action_name}" %>" >
+    <%= render "layouts/cms/admin_bar" %>
+    <%= yield %>
+    <%= javascript_include_tag :application %>
+    <%= javascript_include_tag :application_cms %>
+  </body>
+</html>
