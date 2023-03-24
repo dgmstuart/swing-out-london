@@ -40,3 +40,5 @@ function initClassStyleRadio() {
 window.addEventListener('load', (event) => {
   initClassStyleRadio();
 })
+
+import "./controllers"
