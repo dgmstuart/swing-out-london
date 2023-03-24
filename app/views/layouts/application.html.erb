@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB">
   <head>
-    <%= yield(:analytics) %>
+    <%= render "layouts/google_analytics" %>
     <title>
       <%= content_for?(:title) ? yield(:title) : "Swing Out London - listings of Lindy Hop swing dance classes and socials" %>
     </title>
@@ -13,7 +13,7 @@
     <%= csrf_meta_tag %>
     <%= javascript_include_tag :application %>
     <%= yield :script %>
-    <%= yield :stylesheet %>
+    <%= stylesheet_link_tag 'application', media: "screen" %>
     <meta content="none" name="msapplication-config"/>
     <%= yield :head %>
   </head>

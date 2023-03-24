@@ -1,9 +1,3 @@
-- content_for :analytics do
-  = render "layouts/google_analytics"
-
-- content_for :stylesheet do
-  = stylesheet_link_tag 'application', media: "screen"
-
 - content_for :content do
 
   - if ENV['BANNER_HEAD'].present?
