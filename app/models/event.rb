@@ -132,8 +132,8 @@ class Event < ApplicationRecord
   scope :gigs, -> { where(event_type: 'gig') }
   scope :non_gigs, -> { where.not(event_type: 'gig') }
 
-  scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.local_today) }
-  scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.local_today) }
+  scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.current) }
+  scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.current) }
   scope :active_on, ->(date) { where('(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)', date, date) }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
@@ -228,7 +228,7 @@ class Event < ApplicationRecord
   # Given an array of dates, return only those in the future
   def filter_future(input_dates)
     # TODO: - should be able to simply replace this with some variant of ".future?", but need to test
-    input_dates.select { |d| d >= Date.local_today }
+    input_dates.select { |d| d >= Date.current }
   end
 
   public
@@ -286,7 +286,7 @@ class Event < ApplicationRecord
   # COMPARISON METHODS #
 
   # Are all the dates for the event in the past?
-  def out_of_date(comparison_date = Date.local_today)
+  def out_of_date(comparison_date = Date.current)
     return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
     return false if last_date
     return false unless expecting_a_date?(comparison_date)
@@ -296,7 +296,7 @@ class Event < ApplicationRecord
 
   # Does an event not have any dates not already shown in the socials list?
   def near_out_of_date
-    out_of_date Date.local_today + INITIAL_SOCIALS
+    out_of_date Date.current + INITIAL_SOCIALS
   end
 
   # What date is the next event expected on? (based on the last known date)
@@ -316,21 +316,21 @@ class Event < ApplicationRecord
   def new?
     return false if first_date.nil?
 
-    first_date > Date.local_today - CONSIDERED_NEW_FOR
+    first_date > Date.current - CONSIDERED_NEW_FOR
   end
 
   # Has the first instance of the event happened yet?
   def started?
     return false if first_date.nil?
 
-    first_date < Date.local_today
+    first_date < Date.current
   end
 
   # Has the last instance of the event happened?
   def ended?
     return false if last_date.nil?
 
-    last_date < Date.local_today
+    last_date < Date.current
   end
 
   def one_off?
@@ -371,12 +371,12 @@ class Event < ApplicationRecord
   ###########
 
   def archive!
-    return false if !last_date.nil? && last_date < Date.local_today
+    return false if !last_date.nil? && last_date < Date.current
 
     # If there's already a last_date in the past, then the event should already be archived!
 
     self[:last_date] = if weekly?
-                         Date.local_today.prev_occurring(day.downcase.to_sym)
+                         Date.current.prev_occurring(day.downcase.to_sym)
                        elsif dates.nil?
                          Date.new # Earliest possible ruby date
                        else

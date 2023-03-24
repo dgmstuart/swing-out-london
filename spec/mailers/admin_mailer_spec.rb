@@ -24,8 +24,8 @@ describe AdminMailer do
 
     context 'when there are outdated and nearly outdated events' do
       it 'renders the headers' do
-        create(:event, id: 1, frequency: 4, dates: [Date.local_today - 4.weeks])
-        create(:event, id: 2, frequency: 4, dates: [Date.local_today + 1.week])
+        create(:event, id: 1, frequency: 4, dates: [Date.current - 4.weeks])
+        create(:event, id: 2, frequency: 4, dates: [Date.current + 1.week])
         mail = described_class.outdated
 
         aggregate_failures do
@@ -36,8 +36,8 @@ describe AdminMailer do
       end
 
       it 'includes links to the edit pages of those events' do
-        outdated_event = create(:event, id: 1, frequency: 4, dates: [Date.local_today - 4.weeks])
-        nearly_outdated_event = create(:event, id: 2, frequency: 4, dates: [Date.local_today + 1.week])
+        outdated_event = create(:event, id: 1, frequency: 4, dates: [Date.current - 4.weeks])
+        nearly_outdated_event = create(:event, id: 2, frequency: 4, dates: [Date.current + 1.week])
         mail = described_class.outdated
 
         aggregate_failures do
@@ -47,8 +47,8 @@ describe AdminMailer do
       end
 
       it 'includes links to the urls of those events' do
-        outdated_event = create(:event, id: 1, frequency: 4, dates: [Date.local_today - 4.weeks])
-        nearly_outdated_event = create(:event, id: 2, frequency: 4, dates: [Date.local_today + 1.week])
+        outdated_event = create(:event, id: 1, frequency: 4, dates: [Date.current - 4.weeks])
+        nearly_outdated_event = create(:event, id: 2, frequency: 4, dates: [Date.current + 1.week])
         mail = described_class.outdated
 
         aggregate_failures do
@@ -58,16 +58,16 @@ describe AdminMailer do
       end
 
       it 'includes the expected dates of out-of-date events' do
-        create(:event, id: 1, frequency: 4, dates: [Date.local_today - 4.weeks])
-        create(:event, id: 2, frequency: 4, dates: [Date.local_today + 1.week])
+        create(:event, id: 1, frequency: 4, dates: [Date.current - 4.weeks])
+        create(:event, id: 2, frequency: 4, dates: [Date.current + 1.week])
         mail = described_class.outdated
 
-        expect(mail.body.encoded).to match Date.local_today.to_s(:listing_date)
+        expect(mail.body.encoded).to match Date.current.to_s(:listing_date)
       end
 
       it 'includes headers for the two types of outdatedness' do
-        create(:event, id: 1, frequency: 4, dates: [Date.local_today - 4.weeks])
-        create(:event, id: 2, frequency: 4, dates: [Date.local_today + 1.week])
+        create(:event, id: 1, frequency: 4, dates: [Date.current - 4.weeks])
+        create(:event, id: 2, frequency: 4, dates: [Date.current + 1.week])
         mail = described_class.outdated
 
         aggregate_failures do

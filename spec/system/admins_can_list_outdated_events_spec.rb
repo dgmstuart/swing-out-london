@@ -11,9 +11,9 @@ RSpec.describe 'Admins can see outdated events' do
 
   it 'when there are outdated and nearly outdated events' do
     outdated_event = create(:event, title: 'Corner', id: 1, frequency: 4,
-                                    dates: [Date.local_today - 4.weeks])
+                                    dates: [Date.current - 4.weeks])
     nearly_outdated_event = create(:event, title: 'Jam', id: 2, frequency: 4,
-                                           dates: [Date.local_today + 1.week])
+                                           dates: [Date.current + 1.week])
 
     skip_login
     visit 'outdated'
@@ -26,7 +26,7 @@ RSpec.describe 'Admins can see outdated events' do
     expect(page).to have_link 'link', href: outdated_event.url
     expect(page).to have_link 'link', href: nearly_outdated_event.url
 
-    expect(page).to have_content Date.local_today.to_s(:listing_date)
+    expect(page).to have_content Date.current.to_s(:listing_date)
 
     expect(page).to have_content('Out of date events')
     expect(page).to have_content('Nearly out of date events')
