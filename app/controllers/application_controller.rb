@@ -2,12 +2,7 @@
 
 class ApplicationController < ActionController::Base
   def today
-    @today = if Date.local_today.midnight > Time.local_now.ago(4.hours)
-               # Would be great to just use 4.hours.ago, but timezones would screw it up??
-               Date.local_yesterday
-             else
-               Date.local_today
-             end
+    @today = SOLDNTime.today
   end
 
   def not_found
