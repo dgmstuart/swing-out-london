@@ -7,6 +7,5 @@ DAYNAMES = Date::DAYNAMES.to_a[1..6] << Date::DAYNAMES.to_a[0]
 INITIAL_SOCIALS = 14
 
 CONTACT_EMAIL = 'swingoutlondon@gmail.com'
-TWITTER_URL   = 'https://www.twitter.com/swingoutlondon'
 
 Rails.application.config.x.donate_link = ENV['DONATE_LINK']
