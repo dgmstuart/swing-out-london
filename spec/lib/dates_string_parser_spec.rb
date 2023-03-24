@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'spec_helper'
+require 'lib/dates_string_parser'
+require 'active_support/core_ext/string/conversions'
 
 RSpec.describe DatesStringParser do
   describe '#parse' do
