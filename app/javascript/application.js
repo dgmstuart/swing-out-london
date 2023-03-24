@@ -6,12 +6,6 @@ global.jQuery = require('jquery');
 var $ = global.jQuery;
 window.$ = $;
 
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-
 require('../../vendor/javascript/jquery.sieve')
 $(document).ready(function() {
   $("ul.sieve").sieve({ itemSelector: "li" });
