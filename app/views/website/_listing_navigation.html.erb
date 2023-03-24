@@ -1,0 +1,50 @@
+<div id="site_intro">
+  <p>
+    Swing Out London lists all of the regular
+    <%= link_to "Swing Dance classes", {anchor: "classes_today"}, {rel: "subsection"} %>
+    in London which teach
+    <%= link_to "Lindy Hop", about_path(anchor: "about_lindy"), {rel: "subsection"} %>,
+    Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
+  </p>
+  <p>
+    It also lists all of the opportunities for
+    <%= link_to "social dancing", {anchor: "socials_today"}, {rel: "subsection"} %>
+    to vintage jazz music.
+  </p>
+</div>
+
+<div id="note">
+  <p>
+    If you think something is missing or incorrect please email
+    <%= mail_to CONTACT_EMAIL, "#{CONTACT_EMAIL}", subject: "Swing Out London" %>
+    (but check the
+    <%= link_to "listings policy", listings_policy_path %>
+    first)
+  </p>
+</div>
+
+<div id="soldn_on_the_web">
+  <%= render 'website/advert', advert: ad %>
+
+  <% # Foo for the facebook like button: %>
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <div id="social_links">
+    <%= link_to "Like Swing Out London on Facebook",
+      "https://www.swingoutlondon.co.uk",
+      class: "fb-like",
+      data: { action: "like", share: "true", layout: "button_count", font: "trebuchet ms" }
+    %>
+  </div>
+</div>
+
+<%= render 'shared/header_navigation' %>
