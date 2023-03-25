@@ -71,15 +71,16 @@ class Event < ApplicationRecord
     end
 
     def socials_dates(start_date, venue = nil)
-      # build up an array of events occuring on each date
-      output = []
+      dates = listing_dates(start_date)
 
-      listing_dates(start_date).each do |date|
-        socials_on_date = socials_on_date(date, venue)
-        output << [date, socials_on_date, cancelled_events_on_date(date)] unless socials_on_date.empty?
-      end
-
-      output
+      events_finder =
+        if venue
+          ->(date) { socials_on_date(date, venue) }
+        else
+          ->(date) { socials_on_date(date) }
+        end
+      cancellations_finder = ->(date) { cancelled_events_on_date(date) }
+      SocialsListings.new(events_finder, cancellations_finder).build(dates)
     end
 
     def socials_on_date(date, venue = nil)
