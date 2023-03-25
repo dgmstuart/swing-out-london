@@ -48,6 +48,20 @@ describe Event do
         expect(result).to eq([["10 June 1935".to_date, [event], []]])
       end
 
+      it "returns the correct array when that social has a cancellation" do
+        event = create(:intermittent_social, dates: ["10 June 1935".to_date, "12 June 1935".to_date])
+        event.update!(cancellations: ["12 June 1935".to_date])
+
+        result = described_class.socials_dates("1 June 1935".to_date)
+
+        expect(result).to eq(
+          [
+            ["10 June 1935".to_date, [event], []],
+            ["12 June 1935".to_date, [event], [event.id]]
+          ]
+        )
+      end
+
       it "returns the correct array when that social has two dates in the future" do
         event = create(:intermittent_social, dates: ["17 June 1935".to_date, "10 June 1935".to_date])
 
@@ -85,15 +99,27 @@ describe Event do
       end
     end
 
-    pending "add more tests for socials_dates which return multiple events"
-    pending "add tests including weekly events!"
+    context "when there is a weekly event and two occasional events on the same day" do
+      it "returns an array with both events on that day, sorted alphabetically" do
+        roseland = create(:social, title: "Roseland Tuesdays", frequency: 1, day: "Tuesday")
+        battle = create(:social, title: "Battle of the bands", frequency: 0, dates: ["May 11 1937".to_date])
+        stomping = create(:social, title: "Stomping at the Cotton club", frequency: 0, dates: ["May 18 1937".to_date])
+
+        result = described_class.socials_dates("May 10 1937".to_date)
+
+        expect(result).to eq(
+          [
+            ["May 11 1937".to_date, [battle, roseland], []],
+            ["May 18 1937".to_date, [roseland, stomping], []]
+          ]
+        )
+      end
+    end
 
     context "when things are complex" do
       def date(offset)
         Time.zone.today + offset
       end
-
-      pending "do more complex examples!"
 
       it "returns the correct array with a bunch of classes and socials" do # rubocop:disable RSpec/ExampleLength
         # create one class for each day, starting on monday. None of these should be included
