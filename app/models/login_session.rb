@@ -7,7 +7,7 @@ class LoginSession
   end
 
   def log_in!(auth_id:, name:, token:)
-    request.session[:user] = { 'auth_id' => auth_id, 'name' => name, 'token' => token }
+    request.session[:user] = { "auth_id" => auth_id, "name" => name, "token" => token }
     logger.info("Logged in as auth id #{auth_id}")
   end
 
@@ -39,15 +39,15 @@ class LoginSession
     end
 
     def name
-      user.fetch('name')
+      user.fetch("name")
     end
 
     def auth_id
-      user.fetch('auth_id')
+      user.fetch("auth_id")
     end
 
     def token
-      user.fetch('token')
+      user.fetch("token")
     end
 
     private
@@ -61,15 +61,15 @@ class LoginSession
     end
 
     def name
-      'Guest'
+      "Guest"
     end
 
     def auth_id
-      'NO ID'
+      "NO ID"
     end
 
     def token
-      'NO TOKEN'
+      "NO TOKEN"
     end
   end
 end

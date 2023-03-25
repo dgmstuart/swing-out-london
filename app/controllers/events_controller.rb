@@ -2,9 +2,9 @@
 
 class EventsController < CmsBaseController
   def index
-    @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order('frequency, updated_at')
-    @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order('title')
-    @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser).order('title')
+    @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order("frequency, updated_at")
+    @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order("title")
+    @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser).order("title")
   end
 
   def show
@@ -27,10 +27,10 @@ class EventsController < CmsBaseController
     @event = Event.new(event_params)
 
     if @event.save
-      flash[:notice] = t('flash.success', model: 'Event', action: 'created')
+      flash[:notice] = t("flash.success", model: "Event", action: "created")
       redirect_to(@event)
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -41,10 +41,10 @@ class EventsController < CmsBaseController
     update_params = event_params.merge!(audit_comment)
 
     if @event.update(update_params)
-      flash[:notice] = t('flash.success', model: 'Event', action: 'updated')
+      flash[:notice] = t("flash.success", model: "Event", action: "updated")
       redirect_to(@event)
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

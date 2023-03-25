@@ -11,18 +11,18 @@ class AuditLogsController < ApplicationController
     end
   end
 
-  require 'rss'
+  require "rss"
 
   def audits_rss(audits) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    RSS::Maker.make('atom') do |maker|
-      maker.channel.author = 'Swing Out London'
+    RSS::Maker.make("atom") do |maker|
+      maker.channel.author = "Swing Out London"
       maker.channel.updated = Audit.maximum(:created_at).iso8601
-      maker.channel.id = 'https://www.swingoutlondon.com/'
+      maker.channel.id = "https://www.swingoutlondon.com/"
       link = maker.channel.links.new_link
-      link.href = 'https://www.swingoutlondon.com/audit_log.atom'
-      link.rel = 'self'
-      maker.channel.title = 'Swing Out London Audit Log'
-      maker.channel.description = 'Audit Log for Swing Out London'
+      link.href = "https://www.swingoutlondon.com/audit_log.atom"
+      link.rel = "self"
+      maker.channel.title = "Swing Out London Audit Log"
+      maker.channel.description = "Audit Log for Swing Out London"
 
       audits.each do |audit|
         editor = Editor.build(audit)
@@ -40,7 +40,7 @@ class AuditLogsController < ApplicationController
   end
 
   def audit_title(action, record)
-    if action == 'destroy'
+    if action == "destroy"
       "Delete #{record.class} (id: #{record.id})"
     else
       "#{action.capitalize} #{auditable_name(record)} (id: #{record.id})"
@@ -49,23 +49,23 @@ class AuditLogsController < ApplicationController
 
   def record(class_name, id)
     {
-      'Event' => -> { Event.find_by(id: id) || Event.new(id: id) },
-      'Venue' => -> { Venue.find_by(id: id) || Venue.new(id: id) },
-      'Organiser' => -> { Organiser.find_by(id: id) || Organiser.find(id: id) }
+      "Event" => -> { Event.find_by(id: id) || Event.new(id: id) },
+      "Venue" => -> { Venue.find_by(id: id) || Venue.new(id: id) },
+      "Organiser" => -> { Organiser.find_by(id: id) || Organiser.find(id: id) }
     }.fetch(class_name).call
   end
 
   def auditable_name(record)
     {
-      'Event' => -> { auditable_event_name(record) },
-      'Venue' => -> { "Venue: \"#{record.name}\"" },
-      'Organiser' => -> { "Organiser: \"#{record.name}\"" }
+      "Event" => -> { auditable_event_name(record) },
+      "Venue" => -> { "Venue: \"#{record.name}\"" },
+      "Organiser" => -> { "Organiser: \"#{record.name}\"" }
     }.fetch(record.class.name).call
   end
 
   def auditable_event_name(record)
     if record.title.blank? && record.has_class? && !record.has_social?
-      'Class'
+      "Class"
     else
       "Event: \"#{record.title}\""
     end
@@ -73,13 +73,13 @@ class AuditLogsController < ApplicationController
 
   def audit_show_link(record)
     {
-      'Event' => -> { event_url(record) },
-      'Venue' => -> { venue_url(record) },
-      'Organiser' => -> { organiser_url(record) }
+      "Event" => -> { event_url(record) },
+      "Venue" => -> { venue_url(record) },
+      "Organiser" => -> { organiser_url(record) }
     }.fetch(record.class.name).call
   end
 
   def authenticate
-    head :unauthorized unless params[:password] == ENV.fetch('AUDIT_LOG_PASSWORD')
+    head :unauthorized unless params[:password] == ENV.fetch("AUDIT_LOG_PASSWORD")
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DatePrinter
-  def initialize(separator: ',', format: :uk_date)
+  def initialize(separator: ",", format: :uk_date)
     @separator = separator
     @format = format
   end

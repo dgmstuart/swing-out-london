@@ -33,7 +33,7 @@ module Maps
     end
 
     def highlighted_marker_icon
-      'https://maps.google.com/mapfiles/marker_purple.png'
+      "https://maps.google.com/mapfiles/marker_purple.png"
     end
 
     def info_window_content(venue)

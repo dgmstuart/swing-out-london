@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'faker/facebook'
+require "faker/facebook"
 
 module Controller
   module AuthHelper

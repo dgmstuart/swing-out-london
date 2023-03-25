@@ -8,8 +8,8 @@ module Maps
           return unless date_string
 
           case date_string
-          when 'today'      then today
-          when 'tomorrow'   then today + 1
+          when "today"      then today
+          when "tomorrow"   then today + 1
           else
             safe_parse(date_string)
           end

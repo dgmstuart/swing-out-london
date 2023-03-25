@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'webdrivers/chromedriver'
+require "webdrivers/chromedriver"
 
 module System
   module Drivers
