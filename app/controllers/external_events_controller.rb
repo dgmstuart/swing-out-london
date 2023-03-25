@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExternalEventsController < CmsBaseController
-  layout 'organiser'
+  layout "organiser"
 
   def edit
     @event = Event.find_by!(organiser_token: params[:id])
@@ -14,10 +14,10 @@ class ExternalEventsController < CmsBaseController
     update_params = event_params.merge!(audit_comment)
 
     if @event.update(update_params)
-      flash[:success] = t('flash.success', model: 'Event', action: 'updated')
+      flash[:success] = t("flash.success", model: "Event", action: "updated")
       redirect_to edit_external_event_path(@event.organiser_token)
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

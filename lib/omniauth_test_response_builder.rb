@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'faker'
+require "faker"
 
 class OmniauthTestResponseBuilder
   def initialize(hash_builder: OmniAuth::AuthHash, mock_auth_config: OmniAuth.config.mock_auth)
@@ -25,21 +25,21 @@ class OmniauthTestResponseBuilder
 
   def facebook_auth_hash(id:, name:, token:)
     hash_builder.new(
-      'provider' => 'facebook',
-      'uid' => id,
-      'info' => {
-        'name' => name,
-        'image' => "http://graph.facebook.com/v2.10/#{id}/picture"
+      "provider" => "facebook",
+      "uid" => id,
+      "info" => {
+        "name" => name,
+        "image" => "http://graph.facebook.com/v2.10/#{id}/picture"
       },
-      'credentials' => {
-        'token' => token,
-        'expires_at' => 1546086985,
-        'expires' => true
+      "credentials" => {
+        "token" => token,
+        "expires_at" => 1546086985,
+        "expires" => true
       },
-      'extra' => {
-        'raw_info' => {
-          'name' => name,
-          'id' => id
+      "extra" => {
+        "raw_info" => {
+          "name" => name,
+          "id" => id
         }
       }
     )

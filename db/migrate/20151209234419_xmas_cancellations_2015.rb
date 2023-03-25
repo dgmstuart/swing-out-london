@@ -3,11 +3,11 @@
 class XmasCancellations2015 < ActiveRecord::Migration
   def up
     CSV.parse(DATES_CSV, headers: true) do |row|
-      event = Event.find(row['id'])
+      event = Event.find(row["id"])
       puts "processing #{event.url}"
-      event.url = row['New Url']
+      event.url = row["New Url"]
       puts "old cancellations = #{event.cancellations}"
-      event.cancellation_array = row['Cancelled dates']
+      event.cancellation_array = row["Cancelled dates"]
       puts "new cancellations = #{event.cancellations}"
       event.save
     end

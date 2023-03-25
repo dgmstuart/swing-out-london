@@ -14,11 +14,11 @@ class Editor
     end
 
     def name
-      user.fetch('name')
+      user.fetch("name")
     end
 
     def auth_id
-      user.fetch('auth_id')
+      user.fetch("auth_id")
     end
 
     private
@@ -28,21 +28,21 @@ class Editor
 
   class UnknownEditor
     def name
-      'Unknown name'
+      "Unknown name"
     end
 
     def auth_id
-      'Unknown auth id'
+      "Unknown auth id"
     end
   end
 
   class MissingEditor
     def name
-      'Missing name'
+      "Missing name"
     end
 
     def auth_id
-      'Missing auth id'
+      "Missing auth id"
     end
   end
 end

@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   def not_found
-    head :not_found, 'content_type' => 'text/plain'
+    head :not_found, "content_type" => "text/plain"
   end
 
   protected

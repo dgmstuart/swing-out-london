@@ -15,8 +15,8 @@ module Maps
     end
 
     def address_lines
-      venue.address.split(',').map(&:strip).tap do |lines|
-        lines.delete('London')
+      venue.address.split(",").map(&:strip).tap do |lines|
+        lines.delete("London")
       end
     end
 

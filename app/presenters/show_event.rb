@@ -3,7 +3,7 @@
 class ShowEvent
   def initialize(event)
     @event = event
-    @date_printer = DatePrinter.new(separator: ', ')
+    @date_printer = DatePrinter.new(separator: ", ")
   end
 
   def anchor
@@ -11,16 +11,16 @@ class ShowEvent
   end
 
   def cancellations
-    return 'None' if event.cancellations.empty?
+    return "None" if event.cancellations.empty?
 
     date_printer.print(event.cancellations)
   end
 
   def dates
     if event.weekly?
-      'Weekly'
+      "Weekly"
     elsif event.dates.empty?
-      'Unknown'
+      "Unknown"
     else
       date_printer.print(event.dates)
     end
@@ -36,9 +36,9 @@ class ShowEvent
 
   def event_type
     activities = []
-    activities << 'social' if event.has_social?
-    activities << 'taster' if event.has_taster?
-    activities << 'class' if event.has_class?
+    activities << "social" if event.has_social?
+    activities << "taster" if event.has_taster?
+    activities << "class" if event.has_class?
     "#{event.event_type.humanize}, with #{activities.join(' and ')}"
   end
 
@@ -48,15 +48,15 @@ class ShowEvent
 
   def frequency # rubocop:disable Metrics/MethodLength
     case event.frequency
-    when 0 then 'One-off or intermittent'
-    when 1 then 'Weekly'
-    when 2 then 'Fortnightly'
-    when 4..5 then 'Monthly'
-    when 8 then 'Bi-Monthly'
-    when 26 then 'Twice-yearly'
-    when 52 then 'Yearly'
+    when 0 then "One-off or intermittent"
+    when 1 then "Weekly"
+    when 2 then "Fortnightly"
+    when 4..5 then "Monthly"
+    when 8 then "Bi-Monthly"
+    when 26 then "Twice-yearly"
+    when 52 then "Yearly"
     when 1..100 then "Every #{event.frequency} weeks"
-    else 'Unknown'
+    else "Unknown"
     end
   end
 
@@ -64,9 +64,9 @@ class ShowEvent
     return if event.has_class? || event.has_social?
 
     if event.has_taster?
-      'This event has a taster but no class or social, so it won\'t show up in the listings'
+      "This event has a taster but no class or social, so it won't show up in the listings"
     else
-      'This event doesn\'t have class or social, so it won\'t show up in the listings'
+      "This event doesn't have class or social, so it won't show up in the listings"
     end
   end
 

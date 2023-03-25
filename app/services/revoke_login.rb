@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'facebook_graph_api/api'
+require "facebook_graph_api/api"
 
 class RevokeLogin
   def initialize(

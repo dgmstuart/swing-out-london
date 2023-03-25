@@ -22,10 +22,10 @@ class OrganisersController < CmsBaseController
     @organiser = Organiser.new(organiser_params)
 
     if @organiser.save
-      flash[:notice] = t('flash.success', model: 'Organiser', action: 'created')
+      flash[:notice] = t("flash.success", model: "Organiser", action: "created")
       redirect_to(@organiser)
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -33,10 +33,10 @@ class OrganisersController < CmsBaseController
     @organiser = Organiser.find(params[:id])
 
     if @organiser.update(organiser_params)
-      flash[:notice] = t('flash.success', model: 'Organiser', action: 'updated')
+      flash[:notice] = t("flash.success", model: "Organiser", action: "updated")
       redirect_to(@organiser)
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 
