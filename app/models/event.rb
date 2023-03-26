@@ -79,7 +79,7 @@ class Event < ApplicationRecord
         else
           ->(date) { socials_on_date(date) }
         end
-      cancellations_finder = ->(date) { cancelled_events_on_date(date) }
+      cancellations_finder = ->(date) { cancelled_on_date(date) }
       SocialsListings.new(events_finder, cancellations_finder).build(dates)
     end
 
@@ -98,7 +98,7 @@ class Event < ApplicationRecord
       socials_on_that_date.sort_by(&:title)
     end
 
-    def cancelled_events_on_date(date)
+    def cancelled_on_date(date)
       swing_date = SwingDate.find_by(date:)
       return [] unless swing_date
 
