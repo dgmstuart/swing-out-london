@@ -330,6 +330,8 @@ describe Event do
   end
 
   describe "(validations)" do
+    subject { build(:event) }
+
     it "is invalid if it has neither a class nor a social nor a taster" do
       expect(build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
     end
