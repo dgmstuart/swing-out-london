@@ -176,16 +176,6 @@ describe Event do
 
       expect(socials).to be_empty
     end
-
-    it "sorts the results by title" do
-      date = Date.current.next_occurring(:thursday)
-      create(:intermittent_social, dates: [date], title: "Casablanca")
-      create(:weekly_social, day: "Thursday", title: "Alhambra")
-      create(:intermittent_social, dates: [date], title: "Boogaloo")
-      socials = described_class.socials_on_date(date)
-
-      expect(socials.pluck(:title)).to eq %w[Alhambra Boogaloo Casablanca]
-    end
   end
 
   # ultimately do away with date_array and test .dates= instead"

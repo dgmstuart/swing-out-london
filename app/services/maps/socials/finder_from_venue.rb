@@ -9,11 +9,14 @@ module Maps
       end
 
       def find(venue)
-        if date
-          [[date, Event.socials_on_date(date, venue), Event.cancelled_on_date(date)]]
-        else
-          Event.socials_dates(today, venue)
-        end
+        dates =
+          if date
+            [date]
+          else
+            Event.listing_dates(today)
+          end
+
+        SocialsListings.for_venue(venue).build(dates)
       end
 
       private

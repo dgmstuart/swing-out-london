@@ -70,32 +70,33 @@ class Event < ApplicationRecord
       maximum(:updated_at)
     end
 
-    def socials_dates(start_date, venue = nil)
+    def socials_dates(start_date)
       dates = listing_dates(start_date)
 
-      events_finder =
-        if venue
-          ->(date) { socials_on_date(date, venue) }
-        else
-          ->(date) { socials_on_date(date) }
-        end
-      cancellations_finder = ->(date) { cancelled_on_date(date) }
-      SocialsListings.new(events_finder, cancellations_finder).build(dates)
+      SocialsListings.new.build(dates)
     end
 
-    def socials_on_date(date, venue = nil)
+    def socials_on_date(date)
+      result = weekly_socials_on(date).includes(:venue)
+      result += non_weekly_socials_on(date).includes(:venue)
+      result
+    end
+
+    def socials_on_date_for_venue(date, venue)
+      result = weekly_socials_on(date).where(venue_id: venue.id)
+      result += non_weekly_socials_on(date).where(venue_id: venue.id)
+      result
+    end
+
+    def weekly_socials_on(date)
+      weekly.socials.active_on(date).on_same_day_of_week(date)
+    end
+
+    def non_weekly_socials_on(date)
       swing_date = SwingDate.find_by(date:)
+      return none unless swing_date
 
-      weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
-      if venue
-        socials_on_that_date = weekly_socials.where(venue_id: venue.id)
-        socials_on_that_date += swing_date.events.socials.where(venue_id: venue.id) if swing_date
-      else
-        socials_on_that_date = weekly_socials.includes(:venue)
-        socials_on_that_date += swing_date.events.socials.includes(:venue) if swing_date
-      end
-
-      socials_on_that_date.sort_by(&:title)
+      swing_date.events.socials
     end
 
     def cancelled_on_date(date)
