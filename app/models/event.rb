@@ -99,11 +99,6 @@ class Event < ApplicationRecord
 
       swing_date.cancelled_events.pluck :id
     end
-
-    def listing_dates(start_date)
-      end_date = start_date + (INITIAL_SOCIALS - 1)
-      (start_date..end_date).to_a
-    end
   end
 
   # ----- #

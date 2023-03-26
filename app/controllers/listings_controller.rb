@@ -12,7 +12,7 @@ class ListingsController < ApplicationController
 
     @today = today
     @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
-    dates = Event.listing_dates(today)
+    dates = SOLDNTime.listing_dates(today)
     @socials_dates = SocialsListings.new.build(dates)
 
     @ad = Advert.current

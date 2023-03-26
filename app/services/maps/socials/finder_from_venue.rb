@@ -13,7 +13,7 @@ module Maps
           if date
             [date]
           else
-            Event.listing_dates(today)
+            SOLDNTime.listing_dates(today)
           end
 
         SocialsListings.for_venue(venue).build(dates)

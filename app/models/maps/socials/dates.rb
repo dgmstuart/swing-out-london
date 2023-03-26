@@ -11,7 +11,7 @@ module Maps
       end
 
       def listing_dates
-        Event.listing_dates(today)
+        SOLDNTime.listing_dates(today)
       end
 
       def display_dates

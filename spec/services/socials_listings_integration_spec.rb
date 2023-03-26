@@ -9,7 +9,7 @@ describe SocialsListings do
         it "returns the correct array when that social has only one date in the future" do
           event = create(:intermittent_social, dates: ["10 June 1935".to_date])
 
-          dates = Event.listing_dates("1 June 1935".to_date)
+          dates = SOLDNTime.listing_dates("1 June 1935".to_date)
           result = described_class.new.build(dates)
 
           expect(result).to eq([["10 June 1935".to_date, [event], []]])
@@ -19,7 +19,7 @@ describe SocialsListings do
           event = create(:intermittent_social, dates: ["10 June 1935".to_date, "12 June 1935".to_date])
           event.update!(cancellations: ["12 June 1935".to_date])
 
-          dates = Event.listing_dates("1 June 1935".to_date)
+          dates = SOLDNTime.listing_dates("1 June 1935".to_date)
           result = described_class.new.build(dates)
 
           expect(result).to eq(
@@ -33,7 +33,7 @@ describe SocialsListings do
         it "returns the correct array when that social has two dates in the future" do
           event = create(:intermittent_social, dates: ["17 June 1935".to_date, "10 June 1935".to_date])
 
-          dates = Event.listing_dates("4 June 1935".to_date)
+          dates = SOLDNTime.listing_dates("4 June 1935".to_date)
           result = described_class.new.build(dates)
 
           expect(result).to eq(
@@ -50,7 +50,7 @@ describe SocialsListings do
           outside_limit_date = Time.zone.today + 14
           event = create(:intermittent_social, dates: [upper_limit_date, outside_limit_date, lower_limit_date])
 
-          dates = Event.listing_dates(Time.zone.today)
+          dates = SOLDNTime.listing_dates(Time.zone.today)
           result = described_class.new.build(dates)
 
           expect(result).to eq(
@@ -63,7 +63,7 @@ describe SocialsListings do
           future_date = Time.zone.today + 5
           event = create(:intermittent_social, dates: [past_date, future_date])
 
-          dates = Event.listing_dates(Time.zone.today)
+          dates = SOLDNTime.listing_dates(Time.zone.today)
           result = described_class.new.build(dates)
 
           expect(result).to eq([[future_date, [event], []]])
@@ -76,7 +76,7 @@ describe SocialsListings do
           battle = create(:social, title: "Battle of the bands", frequency: 0, dates: ["May 11 1937".to_date])
           stomping = create(:social, title: "Stomping at the Cotton club", frequency: 0, dates: ["May 18 1937".to_date])
 
-          dates = Event.listing_dates("May 10 1937".to_date)
+          dates = SOLDNTime.listing_dates("May 10 1937".to_date)
           result = described_class.new.build(dates)
 
           expect(result).to eq(
@@ -108,7 +108,7 @@ describe SocialsListings do
           event_1_d8 = create(:social, frequency: 4, dates: [date(8)], title: "A")
           event_2_d8 = create(:social, frequency: 2, dates: [date(8)], title: "Z")
 
-          dates = Event.listing_dates(Time.zone.today)
+          dates = SOLDNTime.listing_dates(Time.zone.today)
           result = described_class.new.build(dates)
 
           expect(result).to eq(
