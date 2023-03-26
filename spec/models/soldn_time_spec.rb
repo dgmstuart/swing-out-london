@@ -110,5 +110,19 @@ RSpec.describe SOLDNTime do
         )
       end
     end
+
+    context "when the start date is not specified" do
+      around do |example|
+        Time.use_zone("UTC") { example.run }
+      end
+
+      it "defaults to today" do
+        travel_to(Time.zone.parse("Jan 1, 1928 19:00"))
+
+        result = described_class.listing_dates(number_of_days: 1)
+
+        expect(result).to eq(["1st January 1928".to_date])
+      end
+    end
   end
 end

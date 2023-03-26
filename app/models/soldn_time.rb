@@ -12,7 +12,7 @@ class SOLDNTime
       end
     end
 
-    def listing_dates(first_date, number_of_days: MAX_LISTING_DATES)
+    def listing_dates(first_date = today, number_of_days: MAX_LISTING_DATES)
       (first_date..).first(number_of_days)
     end
   end

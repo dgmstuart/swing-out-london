@@ -3,25 +3,23 @@
 module Maps
   module Socials
     class FinderFromVenue
-      def initialize(date:, today:)
+      def initialize(date:)
         @date = date
-        @today = today
       end
 
       def find(venue)
-        dates =
-          if date
-            [date]
-          else
-            SOLDNTime.listing_dates(today)
-          end
-
         SocialsListings.for_venue(venue).build(dates)
       end
 
       private
 
-      attr_reader :date, :today
+      def dates
+        return SOLDNTime.listing_dates unless date
+
+        [date]
+      end
+
+      attr_reader :date
     end
   end
 end
