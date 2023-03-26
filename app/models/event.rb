@@ -16,9 +16,9 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  validates :url, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
+  validates :url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
 
-  validates :event_type, :frequency, :url, :day, presence: true
+  validates :event_type, :frequency, :day, presence: true
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 

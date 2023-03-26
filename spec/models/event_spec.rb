@@ -369,6 +369,12 @@ describe Event do
       event.valid?
       expect(event.errors.messages).to eq(class_organiser_id: ["must be present for classes"])
     end
+
+    it "is invalid if url is empty" do
+      event = build(:event, url: nil)
+      event.valid?
+      expect(event.errors.messages).to eq(url: ["can't be blank"])
+    end
   end
 
   describe "#future_dates?" do

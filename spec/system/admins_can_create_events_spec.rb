@@ -62,9 +62,8 @@ RSpec.describe "Admins can create events", :js do
 
     click_on "Create"
 
-    expect(page).to have_content("6 errors prevented this record from being saved")
+    expect(page).to have_content("5 errors prevented this record from being saved")
       .and have_content("Venue must exist")
-      .and have_content("Url is invalid")
       .and have_content("Url can't be blank")
       .and have_content("Event type can't be blank")
       .and have_content("Frequency can't be blank")
