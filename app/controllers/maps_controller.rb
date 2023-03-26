@@ -21,9 +21,9 @@ class MapsController < ApplicationController
     )
     @map =
       Maps::Map.new(
-        venues: venues,
+        venues:,
         highlighted_venue_id: params[:venue_id].to_i,
-        marker_info_builder: marker_info_builder,
+        marker_info_builder:,
         info_window_partial: "classes_map_info",
         renderer: self
       )
@@ -41,13 +41,13 @@ class MapsController < ApplicationController
 
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
     marker_info_builder = Maps::MarkerInfoBuilder.new(
-      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date, today: today)
+      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date, today:)
     )
     @map =
       Maps::Map.new(
-        venues: venues,
+        venues:,
         highlighted_venue_id: params[:venue_id].to_i,
-        marker_info_builder: marker_info_builder,
+        marker_info_builder:,
         info_window_partial: "socials_map_info",
         renderer: self
       )

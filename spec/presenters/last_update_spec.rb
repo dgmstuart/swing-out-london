@@ -11,12 +11,12 @@ RSpec.describe LastUpdate do
     it "is the name of the editor on the last audit record" do
       audit = instance_double("Audited::Audit")
       audits = [double, double, audit]
-      resource = instance_double("Venue", audits: audits)
+      resource = instance_double("Venue", audits:)
       editor = instance_double("Editor::RealEditor", name: "Ann Johnson")
       editor_builder = class_double("Editor")
       allow(editor_builder).to receive(:build).with(audit).and_return(editor)
 
-      update = described_class.new(resource, editor_builder: editor_builder)
+      update = described_class.new(resource, editor_builder:)
 
       expect(update.name).to eq "Ann Johnson"
     end
@@ -26,12 +26,12 @@ RSpec.describe LastUpdate do
     it "is the id of the editor on the last audit record" do
       audit = instance_double("Audited::Audit")
       audits = [double, double, audit]
-      resource = instance_double("Venue", audits: audits)
+      resource = instance_double("Venue", audits:)
       editor = instance_double("Editor::RealEditor", auth_id: 98421080901168127)
       editor_builder = class_double("Editor")
       allow(editor_builder).to receive(:build).with(audit).and_return(editor)
 
-      update = described_class.new(resource, editor_builder: editor_builder)
+      update = described_class.new(resource, editor_builder:)
 
       expect(update.auth_id).to eq 98421080901168127
     end
@@ -41,10 +41,10 @@ RSpec.describe LastUpdate do
     context "when there are no audits" do
       it "is the time of the last update in words" do
         updated_at = Time.utc(1926, 3, 12, 12, 1, 0).in_time_zone("London")
-        resource = instance_double("Venue", updated_at: updated_at, audits: [])
+        resource = instance_double("Venue", updated_at:, audits: [])
         editor_builder = class_double("Editor")
 
-        update = described_class.new(resource, editor_builder: editor_builder)
+        update = described_class.new(resource, editor_builder:)
 
         expect(update.time_in_words).to eq "on Friday 12th March 1926 at 12:01:00"
       end

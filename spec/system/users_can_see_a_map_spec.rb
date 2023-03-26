@@ -13,7 +13,7 @@ RSpec.describe "Users can view a map of upcoming events" do
       )
       create(
         :social,
-        venue: venue,
+        venue:,
         title: "Bedroom Bounce",
         url: "https://bb.com",
         dates: [Date.new(2019, 6, 8)]
@@ -84,7 +84,7 @@ RSpec.describe "Users can view a map of upcoming events" do
       organiser = create(:organiser, name: "Morning Swing")
       create(
         :class,
-        venue: venue,
+        venue:,
         class_organiser: organiser,
         class_style: "Balboa",
         url: "https://dlc.com",

@@ -216,7 +216,7 @@ module ListingsHelper
     end
 
     link_to_unless map_url.nil?, postcode, map_url, title: title, class: "postcode" do
-      tag.abbr(postcode, title: title, class: "postcode")
+      tag.abbr(postcode, title:, class: "postcode")
     end
   end
 

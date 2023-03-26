@@ -15,7 +15,7 @@ class OmniauthTestResponseBuilder
   )
     raise "Can't stub authentication in production" if Rails.env.production?
 
-    auth_hash = facebook_auth_hash(id: id, name: name, token: token)
+    auth_hash = facebook_auth_hash(id:, name:, token:)
     mock_auth_config[:facebook] = auth_hash
   end
 

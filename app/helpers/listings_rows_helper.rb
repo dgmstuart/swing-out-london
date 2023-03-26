@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ListingsRowsHelper
-  def day_row(day, today, &block)
+  def day_row(day, today, &)
     html_options =
       if DayNames.same_weekday?(day, today)
         { class: "day_row today", id: "classes_today" }
@@ -9,10 +9,10 @@ module ListingsRowsHelper
         { class: "day_row" }
       end
 
-    tag.li(**html_options, &block)
+    tag.li(**html_options, &)
   end
 
-  def date_row(date, today, &block)
+  def date_row(date, today, &)
     html_options =
       if date == today
         { class: "date_row today", id: "socials_today" }
@@ -20,13 +20,13 @@ module ListingsRowsHelper
         { class: "date_row" }
       end
 
-    tag.li(**html_options, &block)
+    tag.li(**html_options, &)
   end
 
   def day_header(day)
     url_options = { controller: :maps,
                     action: :classes,
-                    day: day }
+                    day: }
     link_to day, url_options, title: "Click to view this day's weekly classes on a map"
   end
 
@@ -54,11 +54,11 @@ module ListingsRowsHelper
   end
 
   # if there are no socials on this day, we need to add a class
-  def socialsh2(socials_dates, &block)
+  def socialsh2(socials_dates, &)
     if socials_dates.empty?
-      tag.h2(id: "socials_today", &block)
+      tag.h2(id: "socials_today", &)
     else
-      tag.h2(&block)
+      tag.h2(&)
     end
   end
 

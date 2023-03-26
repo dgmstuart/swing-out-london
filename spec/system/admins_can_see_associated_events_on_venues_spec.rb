@@ -7,8 +7,8 @@ RSpec.describe "Admins can see associated events on venues" do
     stub_login
     venue = create(:venue)
     organiser = create(:organiser, name: "Ron and Christine")
-    dance_class = create(:class, class_organiser: organiser, day: "Wednesday", venue: venue)
-    social = create(:social, title: "The Sunday Stomp", venue: venue)
+    dance_class = create(:class, class_organiser: organiser, day: "Wednesday", venue:)
+    social = create(:social, title: "The Sunday Stomp", venue:)
 
     visit "/login"
     click_on "Log in with Facebook"

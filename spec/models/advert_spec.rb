@@ -14,7 +14,7 @@ RSpec.describe Advert do
         "ADVERT_GOOGLE_ID" => "me-1"
       }
 
-      advert = described_class.current(env: env)
+      advert = described_class.current(env:)
 
       aggregate_failures do
         expect(advert.url).to eq "https://myevent.co.uk"
@@ -34,7 +34,7 @@ RSpec.describe Advert do
           "ADVERT_GOOGLE_ID" => "me-1"
         }
 
-        advert = described_class.current(env: env)
+        advert = described_class.current(env:)
 
         expect(advert).to be_nil
       end

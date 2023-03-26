@@ -10,7 +10,7 @@ RSpec.describe OmniauthTestResponseBuilder do
       hash_builder = class_double("OmniAuth::AuthHash", new: auth_hash)
       mock_auth_config = {}
 
-      described_class.new(hash_builder: hash_builder, mock_auth_config: mock_auth_config).stub_auth_hash
+      described_class.new(hash_builder:, mock_auth_config:).stub_auth_hash
       expect(mock_auth_config).to eq(facebook: auth_hash)
     end
 
@@ -18,7 +18,7 @@ RSpec.describe OmniauthTestResponseBuilder do
       hash_builder = class_double("OmniAuth::AuthHash", new: double)
       mock_auth_config = {}
 
-      described_class.new(hash_builder: hash_builder, mock_auth_config: mock_auth_config).stub_auth_hash(
+      described_class.new(hash_builder:, mock_auth_config:).stub_auth_hash(
         id: 79911749339938642,
         name: "Lauretta Kertzmann",
         token: "237699305323155|dc16f036399dda7bc8f140701a901a4f"

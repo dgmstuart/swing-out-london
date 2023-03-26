@@ -49,9 +49,9 @@ class AuditLogsController < ApplicationController
 
   def record(class_name, id)
     {
-      "Event" => -> { Event.find_by(id: id) || Event.new(id: id) },
-      "Venue" => -> { Venue.find_by(id: id) || Venue.new(id: id) },
-      "Organiser" => -> { Organiser.find_by(id: id) || Organiser.find(id: id) }
+      "Event" => -> { Event.find_by(id:) || Event.new(id:) },
+      "Venue" => -> { Venue.find_by(id:) || Venue.new(id:) },
+      "Organiser" => -> { Organiser.find_by(id:) || Organiser.find(id:) }
     }.fetch(class_name).call
   end
 

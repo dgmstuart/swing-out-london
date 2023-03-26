@@ -16,7 +16,7 @@ class EventsController < CmsBaseController
 
   def new
     venue = Venue.find_by(id: params[:venue_id])
-    @event = Event.new(venue: venue)
+    @event = Event.new(venue:)
   end
 
   def edit

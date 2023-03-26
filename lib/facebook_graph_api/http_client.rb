@@ -18,7 +18,7 @@ module FacebookGraphApi
     def delete(path)
       response = client.delete(
         uri(path),
-        params: { appsecret_proof: appsecret_proof }
+        params: { appsecret_proof: }
       )
       case response.code
       when 200

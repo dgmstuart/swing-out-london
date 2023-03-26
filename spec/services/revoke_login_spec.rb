@@ -14,11 +14,11 @@ RSpec.describe RevokeLogin do
       auth_token = double
       user = instance_double("LoginSession::User", token: auth_token, auth_id: double)
 
-      service = described_class.new(http_client_builder: http_client_builder, api_builder: api_builder, logger: logger)
+      service = described_class.new(http_client_builder:, api_builder:, logger:)
       service.revoke!(user)
 
       aggregate_failures do
-        expect(http_client_builder).to have_received(:new).with(auth_token: auth_token)
+        expect(http_client_builder).to have_received(:new).with(auth_token:)
         expect(api_builder).to have_received(:new).with(http_client)
       end
     end
@@ -29,9 +29,9 @@ RSpec.describe RevokeLogin do
       api_builder = class_double("FacebookGraphApi::Api", new: api)
       logger = instance_double("Logger", info: true)
       auth_id = double
-      user = instance_double("LoginSession::User", token: double, auth_id: auth_id)
+      user = instance_double("LoginSession::User", token: double, auth_id:)
 
-      service = described_class.new(http_client_builder: http_client_builder, api_builder: api_builder, logger: logger)
+      service = described_class.new(http_client_builder:, api_builder:, logger:)
       service.revoke!(user)
 
       expect(api).to have_received(:revoke_login).with(auth_id)
@@ -44,7 +44,7 @@ RSpec.describe RevokeLogin do
       logger = instance_double("Logger", info: true)
       user = instance_double("LoginSession::User", token: double, auth_id: 12345678901234567)
 
-      service = described_class.new(http_client_builder: http_client_builder, api_builder: api_builder, logger: logger)
+      service = described_class.new(http_client_builder:, api_builder:, logger:)
       service.revoke!(user)
 
       expect(logger).to have_received(:info)

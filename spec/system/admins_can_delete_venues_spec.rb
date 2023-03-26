@@ -22,7 +22,7 @@ RSpec.describe "Admins can delete venues" do
   it "when the venue has associated events" do
     stub_login
     venue = create(:venue)
-    create(:event, venue: venue)
+    create(:event, venue:)
 
     visit "/login"
     click_on "Log in with Facebook"

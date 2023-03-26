@@ -81,7 +81,7 @@ RSpec.describe ShowEvent do
   describe "#class_organiser" do
     it "delegates to the event" do
       class_organiser = double
-      event = instance_double("Event", class_organiser: class_organiser)
+      event = instance_double("Event", class_organiser:)
 
       expect(described_class.new(event).class_organiser).to eq class_organiser
     end
@@ -90,7 +90,7 @@ RSpec.describe ShowEvent do
   describe "#social_organiser" do
     it "delegates to the event" do
       social_organiser = double
-      event = instance_double("Event", social_organiser: social_organiser)
+      event = instance_double("Event", social_organiser:)
 
       expect(described_class.new(event).social_organiser).to eq social_organiser
     end
@@ -222,7 +222,7 @@ RSpec.describe ShowEvent do
   describe "#venue" do
     it "delegates to the event" do
       venue = double
-      event = instance_double("Event", venue: venue)
+      event = instance_double("Event", venue:)
 
       expect(described_class.new(event).venue).to eq venue
     end

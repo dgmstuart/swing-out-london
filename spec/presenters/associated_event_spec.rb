@@ -9,7 +9,7 @@ RSpec.describe AssociatedEvent do
       event = instance_double("Event")
       summarizer = instance_double("EventSummarizer", summarize: "A summary of the event")
 
-      associated_event = described_class.new(event, summarizer: summarizer, url_helpers: double)
+      associated_event = described_class.new(event, summarizer:, url_helpers: double)
 
       expect(associated_event.summary).to eq "A summary of the event"
     end
@@ -21,7 +21,7 @@ RSpec.describe AssociatedEvent do
       url_helpers = instance_double("Rails.application.routes.url_helpers")
       allow(url_helpers).to receive(:event_path).with(event).and_return("/path/to/event")
 
-      associated_event = described_class.new(event, summarizer: double, url_helpers: url_helpers)
+      associated_event = described_class.new(event, summarizer: double, url_helpers:)
 
       expect(associated_event.link).to eq "/path/to/event"
     end

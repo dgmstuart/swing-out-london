@@ -16,7 +16,7 @@ RSpec.describe FacebookGraphApi::HttpClient do
       client = described_class.new(
         base_url: "https://example.com/",
         auth_token: "super-secret-token",
-        proof_generator: proof_generator
+        proof_generator:
       )
       client.delete("/path")
 
@@ -48,7 +48,7 @@ RSpec.describe FacebookGraphApi::HttpClient do
         client = described_class.new(
           base_url: "https://example.com/",
           auth_token: "super-secret-token",
-          proof_generator: proof_generator
+          proof_generator:
         )
 
         expect { client.delete("/path") }

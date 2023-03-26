@@ -16,6 +16,6 @@ class AdminMailer < ApplicationMailer
       template = "outdated"
     end
 
-    mail to: "swingoutlondon@gmail.com", subject: subject, template_name: template
+    mail to: "swingoutlondon@gmail.com", subject:, template_name: template
   end
 end

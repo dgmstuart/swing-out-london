@@ -25,7 +25,7 @@ class ExternalEventsController < CmsBaseController
 
   def authenticate
     organiser_token = params[:id]
-    if Event.where(organiser_token: organiser_token).load.exists?
+    if Event.where(organiser_token:).load.exists?
       @current_user = OrganiserUser.new(organiser_token)
     else
       redirect_to root_path

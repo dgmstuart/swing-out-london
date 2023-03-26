@@ -85,7 +85,7 @@ class Event < ApplicationRecord
     end
 
     def socials_on_date(date, venue = nil)
-      swing_date = SwingDate.find_by(date: date)
+      swing_date = SwingDate.find_by(date:)
 
       weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
       if venue
@@ -100,7 +100,7 @@ class Event < ApplicationRecord
     end
 
     def cancelled_events_on_date(date)
-      swing_date = SwingDate.find_by(date: date)
+      swing_date = SwingDate.find_by(date:)
       return [] unless swing_date
 
       swing_date.cancelled_events.pluck :id
@@ -137,7 +137,7 @@ class Event < ApplicationRecord
   scope :active_on, ->(date) { where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
-  scope :listing_classes_on_day, ->(day) { listing_classes.where(day: day) }
+  scope :listing_classes_on_day, ->(day) { listing_classes.where(day:) }
   scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
@@ -208,11 +208,11 @@ class Event < ApplicationRecord
   # READ METHODS #
 
   def date_array(future: false)
-    return_array_of_dates(dates, future: future)
+    return_array_of_dates(dates, future:)
   end
 
   def cancellation_array(future: false)
-    return_array_of_dates(cancellations, future: future)
+    return_array_of_dates(cancellations, future:)
   end
 
   private

@@ -10,7 +10,7 @@ RSpec.describe Maps::MarkerInfo do
     it "delegates to the venue" do
       venue = instance_double("Venue", name: "Café Lounge")
 
-      marker_info = described_class.new(venue: venue, events: double)
+      marker_info = described_class.new(venue:, events: double)
 
       expect(marker_info.venue_name).to eq("Café Lounge")
     end
@@ -20,7 +20,7 @@ RSpec.describe Maps::MarkerInfo do
     it "delegates to the venue" do
       venue = instance_double("Venue", website: "https://lounge.com")
 
-      marker_info = described_class.new(venue: venue, events: double)
+      marker_info = described_class.new(venue:, events: double)
 
       expect(marker_info.venue_url).to eq("https://lounge.com")
     end
@@ -30,7 +30,7 @@ RSpec.describe Maps::MarkerInfo do
     it "is the venue address as an array of lines" do
       venue = instance_double("Venue", address: "77 Bedford Hill, Balham")
 
-      marker_info = described_class.new(venue: venue, events: double)
+      marker_info = described_class.new(venue:, events: double)
 
       expect(marker_info.address_lines).to eq(["77 Bedford Hill", "Balham"])
     end
@@ -38,7 +38,7 @@ RSpec.describe Maps::MarkerInfo do
     it 'removes "London" from the address lines' do
       venue = instance_double("Venue", address: "1 Chancery Court, London")
 
-      marker_info = described_class.new(venue: venue, events: double)
+      marker_info = described_class.new(venue:, events: double)
 
       expect(marker_info.address_lines).to eq(["1 Chancery Court"])
     end
@@ -48,7 +48,7 @@ RSpec.describe Maps::MarkerInfo do
     it "delegates to the venue" do
       venue = instance_double("Venue", postcode: "CA4 3LN")
 
-      marker_info = described_class.new(venue: venue, events: double)
+      marker_info = described_class.new(venue:, events: double)
 
       expect(marker_info.postcode).to eq("CA4 3LN")
     end

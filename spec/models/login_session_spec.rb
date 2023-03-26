@@ -8,11 +8,11 @@ RSpec.describe LoginSession do
   describe "log_in!" do
     it "sets user data in the session" do
       session = {}
-      request = instance_double("ActionDispatch::Request", session: session)
+      request = instance_double("ActionDispatch::Request", session:)
       token = double
 
       login_session = described_class.new(request, logger: fake_logger)
-      login_session.log_in!(auth_id: 12345678901234567, name: "Willa Mae Ricker", token: token)
+      login_session.log_in!(auth_id: 12345678901234567, name: "Willa Mae Ricker", token:)
 
       aggregate_failures do
         expect(session[:user]["auth_id"]).to eq 12345678901234567
@@ -25,7 +25,7 @@ RSpec.describe LoginSession do
       logger = instance_double("Logger", info: true)
       request = instance_double("ActionDispatch::Request", session: {})
 
-      login_session = described_class.new(request, logger: logger)
+      login_session = described_class.new(request, logger:)
       login_session.log_in!(auth_id: 12345678901234567, name: "Willa Mae Ricker", token: double)
 
       expect(logger).to have_received(:info).with("Logged in as auth id 12345678901234567")
@@ -35,7 +35,7 @@ RSpec.describe LoginSession do
   describe "log_out!" do
     it "resets the session" do
       session = { user: { "auth_id" => double } }
-      request = instance_double("ActionDispatch::Request", session: session, reset_session: double)
+      request = instance_double("ActionDispatch::Request", session:, reset_session: double)
 
       login_session = described_class.new(request, logger: fake_logger)
       login_session.log_out!
@@ -46,9 +46,9 @@ RSpec.describe LoginSession do
     it "logs that the user logged out" do
       logger = instance_double("Logger", info: true)
       session = { user: { "auth_id" => 12345678901234567 } }
-      request = instance_double("ActionDispatch::Request", session: session, reset_session: double)
+      request = instance_double("ActionDispatch::Request", session:, reset_session: double)
 
-      login_session = described_class.new(request, logger: logger)
+      login_session = described_class.new(request, logger:)
       login_session.log_out!
 
       expect(logger).to have_received(:info).with("Logged out as auth id 12345678901234567")
@@ -59,7 +59,7 @@ RSpec.describe LoginSession do
     context "when the session has been set" do
       it "is true" do
         session = { user: { auth_id: 12345678901234567 } }
-        request = instance_double("ActionDispatch::Request", session: session)
+        request = instance_double("ActionDispatch::Request", session:)
 
         login_session = described_class.new(request, logger: fake_logger)
         expect(login_session.user.logged_in?).to be true
@@ -80,7 +80,7 @@ RSpec.describe LoginSession do
     context "when the session has been set" do
       it "is the name from the session" do
         session = { user: { "name" => "Leon James" } }
-        request = instance_double("ActionDispatch::Request", session: session)
+        request = instance_double("ActionDispatch::Request", session:)
 
         login_session = described_class.new(request, logger: fake_logger)
         expect(login_session.user.name).to eq "Leon James"
@@ -101,7 +101,7 @@ RSpec.describe LoginSession do
     context "when the session has been set" do
       it "is the id from the session" do
         session = { user: { "auth_id" => 76543210987654321 } }
-        request = instance_double("ActionDispatch::Request", session: session)
+        request = instance_double("ActionDispatch::Request", session:)
 
         login_session = described_class.new(request, logger: fake_logger)
         expect(login_session.user.auth_id).to eq 76543210987654321
@@ -123,7 +123,7 @@ RSpec.describe LoginSession do
       it "is the token from the session" do
         token = double
         session = { user: { "token" => token } }
-        request = instance_double("ActionDispatch::Request", session: session)
+        request = instance_double("ActionDispatch::Request", session:)
 
         login_session = described_class.new(request, logger: fake_logger)
         expect(login_session.user.token).to eq token

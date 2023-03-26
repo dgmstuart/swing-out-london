@@ -63,7 +63,7 @@ RSpec.describe Venue do
 
     it "is false if there are associated events" do
       venue = create(:venue)
-      create(:event, venue: venue)
+      create(:event, venue:)
 
       expect(venue.can_delete?).to be false
     end
