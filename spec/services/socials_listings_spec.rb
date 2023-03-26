@@ -7,16 +7,16 @@ require "active_support/core_ext/string/conversions"
 RSpec.describe SocialsListings do
   context "when there are several dates, and one event on one date" do
     it "returns an array with that event and date" do
-      event = instance_double("Event", title: "")
+      event = instance_double("Event", title: "Stompin")
       event_finder = fake_event_finder("11 June 1935".to_date => [event])
       cancellation_finder = fake_cancellation_finder({})
 
       dates = ["10 June 1935", "11 June 1935", "12 June 1935"].map(&:to_date)
-      result = described_class.new(event_finder:, cancellation_finder:).build(dates)
+      result = described_class.new(event_finder:, cancellation_finder:, presenter_class: test_presenter).build(dates)
 
       expect(result).to eq(
         [
-          ["11 June 1935".to_date, [event], []]
+          ["11 June 1935".to_date, ["Stompin"], []]
         ]
       )
     end
@@ -24,16 +24,16 @@ RSpec.describe SocialsListings do
 
   context "when there are several dates, and one event on one date with a cancellation" do
     it "returns an array with that event and date and the event's id" do
-      event = instance_double("Event", id: 23, title: "")
+      event = instance_double("Event", id: 23, title: "Stompin")
       event_finder = fake_event_finder("11 June 1935".to_date => [event])
       cancellation_finder = fake_cancellation_finder("11 June 1935".to_date => [event])
 
       dates = ["10 June 1935", "11 June 1935", "12 June 1935"].map(&:to_date)
-      result = described_class.new(event_finder:, cancellation_finder:).build(dates)
+      result = described_class.new(event_finder:, cancellation_finder:, presenter_class: test_presenter).build(dates)
 
       expect(result).to eq(
         [
-          ["11 June 1935".to_date, [event], [23]]
+          ["11 June 1935".to_date, ["Stompin"], [23]]
         ]
       )
     end
@@ -50,9 +50,9 @@ RSpec.describe SocialsListings do
       cancellation_finder = fake_cancellation_finder({})
 
       dates = ["11 June 1935".to_date]
-      result = described_class.new(event_finder:, cancellation_finder:).build(dates)
+      result = described_class.new(event_finder:, cancellation_finder:, presenter_class: test_presenter).build(dates)
 
-      expect(result.first[1].map(&:title)).to eq(["Alhambra", "Boogaloo", "Cotton Club"])
+      expect(result.first[1]).to eq(["Alhambra", "Boogaloo", "Cotton Club"])
     end
   end
 
@@ -68,6 +68,17 @@ RSpec.describe SocialsListings do
     double.tap do |event_finder|
       allow(event_finder).to receive(:call) do |date|
         results.fetch(date, []).map(&:id)
+      end
+    end
+  end
+
+  def test_presenter
+    # instead of creating an instance, just print the event title
+    Class.new do
+      class << self
+        def new(event)
+          event.title
+        end
       end
     end
   end

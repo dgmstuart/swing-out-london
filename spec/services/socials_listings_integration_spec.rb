@@ -7,39 +7,39 @@ describe SocialsListings do
     describe "#build" do
       context "when there is only one social" do
         it "returns the correct array when that social has only one date in the future" do
-          event = create(:intermittent_social, dates: ["10 June 1935".to_date])
+          create(:intermittent_social, dates: ["10 June 1935".to_date], title: "Swing pit")
 
           dates = SOLDNTime.listing_dates("1 June 1935".to_date)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
-          expect(result).to eq([["10 June 1935".to_date, [event], []]])
+          expect(result).to eq([["10 June 1935".to_date, ["Swing pit"], []]])
         end
 
         it "returns the correct array when that social has a cancellation" do
-          event = create(:intermittent_social, dates: ["10 June 1935".to_date, "12 June 1935".to_date])
+          event = create(:intermittent_social, dates: ["10 June 1935".to_date, "12 June 1935".to_date], title: "Swing pit")
           event.update!(cancellations: ["12 June 1935".to_date])
 
           dates = SOLDNTime.listing_dates("1 June 1935".to_date)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
           expect(result).to eq(
             [
-              ["10 June 1935".to_date, [event], []],
-              ["12 June 1935".to_date, [event], [event.id]]
+              ["10 June 1935".to_date, ["Swing pit"], []],
+              ["12 June 1935".to_date, ["Swing pit"], [event.id]]
             ]
           )
         end
 
         it "returns the correct array when that social has two dates in the future" do
-          event = create(:intermittent_social, dates: ["17 June 1935".to_date, "10 June 1935".to_date])
+          create(:intermittent_social, dates: ["17 June 1935".to_date, "10 June 1935".to_date], title: "Swing pit")
 
           dates = SOLDNTime.listing_dates("4 June 1935".to_date)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
           expect(result).to eq(
             [
-              ["10 June 1935".to_date, [event], []],
-              ["17 June 1935".to_date, [event], []]
+              ["10 June 1935".to_date, ["Swing pit"], []],
+              ["17 June 1935".to_date, ["Swing pit"], []]
             ]
           )
         end
@@ -48,41 +48,41 @@ describe SocialsListings do
           lower_limit_date = Time.zone.today
           upper_limit_date = Time.zone.today + 13
           outside_limit_date = Time.zone.today + 14
-          event = create(:intermittent_social, dates: [upper_limit_date, outside_limit_date, lower_limit_date])
+          create(:intermittent_social, dates: [upper_limit_date, outside_limit_date, lower_limit_date], title: "Swing pit")
 
           dates = SOLDNTime.listing_dates(Time.zone.today)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
           expect(result).to eq(
-            [[lower_limit_date, [event], []], [upper_limit_date, [event], []]]
+            [[lower_limit_date, ["Swing pit"], []], [upper_limit_date, ["Swing pit"], []]]
           )
         end
 
         it "returns the correct array when that social has one date in the future and one in the past" do
           past_date = Time.zone.today - 1.month
           future_date = Time.zone.today + 5
-          event = create(:intermittent_social, dates: [past_date, future_date])
+          create(:intermittent_social, dates: [past_date, future_date], title: "Swing pit")
 
           dates = SOLDNTime.listing_dates(Time.zone.today)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
-          expect(result).to eq([[future_date, [event], []]])
+          expect(result).to eq([[future_date, ["Swing pit"], []]])
         end
       end
 
       context "when there is a weekly event and two occasional events on the same day" do
         it "returns an array with both events on that day, sorted alphabetically" do # rubocop:disable RSpec/ExampleLength
-          roseland = create(:social, title: "Roseland Tuesdays", frequency: 1, day: "Tuesday")
-          battle = create(:social, title: "Battle of the bands", frequency: 0, dates: ["May 11 1937".to_date])
-          stomping = create(:social, title: "Stomping at the Cotton club", frequency: 0, dates: ["May 18 1937".to_date])
+          create(:social, title: "Roseland Tuesdays", frequency: 1, day: "Tuesday")
+          create(:social, title: "Battle of the bands", frequency: 0, dates: ["May 11 1937".to_date])
+          create(:social, title: "Stomping at the Cotton club", frequency: 0, dates: ["May 18 1937".to_date])
 
           dates = SOLDNTime.listing_dates("May 10 1937".to_date)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
           expect(result).to eq(
             [
-              ["May 11 1937".to_date, [battle, roseland], []],
-              ["May 18 1937".to_date, [roseland, stomping], []]
+              ["May 11 1937".to_date, ["Battle of the bands", "Roseland Tuesdays"], []],
+              ["May 18 1937".to_date, ["Roseland Tuesdays", "Stomping at the Cotton club"], []]
             ]
           )
         end
@@ -103,22 +103,33 @@ describe SocialsListings do
           create(:intermittent_social, dates: [date(20)])
 
           # included events:
-          event_d1 = create(:intermittent_social, dates: [date(1)])
-          event_d10_d11 = create(:social, frequency: 4, dates: [date(10), date(11)])
-          event_1_d8 = create(:social, frequency: 4, dates: [date(8)], title: "A")
-          event_2_d8 = create(:social, frequency: 2, dates: [date(8)], title: "Z")
+          create(:intermittent_social, dates: [date(1)], title: "Tomorrow")
+          create(:social, frequency: 4, dates: [date(10), date(11)], title: "Twice")
+          create(:social, frequency: 4, dates: [date(8)], title: "Shown last")
+          create(:social, frequency: 2, dates: [date(8)], title: "Shown first")
 
           dates = SOLDNTime.listing_dates(Time.zone.today)
-          result = described_class.new.build(dates)
+          result = described_class.new(presenter_class: test_presenter).build(dates)
 
           expect(result).to eq(
             [
-              [date(1), [event_d1], []],
-              [date(8), [event_1_d8, event_2_d8], []],
-              [date(10), [event_d10_d11], []],
-              [date(11), [event_d10_d11], []]
+              [date(1), ["Tomorrow"], []],
+              [date(8), ["Shown first", "Shown last"], []],
+              [date(10), ["Twice"], []],
+              [date(11), ["Twice"], []]
             ]
           )
+        end
+      end
+
+      def test_presenter
+        # instead of creating an instance, just print the event title
+        Class.new do
+          class << self
+            def new(event)
+              event.title
+            end
+          end
         end
       end
     end

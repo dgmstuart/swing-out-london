@@ -3,10 +3,12 @@
 class SocialsListings
   def initialize(
     event_finder: ->(date) { Event.socials_on_date(date) },
-    cancellation_finder: ->(date) { Event.cancelled_on_date(date) }
+    cancellation_finder: ->(date) { Event.cancelled_on_date(date) },
+    presenter_class: SocialListing
   )
     @event_finder = event_finder
     @cancellation_finder = cancellation_finder
+    @presenter_class = presenter_class
   end
 
   class << self
@@ -23,11 +25,19 @@ class SocialsListings
 
       ids_of_cancelled_events = cancellation_finder.call(date)
 
-      listings << [date, events_on_date, ids_of_cancelled_events]
+      listings << date_listing(date, events_on_date, ids_of_cancelled_events)
     end
   end
 
   private
 
-  attr_reader :event_finder, :cancellation_finder
+  attr_reader :event_finder, :cancellation_finder, :presenter_class
+
+  def date_listing(date, events_on_date, ids_of_cancelled_events)
+    [
+      date,
+      events_on_date.map { |event| presenter_class.new(event) },
+      ids_of_cancelled_events
+    ]
+  end
 end
