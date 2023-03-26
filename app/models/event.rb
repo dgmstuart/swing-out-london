@@ -70,12 +70,6 @@ class Event < ApplicationRecord
       maximum(:updated_at)
     end
 
-    def socials_dates(start_date)
-      dates = listing_dates(start_date)
-
-      SocialsListings.new.build(dates)
-    end
-
     def socials_on_date(date)
       result = weekly_socials_on(date).includes(:venue)
       result += non_weekly_socials_on(date).includes(:venue)
