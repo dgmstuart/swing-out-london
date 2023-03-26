@@ -41,7 +41,7 @@ module ListingsHelper
 
   def social_title(event)
     # Highlight socials which are monthly or more infrequent by applying a 'social_highlight' class
-    if event.infrequent?
+    if event.highlight?
       tag.span(event.title, class: "social_highlight")
     else
       event.title

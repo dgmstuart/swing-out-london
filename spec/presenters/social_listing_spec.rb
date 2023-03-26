@@ -5,6 +5,20 @@ require "active_support/core_ext/module/delegation"
 require "app/presenters/social_listing"
 
 RSpec.describe SocialListing do
+  describe ".highlight?" do
+    it "is true if the event is less frequent" do
+      event = instance_double("Event", infrequent?: true)
+
+      expect(described_class.new(event).highlight?).to be true
+    end
+
+    it "is false if the event is more frequent" do
+      event = instance_double("Event", infrequent?: false)
+
+      expect(described_class.new(event).highlight?).to be false
+    end
+  end
+
   describe ".id" do
     it "delegates to the given event" do
       event = instance_double("Event", id: 17)
@@ -68,15 +82,6 @@ RSpec.describe SocialListing do
       event = instance_double("Event", new?: new)
 
       expect(described_class.new(event).new?).to eq new
-    end
-  end
-
-  describe ".less_frequent?" do
-    it "delegates to the given event" do
-      less_frequent = instance_double("Boolean")
-      event = instance_double("Event", less_frequent?: less_frequent)
-
-      expect(described_class.new(event).less_frequent?).to eq less_frequent
     end
   end
 

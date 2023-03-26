@@ -14,13 +14,16 @@ class SocialListing
     :venue_area,
     :url,
     :new?,
-    :less_frequent?,
     :has_class?, # only for map
     :has_taster?, # only for map
     :class_style, # only for map
     :class_organiser, # only for map
     to: :event
   )
+
+  def highlight?
+    event.infrequent?
+  end
 
   private
 
