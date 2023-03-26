@@ -12,7 +12,7 @@ describe SocialsListings do
           dates = SOLDNTime.listing_dates("1 June 1935".to_date)
           result = described_class.new(presenter_class: test_presenter).build(dates)
 
-          expect(result).to eq([["10 June 1935".to_date, ["Swing pit"], []]])
+          expect(result).to eq([["10 June 1935".to_date, [["Swing pit", false]]]])
         end
 
         it "returns the correct array when that social has a cancellation" do
@@ -24,8 +24,8 @@ describe SocialsListings do
 
           expect(result).to eq(
             [
-              ["10 June 1935".to_date, ["Swing pit"], []],
-              ["12 June 1935".to_date, ["Swing pit"], [event.id]]
+              ["10 June 1935".to_date, [["Swing pit", false]]],
+              ["12 June 1935".to_date, [["Swing pit", true]]]
             ]
           )
         end
@@ -38,8 +38,8 @@ describe SocialsListings do
 
           expect(result).to eq(
             [
-              ["10 June 1935".to_date, ["Swing pit"], []],
-              ["17 June 1935".to_date, ["Swing pit"], []]
+              ["10 June 1935".to_date, [["Swing pit", false]]],
+              ["17 June 1935".to_date, [["Swing pit", false]]]
             ]
           )
         end
@@ -54,7 +54,7 @@ describe SocialsListings do
           result = described_class.new(presenter_class: test_presenter).build(dates)
 
           expect(result).to eq(
-            [[lower_limit_date, ["Swing pit"], []], [upper_limit_date, ["Swing pit"], []]]
+            [[lower_limit_date, [["Swing pit", false]]], [upper_limit_date, [["Swing pit", false]]]]
           )
         end
 
@@ -66,7 +66,7 @@ describe SocialsListings do
           dates = SOLDNTime.listing_dates(Time.zone.today)
           result = described_class.new(presenter_class: test_presenter).build(dates)
 
-          expect(result).to eq([[future_date, ["Swing pit"], []]])
+          expect(result).to eq([[future_date, [["Swing pit", false]]]])
         end
       end
 
@@ -81,8 +81,8 @@ describe SocialsListings do
 
           expect(result).to eq(
             [
-              ["May 11 1937".to_date, ["Battle of the bands", "Roseland Tuesdays"], []],
-              ["May 18 1937".to_date, ["Roseland Tuesdays", "Stomping at the Cotton club"], []]
+              ["May 11 1937".to_date, [["Battle of the bands", false], ["Roseland Tuesdays", false]]],
+              ["May 18 1937".to_date, [["Roseland Tuesdays", false], ["Stomping at the Cotton club", false]]]
             ]
           )
         end
@@ -113,21 +113,21 @@ describe SocialsListings do
 
           expect(result).to eq(
             [
-              [date(1), ["Tomorrow"], []],
-              [date(8), ["Shown first", "Shown last"], []],
-              [date(10), ["Twice"], []],
-              [date(11), ["Twice"], []]
+              [date(1), [["Tomorrow", false]]],
+              [date(8), [["Shown first", false], ["Shown last", false]]],
+              [date(10), [["Twice", false]]],
+              [date(11), [["Twice", false]]]
             ]
           )
         end
       end
 
       def test_presenter
-        # instead of creating an instance, just print the event title
+        # instead of creating an instance, just print the event title and cancelled status
         Class.new do
           class << self
-            def new(event)
-              event.title
+            def new(event, cancelled:)
+              [event.title, cancelled]
             end
           end
         end

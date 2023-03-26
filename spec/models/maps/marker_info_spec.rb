@@ -68,8 +68,8 @@ RSpec.describe Maps::MarkerInfo do
   describe "social_listings.cancelled?" do
     context "when the event is cancelled" do
       it "returns true" do
-        event = instance_double("Event", id: 123)
-        event_listing_data = [double, [event], [123]]
+        event = instance_double("Event", cancelled?: true)
+        event_listing_data = [double, [event]]
 
         marker_info = described_class.new(venue: double, events: [event_listing_data])
 
@@ -79,8 +79,8 @@ RSpec.describe Maps::MarkerInfo do
 
     context "when the event is not cancelled" do
       it "returns false" do
-        event = instance_double("Event", id: 123)
-        event_listing_data = [double, [event], []]
+        event = instance_double("Event", cancelled?: false)
+        event_listing_data = [double, [event]]
 
         marker_info = described_class.new(venue: double, events: [event_listing_data])
 

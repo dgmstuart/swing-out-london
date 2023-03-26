@@ -2,8 +2,7 @@
   <h3><%= date_header(date, @today) %></h3>
   <ul class="unstyled">
     <% socials.each do |social| %>
-      <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil? %>
-      <%= social_listing(social, cancelled, date) %>
+      <%= social_listing(social, date) %>
     <% end %>
 
     <% if index==1 %>

@@ -36,8 +36,12 @@ class SocialsListings
   def date_listing(date, events_on_date, ids_of_cancelled_events)
     [
       date,
-      events_on_date.map { |event| presenter_class.new(event) },
-      ids_of_cancelled_events
+      events_on_date.map { |event| build_presenter(event, ids_of_cancelled_events) }
     ]
+  end
+
+  def build_presenter(event, ids_of_cancelled_events)
+    cancelled = ids_of_cancelled_events.include?(event.id)
+    presenter_class.new(event, cancelled:)
   end
 end

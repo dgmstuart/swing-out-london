@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class SocialListing
-  def initialize(event)
+  def initialize(event, cancelled: false)
     @event = event
+    @cancelled = cancelled
   end
 
   delegate(
@@ -20,11 +21,15 @@ class SocialListing
     to: :event
   )
 
+  def cancelled?
+    cancelled
+  end
+
   def highlight?
     event.infrequent?
   end
 
   private
 
-  attr_reader :event
+  attr_reader :event, :cancelled
 end

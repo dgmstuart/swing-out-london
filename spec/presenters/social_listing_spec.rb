@@ -19,6 +19,26 @@ RSpec.describe SocialListing do
     end
   end
 
+  describe ".cancelled?" do
+    it "is true if the given value is true" do
+      event = instance_double("Event")
+
+      expect(described_class.new(event, cancelled: true).cancelled?).to be true
+    end
+
+    it "is false if the given value is false" do
+      event = instance_double("Event")
+
+      expect(described_class.new(event, cancelled: false).cancelled?).to be false
+    end
+
+    it "defaults to false" do
+      event = instance_double("Event")
+
+      expect(described_class.new(event).cancelled?).to be false
+    end
+  end
+
   describe ".id" do
     it "delegates to the given event" do
       event = instance_double("Event", id: 17)

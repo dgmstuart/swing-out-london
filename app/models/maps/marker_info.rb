@@ -21,10 +21,9 @@ module Maps
     end
 
     def social_listings
-      events.inject([]) do |listings, (date, socials_on_date, cancelled_ids)|
-        listings + socials_on_date.map do |social|
-          cancelled = cancelled_ids.include?(social.id)
-          SocialListing.new(date, social, cancelled)
+      events.inject([]) do |listings, (date, social_listings_on_date)|
+        listings + social_listings_on_date.map do |social_listing|
+          SocialListing.new(date, social_listing)
         end
       end
     end
@@ -40,10 +39,9 @@ module Maps
     attr_reader :venue, :events
 
     class SocialListing
-      def initialize(date, event, cancelled)
+      def initialize(date, event)
         @date = date
         @event = event
-        @cancelled = cancelled
       end
 
       attr_reader :event
@@ -53,7 +51,7 @@ module Maps
       end
 
       def cancelled?
-        cancelled
+        event.cancelled?
       end
 
       private

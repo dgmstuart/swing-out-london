@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ListingsHelper
-  def social_listing(social, cancelled, date)
+  def social_listing(social, date)
     if social.title.blank?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return
@@ -10,7 +10,7 @@ module ListingsHelper
     postcode_part = outward_postcode(social, social_map_url(date, social.venue))
 
     details = tag.span class: "details" do
-      if cancelled
+      if social.cancelled?
         concat cancelled_label
         concat " "
       end
