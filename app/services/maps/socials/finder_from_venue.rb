@@ -8,7 +8,7 @@ module Maps
       end
 
       def find(venue)
-        SocialsListings.for_venue(venue).build(dates)
+        SocialsListings.for_map(venue).build(dates)
       end
 
       private

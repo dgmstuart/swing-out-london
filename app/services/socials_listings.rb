@@ -12,9 +12,11 @@ class SocialsListings
   end
 
   class << self
-    def for_venue(venue)
-      event_finder = ->(date) { Event.socials_on_date_for_venue(date, venue) }
-      new(event_finder:)
+    def for_map(venue)
+      new(
+        event_finder: ->(date) { Event.socials_on_date_for_venue(date, venue) },
+        presenter_class: Map::SocialListing
+      )
     end
   end
 

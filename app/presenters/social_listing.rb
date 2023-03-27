@@ -13,10 +13,6 @@ class SocialListing
     :venue_postcode,
     :url,
     :new?,
-    :has_class?, # only for map
-    :has_taster?, # only for map
-    :class_style, # only for map
-    :class_organiser, # only for map
     to: :event
   )
 
