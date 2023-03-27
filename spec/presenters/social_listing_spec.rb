@@ -9,13 +9,17 @@ RSpec.describe SocialListing do
     it "is true if the event is less frequent" do
       event = instance_double("Event", infrequent?: true)
 
-      expect(described_class.new(event).highlight?).to be true
+      social_listing = described_class.new(event)
+
+      expect(social_listing.highlight?).to be true
     end
 
     it "is false if the event is more frequent" do
       event = instance_double("Event", infrequent?: false)
 
-      expect(described_class.new(event).highlight?).to be false
+      social_listing = described_class.new(event)
+
+      expect(social_listing.highlight?).to be false
     end
   end
 
@@ -23,19 +27,25 @@ RSpec.describe SocialListing do
     it "is true if the given value is true" do
       event = instance_double("Event")
 
-      expect(described_class.new(event, cancelled: true).cancelled?).to be true
+      social_listing = described_class.new(event, cancelled: true)
+
+      expect(social_listing.cancelled?).to be true
     end
 
     it "is false if the given value is false" do
       event = instance_double("Event")
 
-      expect(described_class.new(event, cancelled: false).cancelled?).to be false
+      social_listing = described_class.new(event, cancelled: false)
+
+      expect(social_listing.cancelled?).to be false
     end
 
     it "defaults to false" do
       event = instance_double("Event")
 
-      expect(described_class.new(event).cancelled?).to be false
+      social_listing = described_class.new(event)
+
+      expect(social_listing.cancelled?).to be false
     end
   end
 
@@ -43,7 +53,9 @@ RSpec.describe SocialListing do
     it "is the combination venue name and location" do
       event = instance_double("Event", venue_name: "The Savoy Ballroom", venue_area: "Harlem")
 
-      expect(described_class.new(event).location).to eq "The Savoy Ballroom in Harlem"
+      social_listing = described_class.new(event)
+
+      expect(social_listing.location).to eq "The Savoy Ballroom in Harlem"
     end
   end
 
@@ -51,7 +63,9 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", id: 17)
 
-      expect(described_class.new(event).id).to eq 17
+      social_listing = described_class.new(event)
+
+      expect(social_listing.id).to eq 17
     end
   end
 
@@ -59,7 +73,9 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", title: "Mambo Thursdays")
 
-      expect(described_class.new(event).title).to eq "Mambo Thursdays"
+      social_listing = described_class.new(event)
+
+      expect(social_listing.title).to eq "Mambo Thursdays"
     end
   end
 
@@ -68,7 +84,9 @@ RSpec.describe SocialListing do
       venue = instance_double("Venue")
       event = instance_double("Event", venue:)
 
-      expect(described_class.new(event).venue).to eq venue
+      social_listing = described_class.new(event)
+
+      expect(social_listing.venue).to eq venue
     end
   end
 
@@ -76,7 +94,9 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", url: "https://www.stompin.co.uk")
 
-      expect(described_class.new(event).url).to eq "https://www.stompin.co.uk"
+      social_listing = described_class.new(event)
+
+      expect(social_listing.url).to eq "https://www.stompin.co.uk"
     end
   end
 
@@ -85,7 +105,9 @@ RSpec.describe SocialListing do
       new = instance_double("Boolean")
       event = instance_double("Event", new?: new)
 
-      expect(described_class.new(event).new?).to eq new
+      social_listing = described_class.new(event)
+
+      expect(social_listing.new?).to eq new
     end
   end
 
@@ -94,7 +116,9 @@ RSpec.describe SocialListing do
       has_class = instance_double("Boolean")
       event = instance_double("Event", has_class?: has_class)
 
-      expect(described_class.new(event).has_class?).to eq has_class
+      social_listing = described_class.new(event)
+
+      expect(social_listing.has_class?).to eq has_class
     end
   end
 
@@ -103,7 +127,9 @@ RSpec.describe SocialListing do
       has_taster = instance_double("Boolean")
       event = instance_double("Event", has_taster?: has_taster)
 
-      expect(described_class.new(event).has_taster?).to eq has_taster
+      social_listing = described_class.new(event)
+
+      expect(social_listing.has_taster?).to eq has_taster
     end
   end
 
@@ -111,7 +137,9 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", class_style: "Balboa")
 
-      expect(described_class.new(event).class_style).to eq "Balboa"
+      social_listing = described_class.new(event)
+
+      expect(social_listing.class_style).to eq "Balboa"
     end
   end
 
@@ -119,7 +147,9 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", class_organiser: "Frankie Manning")
 
-      expect(described_class.new(event).class_organiser).to eq "Frankie Manning"
+      social_listing = described_class.new(event)
+
+      expect(social_listing.class_organiser).to eq "Frankie Manning"
     end
   end
 end
