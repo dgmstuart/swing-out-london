@@ -1,5 +1,4 @@
 <ul class="datelist unstyled">
-<% reset_cycle "row_cycle"%>
 <% @socials_dates.each_with_index do |(date, socials), index| %>
   <%= render "listings/social_listing", date:, socials:, index: %>
 <% end %>
