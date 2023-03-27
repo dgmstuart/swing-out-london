@@ -52,8 +52,8 @@ module ListingsHelper
   end
 
   def mapinfo_social_listing(social_listing)
-    if social_listing.event.title.blank?
-      logger.error "[ERROR]: tried to display Event (id = #{social_listing.event.id}) without a title"
+    if social_listing.title.blank?
+      logger.error "[ERROR]: tried to display Event (id = #{social_listing.id}) without a title"
       return
     end
 
@@ -62,11 +62,11 @@ module ListingsHelper
         concat cancelled_label
         concat " "
       end
-      if social_listing.event.new?
+      if social_listing.new?
         concat new_event_label
         concat " "
       end
-      concat mapinfo_social_link(social_listing.event)
+      concat mapinfo_social_link(social_listing)
     end
   end
 

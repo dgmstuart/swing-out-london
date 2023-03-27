@@ -54,59 +54,35 @@ RSpec.describe Maps::MarkerInfo do
     end
   end
 
-  describe "social_listings.when" do
+  describe "social_listings_rows.date" do
     it "returns the date of the social" do
-      event = instance_double("Event", id: 123)
-      event_listing_data = [Date.new(1934, 1, 4), [event], []]
+      event = instance_double("SocialListing")
+      event_listing_data = [Date.new(1934, 1, 4), [event]]
 
       marker_info = described_class.new(venue: double, events: [event_listing_data])
 
-      expect(marker_info.social_listings.first.when).to eq("Thursday 4th January")
+      expect(marker_info.social_listings_rows.first.date).to eq("Thursday 4th January")
     end
   end
 
-  describe "social_listings.cancelled?" do
-    context "when the event is cancelled" do
-      it "returns true" do
-        event = instance_double("Event", cancelled?: true)
-        event_listing_data = [double, [event]]
-
-        marker_info = described_class.new(venue: double, events: [event_listing_data])
-
-        expect(marker_info.social_listings.first.cancelled?).to be(true)
-      end
-    end
-
-    context "when the event is not cancelled" do
-      it "returns false" do
-        event = instance_double("Event", cancelled?: false)
-        event_listing_data = [double, [event]]
-
-        marker_info = described_class.new(venue: double, events: [event_listing_data])
-
-        expect(marker_info.social_listings.first.cancelled?).to be(false)
-      end
-    end
-  end
-
-  describe "social_listings.event" do
+  describe "social_listings_rows.social_listing" do
     it "returns true" do
-      event = instance_double("Event", id: 123)
-      event_listing_data = [double, [event], []]
+      event = instance_double("SocialListing")
+      event_listing_data = [double, [event]]
 
       marker_info = described_class.new(venue: double, events: [event_listing_data])
 
-      expect(marker_info.social_listings.first.event).to eq(event)
+      expect(marker_info.social_listings_rows.first.social_listing).to eq(event)
     end
   end
 
-  describe "class_listings.when" do
+  describe "class_listings.day" do
     it "returns the date of the social" do
       event = instance_double("Event", day: "Wednesday")
 
       marker_info = described_class.new(venue: double, events: [event])
 
-      expect(marker_info.class_listings.first.when).to eq("Wednesdays")
+      expect(marker_info.class_listings.first.day).to eq("Wednesdays")
     end
   end
 end
