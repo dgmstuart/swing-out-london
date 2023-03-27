@@ -1,13 +1,13 @@
-<%= date_row date, @today %>
-    <h3><%= date_header(date, @today) %></h3>
-    <ul class="unstyled">
+<%= date_row(date, @today) do %>
+  <h3><%= date_header(date, @today) %></h3>
+  <ul class="unstyled">
     <% socials.each do |social| %>
-        <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?%>
-        <%= social_listing(social, cancelled, date) %>
+      <% cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil? %>
+      <%= social_listing(social, cancelled, date) %>
     <% end %>
 
-    <%if index==1%>
-       <%= render "listings/donate_message"%>
-    <%end%>
-    </ul>
-</li>
+    <% if index==1 %>
+      <%= render "listings/donate_message"%>
+    <% end %>
+  </ul>
+<% end %>

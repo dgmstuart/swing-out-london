@@ -1,15 +1,13 @@
-<%= day_row day, @today%>
-    <%= today_label if DayNames.same_weekday?(day, @today) -%>
-    <h3><%= day_header(day) -%></h3>
-    <ul class="unstyled">
-    <% #get all events from this day: %>
-
-    <%if classes_on_day(@classes, day).empty?%>
-        <%= content_tag :li, "There are no classes on this day"%>
+<%= day_row day, @today do %>
+  <%= today_label if DayNames.same_weekday?(day, @today) -%>
+  <h3><%= day_header(day) -%></h3>
+  <ul class="unstyled">
+    <%if classes_on_day(@classes, day).empty? %>
+      <%= content_tag :li, "There are no classes on this day" %>
     <% else %>
-        <% classes_on_day(@classes, day).each do |swingclass|%>
-            <%=swingclass_listing(swingclass, day)%>
-        <%end%>
-    <%end%>
-    </ul>
-</li>
+      <% classes_on_day(@classes, day).each do |swingclass| %>
+        <%= swingclass_listing(swingclass, day) %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

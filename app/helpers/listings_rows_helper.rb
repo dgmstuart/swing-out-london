@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
 module ListingsRowsHelper
-  def day_row(day, today)
-    html_options = if DayNames.same_weekday?(day, today)
-                     { class: 'day_row today', id: 'classes_today' }
-                   else
-                     { class: 'day_row' }
-                   end
+  def day_row(day, today, &block)
+    html_options =
+      if DayNames.same_weekday?(day, today)
+        { class: 'day_row today', id: 'classes_today' }
+      else
+        { class: 'day_row' }
+      end
 
-    tag :li, html_options, true
+    tag.li(**html_options, &block)
   end
 
-  def date_row(date, today)
-    html_options = if date == today
-                     { class: 'date_row today', id: 'socials_today' }
-                   else
-                     { class: 'date_row' }
-                   end
+  def date_row(date, today, &block)
+    html_options =
+      if date == today
+        { class: 'date_row today', id: 'socials_today' }
+      else
+        { class: 'date_row' }
+      end
 
-    tag :li, html_options, true
+    tag.li(**html_options, &block)
   end
 
   def day_header(day)
