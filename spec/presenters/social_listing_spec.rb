@@ -2,14 +2,16 @@
 
 require "spec_helper"
 require "active_support/core_ext/module/delegation"
+require "active_support/core_ext/string/conversions"
 require "app/presenters/social_listing"
+require "spec/support/time_formats_helper"
 
 RSpec.describe SocialListing do
   describe ".highlight?" do
     it "is true if the event is less frequent" do
       event = instance_double("Event", infrequent?: true)
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.highlight?).to be true
     end
@@ -17,7 +19,7 @@ RSpec.describe SocialListing do
     it "is false if the event is more frequent" do
       event = instance_double("Event", infrequent?: false)
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.highlight?).to be false
     end
@@ -27,7 +29,7 @@ RSpec.describe SocialListing do
     it "is true if the given value is true" do
       event = instance_double("Event")
 
-      social_listing = described_class.new(event, cancelled: true)
+      social_listing = described_class.new(event, cancelled: true, url_helpers: double)
 
       expect(social_listing.cancelled?).to be true
     end
@@ -35,7 +37,7 @@ RSpec.describe SocialListing do
     it "is false if the given value is false" do
       event = instance_double("Event")
 
-      social_listing = described_class.new(event, cancelled: false)
+      social_listing = described_class.new(event, cancelled: false, url_helpers: double)
 
       expect(social_listing.cancelled?).to be false
     end
@@ -43,7 +45,7 @@ RSpec.describe SocialListing do
     it "defaults to false" do
       event = instance_double("Event")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.cancelled?).to be false
     end
@@ -53,9 +55,36 @@ RSpec.describe SocialListing do
     it "is the combination venue name and location" do
       event = instance_double("Event", venue_name: "The Savoy Ballroom", venue_area: "Harlem")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.location).to eq "The Savoy Ballroom in Harlem"
+    end
+  end
+
+  describe ".map_url" do
+    context "when the venue has no coordinates" do
+      it "is nil" do
+        event = instance_double("Event", venue_coordinates: nil)
+
+        social_listing = described_class.new(event, url_helpers: double)
+
+        expect(social_listing.map_url(Date.current)).to be_nil
+      end
+    end
+
+    context "when the venue has coordinates" do
+      it "is a link to the venue on the map" do
+        event = instance_double("Event", venue_id: 5, venue_coordinates: double)
+        url_helpers = double(map_socials_path: "a-map-url") # rubocop:disable RSpec/VerifiedDoubles
+
+        social_listing = described_class.new(event, url_helpers:)
+
+        aggregate_failures do
+          expect(social_listing.map_url("11 July 1936".to_date)).to eq("a-map-url")
+          expect(url_helpers).to have_received(:map_socials_path)
+            .with(date: "1936-07-11", venue_id: 5)
+        end
+      end
     end
   end
 
@@ -63,7 +92,7 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", id: 17)
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.id).to eq 17
     end
@@ -73,7 +102,7 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", title: "Mambo Thursdays")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.title).to eq "Mambo Thursdays"
     end
@@ -94,7 +123,7 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", url: "https://www.stompin.co.uk")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.url).to eq "https://www.stompin.co.uk"
     end
@@ -105,7 +134,7 @@ RSpec.describe SocialListing do
       new = instance_double("Boolean")
       event = instance_double("Event", new?: new)
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.new?).to eq new
     end
@@ -116,7 +145,7 @@ RSpec.describe SocialListing do
       has_class = instance_double("Boolean")
       event = instance_double("Event", has_class?: has_class)
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.has_class?).to eq has_class
     end
@@ -127,7 +156,7 @@ RSpec.describe SocialListing do
       has_taster = instance_double("Boolean")
       event = instance_double("Event", has_taster?: has_taster)
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.has_taster?).to eq has_taster
     end
@@ -137,7 +166,7 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", class_style: "Balboa")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.class_style).to eq "Balboa"
     end
@@ -147,7 +176,7 @@ RSpec.describe SocialListing do
     it "delegates to the given event" do
       event = instance_double("Event", class_organiser: "Frankie Manning")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
       expect(social_listing.class_organiser).to eq "Frankie Manning"
     end

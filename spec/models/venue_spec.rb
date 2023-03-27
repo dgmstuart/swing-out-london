@@ -76,4 +76,27 @@ RSpec.describe Venue do
       )
     end
   end
+
+  describe "#coordinates" do
+    it "returns coordinates as a string" do
+      venue = build(:venue, lat: 1.23, lng: 4.56)
+      expect(venue.coordinates).to eq "[ 1.23, 4.56 ]"
+    end
+
+    context "when lat is nil" do
+      it "is nil" do
+        venue = build(:venue, lat: nil)
+
+        expect(venue.coordinates).to be_nil
+      end
+    end
+
+    context "when lng is nil" do
+      it "is nil" do
+        venue = build(:venue, lng: nil)
+
+        expect(venue.coordinates).to be_nil
+      end
+    end
+  end
 end

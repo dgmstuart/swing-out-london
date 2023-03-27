@@ -7,7 +7,7 @@ module ListingsHelper
       return
     end
 
-    postcode_part = outward_postcode(social, social_map_url(date, social.venue))
+    postcode_part = outward_postcode(social, social.map_url(date))
 
     details = tag.span class: "details" do
       if social.cancelled?
@@ -21,10 +21,6 @@ module ListingsHelper
       concat postcode_part
       concat details
     end
-  end
-
-  def social_map_url(date, venue)
-    map_socials_path(date: date.to_s(:db), venue_id: venue.id) unless venue.lat.nil? || venue.lng.nil?
   end
 
   def social_link(event)
@@ -125,7 +121,7 @@ module ListingsHelper
   end
 
   def class_map_url(day, venue)
-    map_classes_path(day:, venue_id: venue.id) unless venue.lat.nil? || venue.lng.nil?
+    map_classes_path(day:, venue_id: venue.id) unless venue.coordinates.nil?
   end
 
   def swingclass_link(event)

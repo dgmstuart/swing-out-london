@@ -44,6 +44,8 @@ class Venue < ApplicationRecord
   end
 
   def coordinates
+    return unless lat && lng
+
     "[ #{lat}, #{lng} ]"
   end
 
