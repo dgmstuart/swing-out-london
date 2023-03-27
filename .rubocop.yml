@@ -115,6 +115,7 @@ Metrics/MethodLength:
     - db/**/*.rb
     # Files where the methods are basically html templates:
     - app/helpers/listings_helper.rb
+    - app/helpers/map_listings_helper.rb
 
 RSpec/DescribeClass:
   Exclude:
