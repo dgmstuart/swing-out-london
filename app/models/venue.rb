@@ -25,15 +25,6 @@ class Venue < ApplicationRecord
           latitude and longitude"
     end
   end
-  UNKNOWN_POSTCODE = "???"
-
-  def outward_postcode
-    return UNKNOWN_POSTCODE if postcode.blank?
-
-    # Match the first part of the postcode:
-    regexp = /[A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?/
-    regexp.match(postcode.upcase)[0]
-  end
 
   def name_and_area
     "#{name} - #{area}"

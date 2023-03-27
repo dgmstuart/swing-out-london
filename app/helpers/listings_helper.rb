@@ -7,7 +7,7 @@ module ListingsHelper
       return
     end
 
-    postcode_part = outward_postcode(social, social.map_url(date))
+    postcode_part = postcode_link(social.venue_postcode, social.map_url(date))
 
     details = tag.span class: "details" do
       if social.cancelled?
@@ -107,7 +107,7 @@ module ListingsHelper
   end
 
   def swingclass_listing(swingclass, day)
-    postcode_part = outward_postcode(swingclass, class_map_url(day, swingclass.venue))
+    postcode_part = postcode_link(swingclass.venue_postcode, class_map_url(day, swingclass.venue))
 
     details = tag.span class: "details" do
       concat swingclass_link(swingclass)
@@ -197,19 +197,27 @@ module ListingsHelper
     tag.strong("Cancelled", class: "cancelled_label")
   end
 
-  def outward_postcode(event, map_url = nil)
+  def postcode_link(postcode, map_url = nil)
     title =
-      if event.venue.postcode.present?
-        "#{event.venue.postcode} to be precise. Click to see the venue on a map"
+      if postcode.present?
+        "#{postcode} to be precise. Click to see the venue on a map"
       else
         "Bah - this event is too secret to have a postcode!"
       end
 
-    postcode = event.venue.outward_postcode
+    postcode = short_postcode(postcode)
 
     link_to_unless map_url.nil?, postcode, map_url, title: title, class: "postcode" do
       tag.abbr(postcode, title:, class: "postcode")
     end
+  end
+
+  def short_postcode(postcode)
+    return "???" if postcode.blank?
+
+    # Match the first part of the postcode:
+    regexp = /[A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?/
+    regexp.match(postcode.upcase)[0]
   end
 
   # Return a span containing a message about cancelled dates:

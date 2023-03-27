@@ -107,6 +107,7 @@ class Event < ApplicationRecord
 
   delegate :name, to: :venue, prefix: true
   delegate :area, to: :venue, prefix: true
+  delegate :postcode, to: :venue, prefix: true
   delegate :coordinates, to: :venue, prefix: true
 
   # ---------- #

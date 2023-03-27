@@ -10,7 +10,7 @@ class SocialListing
   delegate(
     :id,
     :title,
-    :venue,
+    :venue_postcode,
     :url,
     :new?,
     :has_class?, # only for map

@@ -108,14 +108,13 @@ RSpec.describe SocialListing do
     end
   end
 
-  describe ".venue" do
+  describe ".venue_postcode" do
     it "delegates to the given event" do
-      venue = instance_double("Venue")
-      event = instance_double("Event", venue:)
+      event = instance_double("Event", venue_postcode: "N1 3QA")
 
-      social_listing = described_class.new(event)
+      social_listing = described_class.new(event, url_helpers: double)
 
-      expect(social_listing.venue).to eq venue
+      expect(social_listing.venue_postcode).to eq "N1 3QA"
     end
   end
 
