@@ -10,8 +10,6 @@ class SocialListing
     :id,
     :title,
     :venue,
-    :venue_name,
-    :venue_area,
     :url,
     :new?,
     :has_class?, # only for map
@@ -27,6 +25,10 @@ class SocialListing
 
   def highlight?
     event.infrequent?
+  end
+
+  def location
+    "#{event.venue_name} in #{event.venue_area}"
   end
 
   private

@@ -39,6 +39,14 @@ RSpec.describe SocialListing do
     end
   end
 
+  describe ".location" do
+    it "is the combination venue name and location" do
+      event = instance_double("Event", venue_name: "The Savoy Ballroom", venue_area: "Harlem")
+
+      expect(described_class.new(event).location).to eq "The Savoy Ballroom in Harlem"
+    end
+  end
+
   describe ".id" do
     it "delegates to the given event" do
       event = instance_double("Event", id: 17)
@@ -61,22 +69,6 @@ RSpec.describe SocialListing do
       event = instance_double("Event", venue:)
 
       expect(described_class.new(event).venue).to eq venue
-    end
-  end
-
-  describe ".venue_name" do
-    it "delegates to the given event" do
-      event = instance_double("Event", venue_name: "100 Club")
-
-      expect(described_class.new(event).venue_name).to eq "100 Club"
-    end
-  end
-
-  describe ".venue_area" do
-    it "delegates to the given event" do
-      event = instance_double("Event", venue_area: "Oxford st")
-
-      expect(described_class.new(event).venue_area).to eq "Oxford st"
     end
   end
 

@@ -36,7 +36,7 @@ module ListingsHelper
       end
       concat social_title(event)
       concat " - "
-      concat tag.span("#{event.venue_name} in #{event.venue_area}", class: "info")
+      concat tag.span(event.location, class: "info")
     end
 
     link_to text, event.url, id: event.id
