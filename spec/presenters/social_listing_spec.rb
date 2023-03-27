@@ -44,14 +44,6 @@ RSpec.describe SocialListing do
     end
   end
 
-  describe ".venue_id" do
-    it "delegates to the given event" do
-      event = instance_double("Event", venue_id: 23)
-
-      expect(described_class.new(event).venue_id).to eq 23
-    end
-  end
-
   describe ".venue_name" do
     it "delegates to the given event" do
       event = instance_double("Event", venue_name: "100 Club")

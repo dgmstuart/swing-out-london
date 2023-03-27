@@ -67,13 +67,13 @@ RSpec.describe "Adding a new event" do
     within "#social_dances" do
       within page.all(".date_row")[0] do
         expect(page).to have_content "Saturday 2nd January"
-        expect(page).to have_link "WC2R", href: "map/socials/1937-01-02?venue_id=#{venue_id}"
+        expect(page).to have_link "WC2R", href: "/map/socials/1937-01-02?venue_id=#{venue_id}"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
       end
 
       within page.all(".date_row")[1] do
         expect(page).to have_content "Saturday 9th January"
-        expect(page).to have_link "WC2R", href: "map/socials/1937-01-09?venue_id=#{venue_id}"
+        expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe "Adding a new event" do
     within "#classes" do
       within page.all(".day_row")[5] do
         expect(page).to have_content "Saturday"
-        expect(page).to have_link "WC2R", href: "map/classes/Saturday?venue_id=#{venue_id}"
+        expect(page).to have_link "WC2R", href: "/map/classes/Saturday?venue_id=#{venue_id}"
         expect(page).to have_link "Harlem (Savoy Style) at Stompin at the Savoy with Frankie", href: "https://www.savoyballroom.com/stompin"
         expect(page).to have_content "Cancelled on 11th Oct"
       end

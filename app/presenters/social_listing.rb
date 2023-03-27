@@ -9,7 +9,6 @@ class SocialListing
     :id,
     :title,
     :venue,
-    :venue_id,
     :venue_name,
     :venue_area,
     :url,
