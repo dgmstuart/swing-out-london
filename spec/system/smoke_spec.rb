@@ -51,9 +51,9 @@ RSpec.describe "Adding a new event" do
     select "Saturday", from: "Day"
     fill_in "event_frequency", with: 1
     fill_in "Upcoming dates", with: ""
-    fill_in "Cancelled dates", with: "11/10/1958"
+    fill_in "Cancelled dates", with: "09/01/1937"
     fill_in "First date", with: "12/03/1926"
-    fill_in "Last date", with: ""
+    fill_in "Last date", with: "11/10/1958"
     fill_in "Url", with: "https://www.savoyballroom.com/stompin"
 
     Timecop.freeze("01/01/1937") do
@@ -74,6 +74,7 @@ RSpec.describe "Adding a new event" do
       within page.all(".date_row")[1] do
         expect(page).to have_content "Saturday 9th January"
         expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
+        expect(page).to have_content "Cancelled Stompin at the Savoy"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
       end
     end
@@ -83,7 +84,7 @@ RSpec.describe "Adding a new event" do
         expect(page).to have_content "Saturday"
         expect(page).to have_link "WC2R", href: "/map/classes/Saturday?venue_id=#{venue_id}"
         expect(page).to have_link "Harlem (Savoy Style) at Stompin at the Savoy with Frankie", href: "https://www.savoyballroom.com/stompin"
-        expect(page).to have_content "Cancelled on 11th Oct"
+        expect(page).to have_content "Cancelled on 9th Jan"
       end
     end
 
