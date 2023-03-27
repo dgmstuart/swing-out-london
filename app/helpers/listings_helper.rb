@@ -202,16 +202,14 @@ module ListingsHelper
   end
 
   def outward_postcode(event, map_url = nil)
-    # Default message:
-    title = "Bah - this event is too secret to have a postcode!"
+    title =
+      if event.venue.postcode.present?
+        "#{event.venue.postcode} to be precise. Click to see the venue on a map"
+      else
+        "Bah - this event is too secret to have a postcode!"
+      end
 
-    if event.venue.nil?
-      postcode = Venue::UNKNOWN_COMPASS
-      logger.warn "[WARNING]: Venue was nil for '#{event.title}' (event #{event.id})"
-    else
-      title = "#{event.venue.postcode} to be precise. Click to see the venue on a map" if event.venue.postcode.present?
-      postcode = event.venue.outward_postcode
-    end
+    postcode = event.venue.outward_postcode
 
     link_to_unless map_url.nil?, postcode, map_url, title: title, class: "postcode" do
       tag.abbr(postcode, title:, class: "postcode")
