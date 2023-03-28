@@ -4,7 +4,7 @@ class OutdatedEventReport
   attr_reader :out_of_date_events
 
   def initialize
-    @out_of_date_events = Event.out_of_date.sort_by(&:expected_date)
+    @out_of_date_events = Event.out_of_date
   end
 
   def summary

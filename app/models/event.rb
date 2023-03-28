@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "out_of_date_calculator"
-require "date_expectation_calculator"
 require "dates_string_parser"
 require "day_names"
 
@@ -283,22 +282,8 @@ class Event < ApplicationRecord
   def out_of_date(comparison_date = Date.current)
     return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
     return false if last_date
-    return false unless expecting_a_date?(comparison_date)
 
     OutOfDateCalculator.new(latest_date, comparison_date).out_of_date?
-  end
-
-  # What date is the next event expected on? (based on the last known date)
-  def expected_date
-    return self[:expected_date] if self[:expected_date] && !((latest_date && self[:expected_date] <= latest_date))
-    return NoExpectedDate.new if frequency.nil? || weekly? || frequency.zero?
-    return NoExpectedDate.new unless latest_date
-
-    latest_date + frequency.weeks
-  end
-
-  def expecting_a_date?(comparison_date)
-    DateExpectationCalculator.new(infrequent?, expected_date, comparison_date).expecting_a_date?
   end
 
   # Is the event new? (probably only applicable to classes)
@@ -328,10 +313,6 @@ class Event < ApplicationRecord
 
   def weekly?
     frequency == 1
-  end
-
-  def infrequent?
-    frequency >= 26
   end
 
   def less_frequent?

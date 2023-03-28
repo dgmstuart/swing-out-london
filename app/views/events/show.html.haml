@@ -45,12 +45,8 @@
     %span First date:
     = @event.first_date
   %li
-    -if @event.last_date
-      %span Last date:
-      = @event.last_date
-    -else
-      %span Next expected date:
-      = @event.expected_date
+    %span Last date:
+    = @event.last_date
   %li
     %span Url:
     = link_to @event.url, @event.url

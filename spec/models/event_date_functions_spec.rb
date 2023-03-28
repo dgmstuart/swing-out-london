@@ -43,17 +43,5 @@ RSpec.describe Event do
         expect(event.out_of_date).to be false
       end
     end
-
-    context "when the event is out of date and happens every 6 months" do
-      it "is false if the next expected event is more than 6 weeks away" do
-        event = create(:event, frequency: 26, dates: [Time.zone.today - 1])
-        expect(event.out_of_date).to be false
-      end
-
-      it "is true if the next expected event is less than 6 weeks away" do
-        event = create(:event, frequency: 26, dates: [Time.zone.today - (20.weeks + 2.days)])
-        expect(event.out_of_date).to be true
-      end
-    end
   end
 end

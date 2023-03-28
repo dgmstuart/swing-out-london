@@ -370,37 +370,4 @@ describe Event do
       expect(event.errors.messages).to eq(class_organiser_id: ["must be present for classes"])
     end
   end
-
-  describe "expected_date" do
-    it "is a month after the previous date for monthly events" do
-      event = build(:event, frequency: 4)
-      # FIXME: EVIL!!!: Stubbing object under test
-      allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
-      expect(event.expected_date).to eq Date.new(1970, 1, 29)
-    end
-
-    it "is a year after the previous date for monthly events" do
-      event = build(:event, frequency: 52)
-      # FIXME: EVIL!!!: Stubbing object under test
-      allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
-      expect(event.expected_date).to eq Date.new(1970, 12, 31)
-    end
-
-    it "is after a far-future date if there are no dates" do
-      event = build(:event, frequency: 4) # No dates by default
-      expect(event.expected_date).to be > Time.zone.today + 1.year
-    end
-
-    it "is after a far-future date if the event is weekly" do
-      event = build(:event, frequency: 1)
-      expect(event.expected_date).to be > Time.zone.today + 1.year
-    end
-
-    it "is after a far-future date if the event has frequency 0 and other dates" do
-      event = build(:event, frequency: 0)
-      # FIXME: EVIL!!!: Stubbing object under test
-      allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
-      expect(event.expected_date).to be > Time.zone.today + 1.year
-    end
-  end
 end

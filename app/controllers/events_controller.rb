@@ -83,7 +83,6 @@ class EventsController < CmsBaseController
         date_array
         cancellation_array
         first_date
-        expected_date
         last_date
         url
       ]

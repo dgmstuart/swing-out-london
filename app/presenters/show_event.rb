@@ -42,10 +42,6 @@ class ShowEvent
     "#{event.event_type.humanize}, with #{activities.join(' and ')}"
   end
 
-  def expected_date
-    event.expected_date&.to_s(:listing_date)
-  end
-
   def frequency # rubocop:disable Metrics/MethodLength
     case event.frequency
     when 0 then "One-off or intermittent"
