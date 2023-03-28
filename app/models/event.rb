@@ -258,7 +258,7 @@ class Event < ApplicationRecord
     elsif dates.empty?
       "(No dates)"
     else
-      date_rows_printer.print(dates)
+      date_rows_printer.print(dates.reverse)
     end
   end
 

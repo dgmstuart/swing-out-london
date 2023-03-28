@@ -31,7 +31,7 @@ RSpec.describe "Admins can list events" do
       .and have_content("The London Swing Dance Society")
       .and have_content("Mon")
       .and have_content(0)
-      .and have_content("01/06/1997, 05/07/1997")
+      .and have_content("05/07/1997, 01/06/1997")
   end
 
   it "notes when an event has ended" do

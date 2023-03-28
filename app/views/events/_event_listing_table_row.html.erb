@@ -25,7 +25,7 @@
       <%= event.frequency %>
     </td>
     <td class="dates">
-      <%= event.print_dates_rows %>
+      <%= truncate(event.print_dates_rows, length: ((12 * 8) + 3)) %>
     </td>
     <td class="updated">
       <%= event.updated_at.to_s(:uk_date) %>
