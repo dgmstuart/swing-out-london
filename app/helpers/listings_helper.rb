@@ -118,27 +118,12 @@ module ListingsHelper
     tag.strong("Cancelled", class: "cancelled_label")
   end
 
-  def postcode_link(postcode, map_url = nil)
-    title =
-      if postcode.present?
-        "#{postcode} to be precise. Click to see the venue on a map"
-      else
-        "Bah - this event is too secret to have a postcode!"
-      end
+  def postcode_link(postcode_string, map_url = nil)
+    postcode = Postcode.build(postcode_string)
 
-    postcode = short_postcode(postcode)
-
-    link_to_unless map_url.nil?, postcode, map_url, title: title, class: "postcode" do
-      tag.abbr(postcode, title:, class: "postcode")
+    link_to_unless map_url.nil?, postcode.short, map_url, title: postcode.description, class: "postcode" do
+      tag.abbr(postcode.short, title: postcode.description, class: "postcode")
     end
-  end
-
-  def short_postcode(postcode)
-    return "???" if postcode.blank?
-
-    # Match the first part of the postcode:
-    regexp = /[A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?/
-    regexp.match(postcode.upcase)[0]
   end
 
   # Return a span containing a message about cancelled dates:
