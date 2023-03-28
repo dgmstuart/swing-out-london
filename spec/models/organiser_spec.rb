@@ -10,6 +10,8 @@ RSpec.describe Organiser do
   end
 
   describe "Validations" do
+    subject { build(:organiser) }
+
     it { is_expected.to validate_uniqueness_of(:shortname) }
   end
 

@@ -2,11 +2,6 @@
 
 module ListingsHelper
   def social_listing(social, date)
-    if social.title.blank?
-      logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
-      return
-    end
-
     postcode_part = postcode_link(social.venue_postcode, social.map_url(date))
 
     details = tag.span class: "details" do
@@ -101,7 +96,6 @@ module ListingsHelper
   def school_name(event)
     raise "Tried to get class-related info from an event with no class" unless event.has_class? || event.has_taster?
     return if event.class_organiser.nil?
-    raise "Invalid Organiser (##{event.class_organiser.id}): name was blank" if event.class_organiser.name.blank?
 
     if event.class_organiser.shortname.blank?
       event.class_organiser.name
