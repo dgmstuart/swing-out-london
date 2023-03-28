@@ -35,10 +35,6 @@ class Organiser < ApplicationRecord
     events.all?(&:out_of_date)
   end
 
-  def all_events_nearly_out_of_date?
-    events.all?(&:near_out_of_date)
-  end
-
   def can_delete?
     raise "Can't delete an Organiser which is not persisted" unless persisted?
 

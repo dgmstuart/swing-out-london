@@ -44,10 +44,6 @@ class Venue < ApplicationRecord
     events.all?(&:out_of_date)
   end
 
-  def all_events_nearly_out_of_date?
-    events.all?(&:near_out_of_date)
-  end
-
   def coordinates
     "[ #{lat}, #{lng} ]"
   end
