@@ -164,8 +164,14 @@ td.updated {
   max-width: 80px;
 }
 
-.events tr.no_future_dates td.dates {
-  background-color: #ffa500;
+.events {
+  td.dates {
+    background-color: #beed76;
+  }
+
+  tr.no_future_dates td.dates {
+    background-color: #ffa500;
+  }
 }
 
 .venues,

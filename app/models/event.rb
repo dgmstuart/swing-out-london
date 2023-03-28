@@ -251,7 +251,15 @@ class Event < ApplicationRecord
   end
 
   def print_dates_rows
-    date_rows_printer.print(dates)
+    if last_date.present?
+      "Ended"
+    elsif weekly?
+      "Every week"
+    elsif dates.empty?
+      "(No dates)"
+    else
+      date_rows_printer.print(dates)
+    end
   end
 
   def print_cancellations
