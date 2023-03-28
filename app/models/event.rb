@@ -245,11 +245,6 @@ class Event < ApplicationRecord
     end
   end
 
-  # TODO: these should be done in the db, not in ruby
-  def self.out_of_date
-    socials.non_gigs.select { |e| !e.inactive? && e.out_of_date }
-  end
-
   # PRINT METHODS #
 
   def print_dates

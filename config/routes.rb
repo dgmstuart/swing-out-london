@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   get "venue_map_info/:id" => "maps#venue_map_info", :as => :venue_map_info
 
   get "name_clash" => "name_clash#index"
-  get "outdated" => "outdated#index"
 
   get "about" => "info#about"
   get "listings_policy" => "info#listings_policy"
