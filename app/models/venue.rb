@@ -39,9 +39,8 @@ class Venue < ApplicationRecord
     "#{name} - #{area}"
   end
 
-  # Are there any active events associated with this venue?
-  def all_events_out_of_date?
-    events.all?(&:out_of_date)
+  def no_future_dates?
+    events.none?(&:future_dates?)
   end
 
   def coordinates

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "out_of_date_calculator"
 require "dates_string_parser"
 require "day_names"
 
@@ -233,15 +232,15 @@ class Event < ApplicationRecord
   public
 
   def inactive?
-    ended? || (out_of_date && one_off?)
+    ended? || (!future_dates? && one_off?)
   end
 
   # For the event listing tables:
   def status_string
     if inactive?
       "inactive"
-    elsif out_of_date
-      "out_of_date"
+    elsif !future_dates?
+      "no_future_dates"
     end
   end
 
@@ -273,12 +272,12 @@ class Event < ApplicationRecord
 
   # COMPARISON METHODS #
 
-  # Are all the dates for the event in the past?
-  def out_of_date(comparison_date = Date.current)
-    return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
+  def future_dates?
+    return true if weekly? # Weekly events don't have date arrays but implicitly will be running in the future
     return false if last_date
+    return false unless latest_date
 
-    OutOfDateCalculator.new(latest_date, comparison_date).out_of_date?
+    latest_date > Date.current
   end
 
   # Is the event new? (probably only applicable to classes)

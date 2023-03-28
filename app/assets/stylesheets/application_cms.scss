@@ -164,10 +164,15 @@ td.updated {
   max-width: 80px;
 }
 
-/* TODO- replace with proper colours! */
-tr.out_of_date td.dates,
-tr.all_out_of_date td {
-  background-color: #f00;
+.events tr.no_future_dates td.dates {
+  background-color: #ffa500;
+}
+
+.venues,
+.organisers {
+  tr.no_future_dates td.name {
+    background-color: #c0c0c0;
+  }
 }
 
 tr.inactive td.dates {

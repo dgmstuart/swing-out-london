@@ -10,7 +10,7 @@
 
   <% @organisers.each do |organiser| %>
     <%= organiser_row_tag(organiser) %>
-    <td><%= link_to_unless organiser.website.nil?, organiser.name, organiser.website %></td>
+    <td class="name"><%= link_to_unless organiser.website.nil?, organiser.name, organiser.website %></td>
     <td><%=h organiser.description %></td>
     <td class="actions">
       <%= link_to 'Show', organiser %>

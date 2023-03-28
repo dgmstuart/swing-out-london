@@ -370,4 +370,54 @@ describe Event do
       expect(event.errors.messages).to eq(class_organiser_id: ["must be present for classes"])
     end
   end
+
+  describe "#future_dates?" do
+    context "when the event has no dates" do
+      it "is false" do
+        event = create(:event, dates: [])
+
+        expect(event.future_dates?).to be false
+      end
+    end
+
+    context "when the event has one date which is today" do
+      it "is true" do
+        event = create(:event, dates: [Time.zone.today])
+
+        expect(event.future_dates?).to be false
+      end
+    end
+
+    context "when the event has one date in the future" do
+      it "is true" do
+        event = create(:event, dates: [Time.zone.today + 1])
+
+        expect(event.future_dates?).to be true
+      end
+    end
+
+    context "when the event has one date in the past" do
+      it "is false" do
+        event = create(:event, dates: [Time.zone.today - 2])
+
+        expect(event.future_dates?).to be false
+      end
+    end
+
+    context "when the event is weekly" do
+      it "is true" do
+        event = create(:event, frequency: 1, dates: [])
+
+        expect(event.future_dates?).to be true
+      end
+    end
+
+    context "when the event has an end date" do
+      it "is true" do
+        event = create(:event, dates: [], last_date: (Time.zone.today + 1.year))
+
+        expect(event.future_dates?).to be false
+      end
+    end
+  end
 end
