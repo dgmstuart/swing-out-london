@@ -420,4 +420,33 @@ describe Event do
       end
     end
   end
+
+  describe "ended?" do
+    it "is always false if there is no last date" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], last_date: nil),
+        build(:event, dates: [Date.current.tomorrow], last_date: nil),
+        build(:event, dates: [], last_date: nil)
+      ]
+      expect(events).not_to include(be_ended)
+    end
+
+    it "is true if there is a last date in the past" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], last_date: "October 1st 1958".to_date),
+        build(:event, dates: [Date.current.tomorrow], last_date: "October 1st 1958".to_date),
+        build(:event, dates: [], last_date: "October 1st 1958".to_date)
+      ]
+      expect(events).to all(be_ended)
+    end
+
+    it "is false if there is a last date in the future" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], last_date: Date.current.tomorrow),
+        build(:event, dates: [Date.current.tomorrow], last_date: Date.current.tomorrow),
+        build(:event, dates: [], last_date: Date.current.tomorrow)
+      ]
+      expect(events).not_to include(be_ended)
+    end
+  end
 end
