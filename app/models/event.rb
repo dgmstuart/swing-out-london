@@ -8,6 +8,8 @@ require 'day_names'
 class Event < ApplicationRecord
   audited
 
+  CONSIDERED_NEW_FOR = 1.month
+
   belongs_to :venue
   belongs_to :class_organiser, class_name: 'Organiser', optional: true
   belongs_to :social_organiser, class_name: 'Organiser', optional: true
@@ -314,7 +316,7 @@ class Event < ApplicationRecord
   def new?
     return false if first_date.nil?
 
-    first_date > Date.local_today - 1.month
+    first_date > Date.local_today - CONSIDERED_NEW_FOR
   end
 
   # Has the first instance of the event happened yet?
