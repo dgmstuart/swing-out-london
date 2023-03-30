@@ -73,6 +73,36 @@ RSpec.describe "Organisers can edit events" do
       expect(Audit.last.username).to eq("name" => "Organiser (abc123)", "auth_id" => "abc123")
     end
 
+    it "allows an organiser to cancel their changes" do
+      create(
+        :social,
+        venue: build(:venue, name: "The Bishopsgate Centre", area: "Liverpool st"),
+        organiser_token: "abc123",
+        title: "Midtown stomp",
+        url: "https://www.swingland.com/midtown",
+        frequency: 0,
+        dates: ["01/02/2036"],
+        first_date: Date.new(2001, 2, 3)
+      )
+      create(:venue, name: "The 100 Club", area: "central")
+
+      visit("/external_events/abc123/edit")
+
+      select "The 100 Club", from: "Venue"
+      fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
+      fill_in "Cancelled dates", with: "12/12/2012"
+      fill_in "Last date", with: "12/01/2013"
+
+      click_on "Cancel"
+
+      aggregate_failures do
+        expect(page).to have_select("Venue", selected: "The Bishopsgate Centre - Liverpool st")
+        expect(page).to have_field("Upcoming dates", with: "01/02/2036")
+        expect(page).to have_field("Cancelled dates", with: "")
+        expect(page).to have_field("Last date", with: "")
+      end
+    end
+
     it "shows a sensible title for classes" do
       organiser = create(:organiser, name: "Herbert White")
       create(:class, organiser_token: "abc123", class_organiser: organiser)

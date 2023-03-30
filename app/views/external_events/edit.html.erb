@@ -52,5 +52,6 @@
 
   <div class='form-group actions'>
     <%= f.submit 'Update', class: 'button' %>
+    <%= link_to 'Cancel', edit_external_event_path(@event.organiser_token), class: "button button-secondary" %>
   </div>
 <% end %>
