@@ -7,6 +7,7 @@
   </div>
   <div class='form-group'>
     <%= f.label :address %>
+    <p class='help'>Separate the parts of the address with commas, and include "London" at the end</p>
     <%= f.text_area :address %>
   </div>
   <div class='form-group'>
@@ -15,16 +16,22 @@
   </div>
   <div class='form-group'>
     <%= f.label :area %>
+    <p class='help'>Use the nearest tube station unless there's something better</p>
     <%= f.text_field :area %>
-    <p class='help'>For Area, use the nearest tube station unless there's something better</p>
   </div>
-  <div class='form-group'>
+  <div class='form-group lat-lng'>
+    <div class="row">
+      <div>
+        <%= f.label :lat, 'Latitude' %>
+        <%= f.text_field :lat, :size => 15, :class => "shortfield"%>
+      </div>
+      <div>
+        <%= f.label :lng, 'Longitude', :class => "inline_label" %>
+        <%= f.text_field :lng, :size => 15, :class => "shortfield"%>
+      </div>
+      <%=link_to "(get from web)", "https://www.freemaptools.com/convert-uk-postcode-to-lat-lng.htm"%>
+    </div>
     <p class='help'>If you leave Latitude and Longitude blank, they will be automatically calculated based on postcode</p>
-    <%= f.label :lat, 'Latitude' %>
-    <%= f.text_field :lat, :size => 15, :style => "float:left;", :class => "shortfield"%>
-    <%= f.label :lng, 'Longitude', :class => "inline_label" %>
-    <%= f.text_field :lng, :size => 15, :class => "shortfield"%>
-    <%=link_to "(get from web)", "http://www.doogal.co.uk/LatLong.php"%>
   </div>
   <div class='form-group'>
     <%= f.label :website %>

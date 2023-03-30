@@ -34,8 +34,21 @@ form {
     margin-bottom: 5px;
   }
 
+  .new-label {
+    padding: 0.3em 0.6em;
+    margin-right: 0.2em;
+    position: relative;
+    bottom: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: #fee6b8;
+    background-color: $text-colour;
+    font-style: normal;
+  }
+
   label {
     font-weight: bold;
+    font-size: 16px;
   }
 
   input[type="text"] {
@@ -65,51 +78,12 @@ div.actions {
   }
 }
 
+form.new_event,
+form.edit_event,
 form.new_organiser,
 form.edit_organiser,
 form.new_venue,
 form.edit_venue {
-  .form-group-title {
-    margin-left: 155px;
-  }
-
-  p.help {
-    margin-left: 155px;
-  }
-
-  textarea {
-    white-space: pre;
-    width: 30em;
-    height: 5em;
-  }
-
-  textarea.deep {
-    height: 10em;
-  }
-
-  textarea.narrow {
-    width: 10em;
-  }
-
-  label {
-    width: 135px;
-    float: left;
-    text-align: right;
-    padding-right: 20px;
-  }
-
-  input[type="submit"] {
-    line-height: 1.5;
-    clear: left;
-  }
-
-  div.actions {
-    margin-left: 155px;
-  }
-}
-
-form.new_event,
-form.edit_event {
   margin: 0 10px;
 
   @media only screen and (min-width: 481px) {
@@ -120,6 +94,12 @@ form.edit_event {
     display: block;
     margin-bottom: 4px;
     font-family: sans-serif;
+  }
+
+  textarea {
+    white-space: pre;
+    width: 30em;
+    height: 5em;
   }
 
   .radio-group {
@@ -148,6 +128,29 @@ form.edit_event {
     padding: 10px 15px 5px;
     margin: 20px 0;
     border: 1px solid;
+  }
+}
+
+.lat-lng {
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    max-width: calc(30em + (4 * 2px));
+  }
+
+  a {
+    margin: 8px 0;
+    text-decoration: underline;
+
+    &:hover {
+      border: 0;
+    }
+  }
+
+  .help {
+    margin-top: 5px;
   }
 }
 
