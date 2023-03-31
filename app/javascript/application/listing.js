@@ -6,7 +6,7 @@ import { format } from 'timeago.js'
   var $ = require('jquery');
 
   $(document).ready(function() {
-    if ($('body').hasClass('website') && $('body').hasClass('index')) {
+    if ($('body').hasClass('listings') && $('body').hasClass('index')) {
       var timeago = document.querySelector('time.timeago')
       timeago.innerHTML = format(timeago.getAttribute('datetime'));
       add_socials_analytics_events();

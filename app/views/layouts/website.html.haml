@@ -1,9 +1,3 @@
-- content_for :analytics do
-  = render "website/google_analytics"
-
-- content_for :stylesheet do
-  = stylesheet_link_tag 'application', media: "screen"
-
 - content_for :content do
 
   - if ENV['BANNER_HEAD'].present?
@@ -15,21 +9,15 @@
   #page
     #header
       = heading_hn(params[:action], :class=>"site_title") do
-        %em= link_to_unless_current 'Swing Out London', :controller => "website", :action => "index"
+        %em= link_to_unless_current 'Swing Out London', root_path
         Listings of Lindy Hop classes and socials in London
-
-      - if params[:action] == "index"
-        %p#last_updated_ago
-          Last updated
-          %time.timeago{ datetime: @last_updated_datetime.getutc.iso8601 }
-            at #{ @last_updated_time } on #{ @last_updated_date }
 
       = yield(:navigation)
 
     = content_for?(:page_content) ? yield(:page_content) : yield
 
     #footer
-      = render :partial => 'website/navigation', :locals => { :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link }
+      = render 'layouts/website/navigation', :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link
 
       %address
         Site by
