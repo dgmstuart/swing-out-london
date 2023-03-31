@@ -37,7 +37,7 @@ RSpec.describe "Admins can copy an organiser link" do
   context "when an organiser token does not exist", :js do
     it "allows one to be generated" do
       event = create(:event, organiser_token: nil)
-      allow(SecureRandom).to receive(:hex).and_return("abc123".dup)
+      allow(SecureRandom).to receive(:hex).and_return("abc123")
 
       skip_login
       visit "/events/#{event.id}/edit"
