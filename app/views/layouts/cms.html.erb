@@ -10,11 +10,11 @@
     <link href="humans.txt" rel="author"></link>
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag 'application_cms', media: "screen" %>
+    <%= javascript_include_tag :application %>
+    <%= javascript_include_tag :application_cms %>
   </head>
   <body class="<%= "#{@controller_name} #{@action_name}" %>" >
     <%= render "layouts/cms/admin_bar" %>
     <%= yield %>
-    <%= javascript_include_tag :application %>
-    <%= javascript_include_tag :application_cms %>
   </body>
 </html>
