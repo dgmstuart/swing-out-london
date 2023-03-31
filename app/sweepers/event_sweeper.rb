@@ -15,6 +15,6 @@ class EventSweeper < ActionController::Caching::Sweeper
 
   def expire_cache
     @controller ||= ActionController::Base.new
-    expire_fragment('listings#index')
+    expire_fragment("listings#index")
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'support/system/omniauth_helper'
-require 'faker/facebook'
+require "support/system/omniauth_helper"
+require "faker/facebook"
 
 module System
   module AuthHelper
@@ -14,7 +14,7 @@ module System
     end
 
     def stub_login(id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name)
-      stub_auth_hash(id: id, name: name)
+      stub_auth_hash(id:, name:)
       Rails.application.config.x.facebook.admin_user_ids = [id]
     end
 
@@ -23,7 +23,7 @@ module System
                              name: Faker::Name.lindy_hop_name,
                              auth_id: Faker::Facebook.uid,
                              logged_in?: true)
-      login_session = instance_double(LoginSession, 'Fake login', user: user)
+      login_session = instance_double(LoginSession, "Fake login", user:)
       allow(LoginSession).to receive(:new).and_return(login_session)
     end
   end

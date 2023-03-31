@@ -4,7 +4,7 @@ class CmsBaseController < ActionController::Base # rubocop:disable Rails/Applica
   before_action :authenticate
   before_action :set_controller_and_action_name
 
-  layout 'cms'
+  layout "cms"
 
   helper_method :current_user
   attr_reader :current_user
@@ -20,7 +20,7 @@ class CmsBaseController < ActionController::Base # rubocop:disable Rails/Applica
   end
 
   def audit_user
-    { 'auth_id' => current_user.auth_id, 'name' => current_user.name }
+    { "auth_id" => current_user.auth_id, "name" => current_user.name }
   end
 
   def login_session

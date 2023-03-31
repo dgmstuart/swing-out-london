@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'webmock/rspec'
+require "webmock/rspec"
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: 'chromedriver.storage.googleapis.com'
+  allow: "chromedriver.storage.googleapis.com"
 )

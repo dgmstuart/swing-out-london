@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MapsController < ApplicationController
-  layout 'map'
+  layout "map"
 
   caches_action :socials, :classes,
                 cache_path: proc { |c| c.params.permit(:day, :date, :venue_id) },
@@ -11,7 +11,7 @@ class MapsController < ApplicationController
 
   def classes
     # Varnish will cache the page for 3600 seconds = 1 hour:
-    response.headers['Cache-Control'] = 'public, max-age=3600'
+    response.headers["Cache-Control"] = "public, max-age=3600"
 
     @day = Maps::Classes::DayParser.parse(params[:day], today)
     venues = Maps::Classes::VenueQuery.new(@day).venues
@@ -21,38 +21,38 @@ class MapsController < ApplicationController
     )
     @map =
       Maps::Map.new(
-        venues: venues,
+        venues:,
         highlighted_venue_id: params[:venue_id].to_i,
-        marker_info_builder: marker_info_builder,
-        info_window_partial: 'classes_map_info',
+        marker_info_builder:,
+        info_window_partial: "classes_map_info",
         renderer: self
       )
   rescue Maps::Classes::DayParser::NonDayError
-    flash[:warn] = t('flash.map.days_of_week')
+    flash[:warn] = t("flash.map.days_of_week")
     logger.warn("Not a recognised day: #{@day}")
     redirect_to map_classes_path
   end
 
   def socials
     # Varnish will cache the page for 3600 seconds = 1 hour:
-    response.headers['Cache-Control'] = 'public, max-age=3600'
+    response.headers["Cache-Control"] = "public, max-age=3600"
 
     @map_dates = Maps::Socials::Dates.new(params[:date], today)
 
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
     marker_info_builder = Maps::MarkerInfoBuilder.new(
-      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date, today: today)
+      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date, today:)
     )
     @map =
       Maps::Map.new(
-        venues: venues,
+        venues:,
         highlighted_venue_id: params[:venue_id].to_i,
-        marker_info_builder: marker_info_builder,
-        info_window_partial: 'socials_map_info',
+        marker_info_builder:,
+        info_window_partial: "socials_map_info",
         renderer: self
       )
   rescue Maps::Socials::Dates::DateOutOfRangeError
-    flash[:warn] = t('flash.map.14_days')
+    flash[:warn] = t("flash.map.14_days")
     logger.warn("Not a date in the visible range: #{@date}")
     redirect_to map_socials_path
   end

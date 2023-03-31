@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'facebook_graph_api/http_client'
+require "facebook_graph_api/http_client"
 
 module FacebookGraphApi
   class Api
@@ -9,7 +9,7 @@ module FacebookGraphApi
     end
 
     def revoke_login(user_id)
-      raise ArgumentError, 'missing user id' if user_id.nil?
+      raise ArgumentError, "missing user id" if user_id.nil?
 
       http_client.delete("/#{user_id}/permissions")
     end

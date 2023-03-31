@@ -25,7 +25,7 @@ module Maps
       {
         id: venue.id,
         title: venue.name,
-        position: position,
+        position:,
         infoWindowContent: info_window_content(venue)
       }.tap do |json_options|
         json_options[:icon] = highlighted_marker_icon if venue.id == highlighted_venue_id
@@ -33,7 +33,7 @@ module Maps
     end
 
     def highlighted_marker_icon
-      'https://maps.google.com/mapfiles/marker_purple.png'
+      "https://maps.google.com/mapfiles/marker_purple.png"
     end
 
     def info_window_content(venue)

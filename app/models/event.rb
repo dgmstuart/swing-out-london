@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'out_of_date_calculator'
-require 'date_expectation_calculator'
-require 'dates_string_parser'
-require 'day_names'
+require "out_of_date_calculator"
+require "date_expectation_calculator"
+require "dates_string_parser"
+require "day_names"
 
 class Event < ApplicationRecord
   audited
@@ -11,8 +11,8 @@ class Event < ApplicationRecord
   CONSIDERED_NEW_FOR = 1.month
 
   belongs_to :venue
-  belongs_to :class_organiser, class_name: 'Organiser', optional: true
-  belongs_to :social_organiser, class_name: 'Organiser', optional: true
+  belongs_to :class_organiser, class_name: "Organiser", optional: true
+  belongs_to :social_organiser, class_name: "Organiser", optional: true
   has_many :events_swing_dates, dependent: :destroy
   has_many :swing_dates, -> { distinct(true) }, through: :events_swing_dates
   has_many :events_swing_cancellations, dependent: :destroy
@@ -36,7 +36,7 @@ class Event < ApplicationRecord
   def cannot_be_weekly_and_have_dates
     return unless weekly? && !dates.empty?
 
-    errors.add(:date_array, 'must be empty for weekly events')
+    errors.add(:date_array, "must be empty for weekly events")
   end
 
   def will_be_listed
@@ -49,19 +49,19 @@ class Event < ApplicationRecord
     return unless has_social?
     return if title.present?
 
-    errors.add(:title, 'must be present for social dances')
+    errors.add(:title, "must be present for social dances")
   end
 
   def classes_must_have_organisers
     return unless has_class? && class_organiser_id.nil?
 
-    errors.add(:class_organiser_id, 'must be present for classes')
+    errors.add(:class_organiser_id, "must be present for classes")
   end
 
   # display constants:
-  NOTAPPLICABLE = 'n/a'
-  UNKNOWN_ORGANISER = 'Unknown'
-  SEE_WEB = '(See Website)'
+  NOTAPPLICABLE = "n/a"
+  UNKNOWN_ORGANISER = "Unknown"
+  SEE_WEB = "(See Website)"
 
   class << self
     # Find the datetime of the most recently updated event
@@ -85,7 +85,7 @@ class Event < ApplicationRecord
     end
 
     def socials_on_date(date, venue = nil)
-      swing_date = SwingDate.find_by(date: date)
+      swing_date = SwingDate.find_by(date:)
 
       weekly_socials = weekly.socials.active_on(date).on_same_day_of_week(date)
       if venue
@@ -100,7 +100,7 @@ class Event < ApplicationRecord
     end
 
     def cancelled_events_on_date(date)
-      swing_date = SwingDate.find_by(date: date)
+      swing_date = SwingDate.find_by(date:)
       return [] unless swing_date
 
       swing_date.cancelled_events.pluck :id
@@ -129,15 +129,15 @@ class Event < ApplicationRecord
   scope :weekly, -> { where(frequency: 1) }
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
 
-  scope :gigs, -> { where(event_type: 'gig') }
-  scope :non_gigs, -> { where.not(event_type: 'gig') }
+  scope :gigs, -> { where(event_type: "gig") }
+  scope :non_gigs, -> { where.not(event_type: "gig") }
 
-  scope :active, -> { where('last_date IS NULL OR last_date > ?', Date.current) }
-  scope :ended, -> { where('last_date IS NOT NULL AND last_date < ?', Date.current) }
-  scope :active_on, ->(date) { where('(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)', date, date) }
+  scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
+  scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.current) }
+  scope :active_on, ->(date) { where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
-  scope :listing_classes_on_day, ->(day) { listing_classes.where(day: day) }
+  scope :listing_classes_on_day, ->(day) { listing_classes.where(day:) }
   scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
@@ -156,12 +156,12 @@ class Event < ApplicationRecord
   # ----- #
 
   def dates_cache_key
-    caching_key('dates')
+    caching_key("dates")
   end
 
   def dates
     Rails.cache.fetch(dates_cache_key) do
-      swing_dates.order('date ASC').collect(&:date)
+      swing_dates.order("date ASC").collect(&:date)
     end
   end
 
@@ -208,11 +208,11 @@ class Event < ApplicationRecord
   # READ METHODS #
 
   def date_array(future: false)
-    return_array_of_dates(dates, future: future)
+    return_array_of_dates(dates, future:)
   end
 
   def cancellation_array(future: false)
-    return_array_of_dates(cancellations, future: future)
+    return_array_of_dates(cancellations, future:)
   end
 
   private
@@ -240,11 +240,11 @@ class Event < ApplicationRecord
   # For the event listing tables:
   def status_string
     if inactive?
-      'inactive'
+      "inactive"
     elsif out_of_date
-      'out_of_date'
+      "out_of_date"
     elsif near_out_of_date
-      'near_out_of_date'
+      "near_out_of_date"
     end
   end
 
@@ -278,7 +278,7 @@ class Event < ApplicationRecord
   end
 
   def date_rows_printer
-    DatePrinter.new(separator: ', ')
+    DatePrinter.new(separator: ", ")
   end
 
   public
@@ -350,7 +350,7 @@ class Event < ApplicationRecord
   end
 
   def latest_date_cache_key
-    caching_key('latest_date')
+    caching_key("latest_date")
   end
 
   # What's the Latest date in the date array

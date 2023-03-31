@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  layout 'website'
+  layout "website"
 
   def new; end
 
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    flash.alert = 'There was a problem with your login to Facebook'
+    flash.alert = "There was a problem with your login to Facebook"
     logger.warn("Authorisation failed with: #{params[:message]}")
 
     redirect_to action: :new

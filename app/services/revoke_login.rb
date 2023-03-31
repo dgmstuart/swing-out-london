@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'facebook_graph_api/api'
+require "facebook_graph_api/api"
 
 class RevokeLogin
   def initialize(
@@ -23,7 +23,7 @@ class RevokeLogin
   attr_reader :http_client_builder, :api_builder, :logger
 
   def api_for(auth_token)
-    http_client = http_client_builder.new(auth_token: auth_token)
+    http_client = http_client_builder.new(auth_token:)
     api_builder.new(http_client)
   end
 end

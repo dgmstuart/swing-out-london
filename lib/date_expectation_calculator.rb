@@ -25,7 +25,7 @@ end
 class NoExpectedDate
   include Comparable
   def to_s(_format = :default)
-    'Unknown'
+    "Unknown"
   end
 
   def <=>(_other)

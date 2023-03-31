@@ -15,11 +15,11 @@ module EventsHelper
 
   def event_type_select
     [
-      ['School (organised by a dance school)', 'school'],
-      ['Dance Club (organised for dancers)', 'dance_club'],
-      ['Vintage Club (not aimed at dancers)', 'vintage_club'],
-      ['Gig (not aimed at dancers)', 'gig'],
-      ['Festival (part of a larger event)', 'festival']
+      ["School (organised by a dance school)", "school"],
+      ["Dance Club (organised for dancers)", "dance_club"],
+      ["Vintage Club (not aimed at dancers)", "vintage_club"],
+      ["Gig (not aimed at dancers)", "gig"],
+      ["Festival (part of a larger event)", "festival"]
     ].freeze
   end
 
@@ -42,10 +42,10 @@ module EventsHelper
   # --- #
 
   def action_links(anchors)
-    tag.p(class: 'actions_panel') do
-      string = link_to 'New event', new_event_path
+    tag.p(class: "actions_panel") do
+      string = link_to "New event", new_event_path
       anchors.each do |a|
-        string += ' -- '
+        string += " -- "
         string += link_to a.to_s, anchor: a
       end
       string

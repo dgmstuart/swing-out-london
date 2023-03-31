@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'facebook_graph_api/appsecret_proof_generator'
+require "facebook_graph_api/appsecret_proof_generator"
 
 module FacebookGraphApi
   class HttpClient
@@ -18,7 +18,7 @@ module FacebookGraphApi
     def delete(path)
       response = client.delete(
         uri(path),
-        params: { appsecret_proof: appsecret_proof }
+        params: { appsecret_proof: }
       )
       case response.code
       when 200
@@ -37,7 +37,7 @@ module FacebookGraphApi
     end
 
     def error_message_for(json)
-      message = JSON.parse(json).fetch('error')
+      message = JSON.parse(json).fetch("error")
       "#{message.fetch('type')} (code: #{message.fetch('code')}) #{message.fetch('message')}"
     end
   end

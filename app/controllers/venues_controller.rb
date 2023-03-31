@@ -2,7 +2,7 @@
 
 class VenuesController < CmsBaseController
   def index
-    @venues = Venue.order('name ASC').includes(:events)
+    @venues = Venue.order("name ASC").includes(:events)
   end
 
   def show
@@ -23,10 +23,10 @@ class VenuesController < CmsBaseController
     @venue = Venue.new(venue_params)
 
     if @venue.save
-      flash[:notice] = t('flash.success', model: 'Venue', action: 'created')
+      flash[:notice] = t("flash.success", model: "Venue", action: "created")
       redirect_to(@venue)
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -34,11 +34,11 @@ class VenuesController < CmsBaseController
     @venue = Venue.find(params[:id])
 
     if @venue.update(venue_params)
-      flash[:notice] = t('flash.success', model: 'Venue', action: 'updated')
+      flash[:notice] = t("flash.success", model: "Venue", action: "updated")
 
       redirect_to(@venue)
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

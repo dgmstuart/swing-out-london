@@ -2,13 +2,13 @@
 
 class Advert
   def self.current(env: ENV)
-    return unless env['ADVERT_ENABLED'] == 'true'
+    return unless env["ADVERT_ENABLED"] == "true"
 
     new(
-      url: env.fetch('ADVERT_URL'),
-      image_url: env.fetch('ADVERT_IMAGE_URL'),
-      title: env.fetch('ADVERT_TITLE'),
-      google_id: env.fetch('ADVERT_GOOGLE_ID')
+      url: env.fetch("ADVERT_URL"),
+      image_url: env.fetch("ADVERT_IMAGE_URL"),
+      title: env.fetch("ADVERT_TITLE"),
+      google_id: env.fetch("ADVERT_GOOGLE_ID")
     )
   end
 

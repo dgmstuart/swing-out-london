@@ -9,7 +9,7 @@ module Maps
 
     def build(venue)
       events = event_finder.find(venue)
-      presenter_klass.new(venue: venue, events: events)
+      presenter_klass.new(venue:, events:)
     end
 
     private
