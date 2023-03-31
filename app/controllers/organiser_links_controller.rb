@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrganiserTokensController < CmsBaseController
+class OrganiserLinksController < CmsBaseController
   def create
     event = Event.find(params.fetch(:event_id))
     token = SecureRandom.hex

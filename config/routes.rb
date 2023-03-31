@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :events do
     put :archive, on: :member
-    resources :organiser_tokens, only: %i[create]
+    resources :organiser_links, only: %i[create]
   end
 
   resources :external_events, only: %i[edit update]

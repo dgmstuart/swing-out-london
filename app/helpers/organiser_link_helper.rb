@@ -9,7 +9,7 @@ module OrganiserLinkHelper
 
     link_to(
       text,
-      event_organiser_tokens_path(event),
+      event_organiser_links_path(event),
       html_options
     )
   end
