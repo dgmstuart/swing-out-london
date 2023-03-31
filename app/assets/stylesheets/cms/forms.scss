@@ -140,15 +140,6 @@ form.edit_venue {
     max-width: calc(30em + (4 * 2px));
   }
 
-  a {
-    margin: 8px 0;
-    text-decoration: underline;
-
-    &:hover {
-      border: 0;
-    }
-  }
-
   .help {
     margin-top: 5px;
   }
