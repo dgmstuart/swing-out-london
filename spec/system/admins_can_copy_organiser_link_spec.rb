@@ -21,7 +21,7 @@ RSpec.describe "Admins can copy an organiser link" do
 
       expect(clipboard_text).to eq(url)
 
-      click_on "Generate link"
+      click_on "revoke this link"
 
       page.driver.browser.switch_to.alert.accept
 
@@ -45,8 +45,6 @@ RSpec.describe "Admins can copy an organiser link" do
       expect(page).to have_content("No organiser edit link exists for this event")
 
       click_on "Generate link"
-
-      page.driver.browser.switch_to.alert.accept
 
       expect(page).to have_content("/external_events/abc123/edit")
     end
