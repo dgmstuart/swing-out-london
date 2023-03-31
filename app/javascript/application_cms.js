@@ -51,4 +51,6 @@ window.addEventListener("DOMContentLoaded", (_event) => {
   }
 })
 
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
 import "./controllers"
