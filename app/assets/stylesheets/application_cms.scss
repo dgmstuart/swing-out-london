@@ -4,7 +4,6 @@
  *= require shared/buttons
  *= require cms/admin_bar
  *= require cms/forms
- *= require cms/outdated
  *= require cms/account
  *= require accessible-autocomplete/dist/accessible-autocomplete.min.css
  *= require cms/accessible-autocomplete-overrides
@@ -165,15 +164,21 @@ td.updated {
   max-width: 80px;
 }
 
-/* TODO- replace with proper colours! */
-tr.out_of_date td.dates,
-tr.all_out_of_date td {
-  background-color: #f00;
+.events {
+  td.dates {
+    background-color: #beed76;
+  }
+
+  tr.no_future_dates td.dates {
+    background-color: #ffa500;
+  }
 }
 
-tr.near_out_of_date td.dates,
-tr.all_nearly_out_of_date td {
-  background-color: #ffa500;
+.venues,
+.organisers {
+  tr.no_future_dates td.name {
+    background-color: #c0c0c0;
+  }
 }
 
 tr.inactive td.dates {

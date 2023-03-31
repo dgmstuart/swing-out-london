@@ -116,22 +116,6 @@ RSpec.describe ShowEvent do
     end
   end
 
-  describe "#expected_date" do
-    it "formats the date" do
-      event = instance_double("Event", expected_date: Date.new(2011, 5, 14))
-
-      expect(described_class.new(event).expected_date).to eq "Saturday 14th May"
-    end
-
-    context "when there is no expected date" do
-      it "is nil" do
-        event = instance_double("Event", expected_date: nil)
-
-        expect(described_class.new(event).expected_date).to be_nil
-      end
-    end
-  end
-
   describe "#first_date" do
     it "formats the date" do
       event = instance_double("Event", first_date: Date.new(2011, 5, 14))

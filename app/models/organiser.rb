@@ -31,12 +31,8 @@ class Organiser < ApplicationRecord
       .or(Event.where(social_organiser_id: id))
   end
 
-  def all_events_out_of_date?
-    events.all?(&:out_of_date)
-  end
-
-  def all_events_nearly_out_of_date?
-    events.all?(&:near_out_of_date)
+  def no_future_dates?
+    events.none?(&:future_dates?)
   end
 
   def can_delete?

@@ -129,11 +129,6 @@
       <%= f.text_field :first_date, value: @event.first_date.to_s, :size => 10, :class =>"shortfield" %>
     </div>
     <div class='form-group'>
-      <%= f.label :expected_date, 'Next expected' %>
-      <p class='help'>If you leave this blank then it will be calculated based on the dates and frequency</p>
-      <%= f.text_field :expected_date, value: @event.expected_date.to_s, :size => 10, :class =>"shortfield"%>
-    </div>
-    <div class='form-group'>
       <%= f.label :last_date %>
       <p class='help'>The event will stop being included in the listings after this date</p>
       <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "out_of_date_calculator"
-require "date_expectation_calculator"
 require "dates_string_parser"
 require "day_names"
 
@@ -234,27 +232,16 @@ class Event < ApplicationRecord
   public
 
   def inactive?
-    ended? || (out_of_date && one_off?)
+    ended? || (!future_dates? && one_off?)
   end
 
   # For the event listing tables:
   def status_string
     if inactive?
       "inactive"
-    elsif out_of_date
-      "out_of_date"
-    elsif near_out_of_date
-      "near_out_of_date"
+    elsif !future_dates?
+      "no_future_dates"
     end
-  end
-
-  # TODO: these should be done in the db, not in ruby
-  def self.out_of_date
-    socials.non_gigs.select { |e| !e.inactive? && e.out_of_date }
-  end
-
-  def self.near_out_of_date
-    socials.non_gigs.select { |e| !e.inactive? && !e.out_of_date && e.near_out_of_date }
   end
 
   # PRINT METHODS #
@@ -264,7 +251,15 @@ class Event < ApplicationRecord
   end
 
   def print_dates_rows
-    date_rows_printer.print(dates)
+    if last_date.present?
+      "Ended"
+    elsif weekly?
+      "Every week"
+    elsif dates.empty?
+      "(No dates)"
+    else
+      date_rows_printer.print(dates.reverse)
+    end
   end
 
   def print_cancellations
@@ -285,31 +280,12 @@ class Event < ApplicationRecord
 
   # COMPARISON METHODS #
 
-  # Are all the dates for the event in the past?
-  def out_of_date(comparison_date = Date.current)
-    return false if weekly? # Weekly events don't have date arrays, so would otherwise show as out of date
+  def future_dates?
+    return true if weekly? # Weekly events don't have date arrays but implicitly will be running in the future
     return false if last_date
-    return false unless expecting_a_date?(comparison_date)
+    return false unless latest_date
 
-    OutOfDateCalculator.new(latest_date, comparison_date).out_of_date?
-  end
-
-  # Does an event not have any dates not already shown in the socials list?
-  def near_out_of_date
-    out_of_date Date.current + INITIAL_SOCIALS
-  end
-
-  # What date is the next event expected on? (based on the last known date)
-  def expected_date
-    return self[:expected_date] if self[:expected_date] && !((latest_date && self[:expected_date] <= latest_date))
-    return NoExpectedDate.new if frequency.nil? || weekly? || frequency.zero?
-    return NoExpectedDate.new unless latest_date
-
-    latest_date + frequency.weeks
-  end
-
-  def expecting_a_date?(comparison_date)
-    DateExpectationCalculator.new(infrequent?, expected_date, comparison_date).expecting_a_date?
+    latest_date > Date.current
   end
 
   # Is the event new? (probably only applicable to classes)
@@ -342,10 +318,6 @@ class Event < ApplicationRecord
   end
 
   def infrequent?
-    frequency >= 26
-  end
-
-  def less_frequent?
     frequency.zero? || frequency >= 4
   end
 

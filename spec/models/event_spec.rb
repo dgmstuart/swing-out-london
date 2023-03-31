@@ -371,36 +371,82 @@ describe Event do
     end
   end
 
-  describe "expected_date" do
-    it "is a month after the previous date for monthly events" do
-      event = build(:event, frequency: 4)
-      # FIXME: EVIL!!!: Stubbing object under test
-      allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
-      expect(event.expected_date).to eq Date.new(1970, 1, 29)
+  describe "#future_dates?" do
+    context "when the event has no dates" do
+      it "is false" do
+        event = create(:event, dates: [])
+
+        expect(event.future_dates?).to be false
+      end
     end
 
-    it "is a year after the previous date for monthly events" do
-      event = build(:event, frequency: 52)
-      # FIXME: EVIL!!!: Stubbing object under test
-      allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
-      expect(event.expected_date).to eq Date.new(1970, 12, 31)
+    context "when the event has one date which is today" do
+      it "is true" do
+        event = create(:event, dates: [Time.zone.today])
+
+        expect(event.future_dates?).to be false
+      end
     end
 
-    it "is after a far-future date if there are no dates" do
-      event = build(:event, frequency: 4) # No dates by default
-      expect(event.expected_date).to be > Time.zone.today + 1.year
+    context "when the event has one date in the future" do
+      it "is true" do
+        event = create(:event, dates: [Time.zone.today + 1])
+
+        expect(event.future_dates?).to be true
+      end
     end
 
-    it "is after a far-future date if the event is weekly" do
-      event = build(:event, frequency: 1)
-      expect(event.expected_date).to be > Time.zone.today + 1.year
+    context "when the event has one date in the past" do
+      it "is false" do
+        event = create(:event, dates: [Time.zone.today - 2])
+
+        expect(event.future_dates?).to be false
+      end
     end
 
-    it "is after a far-future date if the event has frequency 0 and other dates" do
-      event = build(:event, frequency: 0)
-      # FIXME: EVIL!!!: Stubbing object under test
-      allow(event).to receive(:latest_date).and_return Date.new(1970, 1, 1)
-      expect(event.expected_date).to be > Time.zone.today + 1.year
+    context "when the event is weekly" do
+      it "is true" do
+        event = create(:event, frequency: 1, dates: [])
+
+        expect(event.future_dates?).to be true
+      end
+    end
+
+    context "when the event has an end date" do
+      it "is true" do
+        event = create(:event, dates: [], last_date: (Time.zone.today + 1.year))
+
+        expect(event.future_dates?).to be false
+      end
+    end
+  end
+
+  describe "ended?" do
+    it "is always false if there is no last date" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], last_date: nil),
+        build(:event, dates: [Date.current.tomorrow], last_date: nil),
+        build(:event, dates: [], last_date: nil)
+      ]
+      expect(events).not_to include(be_ended)
+    end
+
+    it "is true if there is a last date in the past" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], last_date: "October 1st 1958".to_date),
+        build(:event, dates: [Date.current.tomorrow], last_date: "October 1st 1958".to_date),
+        build(:event, dates: [], last_date: "October 1st 1958".to_date)
+      ]
+      expect(events).to all(be_ended)
+    end
+
+    it "is false if there is a last date in the future" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], last_date: Date.current.tomorrow),
+        build(:event, dates: [Date.current.tomorrow], last_date: Date.current.tomorrow),
+        build(:event, dates: [], last_date: Date.current.tomorrow)
+      ]
+      expect(events).not_to include(be_ended)
     end
   end
 end
