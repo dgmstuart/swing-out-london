@@ -24,11 +24,6 @@ describe MapsController do
         it "redirects to the main classes page" do
           expect(get(:classes, params: { day: "fuseday" })).to redirect_to("/map/classes")
         end
-
-        it "shows a flash message" do
-          get :classes, params: { day: "fuseday" }
-          expect(flash[:warn]).to eq "We can only show you classes for days of the week"
-        end
       end
 
       context "when the day is described in words" do
@@ -49,11 +44,6 @@ describe MapsController do
         context "the url contained 'yesterday'" do
           it "redirects to the main classes page" do
             expect(get(:classes, params: { day: "yesterday" })).to redirect_to("/map/classes")
-          end
-
-          it "shows a flash message" do
-            get :classes, params: { day: "fuseday" }
-            expect(flash[:warn]).to eq "We can only show you classes for days of the week"
           end
         end
       end
@@ -94,11 +84,6 @@ describe MapsController do
       context "when the url string doesn't represent a date" do
         it "redirects to the main socials page" do
           expect(get(:socials, params: { date: "asfasfasf" })).to redirect_to("/map/socials")
-        end
-
-        it "shows a flash message" do
-          get :socials, params: { date: "asfasfasf" }
-          expect(flash[:warn]).to eq "We can only show you events for the next 14 days"
         end
       end
     end

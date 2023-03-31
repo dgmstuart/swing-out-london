@@ -50,12 +50,14 @@ RSpec.describe "Users can view a map of upcoming events" do
       expect(info_window).to have_link("Bedroom Bounce", href: "https://bb.com")
     end
 
-    it "looking at a date in the past" do
-      visit "/map/socials/2015-12-25"
+    context "when a date in the past is requested" do
+      it "redirects to the main socials view" do
+        visit "/map/socials/2015-12-25"
 
-      expect(page).to have_content("Swing Out London")
-      expect(page).to have_content("Lindy Map")
-      expect(page).to have_content("We can only show you events for the next 14 days")
+        expect(page).to have_content("Swing Out London")
+        expect(page).to have_content("Lindy Map")
+        expect(page).to have_current_path("/map/socials")
+      end
     end
 
     context "when a social has no title (regression test)" do
@@ -113,12 +115,14 @@ RSpec.describe "Users can view a map of upcoming events" do
       expect(info_window).to have_link("Class (Balboa) with Morning Swing", href: "https://dlc.com")
     end
 
-    it "looking at a misspelled day" do
-      visit "/map/classes/mOoonday"
+    context "when the day is misspelled" do
+      it "redirects to the main classes view" do
+        visit "/map/classes/mOoonday"
 
-      expect(page).to have_content("Swing Out London")
-      expect(page).to have_content("Lindy Map")
-      expect(page).to have_content("We can only show you classes for days of the week")
+        expect(page).to have_content("Swing Out London")
+        expect(page).to have_content("Lindy Map")
+        expect(page).to have_current_path("/map/classes")
+      end
     end
   end
 end
