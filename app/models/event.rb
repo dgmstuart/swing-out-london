@@ -315,7 +315,7 @@ class Event < ApplicationRecord
     frequency == 1
   end
 
-  def less_frequent?
+  def infrequent?
     frequency.zero? || frequency >= 4
   end
 
