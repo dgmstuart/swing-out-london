@@ -2,16 +2,13 @@
 
 class OrganiserLinksController < CmsBaseController
   def create
-    event = Event.find(params.fetch(:event_id))
-    token = SecureRandom.hex
+    @event = Event.find(params.fetch(:event_id))
 
-    respond_to do |format|
-      if event.update(organiser_token: token)
-        @url = edit_external_event_url(token)
-        format.js
-      else
-        format.json { render json: event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(organiser_token: SecureRandom.hex)
+      render "organiser_links/show"
+    else
+      logger.error "Failed to save organiser token for Event##{@event.id}"
+      render "organiser_links/error"
     end
   end
 end

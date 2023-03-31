@@ -1,0 +1,27 @@
+<section data-controller="organiser-link">
+  <h3 class='form-group-title'>Organiser edit link</h3>
+  <turbo-frame id="organiser_link">
+    <p id='organiser-token' data-organiser-link-target="source">
+      <% if event.organiser_token %>
+        <%= edit_external_event_url(event.organiser_token) %>
+      <% else %>
+        No organiser edit link exists for this event
+      <% end %>
+    </p>
+    <p class='help'>This is a link you can share with an organiser to allow them to add dates and change details.</p>
+    <% if event.organiser_token %>
+      <p class='help'>
+        You can
+        <%= link_to_generate_organiser(
+          'revoke this link', event, class: "normal-link", data: {
+            confirm: "Are you sure you want to create a new link? This will invalidate the previous link"
+          }
+        )%>
+        and generate a new one if you think the link isn't being used properly
+      </p>
+      <a href="#" class="button button-smaller" data-action="click->organiser-link#copy">Copy</a>
+    <% else %>
+      <%= link_to_generate_organiser('Generate link', event, class: class_names('button', 'button-smaller')) %>
+    <% end %>
+  </turbo-frame>
+</section>

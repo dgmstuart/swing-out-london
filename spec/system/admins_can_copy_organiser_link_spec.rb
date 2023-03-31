@@ -47,6 +47,24 @@ RSpec.describe "Admins can copy an organiser link" do
       click_on "Generate link"
 
       expect(page).to have_content("/external_events/abc123/edit")
+      expect(page).to have_link("revoke this link")
+      expect(page).to have_link("Copy")
+    end
+  end
+
+  context "when the event fails to save" do
+    it "shows an error" do
+      create(:event, organiser_token: "abc123")
+      allow(SecureRandom).to receive(:hex).and_return("abc123")
+      event = create(:event)
+      allow(event).to receive(:update).and_return false
+
+      skip_login
+      visit "/events/#{event.id}/edit"
+
+      click_on "Generate link"
+
+      expect(page).to have_content("Something went wrong")
     end
   end
 end
