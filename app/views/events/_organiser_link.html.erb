@@ -19,7 +19,7 @@
       </p>
       <a href="#" class="button button-smaller" data-action="organiser-link#copy">Copy</a>
     <% else %>
-      <%= link_to_generate_organiser('Generate link', event, class: class_names('button', 'button-smaller')) %>
+      <%= link_to_generate_organiser('Generate link', event, class: class_names('button', 'button-smaller'), data: { action: "organiser-link#delayedCopy" }) %>
     <% end %>
   </turbo-frame>
 </section>

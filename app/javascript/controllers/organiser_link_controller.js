@@ -7,30 +7,42 @@ export default class extends Controller {
   copy(event) {
     event.preventDefault();
 
-    const buttonActive = function (element, changeText) {
-      const {
-        innerText,
-        style: { color, backgroundColor },
-      } = element;
+    const button = event.target;
 
-      setTimeout(() => {
-        element.style.color = color;
-        element.style.backgroundColor = backgroundColor;
-        element.innerText = innerText;
-      }, 1500);
+    this._copyToClipboard(button)
+  }
 
-      element.style.color = "#384f6e";
-      element.style.backgroundColor = "white";
-      element.innerText = changeText;
-    };
+  delayedCopy() {
+    window.addEventListener('turbo:frame-load', () => {
+      const button = document.querySelector('[data-action="organiser-link#copy"]')
 
-    const target = event.target;
+      this._copyToClipboard(button)
+    });
+  }
 
-    target.disabled = true;
-    buttonActive(target, "Copied");
+  _copyToClipboard(button) {
+    button.disabled = true;
+    this._buttonActive(button, "Copied");
 
     navigator.clipboard.writeText(this.sourceTarget.value);
 
-    target.disabled = false;
+    button.disabled = false;
   }
+
+  _buttonActive(element, changeText) {
+    const {
+      innerText,
+      style: { color, backgroundColor },
+    } = element;
+
+    setTimeout(() => {
+      element.style.color = color;
+      element.style.backgroundColor = backgroundColor;
+      element.innerText = innerText;
+    }, 1500);
+
+    element.style.color = "#384f6e";
+    element.style.backgroundColor = "white";
+    element.innerText = changeText;
+  };
 }

@@ -39,6 +39,7 @@ RSpec.describe "Admins can copy an organiser link" do
   context "when an organiser token does not exist", :js do
     it "allows one to be generated" do
       event = create(:event, organiser_token: nil)
+      grant_clipboard_permissions
       allow(SecureRandom).to receive(:hex).and_return("abc123")
 
       skip_login
@@ -52,6 +53,7 @@ RSpec.describe "Admins can copy an organiser link" do
       expect(page).to have_field("Organiser edit link", with: url)
       expect(page).to have_link("revoke this link")
       expect(page).to have_link("Copy")
+      expect(clipboard_text).to eq(url)
     end
   end
 
