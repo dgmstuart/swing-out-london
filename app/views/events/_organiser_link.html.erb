@@ -1,13 +1,11 @@
 <section data-controller="organiser-link">
-  <h3 class='form-group-title'>Organiser edit link</h3>
+  <h3 class='form-group-title'><label for="organiser_link_url">Organiser edit link<label></h3>
   <turbo-frame id="organiser_link">
-    <p id='organiser-token' data-organiser-link-target="source">
-      <% if event.organiser_token %>
-        <%= edit_external_event_url(event.organiser_token) %>
-      <% else %>
-        No organiser edit link exists for this event
-      <% end %>
-    </p>
+    <% if event.organiser_token %>
+      <input id="organiser_link_url" type="text" value="<%= edit_external_event_url(event.organiser_token) %>" data-organiser-link-target="source" readonly>
+    <% else %>
+      <p>No organiser edit link exists for this event</p>
+    <% end %>
     <p class='help'>This is a link you can share with an organiser to allow them to add dates and change details.</p>
     <% if event.organiser_token %>
       <p class='help'>

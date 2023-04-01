@@ -29,9 +29,8 @@ export default class extends Controller {
     target.disabled = true;
     buttonActive(target, "Copied");
 
-    navigator.clipboard.writeText(this.sourceTarget.textContent.trim());
+    navigator.clipboard.writeText(this.sourceTarget.value);
 
     target.disabled = false;
   }
-
 }

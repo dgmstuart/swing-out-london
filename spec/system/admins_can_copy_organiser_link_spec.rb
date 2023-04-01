@@ -15,22 +15,24 @@ RSpec.describe "Admins can copy an organiser link" do
       visit "/events/#{event.id}/edit"
 
       url = URI.join(page.server_url, "/external_events/abc123/edit").to_s
-      expect(page).to have_content(url)
+      expect(page).to have_field("Organiser edit link", with: url)
 
       click_on "Copy"
 
       expect(clipboard_text).to eq(url)
 
+      allow(SecureRandom).to receive(:hex).and_return("xyz789")
+
       click_on "revoke this link"
 
       page.driver.browser.switch_to.alert.accept
 
-      expect(page).not_to have_content(url)
+      expect(page).not_to have_field("Organiser edit link", with: url)
 
       event.reload
       expect(event.organiser_token).not_to eq "abc123"
       new_url = URI.join(page.server_url, "/external_events/#{event.organiser_token}/edit").to_s
-      expect(page).to have_content(new_url)
+      expect(page).to have_field("Organiser edit link", with: new_url)
     end
   end
 
@@ -46,7 +48,8 @@ RSpec.describe "Admins can copy an organiser link" do
 
       click_on "Generate link"
 
-      expect(page).to have_content("/external_events/abc123/edit")
+      url = URI.join(page.server_url, "/external_events/abc123/edit").to_s
+      expect(page).to have_field("Organiser edit link", with: url)
       expect(page).to have_link("revoke this link")
       expect(page).to have_link("Copy")
     end
@@ -66,5 +69,9 @@ RSpec.describe "Admins can copy an organiser link" do
 
       expect(page).to have_content("Something went wrong")
     end
+  end
+
+  def organiser_link_url
+    find("#organiser_link input").value
   end
 end
