@@ -2,7 +2,8 @@
   <h3 class='form-group-title'><label for="organiser_link_url">Organiser edit link<label></h3>
   <turbo-frame id="organiser_link">
     <% if event.organiser_token %>
-      <input id="organiser_link_url" type="text" value="<%= edit_external_event_url(event.organiser_token) %>" data-organiser-link-target="source" readonly>
+      <input id="organiser_link_url" type="text" value="<%= edit_external_event_url(event.organiser_token) %>" data-organiser-link-target="source" readonly><!--
+   --><a href="#" class="button-on-input" data-action="organiser-link#copy">Copy</a>
     <% else %>
       <p>No organiser edit link exists for this event</p>
     <% end %>
@@ -17,7 +18,6 @@
         )%>
         and generate a new one if you think the link isn't being used properly
       </p>
-      <a href="#" class="button button-smaller" data-action="organiser-link#copy">Copy</a>
     <% else %>
       <%= link_to_generate_organiser('Generate link', event, class: class_names('button', 'button-smaller'), data: { action: "organiser-link#delayedCopy" }) %>
     <% end %>

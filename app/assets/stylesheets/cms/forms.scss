@@ -147,11 +147,29 @@ form.edit_venue {
 
 #organiser_link_url {
   width: 40em;
-  border: solid;
-  border-radius: 5px;
+  border: solid $text-colour;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
   background: inherit;
   padding: 5px;
   margin-bottom: 10px;
+}
+
+.button-on-input {
+  display: inline-block;
+  background-color: $button-colour;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  border: solid $text-colour;
+  padding: 5px 10px;
+  font-size: inherit;
+  line-height: normal;
+
+  &:hover {
+    color: $text-colour;
+    background-color: $button-active-colour;
+    border: solid $text-colour;
+  }
 }
 
 form.edit_event h3 label {
