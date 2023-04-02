@@ -1,5 +1,5 @@
 <% if target.errors.any? %>
-<div id="errorExplanation">
+<div id="error-explanation">
   <h2><%= pluralize(target.errors.count, "error") %> prohibited this record from being saved:</h2>
   <ul>
   <% target.errors.full_messages.each do |msg| %>
