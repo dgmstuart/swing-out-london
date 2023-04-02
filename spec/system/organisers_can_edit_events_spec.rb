@@ -134,7 +134,7 @@ RSpec.describe "Organisers can edit events" do
       select "", from: "Venue"
       click_on "Update"
 
-      expect(page).to have_content("1 error prohibited this record from being saved:")
+      expect(page).to have_content("1 error prevented this record from being saved:")
         .and have_content("Venue must exist")
     end
   end

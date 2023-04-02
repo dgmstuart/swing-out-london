@@ -330,6 +330,8 @@ describe Event do
   end
 
   describe "(validations)" do
+    subject { build(:event) }
+
     it "is invalid if it has neither a class nor a social nor a taster" do
       expect(build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
     end
@@ -368,6 +370,12 @@ describe Event do
       event = build(:event, has_taster: false, has_social: false, has_class: true, class_organiser: nil)
       event.valid?
       expect(event.errors.messages).to eq(class_organiser_id: ["must be present for classes"])
+    end
+
+    it "is invalid if url is empty" do
+      event = build(:event, url: nil)
+      event.valid?
+      expect(event.errors.messages).to eq(url: ["can't be blank"])
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_28_222048) do
+ActiveRecord::Schema.define(version: 2023_03_26_223651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2022_09_28_222048) do
     t.datetime "updated_at"
     t.integer "venue_id"
     t.integer "frequency"
-    t.string "url", limit: 255
+    t.string "url", limit: 255, null: false
     t.string "date_array", limit: 255
     t.string "cancellation_array", limit: 255
     t.date "first_date"

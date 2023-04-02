@@ -36,11 +36,7 @@ module ListingsHelper
       concat tag.span("#{event.venue_name} in #{event.venue_area}", class: "info")
     end
 
-    if event.url.nil?
-      tag.span text, id: event.id
-    else
-      link_to text, event.url, id: event.id
-    end
+    link_to text, event.url, id: event.id
   end
 
   def social_title(event)
@@ -108,7 +104,7 @@ module ListingsHelper
       end
     end
 
-    link_to_unless social.url.nil?, text, social.url
+    link_to text, social.url
   end
 
   def swingclass_listing(swingclass, day)
@@ -133,11 +129,7 @@ module ListingsHelper
       concat tag.span swingclass_info(event), class: "info" if swingclass_info(event)
     end
 
-    if event.url.nil?
-      text
-    else
-      link_to text, event.url
-    end
+    link_to text, event.url
   end
 
   def swingclass_details(event)
@@ -171,7 +163,7 @@ module ListingsHelper
       concat tag.span swingclass_info(event), class: "info" if swingclass_info(event)
     end
 
-    link_to_unless event.url.nil?, text, event.url
+    link_to text, event.url
   end
 
   def mapinfo_swingclass_details(event)

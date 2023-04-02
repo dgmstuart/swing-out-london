@@ -180,38 +180,27 @@ form.edit_event h3 label {
 
 // Rails Errors
 /////////////////////////////////////////////
-.fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#errorExplanation {
-  width: 400px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 12px;
+#error-explanation {
+  border: 2px solid #c00;
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
 
-#errorExplanation h2 {
+#error-explanation h2 {
   text-align: left;
+  font-size: 18px;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
+  margin-bottom: 0;
   background-color: #c00;
   color: #fff;
 }
 
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
+#error-explanation ul {
+  list-style: disc;
+  padding: 10px 5px 10px 30px;
 }
 
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
+#error-explanation li {
+  font-size: 14px;
 }
