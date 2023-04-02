@@ -67,7 +67,7 @@ RSpec.describe "Admins can edit events", :js do
 
     click_on "Update"
 
-    expect(page).to have_content("4 errors prohibited this record from being saved:")
+    expect(page).to have_content("4 errors prevented this record from being saved:")
       .and have_content("Url is invalid")
       .and have_content("Url can't be blank")
       .and have_content("Event type can't be blank")
