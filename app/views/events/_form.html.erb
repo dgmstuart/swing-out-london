@@ -18,28 +18,7 @@
   </section>
 
   <% if @event.persisted? %>
-    <section data-controller="organiser-link">
-      <h3 class='form-group-title'>Organiser edit link</h3>
-      <p id='organiser-token' data-organiser-link-target="source" >
-        <% if @event.organiser_token %>
-          <%= edit_external_event_url(@event.organiser_token) %>
-        <% else %>
-          No organiser edit link exists for this event
-        <% end %>
-      </p>
-      <p class='help'>This is a link you can share with an organiser to allow them to add dates and change details</p>
-      <% if @event.organiser_token %>
-        <a href="#" class="button button-smaller" data-action="click->organiser-link#copy">Copy</a>
-      <% end %>
-      <%= link_to(
-        'Generate link',
-        event_organiser_tokens_path(@event),
-        method: :post,
-        remote: true,
-        data: { confirm: "Are you sure you want to create a new link? This will invalidate the previous link" },
-        class: class_names('button', 'button-smaller', { "button-danger": @event.organiser_token }))
-      %>
-    </section>
+    <%= render "events/organiser_link", event: @event %>
   <% end %>
 
   <section>

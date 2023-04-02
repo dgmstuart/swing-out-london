@@ -1,26 +1,29 @@
 import accessibleAutocomplete from 'accessible-autocomplete'
 
-accessibleAutocomplete.enhanceSelectElement({
-  selectElement: document.querySelector('#event_venue_id'),
-  defaultValue: '',
-  preserveNullOptions: true,
-  showAllValues: true
-})
-accessibleAutocomplete.enhanceSelectElement({
-  selectElement: document.querySelector('#event_class_organiser_id'),
-  defaultValue: '',
-  preserveNullOptions: true,
-  showAllValues: true
-})
-accessibleAutocomplete.enhanceSelectElement({
-  selectElement: document.querySelector('#event_social_organiser_id'),
-  defaultValue: '',
-  preserveNullOptions: true,
-  showAllValues: true
-})
+function initEventSelects() {
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#event_venue_id'),
+    defaultValue: '',
+    preserveNullOptions: true,
+    showAllValues: true
+  })
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#event_class_organiser_id'),
+    defaultValue: '',
+    preserveNullOptions: true,
+    showAllValues: true
+  })
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#event_social_organiser_id'),
+    defaultValue: '',
+    preserveNullOptions: true,
+    showAllValues: true
+  })
+}
 
 function initClassStyleRadio() {
-  const radios = document.getElementById("class-style-selection").querySelectorAll("input[type=radio]");
+  const formGroup = document.getElementById("class-style-selection")
+  const radios = formGroup.querySelectorAll("input[type=radio]");
   const otherSelection = document.getElementById("class_style_option_other");
   const classStyleGroup = document.getElementById(otherSelection.dataset['target']);
   const hiddenClass = 'hidden';
@@ -37,8 +40,17 @@ function initClassStyleRadio() {
   })
 }
 
-window.addEventListener('load', (event) => {
-  initClassStyleRadio();
+function eventFormPage () {
+  return document.querySelector("body.events.new, body.events.edit, body.events.create, body.events.update") != null
+}
+
+window.addEventListener("DOMContentLoaded", (_event) => {
+  if (eventFormPage()) {
+    initClassStyleRadio();
+    initEventSelects();
+  }
 })
 
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
 import "./controllers"

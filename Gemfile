@@ -34,6 +34,7 @@ gem "sprockets"
 gem "stimulus-rails"
 gem "strip_attributes"
 gem "test-unit"
+gem "turbo-rails"
 
 group :development do
   gem "bullet"

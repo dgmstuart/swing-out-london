@@ -371,6 +371,10 @@ GEM
     tilt (2.0.10)
     timecop (0.9.5)
     timeout (0.3.2)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -451,6 +455,7 @@ DEPENDENCIES
   strip_attributes
   test-unit
   timecop
+  turbo-rails
   vcr
   webdrivers
   webmock
