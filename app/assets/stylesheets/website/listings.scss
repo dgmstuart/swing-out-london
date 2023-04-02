@@ -24,27 +24,26 @@ $small_font_size: 12px;
 }
 
 #caveat {
-  margin-top: 15px;
   text-align: center;
+  padding: 15px 10px 0;
 }
 
 #soldn_on_the_web,
-#note,
-#caveat {
+#note {
   max-width: 500px;
 }
 
-#caveat {
+main {
   padding: 0 10px;
 }
 
-#classes,
-#social_dances {
-  margin: 0 10px;
+.donation {
+  max-width: 400px;
+  margin: 40px auto 0;
 }
 
 // MOBILE ONLY
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 767px) {
   #social_dances h2 {
     padding-top: 50px;
     margin: 0 30px;
@@ -52,46 +51,39 @@ $small_font_size: 12px;
   }
 }
 
-// AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (min-width: 768px) {
+  body.listings main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+
   #caveat {
-    padding: 0 30px;
+    grid-column-start: span 2;
+    margin: 0 30px;
+  }
+
+  #key {
+    margin: 0 30px 20px;
   }
 
   #classes,
   #social_dances {
-    margin: 0 30px;
-  }
-}
-
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-  #caveat {
-    padding: 0 27px;
+    margin: 0;
   }
 
-  #classes {
-    width: 354px;
-    float: left;
-    position: relative;
-    left: 3px;
-    margin: 0 0 0 27px;
-
-    .daylist {
-      margin: 1.2em 0 40px;
-      border-right: $basic-border;
-      padding-right: 22px;
-    }
+  .daylist {
+    padding: 0 28px 0 30px;
+    border-right: $basic-border; // 3px wide
   }
 
-  #social_dances {
-    margin: 0 30px 0 381px;
+  .datelist {
+    padding: 0 30px 0 29px;
+  }
 
-    .datelist {
-      margin: 1.2em 0 0;
-      border-left: $basic-border;
-      padding-left: 22px;
-    }
+  #social_dances .note {
+    margin: 10px 30px 0 35px;
   }
 }
 
@@ -99,16 +91,6 @@ $small_font_size: 12px;
 @media only screen and (min-width: 900px) {
   #caveat {
     max-width: 100%;
-  }
-
-  #classes {
-    width: 421px;
-    clear: left;
-  }
-
-  #social_dances {
-    width: 422px;
-    margin-left: 448px;
   }
 
   #note,
@@ -121,11 +103,6 @@ $small_font_size: 12px;
     width: 370px;
     float: left;
   }
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-  // placeholder
 }
 
 // Header
@@ -278,13 +255,11 @@ $small_font_size: 12px;
   }
 
   .note {
-    margin: 10px 35px 30px;
     font-style: italic;
     font-size: 15px;
   }
 
   #key {
-    margin: 20px 30px;
     font-size: 17px;
     font-style: italic;
   }
@@ -296,6 +271,7 @@ $small_font_size: 12px;
   text-align: center;
   text-transform: none;
   margin-top: 35px;
+  margin-bottom: 20px;
   line-height: 1;
 
   em {
@@ -409,8 +385,6 @@ li.date_row {
   padding: 0;
   background-color: #fff8ea;
   border: 6px double $text-colour;
-  width: 368px;
-  margin-top: 2.5em;
 
   p {
     margin: 10px;
@@ -440,10 +414,4 @@ li.date_row {
 .donate_button {
   background-color: #ef4836;
   color: white;
-}
-
-@media only screen and (max-width: 480px) {
-  .donation {
-    width: 95%;
-  }
 }

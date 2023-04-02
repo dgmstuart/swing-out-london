@@ -23,7 +23,9 @@
       <%= yield(:navigation) %>
     </div>
 
-    <%= content_for?(:page_content) ? yield(:page_content) : yield %>
+    <main>
+      <%= content_for?(:page_content) ? yield(:page_content) : yield %>
+    </main>
 
     <div id="footer">
       <%= render 'layouts/website/navigation', :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link %>
