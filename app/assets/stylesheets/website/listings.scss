@@ -30,7 +30,7 @@ main {
 
 // MOBILE ONLY
 @media only screen and (max-width: 767px) {
-  #social_dances h2 {
+  #classes h2 {
     padding-top: 50px;
     margin: 0 30px;
     border-top: $basic-border;
@@ -48,6 +48,14 @@ main {
   #caveat {
     grid-column-start: span 2;
     margin: 0 30px;
+  }
+
+  #classes {
+    order: 1;
+  }
+
+  #social_dances {
+    order: 2;
   }
 
   #key {
