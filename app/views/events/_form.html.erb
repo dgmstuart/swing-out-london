@@ -12,8 +12,15 @@
       <%= f.select :venue_id, venue_select, {:include_blank => true} %>
     </div>
     <div class='form-group'>
-      <%= f.label :event_type %>
-      <%= f.select :event_type, event_type_select, {:include_blank => true} %>
+      <h4 class="form-subgroup-title">Event Type</h4>
+
+      <% event_type_select.each do |description, help, value| %>
+        <label>
+          <%= f.radio_button(:event_type, value) %>
+          <%= description %>
+          <span class="help"><%= help %></span>
+        </label>
+      <% end %>
     </div>
   </section>
 
