@@ -64,9 +64,6 @@ class Event < ApplicationRecord
   class << self
     # Find the datetime of the most recently updated event
     def last_updated_at
-      # if the db is empty, return the beginning of the epoch:
-      return Time.zone.at(0) if first.nil?
-
       maximum(:updated_at)
     end
 
