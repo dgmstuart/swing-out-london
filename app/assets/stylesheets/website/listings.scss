@@ -39,7 +39,7 @@ main {
 
 .donation {
   max-width: 400px;
-  margin: 40px auto 0;
+  margin: 25px auto;
 }
 
 // MOBILE ONLY
@@ -84,6 +84,10 @@ main {
 
   #social_dances .note {
     margin: 10px 30px 0 35px;
+  }
+
+  #social_dances .donation {
+    margin: 25px;
   }
 }
 
@@ -382,18 +386,26 @@ li.date_row {
 // DONATION
 /////////////////////////////////////////////
 .donation {
-  padding: 0;
+  padding: 10px 15px;
   background-color: #fff8ea;
   border: 6px double $text-colour;
+  text-align: center;
 
   p {
-    margin: 10px;
+    width: 100%;
   }
+}
+
+.share_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 15px;
+  justify-content: center;
 }
 
 .share_button {
   display: inline-block;
-  margin: 0 0 10px 10px;
   padding: 8px 20px;
 
   &:hover {

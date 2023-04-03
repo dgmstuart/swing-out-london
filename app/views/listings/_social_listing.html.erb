@@ -4,9 +4,9 @@
     <% socials.each do |social| %>
       <%= social_listing(social, date) %>
     <% end %>
-
-    <% if index==1 %>
-      <%= render "listings/donate_message"%>
-    <% end %>
   </ul>
+<% end %>
+
+<% if index==1 %>
+  <%= render "listings/donate_message"%>
 <% end %>
