@@ -38,100 +38,6 @@ describe Event do
     end
   end
 
-  describe ".self.socials_dates" do
-    context "when there is only one social" do
-      it "returns the correct array when that social has only one date in the future" do
-        one_date = Time.zone.today + 7
-        event = create(:intermittent_social, dates: [one_date])
-
-        aggregate_failures do
-          expect(described_class.socials_dates(Time.zone.today).length).to eq(1)
-          expect(described_class.socials_dates(Time.zone.today)[0][0]).to eq(one_date)
-          expect(described_class.socials_dates(Time.zone.today)[0][1]).to eq([event])
-        end
-      end
-
-      it "returns the correct array when that social has two dates in the future" do
-        later_date = Time.zone.today + 7
-        earlier_date = Time.zone.today + 1
-        event = create(:intermittent_social, dates: [later_date, earlier_date])
-
-        aggregate_failures do
-          expect(described_class.socials_dates(Time.zone.today).length).to eq(2)
-          expect(described_class.socials_dates(Time.zone.today)[0][0]).to eq(earlier_date)
-          expect(described_class.socials_dates(Time.zone.today)[0][1]).to eq([event])
-          expect(described_class.socials_dates(Time.zone.today)[1][0]).to eq(later_date)
-          expect(described_class.socials_dates(Time.zone.today)[1][1]).to eq([event])
-        end
-      end
-
-      it "returns the correct array when that social has one date today, one at the limit and one outside the limit" do
-        lower_limit_date = Time.zone.today
-        upper_limit_date = Time.zone.today + 13
-        outside_limit_date = Time.zone.today + 14
-        event = create(:intermittent_social, dates: [upper_limit_date, outside_limit_date, lower_limit_date])
-
-        aggregate_failures do
-          expect(described_class.socials_dates(Time.zone.today).length).to eq(2)
-          expect(described_class.socials_dates(Time.zone.today)).to eq(
-            [[lower_limit_date, [event], []], [upper_limit_date, [event], []]]
-          )
-        end
-      end
-
-      it "returns the correct array when that social has one date in the future and one in the past" do
-        past_date = Time.zone.today - 1.month
-        future_date = Time.zone.today + 5
-        event = create(:intermittent_social, dates: [past_date, future_date])
-
-        aggregate_failures do
-          expect(described_class.socials_dates(Time.zone.today).length).to eq(1)
-          expect(described_class.socials_dates(Time.zone.today)).to eq([[future_date, [event], []]])
-        end
-      end
-    end
-
-    pending "add more tests for socials_dates which return multiple events"
-    pending "add tests including weekly events!"
-
-    context "when things are complex" do
-      def date(offset)
-        Time.zone.today + offset
-      end
-
-      pending "do more complex examples!"
-
-      # class_with_social = FactoryBot.create(:class, :event_type =>"class_with_social", :day => "Tuesday")
-
-      # rubocop:disable RSpec/ExampleLength
-      it "returns the correct array with a bunch of classes and socials" do
-        # create one class for each day, starting on monday. None of these should be included
-        create_list(:class, 7)
-
-        # not included events:
-        create(:intermittent_social, dates: [date(-10)])
-        create(:intermittent_social, dates: [date(-370)])
-        create(:intermittent_social, dates: [date(20)])
-
-        # included events:
-        event_d1 = create(:intermittent_social, dates: [date(1)])
-        event_d10_d11 = create(:social, frequency: 4, dates: [date(10), date(11)])
-        event_1_d8 = create(:social, frequency: 4, dates: [date(8)], title: "A")
-        event_2_d8 = create(:social, frequency: 2, dates: [date(8)], title: "Z")
-
-        expect(described_class.socials_dates(Time.zone.today)).to eq(
-          [
-            [date(1), [event_d1], []],
-            [date(8), [event_1_d8, event_2_d8], []],
-            [date(10), [event_d10_d11], []],
-            [date(11), [event_d10_d11], []]
-          ]
-        )
-      end
-      # rubocop:enable RSpec/ExampleLength
-    end
-  end
-
   describe ".socials_on_date" do
     it "returns intermittent socials on a given date" do
       date = Date.current
@@ -157,16 +63,6 @@ describe Event do
       socials = described_class.socials_on_date(date)
 
       expect(socials).to be_empty
-    end
-
-    it "sorts the results by title" do
-      date = Date.current.next_occurring(:thursday)
-      create(:intermittent_social, dates: [date], title: "Casablanca")
-      create(:weekly_social, day: "Thursday", title: "Alhambra")
-      create(:intermittent_social, dates: [date], title: "Boogaloo")
-      socials = described_class.socials_on_date(date)
-
-      expect(socials.pluck(:title)).to eq %w[Alhambra Boogaloo Casablanca]
     end
   end
 

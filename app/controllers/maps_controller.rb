@@ -40,7 +40,7 @@ class MapsController < ApplicationController
 
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
     marker_info_builder = Maps::MarkerInfoBuilder.new(
-      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date, today:)
+      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date)
     )
     @map =
       Maps::Map.new(

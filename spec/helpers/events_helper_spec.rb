@@ -17,12 +17,6 @@ describe EventsHelper do
     end
 
     context "when there is a class organiser" do
-      it "raises an error if the organiser's name is blank" do
-        organiser = build(:organiser, name: nil)
-        swingclass = build(:class, class_organiser: organiser)
-        expect { helper.school_name(swingclass) }.to raise_error(RuntimeError)
-      end
-
       it "uses the name if the shortname doesn't exist" do
         organiser = build(:organiser, name: "foo", shortname: nil)
         swingclass = build(:class, class_organiser: organiser)

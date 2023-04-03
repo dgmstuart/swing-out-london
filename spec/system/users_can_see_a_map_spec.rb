@@ -16,7 +16,8 @@ RSpec.describe "Users can view a map of upcoming events" do
         venue:,
         title: "Bedroom Bounce",
         url: "https://bb.com",
-        dates: [Date.new(2019, 6, 8)]
+        dates: [Date.new(2019, 6, 8)],
+        has_taster: true
       )
 
       Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
