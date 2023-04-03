@@ -54,12 +54,12 @@ module ListingsRowsHelper
   end
 
   # if there are no socials on this day, we need to add a class
-  def socialsh2(socials_dates, &)
-    if socials_dates.empty?
-      tag.h2(id: "socials_today", &)
-    else
-      tag.h2(&)
-    end
+  def socialsh2(socials_dates, today, html_options = {}, &)
+    first_date = socials_dates.first&.first
+    any_socials_today = first_date && first_date == today
+    html_options = { id: "socials_today" }.merge(html_options) unless any_socials_today
+
+    tag.h2(**html_options, &)
   end
 
   def today_label
