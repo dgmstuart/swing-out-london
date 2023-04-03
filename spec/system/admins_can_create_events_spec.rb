@@ -17,7 +17,7 @@ RSpec.describe "Admins can create events", :js do
     autocomplete_select "The 100 Club", from: "Venue"
     autocomplete_select "The London Swing Dance Society", from: "Social organiser"
     autocomplete_select "The London Swing Dance Society", from: "Class organiser"
-    select "School", from: "Event type"
+    choose "School" # Event Type
     check "Has a taster?"
     check "Has social?"
     choose "Other (balboa, shag etc)"
@@ -70,7 +70,7 @@ RSpec.describe "Admins can create events", :js do
       .and have_content("Events must have either a Social or a Class")
 
     autocomplete_select "The 100 Club", from: "Venue"
-    select "school", from: "Event type"
+    choose "School" # Event Type
     check "Has social?"
     fill_in "Title", with: "Stompin'"
     fill_in "event_frequency", with: "1"

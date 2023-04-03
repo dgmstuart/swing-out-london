@@ -18,7 +18,7 @@ RSpec.describe "Admins can edit events", :js do
     autocomplete_select "The 100 Club", from: "Venue"
     autocomplete_select "The London Swing Dance Society", from: "Social organiser"
     autocomplete_select "The London Swing Dance Society", from: "Class organiser"
-    select "School", from: "Event type"
+    choose "School" # Event Type
     check "Has a taster?"
     check "Has social?"
     choose "Lindy Hop or general swing"
@@ -55,7 +55,6 @@ RSpec.describe "Admins can edit events", :js do
 
     click_on "Edit", match: :first
 
-    select "", from: "Event type"
     empty_autocomplete_field "Venue", "xyz"
     # uncheck doesn't work in selenium chrome headless?
     # uncheck 'Has a class?'
@@ -67,9 +66,8 @@ RSpec.describe "Admins can edit events", :js do
 
     click_on "Update"
 
-    expect(page).to have_content("3 errors prevented this record from being saved:")
+    expect(page).to have_content("2 errors prevented this record from being saved:")
       .and have_content("Url can't be blank")
-      .and have_content("Event type can't be blank")
       .and have_content("Date array must be empty for weekly events")
     # can't uncheck the relevant checkboxes in selenium chrome headless??:
     # .and have_content("Events must have either a Social or a Class, otherwise they won't be listed!")
