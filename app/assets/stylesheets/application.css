@@ -5,6 +5,7 @@
 *= require website/navigation
 *= require website/website
 *= require website/listings
+*= require website/listings_navigation
 *= require website/info
 *= require website/login
 *= require website/map

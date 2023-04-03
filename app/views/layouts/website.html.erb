@@ -1,0 +1,43 @@
+<% content_for :content do %>
+  <% if ENV['BANNER_HEAD'].present? %>
+    <div class="banner">
+      <h3>
+        <%= ENV['BANNER_HEAD'] %>
+      </h3>
+      <p>
+        <%= ENV['BANNER_BODY'] %>
+      </p>
+    </div>
+    <div class="non-semantic-padding"></div>
+  <% end %>
+
+  <div id="page">
+    <div id="header">
+      <%= heading_hn(params[:action], :class=>"site_title") do %>
+        <em>
+          <%= link_to_unless_current 'Swing Out London', root_path %>
+        </em>
+        Listings of Lindy Hop classes and socials in London
+      <% end %>
+
+      <%= yield(:navigation) %>
+    </div>
+
+    <main>
+      <%= content_for?(:page_content) ? yield(:page_content) : yield %>
+    </main>
+
+    <div id="footer">
+      <%= render 'layouts/website/navigation', :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link %>
+      <address>
+        Site by
+        <%= link_to "@dgmstuart", "https://twitter.com/dgmstuart" %>
+      </address>
+      <p id="last_updated">
+        Last updated at #{ @last_updated_time } on #{ @last_updated_date }
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

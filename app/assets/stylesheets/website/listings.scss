@@ -12,201 +12,89 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // SMALL
-#last_updated_ago {
-  margin-bottom: 20px;
-}
-
-#site_intro,
-#soldn_on_the_web,
-#note,
-#caveat {
-  margin: auto;
-}
 
 #caveat {
-  margin-top: 15px;
   text-align: center;
+  margin: auto;
+  padding: 15px 10px 0;
 }
 
-#soldn_on_the_web,
-#note,
-#caveat {
-  max-width: 500px;
-}
-
-#caveat {
+main {
   padding: 0 10px;
 }
 
-#classes,
-#social_dances {
-  margin: 0 10px;
+.donation {
+  max-width: 400px;
+  margin: 25px auto;
 }
 
 // MOBILE ONLY
-@media only screen and (max-width: 480px) {
-  #social_dances h2 {
+@media only screen and (max-width: 767px) {
+  #classes h2 {
     padding-top: 50px;
     margin: 0 30px;
     border-top: $basic-border;
   }
 }
 
-// AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (min-width: 768px) {
+  body.listings main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+
   #caveat {
-    padding: 0 30px;
+    grid-column-start: span 2;
+    margin: 0 30px;
+  }
+
+  #classes {
+    order: 1;
+  }
+
+  #social_dances {
+    order: 2;
+  }
+
+  #key {
+    margin: 0 30px 20px;
   }
 
   #classes,
   #social_dances {
-    margin: 0 30px;
-  }
-}
-
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
-  #caveat {
-    padding: 0 27px;
+    margin: 0;
   }
 
-  #classes {
-    width: 354px;
-    float: left;
-    position: relative;
-    left: 3px;
-    margin: 0 0 0 27px;
-
-    .daylist {
-      margin: 1.2em 0 40px;
-      border-right: $basic-border;
-      padding-right: 22px;
-    }
+  .daylist {
+    padding: 0 28px 0 30px;
+    border-right: $basic-border; // 3px wide
   }
 
-  #social_dances {
-    margin: 0 30px 0 381px;
-
-    .datelist {
-      margin: 1.2em 0 0;
-      border-left: $basic-border;
-      padding-left: 22px;
-    }
-  }
-}
-
-// DESKTOP
-@media only screen and (min-width: 900px) {
-  #caveat {
-    max-width: 100%;
+  .datelist {
+    padding: 0 30px 0 29px;
   }
 
-  #classes {
-    width: 421px;
-    clear: left;
+  #social_dances .note {
+    margin: 10px 30px 0 35px;
   }
 
-  #social_dances {
-    width: 422px;
-    margin-left: 448px;
-  }
-
-  #note,
-  #soldn_on_the_web {
-    width: 370px;
-    margin-left: 410px;
-  }
-
-  #site_intro {
-    width: 370px;
-    float: left;
-  }
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-  // placeholder
-}
-
-// Header
-/////////////////////////////////////////////
-#last_updated_ago {
-  font-style: italic;
-  text-align: center;
-}
-
-#site_intro {
-  p {
-    font-size: 18px;
-  }
-}
-
-#note {
-  p {
-    font-size: 15px;
-  }
-}
-
-#note,
-#site_intro {
-  p {
-    line-height: 1.5;
-    margin-bottom: 18px;
-  }
-
-  a {
-    font-size: 1.1em;
-
-    &:not([href^="mailto"]) {
-      text-transform: capitalize;
-    }
-  }
-}
-
-#site_intro,
-#soldn_on_the_web,
-#note {
-  a {
-    color: $link-colour;
-  }
-}
-
-#soldn_on_the_web {
-  #advert {
-    border: 6px double #0f0f0f;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-transform: uppercase;
-
-    .text {
-      display: inline-block;
-      padding: 15px;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-  }
-
-  .fb-like {
-    &:hover {
-      border: none;
-    }
-  }
-}
-
-#caveat {
-  font-style: italic;
-
-  strong {
-    color: #c00;
+  #social_dances .donation {
+    margin: 25px;
   }
 }
 
 // Main listing styles
 /////////////////////////////////////////////
+
+#caveat {
+  font-style: italic;
+
+  strong {
+    color: $highlight-colour;
+  }
+}
 
 #classes {
   .daylist {
@@ -278,13 +166,11 @@ $small_font_size: 12px;
   }
 
   .note {
-    margin: 10px 35px 30px;
     font-style: italic;
     font-size: 15px;
   }
 
   #key {
-    margin: 20px 30px;
     font-size: 17px;
     font-style: italic;
   }
@@ -296,6 +182,7 @@ $small_font_size: 12px;
   text-align: center;
   text-transform: none;
   margin-top: 35px;
+  margin-bottom: 20px;
   line-height: 1;
 
   em {
@@ -334,17 +221,17 @@ $small_font_size: 12px;
   }
 
   .cancelled_label {
-    color: #fee6b8;
+    color: $background-colour;
     background-color: $highlight-colour;
   }
 
   .new_label {
-    color: #fee6b8;
+    color: $background-colour;
     background-color: $text-colour;
   }
 
   .postcode {
-    border: 1px solid $text-colour;
+    border: $thin-border;
     display: block;
     float: left;
     width: 3.5em;
@@ -360,9 +247,9 @@ $small_font_size: 12px;
   }
 
   a.postcode:hover {
-    border: 1px solid #384f6e;
-    background-color: #384f6e;
-    color: #fee6b8;
+    border: 1px solid $link-colour;
+    background-color: $link-colour;
+    color: $background-colour;
   }
 }
 
@@ -376,7 +263,7 @@ li.today {
   }
 
   &:target {
-    border-color: #c00;
+    border-color: $highlight-colour;
     transition: all 0.8s ease-in;
   }
 }
@@ -406,20 +293,26 @@ li.date_row {
 // DONATION
 /////////////////////////////////////////////
 .donation {
-  padding: 0;
+  padding: 10px 15px;
   background-color: #fff8ea;
-  border: 6px double $text-colour;
-  width: 368px;
-  margin-top: 2.5em;
+  border: $double-border;
+  text-align: center;
 
   p {
-    margin: 10px;
+    width: 100%;
   }
+}
+
+.share_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 15px;
+  justify-content: center;
 }
 
 .share_button {
   display: inline-block;
-  margin: 0 0 10px 10px;
   padding: 8px 20px;
 
   &:hover {
@@ -440,10 +333,4 @@ li.date_row {
 .donate_button {
   background-color: #ef4836;
   color: white;
-}
-
-@media only screen and (max-width: 480px) {
-  .donation {
-    width: 95%;
-  }
 }

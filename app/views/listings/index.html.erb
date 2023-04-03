@@ -27,14 +27,6 @@
     The listings below are only a guide. Always check the source website before making any plans
   </p>
 
-  <div id="classes">
-    <h2>
-      <em>Learn!</em>
-      Weekly Classes
-    </h2>
-    <%= render "class_listings" %>
-  </div>
-
   <div id="social_dances">
     <%= socialsh2(@socials_dates) do %>
       <em>Dance!</em>
@@ -46,5 +38,13 @@
     </p>
     <%= render "social_listings" %>
     <p class="note">Swing Out London lists the next 14 days of events</p>
+  </div>
+
+  <div id="classes">
+    <h2>
+      <em>Learn!</em>
+      Weekly Classes
+    </h2>
+    <%= render "class_listings" %>
   </div>
 <% end %>
