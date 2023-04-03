@@ -2,7 +2,7 @@
 
 class LastUpdated
   def initialize(scope = Event)
-    @time = scope.last_updated_datetime
+    @time = scope.last_updated_at
   end
 
   def time_in_words

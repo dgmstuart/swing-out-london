@@ -9,7 +9,7 @@ RSpec.describe LastUpdated do
   describe "#time_in_words" do
     it "is the time of the last update in words" do
       time = ActiveSupport::TimeZone["UTC"].parse("1987-06-23T19:30:00")
-      scope = class_double("Event", last_updated_datetime: time)
+      scope = class_double("Event", last_updated_at: time)
 
       last_updated = described_class.new(scope)
 
@@ -20,7 +20,7 @@ RSpec.describe LastUpdated do
   describe "#iso" do
     it "is the time of the last update in iso8601 format" do
       time = ActiveSupport::TimeZone["UTC"].parse("1987-06-23T19:30:00")
-      scope = class_double("Event", last_updated_datetime: time)
+      scope = class_double("Event", last_updated_at: time)
 
       last_updated = described_class.new(scope)
 
@@ -29,7 +29,7 @@ RSpec.describe LastUpdated do
 
     it "converts times to UTC" do
       time = ActiveSupport::TimeZone["London"].parse("1987-06-23T19:30:00")
-      scope = class_double("Event", last_updated_datetime: time)
+      scope = class_double("Event", last_updated_at: time)
 
       last_updated = described_class.new(scope)
 
