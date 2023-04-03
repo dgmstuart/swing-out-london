@@ -1,28 +1,25 @@
 import accessibleAutocomplete from 'accessible-autocomplete'
 
-function initEventSelects() {
+function safeEnhanceSelectElement(selector) {
+  const element = document.querySelector(selector);
+  if (element === null) return;
   accessibleAutocomplete.enhanceSelectElement({
-    selectElement: document.querySelector('#event_venue_id'),
-    defaultValue: '',
-    preserveNullOptions: true,
-    showAllValues: true
-  })
-  accessibleAutocomplete.enhanceSelectElement({
-    selectElement: document.querySelector('#event_class_organiser_id'),
-    defaultValue: '',
-    preserveNullOptions: true,
-    showAllValues: true
-  })
-  accessibleAutocomplete.enhanceSelectElement({
-    selectElement: document.querySelector('#event_social_organiser_id'),
+    selectElement: element,
     defaultValue: '',
     preserveNullOptions: true,
     showAllValues: true
   })
 }
 
+function initEventSelects() {
+  safeEnhanceSelectElement('#event_venue_id')
+  safeEnhanceSelectElement('#event_class_organiser_id')
+  safeEnhanceSelectElement('#event_social_organiser_id')
+}
+
 function initClassStyleRadio() {
   const formGroup = document.getElementById("class-style-selection")
+  if (formGroup === null) return;
   const radios = formGroup.querySelectorAll("input[type=radio]");
   const otherSelection = document.getElementById("class_style_option_other");
   const classStyleGroup = document.getElementById(otherSelection.dataset['target']);
@@ -40,15 +37,9 @@ function initClassStyleRadio() {
   })
 }
 
-function eventFormPage () {
-  return document.querySelector("body.events.new, body.events.edit, body.events.create, body.events.update") != null
-}
-
 window.addEventListener("DOMContentLoaded", (_event) => {
-  if (eventFormPage()) {
-    initClassStyleRadio();
-    initEventSelects();
-  }
+  initClassStyleRadio();
+  initEventSelects();
 })
 
 import { Turbo } from "@hotwired/turbo-rails"
