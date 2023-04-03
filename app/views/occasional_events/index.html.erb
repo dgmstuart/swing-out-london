@@ -1,0 +1,18 @@
+<% content_for :navigation do %>
+  <%= render 'shared/header_navigation' %>
+<% end %>
+
+<% content_for :page_content do %>
+  <p id="caveat">
+    <strong>Please note:</strong>
+    The listings below are only a guide. Always check the source website before making any plans
+  </p>
+
+  <section class="listings">
+    <h2 class="listings-heading">
+      <em>Plan ahead!</em>
+      Clubs and Social dancing which happen less often
+    </h2>
+    <%= render "listings/social_listings" %>
+  </section>
+<% end %>

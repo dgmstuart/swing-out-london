@@ -34,7 +34,7 @@
         <%= link_to "@dgmstuart", "https://twitter.com/dgmstuart" %>
       </address>
       <p id="last_updated">
-        Last updated at #{ @last_updated_time } on #{ @last_updated_date }
+        Last updated <%= @last_updated.time_in_words %>
       </p>
     </div>
   </div>

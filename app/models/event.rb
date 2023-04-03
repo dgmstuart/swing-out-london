@@ -63,10 +63,7 @@ class Event < ApplicationRecord
 
   class << self
     # Find the datetime of the most recently updated event
-    def last_updated_datetime
-      # if the db is empty, return the beginning of the epoch:
-      return Time.zone.at(0) if first.nil?
-
+    def last_updated_at
       maximum(:updated_at)
     end
 
@@ -91,6 +88,13 @@ class Event < ApplicationRecord
       return none unless swing_date
 
       swing_date.events.socials
+    end
+
+    def less_frequent_socials_on(date)
+      swing_date = SwingDate.find_by(date:)
+      return none unless swing_date
+
+      swing_date.events.socials.less_frequent
     end
 
     def cancelled_on_date(date)
@@ -119,6 +123,7 @@ class Event < ApplicationRecord
   scope :socials, -> { where(has_social: true) }
   scope :weekly, -> { where(frequency: 1) }
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
+  scope :less_frequent, -> { where(frequency: 0).or(where(frequency: 4..52)) }
 
   scope :gigs, -> { where(event_type: "gig") }
   scope :non_gigs, -> { where.not(event_type: "gig") }

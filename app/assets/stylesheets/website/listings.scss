@@ -62,11 +62,6 @@ main {
     margin: 0 30px 20px;
   }
 
-  #classes,
-  #social_dances {
-    margin: 0;
-  }
-
   .daylist {
     padding: 0 28px 0 30px;
     border-right: $basic-border; // 3px wide
@@ -96,11 +91,14 @@ main {
   }
 }
 
-#classes {
-  .daylist {
-    font-size: $listing_font_size;
-    padding-bottom: 10px;
-  }
+#key {
+  font-size: 17px;
+  font-style: italic;
+}
+
+.daylist {
+  font-size: $listing_font_size;
+  padding-bottom: 10px;
 
   h3 {
     font-size: $class_day_font_size;
@@ -135,10 +133,8 @@ main {
   }
 }
 
-#social_dances {
-  .datelist {
-    font-size: $listing_font_size;
-  }
+.datelist {
+  font-size: $listing_font_size;
 
   h3 {
     font-size: $social_date_font_size;
@@ -164,20 +160,14 @@ main {
     background: url(image_path("highlight_icon.png")) no-repeat 0 0.15em;
     padding-left: 20px;
   }
-
-  .note {
-    font-style: italic;
-    font-size: 15px;
-  }
-
-  #key {
-    font-size: 17px;
-    font-style: italic;
-  }
 }
 
-#classes h2,
-#social_dances h2 {
+#social_dances .note {
+  font-style: italic;
+  font-size: 15px;
+}
+
+.listings-heading {
   font-size: $listing_subheading_font_size;
   text-align: center;
   text-transform: none;
@@ -196,8 +186,7 @@ main {
 
 // Common listing styles
 /////////////////////////////////////////////
-#classes,
-#social_dances {
+section.listings {
   .info {
     font-size: $small_font_size;
     font-style: italic;
@@ -267,8 +256,8 @@ li.today {
     transition: all 0.8s ease-in;
   }
 }
-#social_dances li.today { margin-bottom: 1.7em; }
-#classes li.today { margin-bottom: 0.9em; }
+.datelist li.today { margin-bottom: 1.7em; }
+.daylist li.today { margin-bottom: 0.9em; }
 
 .today_label,
 .tomorrow_label { text-transform: uppercase; }

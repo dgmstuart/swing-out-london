@@ -13,8 +13,8 @@
 <% content_for :navigation do %>
   <p id="last_updated_ago">
     Last updated
-    <time class="timeago" datetime="<%= @last_updated_datetime.getutc.iso8601 %>">
-      at <%= @last_updated_time %> on <%= @last_updated_date %>
+    <time class="timeago" time="<%= @last_updated.iso %>">
+      <%= @last_updated.time_in_words %>
     </time>
   </p>
 
@@ -27,8 +27,8 @@
     The listings below are only a guide. Always check the source website before making any plans
   </p>
 
-  <div id="social_dances">
-    <%= socialsh2(@socials_dates) do %>
+  <section id="social_dances" class="listings">
+    <%= socialsh2(@socials_dates, @today, { class: "listings-heading" }) do %>
       <em>Dance!</em>
       Clubs and Social dancing
     <% end %>
@@ -38,13 +38,13 @@
     </p>
     <%= render "social_listings" %>
     <p class="note">Swing Out London lists the next 14 days of events</p>
-  </div>
+  </section>
 
-  <div id="classes">
-    <h2>
+  <section id="classes" class="listings">
+    <h2 class="listings-heading">
       <em>Learn!</em>
       Weekly Classes
     </h2>
     <%= render "class_listings" %>
-  </div>
+  </section>
 <% end %>

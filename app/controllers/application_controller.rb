@@ -16,9 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def assign_last_updated_times
-    @last_updated_datetime = Event.last_updated_datetime
-    @last_updated_time = @last_updated_datetime.to_s(:timepart)
-    @last_updated_date = @last_updated_datetime.to_s(:listing_date)
+    @last_updated = LastUpdated.new
   end
 
   private

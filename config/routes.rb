@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "map/socials/(:date)" => "maps#socials", as: :map_socials
   get "map" => "maps#socials"
   get "venue_map_info/:id" => "maps#venue_map_info", :as => :venue_map_info
+  get "occasional" => "occasional_events#index"
 
   get "name_clash" => "name_clash#index"
 
