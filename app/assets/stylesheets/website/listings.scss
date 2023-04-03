@@ -12,25 +12,11 @@ $small_font_size: 12px;
 /////////////////////////////////////////////
 
 // SMALL
-#last_updated_ago {
-  margin-bottom: 20px;
-}
-
-#site_intro,
-#soldn_on_the_web,
-#note,
-#caveat {
-  margin: auto;
-}
 
 #caveat {
   text-align: center;
+  margin: auto;
   padding: 15px 10px 0;
-}
-
-#soldn_on_the_web,
-#note {
-  max-width: 500px;
 }
 
 main {
@@ -91,103 +77,16 @@ main {
   }
 }
 
-// DESKTOP
-@media only screen and (min-width: 900px) {
-  #caveat {
-    max-width: 100%;
-  }
-
-  #note,
-  #soldn_on_the_web {
-    width: 370px;
-    margin-left: 410px;
-  }
-
-  #site_intro {
-    width: 370px;
-    float: left;
-  }
-}
-
-// Header
+// Main listing styles
 /////////////////////////////////////////////
-#last_updated_ago {
-  font-style: italic;
-  text-align: center;
-}
-
-#site_intro {
-  p {
-    font-size: 18px;
-  }
-}
-
-#note {
-  p {
-    font-size: 15px;
-  }
-}
-
-#note,
-#site_intro {
-  p {
-    line-height: 1.5;
-    margin-bottom: 18px;
-  }
-
-  a {
-    font-size: 1.1em;
-
-    &:not([href^="mailto"]) {
-      text-transform: capitalize;
-    }
-  }
-}
-
-#site_intro,
-#soldn_on_the_web,
-#note {
-  a {
-    color: $link-colour;
-  }
-}
-
-#soldn_on_the_web {
-  #advert {
-    border: 6px double #0f0f0f;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-transform: uppercase;
-
-    .text {
-      display: inline-block;
-      padding: 15px;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-  }
-
-  .fb-like {
-    &:hover {
-      border: none;
-    }
-  }
-}
 
 #caveat {
   font-style: italic;
 
   strong {
-    color: #c00;
+    color: $highlight-colour;
   }
 }
-
-// Main listing styles
-/////////////////////////////////////////////
 
 #classes {
   .daylist {
@@ -314,17 +213,17 @@ main {
   }
 
   .cancelled_label {
-    color: #fee6b8;
+    color: $background-colour;
     background-color: $highlight-colour;
   }
 
   .new_label {
-    color: #fee6b8;
+    color: $background-colour;
     background-color: $text-colour;
   }
 
   .postcode {
-    border: 1px solid $text-colour;
+    border: $thin-border;
     display: block;
     float: left;
     width: 3.5em;
@@ -340,9 +239,9 @@ main {
   }
 
   a.postcode:hover {
-    border: 1px solid #384f6e;
-    background-color: #384f6e;
-    color: #fee6b8;
+    border: 1px solid $link-colour;
+    background-color: $link-colour;
+    color: $background-colour;
   }
 }
 
@@ -356,7 +255,7 @@ li.today {
   }
 
   &:target {
-    border-color: #c00;
+    border-color: $highlight-colour;
     transition: all 0.8s ease-in;
   }
 }
@@ -388,7 +287,7 @@ li.date_row {
 .donation {
   padding: 10px 15px;
   background-color: #fff8ea;
-  border: 6px double $text-colour;
+  border: $double-border;
   text-align: center;
 
   p {

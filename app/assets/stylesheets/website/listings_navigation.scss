@@ -1,0 +1,104 @@
+@import "../shared/colours";
+@import "borders";
+
+// LAYOUT
+/////////////////////////////////////////////
+
+// SMALL
+#last_updated_ago {
+  margin-bottom: 20px;
+}
+
+#site_intro,
+#soldn_on_the_web,
+#note {
+  margin: auto;
+}
+
+#soldn_on_the_web,
+#note {
+  max-width: 500px;
+}
+
+// DESKTOP
+@media only screen and (min-width: 900px) {
+  #note,
+  #soldn_on_the_web {
+    width: 370px;
+    margin-left: 410px;
+  }
+
+  #site_intro {
+    width: 370px;
+    float: left;
+  }
+}
+
+// Header
+/////////////////////////////////////////////
+#last_updated_ago {
+  font-style: italic;
+  text-align: center;
+}
+
+#site_intro {
+  p {
+    font-size: 18px;
+  }
+}
+
+#note {
+  p {
+    font-size: 15px;
+  }
+}
+
+#note,
+#site_intro {
+  p {
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  a {
+    font-size: 1.1em;
+
+    &:not([href^="mailto"]) {
+      text-transform: capitalize;
+    }
+  }
+}
+
+#site_intro,
+#soldn_on_the_web,
+#note {
+  a {
+    color: $link-colour;
+  }
+}
+
+#soldn_on_the_web {
+  #advert {
+    border: $double-border;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+
+    .text {
+      display: inline-block;
+      padding: 15px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .fb-like {
+    &:hover {
+      border: none;
+    }
+  }
+}
