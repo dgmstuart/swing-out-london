@@ -12,10 +12,10 @@
     <meta name="robots" content="noindex">
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag 'application_cms', media: "screen" %>
-  </head>
-  <body>
-    <%= yield %>
     <%= javascript_include_tag :application %>
     <%= javascript_include_tag :application_cms %>
+  </head>
+  <body "external_event">
+    <%= yield %>
   </body>
 </html>
