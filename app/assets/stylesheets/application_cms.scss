@@ -131,6 +131,10 @@ p.actions_panel {
   margin: 0 10px;
 }
 
+.events.index .button {
+  margin: 0 20px 0 40px;
+}
+
 table {
   border-collapse: collapse;
   margin: 20px 10px 50px;
@@ -138,7 +142,7 @@ table {
 
 table.events {
   .actions.first {
-    width: 35px;
+    max-width: 35px;
   }
 
   .actions.last {
@@ -162,6 +166,10 @@ th.actions { border: none; }
 td.dates,
 td.updated {
   max-width: 80px;
+}
+
+.sieve {
+  display: inline-block;
 }
 
 .events {

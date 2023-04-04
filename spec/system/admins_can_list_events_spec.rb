@@ -35,11 +35,11 @@ RSpec.describe "Admins can list events" do
   end
 
   it "notes when an event has ended" do
-    travel_to("1st May 1935".to_date)
+    travel_to("20th May 1935".to_date)
     create(
       :event,
       frequency: 1,
-      last_date: "20th May 1935".to_date
+      last_date: "1st May 1935".to_date
     )
 
     skip_login

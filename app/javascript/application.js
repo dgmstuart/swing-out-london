@@ -11,7 +11,7 @@ $(document).ready(function() {
   $("ul.sieve").sieve({ itemSelector: "li" });
   $("table.events").sieve({
     itemSelector: "tr",
-    searchTemplate: "<div style='text-align: center'><label>Filter: <input type='text'></label></div>"
+    searchTemplate: "<div class='sieve' style='text-align: center'><label>Filter: <input type='text'></label></div>"
   });
 });
 

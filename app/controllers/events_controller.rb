@@ -2,9 +2,7 @@
 
 class EventsController < CmsBaseController
   def index
-    @current_events = Event.current.includes(:venue, :social_organiser, :class_organiser).order("frequency, updated_at")
-    @gigs = Event.gigs.includes(:venue, :social_organiser, :class_organiser).order("title")
-    @archived_events = Event.archived.includes(:venue, :social_organiser, :class_organiser).order("title")
+    @events = Event.all.includes(:venue, :social_organiser, :class_organiser).order(has_social: :desc).order("title, updated_at")
   end
 
   def show
