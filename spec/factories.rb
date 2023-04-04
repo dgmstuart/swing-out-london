@@ -10,7 +10,6 @@ FactoryBot.define do
     has_social { true }
     event_type { "school" }
     frequency { 0 }
-    day { "Monday" }
     url { Faker::Internet.url }
 
     venue

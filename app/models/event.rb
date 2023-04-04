@@ -18,18 +18,25 @@ class Event < ApplicationRecord
 
   validates :url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
 
-  validates :event_type, :frequency, :day, presence: true
+  validates :event_type, :frequency, presence: true
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validates :organiser_token, uniqueness: true, allow_nil: true
 
   validate :cannot_be_weekly_and_have_dates
+  validate :weekly_events_must_have_day
   validate :socials_must_have_titles
   validate :classes_must_have_organisers
   validate :will_be_listed
 
   strip_attributes only: %i[title url]
+
+  def weekly_events_must_have_day
+    return unless weekly? && day.blank?
+
+    errors.add(:day, "must be present for weekly events")
+  end
 
   def cannot_be_weekly_and_have_dates
     return unless weekly? && !dates.empty?
@@ -247,7 +254,7 @@ class Event < ApplicationRecord
     if ended?
       "Ended"
     elsif weekly?
-      "Every week"
+      "Every week on #{day.pluralize}"
     elsif dates.empty?
       "(No dates)"
     else
@@ -311,6 +318,8 @@ class Event < ApplicationRecord
   end
 
   def infrequent?
+    return false unless frequency
+
     frequency.zero? || frequency >= 4
   end
 

@@ -23,9 +23,9 @@ RSpec.describe "Admins can create events", :js do
     choose "Other (balboa, shag etc)"
     fill_in "Dance style", with: "Balboa"
     fill_in "Course length", with: ""
-    select "Weekly"
+    choose "Weekly"
     select "Wednesday", from: "Day"
-    select "Occasionally"
+    choose "Monthly or occasionally"
     fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
     # TODO: Make this work:
     # fill_in 'Cancelled dates', with: '12/12/2012'
@@ -42,8 +42,7 @@ RSpec.describe "Admins can create events", :js do
       .and have_content("Class Organiser:\nThe London Swing Dance Society")
       .and have_content("School, with social and taster")
       .and have_content("Class style:\nBalboa")
-      .and have_content("Day:\nWednesday")
-      .and have_content("Frequency:\nOne-off or intermittent")
+      .and have_content("Frequency:\nMonthly or occasionally")
       .and have_content("Dates:\n12/12/2012, 19/12/2012")
       .and have_content("Cancelled:\nNone")
       .and have_content("First date:")
@@ -74,14 +73,15 @@ RSpec.describe "Admins can create events", :js do
     choose "School" # Event Type
     check "Has social?"
     fill_in "Title", with: "Stompin'"
-    select "Weekly"
+    choose "Weekly"
+    select "Tuesday", from: "Day"
     fill_in "Url", with: "http://www.lsds.co.uk/stompin"
 
     click_on "Create"
 
     expect(page).to have_content("Venue:\nThe 100 Club")
       .and have_content("School, with social")
-      .and have_content("Frequency:\nWeekly")
+      .and have_content("Frequency:\nWeekly on Tuesdays")
       .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
   end
 end

@@ -84,18 +84,27 @@
     </div>
   </section>
 
-  <section>
+  <section data-controller="event-frequency" data-event-frequency-hidden-class="hidden">
     <h3 class='form-section-title'>When?</h3>
     <div class='form-group'>
+      <h4 class="form-group-title">Frequency</h4>
+      <label>
+        <%= f.radio_button(:frequency, 1, data: { action: "event-frequency#setWeekly" }) %>
+        Weekly
+      </label>
+      <label>
+        <%= f.radio_button(:frequency, 0, data: { action: "event-frequency#setInfrequently" }) %>
+        Monthly or occasionally
+      </label>
+      <% unless [0, 1].include?(@event.frequency) %>
+        <p class="help">Legacy frequency: <%= @event.frequency %></p>
+      <% end %>
+    </div>
+    <div class='form-group <%= "hidden" unless @event.weekly? %>' data-event-frequency-target="daySelect">
       <%= f.label :day %>
-      <%= f.select :day, DAYNAMES %>
+      <%= f.select :day, DAYNAMES, include_blank: true %>
     </div>
-    <div class='form-group'>
-      <%= f.label :frequency %>
-      <p class='help'>For one-off or intermittent events, use 0</p>
-      every <%= f.text_field :frequency, :size => 2, :class =>"shortfield" %> weeks
-    </div>
-    <div class='form-group'>
+    <div class='form-group <%= "hidden" unless @event.infrequent? %>' data-event-frequency-target="datesInput">
       <%= f.label :date_array, 'Upcoming dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
       <%= f.text_field :date_array, :value => @event.print_dates %>

@@ -29,9 +29,6 @@
     %span Class style:
     = @event.class_style.presence || t('forms.events.default_class_style')
   %li
-    %span Day:
-    = @event.day
-  %li
     %span Frequency:
     = @event.frequency
   - unless @event.weekly?

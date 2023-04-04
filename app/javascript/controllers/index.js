@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import EventFrequencyController from "./event_frequency_controller"
+application.register("event-frequency", EventFrequencyController)
+
 import OrganiserLinkController from "./organiser_link_controller"
 application.register("organiser-link", OrganiserLinkController)

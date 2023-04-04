@@ -48,8 +48,8 @@ RSpec.describe "Adding a new event" do
     check "Has social?"
     fill_in "Dance style", with: "Savoy Style"
     fill_in "Course length", with: ""
+    choose "Weekly"
     select "Saturday", from: "Day"
-    fill_in "event_frequency", with: 1
     fill_in "Upcoming dates", with: ""
     fill_in "Cancelled dates", with: "09/01/1937"
     fill_in "First date", with: "12/03/1926"

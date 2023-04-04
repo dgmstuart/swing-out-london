@@ -260,6 +260,22 @@ describe Event do
       expect(event.errors.messages).to eq(title: ["must be present for social dances"])
     end
 
+    it "is invalid if it's weekly and has no day" do
+      event = build(:event, frequency: 1, day: nil)
+      event.valid?
+      expect(event.errors.messages).to eq(day: ["must be present for weekly events"])
+    end
+
+    it "is valid if it's occasional and has no day" do
+      expect(build(:event, frequency: 0, day: nil)).to be_valid
+    end
+
+    it "is invalid without a frequency" do
+      event = build(:event, frequency: nil, day: nil)
+      event.valid?
+      expect(event.errors.messages).to eq(frequency: ["can't be blank"])
+    end
+
     it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
 
     it "is invalid if it has a class and doesn't have a class organiser" do
@@ -310,7 +326,7 @@ describe Event do
 
     context "when the event is weekly" do
       it "is true" do
-        event = create(:event, frequency: 1, dates: [])
+        event = create(:weekly_social)
 
         expect(event.future_dates?).to be true
       end
