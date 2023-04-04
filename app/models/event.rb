@@ -249,7 +249,7 @@ class Event < ApplicationRecord
   end
 
   def print_dates_rows
-    if last_date.present?
+    if ended?
       "Ended"
     elsif weekly?
       "Every week"
