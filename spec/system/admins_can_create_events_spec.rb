@@ -23,8 +23,9 @@ RSpec.describe "Admins can create events", :js do
     choose "Other (balboa, shag etc)"
     fill_in "Dance style", with: "Balboa"
     fill_in "Course length", with: ""
+    select "Weekly"
     select "Wednesday", from: "Day"
-    fill_in "event_frequency", with: "0"
+    select "Occasionally"
     fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
     # TODO: Make this work:
     # fill_in 'Cancelled dates', with: '12/12/2012'
@@ -73,7 +74,7 @@ RSpec.describe "Admins can create events", :js do
     choose "School" # Event Type
     check "Has social?"
     fill_in "Title", with: "Stompin'"
-    fill_in "event_frequency", with: "1"
+    select "Weekly"
     fill_in "Url", with: "http://www.lsds.co.uk/stompin"
 
     click_on "Create"

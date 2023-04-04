@@ -12,7 +12,7 @@
       <%= f.select :venue_id, venue_select, {:include_blank => true} %>
     </div>
     <div class='form-group'>
-      <h4 class="form-subgroup-title">Event Type</h4>
+      <h4 class="form-group-title">Event Type</h4>
 
       <% event_type_select.each do |description, help, value| %>
         <label>
@@ -63,8 +63,8 @@
       <p class='help'>The location and organiser name are displayed in the listings.</>
     </div>
 
-    <h4 class='form-subgroup-title'>Class style</h3>
-    <div class='form-subgroup' id="class-style-selection">
+    <div class='form-group' id="class-style-selection">
+      <h4 class='form-group-title'>Class style</h3>
       <div class='radio-group'>
         <%= radio_button_tag 'class_style_option', 'lindy', @event.class_style.blank? %>
         <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
