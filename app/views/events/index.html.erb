@@ -1,13 +1,13 @@
 <h1 id="events">Events</h1>
-<%= action_links(["gigs","archived"]) %>
-<%=render :partial => "event_listing_table", :locals => {:events => @current_events  } %>
+<%= action_links(%w[gigs archived]) %>
+<%= render "event_listing_table", events: @current_events %>
 
 <h2 id="gigs">Gigs</h2>
-<%= action_links(["events","archived"]) %>
-<%=render :partial => "event_listing_table", :locals => {:events => @gigs  } %>
+<%= action_links(%w[events archived]) %>
+<%= render "event_listing_table", events: @gigs %>
 
 <h2 id="archived">Archived Events</h2>
-<%= action_links(["events","gigs"]) %>
-<%=render :partial => "event_listing_table", :locals => {:events => @archived_events } %>
+<%= action_links(%w[events gigs]) %>
+<%= render "event_listing_table", events: @archived_events %>
 
-<%= action_links(["events","gigs","archived"]) %>
+<%= action_links(%w[events gigs archived]) %>
