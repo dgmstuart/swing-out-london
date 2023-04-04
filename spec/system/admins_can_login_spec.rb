@@ -16,7 +16,6 @@ RSpec.describe "Admin Login" do
     click_on "Log in with Facebook"
 
     expect(page).to have_header("Events")
-    expect(page).to have_content("Archived")
     expect(page).to have_content("Al Minns")
   end
 

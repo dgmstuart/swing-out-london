@@ -1,13 +1,23 @@
 <h1 id="events">Events</h1>
-<%= action_links(%w[gigs archived]) %>
-<%= render "event_listing_table", events: @current_events %>
 
-<h2 id="gigs">Gigs</h2>
-<%= action_links(%w[events archived]) %>
-<%= render "event_listing_table", events: @gigs %>
+<%= link_to 'New event', new_event_path, class: "button" %>
 
-<h2 id="archived">Archived Events</h2>
-<%= action_links(%w[events gigs]) %>
-<%= render "event_listing_table", events: @archived_events %>
-
-<%= action_links(%w[events gigs archived]) %>
+<table class="events">
+  <thead>
+    <tr>
+      <th class="actions first"></th>
+      <th class="name">Event Name</th>
+      <th class="venue">Venue</th>
+      <th class="area">Area</th>
+      <th class="class_org">Class Organiser</th>
+      <th class="soc_org">Social Organiser</th>
+      <th class="day">Day</th>
+      <th class="fq">Fq.</th>
+      <th class="dates">Dates</th>
+      <th class="updated">Last updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'events/event_listing_table_row', collection: @events, as: :event %>
+  </tbody>
+</table>

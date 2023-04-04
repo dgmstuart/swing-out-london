@@ -36,19 +36,4 @@ module EventsHelper
   def venue_link(event)
     link_to_unless event.venue.website.nil?, event.venue.name, event.venue.website
   end
-
-  # --- #
-  # CMS #
-  # --- #
-
-  def action_links(anchors)
-    tag.p(class: "actions_panel") do
-      string = link_to "New event", new_event_path
-      anchors.each do |a|
-        string += " -- "
-        string += link_to a.to_s, anchor: a
-      end
-      string
-    end
-  end
 end

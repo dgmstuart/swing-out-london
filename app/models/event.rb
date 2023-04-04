@@ -125,7 +125,6 @@ class Event < ApplicationRecord
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
   scope :less_frequent, -> { where(frequency: 0).or(where(frequency: 4..52)) }
 
-  scope :gigs, -> { where(event_type: "gig") }
   scope :non_gigs, -> { where.not(event_type: "gig") }
 
   scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
@@ -138,10 +137,6 @@ class Event < ApplicationRecord
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
   scope :on_same_day_of_week, ->(date) { where(day: DayNames.name(date)) }
-
-  # For making sections in the Events editing screens:
-  scope :current, -> { active.non_gigs }
-  scope :archived, -> { ended.non_gigs }
 
   def caching_key(suffix)
     "event_#{id}_#{suffix}"
