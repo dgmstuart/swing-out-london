@@ -96,7 +96,7 @@
         <%= f.radio_button(:frequency, 0, data: { action: "event-frequency#setInfrequently" }) %>
         Monthly or occasionally
       </label>
-      <% unless [0, 1].include?(@event.frequency) %>
+      <% if @event.persisted? && [0, 1].exclude?(@event.frequency) %>
         <p class="help">Legacy frequency: <%= @event.frequency %></p>
       <% end %>
     </div>
