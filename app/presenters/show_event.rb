@@ -44,8 +44,8 @@ class ShowEvent
 
   def frequency # rubocop:disable Metrics/MethodLength
     case event.frequency
-    when 0 then "One-off or intermittent"
-    when 1 then "Weekly"
+    when 0 then "Monthly or occasionally"
+    when 1 then "Weekly on #{event.day.pluralize}"
     when 2 then "Fortnightly"
     when 4..5 then "Monthly"
     when 8 then "Bi-Monthly"

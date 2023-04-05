@@ -1,5 +1,5 @@
 <section data-controller="organiser-link">
-  <h3 class='form-group-title'><label for="organiser_link_url">Organiser edit link<label></h3>
+  <h3 class='form-section-title'><label for="organiser_link_url">Organiser edit link<label></h3>
   <turbo-frame id="organiser_link">
     <% if event.organiser_token %>
       <input id="organiser_link_url" type="text" value="<%= edit_external_event_url(event.organiser_token) %>" data-organiser-link-target="source" readonly><!--

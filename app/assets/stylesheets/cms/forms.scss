@@ -5,12 +5,6 @@ form {
     margin-bottom: 0.5em;
   }
 
-  .form-group-title {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-  }
-
   .form-group-nested {
     margin-left: 25px;
 
@@ -109,17 +103,17 @@ form.edit_venue {
     }
   }
 
-  .form-group,
-  .form-subgroup {
-    margin-bottom: 15px;
-  }
-
-  .form-group-title {
+  .form-section-title {
+    font-size: 20px;
     margin: 3px 0 5px;
   }
 
+  .form-group {
+    margin-bottom: 15px;
+  }
+
   label,
-  .form-subgroup-title {
+  .form-group-title {
     font-size: 16px;
     font-family: sans-serif;
     font-weight: bold;

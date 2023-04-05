@@ -4,6 +4,7 @@ require "spec_helper"
 require "active_support/core_ext/module/delegation"
 require "spec/support/time_formats_helper"
 require "app/presenters/show_event"
+require "app/presenters/date_printer"
 
 RSpec.describe ShowEvent do
   describe "#anchor" do
@@ -135,8 +136,7 @@ RSpec.describe ShowEvent do
   describe "#frequency" do
     examples = [
       { frequency: nil, text: "Unknown" },
-      { frequency: 0, text: "One-off or intermittent" },
-      { frequency: 1, text: "Weekly" },
+      { frequency: 0, text: "Monthly or occasionally" },
       { frequency: 2, text: "Fortnightly" },
       { frequency: 4, text: "Monthly" },
       { frequency: 4, text: "Monthly" },
@@ -151,6 +151,14 @@ RSpec.describe ShowEvent do
         event = instance_double("Event", frequency: example[:frequency])
 
         expect(described_class.new(event).frequency).to eq example[:text]
+      end
+    end
+
+    context "when the event is weekly" do
+      it "includes the day" do
+        event = instance_double("Event", frequency: 1, day: "Wednesday")
+
+        expect(described_class.new(event).frequency).to eq "Weekly on Wednesdays"
       end
     end
   end
