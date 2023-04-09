@@ -22,5 +22,35 @@ module System
       autocomplete_dropdown.fill_in with: value
       autocomplete_dropdown
     end
+
+    def have_autocomplete_field(field_selector, value)
+      HaveAutocompleteField.new(field_selector, value)
+    end
+  end
+
+  class HaveAutocompleteField
+    def initialize(field_selector, value)
+      @field_selector = field_selector
+      @value = value
+    end
+
+    def matches?(page)
+      @autocomplete_dropdown = page.find_field(field_selector)
+      @autocomplete_dropdown.value == value
+    end
+
+    def failure_message
+      "expected page to contain an autocomplete field with label \"#{field_selector}\" " \
+        "and value \"#{value}\", but it had value \"#{@autocomplete_dropdown.value}\""
+    end
+
+    def failure_message_when_negated
+      "expected page not to contain an autocomplete field with label \"#{field_selector}\" " \
+        "and value \"#{value}\", but found such a field"
+    end
+
+    private
+
+    attr_reader :field_selector, :value
   end
 end

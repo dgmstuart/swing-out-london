@@ -83,6 +83,21 @@ RSpec.describe "Admins can create events", :js do
         .and have_content("Frequency:\nWeekly on Tuesdays")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
+
+    it "from the 'New event at this venue' button" do
+      create(:venue, name: "93 feet east", area: "Brick Lane")
+      skip_login
+
+      visit venues_path
+      click_on "Show", match: :first
+
+      expect(page).to have_content("93 feet east")
+
+      click_on "New Event at this venue"
+
+      expect(page).to have_content("New event")
+      expect(page).to have_autocomplete_field("Venue", "93 feet east - Brick Lane")
+    end
   end
 
   context "a weekly class" do # rubocop:disable RSpec/ContextWording
