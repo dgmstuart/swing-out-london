@@ -144,10 +144,6 @@ class Event < ApplicationRecord
     array_of_new_dates.each { |nd| add_date(nd) }
   end
 
-  def date_array=(date_string)
-    self.dates = DatesStringParser.new.parse(date_string)
-  end
-
   def cancellations
     swing_cancellations.collect(&:date)
   end
@@ -161,22 +157,8 @@ class Event < ApplicationRecord
     swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
-  def cancellation_array=(date_string)
-    self.cancellations = DatesStringParser.new.parse(date_string)
-  end
-
   def future_cancellations
     filter_future(cancellations)
-  end
-
-  # READ METHODS #
-
-  def date_array(future: false)
-    return_array_of_dates(dates, future:)
-  end
-
-  def cancellation_array(future: false)
-    return_array_of_dates(cancellations, future:)
   end
 
   private

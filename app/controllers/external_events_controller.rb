@@ -5,15 +5,17 @@ class ExternalEventsController < CmsBaseController
 
   def edit
     @event = Event.find_by!(organiser_token: params[:id])
+    @form = OrganiserEditEventForm.from_event(@event)
   end
 
   def update
     @event = Event.find_by!(organiser_token: params[:id])
 
-    audit_comment = EventParamsCommenter.new.comment(@event, event_params)
-    update_params = event_params.merge!(audit_comment)
-
-    if @event.update(update_params)
+    @form = OrganiserEditEventForm.new(event_params)
+    if @form.valid?
+      audit_comment = EventParamsCommenter.new.comment(@event, event_params)
+      update_params = @form.to_h.merge!(audit_comment)
+      @event.update!(update_params)
       flash[:success] = t("flash.success", model: "Event", action: "updated")
       redirect_to edit_external_event_path(@event.organiser_token)
     else
@@ -36,8 +38,8 @@ class ExternalEventsController < CmsBaseController
     params.require(:event).permit(
       %i[
         venue_id
-        date_array
-        cancellation_array
+        dates
+        cancellations
         last_date
       ]
     )

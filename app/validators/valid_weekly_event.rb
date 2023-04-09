@@ -15,8 +15,8 @@ class ValidWeeklyEvent < ActiveModel::Validator
   end
 
   def cannot_be_weekly_and_have_dates(event)
-    return unless event.weekly? && !event.dates.empty?
+    return unless event.weekly? && event.dates.present?
 
-    event.errors.add(:date_array, "must be empty for weekly events")
+    event.errors.add(:dates, "must be empty for weekly events")
   end
 end

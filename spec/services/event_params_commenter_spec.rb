@@ -2,13 +2,14 @@
 
 require "spec_helper"
 require "app/services/event_params_commenter"
+require "active_support/core_ext/string/conversions"
 
 RSpec.describe EventParamsCommenter do
   describe "#comment" do
     context "when there are changes to the dates" do
       it "returns an audit comment" do
-        event = instance_double("Event", print_dates: "12/04/2011", print_cancellations: nil)
-        update_params = { date_array: "11/04/2011" }
+        event = instance_double("Event", print_dates: "12/04/2011", print_cancellations: "")
+        update_params = { dates: "11/04/2011" }
         comment = described_class.new.comment(event, update_params)
 
         expect(comment).to eq(audit_comment: "Updated dates: (old: 12/04/2011) (new: 11/04/2011)")
@@ -17,8 +18,8 @@ RSpec.describe EventParamsCommenter do
 
     context "when there are no changes to the dates" do
       it "returns an empty hash" do
-        event = instance_double("Event", print_dates: "12/04/2011", print_cancellations: nil)
-        update_params = { date_array: "12/04/2011" }
+        event = instance_double("Event", print_dates: "12/04/2011", print_cancellations: "")
+        update_params = { dates: "12/04/2011" }
         comment = described_class.new.comment(event, update_params)
 
         expect(comment).to eq({})
@@ -27,8 +28,8 @@ RSpec.describe EventParamsCommenter do
 
     context "when there are changes to the cancellations" do
       it "returns an audit comment" do
-        event = instance_double("Event", print_dates: nil, print_cancellations: "12/04/2011")
-        update_params = { cancellation_array: "11/04/2011" }
+        event = instance_double("Event", print_dates: "", print_cancellations: "12/04/2011")
+        update_params = { cancellations: "11/04/2011" }
         comment = described_class.new.comment(event, update_params)
 
         expect(comment).to eq(audit_comment: "Updated cancellations: (old: 12/04/2011) (new: 11/04/2011)")
@@ -38,7 +39,7 @@ RSpec.describe EventParamsCommenter do
     context "when there are changes to both dates and cancellations" do
       it "returns an audit comment" do
         event = instance_double("Event", print_dates: "12/04/2011", print_cancellations: "12/04/2011")
-        update_params = { date_array: "11/04/2011", cancellation_array: "11/04/2011" }
+        update_params = { dates: "11/04/2011", cancellations: "11/04/2011" }
         comment = described_class.new.comment(event, update_params)
 
         expect(comment).to eq(

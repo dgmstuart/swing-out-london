@@ -71,124 +71,72 @@ describe Event do
   end
 
   # ultimately do away with date_array and test .dates= instead"
-  describe ".date_array =" do
+  describe ".dates =" do
     describe "empty strings" do
       it "handles an event with with no dates and adding no dates" do
         event = create(:event)
-        event.date_array = ""
+        event.dates = []
         expect(event.swing_dates).to eq([])
-      end
-
-      it "handles an event with with no dates and adding nil dates" do
-        event = create(:event)
-        event.date_array = nil
-        expect(event.swing_dates).to eq([])
-      end
-
-      it "handles an event with no dates and adding unknown dates" do
-        event = create(:event)
-        event.date_array = "Unknown"
-        expect(event.swing_dates).to eq([])
-      end
-
-      it "handles an event with no dates and a weekly event" do
-        event = create(:event)
-        event.date_array = "Weekly"
       end
     end
 
     it "successfully adds one valid date to an event" do
       event = create(:event)
-      event.date_array = "01/02/2012"
+      event.dates = ["01/02/2012".to_date]
       expect(event.dates).to eq([Date.new(2012, 2, 1)])
     end
 
     it "successfully adds two valid dates to an event with no dates and orders them" do
       event = create(:event)
-      event.date_array = "01/02/2012, 30/11/2011"
+      event.dates = ["01/02/2012", "30/11/2011"].map(&:to_date)
       expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
     end
 
     it "blanks out a date array where there existing dates" do # rubocop:disable RSpec/MultipleExpectations
-      event = create(:event, date_array: "01/02/2012, 30/11/2011")
+      event = create(:event, dates: ["01/02/2012", "30/11/2011"].map(&:to_date))
       expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
-      event.date_array = ""
+      event.dates = []
       expect(event.dates).to eq([])
     end
 
     it "does not create multiple instances of the same date" do
       event1 = create(:event)
-      event1.date_array = "05/05/2005"
+      event1.dates = ["05/05/2005".to_date]
       event1.save!
       event2 = create(:event)
-      event2.date_array = "05/05/2005"
+      event2.dates = ["05/05/2005".to_date]
       event2.save!
       expect(SwingDate.where(date: Date.new(2005, 5, 5)).length).to eq(1)
     end
-
-    pending "multiple valid dates, one invalid date on the end"
-    pending "multiple valid dates, one invalid date in the middle"
-    pending "blanking out where there are existing dates"
-    pending "fails to add an invalid date to an event"
-
-    pending "save with an invalid dates array"
-
-    pending "test with multiple dates, different orders, whitespace"
   end
 
-  describe ".cancellation_array =" do
+  describe ".cancellations =" do
     describe "empty strings" do
       it "handles an event with with no cancellations and adding no cancellations" do
         event = described_class.new
-        event.cancellation_array = ""
-        expect(event.swing_cancellations).to eq([])
-      end
-
-      it "handles an event with with no cancellations and adding nil cancellations" do
-        event = described_class.new
-        event.cancellation_array = nil
-        expect(event.swing_cancellations).to eq([])
-      end
-
-      it "handles an event with no cancellations and adding unknown cancellations" do
-        event = described_class.new
-        event.cancellation_array = "Unknown"
-        expect(event.swing_cancellations).to eq([])
-      end
-
-      it "handles an event with no cancellations and a weekly event" do
-        event = described_class.new
-        event.cancellation_array = "Weekly"
+        event.cancellations = []
         expect(event.swing_cancellations).to eq([])
       end
     end
 
     it "successfully adds one valid cancellation to an event with no cancellations" do
       event = described_class.new
-      event.cancellation_array = "01/02/2012"
+      event.cancellations = ["01/02/2012".to_date]
       expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
     end
 
     it "successfully adds two valid cancellations to an event with no cancellations and orders them" do
       event = described_class.new
-      event.cancellation_array = "01/02/2012, 30/11/2011"
+      event.cancellations = ["01/02/2012", "30/11/2011"].map(&:to_date)
       expect(event.cancellations).to eq([Date.new(2012, 2, 1), Date.new(2011, 11, 30)])
     end
 
     it "blanks out a cancellation array where there existing dates" do # rubocop:disable RSpec/MultipleExpectations
-      event = create(:event, cancellation_array: "01/02/2012")
+      event = create(:event, cancellations: ["01/02/2012".to_date])
       expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
-      event.cancellation_array = ""
+      event.cancellations = []
       expect(event.cancellations).to eq([])
     end
-
-    pending "multiple valid cancellations, one invalid date on the end"
-    pending "multiple valid cancellations, one invalid date in the middle"
-    pending "fails to add an invalid date to an event"
-
-    pending "save with an invalid cancellations array"
-
-    pending "test with multiple cancellations, different orders, whitespace"
   end
 
   describe "active.classes" do
@@ -232,9 +180,9 @@ describe Event do
   describe "(validations)" do
     subject { build(:event) }
 
-    it_behaves_like "validates class and social"
-    it_behaves_like "validates weekly"
-    it_behaves_like "validates course length"
+    it_behaves_like "validates class and social", :event
+    it_behaves_like "validates weekly", :event
+    it_behaves_like "validates course length", :event
     it_behaves_like "validates url", :event
 
     it "is invalid with no venue" do

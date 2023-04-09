@@ -1,5 +1,5 @@
-<%= form_with(model: @event, class: "event-form") do |f| %>
-  <%= render "shared/error_messages", target: @event %>
+<%= form_with(model: @form, url: submit_path, class: "event-form") do |f| %>
+  <%= render "shared/error_messages", target: @form %>
 
   <section>
     <div class='form-group'>
@@ -24,7 +24,7 @@
     </div>
   </section>
 
-  <% if @event.persisted? %>
+  <% if @form.persisted? %>
     <%= render "events/organiser_link", event: @event %>
   <% end %>
 
@@ -66,14 +66,14 @@
     <div class='form-group' id="class-style-selection">
       <h4 class='form-group-title'>Class style</h3>
       <div class='radio-group'>
-        <%= radio_button_tag 'class_style_option', 'lindy', @event.class_style.blank? %>
+        <%= radio_button_tag 'class_style_option', 'lindy', @form.class_style.blank? %>
         <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
       </div>
       <div class='radio-group'>
-        <%= radio_button_tag 'class_style_option', 'other', !@event.class_style.blank?, data: { target: 'class-style-group' }%>
+        <%= radio_button_tag 'class_style_option', 'other', !@form.class_style.blank?, data: { target: 'class-style-group' }%>
         <%= label_tag 'class_style_option_other', 'Other (balboa, shag etc)' %>
       </div>
-      <div class='form-group form-group-nested <%= 'hidden' if @event.class_style.blank? %>' id="class-style-group">
+      <div class='form-group form-group-nested <%= 'hidden' if @form.class_style.blank? %>' id="class-style-group">
         <%= f.label :class_style, "Dance style:" %>
         <%= f.text_field :class_style %>
       </div>
@@ -96,23 +96,23 @@
         <%= f.radio_button(:frequency, 0, data: { action: "event-frequency#setInfrequently" }) %>
         Monthly or occasionally
       </label>
-      <% if @event.persisted? && [0, 1].exclude?(@event.frequency) %>
-        <p class="help">Legacy frequency: <%= @event.frequency %></p>
+      <% if @form.persisted? && [0, 1].exclude?(@form.frequency) %>
+        <p class="help">Legacy frequency: <%= @form.frequency %></p>
       <% end %>
     </div>
-    <div class='form-group <%= "hidden" unless @event.weekly? %>' data-event-frequency-target="daySelect">
+    <div class='form-group <%= "hidden" unless @form.weekly? %>' data-event-frequency-target="daySelect">
       <%= f.label :day %>
       <%= f.select :day, DAYNAMES, include_blank: true %>
     </div>
-    <div class='form-group <%= "hidden" unless @event.infrequent? %>' data-event-frequency-target="datesInput">
-      <%= f.label :date_array, 'Upcoming dates' %>
+    <div class='form-group <%= "hidden" unless @form.infrequent? %>' data-event-frequency-target="datesInput">
+      <%= f.label :dates, 'Upcoming dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
-      <%= f.text_field :date_array, value: @event.print_dates %>
+      <%= f.text_field :dates, value: @form.dates %>
     </div>
     <div class='form-group'>
-      <%= f.label :cancellation_array, 'Cancelled dates' %>
+      <%= f.label :cancellations, 'Cancelled dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
-      <%= f.text_field :cancellation_array, value: @event.print_cancellations %>
+      <%= f.text_field :cancellations, value: @form.cancellations %>
     </div>
     <div class='form-group'>
       <%= f.label :first_date %>
@@ -121,17 +121,17 @@
         A <span class="new-label">NEW!</span> label will be shown on the listing
         for <%= distance_of_time_in_words(Event::CONSIDERED_NEW_FOR) %> after this date.
       </p>
-      <%= f.text_field :first_date, value: @event.first_date.to_s, size: 10, class: "shortfield" %>
+      <%= f.text_field :first_date, value: @form.first_date.to_s, size: 10, class: "shortfield" %>
     </div>
     <div class='form-group'>
       <%= f.label :last_date %>
       <p class='help'>The event will stop being included in the listings after this date</p>
-      <%= f.text_field :last_date, value: @event.last_date.to_s, size: 10, class: "shortfield" %>
+      <%= f.text_field :last_date, value: @form.last_date.to_s, size: 10, class: "shortfield" %>
     </div>
   </section>
 
   <div class='form-group actions'>
-    <%= f.submit action, class: 'button' %>
+    <%= f.submit @form.action, class: 'button' %>
     <%= link_to 'Cancel', cancel_path, class: "button button-secondary" %>
   </div>
 <% end %>
