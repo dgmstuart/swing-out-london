@@ -18,7 +18,7 @@
 
   <div class='form-group'>
     <%= f.label :venue_id, 'Venue' %>
-    <%= f.select :venue_id, venue_select, {:include_blank => true} %>
+    <%= f.select :venue_id, venue_select, {include_blank: true} %>
   </div>
 
   <div class='form-group'>
@@ -34,19 +34,19 @@
     <div class='form-group'>
       <%= f.label :date_array, 'Upcoming dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
-      <%= f.text_field :date_array, :value => @event.print_dates %>
+      <%= f.text_field :date_array, value: @event.print_dates %>
     </div>
   <% end %>
 
   <div class='form-group'>
     <%= f.label :cancellation_array, 'Cancelled dates' %>
     <p class='help'><%= t('forms.help.dates') %></p>
-    <%= f.text_field :cancellation_array, :value => @event.print_cancellations %>
+    <%= f.text_field :cancellation_array, value: @event.print_cancellations %>
   </div>
 
   <div class='form-group'>
     <%= f.label :last_date %>
-    <%= f.text_field :last_date, value: @event.last_date.to_s, :size => 10, :class =>"shortfield"%>
+    <%= f.text_field :last_date, value: @event.last_date.to_s, size: 10, class: "shortfield" %>
     <span class='help'>The event will stop showing up on the site after this date</span>
   </div>
 
