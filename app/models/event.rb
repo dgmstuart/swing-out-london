@@ -194,10 +194,6 @@ class Event < ApplicationRecord
 
   # PRINT METHODS #
 
-  def print_dates
-    date_printer.print(dates)
-  end
-
   def print_dates_rows
     if ended?
       "Ended"
@@ -210,15 +206,7 @@ class Event < ApplicationRecord
     end
   end
 
-  def print_cancellations
-    date_printer.print(cancellations)
-  end
-
   private
-
-  def date_printer
-    DatePrinter.new
-  end
 
   def date_rows_printer
     DatePrinter.new(separator: ", ")
