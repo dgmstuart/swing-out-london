@@ -24,44 +24,10 @@ class Event < ApplicationRecord
 
   validates :organiser_token, uniqueness: true, allow_nil: true
 
-  validate :cannot_be_weekly_and_have_dates
-  validate :weekly_events_must_have_day
-  validate :socials_must_have_titles
-  validate :classes_must_have_organisers
-  validate :will_be_listed
+  validates_with ValidSocialOrClass
+  validates_with ValidWeeklyEvent
 
   strip_attributes only: %i[title url]
-
-  def weekly_events_must_have_day
-    return unless weekly? && day.blank?
-
-    errors.add(:day, "must be present for weekly events")
-  end
-
-  def cannot_be_weekly_and_have_dates
-    return unless weekly? && !dates.empty?
-
-    errors.add(:date_array, "must be empty for weekly events")
-  end
-
-  def will_be_listed
-    return if has_class? || has_social?
-
-    errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed!")
-  end
-
-  def socials_must_have_titles
-    return unless has_social?
-    return if title.present?
-
-    errors.add(:title, "must be present for social dances")
-  end
-
-  def classes_must_have_organisers
-    return unless has_class? && class_organiser_id.nil?
-
-    errors.add(:class_organiser_id, "must be present for classes")
-  end
 
   # display constants:
   NOTAPPLICABLE = "n/a"
