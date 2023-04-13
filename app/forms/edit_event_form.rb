@@ -6,6 +6,7 @@ class EditEventForm < CreateEventForm
 
   class << self
     def from_event(event)
+      date_printable_event = DatePrintableEvent.new(event)
       new(
         {
           title: event.title,
@@ -24,8 +25,8 @@ class EditEventForm < CreateEventForm
 
           frequency: event.frequency,
           day: event.day,
-          dates: event.print_dates,
-          cancellations: event.print_cancellations,
+          dates: date_printable_event.print_dates,
+          cancellations: date_printable_event.print_cancellations,
           first_date: event.first_date,
           last_date: event.last_date
         }

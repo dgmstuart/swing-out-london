@@ -6,11 +6,12 @@ class OrganiserEditEventForm
 
   class << self
     def from_event(event)
+      date_printable_event = DatePrintableEvent.new(event)
       new(
         {
           venue_id: event.venue_id,
-          dates: event.print_dates,
-          cancellations: event.print_cancellations,
+          dates: date_printable_event.print_dates,
+          cancellations: date_printable_event.print_cancellations,
           last_date: event.last_date
         }
       )

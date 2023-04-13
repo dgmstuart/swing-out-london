@@ -6,6 +6,7 @@ class EventParamsCommenter
 
     dates = update_params[:dates]
     cancellations = update_params[:cancellations]
+    event = DatePrintableEvent.new(event)
 
     messages = []
 
