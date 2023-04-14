@@ -1,0 +1,20 @@
+<div id="admin_bar">
+  <ul>
+    <li><%= link_to "Swing Out London", root_path %></li>
+    <li>
+      <div class="navlink"><%= link_to "New Event", new_event_path %></div>
+      <div class="navlink"><%= link_to "Events", events_path%></div>
+    </li>
+    <li>
+      <div class="navlink"><%= link_to "New Venue", new_venue_path %></div>
+      <div class="navlink"><%= link_to "Venues", venues_path %></div>
+    </li>
+    <li>
+      <div class="navlink"><%= link_to "New Organiser", new_organiser_path %></div>
+      <div class="navlink"><%= link_to "Organisers", organisers_path %></div>
+    </li>
+    <li class="account-link">
+      <div class="navlink navlink-right"><%= link_to current_user.name, account_path%></div>
+    </li>
+  </ul>
+</div>
