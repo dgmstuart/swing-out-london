@@ -1,112 +1,49 @@
 // SMALL
 #admin_bar {
-  background-color: #464646;
-  color: #ccc;
   font-family: Helvetica, Arial, sans-serif;
 
-  li {
-    clear: left;
-    text-align: center;
+  .navlink--wrapper {
+    background-color: #464646;
+    color: #ccc;
     border-top: 1px solid #333;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .navlink {
-    border-right: 1px solid #555;
-    border-top: 1px solid #555;
-
-    &:first-child {
-      float: left;
-      width: 160px;
-    }
-
-    &:last-child {
-      margin-left: 160px;
-    }
+    text-align: center;
+    border: 1px solid #333;
+    border-left: 0;
+    border-top: 0;
+    flex-grow: 1;
   }
 
   a {
-    color: inherit;
     display: block;
     padding: 8px 15px;
-    border-right: 1px solid #333;
 
     &:hover {
       background-color: #3a3a3a;
       border-bottom: 0;
     }
   }
-
-  .navlink.navlink-right {
-    border-right: none;
-    border-left: 1px solid #555;
-
-    a {
-      border-left: 1px solid #333;
-      border-right: none;
-    }
-  }
 }
 
-// MOBILE ONLY
-@media only screen and (max-width: 480px) {
-  // placeholder
-}
-
-// AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {
-  #admin_bar .navlink {
-    &:first-child {
-      width: 300px;
-    }
-
-    &:last-child {
-      margin-left: 300px;
-    }
-  }
-}
-
-// TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
+// Links stop wrapping above this
+@media only screen and (min-width: 845px) {
   #admin_bar {
     z-index: 100;
-    min-width: 800px;
-    position: fixed;
+    position: sticky;
     top: 0;
-    right: 0;
-    left: 0;
-
-    li {
-      float: left;
-      clear: none;
-      text-align: left;
-      border-bottom: 0;
-    }
 
     .navlink {
-      float: left;
-      border-bottom: 0;
-
-      &:first-child {
-        width: auto;
-      }
-
-      &:last-child {
-        margin-left: 0;
-      }
+      flex-grow: 0;
     }
 
-    .account-link {
-      float: right;
+    .navlink-right {
+      border-right: none;
+      border-left: 1px solid #333;
+      margin-left: auto;
     }
   }
-}
-
-// DESKTOP */
-@media only screen and (min-width: 900px) {
-  // placeholder
-}
-
-// LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
-  // placeholder
 }
