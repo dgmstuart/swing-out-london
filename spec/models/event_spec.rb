@@ -2,6 +2,10 @@
 
 require "rails_helper"
 require "support/shoulda_matchers"
+require "spec/support/shared_examples/events/validates_class_and_social"
+require "spec/support/shared_examples/events/validates_weekly"
+require "spec/support/shared_examples/events/validates_course_length"
+require "spec/support/shared_examples/validates_url"
 
 describe Event do
   describe "#title" do
@@ -228,21 +232,10 @@ describe Event do
   describe "(validations)" do
     subject { build(:event) }
 
-    it "is invalid if it has neither a class nor a social nor a taster" do
-      expect(build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
-    end
-
-    it "is invalid if it has a taster but no class or social" do
-      expect(build(:event, has_taster: true, has_social: false, has_class: false)).not_to be_valid
-    end
-
-    it "is valid if it has a class but no taster or social (and everything else is OK)" do
-      expect(build(:event, has_taster: false, has_social: false, has_class: true, class_organiser_id: 7)).to be_valid
-    end
-
-    it "is valid if it has a social but no taster or class (and everything else is OK)" do
-      expect(build(:event, has_taster: false, has_social: true, has_class: false)).to be_valid
-    end
+    it_behaves_like "validates class and social"
+    it_behaves_like "validates weekly"
+    it_behaves_like "validates course length"
+    it_behaves_like "validates url", :event
 
     it "is invalid with no venue" do
       event = build(:event, venue_id: nil)
@@ -250,45 +243,11 @@ describe Event do
       expect(event.errors.messages).to eq(venue: ["must exist"])
     end
 
-    it "is valid if it's a class without a title" do
-      expect(build(:event, has_taster: false, has_social: false, has_class: true, title: nil, class_organiser_id: 7)).to be_valid
-    end
-
-    it "is invalid if it's a social without a title" do
-      event = build(:event, has_taster: false, has_social: true, has_class: false, title: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(title: ["must be present for social dances"])
-    end
-
-    it "is invalid if it's weekly and has no day" do
-      event = build(:event, frequency: 1, day: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(day: ["must be present for weekly events"])
-    end
-
-    it "is valid if it's occasional and has no day" do
-      expect(build(:event, frequency: 0, day: nil)).to be_valid
-    end
-
-    it "is invalid without a frequency" do
-      event = build(:event, frequency: nil, day: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(frequency: ["can't be blank"])
-    end
+    it { is_expected.to validate_presence_of(:event_type) }
+    it { is_expected.to validate_presence_of(:frequency) }
+    it { is_expected.to validate_presence_of(:url) }
 
     it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
-
-    it "is invalid if it has a class and doesn't have a class organiser" do
-      event = build(:event, has_taster: false, has_social: false, has_class: true, class_organiser: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(class_organiser_id: ["must be present for classes"])
-    end
-
-    it "is invalid if url is empty" do
-      event = build(:event, url: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(url: ["can't be blank"])
-    end
   end
 
   describe "#future_dates?" do
