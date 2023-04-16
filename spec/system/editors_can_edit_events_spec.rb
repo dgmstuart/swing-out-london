@@ -55,6 +55,73 @@ RSpec.describe "Editors can edit events", :js do
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Saturday 2nd January 2010 at 23:17:16")
   end
 
+  it "Changing a weekly social into a class" do
+    create(:weekly_social, social_organiser: build(:organiser))
+    create(:organiser, name: "The London Swing Dance Society")
+
+    visit "/login"
+    click_button "Log in with Facebook"
+
+    click_link "Edit", match: :first
+
+    choose "Weekly class"
+
+    click_button "Update"
+
+    expect(page).to have_content("1 error prevented this record from being saved")
+      .and have_content("Class organiser must be present for classes")
+
+    autocomplete_select "The London Swing Dance Society", from: "Class organiser"
+
+    click_button "Update"
+
+    expect(page).to have_content("Event type:\nClass")
+      .and have_content("Class Organiser:\nThe London Swing Dance Society")
+
+    expect(page).to have_content("Title:\nVenue:")
+      .and have_content("Social Organiser:\nUnknown")
+  end
+
+  it "Changing a monthly social into a class" do
+    social = create(:social, frequency: 0, dates: ["01/10/2010", "02/12/2012"], social_organiser: build(:organiser))
+    create(:organiser, name: "The London Swing Dance Society")
+
+    visit "/login"
+    click_button "Log in with Facebook"
+
+    click_link "Edit", match: :first
+
+    choose "Weekly class"
+    autocomplete_select "The London Swing Dance Society", from: "Class organiser"
+
+    click_button "Update"
+
+    expect(page).to have_content("1 error prevented this record from being saved")
+      .and have_content("Day must be present for weekly events")
+
+    select "Friday", from: "Day"
+
+    click_button "Update"
+
+    expect(page).to have_content("Event type:\nClass")
+      .and have_content("Class Organiser:\nThe London Swing Dance Society")
+      .and have_content("Frequency:\nWeekly on Fridays")
+
+    expect(page).to have_content("Title:\nVenue:")
+      .and have_content("Social Organiser:\nUnknown")
+
+    expect(social.reload.dates).to be_empty
+  end
+
+  it "Changing a social with a class into a weekly class" do
+    raise "TODO"
+  end
+
+  it "Changing a class into a social" do
+    raise "TODO"
+    # should turn it into a social with a class?
+  end
+
   it "with invalid data" do
     create(:class)
 
