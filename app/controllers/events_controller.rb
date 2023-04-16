@@ -13,20 +13,21 @@ class EventsController < CmsBaseController
   end
 
   def new
-    venue = Venue.find_by(id: params[:venue_id])
-    @event = Event.new(venue:)
+    @form = CreateEventForm.new(venue_id: params[:venue_id])
   end
 
   def edit
     @event = Event.find(params[:id])
+    @form = EditEventForm.from_event(@event)
   end
 
   def create
-    @event = Event.new(event_params)
+    @form = CreateEventForm.new(event_params)
 
-    if @event.save
+    if @form.valid?
+      event = Event.create!(@form.to_h)
       flash[:notice] = t("flash.success", model: "Event", action: "created")
-      redirect_to(@event)
+      redirect_to(event)
     else
       render action: "new"
     end
@@ -35,10 +36,11 @@ class EventsController < CmsBaseController
   def update
     @event = Event.find(params[:id])
 
-    audit_comment = EventParamsCommenter.new.comment(@event, event_params)
-    update_params = event_params.merge!(audit_comment)
-
-    if @event.update(update_params)
+    @form = EditEventForm.new(event_params)
+    if @form.valid?
+      audit_comment = EventParamsCommenter.new.comment(@event, event_params)
+      update_params = @form.to_h.merge!(audit_comment)
+      @event.update!(update_params)
       flash[:notice] = t("flash.success", model: "Event", action: "updated")
       redirect_to(@event)
     else
@@ -78,8 +80,8 @@ class EventsController < CmsBaseController
         course_length
         day
         frequency
-        date_array
-        cancellation_array
+        dates
+        cancellations
         first_date
         last_date
         url

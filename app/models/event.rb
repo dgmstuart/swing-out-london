@@ -16,52 +16,18 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  validates :url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
-
-  validates :event_type, :frequency, presence: true
+  validates :event_type, presence: true
+  validates :frequency, presence: true
+  validates :url, presence: true, uri: true
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validates :organiser_token, uniqueness: true, allow_nil: true
 
-  validate :cannot_be_weekly_and_have_dates
-  validate :weekly_events_must_have_day
-  validate :socials_must_have_titles
-  validate :classes_must_have_organisers
-  validate :will_be_listed
+  validates_with ValidSocialOrClass
+  validates_with ValidWeeklyEvent
 
   strip_attributes only: %i[title url]
-
-  def weekly_events_must_have_day
-    return unless weekly? && day.blank?
-
-    errors.add(:day, "must be present for weekly events")
-  end
-
-  def cannot_be_weekly_and_have_dates
-    return unless weekly? && !dates.empty?
-
-    errors.add(:date_array, "must be empty for weekly events")
-  end
-
-  def will_be_listed
-    return if has_class? || has_social?
-
-    errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed!")
-  end
-
-  def socials_must_have_titles
-    return unless has_social?
-    return if title.present?
-
-    errors.add(:title, "must be present for social dances")
-  end
-
-  def classes_must_have_organisers
-    return unless has_class? && class_organiser_id.nil?
-
-    errors.add(:class_organiser_id, "must be present for classes")
-  end
 
   # display constants:
   NOTAPPLICABLE = "n/a"
@@ -178,10 +144,6 @@ class Event < ApplicationRecord
     array_of_new_dates.each { |nd| add_date(nd) }
   end
 
-  def date_array=(date_string)
-    self.dates = DatesStringParser.new.parse(date_string)
-  end
-
   def cancellations
     swing_cancellations.collect(&:date)
   end
@@ -195,22 +157,8 @@ class Event < ApplicationRecord
     swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
-  def cancellation_array=(date_string)
-    self.cancellations = DatesStringParser.new.parse(date_string)
-  end
-
   def future_cancellations
     filter_future(cancellations)
-  end
-
-  # READ METHODS #
-
-  def date_array(future: false)
-    return_array_of_dates(dates, future:)
-  end
-
-  def cancellation_array(future: false)
-    return_array_of_dates(cancellations, future:)
   end
 
   private
@@ -246,10 +194,6 @@ class Event < ApplicationRecord
 
   # PRINT METHODS #
 
-  def print_dates
-    date_printer.print(dates)
-  end
-
   def print_dates_rows
     if ended?
       "Ended"
@@ -262,15 +206,7 @@ class Event < ApplicationRecord
     end
   end
 
-  def print_cancellations
-    date_printer.print(cancellations)
-  end
-
   private
-
-  def date_printer
-    DatePrinter.new
-  end
 
   def date_rows_printer
     DatePrinter.new(separator: ", ")

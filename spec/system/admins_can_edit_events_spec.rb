@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Admins can edit events", :js do
   it "with valid data" do
     stub_login(id: 12345678901234567, name: "Al Minns")
-    create(:weekly_social, event_type: "dance_club", class_style: "Balboa")
+    create(:weekly_social, event_type: "dance_club", class_style: "Balboa", cancellations: ["01/10/2010", "02/12/2012"])
     create(:venue, name: "The 100 Club")
     create(:organiser, name: "The London Swing Dance Society")
 
@@ -13,6 +13,8 @@ RSpec.describe "Admins can edit events", :js do
     click_on "Log in with Facebook"
 
     click_on "Edit", match: :first
+
+    expect(page).to have_field("Cancelled dates", with: "01/10/2010,02/12/2012")
 
     fill_in "Title", with: "Stompin'"
     autocomplete_select "The 100 Club", from: "Venue"
@@ -79,6 +81,8 @@ RSpec.describe "Admins can edit events", :js do
 
     click_on "Edit", match: :first
 
+    expect(page).to have_field("Upcoming dates", with: "12/12/2012,13/12/2012")
+
     fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
@@ -88,6 +92,9 @@ RSpec.describe "Admins can edit events", :js do
     expect(page).to have_content("Dates:\n12/12/2012, 12/01/2013")
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
+    audit = Audit.last
+    expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
+    expect(audit.comment).to eq "Updated dates: (old: 12/12/2012,13/12/2012) (new: 12/12/2012, 12/01/2013)"
   end
 
   it "adding cancellations" do
@@ -108,6 +115,9 @@ RSpec.describe "Admins can edit events", :js do
     expect(page).to have_content("Cancelled:\n12/12/2012")
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
+    audit = Audit.last
+    expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
+    expect(audit.comment).to eq "Updated cancellations: (old: ) (new: 12/12/2012)"
   end
 
   context "when the event has an old frequency" do

@@ -4,10 +4,14 @@ class EventParamsCommenter
   def comment(event, update_params)
     return {} if update_params.empty?
 
+    dates = update_params[:dates]
+    cancellations = update_params[:cancellations]
+    event = DatePrintableEvent.new(event)
+
     messages = []
 
-    messages << updated_dates_comment(event, update_params) if changed_dates(event, update_params)
-    messages << updated_cancellations_comment(event, update_params) if changed_cancellations(event, update_params)
+    messages << updated_dates_comment(event, dates) if changed_dates?(event, dates)
+    messages << updated_cancellations_comment(event, cancellations) if changed_cancellations?(event, cancellations)
 
     return {} if messages.empty?
 
@@ -16,20 +20,24 @@ class EventParamsCommenter
 
   private
 
-  def updated_dates_comment(event, update_params)
-    comment_text("Updated dates", event.print_dates, update_params[:date_array])
+  def updated_dates_comment(event, dates)
+    comment_text("Updated dates", event.print_dates, dates)
   end
 
-  def updated_cancellations_comment(event, update_params)
-    comment_text("Updated cancellations", event.print_cancellations, update_params[:cancellation_array])
+  def updated_cancellations_comment(event, cancellations)
+    comment_text("Updated cancellations", event.print_cancellations, cancellations)
   end
 
-  def changed_dates(event, update_params)
-    (event.print_dates != update_params[:date_array])
+  def changed_dates?(event, dates)
+    return false if dates.nil?
+
+    event.print_dates != dates
   end
 
-  def changed_cancellations(event, update_params)
-    (event.print_cancellations != update_params[:cancellation_array])
+  def changed_cancellations?(event, cancellations)
+    return false if cancellations.nil?
+
+    event.print_cancellations != cancellations
   end
 
   def comment_text(message, old, new)

@@ -27,6 +27,8 @@ RSpec.describe "Organisers can edit events" do
       fill_in "Last date", with: "12/01/2013"
       click_on "Update"
 
+      expect(page).to have_content("Event was successfully updated")
+
       aggregate_failures do
         expect(page).to have_select("Venue", selected: "The 100 Club - central")
         expect(page).to have_field("Upcoming dates", with: "12/12/2012,12/01/2013")
@@ -61,6 +63,8 @@ RSpec.describe "Organisers can edit events" do
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
       click_on "Update"
+
+      expect(page).to have_content("Event was successfully updated")
 
       aggregate_failures do
         expect(page).to have_select("Venue", selected: "The 100 Club - central")
@@ -135,7 +139,7 @@ RSpec.describe "Organisers can edit events" do
       click_on "Update"
 
       expect(page).to have_content("1 error prevented this record from being saved:")
-        .and have_content("Venue must exist")
+        .and have_content("Venue can't be blank")
     end
   end
 

@@ -32,26 +32,4 @@ describe EventsController do
       expect(assigns[:warning]).to be_nil
     end
   end
-
-  describe "GET new" do
-    context "when a venue id is provided which matches a venue" do
-      it "creates an event at that venue" do
-        venue = create(:venue, id: 23)
-        get :new, params: { venue_id: 23 }
-        expect(assigns(:event).venue).to eq venue
-      end
-    end
-
-    context "when a venue id is provided which doesn't match a venue" do
-      [
-        23,
-        nil
-      ].each do |vid|
-        it "creates an event with a null venue" do
-          get :new, params: { venue_id: vid }
-          expect(assigns(:event).venue).to be_nil
-        end
-      end
-    end
-  end
 end

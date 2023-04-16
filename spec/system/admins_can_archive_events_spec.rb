@@ -21,7 +21,7 @@ RSpec.describe "Admins can archive events" do
 
   it "with an occasional event" do
     skip_login
-    create(:event, frequency: 0, date_array: "02/01/2000")
+    create(:event, frequency: 0, dates: ["02/01/2000".to_date])
 
     visit "/events"
 

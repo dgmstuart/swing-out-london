@@ -73,8 +73,7 @@ div.actions {
   }
 }
 
-form.new_event,
-form.edit_event,
+form.event-form,
 form.new_organiser,
 form.edit_organiser,
 form.new_venue,
@@ -106,6 +105,12 @@ form.edit_venue {
   .form-section-title {
     font-size: 20px;
     margin: 3px 0 5px;
+  }
+
+  .form-section-title label {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
   }
 
   .form-group {
@@ -166,12 +171,6 @@ form.edit_venue {
     background-color: $button-active-colour;
     border: solid $text-colour;
   }
-}
-
-form.edit_event h3 label {
-  font-size: inherit;
-  font-family: inherit;
-  font-weight: inherit;
 }
 
 // Rails Errors

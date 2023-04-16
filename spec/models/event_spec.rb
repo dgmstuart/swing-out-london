@@ -2,6 +2,10 @@
 
 require "rails_helper"
 require "support/shoulda_matchers"
+require "spec/support/shared_examples/events/validates_class_and_social"
+require "spec/support/shared_examples/events/validates_weekly"
+require "spec/support/shared_examples/events/validates_course_length"
+require "spec/support/shared_examples/validates_url"
 
 describe Event do
   describe "#title" do
@@ -67,124 +71,72 @@ describe Event do
   end
 
   # ultimately do away with date_array and test .dates= instead"
-  describe ".date_array =" do
+  describe ".dates =" do
     describe "empty strings" do
       it "handles an event with with no dates and adding no dates" do
         event = create(:event)
-        event.date_array = ""
+        event.dates = []
         expect(event.swing_dates).to eq([])
-      end
-
-      it "handles an event with with no dates and adding nil dates" do
-        event = create(:event)
-        event.date_array = nil
-        expect(event.swing_dates).to eq([])
-      end
-
-      it "handles an event with no dates and adding unknown dates" do
-        event = create(:event)
-        event.date_array = "Unknown"
-        expect(event.swing_dates).to eq([])
-      end
-
-      it "handles an event with no dates and a weekly event" do
-        event = create(:event)
-        event.date_array = "Weekly"
       end
     end
 
     it "successfully adds one valid date to an event" do
       event = create(:event)
-      event.date_array = "01/02/2012"
+      event.dates = ["01/02/2012".to_date]
       expect(event.dates).to eq([Date.new(2012, 2, 1)])
     end
 
     it "successfully adds two valid dates to an event with no dates and orders them" do
       event = create(:event)
-      event.date_array = "01/02/2012, 30/11/2011"
+      event.dates = ["01/02/2012", "30/11/2011"].map(&:to_date)
       expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
     end
 
     it "blanks out a date array where there existing dates" do # rubocop:disable RSpec/MultipleExpectations
-      event = create(:event, date_array: "01/02/2012, 30/11/2011")
+      event = create(:event, dates: ["01/02/2012", "30/11/2011"].map(&:to_date))
       expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
-      event.date_array = ""
+      event.dates = []
       expect(event.dates).to eq([])
     end
 
     it "does not create multiple instances of the same date" do
       event1 = create(:event)
-      event1.date_array = "05/05/2005"
+      event1.dates = ["05/05/2005".to_date]
       event1.save!
       event2 = create(:event)
-      event2.date_array = "05/05/2005"
+      event2.dates = ["05/05/2005".to_date]
       event2.save!
       expect(SwingDate.where(date: Date.new(2005, 5, 5)).length).to eq(1)
     end
-
-    pending "multiple valid dates, one invalid date on the end"
-    pending "multiple valid dates, one invalid date in the middle"
-    pending "blanking out where there are existing dates"
-    pending "fails to add an invalid date to an event"
-
-    pending "save with an invalid dates array"
-
-    pending "test with multiple dates, different orders, whitespace"
   end
 
-  describe ".cancellation_array =" do
+  describe ".cancellations =" do
     describe "empty strings" do
       it "handles an event with with no cancellations and adding no cancellations" do
         event = described_class.new
-        event.cancellation_array = ""
-        expect(event.swing_cancellations).to eq([])
-      end
-
-      it "handles an event with with no cancellations and adding nil cancellations" do
-        event = described_class.new
-        event.cancellation_array = nil
-        expect(event.swing_cancellations).to eq([])
-      end
-
-      it "handles an event with no cancellations and adding unknown cancellations" do
-        event = described_class.new
-        event.cancellation_array = "Unknown"
-        expect(event.swing_cancellations).to eq([])
-      end
-
-      it "handles an event with no cancellations and a weekly event" do
-        event = described_class.new
-        event.cancellation_array = "Weekly"
+        event.cancellations = []
         expect(event.swing_cancellations).to eq([])
       end
     end
 
     it "successfully adds one valid cancellation to an event with no cancellations" do
       event = described_class.new
-      event.cancellation_array = "01/02/2012"
+      event.cancellations = ["01/02/2012".to_date]
       expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
     end
 
     it "successfully adds two valid cancellations to an event with no cancellations and orders them" do
       event = described_class.new
-      event.cancellation_array = "01/02/2012, 30/11/2011"
+      event.cancellations = ["01/02/2012", "30/11/2011"].map(&:to_date)
       expect(event.cancellations).to eq([Date.new(2012, 2, 1), Date.new(2011, 11, 30)])
     end
 
     it "blanks out a cancellation array where there existing dates" do # rubocop:disable RSpec/MultipleExpectations
-      event = create(:event, cancellation_array: "01/02/2012")
+      event = create(:event, cancellations: ["01/02/2012".to_date])
       expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
-      event.cancellation_array = ""
+      event.cancellations = []
       expect(event.cancellations).to eq([])
     end
-
-    pending "multiple valid cancellations, one invalid date on the end"
-    pending "multiple valid cancellations, one invalid date in the middle"
-    pending "fails to add an invalid date to an event"
-
-    pending "save with an invalid cancellations array"
-
-    pending "test with multiple cancellations, different orders, whitespace"
   end
 
   describe "active.classes" do
@@ -228,21 +180,10 @@ describe Event do
   describe "(validations)" do
     subject { build(:event) }
 
-    it "is invalid if it has neither a class nor a social nor a taster" do
-      expect(build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
-    end
-
-    it "is invalid if it has a taster but no class or social" do
-      expect(build(:event, has_taster: true, has_social: false, has_class: false)).not_to be_valid
-    end
-
-    it "is valid if it has a class but no taster or social (and everything else is OK)" do
-      expect(build(:event, has_taster: false, has_social: false, has_class: true, class_organiser_id: 7)).to be_valid
-    end
-
-    it "is valid if it has a social but no taster or class (and everything else is OK)" do
-      expect(build(:event, has_taster: false, has_social: true, has_class: false)).to be_valid
-    end
+    it_behaves_like "validates class and social", :event
+    it_behaves_like "validates weekly", :event
+    it_behaves_like "validates course length", :event
+    it_behaves_like "validates url", :event
 
     it "is invalid with no venue" do
       event = build(:event, venue_id: nil)
@@ -250,45 +191,11 @@ describe Event do
       expect(event.errors.messages).to eq(venue: ["must exist"])
     end
 
-    it "is valid if it's a class without a title" do
-      expect(build(:event, has_taster: false, has_social: false, has_class: true, title: nil, class_organiser_id: 7)).to be_valid
-    end
-
-    it "is invalid if it's a social without a title" do
-      event = build(:event, has_taster: false, has_social: true, has_class: false, title: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(title: ["must be present for social dances"])
-    end
-
-    it "is invalid if it's weekly and has no day" do
-      event = build(:event, frequency: 1, day: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(day: ["must be present for weekly events"])
-    end
-
-    it "is valid if it's occasional and has no day" do
-      expect(build(:event, frequency: 0, day: nil)).to be_valid
-    end
-
-    it "is invalid without a frequency" do
-      event = build(:event, frequency: nil, day: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(frequency: ["can't be blank"])
-    end
+    it { is_expected.to validate_presence_of(:event_type) }
+    it { is_expected.to validate_presence_of(:frequency) }
+    it { is_expected.to validate_presence_of(:url) }
 
     it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
-
-    it "is invalid if it has a class and doesn't have a class organiser" do
-      event = build(:event, has_taster: false, has_social: false, has_class: true, class_organiser: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(class_organiser_id: ["must be present for classes"])
-    end
-
-    it "is invalid if url is empty" do
-      event = build(:event, url: nil)
-      event.valid?
-      expect(event.errors.messages).to eq(url: ["can't be blank"])
-    end
   end
 
   describe "#future_dates?" do

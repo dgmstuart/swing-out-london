@@ -122,7 +122,7 @@ module ListingsHelper
 
   # Return a span containing a message about cancelled dates:
   def swingclass_cancelledmsg(swingclass)
-    return "" if swingclass.cancellation_array(future: true).empty?
+    return "" if swingclass.future_cancellations.empty?
 
     date_printer = DatePrinter.new(separator: ", ", format: :short_date)
     cancellations = date_printer.print(swingclass.future_cancellations)
