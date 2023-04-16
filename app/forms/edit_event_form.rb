@@ -13,11 +13,11 @@ class EditEventForm < CreateEventForm
           url: event.url,
           venue_id: event.venue_id,
 
-          has_social: event.has_social,
+          # TODO: it's not necessarily true that it's only one or the other: legacy events might be neither...
+          event_type: (event.has_social? ? "social_dance" : "weekly_class"),
           social_organiser_id: event.social_organiser_id,
+          social_has_class: event.has_social? && (event.has_class? || event.has_taster?),
 
-          has_class: event.has_class,
-          has_taster: event.has_taster,
           class_style: event.class_style,
           course_length: event.course_length,
           class_organiser_id: event.class_organiser_id,

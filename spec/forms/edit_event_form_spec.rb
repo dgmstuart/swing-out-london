@@ -7,7 +7,7 @@ require "app/validators/valid_social_or_class"
 require "app/validators/valid_weekly_event"
 require "app/forms/create_event_form"
 require "app/forms/edit_event_form"
-require "spec/support/shared_examples/events/validates_class_and_social"
+require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
@@ -18,7 +18,7 @@ RSpec.describe EditEventForm do
 
     before { stub_model_name("Event") }
 
-    it_behaves_like "validates class and social", :edit_event_form
+    it_behaves_like "validates class and social (form)", :edit_event_form
     it_behaves_like "validates weekly", :edit_event_form
     it_behaves_like "validates course length", :edit_event_form
     it_behaves_like "validates url", :edit_event_form

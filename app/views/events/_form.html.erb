@@ -1,4 +1,4 @@
-<%= form_with(model: @form, url: submit_path, class: "event-form") do |f| %>
+<%= form_with(model: @form, url: submit_path, class: "event-form", data: { controller: "event-form", "event-form-hidden-class" => "hidden" }) do |f| %>
   <%= render "shared/error_messages", target: @form %>
 
   <section>
@@ -11,40 +11,43 @@
       <%= f.label :venue_id, 'Venue' %>
       <%= f.select :venue_id, venue_select, { include_blank: true} %>
     </div>
+    <div class='form-group'>
+      <h4 class="form-group-title">Event Type</h4>
+
+      <label data-action="input->event-form#socialDance">
+        <%= f.radio_button(:event_type, "social_dance") %>
+        Social dance
+      </label>
+      <label data-action="input->event-form#weeklyClass">
+        <%= f.radio_button(:event_type, "weekly_class") %>
+        Weekly class
+      </label>
+    </div>
   </section>
 
   <% if @form.persisted? %>
     <%= render "events/organiser_link", event: @event %>
   <% end %>
 
-  <section>
+  <section data-event-form-target="socialDetails" class="<%= 'hidden' unless @form.show_social_details? %>">
     <h3 class='form-section-title'>Social details</h3>
     <div class='form-group'>
-      <%= f.label :has_social, "Has social?" %>
-      <%= f.check_box :has_social %>
-      <span class='help'>Events with a social dance *must* have a title: this is what gets displayed in the listing</span>
-    </div>
-    <div class='form-group'>
       <%= f.label :title %>
-      <%= f.text_field :title %>
+      <p class='help'>Events with a social dance *must* have a title: this is what gets displayed in the listing</p>
+      <%= f.text_field :title, data: { event_form_target: "title" } %>
     </div>
     <div class='form-group'>
       <%= f.label :social_organiser_id, 'Social organiser' %>
-      <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' } %>
+      <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' }, { data: { event_form_target: "socialOrganiser" } } %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :social_has_class, "Has a class?" %>
+      <%= f.check_box :social_has_class, data: { action: "event-form#socialClass", event_form_target: "socialHasClass" } %>
     </div>
   </section>
 
-  <section>
+  <section data-event-form-target="classDetails" class="<%= 'hidden' unless @form.show_class_details? %>">
     <h3 class='form-section-title'>Class details</h3>
-    <div class='form-group'>
-      <%= f.label :has_class, "Has a class?" %>
-      <%= f.check_box :has_class %>
-      <span class='help'>Events with a class *must* have a class organiser</span>
-    </div>
-    <div class='form-group'>
-      <%= f.label :has_taster, "Has a taster?" %>
-      <%= f.check_box :has_taster %>
-    </div>
     <div class='form-group'>
       <%= f.label :class_organiser_id, 'Class organiser' %>
       <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' } %>
@@ -73,27 +76,27 @@
     </div>
   </section>
 
-  <section data-controller="event-frequency" data-event-frequency-hidden-class="hidden">
+  <section data-event-form-target="when" class="<%= 'hidden' unless @form.show_when? %>">
     <h3 class='form-section-title'>When?</h3>
-    <div class='form-group'>
+    <div class='form-group' data-event-form-target="frequency">
       <h4 class="form-group-title">Frequency</h4>
       <label>
-        <%= f.radio_button(:frequency, 1, data: { action: "event-frequency#setWeekly" }) %>
+        <%= f.radio_button(:frequency, 1, data: { action: "event-form#setWeekly", "event-form-target" => "frequencyWeekly" }) %>
         Weekly
       </label>
       <label>
-        <%= f.radio_button(:frequency, 0, data: { action: "event-frequency#setInfrequently" }) %>
+        <%= f.radio_button(:frequency, 0, data: { action: "event-form#setInfrequently" }) %>
         Monthly or occasionally
       </label>
       <% if @form.persisted? && [0, 1].exclude?(@form.frequency) %>
         <p class="help">Legacy frequency: <%= @form.frequency %></p>
       <% end %>
     </div>
-    <div class='form-group <%= "hidden" unless @form.weekly? %>' data-event-frequency-target="daySelect">
+    <div class='form-group <%= "hidden" unless @form.weekly? %>' data-event-form-target="daySelect">
       <%= f.label :day %>
       <%= f.select :day, DAYNAMES, include_blank: true %>
     </div>
-    <div class='form-group <%= "hidden" unless @form.infrequent? %>' data-event-frequency-target="datesInput">
+    <div class='form-group <%= "hidden" unless @form.infrequent? %>' data-event-form-target="datesInput">
       <%= f.label :dates, 'Upcoming dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
       <%= f.text_field :dates %>

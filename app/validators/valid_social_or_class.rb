@@ -4,8 +4,6 @@ class ValidSocialOrClass < ActiveModel::Validator
   def validate(event)
     socials_must_have_titles(event)
     classes_must_have_organisers(event)
-    must_have_class_or_social(event)
-    events_without_a_social_must_be_weekly(event)
   end
 
   private
@@ -21,17 +19,5 @@ class ValidSocialOrClass < ActiveModel::Validator
     return unless event.has_class? && event.class_organiser_id.nil?
 
     event.errors.add(:class_organiser_id, "must be present for classes")
-  end
-
-  def must_have_class_or_social(event)
-    return if event.has_class? || event.has_social?
-
-    event.errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed!")
-  end
-
-  def events_without_a_social_must_be_weekly(event)
-    return if event.has_social? || event.weekly? || event.frequency.nil?
-
-    event.errors.add(:frequency, "must be 1 (weekly) for events without a social")
   end
 end
