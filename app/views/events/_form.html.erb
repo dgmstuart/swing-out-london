@@ -1,4 +1,4 @@
-<%= form_for(@event) do |f| %>
+<%= form_with(model: @event, class: "event-form") do |f| %>
   <%= render "shared/error_messages", target: @event %>
 
   <section>
