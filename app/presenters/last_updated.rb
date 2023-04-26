@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LastUpdated
-  def initialize(scope = Event)
+  def initialize(scope = Audit)
     time = scope.last_updated_at
     @time =
       if time

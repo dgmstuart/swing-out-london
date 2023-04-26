@@ -35,11 +35,6 @@ class Event < ApplicationRecord
   SEE_WEB = "(See Website)"
 
   class << self
-    # Find the datetime of the most recently updated event
-    def last_updated_at
-      maximum(:updated_at)
-    end
-
     def socials_on_date(date)
       result = weekly_socials_on(date).includes(:venue)
       result += non_weekly_socials_on(date).includes(:venue)
