@@ -10,7 +10,7 @@ RSpec.describe LastUpdated do
   describe "#time_in_words" do
     it "is the time of the last update in words" do
       time = ActiveSupport::TimeZone["UTC"].parse("1987-06-23T19:30:00")
-      scope = class_double("Event", last_updated_at: time)
+      scope = class_double("Audit", last_updated_at: time)
 
       last_updated = described_class.new(scope)
 
@@ -19,7 +19,7 @@ RSpec.describe LastUpdated do
 
     context "when there are no records" do
       it "is the time of the last update in words" do
-        scope = class_double("Event", last_updated_at: nil)
+        scope = class_double("Audit", last_updated_at: nil)
 
         last_updated = described_class.new(scope)
 
@@ -31,7 +31,7 @@ RSpec.describe LastUpdated do
   describe "#iso" do
     it "is the time of the last update in iso8601 format" do
       time = ActiveSupport::TimeZone["UTC"].parse("1987-06-23T19:30:00")
-      scope = class_double("Event", last_updated_at: time)
+      scope = class_double("Audit", last_updated_at: time)
 
       last_updated = described_class.new(scope)
 
@@ -40,7 +40,7 @@ RSpec.describe LastUpdated do
 
     it "converts times to UTC" do
       time = ActiveSupport::TimeZone["London"].parse("1987-06-23T19:30:00")
-      scope = class_double("Event", last_updated_at: time)
+      scope = class_double("Audit", last_updated_at: time)
 
       last_updated = described_class.new(scope)
 
@@ -49,7 +49,7 @@ RSpec.describe LastUpdated do
 
     context "when there are no records" do
       it "is nil" do
-        scope = class_double("Event", last_updated_at: nil)
+        scope = class_double("Audit", last_updated_at: nil)
 
         last_updated = described_class.new(scope)
 

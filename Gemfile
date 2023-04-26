@@ -25,7 +25,6 @@ gem "pg"
 gem "pry-rails"
 gem "puma"
 gem "rack-attack"
-gem "rails-observers" # to support pre rails-4 style cache sweeping
 gem "redcarpet" # Markdown
 gem "rollbar"
 gem "rss"
