@@ -3,8 +3,7 @@
 class ListingsController < ApplicationController
   layout "website"
 
-  caches_action :index, cache_path: "website#index", layout: true, expires_in: 1.hour, race_condition_ttl: 10
-  cache_sweeper :event_sweeper, only: :index
+  caches_action :index, cache_path: -> { Audit.last.cache_key }, layout: true, expires_in: 1.hour, race_condition_ttl: 10
 
   def index
     # Varnish and users browsers will cache the page for 3600 seconds = 1 hour:

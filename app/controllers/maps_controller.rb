@@ -4,7 +4,7 @@ class MapsController < ApplicationController
   layout "map"
 
   caches_action :socials, :classes,
-                cache_path: proc { |c| c.params.permit(:day, :date, :venue_id) },
+                cache_path: ->(c) { c.params.permit(:day, :date, :venue_id).to_s + Audit.last.cache_key },
                 layout: true,
                 expires_in: 1.hour,
                 race_condition_ttl: 10
