@@ -10,9 +10,6 @@ class MapsController < ApplicationController
                 race_condition_ttl: 10
 
   def classes
-    # Varnish will cache the page for 3600 seconds = 1 hour:
-    response.headers["Cache-Control"] = "public, max-age=3600"
-
     @day = Maps::Classes::DayParser.parse(params[:day], today)
     venues = Maps::Classes::VenueQuery.new(@day).venues
 
@@ -33,9 +30,6 @@ class MapsController < ApplicationController
   end
 
   def socials
-    # Varnish will cache the page for 3600 seconds = 1 hour:
-    response.headers["Cache-Control"] = "public, max-age=3600"
-
     @map_dates = Maps::Socials::Dates.new(params[:date], today)
 
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
