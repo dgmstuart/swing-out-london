@@ -18,10 +18,6 @@
         padding: 8px;
         border: $nav-border;
       }
-
-      &.internal:hover {
-        background: url(image_path("downarrow.png")) no-repeat 50% 95%;
-      }
     }
 
     .current {

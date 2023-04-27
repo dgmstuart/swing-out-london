@@ -9,7 +9,7 @@ module ListingsHelper
         concat cancelled_label
         concat " "
       end
-      concat social_link(social)
+      concat social_link(social, date)
     end
 
     tag.li do
@@ -18,7 +18,7 @@ module ListingsHelper
     end
   end
 
-  def social_link(event)
+  def social_link(event, date)
     # example: NEW! Awesome swing event - Dalston
     text = capture do
       if event.new?
@@ -30,7 +30,7 @@ module ListingsHelper
       concat tag.span(event.location, class: "info")
     end
 
-    link_to text, event.url, id: event.id
+    link_to text, event.url, id: "#{event.id}-#{date.to_s(:db)}"
   end
 
   def social_title(event)

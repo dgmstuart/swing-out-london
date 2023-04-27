@@ -77,28 +77,26 @@
   }
 }
 
-#soldn_on_the_web {
-  #advert {
-    border: $double-border;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-transform: uppercase;
+#advert {
+  border: $double-border;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
 
-    .text {
-      display: inline-block;
-      padding: 15px;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
+  .text {
+    display: inline-block;
+    padding: 15px;
   }
 
-  .fb-like {
-    &:hover {
-      border: none;
-    }
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.fb-like {
+  &:hover {
+    border: none;
   }
 }

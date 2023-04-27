@@ -109,28 +109,28 @@ main {
   .today h3 {
     padding-left: 0;
   }
+}
 
-  li.day_row {
-    padding: 10px;
+.day_row {
+  padding: 10px;
 
-    li {
-      margin-left: 100px;
-      margin-bottom: 0.6em;
-      padding-left: 3px;
+  li {
+    margin-left: 100px;
+    margin-bottom: 0.6em;
+    padding-left: 3px;
 
-      // (to account for the border we apply when it's today)
-      line-height: 1.4em;
-    }
+    // (to account for the border we apply when it's today)
+    line-height: 1.4em;
   }
+}
 
-  .class_cancelled {
-    font-size: $small_font_size;
-    display: block;
-    font-style: italic;
-    padding-left: 1em;
-    margin-right: 1.5em;
-    color: $highlight-colour;
-  }
+.class_cancelled {
+  font-size: $small_font_size;
+  display: block;
+  font-style: italic;
+  padding-left: 1em;
+  margin-right: 1.5em;
+  color: $highlight-colour;
 }
 
 .datelist {
@@ -142,24 +142,24 @@ main {
     text-align: center;
     margin-bottom: 10px;
   }
+}
 
-  li.date_row {
-    padding: 10px 10px 7px 7px;
-    margin-bottom: 13px;
+.date_row {
+  padding: 10px 10px 7px 7px;
+  margin-bottom: 13px;
 
-    li {
-      margin-bottom: 10px;
-      padding-left: 3px;
+  li {
+    margin-bottom: 10px;
+    padding-left: 3px;
 
-      // (to account for the border we apply when it's today)
-      line-height: 1.4em;
-    }
+    // (to account for the border we apply when it's today)
+    line-height: 1.4em;
   }
+}
 
-  .social_highlight {
-    background: url(image_path("highlight_icon.png")) no-repeat 0 0.15em;
-    padding-left: 20px;
-  }
+.social_highlight {
+  background: url(image_path("highlight_icon.png")) no-repeat 0 0.15em;
+  padding-left: 20px;
 }
 
 #social_dances .note {
@@ -235,7 +235,7 @@ section.listings {
     text-decoration: none;
   }
 
-  a.postcode:hover {
+  .postcode:hover {
     border: 1px solid $link-colour;
     background-color: $link-colour;
     color: $background-colour;
@@ -244,7 +244,7 @@ section.listings {
 
 // TODAY AND TOMORROW
 /////////////////////////////////////////////
-li.today {
+.today {
   border: 3px dashed $text-colour;
 
   li {
@@ -256,13 +256,13 @@ li.today {
     transition: all 0.8s ease-in;
   }
 }
-.datelist li.today { margin-bottom: 1.7em; }
-.daylist li.today { margin-bottom: 0.9em; }
+.datelist .today { margin-bottom: 1.7em; }
+.daylist .today { margin-bottom: 0.9em; }
 
 .today_label,
 .tomorrow_label { text-transform: uppercase; }
 
-li.day_row .today_label {
+.day_row .today_label {
   display: block;
   text-align: center;
   font-size: 1.2em;
@@ -271,7 +271,7 @@ li.day_row .today_label {
   padding-bottom: 0.3em;
 }
 
-li.date_row {
+.date_row {
   .today_label,
   .tomorrow_label { letter-spacing: 0.1em; }
 
@@ -316,10 +316,10 @@ li.date_row {
 
 .twitter {
   background-color: $twitter-blue;
-  color: white;
+  color: $text-colour;
 }
 
 .donate_button {
-  background-color: #ef4836;
+  background-color: $highlight-colour;
   color: white;
 }
