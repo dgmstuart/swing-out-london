@@ -29,14 +29,6 @@ a:hover {
   border-bottom: solid 2px;
 }
 
-a.normal-link {
-  text-decoration: underline;
-
-  &:hover {
-    border-bottom: none;
-  }
-}
-
 ul.unstyled,
 ol.unstyled {
   margin-left: 0;

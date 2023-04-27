@@ -173,6 +173,14 @@ form.edit_venue {
   }
 }
 
+a.normal-link {
+  text-decoration: underline;
+
+  &:hover {
+    border-bottom: none;
+  }
+}
+
 // Rails Errors
 /////////////////////////////////////////////
 #error-explanation {
