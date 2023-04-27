@@ -3,7 +3,7 @@
 class ListingsController < ApplicationController
   layout "website"
 
-  caches_action :index, cache_path: -> { Audit.last.cache_key }, layout: true, expires_in: 1.hour, race_condition_ttl: 10
+  caches_action :index, cache_path: -> { action_cache_key }, layout: true, expires_in: 1.hour, race_condition_ttl: 10
 
   def index
     @today = today
@@ -12,5 +12,9 @@ class ListingsController < ApplicationController
     @socials_dates = SocialsListings.new.build(dates)
 
     @ad = Advert.current
+  end
+
+  def action_cache_key
+    "listings-#{Audit.last.cache_key}"
   end
 end
