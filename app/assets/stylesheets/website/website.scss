@@ -37,13 +37,16 @@ address,
 }
 
 #main_nav {
+  flex-direction: column;
+  width: 250px;
+  margin: auto;
+
   li {
-    margin-bottom: 5px;
+    margin-bottom: calc(5px + 6px);
 
     a,
     .current {
-      display: inline-block;
-      width: 250px;
+      display: block;
     }
   }
 }
@@ -99,19 +102,12 @@ address,
 
   #main_nav {
     li {
-      display: inline;
       border-left: $basic-border;
-      margin: 0 0.5em 0 0;
-      padding: 0 0 0 1em;
+      padding: 0 1em;
 
       &:first-child {
         border: none;
         padding-left: 0;
-      }
-
-      a,
-      .current {
-        display: inline;
       }
     }
   }

@@ -10,19 +10,21 @@
   }
 
   &.primary-nav {
-    a {
-      padding: 10px;
+    display: flex;
+    justify-content: center;
 
-      // added here so we can take it away when we apply the border
+    a {
+      padding: 8px;
+
       &:hover {
-        padding: 8px;
-        border: $nav-border;
+        outline: $nav-border;
+        border: none;
       }
     }
 
     .current {
       padding: 8px;
-      border: $double-border;
+      outline: $double-border;
     }
 
     // We allow the current link to be a link on the map:
