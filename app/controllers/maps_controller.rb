@@ -4,7 +4,7 @@ class MapsController < ApplicationController
   layout "map"
 
   caches_action :socials, :classes,
-                cache_path: ->(c) { c.params.permit(:day, :date, :venue_id).to_s + Audit.last.cache_key },
+                cache_path: ->(c) { c.action_cache_key },
                 layout: true,
                 expires_in: 1.hour,
                 race_condition_ttl: 10
@@ -47,5 +47,11 @@ class MapsController < ApplicationController
   rescue Maps::Socials::Dates::DateOutOfRangeError
     logger.warn("Not a date in the visible range: #{@date}")
     redirect_to map_socials_path
+  end
+
+  def action_cache_key
+    values = params.values_at(:controller, :action, :day, :date, :venue_id).compact
+    values << Audit.last.cache_key
+    values.join("-")
   end
 end
