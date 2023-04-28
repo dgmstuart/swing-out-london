@@ -16,7 +16,7 @@
       <%= link_to 'Show', organiser %>
       <%= link_to 'Edit', edit_organiser_path(organiser) %>
       <% if organiser.can_delete? %>
-        <%= link_to 'Delete', organiser, confirm: 'Are you sure?', method: :delete %>
+        <%= link_to 'Delete', organiser, data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete } %>
       <% end %>
     </td>
     </tr>
