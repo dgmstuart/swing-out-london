@@ -23,9 +23,9 @@ RSpec.describe "Admins can copy an organiser link" do
 
       allow(SecureRandom).to receive(:hex).and_return("xyz789")
 
-      click_on "revoke this link"
-
-      page.driver.browser.switch_to.alert.accept
+      accept_confirm do
+        click_on "revoke this link"
+      end
 
       expect(page).not_to have_field("Organiser edit link", with: url)
 
