@@ -1,4 +1,5 @@
 import accessibleAutocomplete from 'accessible-autocomplete'
+import { initSieveTable } from './lib/sieve'
 
 function safeEnhanceSelectElement(selector) {
   const element = document.querySelector(selector);
@@ -40,6 +41,7 @@ function initClassStyleRadio() {
 window.addEventListener("DOMContentLoaded", (_event) => {
   initClassStyleRadio();
   initEventSelects();
+  initSieveTable(".sieveInput", "table.events");
 })
 
 import { Turbo } from "@hotwired/turbo-rails"

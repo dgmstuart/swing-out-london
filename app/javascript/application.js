@@ -1,18 +1,11 @@
-require('./application/listing')
+import { initListings } from './application/listing'
+import { initSieveList } from './lib/sieve'
 
 require("@rails/ujs").start()
 
-global.jQuery = require('jquery');
-var $ = global.jQuery;
-window.$ = $;
-
-require('../../vendor/javascript/jquery.sieve')
-$(document).ready(function() {
-  $("ul.sieve").sieve({ itemSelector: "li" });
-  $("table.events").sieve({
-    itemSelector: "tr",
-    searchTemplate: "<div class='sieve' style='text-align: center'><label>Filter: <input type='text'></label></div>"
-  });
+window.addEventListener("DOMContentLoaded", () => {
+  initListings();
+  initSieveList(".sieveInput", ".sieveList");
 });
 
 var cheet = require('cheet.js')

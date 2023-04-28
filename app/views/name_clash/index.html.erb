@@ -1,0 +1,11 @@
+<h1>London Swing Name Clash Avoider</h1>
+<p>The following is a poorly filtered list of all social events which have ever been listed in Swing Out London</p>
+<label>Search: <input type='text' class="sieveInput"></label>
+<ul class="sieveList">
+  <% @names.each do |name| %>
+    <li>
+      <%= name %>
+    </li>
+  <% end %>
+</ul>
+
