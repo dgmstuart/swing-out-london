@@ -1,0 +1,11 @@
+<aside id="advert">
+  <% if advert %>
+    <%= link_to advert.url, title: advert.title, id: advert.google_id do %>
+      <%= image_tag advert.image_url, alt: "Advertisment: #{advert.title}" %>
+    <% end %>
+  <% else %>
+    <div class="text">
+      <%= mail_to "swingoutlondon@gmail.com", "Advertise here" %>
+    </div>
+  <% end %>
+</aside>
