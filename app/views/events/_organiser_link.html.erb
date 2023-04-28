@@ -13,7 +13,7 @@
         You can
         <%= link_to_generate_organiser(
           'revoke this link', event, class: "normal-link", data: {
-            confirm: "Are you sure you want to create a new link? This will invalidate the previous link"
+            action: "organiser-link#revoke",
           }
         )%>
         and generate a new one if you think the link isn't being used properly

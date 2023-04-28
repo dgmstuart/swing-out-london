@@ -20,6 +20,14 @@ export default class extends Controller {
     });
   }
 
+  revoke(event) {
+    let confirmed = confirm("Are you sure you want to create a new link? This will invalidate the previous link")
+
+    if (!confirmed) {
+      event.preventDefault()
+    }
+  }
+
   _copyToClipboard(button) {
     button.disabled = true;
     this._buttonActive(button, "Copied");
