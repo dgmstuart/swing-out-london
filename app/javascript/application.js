@@ -1,8 +1,6 @@
 import { initListings } from './application/listing'
 import { initSieveList } from './lib/sieve'
 
-require("@rails/ujs").start()
-
 window.addEventListener("DOMContentLoaded", () => {
   initListings();
   initSieveList(".sieveInput", ".sieveList");
