@@ -158,14 +158,6 @@ class Event < ApplicationRecord
 
   private
 
-  # Given an array of dates, return an appropriately filtered array
-  def return_array_of_dates(input_dates, future:)
-    return [] if input_dates.blank?
-
-    input_dates = filter_future(input_dates) if future
-    input_dates
-  end
-
   # Given an array of dates, return only those in the future
   def filter_future(input_dates)
     # TODO: - should be able to simply replace this with some variant of ".future?", but need to test
