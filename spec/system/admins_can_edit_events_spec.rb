@@ -33,7 +33,7 @@ RSpec.describe "Admins can edit events", :js do
       click_on "Update"
     end
 
-    expect(page).to have_content("Title:\nStompin\'")
+    expect(page).to have_content("Title:\nStompin'")
       .and have_content("Venue:\nThe 100 Club")
       .and have_content("Social Organiser:\nThe London Swing Dance Society")
       .and have_content("Class Organiser:\nThe London Swing Dance Society")

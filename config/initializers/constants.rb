@@ -5,4 +5,4 @@ DAYNAMES = Date::DAYNAMES.rotate
 
 CONTACT_EMAIL = "swingoutlondon@gmail.com"
 
-Rails.application.config.x.donate_link = ENV["DONATE_LINK"]
+Rails.application.config.x.donate_link = ENV.fetch("DONATE_LINK", nil)
