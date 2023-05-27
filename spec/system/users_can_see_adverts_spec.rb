@@ -31,7 +31,7 @@ RSpec.describe "Users can see adverts" do
       nil,
       href: "https://myevent.co.uk",
       title: "My Event",
-      id: "me-1"
+      class: "ga-advert me-1"
     )
     expect(page).to have_xpath("//img[@src = 'https://myevent.co.uk/banner' and @alt = 'Advertisment: My Event']")
   end

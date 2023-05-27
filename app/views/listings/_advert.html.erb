@@ -1,6 +1,6 @@
 <aside id="advert">
   <% if advert %>
-    <%= link_to advert.url, title: advert.title, id: advert.google_id do %>
+    <%= link_to advert.url, title: advert.title, class: ["ga-advert", advert.google_id] do %>
       <%= image_tag advert.image_url, alt: "Advertisment: #{advert.title}" %>
     <% end %>
   <% else %>

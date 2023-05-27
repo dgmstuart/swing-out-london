@@ -13,36 +13,6 @@ export function initListings() {
   }
 };
 
-function add_socials_analytics_events() {
-  return document.querySelector('#social_dances .datelist .details a').addEventListener("click", () => {
-    return _gaq.push(['_trackEvent', 'Social Link', '#' + this.id, this.text]);
-  });
-};
-
-function add_advertisement_analytics_events() {
-  return document.querySelector('#advert a').addEventListener("click", () => {
-    return _gaq.push(['_trackEvent', 'Advert Link', this.id, this.href]);
-  });
-};
-
-function add_donation_button_analytics_event() {
-  return document.querySelector('.donate_button').addEventListener("click", () => {
-    return _gaq.push(['_trackEvent', 'Donate Button', 'donate_button', this.href]);
-  });
-};
-
-function add_tweet_share_analytics_event() {
-  return document.querySelector('.share_button.twitter').addEventListener("click", () => {
-    return _gaq.push(['_trackEvent', 'Share Button', 'twitter', this.href]);
-  });
-};
-
-function add_facebook_share_analytics_event() {
-  return document.querySelector('.share_button.facebook').addEventListener("click", () => {
-    return _gaq.push(['_trackEvent', 'Share Button', 'facebook', this.href]);
-  });
-};
-
 function add_facebook_share_click_handler() {
   var height, left, other_options, share_link, size_and_position, top, url, width;
   share_link = document.querySelector(".share_button.facebook");
