@@ -50,7 +50,7 @@ group :development, :test do
   gem "rubocop", "~> 1.51.0", require: false
   gem "rubocop-faker", require: false
   gem "rubocop-rails", require: false
-  gem "rubocop-rspec", "~> 2.9.0", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :test do

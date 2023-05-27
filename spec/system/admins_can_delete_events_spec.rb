@@ -18,7 +18,7 @@ RSpec.describe "Admins can delete events" do
     end
 
     expect(page).to have_content("Event Name")
-    expect(page).to have_no_content("Delete")
-    expect(page).to have_no_content("Balboa at Bobby McGee's")
+    expect(page).not_to have_content("Delete")
+    expect(page).not_to have_content("Balboa at Bobby McGee's")
   end
 end

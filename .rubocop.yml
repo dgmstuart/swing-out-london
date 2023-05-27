@@ -4,6 +4,8 @@ require:
   - rubocop-rspec
   - rubocop-rails
   - rubocop-faker
+  - rubocop-capybara
+  - rubocop-factory_bot
 
 inherit_mode:
   merge:
@@ -137,6 +139,9 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**/*_spec.rb
+
+RSpec/VerifiedDoubleReference:
+  Enabled: false
 
 Rails/FilePath:
   Exclude:

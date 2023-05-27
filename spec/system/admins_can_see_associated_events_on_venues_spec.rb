@@ -33,6 +33,6 @@ RSpec.describe "Admins can see associated events on venues" do
 
     click_on "Show"
 
-    expect(page).to have_no_content("Associated Events")
+    expect(page).not_to have_content("Associated Events")
   end
 end

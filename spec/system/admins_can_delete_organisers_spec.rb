@@ -18,8 +18,8 @@ RSpec.describe "Admins can delete organisers" do
       end
 
       expect(page).to have_content("Listing organisers")
-      expect(page).to have_no_content("Delete")
-      expect(page).to have_no_content("Herbert White")
+      expect(page).not_to have_content("Delete")
+      expect(page).not_to have_content("Herbert White")
     end
 
     it "can be deleted from the edit page" do
@@ -38,8 +38,8 @@ RSpec.describe "Admins can delete organisers" do
       end
 
       expect(page).to have_content("Listing organisers")
-      expect(page).to have_no_content("Delete")
-      expect(page).to have_no_content("Herbert White")
+      expect(page).not_to have_content("Delete")
+      expect(page).not_to have_content("Herbert White")
     end
   end
 
@@ -54,15 +54,15 @@ RSpec.describe "Admins can delete organisers" do
 
       click_on "Organisers", match: :first
 
-      expect(page).to have_no_content("Delete")
+      expect(page).not_to have_content("Delete")
 
       click_on "Show"
 
-      expect(page).to have_no_content("Delete")
+      expect(page).not_to have_content("Delete")
 
       click_on "Edit"
 
-      expect(page).to have_no_content("Delete")
+      expect(page).not_to have_content("Delete")
       expect(page).to have_content("Can't be deleted: has associated events")
     end
   end
