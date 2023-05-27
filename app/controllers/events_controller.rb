@@ -33,7 +33,7 @@ class EventsController < CmsBaseController
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     @event = Event.find(params[:id])
 
     @form = EditEventForm.new(event_params)

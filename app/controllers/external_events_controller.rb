@@ -8,7 +8,7 @@ class ExternalEventsController < CmsBaseController
     @form = OrganiserEditEventForm.from_event(@event)
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     @event = Event.find_by!(organiser_token: params[:id])
 
     @form = OrganiserEditEventForm.new(event_params)

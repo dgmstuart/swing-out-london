@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], scope: ""
+  provider :facebook, ENV.fetch("FACEBOOK_APP_ID", nil), ENV.fetch("FACEBOOK_SECRET", nil), scope: ""
 end
 
 if Rails.env.development?

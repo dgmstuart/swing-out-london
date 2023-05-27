@@ -4,10 +4,6 @@ require "spec_helper"
 require "app/models/auth_response"
 
 RSpec.describe AuthResponse do
-  it "works" do
-    described_class.new(double)
-  end
-
   describe "#id" do
     it "returns the UID from the auth hash" do
       request_env = {

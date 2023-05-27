@@ -21,7 +21,7 @@ RSpec.describe "Admins can list events" do
     visit "/login"
     click_on "Log in with Facebook"
 
-    expect(page).to have_content("Stompin\'")
+    expect(page).to have_content("Stompin'")
       .and have_content("The 100 Club")
       .and have_content("Oxford Street")
       .and have_content("Simon Selmon")

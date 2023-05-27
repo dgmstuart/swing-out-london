@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Audit Log RSS feed", type: :request do
+RSpec.describe "Audit Log RSS feed" do
   it "displays an RSS feed of audit events" do
     audit_user = { "auth_id" => "abc123", "name" => "Pepsi Bethel" }
     Audited.store[:current_user] = -> { audit_user }

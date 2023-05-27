@@ -47,10 +47,10 @@ group :development, :test do
   gem "faker"
   gem "rb-fsevent"
   gem "rspec-rails"
-  gem "rubocop", "~> 1.27.0", require: false
+  gem "rubocop", "~> 1.51.0", require: false
   gem "rubocop-faker", require: false
   gem "rubocop-rails", require: false
-  gem "rubocop-rspec", "~> 2.9.0", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :test do
