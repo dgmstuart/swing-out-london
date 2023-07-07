@@ -14,7 +14,7 @@
     "webpack-cli": "^4.9.2"
   },
   "devDependencies": {
-    "stylelint": "^14.0.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-standard-scss": "^3.0.0"
   }
 }
