@@ -59,11 +59,11 @@ group :test do
   gem "elabs_matchers"
   gem "launchy"
   gem "rails-controller-testing" # TODO: refactor tests so that we don't need this
+  gem "selenium-webdriver", require: false
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
   gem "vcr"
-  gem "webdrivers", require: false
   gem "webmock"
 end
 

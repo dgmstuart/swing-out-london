@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "webdrivers/chromedriver"
-
 module System
   module Drivers
     RSpec.configure do |config|
