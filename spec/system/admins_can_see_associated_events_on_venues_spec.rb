@@ -11,11 +11,11 @@ RSpec.describe "Admins can see associated events on venues" do
     social = create(:social, title: "The Sunday Stomp", venue:)
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Venues"
+    click_link "Venues"
 
-    click_on "Show"
+    click_link "Show"
 
     expect(page).to have_content("Associated Events")
     expect(page).to have_link("Class with Ron and Christine on Wednesdays", href: event_path(dance_class))
@@ -27,11 +27,11 @@ RSpec.describe "Admins can see associated events on venues" do
     create(:venue)
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Venues"
+    click_link "Venues"
 
-    click_on "Show"
+    click_link "Show"
 
     expect(page).not_to have_content("Associated Events")
   end

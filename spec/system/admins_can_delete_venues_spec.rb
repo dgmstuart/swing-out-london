@@ -9,12 +9,12 @@ RSpec.describe "Admins can delete venues" do
       create(:venue, name: "Bobby McGee's")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "Venues", match: :first
+      click_link "Venues", match: :first
 
       accept_confirm do
-        click_on "Delete", match: :first
+        click_link "Delete", match: :first
       end
 
       expect(page).to have_content("Listing venues")
@@ -27,14 +27,14 @@ RSpec.describe "Admins can delete venues" do
       create(:venue, name: "Bobby McGee's")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "Venues", match: :first
+      click_link "Venues", match: :first
 
-      click_on "Edit", match: :first
+      click_link "Edit", match: :first
 
       accept_confirm do
-        click_on "Delete"
+        click_link "Delete"
       end
 
       expect(page).to have_content("Listing venues")
@@ -50,17 +50,17 @@ RSpec.describe "Admins can delete venues" do
       create(:event, venue:)
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "Venues", match: :first
-
-      expect(page).not_to have_content("Delete")
-
-      click_on "Show"
+      click_link "Venues", match: :first
 
       expect(page).not_to have_content("Delete")
 
-      click_on "Edit"
+      click_link "Show"
+
+      expect(page).not_to have_content("Delete")
+
+      click_link "Edit"
 
       expect(page).not_to have_content("Delete")
       expect(page).to have_content("Can't be deleted: has associated events")

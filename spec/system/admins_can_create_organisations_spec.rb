@@ -7,9 +7,9 @@ RSpec.describe "Admins can create organisers" do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "New Organiser"
+    click_link "New Organiser"
 
     fill_in "Name", with: "The London Swing Dance Society"
     fill_in "Shortname", with: "LSDS"
@@ -17,7 +17,7 @@ RSpec.describe "Admins can create organisers" do
     fill_in "Website", with: "http://www.lsds.co.uk"
 
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-      click_on "Create"
+      click_button "Create"
     end
 
     expect(page).to have_content("Name: The London Swing Dance Society")
@@ -33,14 +33,14 @@ RSpec.describe "Admins can create organisers" do
     stub_login
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "New Organiser"
+    click_link "New Organiser"
 
     fill_in "Name", with: "The London Swing Dance Society"
     fill_in "Shortname", with: ""
 
-    click_on "Create"
+    click_button "Create"
 
     expect(page).to have_content("Last updated by")
   end

@@ -6,9 +6,9 @@ RSpec.describe "Adding a new event" do
   it "with a dance class" do
     visit "/events"
 
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "New Venue"
+    click_link "New Venue"
 
     fill_in "Name", with: "The Savoy Ballroom"
     fill_in "Address", with: "596 Lenox Avenue"
@@ -18,25 +18,25 @@ RSpec.describe "Adding a new event" do
     fill_in "Longitude", with: "73.938456"
     fill_in "Website", with: "https://www.savoyballroom.com"
 
-    click_on "Create"
+    click_button "Create"
 
-    click_on "New Organiser"
+    click_link "New Organiser"
 
     fill_in "Name", with: "Herbert White"
     fill_in "Shortname", with: "Whitey"
     fill_in "Website", with: "https://hoppingmainacs.org"
     fill_in "Description", with: "Architect of Whitey's Lindy Hoppers"
 
-    click_on "Create"
+    click_button "Create"
 
-    click_on "New Organiser"
+    click_link "New Organiser"
 
     fill_in "Name", with: "Frankie Manning"
     fill_in "Shortname", with: "Frankie"
 
-    click_on "Create"
+    click_button "Create"
 
-    click_on "New Event"
+    click_link "New Event"
 
     fill_in "Title", with: "Stompin at the Savoy"
     select "The Savoy Ballroom", from: "Venue"
@@ -57,9 +57,9 @@ RSpec.describe "Adding a new event" do
     fill_in "Url", with: "https://www.savoyballroom.com/stompin"
 
     Timecop.freeze("01/01/1937") do
-      click_on "Create"
+      click_button "Create"
 
-      click_on "Swing Out London"
+      click_link "Swing Out London"
     end
 
     venue_id = Venue.first.id

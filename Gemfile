@@ -48,7 +48,6 @@ group :development, :test do
   gem "rb-fsevent"
   gem "rspec-rails"
   gem "rubocop", "~> 1.51.0", require: false
-  gem "rubocop-capybara", "2.18.0", require: false
   gem "rubocop-faker", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false

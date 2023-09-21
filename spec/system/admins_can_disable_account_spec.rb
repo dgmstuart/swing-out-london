@@ -16,13 +16,13 @@ RSpec.describe "Admin Login Revocation" do
 
     visit "/account"
 
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
     # TEMP - remove once we have implemented redirect:
     visit "/account"
 
     VCR.use_cassette("disable_login") do
-      click_on "Disable my login"
+      click_link "Disable my login"
     end
 
     expect(page).to have_header("Admin Login")

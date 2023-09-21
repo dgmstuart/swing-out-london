@@ -11,10 +11,10 @@ RSpec.describe "Admins can archive events" do
 
     # 8th Jan 2000 was a saturday
     Timecop.freeze(Time.zone.local(2000, 1, 8)) do
-      click_on "Archive", match: :first
+      click_link "Archive", match: :first
     end
 
-    click_on "Show", match: :first
+    click_link "Show", match: :first
 
     expect(page).to have_content("Last date: Sunday 2nd January")
   end
@@ -26,10 +26,10 @@ RSpec.describe "Admins can archive events" do
     visit "/events"
 
     Timecop.freeze(Time.zone.local(2000, 1, 8)) do
-      click_on "Archive", match: :first
+      click_link "Archive", match: :first
     end
 
-    click_on "Show", match: :first
+    click_link "Show", match: :first
 
     expect(page).to have_content("Last date: Sunday 2nd January")
   end

@@ -9,12 +9,12 @@ RSpec.describe "Admins can delete organisers" do
       create(:organiser, name: "Herbert White")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "Organisers", match: :first
+      click_link "Organisers", match: :first
 
       accept_confirm do
-        click_on "Delete", match: :first
+        click_link "Delete", match: :first
       end
 
       expect(page).to have_content("Listing organisers")
@@ -27,14 +27,14 @@ RSpec.describe "Admins can delete organisers" do
       create(:organiser, name: "Herbert White")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "Organisers", match: :first
+      click_link "Organisers", match: :first
 
-      click_on "Edit", match: :first
+      click_link "Edit", match: :first
 
       accept_confirm do
-        click_on "Delete"
+        click_link "Delete"
       end
 
       expect(page).to have_content("Listing organisers")
@@ -50,17 +50,17 @@ RSpec.describe "Admins can delete organisers" do
       create(:event, social_organiser: organiser)
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "Organisers", match: :first
-
-      expect(page).not_to have_content("Delete")
-
-      click_on "Show"
+      click_link "Organisers", match: :first
 
       expect(page).not_to have_content("Delete")
 
-      click_on "Edit"
+      click_link "Show"
+
+      expect(page).not_to have_content("Delete")
+
+      click_link "Edit"
 
       expect(page).not_to have_content("Delete")
       expect(page).to have_content("Can't be deleted: has associated events")
