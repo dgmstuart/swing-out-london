@@ -280,6 +280,6 @@ class Event < ApplicationRecord
                          latest_date
                        end
 
-    return true if save!
+    true if save!
   end
 end
