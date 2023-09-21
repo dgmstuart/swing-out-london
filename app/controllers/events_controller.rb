@@ -2,7 +2,7 @@
 
 class EventsController < CmsBaseController
   def index
-    @events = Event.all.includes(:venue, :social_organiser, :class_organiser).order(has_social: :desc).order("title, updated_at")
+    @events = Event.includes(:venue, :social_organiser, :class_organiser).order(has_social: :desc).order("title, updated_at")
   end
 
   def show

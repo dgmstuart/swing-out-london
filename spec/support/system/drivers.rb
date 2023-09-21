@@ -7,7 +7,7 @@ module System
         driven_by :rack_test
       end
 
-      config.before(:each, js: true, type: :system) do
+      config.before(:each, :js, type: :system) do
         driven_by :selenium_chrome_headless
       end
     end

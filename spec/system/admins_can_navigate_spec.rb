@@ -8,11 +8,11 @@ RSpec.describe "Admins can navigate" do
     create(:event, url: "https://navigating.se")
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Show", match: :first
+    click_link "Show", match: :first
 
-    click_on "Edit"
+    click_link "Edit"
 
     expect(page).to have_content("Editing event")
   end

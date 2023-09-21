@@ -4,7 +4,7 @@ class AuditLogsController < ApplicationController
   before_action :authenticate
 
   def show
-    @audits = Audit.all.order(created_at: :desc)
+    @audits = Audit.order(created_at: :desc)
     respond_to do |format|
       format.html
       format.atom { render xml: audits_rss(@audits).to_xml }

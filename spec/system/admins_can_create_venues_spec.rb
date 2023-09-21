@@ -7,9 +7,9 @@ RSpec.describe "Admins can create venues" do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "New Venue"
+    click_link "New Venue"
 
     fill_in "Name", with: "The 100 Club"
     fill_in "Address", with: "100 Oxford Street\nLondon"
@@ -18,7 +18,7 @@ RSpec.describe "Admins can create venues" do
     fill_in "Website", with: "https://www.the100club.co.uk/"
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
       VCR.use_cassette("geocode_100_club") do
-        click_on "Create"
+        click_button "Create"
       end
     end
 

@@ -2,14 +2,14 @@
 
 module PageHelper
   # Switching h1 and h2 in the header
-  def heading_hn(action, *args, &)
+  def heading_hn(action, *, &)
     hn = if action == "index"
            :h1
          else
            :h2
          end
 
-    content_tag(hn, *args, &)
+    content_tag(hn, *, &)
   end
 
   # Links for navigation

@@ -13,7 +13,7 @@ RSpec.describe "Admin Login" do
 
     expect(page).not_to have_header("Events")
 
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
     expect(page).to have_header("Events")
     expect(page).to have_content("Al Minns")
@@ -28,7 +28,7 @@ RSpec.describe "Admin Login" do
 
       visit "/events"
 
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
       expect(page).to have_content(
         "Your Facebook ID for Swing Out London (76543210987654321) isn't in the approved list"
@@ -43,7 +43,7 @@ RSpec.describe "Admin Login" do
 
       visit "/events"
 
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
       expect(page).to have_content("There was a problem with your login to Facebook")
       expect(page).not_to have_header("Events")

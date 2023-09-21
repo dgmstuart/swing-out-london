@@ -7,8 +7,8 @@ module System
     OmniAuth.config.test_mode = true
     OmniAuth.config.logger = Logger.new("/dev/null")
 
-    def stub_auth_hash(**args)
-      OmniauthTestResponseBuilder.new.stub_auth_hash(**args)
+    def stub_auth_hash(**)
+      OmniauthTestResponseBuilder.new.stub_auth_hash(**)
     end
   end
 end

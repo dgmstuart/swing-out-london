@@ -10,9 +10,9 @@ RSpec.describe "Admins can edit events", :js do
     create(:organiser, name: "The London Swing Dance Society")
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Edit", match: :first
+    click_link "Edit", match: :first
 
     expect(page).to have_field("Cancelled dates", with: "01/10/2010,02/12/2012")
 
@@ -30,7 +30,7 @@ RSpec.describe "Admins can edit events", :js do
     fill_in "Url", with: "http://www.lsds.co.uk/stompin"
 
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-      click_on "Update"
+      click_button "Update"
     end
 
     expect(page).to have_content("Title:\nStompin'")
@@ -51,9 +51,9 @@ RSpec.describe "Admins can edit events", :js do
     create(:class)
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Edit", match: :first
+    click_link "Edit", match: :first
 
     empty_autocomplete_field "Venue", "xyz"
     # uncheck doesn't work in selenium chrome headless?
@@ -63,7 +63,7 @@ RSpec.describe "Admins can edit events", :js do
     select "", from: "Day"
     fill_in "Url", with: ""
 
-    click_on "Update"
+    click_button "Update"
 
     expect(page).to have_content("2 errors prevented this record from being saved:")
       .and have_content("Url can't be blank")
@@ -77,16 +77,16 @@ RSpec.describe "Admins can edit events", :js do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Edit", match: :first
+    click_link "Edit", match: :first
 
     expect(page).to have_field("Upcoming dates", with: "12/12/2012,13/12/2012")
 
     fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
-      click_on "Update"
+      click_button "Update"
     end
 
     expect(page).to have_content("Dates:\n12/12/2012, 12/01/2013")
@@ -102,14 +102,14 @@ RSpec.describe "Admins can edit events", :js do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_on "Log in with Facebook"
+    click_button "Log in with Facebook"
 
-    click_on "Edit", match: :first
+    click_link "Edit", match: :first
 
     fill_in "Cancelled dates", with: "12/12/2012"
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
-      click_on "Update"
+      click_button "Update"
     end
 
     expect(page).to have_content("Cancelled:\n12/12/2012")

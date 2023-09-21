@@ -10,9 +10,9 @@ RSpec.describe "Admins can create events", :js do
       create(:organiser, name: "The London Swing Dance Society")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "New event", match: :first
+      click_link "New event", match: :first
 
       fill_in "Title", with: "Stompin'"
       autocomplete_select "The 100 Club", from: "Venue"
@@ -32,7 +32,7 @@ RSpec.describe "Admins can create events", :js do
       fill_in "Url", with: "http://www.lsds.co.uk/stompin"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-        click_on "Create"
+        click_button "Create"
       end
 
       expect(page).to have_content("Title:\nStompin'")
@@ -55,11 +55,11 @@ RSpec.describe "Admins can create events", :js do
       create(:venue, name: "The 100 Club")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "New event", match: :first
+      click_link "New event", match: :first
 
-      click_on "Create"
+      click_button "Create"
 
       expect(page).to have_content("5 errors prevented this record from being saved")
         .and have_content("Venue can't be blank")
@@ -76,7 +76,7 @@ RSpec.describe "Admins can create events", :js do
       select "Tuesday", from: "Day"
       fill_in "Url", with: "http://www.lsds.co.uk/stompin"
 
-      click_on "Create"
+      click_button "Create"
 
       expect(page).to have_content("Venue:\nThe 100 Club")
         .and have_content("School, with social")
@@ -89,11 +89,11 @@ RSpec.describe "Admins can create events", :js do
       skip_login
 
       visit venues_path
-      click_on "Show", match: :first
+      click_link "Show", match: :first
 
       expect(page).to have_content("93 feet east")
 
-      click_on "New Event at this venue"
+      click_link "New Event at this venue"
 
       expect(page).to have_content("New event")
       expect(page).to have_autocomplete_field("Venue", "93 feet east - Brick Lane")
@@ -107,9 +107,9 @@ RSpec.describe "Admins can create events", :js do
       create(:organiser, name: "Sunshine Swing")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "New event", match: :first
+      click_link "New event", match: :first
 
       autocomplete_select "Dogstar", from: "Venue"
       autocomplete_select "Sunshine Swing", from: "Class organiser"
@@ -121,7 +121,7 @@ RSpec.describe "Admins can create events", :js do
       fill_in "Url", with: "https://sunshineswing.uk/events"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-        click_on "Create"
+        click_button "Create"
       end
 
       expect(page).to have_content("Venue:\nDogstar")
@@ -141,11 +141,11 @@ RSpec.describe "Admins can create events", :js do
       create(:organiser, name: "Sunshine Swing")
 
       visit "/login"
-      click_on "Log in with Facebook"
+      click_button "Log in with Facebook"
 
-      click_on "New event", match: :first
+      click_link "New event", match: :first
 
-      click_on "Create"
+      click_button "Create"
 
       expect(page).to have_content("5 errors prevented this record from being saved")
         .and have_content("Venue can't be blank")
@@ -161,13 +161,13 @@ RSpec.describe "Admins can create events", :js do
       select "Tuesday", from: "Day"
       fill_in "Url", with: "https://sunshineswing.uk/events"
 
-      click_on "Create"
+      click_button "Create"
 
       expect(page).to have_content("1 error prevented this record from being saved")
         .and have_content("Class organiser must be present for classes")
 
       autocomplete_select "Sunshine Swing", from: "Class organiser"
-      click_on "Create"
+      click_button "Create"
 
       expect(page).to have_content("Venue:\nDogstar")
         .and have_content("Class Organiser:\nSunshine Swing")
