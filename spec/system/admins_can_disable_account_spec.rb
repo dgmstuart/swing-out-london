@@ -5,10 +5,12 @@ require "rails_helper"
 RSpec.describe "Admin Login Revocation" do
   it "admins can deauthorise Swing Out Londons facebook permissions", :vcr do
     config = Rails.configuration.x.facebook
-    allow(config).to receive(:api_base!).and_return("https://graph.facebook.com/")
-    allow(config).to receive(:api_auth_token!).and_return("super-secret-token")
-    allow(config).to receive(:app_secret!).and_return("super-secret-secret")
-    allow(config).to receive(:admin_user_ids).and_return([12345678901234567])
+    allow(config).to receive_messages(
+      api_base!: "https://graph.facebook.com/",
+      api_auth_token!: "super-secret-token",
+      app_secret!: "super-secret-secret",
+      admin_user_ids: [12345678901234567]
+    )
 
     stub_auth_hash(id: 12345678901234567)
 
