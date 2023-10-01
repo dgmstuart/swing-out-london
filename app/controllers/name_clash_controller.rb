@@ -4,7 +4,9 @@ class NameClashController < ApplicationController
   layout "name_clash"
 
   def index
-    names = Event.socials.where.not(event_type: "gig").pluck(:title)
+    scope = Event.socials
+    records = scope.where.not(event_type: "gig").or(scope.where(event_type: nil))
+    names = records.pluck(:title)
 
     @names = names.map do |s|
       s.gsub(
