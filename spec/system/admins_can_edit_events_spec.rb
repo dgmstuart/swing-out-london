@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Admins can edit events", :js do
   it "with valid data" do
     stub_login(id: 12345678901234567, name: "Al Minns")
-    create(:weekly_social, event_type: "dance_club", class_style: "Balboa", cancellations: ["01/10/2010", "02/12/2012"])
+    create(:weekly_social, class_style: "Balboa", cancellations: ["01/10/2010", "02/12/2012"])
     create(:venue, name: "The 100 Club")
     create(:organiser, name: "The London Swing Dance Society")
 
