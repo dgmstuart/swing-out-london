@@ -207,3 +207,16 @@ a.normal-link {
 #error-explanation li {
   font-size: 14px;
 }
+
+.field_with_errors {
+  input,
+  select {
+    border: 2px solid #c00;
+  }
+}
+
+// For radio buttons, the input is inside the label
+label .field_with_errors {
+  display: inline-block;
+  border: 2px solid #c00;
+}
