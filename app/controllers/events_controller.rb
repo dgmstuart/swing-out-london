@@ -72,7 +72,6 @@ class EventsController < CmsBaseController
         venue_id
         social_organiser_id
         class_organiser_id
-        event_type
         has_taster
         has_class
         has_social

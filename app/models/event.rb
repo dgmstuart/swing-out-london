@@ -16,7 +16,6 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
-  validates :event_type, presence: true
   validates :frequency, presence: true
   validates :url, presence: true, uri: true
 
@@ -92,8 +91,6 @@ class Event < ApplicationRecord
   scope :weekly, -> { where(frequency: 1) }
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
   scope :less_frequent, -> { where(frequency: 0).or(where(frequency: 4..52)) }
-
-  scope :non_gigs, -> { where.not(event_type: "gig") }
 
   scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
   scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.current) }

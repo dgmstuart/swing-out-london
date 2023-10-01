@@ -20,7 +20,6 @@ RSpec.describe "Admins can edit events", :js do
     autocomplete_select "The 100 Club", from: "Venue"
     autocomplete_select "The London Swing Dance Society", from: "Social organiser"
     autocomplete_select "The London Swing Dance Society", from: "Class organiser"
-    choose "School" # Event Type
     check "Has a taster?"
     check "Has social?"
     choose "Lindy Hop or general swing"
@@ -37,7 +36,7 @@ RSpec.describe "Admins can edit events", :js do
       .and have_content("Venue:\nThe 100 Club")
       .and have_content("Social Organiser:\nThe London Swing Dance Society")
       .and have_content("Class Organiser:\nThe London Swing Dance Society")
-      .and have_content("School, with social and taster")
+      .and have_content("Social with taster")
       .and have_content("Class style:\nLindy Hop or general swing")
       .and have_content("Frequency:\nMonthly or occasionally")
       .and have_content("First date:")

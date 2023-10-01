@@ -18,7 +18,6 @@ RSpec.describe "Admins can create events", :js do
       autocomplete_select "The 100 Club", from: "Venue"
       autocomplete_select "The London Swing Dance Society", from: "Social organiser"
       autocomplete_select "The London Swing Dance Society", from: "Class organiser"
-      choose "School" # Event Type
       check "Has a taster?"
       check "Has social?"
       choose "Other (balboa, shag etc)"
@@ -39,7 +38,7 @@ RSpec.describe "Admins can create events", :js do
         .and have_content("Venue:\nThe 100 Club")
         .and have_content("Social Organiser:\nThe London Swing Dance Society")
         .and have_content("Class Organiser:\nThe London Swing Dance Society")
-        .and have_content("School, with social and taster")
+        .and have_content("Social with taster")
         .and have_content("Class style:\nBalboa")
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 19/12/2012")
@@ -61,15 +60,13 @@ RSpec.describe "Admins can create events", :js do
 
       click_button "Create"
 
-      expect(page).to have_content("5 errors prevented this record from being saved")
+      expect(page).to have_content("4 errors prevented this record from being saved")
         .and have_content("Venue can't be blank")
         .and have_content("Url can't be blank")
-        .and have_content("Event type can't be blank")
         .and have_content("Frequency can't be blank")
         .and have_content("Events must have either a Social or a Class")
 
       autocomplete_select "The 100 Club", from: "Venue"
-      choose "School" # Event Type
       check "Has social?"
       fill_in "Title", with: "Stompin'"
       choose "Weekly"
@@ -79,7 +76,7 @@ RSpec.describe "Admins can create events", :js do
       click_button "Create"
 
       expect(page).to have_content("Venue:\nThe 100 Club")
-        .and have_content("School, with social")
+        .and have_content("Social")
         .and have_content("Frequency:\nWeekly on Tuesdays")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
@@ -113,7 +110,6 @@ RSpec.describe "Admins can create events", :js do
 
       autocomplete_select "Dogstar", from: "Venue"
       autocomplete_select "Sunshine Swing", from: "Class organiser"
-      choose "School" # Event Type
       check "Has a class?"
       choose "Weekly"
       select "Wednesday", from: "Day"
@@ -126,7 +122,7 @@ RSpec.describe "Admins can create events", :js do
 
       expect(page).to have_content("Venue:\nDogstar")
         .and have_content("Class Organiser:\nSunshine Swing")
-        .and have_content("School, with class")
+        .and have_content("Class")
         .and have_content("Frequency:\nWeekly on Wednesdays")
         .and have_content("Cancelled:\nNone")
         .and have_content("First date:\nWednesday 16th February")
@@ -147,15 +143,13 @@ RSpec.describe "Admins can create events", :js do
 
       click_button "Create"
 
-      expect(page).to have_content("5 errors prevented this record from being saved")
+      expect(page).to have_content("4 errors prevented this record from being saved")
         .and have_content("Venue can't be blank")
         .and have_content("Url can't be blank")
-        .and have_content("Event type can't be blank")
         .and have_content("Frequency can't be blank")
         .and have_content("Events must have either a Social or a Class")
 
       autocomplete_select "Dogstar", from: "Venue"
-      choose "School" # Event Type
       check "Has a class?"
       choose "Weekly"
       select "Tuesday", from: "Day"
@@ -171,7 +165,7 @@ RSpec.describe "Admins can create events", :js do
 
       expect(page).to have_content("Venue:\nDogstar")
         .and have_content("Class Organiser:\nSunshine Swing")
-        .and have_content("School, with class")
+        .and have_content("Class")
         .and have_content("Frequency:\nWeekly on Tuesdays")
         .and have_content("Url:\nhttps://sunshineswing.uk/events")
     end

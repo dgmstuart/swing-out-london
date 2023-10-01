@@ -191,7 +191,6 @@ describe Event do
       expect(event.errors.messages).to eq(venue: ["must exist"])
     end
 
-    it { is_expected.to validate_presence_of(:event_type) }
     it { is_expected.to validate_presence_of(:frequency) }
     it { is_expected.to validate_presence_of(:url) }
 

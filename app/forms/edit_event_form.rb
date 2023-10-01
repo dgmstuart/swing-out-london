@@ -12,7 +12,6 @@ class EditEventForm < CreateEventForm
           title: event.title,
           url: event.url,
           venue_id: event.venue_id,
-          event_type: event.event_type,
 
           has_social: event.has_social,
           social_organiser_id: event.social_organiser_id,

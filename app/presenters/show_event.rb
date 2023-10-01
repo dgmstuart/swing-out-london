@@ -39,7 +39,7 @@ class ShowEvent
     activities << "social" if event.has_social?
     activities << "taster" if event.has_taster?
     activities << "class" if event.has_class?
-    "#{event.event_type.humanize}, with #{activities.join(' and ')}"
+    activities.join(" with ").capitalize
   end
 
   def frequency # rubocop:disable Metrics/MethodLength

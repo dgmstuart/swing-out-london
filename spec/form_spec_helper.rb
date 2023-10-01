@@ -17,7 +17,6 @@ FactoryBot.define do
     has_taster { false }
     has_class { false }
     has_social { true }
-    event_type { "school" }
     frequency { 0 }
     url { Faker::Internet.url }
     venue_id { rand(999) }
