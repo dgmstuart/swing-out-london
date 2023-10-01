@@ -42,7 +42,6 @@ RSpec.describe "Adding a new event" do
     select "The Savoy Ballroom", from: "Venue"
     select "Herbert White", from: "Social organiser"
     select "Frankie Manning", from: "Class organiser"
-    choose "Dance Club" # Event Type
     uncheck "Has a taster?"
     check "Has a class?"
     check "Has social?"

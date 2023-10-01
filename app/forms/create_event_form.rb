@@ -7,7 +7,6 @@ class CreateEventForm
   attribute :title, :string
   attribute :url, :string
   attribute :venue_id, :integer
-  attribute :event_type, :string
 
   attribute :has_social, :boolean
   attribute :social_organiser_id, :integer
@@ -31,7 +30,6 @@ class CreateEventForm
 
   validates :url, presence: true, uri: true
   validates :venue_id, presence: true
-  validates :event_type, presence: true
   validates :frequency, presence: true
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_blank: true }
 

@@ -23,7 +23,6 @@ RSpec.describe EditEventForm do
     it_behaves_like "validates course length", :edit_event_form
     it_behaves_like "validates url", :edit_event_form
 
-    it { is_expected.to validate_presence_of(:event_type) }
     it { is_expected.to validate_presence_of(:frequency) }
     it { is_expected.to validate_presence_of(:url) }
     it { is_expected.to validate_presence_of(:venue_id) }
