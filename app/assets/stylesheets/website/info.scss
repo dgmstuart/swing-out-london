@@ -115,6 +115,7 @@ table.full-width {
 table {
   font-size: 0.9em;
   padding-bottom: 35px;
+  border-collapse: collapse;
 
   th,
   td {
@@ -146,6 +147,12 @@ table {
       &.row_title {
         width: 150px;
       }
+
+      padding-bottom: 10px;
+    }
+
+    tr:not(:first-child) {
+      border-top: $dashed-border;
     }
   }
 
