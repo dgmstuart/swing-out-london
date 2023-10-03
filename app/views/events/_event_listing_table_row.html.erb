@@ -1,7 +1,7 @@
 <% cache [event, event.venue, event.social_organiser, event.class_organiser] do %>
   <tr class="<%= event.status_string %>" id="event_<%= event.id %>">
     <td class="actions first">
-      <%= link_to 'Edit', edit_event_path(event) %>
+      <%= link_to 'Edit', edit_event_path(event), class: "button button-smaller button-secondary" %>
     </td>
     <td class="name">
       <%= link_to event.title, event.url %>
