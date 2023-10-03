@@ -4,11 +4,6 @@ export function initListings() {
   if (document.body.classList.contains('listings') && document.body.classList.contains('index')) {
     var timeago = document.querySelector('time.timeago')
     timeago.innerHTML = format(timeago.getAttribute('time'));
-    add_socials_analytics_events();
-    add_advertisement_analytics_events();
-    add_donation_button_analytics_event();
-    add_facebook_share_analytics_event();
-    add_tweet_share_analytics_event();
     add_facebook_share_click_handler();
   }
 };
