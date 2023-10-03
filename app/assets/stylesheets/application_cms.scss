@@ -55,67 +55,47 @@ p.actions_panel {
 // TABLE COLUMNS
 /////////////////////////////////////////////
 
-// DESKTOP
+// SMALLER THAN DESKTOP
 @media only screen and (max-width: 900px) {
   table {
     td.actions.last {
-      display: none;
-    }
-
-    td.updated,
-    th.updated {
       display: none;
     }
   }
 }
 
 // TABLET & SMALLER LAPTOPS
-@media only screen and (max-width: 767px) {
-  td.area,
-  th.area {
-    display: none;
-  }
-}
+// @media only screen and (max-width: 767px) {
+// }
 
 // SMALL
 @media only screen and (max-width: 480px) {
   table {
-    // Below doesn't work
-    table-layout: fixed;
     width: 100%;
+    min-width: 1200px;
 
     td {
       word-break: word-wrap;
     }
 
-    th.name {
-      width: 100px;
+    td.actions {
+      .button {
+        margin: 0;
+      }
     }
 
-    th.venue {
-      width: 120px;
+    td.name {
+      max-width: 350px;
+      min-width: 120px;
     }
 
-    th.class_org {
-      width: 120px;
+    td.area {
+      max-width: 140px;
     }
 
-    th.day {
-      width: 30px;
-    }
-
-    td.fq,
-    th.fq {
-      display: none;
-    }
-
-    th.dates {
-      width: 68px;
-    }
-
-    td.soc_org,
-    th.soc_org {
-      display: none;
+    td.class_org,
+    td.soc_org {
+      max-width: 120px;
     }
   }
 }
@@ -125,8 +105,23 @@ p.actions_panel {
   margin: 0 10px;
 }
 
-.events.index .button {
-  margin: 0 20px 0 40px;
+.events.index {
+  .button {
+    margin: 0 5px 20px 15px;
+  }
+
+  label {
+    margin-left: 15px;
+    font-size: 24px;
+  }
+
+  td.actions {
+    vertical-align: middle;
+
+    .button {
+      margin: 0;
+    }
+  }
 }
 
 table {
@@ -135,10 +130,6 @@ table {
 }
 
 table.events {
-  .actions.first {
-    max-width: 35px;
-  }
-
   .actions.last {
     width: 5.5em;
   }
@@ -159,7 +150,7 @@ th.actions { border: none; }
 
 td.dates,
 td.updated {
-  max-width: 80px;
+  max-width: 74px;
 }
 
 .events {
