@@ -1,15 +1,15 @@
-<div class="content" id="about_swingoutlondon">
-  <%= render "about_swingoutlondon" %>
-</div>
-<div class="sidebar first" id="about_me">
-  <%= render "about_me" %>
-</div>
-<div class="sidebar" id="about_lindy">
-  <%= render "about_lindy" %>
-</div>
-<div class="sidebar">
-  <%= render "show_love" %>
-</div>
+<section class="content">
+  <% @page.content_partials.each do |partial| %>
+    <%= render partial.path %>
+  <% end %>
+</section>
+
+<% @page.sidebar_partials.each do |partial| %>
+  <aside class="sidebar" id="<%= partial.name %>">
+    <%= render partial.path %>
+  </aside>
+<% end %>
+
 <div id="colophon">
-  <%= render "colophon" %>
+  <%= render "info/about/colophon" %>
 </div>
