@@ -9,7 +9,7 @@ they have no clear definition and are not governed by any authority.
 The figures, style and aesthetics of these dances are a matter of personal preference,
 as is the music that they are danced to.
 
-Swing Out London lists events based upon one particular view of the dance -
+Swing Out Bristol lists events based upon one particular view of the dance -
 largely informed by the big European swing dance camps.
 
 Its hard to say no, so please read this page carefully and if you're unclear on anything, please ask.
@@ -17,6 +17,6 @@ If your event doesn't fit into the criteria below we'll be happy to point you to
 sites which might be interested in your event.
 
 If you're confident that your event meets these criteria, please send an email to
-[swingoutlondon@gmail.com](mailto:swingoutlondon@gmail.com?subject=Event%20listing)
-and we'll have a look. Please bear in mind that Swing Out London is run by volunteers,
+[swingoutbristol@gmail.com](mailto:swingoutbristol@gmail.com?subject=Event%20listing)
+and we'll have a look. Please bear in mind that Swing Out Bristol is run by volunteers,
 so we're usually not able to respond at short notice.
