@@ -1,0 +1,20 @@
+
+- root: "info/about"
+  content:
+    - about_swingoutlondon
+  sidebar:
+    - about_us
+    - about_lindy
+    - show_love
+
+- root: "info/listings_policy"
+  content:
+    - intro
+    - location_text
+    - classes_text
+    - classes_policy
+    - socials_text
+    - socials_policy
+    - music_text
+  sidebar:
+    - swing_music
