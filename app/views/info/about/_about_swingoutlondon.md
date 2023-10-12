@@ -33,8 +33,8 @@ difficult, so please always check with the event organiser's site.
 
 ### 4. Comprehensive
 
-We try class and every social dancing opportunity within certain criteria:
-see our
+We try to list every class and every social dancing opportunity within certain
+criteria: see our
 [Listings Policy](/listings_policy) for details.
 
 Swing dancing in London
