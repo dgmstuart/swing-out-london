@@ -1,7 +1,9 @@
 about:
   dir_path: "info/about"
   content:
-    - about_swingoutlondon
+    - intro
+    - goals
+    - swing_dancing_in_london
   sidebar:
     - about_us
     - about_lindy
