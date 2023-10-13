@@ -3,6 +3,7 @@ import { setupMap } from './setup_map'
 function initMap() {
   var mapElement = document.getElementById('map');
   var venues = JSON.parse(mapElement.dataset.markers);
+  const { center, zoom } = JSON.parse(mapElement.dataset.config);
 
   var mapControlOptions = {
     zoomControl: true,
@@ -14,11 +15,9 @@ function initMap() {
     mapTypeControl: false
   }
 
-  var barNightjar = {lat: 51.526532, lng: -0.087777}
-
   var mapBasicOptions = {
-    center: barNightjar,
-    zoom: 11,
+    center: center,
+    zoom: zoom,
     maxZoom: 19,
   }
 
