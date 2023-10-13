@@ -26,9 +26,11 @@
 <div id="soldn_on_the_web">
   <%= render 'advert', advert: ad %>
 
-  <div id="social_links">
-    <%= render 'facebook_buttons', text: "Like Swing Out London on Facebook", url: "https://www.swingoutlondon.co.uk" %>
-  </div>
+  <% if CITY.has_facebook_page? %>
+    <div id="social_links">
+      <%= render 'facebook_buttons', text: "Like Swing Out London on Facebook", url: "https://www.swingoutlondon.co.uk" %>
+    </div>
+  <% end %>
 </div>
 
 <%= render 'shared/header_navigation' %>
