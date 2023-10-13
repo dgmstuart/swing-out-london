@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  <% case params[:action] %>
+  <% when "about" %>
+    About <%= tc("site_name") %>
+  <% when "listings_policy" %>
+    Swing Out London's listings policy
+  <% end %>
+<% end %>
+
+<% content_for :description do %>
+  <% case params[:action] %>
+  <% when "listings_policy" %>
+    A guide to the criteria for deciding what classes and socials are listed on Swing Out London
+  <% end %>
+<% end %>
+
+<% content_for :navigation do %>
+  <%= render partial: 'shared/header_navigation' %>
+<% end %>
+
+<% content_for :page do %>
+  <%= yield %>
+<% end %>
+
+<%= render :template => 'layouts/website' %>

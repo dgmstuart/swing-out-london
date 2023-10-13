@@ -1,0 +1,28 @@
+<% content_for :title do %>
+  Swing Out London's Lindy Map:
+  <% if @day %>
+    on #{ @day.pluralize }
+  <% end %>
+<% end %>
+
+<% content_for :description do %>
+  <% # This just about fits on a google search result: %>
+  A map of all the Lindy Hop classes in London
+  <% if @day %>
+    on #{ @day.pluralize },
+  <% end %>
+  also classes in other swing dance styles: Charleston, Balboa, Blues, Authentic Jazz and Collegiate Shag
+<% end %>
+
+<% content_for :listings do %>
+  <ul>
+    <% DAYNAMES.each do |day| %>
+      <li>
+        <%= link_to day.pluralize, { day: day }, { class: ["js-update-map", (:selected if day == @day)], data: { url: map_classes_path(day, format: :json) } } %>
+      </li>
+    <% end %>
+  </ul>
+  <p class="note">
+    <em>Unless otherwise stated all classes are primarily Lindy Hop</em>
+  </p>
+<% end %>

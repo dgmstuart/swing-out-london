@@ -1,0 +1,18 @@
+<%= render partial: "map_info_address", locals: { marker_info: marker_info } %>
+
+<ul class="listing_info">
+  <% marker_info.social_listings_rows.each do |social_listings_row| %>
+    <li>
+      <span class="social_date">
+        <%= "#{ social_listings_row.date }:" %>
+      </span>
+      <span class="event_details">
+        <%= mapinfo_social_listing(social_listings_row.social_listing) %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+<p class="nota_bene">
+  <em>N.B. Swing Out London only lists events for the next 14 days</em>
+</p>
+
