@@ -1,12 +1,12 @@
 <% content_for :title do %>
-  Swing Out London's Lindy Map: Socials
+  <%= tc("site_name") %>'s Lindy Map: Socials
   <% if @map_dates.selected_date %>
     on <%= @map_dates.selected_date.to_s(:listing_date) %>
   <% end %>
 <% end %>
 
 <% content_for :description do %>
-  A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in London
+  A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in <%= tc("city") %>
   <% if @map_dates.selected_date %>
     on <%= @map_dates.selected_date.to_s(:listing_date) %>
   <% end %>

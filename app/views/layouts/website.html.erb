@@ -15,9 +15,9 @@
     <div id="header">
       <%= heading_hn(params[:action], :class=>"site_title") do %>
         <em>
-          <%= link_to_unless_current 'Swing Out London', root_path %>
+          <%= link_to_unless_current tc("site_name"), root_path %>
         </em>
-        Listings of Lindy Hop classes and socials in London
+        Listings of Lindy Hop classes and socials in <%= tc("city") %>
       <% end %>
 
       <%= yield(:navigation) %>

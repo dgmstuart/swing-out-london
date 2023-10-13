@@ -4,9 +4,9 @@
 
   <h2>Revoke login permissions</h2>
 
-  <p>When you logged in for the first time, you told Facebook to allow Swing Out London permission to access some basic details from your acount, so that we can identify you. You can revoke those permissions either from within Facebook, or by clicking the button below.</p>
+  <p>When you logged in for the first time, you told Facebook to allow <%= tc("site_name") %> permission to access some basic details from your acount, so that we can identify you. You can revoke those permissions either from within Facebook, or by clicking the button below.</p>
 
-  <p>If you later decide to log in again, you'll be asked to grant Swing Out London those permissions again.</p>
+  <p>If you later decide to log in again, you'll be asked to grant <%= tc("site_name") %> those permissions again.</p>
 
   <%= link_to 'Disable my login', account_path, method: :delete, class: 'button button-danger' %>
 </section>

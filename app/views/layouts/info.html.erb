@@ -3,14 +3,14 @@
   <% when "about" %>
     About <%= tc("site_name") %>
   <% when "listings_policy" %>
-    Swing Out London's listings policy
+    <%= tc("site_name") %>'s listings policy
   <% end %>
 <% end %>
 
 <% content_for :description do %>
   <% case params[:action] %>
   <% when "listings_policy" %>
-    A guide to the criteria for deciding what classes and socials are listed on Swing Out London
+    A guide to the criteria for deciding what classes and socials are listed on <%= tc("site_name") %>
   <% end %>
 <% end %>
 

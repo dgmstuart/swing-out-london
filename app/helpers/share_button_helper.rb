@@ -1,21 +1,19 @@
 # frozen_string_literal: true
 
 module ShareButtonHelper
-  SHARE_LINK = "https://swingoutlondon.co.uk"
-
   def twitter_button
     twitter_url = "https://twitter.com/intent/tweet"
 
-    tweet_text = "If you want to learn to swing dance, Swing Out London lists all the classes in London:"
+    tweet_text = "If you want to learn to swing dance, #{tc('site_name')} lists all the classes in #{tc('city')}:"
     via = "swingoutlondon"
 
     query_parameters = [
-      "url=#{SHARE_LINK}",
+      "url=#{tc('site_url')}",
       "text=#{tweet_text}",
       "via=#{via}"
     ].join("&")
 
-    alt_text = "Share Swing Out London on Twitter"
+    alt_text = "Share #{tc('site_name')} on Twitter"
 
     link_to "Tweet",
             "#{twitter_url}?#{query_parameters}",
@@ -28,18 +26,19 @@ module ShareButtonHelper
   def facebook_button
     facebook_url = "https://www.facebook.com/sharer/sharer.php"
 
-    share_title = "Swing Out London - Lindy Hop Listings"
-    share_summary = "Swing Out London is a listing of all the swing dance classes in London, and all the places you can go to dance."
+    share_title = "#{tc('site_name')} - Lindy Hop Listings"
+    share_summary =
+      "#{tc('site_name')} is a listing of all the swing dance classes in #{tc('city')}, and all the places you can go to dance."
 
     query_parameters = [
       "s=100",
-      "p[url]=#{SHARE_LINK}",
+      "p[url]=#{tc('site_url')}",
       # p[images][0] = SOME IMAGE,
       "p[title]='#{share_title}'",
       "p[summary]='#{share_summary}'"
     ].join("&")
 
-    alt_text = "Share Swing Out London on Facebook"
+    alt_text = "Share #{tc('site_name')} on Facebook"
 
     link_to "Share",
             "#{facebook_url}?#{query_parameters}",
@@ -50,7 +49,7 @@ module ShareButtonHelper
   end
 
   def donate_button
-    alt_text = "Donate to help keep Swing Out London running"
+    alt_text = "Donate to help keep #{tc('site_name')} running"
 
     link_to "Donate",
             Rails.application.config.x.donate_link,

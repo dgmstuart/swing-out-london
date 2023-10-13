@@ -7,7 +7,7 @@
   </div>
   <div class='form-group'>
     <%= f.label :address %>
-    <p class='help'>Separate the parts of the address with commas, and include "London" at the end</p>
+    <p class='help'>Separate the parts of the address with commas, and include "<%= tc("city") %>" at the end</p>
     <%= f.text_area :address %>
   </div>
   <div class='form-group'>

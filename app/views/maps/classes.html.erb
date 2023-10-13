@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  Swing Out London's Lindy Map:
+  <%= tc("site_name") %>'s Lindy Map:
   <% if @day %>
     on #{ @day.pluralize }
   <% end %>
@@ -7,7 +7,7 @@
 
 <% content_for :description do %>
   <% # This just about fits on a google search result: %>
-  A map of all the Lindy Hop classes in London
+  A map of all the Lindy Hop classes in <%= tc("city") %>
   <% if @day %>
     on #{ @day.pluralize },
   <% end %>
