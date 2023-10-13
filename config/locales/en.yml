@@ -1,4 +1,16 @@
 en:
+  site_name:
+    london: Swing Out London
+    bristol: Swing Out Bristol
+  site_url:
+    london: "https://www.swingoutlondon.co.uk"
+    bristol: "https://www.swingoutbristol.co.uk"
+  email_address:
+    london: "swingoutlondon@gmail.com"
+    bristol: "swingoutbristol@gmail.com"
+  city:
+    london: London
+    bristol: Bristol
   flash:
     success: "%{model} was successfully %{action}"
     map:

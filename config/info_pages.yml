@@ -1,0 +1,23 @@
+about:
+  dir_path: "info/about"
+  content:
+    - intro
+    - goals
+    - swing_dancing_in_london
+  sidebar:
+    - about_us
+    - about_lindy
+    - show_love
+
+listings_policy:
+  dir_path: "info/listings_policy"
+  content:
+    - intro
+    - location_text
+    - classes_text
+    - classes_policy
+    - socials_text
+    - socials_policy
+    - music_text
+  sidebar:
+    - swing_music

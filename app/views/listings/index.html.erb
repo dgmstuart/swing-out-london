@@ -1,12 +1,14 @@
 <% content_for :head do %>
   <% # Facebook open graph tags %>
-  <meta content="Swing Out London - Lindy Hop Listings" property="og:title"/>
-  <meta content="Swing Out London" property="og:site_name"/>
-  <meta content="Swing Out London is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" property="og:description"/>
+  <meta content="<%= tc("site_name") %> - Lindy Hop Listings" property="og:title"/>
+  <meta content="<%= tc("site_name") %>" property="og:site_name"/>
+  <meta content="<%= tc("site_name") %> is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" property="og:description"/>
   <meta content="website" property="og:type"/>
-  <meta content="https://www.swingoutlondon.co.uk" property="og:url"/>
-  <meta content="https://www.swingoutlondon.co.uk/swingoutlondon_og.png" property="og:image"/>
-  <meta content="<%= Rails.configuration.x.facebook.app_id %>" property="fb:app_id"/>
+  <meta content="<%= tc("site_url") %>" property="og:url"/>
+  <meta content="<%= tc("site_url") %>/swingoutlondon_og.png" property="og:image"/>
+  <% if Rails.configuration.x.facebook.app_id %>
+    <meta content="<%= Rails.configuration.x.facebook.app_id %>" property="fb:app_id"/>
+  <% end %>
   <meta content="dgmstuart" property="fb:admins"/>
 <% end %>
 
@@ -37,7 +39,7 @@
       <%= image_tag "highlight_icon.png", alt: "asterisk", width: "14", height: "16" %>
     </p>
     <%= render "social_listings" %>
-    <p class="note">Swing Out London lists the next 14 days of events</p>
+    <p class="note"><%= tc("site_name") %> lists the next 14 days of events</p>
   </section>
 
   <section id="classes" class="listings">

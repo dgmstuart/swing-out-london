@@ -3,8 +3,14 @@
 class InfoController < ApplicationController
   before_action :set_cache_control_on_static_pages, only: %i[about listings_policy privacy]
 
-  def about; end
-  def listings_policy; end
+  def about
+    @page = InfoPage.new(:about)
+  end
+
+  def listings_policy
+    @page = InfoPage.new(:listings_policy)
+  end
+
   def privacy; end
 
   private

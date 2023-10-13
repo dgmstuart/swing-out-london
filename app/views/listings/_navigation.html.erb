@@ -1,8 +1,8 @@
 <div id="site_intro">
   <p>
-    Swing Out London lists all of the regular
+    <%= tc("site_name") %> lists all of the regular
     <%= link_to "Swing Dance classes", {anchor: "classes_today"}, {rel: "subsection"} %>
-    in London which teach
+    in <%= tc("city") %> which teach
     <%= link_to "Lindy Hop", about_path(anchor: "about_lindy"), {rel: "subsection"} %>,
     Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
   </p>
@@ -16,7 +16,7 @@
 <div id="note">
   <p>
     If you think something is missing or incorrect please email
-    <%= mail_to CONTACT_EMAIL, "#{CONTACT_EMAIL}", subject: "Swing Out London" %>
+    <%= mail_to tc("email_address"), tc("email_address"), subject: tc("site_name") %>
     (but check the
     <%= link_to "listings policy", listings_policy_path %>
     first)
@@ -26,9 +26,11 @@
 <div id="soldn_on_the_web">
   <%= render 'advert', advert: ad %>
 
-  <div id="social_links">
-    <%= render 'facebook_buttons', text: "Like Swing Out London on Facebook", url: "https://www.swingoutlondon.co.uk" %>
-  </div>
+  <% if CITY.has_facebook_page? %>
+    <div id="social_links">
+      <%= render 'facebook_buttons', text: "Like #{tc("site_name")} on Facebook", url: tc("site_url") %>
+    </div>
+  <% end %>
 </div>
 
 <%= render 'shared/header_navigation' %>

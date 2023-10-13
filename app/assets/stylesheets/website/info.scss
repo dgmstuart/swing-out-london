@@ -19,7 +19,7 @@ table.full-width {
   padding: 20px;
   border: $double-border;
 
-  &.first {
+  &:first-of-type {
     margin-top: 35px;
   }
 

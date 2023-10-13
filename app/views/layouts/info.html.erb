@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  <% case params[:action] %>
+  <% when "about" %>
+    About <%= tc("site_name") %>
+  <% when "listings_policy" %>
+    <%= tc("site_name") %>'s listings policy
+  <% end %>
+<% end %>
+
+<% content_for :description do %>
+  <% case params[:action] %>
+  <% when "listings_policy" %>
+    A guide to the criteria for deciding what classes and socials are listed on <%= tc("site_name") %>
+  <% end %>
+<% end %>
+
+<% content_for :navigation do %>
+  <%= render partial: 'shared/header_navigation' %>
+<% end %>
+
+<% content_for :page do %>
+  <%= yield %>
+<% end %>
+
+<%= render :template => 'layouts/website' %>
