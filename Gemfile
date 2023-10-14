@@ -19,7 +19,7 @@ gem "memcachier"
 gem "net-imap", require: false
 gem "net-pop", require: false
 gem "net-smtp", require: false
-gem "omniauth-facebook"
+gem "omniauth-auth0"
 gem "omniauth-rails_csrf_protection"
 gem "pg"
 gem "pry-rails"

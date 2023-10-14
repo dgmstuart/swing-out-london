@@ -13,10 +13,14 @@ if Rails.env.development? && ENV.fetch("SKIP_LOGIN", "false") == "true"
 else
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(
-      :facebook,
-      ENV.fetch("FACEBOOK_APP_ID", nil),
-      ENV.fetch("FACEBOOK_SECRET", nil),
-      scope: "" # Don't request _any_ data - just the basic profile
+      :auth0,
+      AUTH0_CONFIG['auth0_client_id'],
+      AUTH0_CONFIG['auth0_client_secret'],
+      AUTH0_CONFIG['auth0_domain'],
+      callback_path: '/auth/auth0/callback',
+      authorize_params: {
+        scope: 'openid profile'
+      }
     )
   end
 end
