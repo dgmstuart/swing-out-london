@@ -1,5 +1,5 @@
 <% content_for :content do %>
-  <div id="map" data-markers='<%= @map.markers.to_json %>'></div>
+  <div id="map" data-markers='<%= @map.markers.to_json %>' data-config='<%= CITY.map_config.to_h.to_json %>'></div>
 
   <header class="page">
     <h1>
