@@ -15,6 +15,8 @@ class ListingsController < ApplicationController
   end
 
   def action_cache_key
+    return if Audit.none?
+
     "listings-#{Audit.last.cache_key}"
   end
 end
