@@ -74,6 +74,17 @@ RSpec.describe "Users can view a map of upcoming events" do
         end
       end
     end
+
+    it "viewing the map by clicking a postcode" do
+      venue = create(:venue, postcode: "ZZ2 2ZZ")
+      create(:weekly_social, venue:)
+
+      visit "/"
+
+      first(:link, "ZZ2 2ZZ").click
+
+      expect(page).to have_content("Lindy Map")
+    end
   end
 
   describe "classes page" do
@@ -124,6 +135,17 @@ RSpec.describe "Users can view a map of upcoming events" do
         expect(page).to have_content("Lindy Map")
         expect(page).to have_current_path("/map/classes")
       end
+    end
+
+    it "viewing the map by clicking a postcode" do
+      venue = create(:venue, postcode: "ZZ2 2ZZ")
+      create(:class, venue:)
+
+      visit "/"
+
+      click_link("ZZ2 2ZZ")
+
+      expect(page).to have_content("Lindy Map")
     end
   end
 end

@@ -40,6 +40,6 @@ Rails.application.routes.draw do
   resource :audit_log, only: %i[show]
 
   get "apple-touch-icon-precomposed" => "application#not_found"
-  get "apple-touch-icon-(:size)-precomposed" => "application#not_found"
+  get "apple-touch-icon-:size-precomposed" => "application#not_found"
   get "apple-app-site-association" => "application#not_found"
 end
