@@ -51,7 +51,7 @@ class MapsController < ApplicationController
 
   def action_cache_key
     values = params.values_at(:controller, :action, :day, :date, :venue_id).compact
-    values << Audit.last.cache_key
+    values << Audit.last.cache_key if Audit.any?
     values.join("-")
   end
 end
