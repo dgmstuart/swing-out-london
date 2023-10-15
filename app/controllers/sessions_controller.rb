@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
 
   def destroy
     login_session.log_out!
-    redirect_to action: :new
+
+    redirect_to auth0_logout_url, allow_other_host: true
   end
 
   def failure
@@ -40,5 +41,18 @@ class SessionsController < ApplicationController
 
   def login_session
     LoginSession.new(request)
+  end
+
+  def auth0_logout_url
+    request_params = {
+      returnTo: login_url,
+      client_id: ENV.fetch("AUTH0_CLIENT_ID")
+    }
+
+    URI::HTTPS.build(
+      host: ENV.fetch("AUTH0_DOMAIN"),
+      path: "/v2/logout",
+      query: request_params.to_query
+    ).to_s
   end
 end
