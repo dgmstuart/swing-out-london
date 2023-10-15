@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Admins can create organisers" do
   it "with valid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
+    stub_login(email: "aminns@example.com", name: "Al Minns")
 
     visit "/login"
     click_button "Log in"
@@ -25,7 +25,7 @@ RSpec.describe "Admins can create organisers" do
       .and have_content("Description: A long-running business")
       .and have_content("Website: http://www.lsds.co.uk")
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+    expect(page).to have_content("Last updated by Al Minns (aminns@example.com) on Sunday 2nd January 2000 at 23:17:16")
   end
 
   it "with an empty shortname" do

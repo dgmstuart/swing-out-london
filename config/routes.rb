@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   get "listings_policy" => "info#listings_policy"
   get "privacy" => "info#privacy"
 
-  get "login" => "sessions#new"
-  get "auth/facebook/callback" => "sessions#create"
+  get "login" => "sessions#new", as: "login"
+  get "auth/callback" => "sessions#create"
   get "auth/failure" => "sessions#failure"
   delete "logout" => "sessions#destroy", as: "logout"
 

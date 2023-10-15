@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Admins can create events", :js do
   context "an intermittent social with a taster" do # rubocop:disable RSpec/ContextWording
     it "with valid data" do
-      stub_login(id: 12345678901234567, name: "Al Minns")
+      stub_login(email: "aminns@example.com", name: "Al Minns")
       create(:venue, name: "The 100 Club")
       create(:organiser, name: "The London Swing Dance Society")
 
@@ -46,11 +46,11 @@ RSpec.describe "Admins can create events", :js do
         .and have_content("First date:")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
-      expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+      expect(page).to have_content("Last updated by Al Minns (aminns@example.com) on Sunday 2nd January 2000 at 23:17:16")
     end
 
     it "with missing data" do
-      stub_login(id: 12345678901234567, name: "Al Minns")
+      stub_login(email: "aminns@example.com", name: "Al Minns")
       create(:venue, name: "The 100 Club")
 
       visit "/login"
@@ -99,7 +99,7 @@ RSpec.describe "Admins can create events", :js do
 
   context "a weekly class" do # rubocop:disable RSpec/ContextWording
     it "with valid data" do
-      stub_login(id: 12345678901234567, name: "Leon James")
+      stub_login(email: "ljames@example.com", name: "Leon James")
       create(:venue, name: "Dogstar")
       create(:organiser, name: "Sunshine Swing")
 
@@ -128,11 +128,11 @@ RSpec.describe "Admins can create events", :js do
         .and have_content("First date:\nWednesday 16th February")
         .and have_content("Url:\nhttps://sunshineswing.uk/events")
 
-      expect(page).to have_content("Last updated by Leon James (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+      expect(page).to have_content("Last updated by Leon James (ljames@example.com) on Sunday 2nd January 2000 at 23:17:16")
     end
 
     it "with missing data" do
-      stub_login(id: 12345678901234567, name: "Leon James")
+      stub_login(email: "aminns@example.com", name: "Leon James")
       create(:venue, name: "Dogstar")
       create(:organiser, name: "Sunshine Swing")
 

@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Admins can edit events", :js do
   it "with valid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
+    stub_login(email: "aminns@example.com", name: "Al Minns")
     create(:weekly_social, class_style: "Balboa", cancellations: ["01/10/2010", "02/12/2012"])
     create(:venue, name: "The 100 Club")
     create(:organiser, name: "The London Swing Dance Society")
@@ -42,11 +42,11 @@ RSpec.describe "Admins can edit events", :js do
       .and have_content("First date:")
       .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+    expect(page).to have_content("Last updated by Al Minns (aminns@example.com) on Sunday 2nd January 2000 at 23:17:16")
   end
 
   it "with invalid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
+    stub_login(email: "aminns@example.com", name: "Al Minns")
     create(:class)
 
     visit "/login"
@@ -73,7 +73,7 @@ RSpec.describe "Admins can edit events", :js do
 
   it "adding dates" do
     create(:event, frequency: 0, dates: ["12/12/2012", "13/12/2012"])
-    stub_login(id: 12345678901234567, name: "Al Minns")
+    stub_login(email: "aminns@example.com", name: "Al Minns")
 
     visit "/login"
     click_button "Log in"
@@ -90,7 +90,7 @@ RSpec.describe "Admins can edit events", :js do
 
     expect(page).to have_content("Dates:\n12/12/2012, 12/01/2013")
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
+    expect(page).to have_content("Last updated by Al Minns (aminns@example.com) on Friday 2nd January 2015 at 23:17:16")
     audit = Audit.last
     expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
     expect(audit.comment).to eq "Updated dates: (old: 12/12/2012,13/12/2012) (new: 12/12/2012, 12/01/2013)"
@@ -98,7 +98,7 @@ RSpec.describe "Admins can edit events", :js do
 
   it "adding cancellations" do
     create(:event, dates: ["12/12/2012"])
-    stub_login(id: 12345678901234567, name: "Al Minns")
+    stub_login(email: "aminns@example.com", name: "Al Minns")
 
     visit "/login"
     click_button "Log in"
@@ -113,7 +113,7 @@ RSpec.describe "Admins can edit events", :js do
 
     expect(page).to have_content("Cancelled:\n12/12/2012")
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
+    expect(page).to have_content("Last updated by Al Minns (aminns@example.com) on Friday 2nd January 2015 at 23:17:16")
     audit = Audit.last
     expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
     expect(audit.comment).to eq "Updated cancellations: (old: ) (new: 12/12/2012)"

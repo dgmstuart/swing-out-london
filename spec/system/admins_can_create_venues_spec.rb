@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Admins can create venues" do
   it "with valid data", :vcr do
-    stub_login(id: 12345678901234567, name: "Al Minns")
+    stub_login(email: "aminns@example.com", name: "Al Minns")
 
     visit "/login"
     click_button "Log in"
@@ -32,6 +32,6 @@ RSpec.describe "Admins can create venues" do
     expect(page.find("a", text: "[ 51.5161046, -0.1353113 ]")["href"])
       .to eq("https://www.google.co.uk/maps/place/51.5161046,-0.1353113/@51.5161046,-0.1353113,15z")
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+    expect(page).to have_content("Last updated by Al Minns (aminns@example.com) on Sunday 2nd January 2000 at 23:17:16")
   end
 end

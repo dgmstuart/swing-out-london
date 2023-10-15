@@ -8,14 +8,15 @@ class SessionsController < ApplicationController
 
   def create
     user = AuthResponse.new(request.env)
-    if authorised?(user.id)
-      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token)
+    if authorised?(user.email)
+      login_session.log_in!(auth_id: user.email, name: user.name, token: user.token)
       redirect_to events_path
     else
-      flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
-                    "If you've been invited to become an admin, please contact the main site admins and get them to add this ID"
-      logger.warn("Auth id #{user.id} tried to log in, but was not in the allowed list")
-      redirect_to action: :new
+      flash.alert = "Your email address (#{user.email}) is not in the list of editors.\n" \
+                    "If you've been invited to become an editor, please contact the main site admins and get them to add you"
+      logger.warn("#{user.email} tried to log in, but was not in the allowed list")
+
+      redirect_to login_url
     end
   end
 
@@ -25,7 +26,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    flash.alert = "There was a problem with your login to Facebook"
+    flash.alert = "There was a problem with your login"
     logger.warn("Authorisation failed with: #{params[:message]}")
 
     redirect_to action: :new
@@ -33,8 +34,8 @@ class SessionsController < ApplicationController
 
   private
 
-  def authorised?(auth_id)
-    Rails.application.config.x.facebook.admin_user_ids.include?(auth_id)
+  def authorised?(email)
+    Rails.application.config.x.admin.user_emails.include?(email)
   end
 
   def login_session

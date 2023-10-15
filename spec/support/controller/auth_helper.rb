@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "faker/facebook"
+require "faker/auth0"
 
 module Controller
   module AuthHelper
     def login(
-      auth_id: Faker::Facebook.uid,
+      auth_id: Faker::Auth0.uid,
       name: Faker::Name.lindy_hop_name,
-      token: Faker::Facebook.access_token
+      token: Faker::Auth0.access_token
     )
       LoginSession.new(controller.request).log_in!(auth_id:, name:, token:)
     end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Admin Login Revocation" do
-  it "admins can deauthorise Swing Out Londons facebook permissions", :vcr do
+  it "admins can deauthorise Swing Out London's permissions", :vcr do
     config = Rails.configuration.x.facebook
     allow(config).to receive_messages(
       api_base!: "https://graph.facebook.com/",
@@ -12,7 +12,7 @@ RSpec.describe "Admin Login Revocation" do
       admin_user_ids: [12345678901234567]
     )
 
-    stub_auth_hash(id: 12345678901234567)
+    stub_auth_hash(email: "aminns@example.com")
 
     visit "/account"
 

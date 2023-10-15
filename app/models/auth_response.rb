@@ -5,12 +5,12 @@ class AuthResponse
     @request_env = request_env
   end
 
-  def id
-    auth_hash.fetch("uid")
+  def email
+    info.fetch("email")
   end
 
   def name
-    auth_hash.fetch("info").fetch("name")
+    info.fetch("name")
   end
 
   def token
@@ -18,6 +18,10 @@ class AuthResponse
   end
 
   private
+
+  def info
+    auth_hash.fetch("extra").fetch("raw_info")
+  end
 
   def auth_hash
     request_env.fetch("omniauth.auth")
