@@ -7,7 +7,7 @@ RSpec.describe "Admins can view an audit log" do
     stub_login
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     create(:event)
     create(:venue)

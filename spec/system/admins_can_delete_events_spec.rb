@@ -8,7 +8,7 @@ RSpec.describe "Admins can delete events" do
     create(:event, title: "Balboa at Bobby McGee's")
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     # The delete link only shows above 900px wide
     page.driver.browser.manage.window.resize_to(901, 600)

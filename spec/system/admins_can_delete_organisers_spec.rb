@@ -9,7 +9,7 @@ RSpec.describe "Admins can delete organisers" do
       create(:organiser, name: "Herbert White")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "Organisers", match: :first
 
@@ -27,7 +27,7 @@ RSpec.describe "Admins can delete organisers" do
       create(:organiser, name: "Herbert White")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "Organisers", match: :first
 
@@ -50,7 +50,7 @@ RSpec.describe "Admins can delete organisers" do
       create(:event, social_organiser: organiser)
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "Organisers", match: :first
 

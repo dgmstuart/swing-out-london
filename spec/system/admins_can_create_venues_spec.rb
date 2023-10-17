@@ -7,7 +7,7 @@ RSpec.describe "Admins can create venues" do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "New Venue"
 

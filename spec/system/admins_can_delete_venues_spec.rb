@@ -9,7 +9,7 @@ RSpec.describe "Admins can delete venues" do
       create(:venue, name: "Bobby McGee's")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "Venues", match: :first
 
@@ -27,7 +27,7 @@ RSpec.describe "Admins can delete venues" do
       create(:venue, name: "Bobby McGee's")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "Venues", match: :first
 
@@ -50,7 +50,7 @@ RSpec.describe "Admins can delete venues" do
       create(:event, venue:)
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "Venues", match: :first
 

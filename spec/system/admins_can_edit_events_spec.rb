@@ -10,7 +10,7 @@ RSpec.describe "Admins can edit events", :js do
     create(:organiser, name: "The London Swing Dance Society")
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Edit", match: :first
 
@@ -50,7 +50,7 @@ RSpec.describe "Admins can edit events", :js do
     create(:class)
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Edit", match: :first
 
@@ -76,7 +76,7 @@ RSpec.describe "Admins can edit events", :js do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Edit", match: :first
 
@@ -101,7 +101,7 @@ RSpec.describe "Admins can edit events", :js do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Edit", match: :first
 

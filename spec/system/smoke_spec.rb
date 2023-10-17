@@ -6,7 +6,7 @@ RSpec.describe "Adding a new event" do
   it "with a dance class" do
     visit "/events"
 
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "New Venue"
 
