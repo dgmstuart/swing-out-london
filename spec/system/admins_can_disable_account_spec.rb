@@ -4,11 +4,11 @@ require "rails_helper"
 
 RSpec.describe "Admin Login Revocation" do
   it "admins can deauthorise Swing Out London's permissions", :vcr do
-    config = Rails.configuration.x.facebook
+    config = Rails.configuration.x.auth0
     allow(config).to receive_messages(
-      api_base!: "https://graph.facebook.com/",
-      api_auth_token!: "super-secret-token",
-      app_secret!: "super-secret-secret",
+      client_id!: "not-so-secret-id",
+      client_secret!: "super-secret-secret",
+      doamain!: "auth0domainthisisprobablywrong",
       admin_user_ids: [12345678901234567]
     )
 
@@ -26,7 +26,7 @@ RSpec.describe "Admin Login Revocation" do
     end
 
     expect(page).to have_header("Admin Login")
-    expect(page).to have_content("Your login permissions have been revoked in Facebook")
+    expect(page).to have_content("Your login permissions have been revoked")
     expect(page).to have_button("Log in")
 
     visit "/events"

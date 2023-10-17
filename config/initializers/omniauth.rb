@@ -14,9 +14,9 @@ else
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(
       :auth0,
-      ENV.fetch("AUTH0_CLIENT_ID", nil),
-      ENV.fetch("AUTH0_CLIENT_SECRET", nil),
-      ENV.fetch("AUTH0_DOMAIN", nil),
+      Rails.configuration.x.auth0.client_id,
+      Rails.configuration.x.auth0.client_secret,
+      Rails.configuration.x.auth0.domain,
       callback_path: "/auth/callback",
       authorize_params: {
         scope: "openid profile email"
