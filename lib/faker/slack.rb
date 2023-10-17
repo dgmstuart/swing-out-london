@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Faker
-  class Facebook
+  class Slack
     class << self
       def uid
-        Number.number(digits: 17)
+        SecureRandom.hex(4).upcase
       end
 
       def access_token

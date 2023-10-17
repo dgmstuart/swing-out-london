@@ -8,19 +8,13 @@ RSpec.describe AuthResponse do
     it "returns the UID from the auth hash" do
       request_env = {
         "omniauth.auth" => {
-          "provider" => "facebook",
+          "provider" => "slack",
           "uid" => "72432833316128378",
           "info" => {
-            "name" => "Felipe Goyette Jr.",
-            "image" => "http://graph.facebook.com/v2.10/72432833316128378/picture"
+            "name" => "Felipe Goyette Jr."
           },
           "credentials" => {
-            "token" => "0469a691b47c1df413e95edabd336ca3",
-            "expires_at" => 1546086985,
-            "expires" => true
-          },
-          "extra" => {
-            "raw_info" => { "name" => "72432833316128378", "id" => "72432833316128378" }
+            "token" => "0469a691b47c1df413e95edabd336ca3"
           }
         }
       }
@@ -35,19 +29,13 @@ RSpec.describe AuthResponse do
     it "returns the name from the auth hash" do
       request_env = {
         "omniauth.auth" => {
-          "provider" => "facebook",
+          "provider" => "slack",
           "uid" => "72432833316128378",
           "info" => {
-            "name" => "Felipe Goyette Jr.",
-            "image" => "http://graph.facebook.com/v2.10/72432833316128378/picture"
+            "name" => "Felipe Goyette Jr."
           },
           "credentials" => {
-            "token" => "0469a691b47c1df413e95edabd336ca3",
-            "expires_at" => 1546086985,
-            "expires" => true
-          },
-          "extra" => {
-            "raw_info" => { "name" => "72432833316128378", "id" => "72432833316128378" }
+            "token" => "0469a691b47c1df413e95edabd336ca3"
           }
         }
       }
@@ -65,16 +53,10 @@ RSpec.describe AuthResponse do
           "provider" => "facebook",
           "uid" => "72432833316128378",
           "info" => {
-            "name" => "Felipe Goyette Jr.",
-            "image" => "http://graph.facebook.com/v2.10/72432833316128378/picture"
+            "name" => "Felipe Goyette Jr."
           },
           "credentials" => {
-            "token" => "0469a691b47c1df413e95edabd336ca3",
-            "expires_at" => 1546086985,
-            "expires" => true
-          },
-          "extra" => {
-            "raw_info" => { "name" => "72432833316128378", "id" => "72432833316128378" }
+            "token" => "0469a691b47c1df413e95edabd336ca3"
           }
         }
       }

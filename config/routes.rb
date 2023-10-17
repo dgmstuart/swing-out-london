@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get "privacy" => "info#privacy"
 
   get "login" => "sessions#new"
-  get "auth/facebook/callback" => "sessions#create"
+  get "auth/slack/callback" => "sessions#create"
   get "auth/failure" => "sessions#failure"
   delete "logout" => "sessions#destroy", as: "logout"
 
