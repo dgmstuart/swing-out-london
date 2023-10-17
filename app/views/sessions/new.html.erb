@@ -3,5 +3,7 @@
     <%= content_tag :div, message, class: key %>
   <% end %>
   <h2>Admin Login</h2>
-  <%= button_to "Log in with Facebook", "/auth/facebook", class: 'button facebook-button' %>
+  <%= button_to "/auth/slack", class: "slack-button" do %>
+    Log in with Slack
+  <% end %>
 </section>

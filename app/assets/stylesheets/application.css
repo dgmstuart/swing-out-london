@@ -10,4 +10,5 @@
 *= require website/login
 *= require website/map
 *= require name_clash
+*= require slack_button
 */
