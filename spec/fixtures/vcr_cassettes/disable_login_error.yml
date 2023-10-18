@@ -8,11 +8,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-        - Bearer <AUTH_TOKEN>
-      Accept:
-      - application/json
-      Content-Type:
-      - application/json
+      - Bearer ffbcc0cc2c5871379333d66d0ba4c7b0
       Connection:
       - close
       Host:
@@ -25,17 +21,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 18 Oct 2023 01:45:06 GMT
+      - Wed, 18 Oct 2023 19:27:08 GMT
       Server:
       - Apache
       Vary:
       - Accept-Encoding
       X-Slack-Req-Id:
-      - cd5511f3f43dd3197dadf68cc9df519d
+      - c48ae16caa3e7a26105308efb4cc7a2f
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
       - '0'
+      X-Robots-Tag:
+      - noindex,nofollow
       Pragma:
       - no-cache
       Cache-Control:
@@ -44,8 +42,6 @@ http_interactions:
       - Sat, 26 Jul 1997 05:00:00 GMT
       Content-Type:
       - application/json; charset=utf-8
-      X-Oauth-Scopes:
-      - openid,profile
       Access-Control-Expose-Headers:
       - x-slack-req-id, retry-after
       Access-Control-Allow-Headers:
@@ -56,23 +52,23 @@ http_interactions:
       Referrer-Policy:
       - no-referrer
       X-Slack-Unique-Id:
-      - ZS84onlKNjHv901ebaqQ1AAAQA8
+      - ZTAxjPJTZsA_DmCG7g98BQAAACs
       X-Slack-Backend:
       - r
       Access-Control-Allow-Origin:
       - "*"
       Content-Length:
-      - '26'
+      - '35'
       Via:
-      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-qzthprnx, envoy-edge-lhr-rbofjjff
+      - 1.1 slack-prod.tinyspeck.com, envoy-www-iad-cldkczyu, envoy-edge-lhr-xdzuapxi
       X-Envoy-Attempt-Count:
       - '1'
       X-Envoy-Upstream-Service-Time:
-      - '242'
+      - '84'
       X-Backend:
       - main_normal main_canary_with_overflow main_control_with_overflow
       X-Server:
-      - slack-www-hhvm-main-iad-cowo
+      - slack-www-hhvm-main-iad-uxel
       X-Slack-Shared-Secret-Outcome:
       - no-match
       X-Edge-Backend:
@@ -83,6 +79,6 @@ http_interactions:
       - close
     body:
       encoding: UTF-8
-      string: '{"ok":true,"revoked":true}'
-  recorded_at: Wed, 18 Oct 2023 01:45:06 GMT
+      string: '{"ok":false,"error":"invalid_auth"}'
+  recorded_at: Wed, 18 Oct 2023 19:27:09 GMT
 recorded_with: VCR 6.2.0

@@ -131,7 +131,7 @@ RSpec/ExampleLength:
     - spec/system/**/*_spec.rb
     - spec/models/auth_response_spec.rb
     - spec/models/advert_spec.rb
-    - spec/lib/facebook_graph_api/http_client_spec.rb
+    - spec/lib/slack/http_client_spec.rb
     - spec/lib/omniauth_test_response_builder_spec.rb
     - spec/services/events_importer_spec.rb
     - spec/services/revoke_login_spec.rb
