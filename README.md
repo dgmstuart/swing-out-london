@@ -31,9 +31,13 @@ Run the tests and linters:
 This project uses [.env](https://github.com/bkeepers/dotenv) to manage
 environment variables.
 
-The `bin/setup` command creates a starting file which you will need to
-configure in order for some parts of the application to work in development.
-That file contains instructions on how to set those variables.
+See [`.env.example`](.env.example) for documentation of environment variables
+which can be used in development, some of which are required for the
+application to run.
+
+Running `bin/setup` command will copy this file to your `.env` - that's the
+file you'll need to modify in order to change these variables. Restart your
+server after editing this file.
 
 ### Production environment Variables
 
