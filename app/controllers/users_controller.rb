@@ -6,9 +6,13 @@ class UsersController < CmsBaseController
   def show; end
 
   def destroy
-    RevokeLogin.new.revoke!(login_session.user)
+    result = RevokeLogin.new.revoke!(login_session.user)
     login_session.log_out!
-    flash.notice = "Your login permissions have been revoked in Facebook"
+    if result
+      flash.notice = "Your login permissions have been revoked"
+    else
+      flash.alert = "Error: failed to revoke your login permissions. Contact an admin."
+    end
 
     redirect_to login_path
   end

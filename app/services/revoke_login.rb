@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require "facebook_graph_api/api"
+require "slack/api"
 
 class RevokeLogin
   def initialize(
-    http_client_builder: FacebookGraphApi::HttpClient,
-    api_builder: FacebookGraphApi::Api,
+    http_client_builder: Slack::HttpClient,
+    api_builder: Slack::Api,
     logger: Rails.logger
   )
     @http_client_builder = http_client_builder
@@ -14,8 +14,9 @@ class RevokeLogin
   end
 
   def revoke!(user)
-    api_for(user.token).revoke_login(user.auth_id)
-    logger.info("Auth id #{user.auth_id} revoked their login permissions")
+    api_for(user.token).revoke_login.tap do
+      logger.info("Auth id #{user.auth_id} revoked their login permissions")
+    end
   end
 
   private

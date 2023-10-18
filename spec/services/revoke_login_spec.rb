@@ -6,10 +6,10 @@ require "app/services/revoke_login"
 RSpec.describe RevokeLogin do
   describe "#revoke!" do
     it "builds an API client based on the user" do
-      http_client = instance_double("FacebookGraphApi::HttpClient")
-      http_client_builder = class_double("FacebookGraphApi::HttpClient", new: http_client)
-      api = instance_double("FacebookGraphApi::Api", revoke_login: double)
-      api_builder = class_double("FacebookGraphApi::Api", new: api)
+      http_client = instance_double("Slack::HttpClient")
+      http_client_builder = class_double("Slack::HttpClient", new: http_client)
+      api = instance_double("Slack::Api", revoke_login: double)
+      api_builder = class_double("Slack::Api", new: api)
       logger = instance_double("Logger", info: true)
       auth_token = double
       user = instance_double("LoginSession::User", token: auth_token, auth_id: double)
@@ -23,24 +23,23 @@ RSpec.describe RevokeLogin do
       end
     end
 
-    it "makes a call to the Facebook API" do
-      http_client_builder = class_double("FacebookGraphApi::HttpClient", new: double)
-      api = instance_double("FacebookGraphApi::Api", revoke_login: double)
-      api_builder = class_double("FacebookGraphApi::Api", new: api)
+    it "makes an API call to revoke the token" do
+      http_client_builder = class_double("Slack::HttpClient", new: double)
+      api = instance_double("Slack::Api", revoke_login: double)
+      api_builder = class_double("Slack::Api", new: api)
       logger = instance_double("Logger", info: true)
-      auth_id = double
-      user = instance_double("LoginSession::User", token: double, auth_id:)
+      user = instance_double("LoginSession::User", token: double, auth_id: double)
 
       service = described_class.new(http_client_builder:, api_builder:, logger:)
       service.revoke!(user)
 
-      expect(api).to have_received(:revoke_login).with(auth_id)
+      expect(api).to have_received(:revoke_login)
     end
 
     it "logs that the user revoked their permissions" do
-      http_client_builder = class_double("FacebookGraphApi::HttpClient", new: double)
-      api = instance_double("FacebookGraphApi::Api", revoke_login: double)
-      api_builder = class_double("FacebookGraphApi::Api", new: api)
+      http_client_builder = class_double("Slack::HttpClient", new: double)
+      api = instance_double("Slack::Api", revoke_login: double)
+      api_builder = class_double("Slack::Api", new: api)
       logger = instance_double("Logger", info: true)
       user = instance_double("LoginSession::User", token: double, auth_id: 12345678901234567)
 
@@ -49,6 +48,20 @@ RSpec.describe RevokeLogin do
 
       expect(logger).to have_received(:info)
         .with("Auth id 12345678901234567 revoked their login permissions")
+    end
+
+    it "returns the return value of the API call" do
+      response = double
+      http_client_builder = class_double("Slack::HttpClient", new: double)
+      api = instance_double("Slack::Api", revoke_login: response)
+      api_builder = class_double("Slack::Api", new: api)
+      logger = instance_double("Logger", info: true)
+      user = instance_double("LoginSession::User", token: double, auth_id: 12345678901234567)
+
+      service = described_class.new(http_client_builder:, api_builder:, logger:)
+      result = service.revoke!(user)
+
+      expect(result).to eq response
     end
   end
 end
