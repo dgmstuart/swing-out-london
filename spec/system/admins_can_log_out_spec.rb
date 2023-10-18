@@ -12,7 +12,7 @@ RSpec.describe "Admin Login" do
 
     click_link "Al Minns"
 
-    click_link "Log out"
+    click_button "Log out"
     expect(page).to have_button("Log in with Facebook")
 
     visit "/events"

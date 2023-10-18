@@ -22,7 +22,7 @@ RSpec.describe "Admin Login Revocation" do
     visit "/account"
 
     VCR.use_cassette("disable_login") do
-      click_link "Disable my login"
+      click_button "Disable my login"
     end
 
     expect(page).to have_header("Admin Login")
