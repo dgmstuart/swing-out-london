@@ -10,7 +10,7 @@ RSpec.describe "Admins can create events", :js do
       create(:organiser, name: "The London Swing Dance Society")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "New event", match: :first
 
@@ -54,7 +54,7 @@ RSpec.describe "Admins can create events", :js do
       create(:venue, name: "The 100 Club")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "New event", match: :first
 
@@ -104,7 +104,7 @@ RSpec.describe "Admins can create events", :js do
       create(:organiser, name: "Sunshine Swing")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "New event", match: :first
 
@@ -137,7 +137,7 @@ RSpec.describe "Admins can create events", :js do
       create(:organiser, name: "Sunshine Swing")
 
       visit "/login"
-      click_button "Log in with Facebook"
+      click_button "Log in"
 
       click_link "New event", match: :first
 

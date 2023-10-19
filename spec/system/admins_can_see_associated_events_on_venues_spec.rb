@@ -11,7 +11,7 @@ RSpec.describe "Admins can see associated events on venues" do
     social = create(:social, title: "The Sunday Stomp", venue:)
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Venues"
 
@@ -27,7 +27,7 @@ RSpec.describe "Admins can see associated events on venues" do
     create(:venue)
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Venues"
 

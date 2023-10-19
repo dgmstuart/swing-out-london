@@ -8,7 +8,7 @@ RSpec.describe "Admins can navigate" do
     create(:event, url: "https://navigating.se")
 
     visit "/login"
-    click_button "Log in with Facebook"
+    click_button "Log in"
 
     click_link "Show", match: :first
 
