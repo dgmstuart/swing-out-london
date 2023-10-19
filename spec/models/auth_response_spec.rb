@@ -46,6 +46,34 @@ RSpec.describe AuthResponse do
     end
   end
 
+  describe "#team" do
+    it "returns the team UID" do
+      request_env = {
+        "omniauth.auth" => {
+          "provider" => "facebook",
+          "uid" => "C536F34C",
+          "info" => {
+            "name" => "Felipe Goyette Jr."
+          },
+          "credentials" => {
+            "token" => "0469a691b47c1df413e95edabd336ca3"
+          },
+          "extra" => {
+            "raw_info" => {
+              "sub" => "C536F34C",
+              "https://slack.com/user_id" => "C536F34C",
+              "https://slack.com/team_id" => "8706A05B"
+            }
+          }
+        }
+      }
+
+      response = described_class.new(request_env)
+
+      expect(response.team).to eq "8706A05B"
+    end
+  end
+
   describe "#token" do
     it "returns the token from the auth hash" do
       request_env = {
