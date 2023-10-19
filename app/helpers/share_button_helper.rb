@@ -5,7 +5,7 @@ module ShareButtonHelper
     twitter_url = "https://twitter.com/intent/tweet"
 
     tweet_text = "If you want to learn to swing dance, #{tc('site_name')} lists all the classes in #{tc('city')}:"
-    via = "swingoutlondon"
+    via = tc("twitter_handle")
 
     query_parameters = [
       "url=#{tc('site_url')}",
