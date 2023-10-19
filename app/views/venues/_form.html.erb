@@ -16,7 +16,9 @@
   </div>
   <div class='form-group'>
     <%= f.label :area %>
-    <p class='help'>Use the nearest tube station unless there's something better</p>
+    <% if CITY.london? %>
+      <p class='help'>Use the nearest tube station unless there's something better</p>
+    <% end %>
     <%= f.text_field :area %>
   </div>
   <div class='form-group lat-lng'>

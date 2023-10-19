@@ -37,6 +37,10 @@ City = Struct.new(:key, :map_config, :has_facebook_page?) do
       new(:bristol, map_config, false)
     end
   end
+
+  def london?
+    key == :london
+  end
 end
 
 CITY =
