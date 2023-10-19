@@ -21,7 +21,8 @@ RSpec.describe OmniauthTestResponseBuilder do
       described_class.new(hash_builder:, mock_auth_config:).stub_auth_hash(
         id: "C536F34C",
         name: "Lauretta Kertzmann",
-        token: "b1d2-773a72666cb7-80e99584d7d2-ed0be4d3c3840-55b620d612bab90de2c60f19a897878d"
+        token: "b1d2-773a72666cb7-80e99584d7d2-ed0be4d3c3840-55b620d612bab90de2c60f19a897878d",
+        team: "8706A05B"
       )
 
       expect(hash_builder).to have_received(:new).with(
@@ -51,7 +52,7 @@ RSpec.describe OmniauthTestResponseBuilder do
             "ok" => true,
             "sub" => "C536F34C",
             "https://slack.com/user_id" => "C536F34C",
-            "https://slack.com/team_id" => "TEKLWQYP5",
+            "https://slack.com/team_id" => "8706A05B",
             "name" => "Lauretta Kertzmann",
             "picture" => "https://avatars.slack-edge.com/2022-02-02/3067504073456_edeaee73989a69e2787a_512.jpg",
             "given_name" => "Lauretta",
