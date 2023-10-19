@@ -12,11 +12,12 @@ class OmniauthTestResponseBuilder
   def stub_auth_hash(
     id: Faker::Slack.uid,
     name: Faker::Name.lindy_hop_name,
-    token: SecureRandom.hex
+    token: SecureRandom.hex,
+    team: Faker::Slack.uid
   )
     raise "Can't stub authentication in production" if Rails.env.production?
 
-    auth_hash = slack_auth_hash(id:, name:, token:)
+    auth_hash = slack_auth_hash(id:, name:, token:, team:)
     mock_auth_config[:slack] = auth_hash
   end
 
@@ -24,7 +25,7 @@ class OmniauthTestResponseBuilder
 
   attr_reader :hash_builder, :mock_auth_config
 
-  def slack_auth_hash(id:, name:, token:)
+  def slack_auth_hash(id:, name:, token:, team:)
     first_name, *other_names = name.split
     last_name = other_names.join(" ")
     hash_builder.new(
@@ -54,7 +55,7 @@ class OmniauthTestResponseBuilder
           "ok" => true,
           "sub" => id,
           "https://slack.com/user_id" => id,
-          "https://slack.com/team_id" => "TEKLWQYP5",
+          "https://slack.com/team_id" => team,
           "name" => name,
           "picture" => "https://avatars.slack-edge.com/2022-02-02/3067504073456_edeaee73989a69e2787a_512.jpg",
           "given_name" => first_name,
