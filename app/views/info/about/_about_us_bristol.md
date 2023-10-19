@@ -1,10 +1,12 @@
 ### About Us
 
-Swing Out Bristol uses the same underlying system as [Swing Out
-London](https://www.swingoutlondon.co.uk/), which was built by Duncan Stuart
-in 2010 and has been providing swing dance listings to Londoners ever since.
+Swing Out Bristol is a community project started in 2023, based on [Swing Out
+London](https://www.swingoutlondon.co.uk/), a site built by Duncan Stuart
+in 2010 which has been listing swing dance events ever since.
 
-{{{INSERT SOME TEXT ABOUT WHO IS BEHIND SWING OUT BRISTOL}}}
+This site is maintained by Chris Neale and Duncan Stuart and relies on
+volunteers to support it with tips on upcoming classes and socials, development
+support and, if you can spare it, donations toward the hosting.
 
-If you'd like to get in touch with us, please send an email to
+If you'd like to help out and get involved in any way, please email us at
 [swingoutbristol@gmail.com](mailto:swingoutbristol@gmail.com).
