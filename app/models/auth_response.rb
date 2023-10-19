@@ -13,6 +13,10 @@ class AuthResponse
     auth_hash.fetch("info").fetch("name")
   end
 
+  def team
+    auth_hash.fetch("extra").fetch("raw_info").fetch("https://slack.com/team_id")
+  end
+
   def token
     auth_hash.fetch("credentials").fetch("token")
   end

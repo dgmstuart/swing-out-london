@@ -8,7 +8,14 @@ class SessionsController < ApplicationController
 
   def create
     user = AuthResponse.new(request.env)
-    login_session.log_in!(auth_id: user.id, name: user.name, token: user.token)
+    if user.team == ENV.fetch("SLACK_TEAM_ID")
+      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token)
+    else
+      # revoke auth token!
+      # TODO: MAKE A BETTER MESSAGE:
+      flash.alert = "There was a problem with your login"
+      # logger.warn("Authorisation failed with: #{params[:message]}")
+    end
 
     redirect_to events_path
   end
