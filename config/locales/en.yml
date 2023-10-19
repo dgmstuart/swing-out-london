@@ -8,6 +8,9 @@ en:
   email_address:
     london: "swingoutlondon@gmail.com"
     bristol: "swingoutbristol@gmail.com"
+  twitter_handle:
+    london: "swingoutlondon"
+    bristol: "swingoutbristol"
   city:
     london: London
     bristol: Bristol
