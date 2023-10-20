@@ -17,16 +17,18 @@ FactoryBot.define do
       title { "" }
       has_class { true }
       has_social { false }
-      frequency { 1 }
-      # generate classes for different days of the week:
-      sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
+      weekly
       class_organiser factory: :organiser
     end
 
     factory :weekly_social do
-      frequency { 1 }
-      sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
+      weekly
     end
+  end
+
+  trait :weekly do
+    frequency { 1 }
+    sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
   end
 
   factory :venue do
