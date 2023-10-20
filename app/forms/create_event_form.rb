@@ -23,8 +23,10 @@ class CreateEventForm
   attribute :first_date, :string
   attribute :last_date, :string
 
-  def self.model_name
-    Event.model_name
+  class << self
+    def model_name
+      Event.model_name
+    end
   end
 
   validates :url, presence: true, uri: true

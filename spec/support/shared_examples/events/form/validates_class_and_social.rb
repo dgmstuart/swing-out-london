@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "validates class and social (form)" do |model_name|
-  it { is_expected.to validate_presence_of(:event_type) }
-  it { is_expected.to validate_inclusion_of(:event_type).in_array(%w[social_dance weekly_class]) }
-
   it "is valid if it's a class without a title" do
     expect(build(model_name, event_type: "weekly_class", title: nil, class_organiser_id: 7)).to be_valid
   end

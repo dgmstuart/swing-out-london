@@ -22,6 +22,9 @@ RSpec.describe CreateEventForm do
     it_behaves_like "validates course length", :create_event_form
     it_behaves_like "validates url", :create_event_form
 
+    it { is_expected.to validate_presence_of(:event_type) }
+    it { is_expected.to validate_inclusion_of(:event_type).in_array(%w[social_dance weekly_class]) }
+
     it { is_expected.to validate_presence_of(:frequency) }
     it { is_expected.to validate_inclusion_of(:frequency).in_array([0, 1]) }
     it { is_expected.to validate_presence_of(:url) }
