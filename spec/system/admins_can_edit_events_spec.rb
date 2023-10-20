@@ -14,6 +14,7 @@ RSpec.describe "Admins can edit events", :js do
 
     click_link "Edit", match: :first
 
+    expect(page).to have_content("Event Type\nSocial dance")
     expect(page).to have_field("Cancelled dates", with: "01/10/2010,02/12/2012")
 
     fill_in "Url", with: "http://www.lsds.co.uk/stompin"

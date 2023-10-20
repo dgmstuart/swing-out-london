@@ -6,7 +6,6 @@ class EditEventForm
 
   attribute :url, :string
   attribute :venue_id, :integer
-  attribute :event_type, :string
 
   attribute :title, :string
   attribute :social_organiser_id, :integer
@@ -23,23 +22,24 @@ class EditEventForm
   attribute :first_date, :string
   attribute :last_date, :string
 
+  attr_accessor :event_type
+
   class << self
     def from_event(event)
       date_printable_event = DatePrintableEvent.new(event)
+
       new(
         {
           title: event.title,
           url: event.url,
           venue_id: event.venue_id,
-
           # TODO: it's not necessarily true that it's only one or the other: legacy events might be neither...
           event_type: (event.has_social? ? "social_dance" : "weekly_class"),
+
           social_organiser_id: event.social_organiser_id,
           social_has_class: event.has_social? && (event.has_class? || event.has_taster?),
 
-          class_style: event.class_style,
-          course_length: event.course_length,
-          class_organiser_id: event.class_organiser_id,
+          class_style: event.class_style, course_length: event.course_length, class_organiser_id: event.class_organiser_id,
 
           frequency: event.frequency,
           day: event.day,
@@ -58,7 +58,6 @@ class EditEventForm
 
   validates :url, presence: true, uri: true
   validates :venue_id, presence: true
-  validates :event_type, presence: true, inclusion: { in: %w[social_dance weekly_class], allow_blank: true }
   validates :frequency, presence: true, inclusion: { in: [0, 1], allow_blank: true }
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_blank: true }
 
@@ -99,11 +98,9 @@ class EditEventForm
     attributes.merge(
       "dates" => DatesStringParser.new.parse(dates),
       "cancellations" => DatesStringParser.new.parse(cancellations),
-      "has_social" => type_is_social_dance?,
       "has_class" => has_weekly_class?,
       "has_taster" => has_occasional_class?
     ).except(
-      "event_type",
       "social_has_class"
     )
   end

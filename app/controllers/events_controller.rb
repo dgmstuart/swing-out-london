@@ -36,7 +36,8 @@ class EventsController < CmsBaseController
   def update # rubocop:disable Metrics/MethodLength
     @event = Event.find(params[:id])
 
-    @form = EditEventForm.new(update_event_params)
+    @form = EditEventForm.from_event(@event)
+    @form.assign_attributes(update_event_params)
     if @form.valid?
       audit_comment = EventParamsCommenter.new.comment(@event, update_event_params)
       update_params = @form.to_h.merge!(audit_comment)

@@ -11,17 +11,21 @@
       <%= f.label :venue_id, 'Venue' %>
       <%= f.select :venue_id, venue_select, { include_blank: true} %>
     </div>
+
     <div class='form-group'>
       <h4 class="form-group-title">Event Type</h4>
-
-      <label data-action="input->event-form#socialDance">
-        <%= f.radio_button(:event_type, "social_dance") %>
-        Social dance
-      </label>
-      <label data-action="input->event-form#weeklyClass">
-        <%= f.radio_button(:event_type, "weekly_class") %>
-        Weekly class
-      </label>
+      <% if @form.persisted? %>
+        <p><%= t("forms.events.event_type.#{@form.event_type}") %></p>
+      <% else %>
+        <label data-action="input->event-form#socialDance">
+          <%= f.radio_button(:event_type, "social_dance") %>
+          <%= t("forms.events.event_type.social_dance") %>
+        </label>
+        <label data-action="input->event-form#weeklyClass">
+          <%= f.radio_button(:event_type, "weekly_class") %>
+          <%= t("forms.events.event_type.weekly_class") %>
+        </label>
+      <% end %>
     </div>
   </section>
 
