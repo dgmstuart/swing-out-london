@@ -22,7 +22,7 @@ class EventsController < CmsBaseController
   end
 
   def create
-    @form = CreateEventForm.new(event_params)
+    @form = CreateEventForm.new(create_event_params)
 
     if @form.valid?
       event = Event.create!(@form.to_h)
@@ -36,9 +36,9 @@ class EventsController < CmsBaseController
   def update # rubocop:disable Metrics/MethodLength
     @event = Event.find(params[:id])
 
-    @form = EditEventForm.new(event_params)
+    @form = EditEventForm.new(update_event_params)
     if @form.valid?
-      audit_comment = EventParamsCommenter.new.comment(@event, event_params)
+      audit_comment = EventParamsCommenter.new.comment(@event, update_event_params)
       update_params = @form.to_h.merge!(audit_comment)
       @event.update!(update_params)
       flash[:notice] = t("flash.success", model: "Event", action: "updated")
@@ -65,26 +65,15 @@ class EventsController < CmsBaseController
 
   private
 
-  def event_params
-    params.require(:event).permit(
-      %i[
-        title
-        venue_id
-        social_organiser_id
-        class_organiser_id
-        has_taster
-        has_class
-        has_social
-        class_style
-        course_length
-        day
-        frequency
-        dates
-        cancellations
-        first_date
-        last_date
-        url
-      ]
-    )
+  def create_event_params
+    event_params(CreateEventForm.attribute_names)
+  end
+
+  def update_event_params
+    event_params(EditEventForm.attribute_names)
+  end
+
+  def event_params(attribute_names)
+    params.require(:event).permit(attribute_names)
   end
 end
