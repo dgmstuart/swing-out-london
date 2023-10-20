@@ -34,7 +34,7 @@ Run the tests and linters:
 See [`Procfile.dev`](Procfile.dev): run each command in its own terminal, or
 run them together using the heroku CLI (installed as part of the bundle):
 
-    heroku local
+    heroku local -f Procfile.dev
 
 ## Environment Variables
 
