@@ -7,7 +7,10 @@ website based on a custom CMS for listing links to dance events.
 
 ### Prerequisites
 
-[Yarn](https://yarnpkg.com/en/docs/install/) is used in development.
+- [Yarn](https://yarnpkg.com/en/docs/install/) is used in development.
+- [Postgres](https://www.postgresql.org/) is the database. If you don't have a
+preference for how to run Postgres locally we recommend
+[Postgres.app](https://postgresapp.com/).
 
 Other dependencies (including ruby) are listed in
 [`.tool-versions`](.tool-versions).
@@ -25,6 +28,13 @@ Set up the app from scratch:
 Run the tests and linters:
 
     bin/rake
+
+### Local development
+
+See [`Procfile.dev`](Procfile.dev): run each command in its own terminal, or
+run them together using the heroku CLI (installed as part of the bundle):
+
+    heroku local
 
 ## Environment Variables
 
