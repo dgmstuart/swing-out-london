@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe EventsHelper do
+RSpec.describe EventsHelper do
   describe "school_name" do
     it "fails if called on a non-class" do
       event = build(:event, has_class: false)

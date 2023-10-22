@@ -4,7 +4,7 @@ require "spec_helper"
 require "app/presenters/date_printer"
 require "spec/support/time_formats_helper"
 
-describe DatePrinter do
+RSpec.describe DatePrinter do
   describe "#print" do
     it "prints out a list of dates as a formatted string" do
       dates = [Date.new(1958, 9, 30), Date.new(1958, 10, 28), Date.new(1958, 11, 25)]

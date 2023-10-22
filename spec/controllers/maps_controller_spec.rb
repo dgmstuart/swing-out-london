@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe MapsController do
+RSpec.describe MapsController do
   describe "GET classes" do
     describe "assigns days correctly:" do
       before do

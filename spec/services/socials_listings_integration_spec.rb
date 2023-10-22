@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe SocialsListings do
+RSpec.describe SocialsListings do
   describe "Integration tests:" do
     describe "#build" do
       context "when there is only one social" do
