@@ -63,6 +63,21 @@ RSpec.describe "Adding a new event", :js do
 
     click_button "Create"
 
+    # RECENTLY STARTED EVENT (NEW!)
+    click_link "New Event"
+
+    fill_in "Url", with: "https://www.savoyballroom.com/ladies"
+    autocomplete_select "The Savoy Ballroom", from: "Venue"
+    choose "Social dance"
+
+    fill_in "Title", with: "Ladies night"
+    choose "Monthly or occasionally"
+
+    fill_in "Upcoming dates", with: "13/01/1937"
+    fill_in "First date", with: "13/01/1937"
+
+    click_button "Create"
+
     Timecop.freeze("01/01/1937") do
       click_link "Swing Out London"
     end
@@ -85,6 +100,15 @@ RSpec.describe "Adding a new event", :js do
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
           expect(page).to have_content "CANCELLED Stompin at the Savoy"
           expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
+        end
+      end
+
+      within rows[2] do
+        aggregate_failures do
+          expect(page).to have_content "Wednesday 13th January"
+          expect(page).to have_link "WC2R", href: "/map/socials/1937-01-13?venue_id=#{venue_id}"
+          expect(page).to have_content "NEW! Ladies night"
+          expect(page).to have_link "Ladies night - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/ladies"
         end
       end
     end
