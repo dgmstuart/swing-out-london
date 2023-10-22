@@ -14,9 +14,7 @@ end
 FactoryBot.define do
   trait :event_form do
     title { Faker::Company.social_dance }
-    has_taster { false }
-    has_class { false }
-    has_social { true }
+    event_type { "social_dance" }
     frequency { 0 }
     url { Faker::Internet.url }
     venue_id { rand(999) }

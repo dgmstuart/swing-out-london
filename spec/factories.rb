@@ -23,6 +23,11 @@ FactoryBot.define do
 
     factory :weekly_social do
       weekly
+
+      trait :with_class do
+        has_class { true }
+        class_organiser factory: :organiser
+      end
     end
   end
 

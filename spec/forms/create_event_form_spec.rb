@@ -6,7 +6,7 @@ require "app/validators/uri_validator"
 require "app/validators/valid_social_or_class"
 require "app/validators/valid_weekly_event"
 require "app/forms/create_event_form"
-require "spec/support/shared_examples/events/validates_class_and_social"
+require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
@@ -17,12 +17,16 @@ RSpec.describe CreateEventForm do
 
     before { stub_model_name("Event") }
 
-    it_behaves_like "validates class and social", :create_event_form
+    it_behaves_like "validates class and social (form)", :create_event_form
     it_behaves_like "validates weekly", :create_event_form
     it_behaves_like "validates course length", :create_event_form
     it_behaves_like "validates url", :create_event_form
 
+    it { is_expected.to validate_presence_of(:event_type) }
+    it { is_expected.to validate_inclusion_of(:event_type).in_array(%w[social_dance weekly_class]) }
+
     it { is_expected.to validate_presence_of(:frequency) }
+    it { is_expected.to validate_inclusion_of(:frequency).in_array([0, 1]) }
     it { is_expected.to validate_presence_of(:url) }
     it { is_expected.to validate_presence_of(:venue_id) }
   end

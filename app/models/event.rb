@@ -23,6 +23,9 @@ class Event < ApplicationRecord
 
   validates :organiser_token, uniqueness: true, allow_nil: true
 
+  validate :has_class_or_social
+  validate :must_be_weekly_if_no_social
+
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
 
@@ -70,6 +73,18 @@ class Event < ApplicationRecord
 
       swing_date.cancelled_events.pluck :id
     end
+  end
+
+  def has_class_or_social # rubocop:disable Naming/PredicateName
+    return true if has_class? || has_social?
+
+    errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed")
+  end
+
+  def must_be_weekly_if_no_social
+    return if has_social? || weekly? || frequency.nil?
+
+    errors.add(:frequency, "must be 1 (weekly) for events without a social")
   end
 
   # ----- #

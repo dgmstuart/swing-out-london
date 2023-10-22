@@ -14,21 +14,26 @@ RSpec.describe "Admins can create events", :js do
 
       click_link "New event", match: :first
 
-      fill_in "Title", with: "Stompin'"
+      fill_in "Url", with: "http://www.lsds.co.uk/stompin"
       autocomplete_select "The 100 Club", from: "Venue"
+
+      choose "Social dance" # Event Type
+      fill_in "Title", with: "Stompin'"
       autocomplete_select "The London Swing Dance Society", from: "Social organiser"
-      autocomplete_select "The London Swing Dance Society", from: "Class organiser"
-      check "Has a taster?"
-      check "Has social?"
+      check "Has a class?"
+
       choose "Other (balboa, shag etc)"
       fill_in "Dance style", with: "Balboa"
       fill_in "Course length", with: ""
+      # This autocomplete_select is above the other fields in the form, but
+      # I guess it doesn't scroll the capybara page, so we need a simpler interaction first.
+      autocomplete_select "The London Swing Dance Society", from: "Class organiser"
+
       choose "Monthly or occasionally"
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
       # TODO: Make this work:
       # fill_in 'Cancelled dates', with: '12/12/2012'
       fill_in "First date", with: ""
-      fill_in "Url", with: "http://www.lsds.co.uk/stompin"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
         click_button "Create"
@@ -64,11 +69,13 @@ RSpec.describe "Admins can create events", :js do
         .and have_content("Venue can't be blank")
         .and have_content("Url can't be blank")
         .and have_content("Frequency can't be blank")
-        .and have_content("Events must have either a Social or a Class")
+        .and have_content("Event type can't be blank")
 
       autocomplete_select "The 100 Club", from: "Venue"
-      check "Has social?"
+      choose "Social dance"
+
       fill_in "Title", with: "Stompin'"
+
       choose "Weekly"
       select "Tuesday", from: "Day"
       fill_in "Url", with: "http://www.lsds.co.uk/stompin"
@@ -108,13 +115,14 @@ RSpec.describe "Admins can create events", :js do
 
       click_link "New event", match: :first
 
+      fill_in "Url", with: "https://sunshineswing.uk/events"
       autocomplete_select "Dogstar", from: "Venue"
+      choose "Weekly class"
+
       autocomplete_select "Sunshine Swing", from: "Class organiser"
-      check "Has a class?"
-      choose "Weekly"
+
       select "Wednesday", from: "Day"
       fill_in "First date", with: "16/02/2000"
-      fill_in "Url", with: "https://sunshineswing.uk/events"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
         click_button "Create"
@@ -147,11 +155,11 @@ RSpec.describe "Admins can create events", :js do
         .and have_content("Venue can't be blank")
         .and have_content("Url can't be blank")
         .and have_content("Frequency can't be blank")
-        .and have_content("Events must have either a Social or a Class")
+        .and have_content("Event type can't be blank")
 
       autocomplete_select "Dogstar", from: "Venue"
-      check "Has a class?"
-      choose "Weekly"
+      choose "Weekly class"
+
       select "Tuesday", from: "Day"
       fill_in "Url", with: "https://sunshineswing.uk/events"
 
