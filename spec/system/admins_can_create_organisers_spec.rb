@@ -29,7 +29,6 @@ RSpec.describe "Admins can create organisers" do
   end
 
   it "with an empty shortname" do
-    create(:organiser, shortname: "")
     stub_login
 
     visit "/login"
@@ -43,5 +42,29 @@ RSpec.describe "Admins can create organisers" do
     click_button "Create"
 
     expect(page).to have_content("Last updated by")
+  end
+
+  context "with invalid data" do
+    it "shows an error" do
+      skip_login
+
+      visit "/organisers/new"
+
+      fill_in "Shortname", with: "12345678901234567890+"
+
+      click_button "Create"
+
+      expect(page).to have_content("2 errors prevented this record from being saved")
+        .and have_content("Name can't be blank")
+        .and have_content("Shortname is too long")
+
+      fill_in "Name", with: "The London Swing Dance Society"
+      fill_in "Shortname", with: "12345678901234567890"
+
+      click_button "Create"
+
+      expect(page).to have_content("Name: The London Swing Dance Society")
+        .and have_content("Shortname: 12345678901234567890")
+    end
   end
 end
