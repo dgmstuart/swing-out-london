@@ -2,23 +2,37 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can create venues" do
-  it "with valid data", :vcr do
+RSpec.describe "Admins can edit venues", :vcr do
+  it "with valid data" do
     stub_login(id: 12345678901234567, name: "Al Minns")
+    create(
+      :venue,
+      name: "The 99 Club",
+      address: "199 Oxford Street\nLondon",
+      postcode: "W1D 1KK",
+      area: "Burford Street",
+      website: "https://www.the99club.co.uk/",
+      lat: 0,
+      lng: 1
+    )
 
     visit "/login"
     click_button "Log in"
 
-    click_link "New Venue"
+    click_link "Venues"
+
+    click_link "Edit", match: :first
 
     fill_in "Name", with: "The 100 Club"
     fill_in "Address", with: "100 Oxford Street\nLondon"
     fill_in "Postcode", with: "W1D 1LL"
+    fill_in "Latitude", with: "" # Blank out Lat so that it gets recalculated from postcode
+    fill_in "Longitude", with: "" # Blank out Lng so that it gets recalculated from postcode
     fill_in "Area", with: "Oxford Street"
     fill_in "Website", with: "https://www.the100club.co.uk/"
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
       VCR.use_cassette("geocode_100_club") do
-        click_button "Create"
+        click_button "Update"
       end
     end
 
@@ -38,12 +52,28 @@ RSpec.describe "Admins can create venues" do
   context "with invalid data" do
     it "shows an error" do
       skip_login
+      venue = create(
+        :venue,
+        name: "The 99 Club",
+        address: "199 Oxford Street\nLondon",
+        postcode: "W1D 1KK",
+        area: "Burford Street",
+        website: "https://www.the99club.co.uk/",
+        lat: 0,
+        lng: 1
+      )
 
-      visit "/venues/new"
+      visit "/venues/#{venue.to_param}/edit"
 
+      fill_in "Name", with: ""
+      fill_in "Address", with: ""
+      fill_in "Postcode", with: ""
+      fill_in "Latitude", with: ""
+      fill_in "Longitude", with: ""
+      fill_in "Area", with: ""
       fill_in "Website", with: "www.the100club.co.uk"
 
-      click_button "Create"
+      click_button "Update"
 
       expect(page).to have_content("5 errors prevented this record from being saved")
         .and have_content("Address can't be blank")
@@ -59,7 +89,7 @@ RSpec.describe "Admins can create venues" do
       fill_in "Latitude", with: "51.5164092"
       fill_in "Longitude", with: "-0.1345404"
 
-      click_button "Create"
+      click_button "Update"
 
       expect(page).to have_content("Name: The 100 Club")
         .and have_content("Address: 100 Oxford Street\r London")
