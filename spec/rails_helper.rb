@@ -13,6 +13,12 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "support/vcr"
 
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  abort e.to_s.strip
+end
+
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
