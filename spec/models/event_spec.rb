@@ -4,6 +4,7 @@ require "rails_helper"
 require "support/shoulda_matchers"
 require "spec/support/shared_examples/events/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
+require "spec/support/shared_examples/events/validates_event_with_dates"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 
@@ -182,6 +183,7 @@ RSpec.describe Event do
 
     it_behaves_like "validates class and social", :event
     it_behaves_like "validates weekly", :event
+    it_behaves_like "validates event with dates", :event
     it_behaves_like "validates course length", :event
     it_behaves_like "validates url", :event
 

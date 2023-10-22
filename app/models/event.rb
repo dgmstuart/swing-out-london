@@ -25,6 +25,7 @@ class Event < ApplicationRecord
 
   validate :has_class_or_social
   validate :must_be_weekly_if_no_social
+  validate :cannot_be_weekly_and_have_dates
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -85,6 +86,12 @@ class Event < ApplicationRecord
     return if has_social? || weekly? || frequency.nil?
 
     errors.add(:frequency, "must be 1 (weekly) for events without a social")
+  end
+
+  def cannot_be_weekly_and_have_dates
+    return unless weekly? && swing_dates.any?
+
+    errors.add(:swing_dates, "must be empty for weekly events")
   end
 
   # ----- #

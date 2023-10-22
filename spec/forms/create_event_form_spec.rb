@@ -5,9 +5,11 @@ require "config/initializers/inflections" # because of URI in URIValidator
 require "app/validators/uri_validator"
 require "app/validators/valid_social_or_class"
 require "app/validators/valid_weekly_event"
+require "app/validators/form/valid_event_with_dates"
 require "app/forms/create_event_form"
 require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
+require "spec/support/shared_examples/events/form/validates_event_with_dates"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 
@@ -19,6 +21,7 @@ RSpec.describe CreateEventForm do
 
     it_behaves_like "validates class and social (form)", :create_event_form
     it_behaves_like "validates weekly", :create_event_form
+    it_behaves_like "validates event with dates (form)", :create_event_form
     it_behaves_like "validates course length", :create_event_form
     it_behaves_like "validates url", :create_event_form
 
