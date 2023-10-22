@@ -72,26 +72,32 @@ RSpec.describe "Adding a new event", :js do
     within "#social_dances" do
       rows = page.all(".date_row")
       within rows[0] do
-        expect(page).to have_content "Saturday 2nd January"
-        expect(page).to have_link "WC2R", href: "/map/socials/1937-01-02?venue_id=#{venue_id}"
-        expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
+        aggregate_failures do
+          expect(page).to have_content "Saturday 2nd January"
+          expect(page).to have_link "WC2R", href: "/map/socials/1937-01-02?venue_id=#{venue_id}"
+          expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
+        end
       end
 
       within rows[1] do
-        expect(page).to have_content "Saturday 9th January"
-        expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
-        expect(page).to have_content "CANCELLED Stompin at the Savoy"
-        expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
+        aggregate_failures do
+          expect(page).to have_content "Saturday 9th January"
+          expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
+          expect(page).to have_content "CANCELLED Stompin at the Savoy"
+          expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
+        end
       end
     end
 
     within "#classes" do
       rows = page.all(".day_row")
       within rows[5] do
-        expect(page).to have_content "Saturday"
-        expect(page).to have_link "WC2R", href: "/map/classes/Saturday?venue_id=#{venue_id}"
-        expect(page).to have_link "Harlem (Savoy Style) at Stompin at the Savoy with Frankie", href: "https://www.savoyballroom.com/stompin"
-        expect(page).to have_content "Cancelled on 9th Jan"
+        aggregate_failures do
+          expect(page).to have_content "Saturday"
+          expect(page).to have_link "WC2R", href: "/map/classes/Saturday?venue_id=#{venue_id}"
+          expect(page).to have_link "Harlem (Savoy Style) at Stompin at the Savoy with Frankie", href: "https://www.savoyballroom.com/stompin"
+          expect(page).to have_content "Cancelled on 9th Jan"
+        end
       end
     end
 
