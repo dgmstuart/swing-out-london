@@ -7,7 +7,7 @@ require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 
-describe Event do
+RSpec.describe Event do
   describe "#title" do
     it "strips whitespace before saving" do
       event = build(:event, title: " \tDance time! ")

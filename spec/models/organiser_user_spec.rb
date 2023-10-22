@@ -3,7 +3,7 @@
 require "spec_helper"
 require "app/models/organiser_user"
 
-describe OrganiserUser do
+RSpec.describe OrganiserUser do
   describe "logged_in?" do
     it "is always true" do
       user = described_class.new(double)

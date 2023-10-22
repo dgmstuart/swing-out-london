@@ -3,7 +3,7 @@
 require "spec_helper"
 require "app/models/info_page"
 
-describe InfoPage do
+RSpec.describe InfoPage do
   describe "#content_partials" do
     it "returns the list of content partials for the current city" do # rubocop:disable RSpec/ExampleLength
       config = {
