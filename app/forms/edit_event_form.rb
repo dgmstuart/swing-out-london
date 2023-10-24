@@ -63,6 +63,7 @@ class EditEventForm
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
+  validates_with Form::ValidEventWithDates
 
   def action
     "Update"
