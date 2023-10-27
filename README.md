@@ -20,7 +20,6 @@ install` to install these. If you're already managing dependencies in a
 different way, ensure that you install the versions listed in
 `.tool_versions`.
 
-
 Set up the app from scratch:
 
     bin/setup
@@ -60,3 +59,6 @@ are not included in the .env.example file:
   - `ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN` [Rollbar](https://rollbar.com/) is
     used for exception reporting. This value can be found in Account Settings
     => Account Access Tokens in your Rollbar account.
+  - `CANONICAL_HOST` - all variations of the domain will be `301` redirected
+    to this - eg. set it to `www.swingoutlondon.co.uk` to have
+    `swingoutlondon.co.uk` redirect to www.
