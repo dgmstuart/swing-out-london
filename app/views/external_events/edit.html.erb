@@ -1,14 +1,7 @@
 <h1><%= @event.has_social? ? @event.title : "Dance class by #{ @event.class_organiser.name }" %></h1>
 
 <%= form_for(@form, url: external_event_path(@event.organiser_token)) do |f| %>
-  <% if flash.any? %>
-    <ul>
-      <% flash.each do |level, message| %>
-        <li class='flash <%= level %>'><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
+  <%= render "shared/flash" %>
   <%= render "shared/error_messages", target: @form %>
 
   <div class='form-group'>

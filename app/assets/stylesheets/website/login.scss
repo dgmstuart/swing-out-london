@@ -8,22 +8,6 @@
     font-size: 30px;
   }
 
-  .alert,
-  .notice {
-    padding: 20px;
-    margin-bottom: 15px;
-  }
-
-  .alert {
-    background-color: $alert-colour;
-    color: white;
-  }
-
-  .notice {
-    background-color: $notice-colour;
-    color: white;
-  }
-
   // AVERAGE VIEWING SIZE
   @media only screen and (min-width: 481px) {
     margin-left: 70px;
