@@ -9,7 +9,7 @@ RSpec.describe "Editor Login Revocation" do
       api_base!: "https://graph.facebook.com/",
       api_auth_token!: "super-secret-token",
       app_secret!: "super-secret-secret",
-      admin_user_ids: [12345678901234567]
+      editor_user_ids: [12345678901234567]
     )
 
     stub_auth_hash(id: 12345678901234567)
