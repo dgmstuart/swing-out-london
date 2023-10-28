@@ -17,12 +17,14 @@ module System
 
     def stub_login(id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name)
       stub_auth_hash(id:, name:)
-      stub_facebook_config(editor_user_ids: [id])
+      stub_facebook_config(editor_user_ids: [id], admin_user_ids: [])
     end
 
     def skip_login
+      name = Faker::Name.lindy_hop_name
       user = instance_double(LoginSession::User,
-                             name: Faker::Name.lindy_hop_name,
+                             name:,
+                             name_with_role: name,
                              auth_id: Faker::Facebook.uid,
                              logged_in?: true)
       login_session = instance_double(LoginSession, "Fake login", user:)

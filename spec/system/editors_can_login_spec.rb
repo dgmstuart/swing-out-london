@@ -8,7 +8,7 @@ RSpec.describe "Editor Login" do
 
   it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, name: "Al Minns")
-    stub_facebook_config(editor_user_ids: [12345678901234567])
+    stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [])
 
     visit "/events"
 
@@ -20,10 +20,24 @@ RSpec.describe "Editor Login" do
     expect(page).to have_content("Al Minns")
   end
 
+  it "Admins can login and access editor pages" do
+    stub_auth_hash(id: 12345678901234567, name: "Herbert White")
+    stub_facebook_config(editor_user_ids: [], admin_user_ids: [12345678901234567])
+
+    visit "/events"
+
+    expect(page).not_to have_header("Events")
+
+    click_button "Log in"
+
+    expect(page).to have_header("Events")
+    expect(page).to have_content("Herbert White (Admin)")
+  end
+
   context "when the user isn't in the approved list" do
     it "disallows the user from signing in, but shows them their Facebook ID" do
       stub_auth_hash(id: 76543210987654321, name: "Fred Astaire")
-      stub_facebook_config(editor_user_ids: [])
+      stub_facebook_config(editor_user_ids: [], admin_user_ids: [])
 
       visit "/events"
 

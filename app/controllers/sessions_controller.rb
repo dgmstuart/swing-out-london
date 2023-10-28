@@ -6,10 +6,11 @@ class SessionsController < ApplicationController
 
   def new; end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     user = AuthResponse.new(request.env)
-    if authorised?(user.id)
-      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token)
+    role = authorisation_for(user.id)
+    if %i[editor admin].include?(role)
+      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, role:)
       redirect_to events_path
     else
       flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
@@ -33,8 +34,15 @@ class SessionsController < ApplicationController
 
   private
 
-  def authorised?(auth_id)
-    Rails.configuration.x.facebook.editor_user_ids.include?(auth_id)
+  def authorisation_for(auth_id)
+    config = Rails.configuration.x.facebook
+    if config.admin_user_ids.include?(auth_id)
+      :admin
+    elsif config.editor_user_ids.include?(auth_id)
+      :editor
+    else
+      :none
+    end
   end
 
   def login_session
