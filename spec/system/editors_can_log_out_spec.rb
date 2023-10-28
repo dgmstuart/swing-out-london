@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe "Admin Login" do
-  it "admins can log out" do
+RSpec.describe "Editor Login" do
+  it "Editors can log out" do
     stub_login(name: "Al Minns")
 
     visit "/events"

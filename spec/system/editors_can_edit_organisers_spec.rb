@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can edit organisers" do
+RSpec.describe "Editors can edit organisers" do
   it "with valid data" do
     stub_login(id: 12345678901234567, name: "Al Minns")
     create(

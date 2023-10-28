@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can delete organisers" do
+RSpec.describe "Editors can delete organisers" do
   context "when the organiser has no associated events", :js do
     it "can be deleted from the organiser list" do
       stub_login

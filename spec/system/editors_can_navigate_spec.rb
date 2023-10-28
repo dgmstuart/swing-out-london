@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can navigate" do
+RSpec.describe "Editors can navigate" do
   it "from a show page to an edit page" do
     stub_login
     create(:event, url: "https://navigating.se")

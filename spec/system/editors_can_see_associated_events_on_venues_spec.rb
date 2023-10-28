@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can see associated events on venues" do
+RSpec.describe "Editors can see associated events on venues" do
   it "when there are associated events" do
     stub_login
     venue = create(:venue)

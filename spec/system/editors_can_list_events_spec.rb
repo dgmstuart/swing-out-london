@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can list events" do
+RSpec.describe "Editors can list events" do
   include ActiveSupport::Testing::TimeHelpers
 
   it "shows a list of events" do

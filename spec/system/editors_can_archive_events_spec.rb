@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can archive events" do
+RSpec.describe "Editors can archive events" do
   it "with a weekly event" do
     skip_login
     create(:event, frequency: 1, day: "Sunday")

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can delete events" do
+RSpec.describe "Editors can delete events" do
   it "can be deleted from the event list", :js do
     stub_login
     create(:event, title: "Balboa at Bobby McGee's")

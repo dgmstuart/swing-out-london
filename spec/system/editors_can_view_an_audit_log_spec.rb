@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can view an audit log" do
+RSpec.describe "Editors can view an audit log" do
   it "showing a list of audited events" do
     stub_login
 
