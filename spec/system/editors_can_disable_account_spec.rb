@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "spec/support/system/facebook_helper"
 
 RSpec.describe "Editor Login Revocation" do
+  include System::FacebookHelper
   it "Editors can deauthorise Swing Out Londons facebook permissions", :vcr do
-    config = Rails.configuration.x.facebook
-    allow(config).to receive_messages(
+    stub_facebook_config(
       api_base!: "https://graph.facebook.com/",
       api_auth_token!: "super-secret-token",
       app_secret!: "super-secret-secret",

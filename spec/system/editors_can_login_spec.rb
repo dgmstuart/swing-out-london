@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "support/system/facebook_helper"
 
 RSpec.describe "Editor Login" do
+  include System::FacebookHelper
+
   it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, name: "Al Minns")
-    allow(Rails.configuration.x.facebook)
-      .to receive(:editor_user_ids)
-      .and_return([12345678901234567])
+    stub_facebook_config(editor_user_ids: [12345678901234567])
 
     visit "/events"
 
@@ -22,9 +23,7 @@ RSpec.describe "Editor Login" do
   context "when the user isn't in the approved list" do
     it "disallows the user from signing in, but shows them their Facebook ID" do
       stub_auth_hash(id: 76543210987654321, name: "Fred Astaire")
-      allow(Rails.configuration.x.facebook)
-        .to receive(:editor_user_ids)
-        .and_return([])
+      stub_facebook_config(editor_user_ids: [])
 
       visit "/events"
 

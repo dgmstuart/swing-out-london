@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 require "support/system/omniauth_helper"
+require "support/system/facebook_helper"
 require "faker/facebook"
 
 module System
   module AuthHelper
     include OmniAuthHelper
+    include System::FacebookHelper
 
     RSpec.configure do |config|
       config.before(:each, type: :system) do
@@ -15,7 +17,7 @@ module System
 
     def stub_login(id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name)
       stub_auth_hash(id:, name:)
-      Rails.configuration.x.facebook.editor_user_ids = [id]
+      stub_facebook_config(editor_user_ids: [id])
     end
 
     def skip_login
