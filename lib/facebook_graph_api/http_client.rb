@@ -15,17 +15,20 @@ module FacebookGraphApi
       @appsecret_proof = proof_generator.generate(auth_token)
     end
 
+    def get(path)
+      response = client.get(
+        uri(path),
+        params: { appsecret_proof: }
+      )
+      handle_response(response) { JSON.parse(response.body) }
+    end
+
     def delete(path)
       response = client.delete(
         uri(path),
         params: { appsecret_proof: }
       )
-      case response.code
-      when 200
-        true
-      else
-        raise ResponseError, error_message_for(response.body)
-      end
+      handle_response(response) { true }
     end
 
     private
@@ -34,6 +37,15 @@ module FacebookGraphApi
 
     def uri(path)
       URI.join(base_url, path).to_s
+    end
+
+    def handle_response(response, &)
+      case response.code
+      when 200
+        yield(response)
+      else
+        raise ResponseError, error_message_for(response.body)
+      end
     end
 
     def error_message_for(json)

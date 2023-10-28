@@ -15,6 +15,17 @@ module FacebookGraphApi
       @api_builder = api_builder
     end
 
+    class << self
+      def for_user_attributes(token:, auth_id: nil)
+        user = LoginSession::User.new({ "token" => token, "auth_id" => auth_id })
+        new(user)
+      end
+    end
+
+    def profile(user_id)
+      api.profile(user_id)
+    end
+
     def revoke_login
       api.revoke_login(user.auth_id)
     end
