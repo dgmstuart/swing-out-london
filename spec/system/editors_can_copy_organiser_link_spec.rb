@@ -3,11 +3,11 @@
 require "rails_helper"
 require "spec/support/system/clipboard_helper"
 
-RSpec.describe "Admins can copy an organiser link" do
+RSpec.describe "Editors can copy an organiser link" do
   include System::ClipboardHelper
 
   context "when an organiser token exists", :js do
-    it "shows a url which will allow an organiser to edit an event, and allows the admin to change the link" do
+    it "shows a url which will allow an organiser to edit an event, and allows the editor to change the link" do
       event = create(:event, organiser_token: "abc123")
       grant_clipboard_permissions
 

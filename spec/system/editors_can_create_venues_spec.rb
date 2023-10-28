@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can create venues" do
+RSpec.describe "Editors can create venues" do
   it "with valid data", :vcr do
     stub_login(id: 12345678901234567, name: "Al Minns")
 

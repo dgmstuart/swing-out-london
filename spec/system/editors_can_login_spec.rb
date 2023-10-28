@@ -2,11 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe "Admin Login" do
-  it "admins can login and access admin pages" do
+RSpec.describe "Editor Login" do
+  it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, name: "Al Minns")
     allow(Rails.application.config.x.facebook)
-      .to receive(:admin_user_ids)
+      .to receive(:editor_user_ids)
       .and_return([12345678901234567])
 
     visit "/events"
@@ -23,7 +23,7 @@ RSpec.describe "Admin Login" do
     it "disallows the user from signing in, but shows them their Facebook ID" do
       stub_auth_hash(id: 76543210987654321, name: "Fred Astaire")
       allow(Rails.application.config.x.facebook)
-        .to receive(:admin_user_ids)
+        .to receive(:editor_user_ids)
         .and_return([])
 
       visit "/events"

@@ -15,7 +15,7 @@ module System
 
     def stub_login(id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name)
       stub_auth_hash(id:, name:)
-      Rails.application.config.x.facebook.admin_user_ids = [id]
+      Rails.application.config.x.facebook.editor_user_ids = [id]
     end
 
     def skip_login

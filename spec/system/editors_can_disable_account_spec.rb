@@ -2,14 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe "Admin Login Revocation" do
-  it "admins can deauthorise Swing Out Londons facebook permissions", :vcr do
+RSpec.describe "Editor Login Revocation" do
+  it "Editors can deauthorise Swing Out Londons facebook permissions", :vcr do
     config = Rails.configuration.x.facebook
     allow(config).to receive_messages(
       api_base!: "https://graph.facebook.com/",
       api_auth_token!: "super-secret-token",
       app_secret!: "super-secret-secret",
-      admin_user_ids: [12345678901234567]
+      editor_user_ids: [12345678901234567]
     )
 
     stub_auth_hash(id: 12345678901234567)
@@ -25,7 +25,7 @@ RSpec.describe "Admin Login Revocation" do
       click_button "Disable my login"
     end
 
-    expect(page).to have_header("Admin Login")
+    expect(page).to have_header("Editor Login")
     expect(page).to have_content("Your login permissions have been revoked in Facebook")
     expect(page).to have_button("Log in")
 

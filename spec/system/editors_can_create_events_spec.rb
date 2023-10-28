@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can create events", :js do
+RSpec.describe "Editors can create events", :js do
   context "an intermittent social with a taster" do # rubocop:disable RSpec/ContextWording
     it "with valid data" do
       stub_login(id: 12345678901234567, name: "Al Minns")

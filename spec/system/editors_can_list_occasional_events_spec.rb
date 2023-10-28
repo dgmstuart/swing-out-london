@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can list occasional events" do
+RSpec.describe "Editors can list occasional events" do
   it "with a dance class" do
     venue = create(
       :venue,

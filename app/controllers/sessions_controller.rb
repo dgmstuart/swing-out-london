@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to events_path
     else
       flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
-                    "If you've been invited to become an admin, please contact the main site admins and get them to add this ID"
+                    "If you've been invited to become an editor, please contact the main site admins and get them to add this ID"
       logger.warn("Auth id #{user.id} tried to log in, but was not in the allowed list")
       redirect_to action: :new
     end
@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
   private
 
   def authorised?(auth_id)
-    Rails.application.config.x.facebook.admin_user_ids.include?(auth_id)
+    Rails.application.config.x.facebook.editor_user_ids.include?(auth_id)
   end
 
   def login_session

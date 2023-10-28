@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Admins can delete venues" do
+RSpec.describe "Editors can delete venues" do
   context "when the venue has no associated events", :js do
     it "can be deleted from the venue list" do
       stub_login
