@@ -6,7 +6,7 @@ require "lib/facebook_graph_api/api"
 RSpec.describe FacebookGraphApi::Api do
   describe "#revoke_login" do
     it "makes a request to revoke the user's login" do
-      http_client = instance_double("HTTP::Client", delete: double)
+      http_client = instance_double("FacebookGraphApi::HttpClient", delete: double)
 
       described_class.new(http_client).revoke_login("1234567")
 
