@@ -10,6 +10,8 @@
     <meta content="Duncan Stuart" name="author"/>
     <meta content="<%= content_for?(:description) ? yield(:description) : "#{tc("site_name")} is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" %>" name="description"/>
     <link href="humans.txt" rel="author"></link>
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <%= csrf_meta_tag %>
     <%= javascript_include_tag :application, defer: true %>
     <%= stylesheet_link_tag 'application', media: "screen" %>
