@@ -1,15 +1,10 @@
 <% content_for :head do %>
   <% # Facebook open graph tags %>
-  <meta content="<%= tc("site_name") %> - Lindy Hop Listings" property="og:title"/>
-  <meta content="<%= tc("site_name") %>" property="og:site_name"/>
+  <meta content="<%= tc("site_name") %>" property="og:title"/>
   <meta content="<%= tc("site_name") %> is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" property="og:description"/>
   <meta content="website" property="og:type"/>
   <meta content="<%= tc("site_url") %>" property="og:url"/>
-  <meta content="<%= tc("site_url") %>/swingoutlondon_og.png" property="og:image"/>
-  <% if Rails.configuration.x.facebook.app_id %>
-    <meta content="<%= Rails.configuration.x.facebook.app_id %>" property="fb:app_id"/>
-  <% end %>
-  <meta content="dgmstuart" property="fb:admins"/>
+  <meta content="<%= image_url(CITY.opengraph_image) %>" property="og:image"/>
 <% end %>
 
 <% content_for :navigation do %>

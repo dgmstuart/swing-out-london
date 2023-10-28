@@ -128,5 +128,15 @@ RSpec.describe "Adding a new event", :js do
     expect(page).not_to have_content("<")
     expect(page).not_to have_content(">")
     expect(page).not_to have_content("abbr title=")
+
+    aggregate_failures do
+      expect(page).to have_css('meta[property="og:title"][content="Swing Out London"]', visible: :hidden)
+      expect(page).to have_css('meta[property="og:description"][content*="Swing Out London is a listing of"]', visible: :hidden)
+      expect(page).to have_css('meta[property="og:url"][content="https://www.swingoutlondon.co.uk"]', visible: :hidden)
+      expect(page).to have_css('meta[property="og:image"]', visible: :hidden)
+      image_url = find('meta[property="og:image"]', visible: :hidden)["content"]
+      image_url_regexp = %r{http://127\.0\.0\.1:\d+/assets/swingoutlondon_og-\h+\.png}
+      expect(image_url).to match(image_url_regexp)
+    end
   end
 end
