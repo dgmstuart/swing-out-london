@@ -2,6 +2,7 @@
 *= require shared/reset
 *= require shared/base
 *= require shared/buttons
+*= require shared/flash
 *= require website/navigation
 *= require website/website
 *= require website/listings

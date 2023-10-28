@@ -52,7 +52,7 @@ module ShareButtonHelper
     alt_text = "Donate to help keep #{tc('site_name')} running"
 
     link_to "Donate",
-            Rails.application.config.x.donate_link,
+            Rails.configuration.x.donate_link,
             title: alt_text,
             alt: alt_text,
             target: "_blank",

@@ -7,7 +7,6 @@ class AuditLogsController < ApplicationController
   def show
     @audits = Audit.order(created_at: :desc)
     respond_to do |format|
-      format.html
       format.atom { render xml: audits_rss(@audits).to_xml }
     end
   end
@@ -52,7 +51,7 @@ class AuditLogsController < ApplicationController
     {
       "Event" => -> { Event.find_by(id:) || Event.new(id:) },
       "Venue" => -> { Venue.find_by(id:) || Venue.new(id:) },
-      "Organiser" => -> { Organiser.find_by(id:) || Organiser.find(id:) }
+      "Organiser" => -> { Organiser.find_by(id:) || Organiser.new(id:) }
     }.fetch(class_name).call
   end
 

@@ -7,6 +7,11 @@
     <li class="navlink"><%= link_to "Venues", venues_path %></li>
     <li class="navlink"><%= link_to "New Organiser", new_organiser_path %></li>
     <li class="navlink"><%= link_to "Organisers", organisers_path %></li>
-    <li class="navlink navlink-right"><%= link_to current_user.name, account_path%></li>
+
+    <% if current_user.admin? %>
+      <li class="navlink"><%= link_to "Audit Log", admin_audit_log_path %></li>
+    <% end %>
+
+    <li class="navlink navlink-right"><%= link_to current_user.name_with_role, account_path %></li>
   </ul>
 </nav>
