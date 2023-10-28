@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
   private
 
   def authorised?(auth_id)
-    Rails.application.config.x.facebook.editor_user_ids.include?(auth_id)
+    Rails.configuration.x.facebook.editor_user_ids.include?(auth_id)
   end
 
   def login_session
