@@ -51,7 +51,7 @@ class AuditLogsController < ApplicationController
     {
       "Event" => -> { Event.find_by(id:) || Event.new(id:) },
       "Venue" => -> { Venue.find_by(id:) || Venue.new(id:) },
-      "Organiser" => -> { Organiser.find_by(id:) || Organiser.find(id:) }
+      "Organiser" => -> { Organiser.find_by(id:) || Organiser.new(id:) }
     }.fetch(class_name).call
   end
 
