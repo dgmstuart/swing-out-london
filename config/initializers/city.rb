@@ -34,7 +34,7 @@ City = Struct.new(:key, :map_config, :opengraph_image, :has_facebook_page?) do
         center: Coordinates.new(51.4750364, -2.5659198),
         zoom: 12
       )
-      new(:bristol, map_config, "swingoutbristol_og.jpg", false)
+      new(:bristol, map_config, "swingoutbristol_og.png", false)
     end
   end
 
