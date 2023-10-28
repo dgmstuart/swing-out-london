@@ -7,7 +7,6 @@ class AuditLogsController < ApplicationController
   def show
     @audits = Audit.order(created_at: :desc)
     respond_to do |format|
-      format.html
       format.atom { render xml: audits_rss(@audits).to_xml }
     end
   end

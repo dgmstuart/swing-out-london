@@ -120,6 +120,47 @@ RSpec.describe LoginSession do
     end
   end
 
+  describe "#user.admin?" do
+    context "when the session has been set as a non-admin" do
+      it "is the just the name from the session" do
+        session = { user: { "admin" => false } }
+        request = instance_double("ActionDispatch::Request", session:)
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.admin?).to be false
+      end
+    end
+
+    context "when the session has been set as an admin" do
+      it "is the just the name from the session" do
+        session = { user: { "admin" => true } }
+        request = instance_double("ActionDispatch::Request", session:)
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.admin?).to be true
+      end
+    end
+
+    context "when the session has not been set" do
+      it "is false" do
+        request = instance_double("ActionDispatch::Request", session: {})
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.admin?).to be false
+      end
+    end
+
+    context "when the session doesn't contain an 'admin' key" do
+      it "is false" do
+        session = { user: { name: "Jimmy Valentine" } }
+        request = instance_double("ActionDispatch::Request", session:)
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.admin?).to be false
+      end
+    end
+  end
+
   describe "#user.name_with_role" do
     context "when the session has been set" do
       it "is the just the name from the session" do

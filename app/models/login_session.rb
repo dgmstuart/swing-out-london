@@ -53,6 +53,10 @@ class LoginSession
       end
     end
 
+    def admin?
+      user.fetch("admin", false)
+    end
+
     def auth_id
       user.fetch("auth_id")
     end
@@ -64,10 +68,6 @@ class LoginSession
     private
 
     attr_reader :user
-
-    def admin?
-      user.fetch("admin", false)
-    end
   end
 
   class Guest
@@ -81,6 +81,10 @@ class LoginSession
 
     def name_with_role
       name
+    end
+
+    def admin?
+      false
     end
 
     def auth_id
