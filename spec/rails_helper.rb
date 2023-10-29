@@ -26,10 +26,11 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
-  require "support/system/auth_helper"
+  require "support/auth_helper"
   require "support/system/drivers"
   require "support/system/form_helper"
-  config.include System::AuthHelper, type: :system
+  config.include AuthHelper, type: :system
+  config.include AuthHelper, type: :request
   config.include System::Drivers, type: :system
   config.include System::FormHelper, type: :system
 end
