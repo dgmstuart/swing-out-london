@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     user = AuthResponse.new(request.env)
     role = authorisation_for(user.id)
     if %i[editor admin].include?(role)
+      reset_session # calling reset_session prevents "session fixation" attacks
       login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, role:)
       redirect_to events_path
     else
