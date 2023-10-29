@@ -8,12 +8,6 @@ module AuthHelper
   include OmniAuthHelper
   include FacebookHelper
 
-  RSpec.configure do |config|
-    config.before(:each, type: :system) do
-      stub_login
-    end
-  end
-
   def stub_login(id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name, admin: false)
     stub_auth_hash(id:, name:)
     ids = if admin
