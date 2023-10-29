@@ -12,7 +12,7 @@ class RevokeLogin
   end
 
   def revoke!(user)
-    api = api_builder.new(user)
+    api = api_builder.for_user(user)
     api.revoke_login
     logger.info("Auth id #{user.auth_id} revoked their login permissions")
   end
