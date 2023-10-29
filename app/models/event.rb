@@ -288,12 +288,11 @@ class Event < ApplicationRecord
 
   def archive!
     return false if !last_date.nil? && last_date < Date.current
-
     # If there's already a last_date in the past, then the event should already be archived!
 
     self[:last_date] = if weekly?
                          Date.current.prev_occurring(day.downcase.to_sym)
-                       elsif dates.nil?
+                       elsif dates.blank?
                          Date.new # Earliest possible ruby date
                        else
                          latest_date
