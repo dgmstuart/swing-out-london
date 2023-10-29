@@ -74,12 +74,12 @@ RSpec.describe "Adding a new event", :js do
     fill_in "Title", with: "Ladies night"
     choose "Monthly or occasionally"
 
-    fill_in "Upcoming dates", with: "13/01/1937"
-    fill_in "First date", with: "13/01/1937"
+    fill_in "Upcoming dates", with: "01/01/1937,14/01/1937"
+    fill_in "First date", with: "01/01/1937"
 
     click_button "Create"
 
-    Timecop.freeze("01/01/1937") do
+    Timecop.freeze("01/01/1937T12:00") do
       click_link "Swing Out London"
     end
 
@@ -89,13 +89,22 @@ RSpec.describe "Adding a new event", :js do
       rows = page.all(".date_row")
       within rows[0] do
         aggregate_failures do
-          expect(page).to have_content "Saturday 2nd January"
+          expect(page).to have_content "TODAY Friday 1st January"
+          expect(page).to have_link "WC2R", href: "/map/socials/1937-01-01?venue_id=#{venue_id}"
+          expect(page).to have_content "NEW! Ladies night"
+          expect(page).to have_link "Ladies night - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/ladies"
+        end
+      end
+
+      within rows[1] do
+        aggregate_failures do
+          expect(page).to have_content "TOMORROW Saturday 2nd January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-02?venue_id=#{venue_id}"
           expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
         end
       end
 
-      within rows[1] do
+      within rows[2] do
         aggregate_failures do
           expect(page).to have_content "Saturday 9th January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
@@ -104,10 +113,10 @@ RSpec.describe "Adding a new event", :js do
         end
       end
 
-      within rows[2] do
+      within rows[3] do
         aggregate_failures do
-          expect(page).to have_content "Wednesday 13th January"
-          expect(page).to have_link "WC2R", href: "/map/socials/1937-01-13?venue_id=#{venue_id}"
+          expect(page).to have_content "Thursday 14th January"
+          expect(page).to have_link "WC2R", href: "/map/socials/1937-01-14?venue_id=#{venue_id}"
           expect(page).to have_content "NEW! Ladies night"
           expect(page).to have_link "Ladies night - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/ladies"
         end
