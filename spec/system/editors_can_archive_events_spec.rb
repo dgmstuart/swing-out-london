@@ -33,4 +33,17 @@ RSpec.describe "Editors can archive events" do
 
     expect(page).to have_content("Last date: Sunday 2nd January")
   end
+
+  it "with an event with no dates" do
+    skip_login
+    create(:event, frequency: 0, dates: [])
+
+    visit "/events"
+
+    click_link "Archive", match: :first
+
+    click_link "Show", match: :first
+
+    expect(page).to have_content("Last date: Monday 1st January") # earliest possible Date
+  end
 end
