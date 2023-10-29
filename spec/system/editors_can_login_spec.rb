@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "support/system/facebook_helper"
+require "support/facebook_helper"
 
 RSpec.describe "Editor Login" do
-  include System::FacebookHelper
+  include FacebookHelper
 
   it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, name: "Al Minns")

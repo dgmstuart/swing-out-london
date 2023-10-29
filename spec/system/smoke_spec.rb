@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Adding a new event", :js do
   it "with a social and a dance class" do
+    stub_login
     visit "/events"
 
     click_button "Log in"

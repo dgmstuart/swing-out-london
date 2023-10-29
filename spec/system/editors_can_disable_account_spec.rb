@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "spec/support/system/facebook_helper"
+require "spec/support/facebook_helper"
 
 RSpec.describe "Editor Login Revocation" do
-  include System::FacebookHelper
+  include FacebookHelper
   it "Editors can deauthorise Swing Out Londons facebook permissions", :vcr do
     stub_facebook_config(
       api_base!: "https://graph.facebook.com/",
