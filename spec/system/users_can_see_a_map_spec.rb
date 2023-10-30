@@ -5,19 +5,38 @@ require "rails_helper"
 RSpec.describe "Users can view a map of upcoming events" do
   describe "socials page" do
     it "viewing the page" do
-      venue = create(
-        :venue,
-        name: "The Boudoir Club",
-        address: "22 Night Street",
-        postcode: "ZZ2 2ZZ"
-      )
-      create(
+      event = create(
         :social,
-        venue:,
+        venue: build(
+          :venue,
+          name: "The Boudoir Club",
+          address: "22 Night Street",
+          postcode: "ZZ2 2ZZ"
+        ),
         title: "Bedroom Bounce",
         url: "https://bb.com",
-        dates: [Date.new(2019, 6, 8)],
-        has_taster: true
+        dates: [Date.new(2019, 6, 8), Date.new(2019, 6, 17)],
+        first_date: Date.new(2019, 6, 8),
+        has_taster: true,
+        class_style: "Balboa"
+      )
+      # There's currently a bug whereby you can't create cancellations at the same time as the event
+      event.update!(cancellations: [Date.new(2019, 6, 17)])
+
+      create(
+        :social,
+        :weekly,
+        day: "Thursday",
+        venue: build(
+          :venue,
+          name: "The Alhambra",
+          address: "17-19 Argyle St, London",
+          postcode: "WC1H 8EJ"
+        ),
+        title: "Alhambra Thursdays",
+        url: "https://at.com",
+        has_class: true,
+        class_organiser: create(:organiser, name: "Ann Johnson")
       )
 
       Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
@@ -41,14 +60,31 @@ RSpec.describe "Users can view a map of upcoming events" do
 
       marker_json = page.find_by_id("map")["data-markers"]
       markers = JSON.parse(marker_json)
-      expect(markers.count).to eq 1
+      expect(markers.count).to eq 2
+
       info_window_string = markers.first.fetch("infoWindowContent")
       info_window = Capybara.string(info_window_string)
-      expect(info_window).to have_content("The Boudoir Club")
-      expect(info_window).to have_content("22 Night Street")
-      expect(info_window).to have_content("ZZ2 2ZZ")
-      expect(info_window).to have_content("Saturday 8th June:")
-      expect(info_window).to have_link("Bedroom Bounce", href: "https://bb.com")
+      aggregate_failures do
+        expect(info_window).to have_content("The Alhambra")
+        expect(info_window).to have_content("17-19 Argyle St")
+        expect(info_window).to have_content("WC1H 8EJ")
+        expect(info_window).to have_content("Thursday 6th June:")
+        expect(info_window).to have_content("Thursday 13th June:")
+        expect(info_window).to have_content("Alhambra Thursdays (class by Ann Johnson)").twice
+        expect(info_window).to have_link("Alhambra Thursdays", href: "https://at.com").twice
+      end
+
+      info_window_string = markers.last.fetch("infoWindowContent")
+      info_window = Capybara.string(info_window_string)
+      aggregate_failures do
+        expect(info_window).to have_content("The Boudoir Club")
+        expect(info_window).to have_content("22 Night Street")
+        expect(info_window).to have_content("ZZ2 2ZZ")
+        expect(info_window).to have_content("Saturday 8th June:")
+        expect(info_window).to have_content(/Monday 17th June:\s+Cancelled/)
+        expect(info_window).to have_content("New! Bedroom Bounce (Balboa taster)").twice
+        expect(info_window).to have_link("Bedroom Bounce", href: "https://bb.com").twice
+      end
     end
 
     context "when a date in the past is requested" do
