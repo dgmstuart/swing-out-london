@@ -10,7 +10,7 @@ class UserName
   end
 
   def name_for(user_id)
-    api = api_builder.new(user)
+    api = api_builder.for_user(user)
     profile = api.profile(user_id)
     profile.fetch("name")
   end

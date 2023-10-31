@@ -8,19 +8,19 @@ RSpec.describe UserName do
     it "builds an API client based on the user" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
       api = instance_double("FacebookGraphApi::UserApi", profile:)
-      api_builder = class_double("FacebookGraphApi::UserApi", new: api)
+      api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
       user = instance_double("LoginSession::User")
 
       service = described_class.new(api_builder:, user:)
       service.name_for(double)
 
-      expect(api_builder).to have_received(:new).with(user)
+      expect(api_builder).to have_received(:for_user).with(user)
     end
 
     it "makes a call to the Facebook API" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
       api = instance_double("FacebookGraphApi::UserApi", profile:)
-      api_builder = class_double("FacebookGraphApi::UserApi", new: api)
+      api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
       user = instance_double("LoginSession::User")
 
       service = described_class.new(api_builder:, user:)
@@ -32,7 +32,7 @@ RSpec.describe UserName do
     it "returns the name of the specified user" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
       api = instance_double("FacebookGraphApi::UserApi", profile:)
-      api_builder = class_double("FacebookGraphApi::UserApi", new: api)
+      api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
       user = instance_double("LoginSession::User")
 
       service = described_class.new(api_builder:, user:)
