@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resource :audit_log, only: %i[show]
+    resource :cache, only: %i[show destroy]
   end
 
   resource :audit_log, only: %i[show]
