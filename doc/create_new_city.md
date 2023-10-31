@@ -8,6 +8,7 @@
 - add additional config for the city in [`config/initializers/city.rb`](config/initializers/city.rb).
 - Use the city locally by adding a `CITY` variable to [`.env`](.env), and
   configure it on Heroku in the same way.
+- Add `ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN` to enable error logging to [Rollbar](https://rollbar.com/)
 
 ## Domain names
 
