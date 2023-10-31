@@ -69,7 +69,7 @@ module MapListingsHelper
   def mapinfo_swingclass_details(event)
     details = []
     details << new_event_label if event.new?
-    details << "(from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
+    details << "(from #{event.first_date.to_fs(:short_date)})" unless event.first_date.nil? || event.started?
     details << "(#{event.class_style})" if event.class_style.present?
     details << "- #{event.course_length} week courses" unless event.course_length.nil?
     details.join(" ")
