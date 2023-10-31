@@ -3,7 +3,7 @@
 - @audits.each do |audit|
   - editor = Editor.build(audit)
   %p
-    %span{ class: 'timestamp' }= audit.created_at
+    %span{ class: 'timestamp' }= audit.created_at.to_fs
     %span{ class: 'editor', title: editor.auth_id }= editor.name
     %span{ class: 'action'}= audit.action
     %span{ class: 'record'}= "#{audit.auditable_type}(#{audit.auditable_id})"

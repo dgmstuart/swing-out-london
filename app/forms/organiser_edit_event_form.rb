@@ -12,7 +12,7 @@ class OrganiserEditEventForm
           venue_id: event.venue_id,
           dates: date_printable_event.print_dates,
           cancellations: date_printable_event.print_cancellations,
-          last_date: event.last_date
+          last_date: event.last_date&.to_fs
         }
       )
     end
