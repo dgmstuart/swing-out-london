@@ -1,0 +1,18 @@
+<main class="page">
+  <h1>Cache</h1>
+  <p>
+    Clear all the application caches so that changes show up immediately instead of waiting for page caches to expire (1 hour for the main listings page, 12 hours for the info pages).
+  </p>
+  <p>
+    This is not necessarily required: some changes to events, venues and organisers should automatically clear the cache. Note that content may still be cached by users' browsers, in which case clearing the Rails cache will not make any difference.
+  </p>
+  <p>
+    After clearing the cache, certain pages will be rebuilt from scratch, which will result in slow loading times for those pages.
+  </p>
+  <p>
+    After clicking this button you will be redirected to the admin events list to rebuild that cache. Please also visit the main listings page and the map to "warm" the page cache and provide a good experience for our visitors.
+  </p>
+  <p>
+  </p>
+  <%= button_to "Clear", admin_cache_path, method: :delete, class: "button button-danger" %>
+</section>
