@@ -8,14 +8,22 @@ class ReturnToSession
   end
 
   def store!(path)
-    request.session[:return_to] = path
+    request.session[:return_to] = sanitise_path(path)
   end
 
   def path
-    request.session[:return_to]
+    sanitise_path(request.session[:return_to])
   end
 
   private
 
   attr_reader :request
+
+  def sanitise_path(path)
+    return if path.nil?
+
+    URI.parse(path).path
+  rescue URI::InvalidURIError
+    # just ignore it
+  end
 end
