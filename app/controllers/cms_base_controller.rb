@@ -16,11 +16,17 @@ class CmsBaseController < ActionController::Base # rubocop:disable Rails/Applica
 
     return true if @current_user.logged_in?
 
+    return_to_session.store!(request.original_fullpath)
+
     redirect_to login_path
   end
 
   def audit_user
     { "auth_id" => current_user.auth_id, "name" => current_user.name }
+  end
+
+  def return_to_session
+    ReturnToSession.new(request)
   end
 
   def login_session

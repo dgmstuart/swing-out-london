@@ -10,9 +10,10 @@ class SessionsController < ApplicationController
     user = AuthResponse.new(request.env)
     role = authorisation_for(user.id)
     if %i[editor admin].include?(role)
+      after_login_path = return_to_session.path || events_path
       reset_session # calling reset_session prevents "session fixation" attacks
       login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, role:)
-      redirect_to events_path
+      redirect_to after_login_path
     else
       flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
                     "If you've been invited to become an editor, please contact the main site admins and get them to add this ID"
@@ -48,5 +49,9 @@ class SessionsController < ApplicationController
 
   def login_session
     LoginSession.new(request)
+  end
+
+  def return_to_session
+    ReturnToSession.new(request)
   end
 end

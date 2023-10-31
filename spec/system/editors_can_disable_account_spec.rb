@@ -19,9 +19,6 @@ RSpec.describe "Editor Login Revocation" do
 
     click_button "Log in"
 
-    # TEMP - remove once we have implemented redirect:
-    visit "/account"
-
     VCR.use_cassette("disable_login") do
       click_button "Disable my login"
     end

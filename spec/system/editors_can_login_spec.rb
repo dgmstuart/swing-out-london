@@ -10,13 +10,13 @@ RSpec.describe "Editor Login" do
     stub_auth_hash(id: 12345678901234567, name: "Al Minns")
     stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [])
 
-    visit "/events"
+    visit "/events/new"
 
-    expect(page).not_to have_header("Events")
+    expect(page).not_to have_header("New event")
 
     click_button "Log in"
 
-    expect(page).to have_header("Events")
+    expect(page).to have_header("New event")
     expect(page).to have_content("Al Minns")
   end
 
@@ -60,6 +60,22 @@ RSpec.describe "Editor Login" do
 
       expect(page).to have_content("There was a problem with your login to Facebook")
       expect(page).not_to have_header("Events")
+    end
+  end
+
+  context "when starting login from /login (ie. no return_to page)" do
+    it "lands on the event list page after successful login" do
+      stub_auth_hash(id: 12345678901234567, name: "Al Minns")
+      stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [])
+
+      visit "/login"
+
+      expect(page).not_to have_header("Events")
+
+      click_button "Log in"
+
+      expect(page).to have_header("Events")
+      expect(page).to have_content("Al Minns")
     end
   end
 end
