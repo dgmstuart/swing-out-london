@@ -11,8 +11,8 @@ class ReturnToSession
     request.session[:return_to] = sanitise_path(path)
   end
 
-  def path
-    sanitise_path(request.session[:return_to])
+  def path(fallback:)
+    sanitise_path(request.session[:return_to]) || fallback
   end
 
   private

@@ -39,11 +39,11 @@ RSpec.describe ReturnToSession do
 
   describe "path" do
     context "when no return path is set" do
-      it "is nil" do
+      it "returns the fallback" do
         request = instance_double("ActionDispatch::Request", session: {})
 
         return_to_session = described_class.new(request)
-        expect(return_to_session.path).to be_nil
+        expect(return_to_session.path(fallback: "/home")).to eq "/home"
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe ReturnToSession do
         request = instance_double("ActionDispatch::Request", session: { return_to: "/path/to/return/to" })
 
         return_to_session = described_class.new(request)
-        expect(return_to_session.path).to eq "/path/to/return/to"
+        expect(return_to_session.path(fallback: double)).to eq "/path/to/return/to"
       end
 
       it "_only_ returns the path" do
@@ -60,14 +60,14 @@ RSpec.describe ReturnToSession do
         request = instance_double("ActionDispatch::Request", session: { return_to: sketchy_url })
 
         return_to_session = described_class.new(request)
-        expect(return_to_session.path).to eq "/path/to/return/to"
+        expect(return_to_session.path(fallback: double)).to eq "/path/to/return/to"
       end
 
       it "ignores things which don't look like paths" do
         request = instance_double("ActionDispatch::Request", session: { return_to: 1 })
 
         return_to_session = described_class.new(request)
-        expect(return_to_session.path).to be_nil
+        expect(return_to_session.path(fallback: "/home")).to eq "/home"
       end
     end
   end
