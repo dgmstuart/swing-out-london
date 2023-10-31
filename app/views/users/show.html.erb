@@ -1,4 +1,4 @@
-<section class="account">
+<main class="page account">
   <h1>Account</h1>
   <%= button_to 'Log out', logout_path, method: :delete, class: "button" %>
 
@@ -9,4 +9,4 @@
   <p>If you later decide to log in again, you'll be asked to grant <%= tc("site_name") %> those permissions again.</p>
 
   <%= button_to 'Disable my login', account_path, method: :delete, class: 'button button-danger' %>
-</section>
+</main>
