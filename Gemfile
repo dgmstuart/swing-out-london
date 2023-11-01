@@ -68,7 +68,6 @@ group :test do
 end
 
 group :production do
-  gem "connection_pool"
   gem "dalli"
   gem "oj" # For Rollbar
   gem "rack-canonical-host"

@@ -453,7 +453,6 @@ DEPENDENCIES
   capybara
   climate_control
   coffee-rails
-  connection_pool
   dalli
   dotenv-rails
   elabs_matchers
