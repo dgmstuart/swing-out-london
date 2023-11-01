@@ -33,14 +33,14 @@ module ListingsRowsHelper
   def date_header(date, today)
     url_options = { controller: :maps,
                     action: :socials,
-                    date: date.to_s(:db) }
+                    date: date.to_fs(:db) }
     label_prefix = date_header_label_prefix(date, today)
     link_to url_options, title: "Click to view this date's events on a map" do
       if label_prefix
         concat label_prefix
         concat " "
       end
-      concat date.to_s(:listing_date)
+      concat date.to_fs(:listing_date)
     end
   end
 

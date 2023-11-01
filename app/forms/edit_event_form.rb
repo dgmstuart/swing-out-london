@@ -45,8 +45,8 @@ class EditEventForm
           day: event.day,
           dates: date_printable_event.print_dates,
           cancellations: date_printable_event.print_cancellations,
-          first_date: event.first_date,
-          last_date: event.last_date
+          first_date: event.first_date&.to_fs,
+          last_date: event.last_date&.to_fs
         }
       )
     end

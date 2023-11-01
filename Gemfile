@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby "3.2.1"
 
-gem "rails", "~> 6.1.7", ">= 6.1.7.5"
+gem "rails", "~> 7.0.8"
 
 gem "actionpack-action_caching" # to support pre rails-4 style action caching
 gem "audited"
@@ -29,7 +29,7 @@ gem "redcarpet" # Markdown
 gem "rollbar"
 gem "rss"
 gem "sassc-rails"
-gem "sprockets"
+gem "sprockets-rails"
 gem "stimulus-rails"
 gem "strip_attributes"
 gem "test-unit"
