@@ -464,7 +464,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simplecov
-  sprockets
+  sprockets-rails
   stimulus-rails
   strip_attributes
   test-unit
