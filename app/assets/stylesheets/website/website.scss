@@ -152,7 +152,7 @@ address,
 // bigger than the page... */
 @media only screen and (min-width: 900px) {
   body {
-    background: transparent url(image_path("flock_02_by_ZEBiii.jpg"));
+    background: transparent url("flock_02_by_ZEBiii.jpg");
 
     #page {
       width: 900px;
