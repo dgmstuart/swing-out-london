@@ -41,6 +41,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build Javascript
         run: yarn build
+      - name: Compile CSS
+        run: bin/rails dartsass:build
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Run tests and linters

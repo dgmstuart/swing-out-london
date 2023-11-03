@@ -1,15 +1,12 @@
-/*
- *= require shared/reset
- *= require shared/base
- *= require shared/buttons
- *= require shared/flash
- *= require cms/admin_bar
- *= require cms/forms
- *= require cms/account
- *= require accessible-autocomplete/dist/accessible-autocomplete.min.css
- *= require cms/accessible-autocomplete-overrides
- *= require_self
- */
+@import "shared/reset";
+@import "shared/base";
+@import "shared/buttons";
+@import "shared/flash";
+@import "cms/admin_bar";
+@import "cms/forms";
+@import "cms/account";
+@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
+@import "cms/accessible-autocomplete-overrides";
 @import "shared/colours";
 
 body {
