@@ -1,11 +1,25 @@
-%h1 Audit Log
+<h1>Audit Log</h1>
 
-- @audits.each do |audit|
-  - editor = Editor.build(audit)
-  %p
-    %span{ class: 'timestamp' }= audit.created_at.to_fs
-    %span{ class: 'editor', title: editor.auth_id }= editor.name
-    %span{ class: 'action'}= audit.action
-    %span{ class: 'record'}= "#{audit.auditable_type}(#{audit.auditable_id})"
-    %span{ class: 'changes'}= audit.audited_changes.to_json
-    %span{ class: 'changes'}= audit.comment
+<% @audits.each do |audit| %>
+  <% editor = Editor.build(audit) %>
+  <p>
+    <span class="timestamp">
+      <%= audit.created_at.to_fs %>
+    </span>
+    <span class="editor" title="<%= editor.auth_id %>">
+      <%= editor.name %>
+    </span>
+    <span class="action">
+      <%= audit.action %>
+    </span>
+    <span class="record">
+      <%= "#{audit.auditable_type}(#{audit.auditable_id})" %>
+    </span>
+    <span class="changes">
+      <%= audit.audited_changes.to_json %>
+    </span>
+    <span class="changes">
+      <%= audit.comment %>
+    </span>
+  </p>
+<% end %>
