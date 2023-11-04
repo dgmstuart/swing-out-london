@@ -9,7 +9,7 @@
   }
 
   // AVERAGE VIEWING SIZE
-  @media only screen and (min-width: 481px) {
+  @media only screen and (width >= 481px) {
     margin-left: 70px;
     margin-right: 70px;
   }

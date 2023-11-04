@@ -166,7 +166,7 @@ table {
 }
 
 // MOBILE ONLY
-@media only screen and (max-width: 481px) {
+@media only screen and (width <= 481px) {
   table {
     &.full-width {
       font-size: 0.8em;
@@ -180,7 +180,7 @@ table {
 }
 
 // AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {
+@media only screen and (width >= 481px) {
   .content,
   .sidebar,
   #colophon {
@@ -205,7 +205,7 @@ table {
 }
 
 // TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .content {
     width: 580px;
     margin-left: auto;
@@ -221,7 +221,7 @@ table {
 }
 
 // Page
-@media only screen and (min-width: 900px) {
+@media only screen and (width >= 900px) {
   .content {
     width: 470px;
     margin-left: 50px;
@@ -249,12 +249,12 @@ table {
 }
 
 // DESKTOP */
-@media only screen and (min-width: 992px) {
+@media only screen and (width >= 992px) {
   // placeholder
 }
 
 // LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
+@media only screen and (width >= 1240px) {
   // placeholder
 }
 

@@ -29,7 +29,7 @@ main {
 }
 
 // MOBILE ONLY
-@media only screen and (max-width: 767px) {
+@media only screen and (width <= 767px) {
   #classes h2 {
     padding-top: 50px;
     margin: 0 30px;
@@ -43,7 +43,7 @@ main {
 }
 
 // TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   body.listings main {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -300,8 +300,7 @@ section.listings {
 .share_buttons {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 10px;
-  column-gap: 15px;
+  gap: 10px 15px;
   justify-content: center;
 }
 

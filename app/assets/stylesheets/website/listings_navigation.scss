@@ -21,7 +21,7 @@
 }
 
 // DESKTOP
-@media only screen and (min-width: 900px) {
+@media only screen and (width >= 900px) {
   #note,
   #soldn_on_the_web {
     width: 370px;
