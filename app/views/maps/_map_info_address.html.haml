@@ -1,7 +1,0 @@
-.venue_info.vcard
-  %h3.url.fn= link_to marker_info.venue_name, marker_info.venue_url
-  .adr
-    - marker_info.address_lines.each do |address_line|
-      %p= address_line
-    %p.postal-code
-      = marker_info.postcode

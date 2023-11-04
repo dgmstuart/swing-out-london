@@ -1,0 +1,72 @@
+<%= render partial: 'shared/last_updated_by', locals: { last_update: @last_update } %>
+
+<% if @warning %>
+  <p class="warning-message">
+    <strong>Warning:</strong>
+    <%= @warning %>
+  </p>
+<% end %>
+
+<ol class="show">
+  <li>
+    <span>Title:</span>
+    <%= @event.title %>
+  </li>
+  <li>
+    <span>Venue:</span>
+    <%= venue_link(@event) %>
+  </li>
+  <li>
+    <span>Class Organiser:</span>
+    <%= organiser_link(@event.class_organiser) %>
+  </li>
+  <li>
+    <span>Social Organiser:</span>
+    <%= organiser_link(@event.social_organiser) %>
+  </li>
+  <li>
+    <span>Event type:</span>
+    <%= @event.event_type %>
+  </li>
+  <% unless @event.course_length.nil? %>
+    <li>
+      <span>Course_length:</span>
+      <%= @event.course_length %>
+      weeks
+    </li>
+  <% end %>
+  <li>
+    <span>Class style:</span>
+    <%= @event.class_style.presence || t('forms.events.default_class_style') %>
+  </li>
+  <li>
+    <span>Frequency:</span>
+    <%= @event.frequency %>
+  </li>
+  <% unless @event.weekly? %>
+    <li>
+      <span>Dates:</span>
+      <%= @event.dates %>
+    </li>
+  <% end %>
+  <li>
+    <span>Cancelled:</span>
+    <%= @event.cancellations %>
+  </li>
+  <li>
+    <span>First date:</span>
+    <%= @event.first_date %>
+  </li>
+  <li>
+    <span>Last date:</span>
+    <%= @event.last_date %>
+  </li>
+  <li>
+    <span>Url:</span>
+    <%= link_to @event.url, @event.url %>
+  </li>
+</ol>
+
+<div class="actions">
+  <%= link_to 'Edit', edit_event_path(@event), class: "button" %>
+</div>
