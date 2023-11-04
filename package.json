@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "stylelint": "stylelint app/assets/stylesheets",
     "style-fix": "stylelint --fix app/assets/stylesheets",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch"
