@@ -54,7 +54,7 @@ RSpec.describe "Editors can create events", :js do
       expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
     end
 
-    it "with missing data" do
+    it "with invalid data" do
       stub_login(id: 12345678901234567, name: "Al Minns")
       create(:venue, name: "The 100 Club")
 
@@ -71,20 +71,28 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Frequency can't be blank")
         .and have_content("Event type can't be blank")
 
+      fill_in "Url", with: "http://www.lsds.co.uk/stompin"
       autocomplete_select "The 100 Club", from: "Venue"
       choose "Social dance"
 
       fill_in "Title", with: "Stompin'"
 
-      choose "Weekly"
-      select "Tuesday", from: "Day"
-      fill_in "Url", with: "http://www.lsds.co.uk/stompin"
+      choose "Monthly"
+      fill_in "Upcoming dates", with: "12//20012, 31/04/2013"
+
+      click_button "Create"
+
+      expect(page).to have_content("1 error prevented this record from being saved")
+        .and have_content('Dates contained some invalid dates: "12//20012", "31/04/2013"')
+
+      fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
 
       click_button "Create"
 
       expect(page).to have_content("Venue:\nThe 100 Club")
         .and have_content("Social")
-        .and have_content("Frequency:\nWeekly on Tuesdays")
+        .and have_content("Frequency:\nMonthly or occasionally")
+        .and have_content("Dates:\n12/12/2012, 30/04/2013")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
 
