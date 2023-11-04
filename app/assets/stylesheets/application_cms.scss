@@ -58,7 +58,7 @@ p.actions_panel {
 /////////////////////////////////////////////
 
 // SMALLER THAN DESKTOP
-@media only screen and (max-width: 900px) {
+@media only screen and (width <= 900px) {
   table {
     td.actions.last {
       display: none;
@@ -71,7 +71,7 @@ p.actions_panel {
 // }
 
 // SMALL
-@media only screen and (max-width: 480px) {
+@media only screen and (width <= 480px) {
   table {
     width: 100%;
     min-width: 1200px;

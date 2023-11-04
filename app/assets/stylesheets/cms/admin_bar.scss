@@ -30,7 +30,7 @@
 }
 
 // Links stop wrapping above this
-@media only screen and (min-width: 845px) {
+@media only screen and (width >= 845px) {
   #admin_bar {
     z-index: 100;
     position: sticky;

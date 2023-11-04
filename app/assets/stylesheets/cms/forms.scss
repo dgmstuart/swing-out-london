@@ -80,7 +80,7 @@ form.new_venue,
 form.edit_venue {
   margin: 0 10px;
 
-  @media only screen and (min-width: 481px) {
+  @media only screen and (width >= 481px) {
     margin: 0 40px;
   }
 

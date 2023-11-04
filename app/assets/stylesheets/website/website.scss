@@ -5,7 +5,7 @@
 /////////////////////////////////////////////
 
 // MOBILE ONLY
-@media only screen and (max-width: 481px) {
+@media only screen and (width <= 481px) {
   #header {
     margin: 0 20px;
   }
@@ -59,7 +59,7 @@ address,
 }
 
 // AVERAGE VIEWING SIZE
-@media only screen and (min-width: 481px) {
+@media only screen and (width >= 481px) {
   #header {
     margin: 0 60px;
   }
@@ -92,7 +92,7 @@ address,
 }
 
 // TABLET & SMALLER LAPTOPS */
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   #header {
     padding-bottom: 30px;
   }
@@ -150,7 +150,7 @@ address,
 }
 
 // bigger than the page... */
-@media only screen and (min-width: 900px) {
+@media only screen and (width >= 900px) {
   body {
     background: transparent url("flock_02_by_ZEBiii.jpg");
 
@@ -161,12 +161,12 @@ address,
 }
 
 // DESKTOP */
-@media only screen and (min-width: 992px) {
+@media only screen and (width >= 992px) {
   // placeholder
 }
 
 // LARGE VIEWING SIZE
-@media only screen and (min-width: 1240px) {
+@media only screen and (width >= 1240px) {
   // placeholder
 }
 

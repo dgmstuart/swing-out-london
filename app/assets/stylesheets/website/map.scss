@@ -154,8 +154,7 @@ body.socials {
   .listings {
     font-size: 14px;
     position: absolute;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden auto;
     top: 170px;
     bottom: 0;
     left: 0;
@@ -170,7 +169,7 @@ body.socials {
   }
 
   // SMALL ONLY
-  @media only screen and (max-width: 767px) {
+  @media only screen and (width <= 767px) {
     #map {
       margin-left: 164px;
     }
@@ -199,7 +198,7 @@ body.socials {
   }
 
   // TABLET & SMALLER LAPTOPS
-  @media only screen and (min-width: 768px) {
+  @media only screen and (width >= 768px) {
     #map {
       margin-left: 220px;
     }
@@ -218,7 +217,7 @@ body.socials {
   }
 
   // DESKTOP
-  @media only screen and (min-width: 960px) {
+  @media only screen and (width >= 960px) {
     #map {
       margin-left: 320px;
     }

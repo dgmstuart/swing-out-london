@@ -52,7 +52,7 @@
   }
 }
 
-@media only screen and (min-width: 481px) {
+@media only screen and (width >= 481px) {
   a.button {
     display: inline-block;
   }
