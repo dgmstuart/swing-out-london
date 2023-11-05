@@ -26,8 +26,8 @@ RSpec.describe EditEventForm do
     it_behaves_like "validates weekly", :edit_event_form
     it_behaves_like "validates event with dates (form)", :edit_event_form
     it_behaves_like "validates course length", :edit_event_form
-    it_behaves_like "validates date string", :dates, :edit_event_form
-    it_behaves_like "validates date string", :cancellations, :edit_event_form
+    it_behaves_like "validates date string", :dates, :edit_event_form, { allow_past: true }
+    it_behaves_like "validates date string", :cancellations, :edit_event_form, { allow_past: true }
     it_behaves_like "validates url", :edit_event_form
 
     it { is_expected.to validate_presence_of(:frequency) }

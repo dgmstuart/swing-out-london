@@ -4,6 +4,8 @@ require "rails_helper"
 
 RSpec.describe "Adding a new event", :js do
   it "with a social and a dance class" do
+    Timecop.freeze("01/01/1937T12:00")
+
     stub_login
     visit "/events"
 
@@ -22,6 +24,8 @@ RSpec.describe "Adding a new event", :js do
 
     click_button "Create"
 
+    expect(page).not_to have_content("error")
+
     # SOCIAL ORGANISER
     click_link "New Organiser"
 
@@ -32,6 +36,8 @@ RSpec.describe "Adding a new event", :js do
 
     click_button "Create"
 
+    expect(page).not_to have_content("error")
+
     # CLASS ORGANISER
     click_link "New Organiser"
 
@@ -40,9 +46,11 @@ RSpec.describe "Adding a new event", :js do
 
     click_button "Create"
 
-    click_link "New Event"
+    expect(page).not_to have_content("error")
 
     # EVENT WITH CANCELLED DATE
+    click_link "New Event"
+
     fill_in "Url", with: "https://www.savoyballroom.com/stompin"
     autocomplete_select "The Savoy Ballroom", from: "Venue"
     choose "Social dance"
@@ -64,6 +72,8 @@ RSpec.describe "Adding a new event", :js do
 
     click_button "Create"
 
+    expect(page).not_to have_content("error")
+
     # RECENTLY STARTED EVENT (NEW!)
     click_link "New Event"
 
@@ -79,11 +89,13 @@ RSpec.describe "Adding a new event", :js do
 
     click_button "Create"
 
-    Timecop.freeze("01/01/1937T12:00") do
-      click_link "Swing Out London"
-    end
+    expect(page).not_to have_content("error")
+
+    click_link "Swing Out London"
 
     venue_id = Venue.first.id
+
+    expect(page).not_to have_content("error prevented this record from being saved")
 
     within "#social_dances" do
       rows = page.all(".date_row")

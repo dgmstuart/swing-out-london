@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
+require "active_support/testing/time_helpers"
+
 RSpec.shared_examples "validates event with dates (form)" do |model_name|
+  include ActiveSupport::Testing::TimeHelpers
+
+  before { travel_to Date.parse("2010-01-01") }
+
   it "is invalid if it's weekly and has dates" do
     model = build(model_name, frequency: 1, day: 5, dates: "12/10/2010")
     model.valid?
