@@ -61,6 +61,12 @@ RSpec.shared_examples "validates date string" do |attribute, model_name, options
     end
   end
 
+  it "is invalid if dates are earlier than the start of SOLDN" do
+    model = build(model_name, dates: "15/08/2010")
+    model.valid?
+    expect(model.errors.messages).to eq(dates: ["contained some dates in the past: 15/08/2010"])
+  end
+
   it "is invalid if dates are too far in the future" do
     model = build(model_name, dates: "02/06/2014")
     model.valid?

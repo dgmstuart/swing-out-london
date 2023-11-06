@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DatesStringValidator < ActiveModel::EachValidator
+  SOLDN_START_DATE = Date.parse("2010-08-16")
+
   def validate_each(record, attribute, value)
     return if value.blank?
 
@@ -31,11 +33,19 @@ class DatesStringValidator < ActiveModel::EachValidator
     date_strings.each_with_object({ invalid: [], past: [], too_far_future: [] }) do |date_string, problems|
       date = parse_date(date_string)
       if date
-        problems[:past] << date_string if !options[:allow_past] && (date < Date.current)
+        problems[:past] << date_string if date < past_cutoff
         problems[:too_far_future] << date_string if date > 2.years.from_now
       else
         problems[:invalid] << %("#{date_string}")
       end
+    end
+  end
+
+  def past_cutoff
+    if options[:allow_past]
+      SOLDN_START_DATE
+    else
+      Date.current
     end
   end
 
