@@ -1,4 +1,4 @@
-@import "borders";
+@use "borders";
 
 .navigation {
   text-align: center;
@@ -16,18 +16,18 @@
       // added here so we can take it away when we apply the border
       &:hover {
         padding: 8px;
-        border: $nav-border;
+        border: borders.$nav-border;
       }
     }
 
     .current {
       padding: 8px;
-      border: $double-border;
+      border: borders.$double-border;
     }
 
     // We allow the current link to be a link on the map:
     a.current:hover {
-      border: $thick-border;
+      border: borders.$thick-border;
     }
   }
 }

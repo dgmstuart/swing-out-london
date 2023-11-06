@@ -1,5 +1,5 @@
-@import "../shared/colours";
-@import "borders";
+@use "../shared/colours";
+@use "borders";
 
 // LAYOUT
 /////////////////////////////////////////////
@@ -79,7 +79,7 @@ address,
   #footer_nav {
     li {
       display: inline;
-      border-left: $thin-border;
+      border-left: borders.$thin-border;
       margin: 0 0.5em 0 0;
       padding: 0 0 0 1em;
 
@@ -100,7 +100,7 @@ address,
   #main_nav {
     li {
       display: inline;
-      border-left: $basic-border;
+      border-left: borders.$basic-border;
       margin: 0 0.5em 0 0;
       padding: 0 0 0 1em;
 
@@ -173,7 +173,7 @@ address,
 // Header
 /////////////////////////////////////////////
 #header {
-  border-bottom: $basic-border;
+  border-bottom: borders.$basic-border;
 }
 
 #title {
@@ -205,14 +205,14 @@ address,
 // Footer
 /////////////////////////////////////////////
 #footer {
-  border-top: $basic-border;
+  border-top: borders.$basic-border;
   padding: 30px 20px;
   clear: both;
 
   p,
   address {
     a {
-      color: $link-colour;
+      color: colours.$link-colour;
     }
   }
 }
@@ -222,19 +222,19 @@ address,
   letter-spacing: 1px;
 
   a:hover {
-    border-bottom: $thin-border;
+    border-bottom: borders.$thin-border;
   }
 
   .current {
     padding: 5px;
-    border: $thin-border;
+    border: borders.$thin-border;
   }
 }
 
 // Banner
 /////////////////////////////////////////////
 .banner {
-  background: $banner-colour;
+  background: colours.$banner-colour;
   text-align: center;
 
   h3 {
@@ -245,5 +245,5 @@ address,
     margin: 0;
     text-align: center;
   }
-  a { color: $link-colour; }
+  a { color: colours.$link-colour; }
 }

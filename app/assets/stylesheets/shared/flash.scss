@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours";
 
 .alert,
 .notice {
@@ -7,11 +7,11 @@
 }
 
 .alert {
-  background-color: $alert-colour;
+  background-color: colours.$alert-colour;
   color: white;
 }
 
 .notice {
-  background-color: $notice-colour;
+  background-color: colours.$notice-colour;
   color: white;
 }

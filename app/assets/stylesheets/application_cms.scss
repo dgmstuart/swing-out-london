@@ -1,16 +1,17 @@
-@import "shared/reset";
-@import "shared/base";
-@import "shared/buttons";
-@import "shared/flash";
-@import "cms/admin_bar";
-@import "cms/forms";
-@import "cms/account";
+@use "sass:meta";
+@use "shared/reset";
+@use "shared/colours";
+@use "shared/base";
+@use "shared/buttons";
+@use "shared/flash";
+@use "cms/admin_bar";
+@use "cms/forms";
+@use "cms/account";
 @import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
-@import "cms/accessible-autocomplete-overrides";
-@import "shared/colours";
+@include meta.load-css("cms/accessible-autocomplete-overrides");
 
 body {
-  background-color: $background-colour;
+  background-color: colours.$background-colour;
 }
 
 main.page {
@@ -227,6 +228,6 @@ ol.show li ul {
   max-width: 550px;
 
   &.success {
-    background-color: $success-colour;
+    background-color: colours.$success-colour;
   }
 }

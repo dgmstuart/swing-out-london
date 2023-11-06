@@ -1,8 +1,8 @@
-@import "../shared/colours";
+@use "../shared/colours";
 
-$thin-border: 1px solid $text-colour;
-$nav-border: 2px solid $text-colour;
-$basic-border: 3px solid $text-colour;
-$thick-border: 6px solid $text-colour;
-$double-border: 6px double $text-colour;
-$dashed-border: 1px dashed $text-colour;
+$thin-border: 1px solid colours.$text-colour;
+$nav-border: 2px solid colours.$text-colour;
+$basic-border: 3px solid colours.$text-colour;
+$thick-border: 6px solid colours.$text-colour;
+$double-border: 6px double colours.$text-colour;
+$dashed-border: 1px dashed colours.$text-colour;

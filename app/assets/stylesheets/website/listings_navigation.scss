@@ -1,5 +1,5 @@
-@import "../shared/colours";
-@import "borders";
+@use "../shared/colours";
+@use "borders";
 
 // LAYOUT
 /////////////////////////////////////////////
@@ -73,12 +73,12 @@
 #soldn_on_the_web,
 #note {
   a {
-    color: $link-colour;
+    color: colours.$link-colour;
   }
 }
 
 #advert {
-  border: $double-border;
+  border: borders.$double-border;
   margin-bottom: 1rem;
   text-align: center;
   text-transform: uppercase;

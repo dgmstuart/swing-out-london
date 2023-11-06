@@ -1,5 +1,5 @@
-@import "../shared/colours";
-@import "borders";
+@use "../shared/colours";
+@use "borders";
 
 // LAYOUT
 /////////////////////////////////////////////
@@ -17,14 +17,14 @@ table.full-width {
 .sidebar {
   margin: 0 20px 30px;
   padding: 20px;
-  border: $double-border;
+  border: borders.$double-border;
 
   &:first-of-type {
     margin-top: 35px;
   }
 
   a {
-    color: $link-colour;
+    color: colours.$link-colour;
   }
 
   h3 {
@@ -75,7 +75,7 @@ table.full-width {
   }
 
   a {
-    color: $link-colour;
+    color: colours.$link-colour;
   }
 
   em {
@@ -123,7 +123,7 @@ table {
 
     &.row_title {
       font-size: 1.1em;
-      border-right: $thin-border;
+      border-right: borders.$thin-border;
     }
   }
 
@@ -135,7 +135,7 @@ table {
     padding: 10px 15px 18px;
     font-size: 1.3em;
     text-align: center;
-    border-bottom: $thin-border;
+    border-bottom: borders.$thin-border;
   }
 
   &#music_policy {
@@ -152,7 +152,7 @@ table {
     }
 
     tr:not(:first-child) {
-      border-top: $dashed-border;
+      border-top: borders.$dashed-border;
     }
   }
 
@@ -261,7 +261,7 @@ table {
 #colophon {
   clear: both;
   padding: 20px;
-  border: $double-border;
+  border: borders.$double-border;
   text-align: justify;
 
   h2 {
@@ -273,7 +273,7 @@ table {
   }
 
   a {
-    color: $link-colour;
+    color: colours.$link-colour;
   }
 
   li {

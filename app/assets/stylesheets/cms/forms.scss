@@ -1,4 +1,4 @@
-@import "../shared/colours";
+@use "../shared/colours";
 
 form {
   .form-group {
@@ -22,7 +22,7 @@ form {
   .help {
     font-weight: normal;
     font-style: italic;
-    color: $lowlight-colour;
+    color: colours.$lowlight-colour;
   }
 
   p.help {
@@ -37,7 +37,7 @@ form {
     text-transform: uppercase;
     font-size: 0.8em;
     color: #fee6b8;
-    background-color: $text-colour;
+    background-color: colours.$text-colour;
     font-style: normal;
   }
 
@@ -64,7 +64,7 @@ div.actions {
   clear: left;
 
   .inactive {
-    color: $lowlight-colour;
+    color: colours.$lowlight-colour;
     font-style: italic;
   }
 
@@ -148,7 +148,7 @@ form.edit_venue {
 
 #organiser_link_url {
   width: 40em;
-  border: solid $text-colour;
+  border: solid colours.$text-colour;
   border-right: none;
   border-radius: 5px 0 0 5px;
   background: inherit;
@@ -158,18 +158,18 @@ form.edit_venue {
 
 .button-on-input {
   display: inline-block;
-  background-color: $button-colour;
+  background-color: colours.$button-colour;
   color: white;
   border-radius: 0 5px 5px 0;
-  border: solid $text-colour;
+  border: solid colours.$text-colour;
   padding: 5px 10px;
   font-size: inherit;
   line-height: normal;
 
   &:hover {
-    color: $text-colour;
-    background-color: $button-active-colour;
-    border: solid $text-colour;
+    color: colours.$text-colour;
+    background-color: colours.$button-active-colour;
+    border: solid colours.$text-colour;
   }
 }
 
