@@ -61,6 +61,9 @@ class EditEventForm
   validates :frequency, presence: true, inclusion: { in: [0, 1], allow_blank: true }
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_blank: true }
 
+  validates :dates, dates_string: { allow_past: true }
+  validates :cancellations, dates_string: { allow_past: true }
+
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
   validates_with Form::ValidEventWithDates
