@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "active_support"
 require "active_support/core_ext/module/delegation"
 require "active_support/core_ext/string/conversions"
 require "app/presenters/social_listing"

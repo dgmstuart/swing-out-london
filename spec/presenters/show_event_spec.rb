@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "active_support/core_ext/module/delegation"
 require "spec/support/time_formats_helper"
+require "active_support/core_ext/module/delegation"
 require "app/presenters/show_event"
 require "app/presenters/date_printer"
 

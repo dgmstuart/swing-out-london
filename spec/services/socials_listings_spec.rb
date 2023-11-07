@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "app/services/socials_listings"
+require "active_support"
 require "active_support/core_ext/string/conversions"
 
 RSpec.describe SocialsListings do

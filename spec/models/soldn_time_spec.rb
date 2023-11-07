@@ -2,10 +2,10 @@
 
 require "spec_helper"
 require "app/models/soldn_time"
+require "spec/support/time_formats_helper"
 require "active_support/testing/time_helpers"
 require "active_support/core_ext/string/zones"
 require "active_support/core_ext/numeric/time"
-require "spec/support/time_formats_helper"
 
 RSpec.describe SOLDNTime, :time do
   include ActiveSupport::Testing::TimeHelpers
