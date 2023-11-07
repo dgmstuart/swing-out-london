@@ -2,7 +2,6 @@
 
 require "spec_helper"
 require "app/models/return_to_session"
-# require "active_support/core_ext/object/blank"
 
 RSpec.describe ReturnToSession do
   describe "store!" do

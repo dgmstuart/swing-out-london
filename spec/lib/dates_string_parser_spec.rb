@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "lib/dates_string_parser"
+require "active_support"
 require "active_support/core_ext/string/conversions"
 
 RSpec.describe DatesStringParser do

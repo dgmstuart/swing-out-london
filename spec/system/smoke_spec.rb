@@ -3,9 +3,11 @@
 require "rails_helper"
 
 RSpec.describe "Adding a new event", :js do
-  it "with a social and a dance class" do
-    Timecop.freeze("01/01/1937T12:00")
+  around do |example|
+    Timecop.freeze("01/01/1937T12:00") { example.run }
+  end
 
+  it "with a social and a dance class" do
     stub_login
     visit "/events"
 

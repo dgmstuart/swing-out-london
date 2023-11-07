@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "app/models/login_session"
+require "active_support"
 require "active_support/core_ext/object/blank"
 
 RSpec.describe LoginSession do

@@ -4,8 +4,8 @@ require "spec_helper"
 require "app/presenters/date_printable_event"
 require "app/presenters/date_printer"
 require "app/services/event_params_commenter"
-require "active_support/core_ext/string/conversions"
 require "spec/support/time_formats_helper"
+require "active_support/core_ext/string/conversions"
 
 RSpec.describe EventParamsCommenter do
   describe "#comment" do
