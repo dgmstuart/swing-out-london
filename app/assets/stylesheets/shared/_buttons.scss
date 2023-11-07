@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours";
 
 .button {
   display: block;
@@ -8,23 +8,23 @@
   text-decoration: none;
   border: none;
   color: white;
-  background-color: $button-colour;
+  background-color: colours.$button-colour;
   font-size: 18px;
   text-align: center;
   transition: all 0.2s;
 
   &.facebook-button {
     color: white;
-    background-color: $facebook-blue;
+    background-color: colours.$facebook-blue;
   }
 
   &.button-danger {
-    background-color: $button-danger-colour;
+    background-color: colours.$button-danger-colour;
   }
 
   &.button-secondary {
-    color: $text-colour;
-    background-color: $button-secondary-colour;
+    color: colours.$text-colour;
+    background-color: colours.$button-secondary-colour;
   }
 }
 
@@ -34,21 +34,21 @@
 }
 
 .button:hover {
-  color: $text-colour;
-  background-color: $button-active-colour;
+  color: colours.$text-colour;
+  background-color: colours.$button-active-colour;
   border-bottom: none;
 
   &.facebook-button {
     color: black;
-    background-color: $facebook-blue-highlight;
+    background-color: colours.$facebook-blue-highlight;
   }
 
   &.button-danger {
-    background-color: $button-danger-active-colour;
+    background-color: colours.$button-danger-active-colour;
   }
 
   &.button-secondary {
-    background-color: $button-secondary-active-colour;
+    background-color: colours.$button-secondary-active-colour;
   }
 }
 

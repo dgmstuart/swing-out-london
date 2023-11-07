@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours";
 
 $body_font_size: 14px;
 
@@ -6,11 +6,11 @@ body {
   // Disable automatic font zooming:
   text-size-adjust: 100%;
   font-family: Futura, Jost, "Tw Cen MT", "Trebuchet MS", sans-serif;
-  color: $text-colour;
+  color: colours.$text-colour;
   font-size: $body_font_size;
 
   #page {
-    background: $background-colour none;
+    background: colours.$background-colour none;
     margin: auto;
   }
 

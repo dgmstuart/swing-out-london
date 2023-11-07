@@ -1,5 +1,5 @@
-@import "../shared/colours";
-@import "borders";
+@use "../shared/colours";
+@use "borders";
 
 $listing_font_size: 15px;
 $class_day_font_size: 17px;
@@ -33,7 +33,7 @@ main {
   #classes h2 {
     padding-top: 50px;
     margin: 0 30px;
-    border-top: $basic-border;
+    border-top: borders.$basic-border;
   }
 
   .note {
@@ -69,7 +69,7 @@ main {
 
   .daylist {
     padding: 0 28px 0 30px;
-    border-right: $basic-border; // 3px wide
+    border-right: borders.$basic-border; // 3px wide
   }
 
   .datelist {
@@ -92,7 +92,7 @@ main {
   font-style: italic;
 
   strong {
-    color: $highlight-colour;
+    color: colours.$highlight-colour;
   }
 }
 
@@ -135,7 +135,7 @@ main {
   font-style: italic;
   padding-left: 1em;
   margin-right: 1.5em;
-  color: $highlight-colour;
+  color: colours.$highlight-colour;
 }
 
 .datelist {
@@ -195,7 +195,7 @@ section.listings {
   .info {
     font-size: $small_font_size;
     font-style: italic;
-    color: $lowlight-colour;
+    color: colours.$lowlight-colour;
     line-height: 0;
   }
 
@@ -215,17 +215,17 @@ section.listings {
   }
 
   .cancelled_label {
-    color: $background-colour;
-    background-color: $highlight-colour;
+    color: colours.$background-colour;
+    background-color: colours.$highlight-colour;
   }
 
   .new_label {
-    color: $background-colour;
-    background-color: $text-colour;
+    color: colours.$background-colour;
+    background-color: colours.$text-colour;
   }
 
   .postcode {
-    border: $thin-border;
+    border: borders.$thin-border;
     display: block;
     float: left;
     width: 3.5em;
@@ -241,23 +241,23 @@ section.listings {
   }
 
   .postcode:hover {
-    border: 1px solid $link-colour;
-    background-color: $link-colour;
-    color: $background-colour;
+    border: 1px solid colours.$link-colour;
+    background-color: colours.$link-colour;
+    color: colours.$background-colour;
   }
 }
 
 // TODAY AND TOMORROW
 /////////////////////////////////////////////
 .today {
-  border: 3px dashed $text-colour;
+  border: 3px dashed colours.$text-colour;
 
   li {
     padding: 0;
   }
 
   &:target {
-    border-color: $highlight-colour;
+    border-color: colours.$highlight-colour;
     transition: all 0.8s ease-in;
   }
 }
@@ -289,7 +289,7 @@ section.listings {
 .donation {
   padding: 10px 15px;
   background-color: #fff8ea;
-  border: $double-border;
+  border: borders.$double-border;
   text-align: center;
 
   p {
@@ -314,16 +314,16 @@ section.listings {
 }
 
 .facebook {
-  background-color: $facebook-blue;
+  background-color: colours.$facebook-blue;
   color: white;
 }
 
 .twitter {
-  background-color: $twitter-blue;
-  color: $text-colour;
+  background-color: colours.$twitter-blue;
+  color: colours.$text-colour;
 }
 
 .donate_button {
-  background-color: $highlight-colour;
+  background-color: colours.$highlight-colour;
   color: white;
 }
