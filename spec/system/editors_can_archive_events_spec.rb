@@ -14,7 +14,7 @@ RSpec.describe "Editors can archive events" do
       click_link "Archive", match: :first
     end
 
-    click_link "Show", match: :first
+    click_show
 
     expect(page).to have_content("Last date: Sunday 2nd January")
   end
@@ -29,7 +29,7 @@ RSpec.describe "Editors can archive events" do
       click_link "Archive", match: :first
     end
 
-    click_link "Show", match: :first
+    click_show
 
     expect(page).to have_content("Last date: Sunday 2nd January")
   end
@@ -42,8 +42,14 @@ RSpec.describe "Editors can archive events" do
 
     click_link "Archive", match: :first
 
-    click_link "Show", match: :first
+    click_show
 
     expect(page).to have_content("Last date: Monday 1st January") # earliest possible Date
+  end
+
+  def click_show
+    within ".actions.last", match: :first do
+      click_link "Show"
+    end
   end
 end
