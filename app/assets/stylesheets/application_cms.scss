@@ -7,8 +7,8 @@
 @use "cms/admin_bar";
 @use "cms/forms";
 @use "cms/account";
-@import "accessible-autocomplete/dist/accessible-autocomplete.min";
-@include meta.load-css("cms/accessible-autocomplete-overrides");
+@use "accessible-autocomplete/dist/accessible-autocomplete.min.css";
+@use "cms/accessible-autocomplete-overrides";
 
 body {
   background-color: colours.$background-colour;
