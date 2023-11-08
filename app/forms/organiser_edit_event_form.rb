@@ -28,6 +28,8 @@ class OrganiserEditEventForm
   end
 
   validates :venue_id, presence: true
+  validates :dates, dates_string: { allow_past: true }
+  validates :cancellations, dates_string: { allow_past: true }
 
   def to_h
     attributes.merge(
