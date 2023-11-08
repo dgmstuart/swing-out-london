@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "lib/date_string_parser"
 require "lib/dates_string_parser"
 require "active_support"
 require "active_support/core_ext/string/conversions"
@@ -28,10 +29,6 @@ RSpec.describe DatesStringParser do
       expect(parse("01/12/2015, 11/07/2015,05/12/2015")).to eq [
         Date.new(2015, 12, 1), Date.new(2015, 7, 11), Date.new(2015, 12, 0o5)
       ]
-    end
-
-    it "BUG: Ignores non-comma separated dates" do
-      expect(parse("5/2/2014 06/10/2012")).to eq [Date.new(2014, 2, 5)]
     end
 
     it "ignores duplicated dates" do

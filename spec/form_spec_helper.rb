@@ -27,6 +27,10 @@ FactoryBot.define do
   factory :edit_event_form do
     event_form
   end
+
+  factory :organiser_edit_event_form do
+    venue_id { rand(999) }
+  end
 end
 
 # MONKEY PATCH

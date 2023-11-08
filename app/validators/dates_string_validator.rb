@@ -30,8 +30,9 @@ class DatesStringValidator < ActiveModel::EachValidator
   end
 
   def problem_date_strings(date_strings)
+    parser = DateStringParser.new
     date_strings.each_with_object({ invalid: [], past: [], too_far_future: [] }) do |date_string, problems|
-      date = parse_date(date_string)
+      date = parser.parse(date_string)
       if date
         problems[:past] << date_string if date < past_cutoff
         problems[:too_far_future] << date_string if date > 2.years.from_now
@@ -47,20 +48,5 @@ class DatesStringValidator < ActiveModel::EachValidator
     else
       Date.current
     end
-  end
-
-  def parse_date(date_string, &)
-    # if the string contains extra characters,
-    # Date.strptime will parse the part of the string which looks like a date
-    # and ignore the rest
-    return unless contains_only_date_characters(date_string)
-
-    Date.strptime(date_string, "%d/%m/%Y")
-  rescue Date::Error
-    false
-  end
-
-  def contains_only_date_characters(string)
-    !!string.match(%r{^[0-9/]+$})
   end
 end
