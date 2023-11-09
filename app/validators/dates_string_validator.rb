@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "date_string_parser"
+
 class DatesStringValidator < ActiveModel::EachValidator
   SOLDN_START_DATE = Date.parse("2010-08-16")
 

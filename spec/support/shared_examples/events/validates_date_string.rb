@@ -2,7 +2,6 @@
 
 require "active_support/testing/time_helpers"
 require "active_support/core_ext/integer/time" # Required to call "2.years.from_now" in DatesStringValidator
-require "lib/date_string_parser"
 
 RSpec.shared_examples "validates date string" do |attribute, model_name, options = {}|
   include ActiveSupport::Testing::TimeHelpers
