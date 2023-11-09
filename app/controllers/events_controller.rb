@@ -30,7 +30,7 @@ class EventsController < CmsBaseController
     @form = CreateEventForm.new(create_event_params)
 
     if @form.valid?
-      event = Event.create!(@form.to_h)
+      event = EventCreator.new.create!(@form.to_h)
       flash[:notice] = t("flash.success", model: "Event", action: "created")
       redirect_to(event)
     else
