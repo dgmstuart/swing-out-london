@@ -143,14 +143,11 @@ class Event < ApplicationRecord
     Rails.cache.delete(dates_cache_key)
   end
 
-  def add_date(new_date)
-    swing_dates << SwingDate.find_or_initialize_by(date: new_date)
-  end
-
   def dates=(array_of_new_dates)
     clear_dates_cache
-    self.swing_dates = []
-    array_of_new_dates.each { |nd| add_date(nd) }
+    self.swing_dates = array_of_new_dates.map do |date|
+      SwingDate.find_or_initialize_by(date:)
+    end
   end
 
   def cancellations
@@ -158,12 +155,9 @@ class Event < ApplicationRecord
   end
 
   def cancellations=(array_of_new_cancellations)
-    self.swing_cancellations = []
-    array_of_new_cancellations.each { |nc| add_cancellation(nc) }
-  end
-
-  def add_cancellation(new_cancellation)
-    swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
+    self.swing_cancellations = array_of_new_cancellations.map do |date|
+      SwingDate.find_or_initialize_by(date:)
+    end
   end
 
   def future_cancellations
