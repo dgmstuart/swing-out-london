@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "date_string_parser"
+
 class DatesStringParser
   def initialize(date_string_parser: DateStringParser.new)
     @date_string_parser = date_string_parser
