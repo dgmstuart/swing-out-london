@@ -85,16 +85,4 @@ RSpec.describe CreateEventForm do
       expect(form.infrequent?).to be false
     end
   end
-
-  # Are these still a thing??
-  # it "handles an event with no dates and a weekly event" do
-  #   event = create(:event)
-  #   event.dates = "Weekly"
-  # end
-  #
-  # it "handles an event with no dates and adding unknown dates" do
-  #   event = create(:event)
-  #   event.dates = "Unknown"
-  #   expect(event.swing_dates).to eq([])
-  # end
 end
