@@ -2,6 +2,9 @@
 
 require "active_support/testing/time_helpers"
 require "active_support/core_ext/integer/time" # Required to call "2.years.from_now" in DatesStringValidator
+require "app/validators/past_date_validator"
+require "app/validators/distant_past_date_validator"
+require "app/validators/distant_future_date_validator"
 
 RSpec.shared_examples "validates date string" do |attribute, model_name, options = {}|
   include ActiveSupport::Testing::TimeHelpers
@@ -53,18 +56,18 @@ RSpec.shared_examples "validates date string" do |attribute, model_name, options
       model = build(model_name, dates: "31/05/2012")
       expect(model).to be_valid
     end
+
+    it "is invalid if dates are earlier than the start of SOLDN" do
+      model = build(model_name, dates: "15/08/2010")
+      model.valid?
+      expect(model.errors.messages).to eq(dates: ["contained some dates in the distant past: 15/08/2010"])
+    end
   else
     it "is invalid if dates are in the past" do
       model = build(model_name, dates: "31/05/2012")
       model.valid?
       expect(model.errors.messages).to eq(dates: ["contained some dates in the past: 31/05/2012"])
     end
-  end
-
-  it "is invalid if dates are earlier than the start of SOLDN" do
-    model = build(model_name, dates: "15/08/2010")
-    model.valid?
-    expect(model.errors.messages).to eq(dates: ["contained some dates in the past: 15/08/2010"])
   end
 
   it "is invalid if dates are too far in the future" do
