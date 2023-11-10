@@ -97,21 +97,4 @@ RSpec.describe CreateEventForm do
   #   event.dates = "Unknown"
   #   expect(event.swing_dates).to eq([])
   # end
-
-  pending "multiple valid dates, one invalid date on the end"
-  pending "multiple valid dates, one invalid date in the middle"
-  pending "blanking out where there are existing dates"
-  pending "fails to add an invalid date to an event"
-
-  pending "save with an invalid dates array"
-
-  pending "test with multiple dates, different orders, whitespace"
-
-  pending "multiple valid cancellations, one invalid date on the end"
-  pending "multiple valid cancellations, one invalid date in the middle"
-  pending "fails to add an invalid date to an event"
-
-  pending "save with an invalid cancellations array"
-
-  pending "test with multiple cancellations, different orders, whitespace"
 end
