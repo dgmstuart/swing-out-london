@@ -71,7 +71,6 @@ RSpec.describe Event do
     end
   end
 
-  # ultimately do away with date_array and test .dates= instead"
   describe ".dates =" do
     describe "empty strings" do
       it "handles an event with with no dates and adding no dates" do
