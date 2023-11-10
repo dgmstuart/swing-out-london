@@ -6,6 +6,8 @@ require "day_names"
 class Event < ApplicationRecord
   audited
 
+  include Frequency
+
   CONSIDERED_NEW_FOR = 1.month
 
   belongs_to :venue
@@ -253,16 +255,6 @@ class Event < ApplicationRecord
 
   def one_off?
     frequency.zero? && last_date == latest_date && first_date == latest_date
-  end
-
-  def weekly?
-    frequency == 1
-  end
-
-  def infrequent?
-    return false unless frequency
-
-    frequency.zero? || frequency >= 4
   end
 
   def latest_date_cache_key
