@@ -62,12 +62,3 @@ are not included in the .env.example file:
   - `CANONICAL_HOST` - all variations of the domain will be `301` redirected
     to this - eg. set it to `www.swingoutlondon.co.uk` to have
     `swingoutlondon.co.uk` redirect to www.
-
-## Heroku setup
-
-When deployed on Heroku, the build environment (eg. staging) needs the Nodejs
-buildpack in addition to the Ruby buildpack:
-
-    heroku buildpacks:add heroku/nodejs -i 1
-
-  https://devcenter.heroku.com/articles/ruby-support#node-js-support
