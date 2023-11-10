@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-require "date_string_parser"
+require "dates_string_parser"
 
 class DatesStringValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    return if value.blank?
-
-    date_strings = value.split(",").map(&:strip)
-    problems = problem_date_strings(date_strings)
-
-    problems.each do |type, problem_dates|
+    errors = parse(value)
+    errors.each do |type, problem_dates|
       description = {
         invalid: "contained some invalid dates",
         past: "contained some dates in the past",
@@ -24,21 +20,19 @@ class DatesStringValidator < ActiveModel::EachValidator
 
   private
 
-  def problem_date_strings(date_strings)
-    parser = DateStringParser.new
-    date_strings.each_with_object(new_hash_of_arrays) do |date_string, problems|
-      date = parser.parse(date_string)
-      if date
-        form = DateForm.new(date, allow_past: options[:allow_past])
-        form.errors.each { |error| problems[error.type] << date_string } if form.invalid?
-      else
-        problems[:invalid] << %("#{date_string}")
+  def parse(dates_string)
+    parser.parse(dates_string) do |date, date_string, result|
+      form = DateForm.new(date, allow_past: options[:allow_past])
+      if form.invalid?
+        form.errors.each do |error|
+          result[:errors][error.type] << date_string
+        end
       end
     end
   end
 
-  def new_hash_of_arrays
-    Hash.new { |hash, key| hash[key] = [] }
+  def parser
+    DatesStringParser.new(formatter: ErrorsFormat.new)
   end
 
   class DateForm
@@ -58,5 +52,11 @@ class DatesStringValidator < ActiveModel::EachValidator
     private
 
     attr_reader :allow_past
+  end
+
+  class ErrorsFormat
+    def transform(parse_result)
+      parse_result.fetch(:errors)
+    end
   end
 end
