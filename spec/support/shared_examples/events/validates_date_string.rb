@@ -75,4 +75,25 @@ RSpec.shared_examples "validates date string" do |attribute, model_name, options
     model.valid?
     expect(model.errors.messages).to eq(dates: ["contained some dates unreasonably far in the future: 02/06/2014"])
   end
+
+  it "is invalid with duplicate dates" do
+    model = build(model_name, dates: "12/07/2012,12/07/2012")
+    model.valid?
+    expect(model.errors.messages).to eq(dates: ["contained some dates more than once: 12/07/2012"])
+  end
+
+  it "only reports duplicate future dates once as future" do
+    model = build(model_name, dates: "01/02/2020,01/02/2020")
+    model.valid?
+    expect(model.errors.messages).to eq(
+      dates: ["contained some dates unreasonably far in the future: 01/02/2020",
+              "contained some dates more than once: 01/02/2020"]
+    )
+  end
+
+  it "reports duplicated non-dates twice" do
+    model = build(model_name, dates: "30/02/2012,30/02/2012")
+    model.valid?
+    expect(model.errors.messages).to eq(dates: ['contained some invalid dates: "30/02/2012", "30/02/2012"'])
+  end
 end

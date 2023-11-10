@@ -10,7 +10,8 @@ class DatesStringValidator < ActiveModel::EachValidator
         invalid: "contained some invalid dates",
         past: "contained some dates in the past",
         distant_past: "contained some dates in the distant past",
-        distant_future: "contained some dates unreasonably far in the future"
+        distant_future: "contained some dates unreasonably far in the future",
+        duplicate: "contained some dates more than once"
       }.fetch(type)
       message = "#{description}: #{problem_dates.join(', ')}"
 
