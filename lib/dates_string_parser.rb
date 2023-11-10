@@ -18,12 +18,16 @@ class DatesStringParser
 
   attr_reader :date_string_parser, :formatter
 
-  def parse_strings(date_strings, &)
+  def parse_strings(date_strings, &) # rubocop:disable Metrics/MethodLength
     date_strings.each_with_object(empty_result) do |date_string, result|
       date = date_string_parser.parse(date_string)
       if date
-        result[:dates] << date
-        yield(date, date_string, result) if block_given?
+        if result[:dates].include?(date)
+          result[:errors][:duplicate] << date_string
+        else
+          result[:dates] << date
+          yield(date, date_string, result) if block_given?
+        end
       else
         result[:errors][:invalid] << %("#{date_string}")
       end
@@ -31,7 +35,7 @@ class DatesStringParser
   end
 
   def empty_result
-    { dates: [], errors: empty_hash_of_arrays }
+    { dates: Set.new, errors: empty_hash_of_arrays }
   end
 
   def empty_hash_of_arrays
@@ -40,7 +44,7 @@ class DatesStringParser
 
   class DateListFormat
     def transform(parse_result)
-      parse_result.fetch(:dates).uniq
+      parse_result.fetch(:dates).to_a
     end
   end
 end
