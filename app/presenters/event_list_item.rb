@@ -10,10 +10,6 @@ class EventListItem
     event.to_model
   end
 
-  def id
-    event.id
-  end
-
   def to_param
     event.to_param
   end
@@ -54,7 +50,11 @@ class EventListItem
     event.updated_at
   end
 
-  def status_string
+  def html_id
+    "event_#{event.id}"
+  end
+
+  def css_class
     if ended?
       "inactive"
     elsif !future_dates?

@@ -15,11 +15,11 @@ RSpec.describe EventListItem do
     end
   end
 
-  describe "#id" do
-    it "delegates to the event" do
+  describe "#html_id" do
+    it "uses the ID from the event" do
       event = instance_double("Event", id: 23)
 
-      expect(item_instance(event).id).to eq 23
+      expect(item_instance(event).html_id).to eq "event_23"
     end
   end
 
@@ -107,12 +107,12 @@ RSpec.describe EventListItem do
     end
   end
 
-  describe "#status_string" do
+  describe "#css_class" do
     context "when the event has ended" do
       it "is inactive" do
         event = instance_double("Event", ended?: true)
 
-        expect(item_instance(event).status_string).to eq "inactive"
+        expect(item_instance(event).css_class).to eq "inactive"
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe EventListItem do
       it "is nil" do
         event = instance_double("Event", ended?: false, future_dates?: true)
 
-        expect(item_instance(event).status_string).to be_nil
+        expect(item_instance(event).css_class).to be_nil
       end
     end
 
@@ -128,7 +128,7 @@ RSpec.describe EventListItem do
       it "is no_future_dates" do
         event = instance_double("Event", ended?: false, future_dates?: false)
 
-        expect(item_instance(event).status_string).to eq "no_future_dates"
+        expect(item_instance(event).css_class).to eq "no_future_dates"
       end
     end
   end
