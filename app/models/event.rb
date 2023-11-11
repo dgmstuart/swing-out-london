@@ -187,13 +187,9 @@ class Event < ApplicationRecord
 
   public
 
-  def inactive?
-    ended? || (!future_dates? && one_off?)
-  end
-
   # For the event listing tables:
   def status_string
-    if inactive?
+    if ended?
       "inactive"
     elsif !future_dates?
       "no_future_dates"
@@ -251,10 +247,6 @@ class Event < ApplicationRecord
     return false if last_date.nil?
 
     last_date < Date.current
-  end
-
-  def one_off?
-    frequency.zero? && last_date == latest_date && first_date == latest_date
   end
 
   def latest_date_cache_key
