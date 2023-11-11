@@ -187,41 +187,6 @@ class Event < ApplicationRecord
 
   public
 
-  def inactive?
-    ended? || (!future_dates? && one_off?)
-  end
-
-  # For the event listing tables:
-  def status_string
-    if inactive?
-      "inactive"
-    elsif !future_dates?
-      "no_future_dates"
-    end
-  end
-
-  # PRINT METHODS #
-
-  def print_dates_rows
-    if ended?
-      "Ended"
-    elsif weekly?
-      "Every week on #{day.pluralize}"
-    elsif dates.empty?
-      "(No dates)"
-    else
-      date_rows_printer.print(dates.reverse)
-    end
-  end
-
-  private
-
-  def date_rows_printer
-    DatePrinter.new(separator: ", ")
-  end
-
-  public
-
   # COMPARISON METHODS #
 
   def future_dates?
@@ -251,10 +216,6 @@ class Event < ApplicationRecord
     return false if last_date.nil?
 
     last_date < Date.current
-  end
-
-  def one_off?
-    frequency.zero? && last_date == latest_date && first_date == latest_date
   end
 
   def latest_date_cache_key
