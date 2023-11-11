@@ -3,6 +3,7 @@
 class EditEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include Frequency
 
   attribute :url, :string
   attribute :venue_id, :integer
@@ -74,16 +75,6 @@ class EditEventForm
 
   def persisted?
     true
-  end
-
-  def weekly?
-    frequency == 1
-  end
-
-  def infrequent?
-    return false if frequency.nil?
-
-    frequency.zero? || frequency >= 4
   end
 
   def show_social_details?
