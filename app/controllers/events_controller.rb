@@ -46,7 +46,7 @@ class EventsController < CmsBaseController
     if @form.valid?
       audit_comment = EventParamsCommenter.new.comment(@event, update_event_params)
       update_params = @form.to_h.merge!(audit_comment)
-      @event.update!(update_params)
+      EventUpdater.new(@event).update!(update_params)
       flash[:notice] = t("flash.success", model: "Event", action: "updated")
       redirect_to(@event)
     else

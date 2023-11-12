@@ -15,7 +15,7 @@ class ExternalEventsController < CmsBaseController
     if @form.valid?
       audit_comment = EventParamsCommenter.new.comment(@event, event_params)
       update_params = @form.to_h.merge!(audit_comment)
-      @event.update!(update_params)
+      EventUpdater.new(@event).update!(update_params)
       flash[:success] = t("flash.success", model: "Event", action: "updated")
       redirect_to edit_external_event_path(@event.organiser_token)
     else
