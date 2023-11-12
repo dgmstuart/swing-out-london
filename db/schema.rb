@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_03_28_083046) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_12_221023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -56,10 +56,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_03_28_083046) do
     t.integer "class_organiser_id"
     t.integer "social_organiser_id"
     t.string "organiser_token"
-    t.string "event_type"
-    t.string "date_array"
-    t.string "cancellation_array"
-    t.date "expected_date"
     t.index ["frequency", "day", "has_class"], name: "index_events_on_fq_and_day_and_has_class"
     t.index ["frequency", "day", "has_social"], name: "index_events_on_fq_and_day_and_has_social"
     t.index ["frequency", "has_class"], name: "index_events_on_fq_and_has_class"
@@ -107,7 +103,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_03_28_083046) do
     t.string "area", limit: 255
     t.decimal "lat", precision: 15, scale: 10
     t.decimal "lng", precision: 15, scale: 10
-    t.string "compass"
   end
 
 end
