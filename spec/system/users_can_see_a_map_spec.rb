@@ -21,7 +21,7 @@ RSpec.describe "Users can view a map of upcoming events" do
         class_style: "Balboa"
       )
       # There's currently a bug whereby you can't create cancellations at the same time as the event
-      event.update!(cancellations: [Date.new(2019, 6, 17)])
+      EventUpdater.new(event).update!(cancellations: ["2019-6-17".to_date])
 
       create(
         :social,

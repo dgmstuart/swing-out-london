@@ -13,6 +13,20 @@ FactoryBot.define do
 
     venue
 
+    transient do
+      dates { [] }
+      cancellations { [] }
+    end
+
+    after(:create) do |event, evaluator|
+      evaluator.dates.each do |date|
+        create(:events_swing_date, event:, swing_date: build(:swing_date, date:))
+      end
+      evaluator.cancellations.each do |date|
+        create(:events_swing_cancellation, event:, swing_date: build(:swing_date, date:))
+      end
+    end
+
     factory :class, class: "Event" do
       title { "" }
       has_class { true }
@@ -55,6 +69,16 @@ FactoryBot.define do
 
   factory :swing_date do
     date { Date.new }
+  end
+
+  factory :events_swing_date do
+    event
+    swing_date
+  end
+
+  factory :events_swing_cancellation do
+    event
+    swing_date
   end
 
   trait :event_form do

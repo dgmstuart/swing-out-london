@@ -34,7 +34,7 @@ RSpec.describe "Editors can list occasional events" do
         last_date: Date.parse("11/10/1958"),
         url: "https://www.savoyballroom.com/stompin"
       )
-      event.update!(cancellations: [Date.parse("09/01/1937")])
+      EventUpdater.new(event).update!(cancellations: [Date.parse("09/01/1937")])
     end
 
     Timecop.freeze("02/01/1937") do
