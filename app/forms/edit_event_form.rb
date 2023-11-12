@@ -91,13 +91,14 @@ class EditEventForm
   end
 
   def to_h
-    attributes.merge(
-      "dates" => parsed_dates,
-      "cancellations" => parsed_cancellations,
-      "has_class" => has_weekly_class?,
-      "has_taster" => has_occasional_class?
+    attributes.symbolize_keys.merge(
+      dates: parsed_dates,
+      cancellations: parsed_cancellations,
+      has_class: has_weekly_class?,
+      has_taster: has_occasional_class?,
+      course_length: (course_length.to_i if course_length.present?)
     ).except(
-      "social_has_class"
+      :social_has_class
     )
   end
 

@@ -49,4 +49,98 @@ RSpec.describe EditEventForm do
       expect(described_class.new.persisted?).to be true
     end
   end
+
+  describe "#to_h" do
+    it "returns the attributes as a symbol hash" do # rubocop:disable RSpec/ExampleLength
+      form = described_class.new(
+        url: "https://savoy.com",
+        venue_id: 1,
+
+        title: "Stompin",
+        social_organiser_id: 2,
+        social_has_class: true,
+
+        class_style: "Savoy style",
+        course_length: 3,
+        class_organiser_id: 4,
+
+        frequency: 0,
+        day: nil,
+        dates: "10/12/2020, 12/01/2021",
+        cancellations: "10/12/2020",
+        first_date: "01/02/2018",
+        last_date: "10/02/2024"
+      )
+
+      expect(form.to_h).to eq(
+        url: "https://savoy.com",
+        venue_id: 1,
+
+        has_class: false,
+        has_taster: true,
+
+        title: "Stompin",
+        social_organiser_id: 2,
+
+        class_style: "Savoy style",
+        course_length: 3,
+        class_organiser_id: 4,
+
+        frequency: 0,
+        day: nil,
+        dates: ["2020-12-10".to_date, "2021-01-12".to_date],
+        cancellations: ["2020-12-10".to_date],
+        first_date: "01/02/2018",
+        last_date: "10/02/2024"
+      )
+    end
+
+    context "when the event is weekly with no course length" do
+      it "returns the attributes as a symbol hash" do # rubocop:disable RSpec/ExampleLength
+        form = described_class.new(
+          url: "https://savoy.com",
+          venue_id: 1,
+
+          title: "",
+          social_organiser_id: nil,
+          social_has_class: nil,
+
+          event_type: "weekly_class",
+
+          class_style: "",
+          course_length: "",
+          class_organiser_id: 4,
+
+          frequency: 1,
+          day: "Tuesday",
+          dates: "",
+          cancellations: "",
+          first_date: "",
+          last_date: ""
+        )
+
+        expect(form.to_h).to eq(
+          url: "https://savoy.com",
+          venue_id: 1,
+
+          has_class: true,
+          has_taster: false,
+
+          title: "",
+          social_organiser_id: nil,
+
+          class_style: "",
+          course_length: nil,
+          class_organiser_id: 4,
+
+          frequency: 1,
+          day: "Tuesday",
+          dates: [],
+          cancellations: [],
+          first_date: "",
+          last_date: ""
+        )
+      end
+    end
+  end
 end

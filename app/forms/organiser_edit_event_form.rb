@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "dates_string_parser"
+
 class OrganiserEditEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -36,10 +38,10 @@ class OrganiserEditEventForm
   validates_with ValidCancellations
 
   def to_h
-    attributes.merge(
-      "dates" => parsed_dates,
-      "cancellations" => parsed_cancellations
-    ).except("frequency")
+    attributes.symbolize_keys.merge(
+      dates: parsed_dates,
+      cancellations: parsed_cancellations
+    ).except(:frequency)
   end
 
   def persisted?
