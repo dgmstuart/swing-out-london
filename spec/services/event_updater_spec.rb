@@ -5,14 +5,15 @@ require "rails_helper"
 RSpec.describe EventUpdater do
   describe "#update!" do
     it "builds an event with the passed in params, except dates and cancellations" do
-      record = instance_double("Event", update!: double, reload: double)
+      record = create(:event)
+      allow(record).to receive(:update!)
       other_value = double
-      params = { dates: [], cancellations: [], other: other_value }
+      params = { dates: [], cancellations: [], title: other_value }
 
       described_class.new(record).update!(params)
 
       expect(record).to have_received(:update!).with(
-        { other: other_value, swing_dates: [], swing_cancellations: [] }
+        { title: other_value, swing_dates: [], swing_cancellations: [] }
       )
     end
 
@@ -26,28 +27,38 @@ RSpec.describe EventUpdater do
     end
 
     context "when there are dates" do
-      it "creates SwingDate records from the dates" do
+      it "creates SwingDate records from the dates" do # rubocop:disable RSpec/ExampleLength
         record = create(:event)
-        date1 = Date.tomorrow
-        date2 = 2.days.from_now.to_date
+        date1 = Date.parse("1940-11-13")
+        date2 = Date.parse("1940-11-14")
         params = attributes_for(:event).merge(dates: [date1, date2])
 
-        event = described_class.new(record).update!(params)
+        Timecop.freeze("1940-11-01") do
+          event = described_class.new(record).update!(params)
 
-        expect(event.swing_dates.map(&:date)).to contain_exactly(date1, date2)
+          aggregate_failures do
+            expect(event.swing_dates.map(&:date)).to contain_exactly(date1, date2)
+            expect(event.audits.last.comment).to eq "Updated dates: (old: ) (new: 13/11/1940,14/11/1940)"
+          end
+        end
       end
     end
 
     context "when there are cancellations" do
-      it "creates SwingDate records from the cancellations" do
+      it "creates SwingDate records from the cancellations" do # rubocop:disable RSpec/ExampleLength
         record = create(:event)
-        date1 = Date.tomorrow
-        date2 = 2.days.from_now.to_date
+        date1 = Date.parse("1940-11-13")
+        date2 = Date.parse("1940-11-14")
         params = attributes_for(:event).merge(cancellations: [date1, date2])
 
-        event = described_class.new(record).update!(params)
+        Timecop.freeze("1940-11-01") do
+          event = described_class.new(record).update!(params)
 
-        expect(event.swing_cancellations.map(&:date)).to contain_exactly(date1, date2)
+          aggregate_failures do
+            expect(event.swing_cancellations.map(&:date)).to contain_exactly(date1, date2)
+            expect(event.audits.last.comment).to eq "Updated cancellations: (old: ) (new: 13/11/1940,14/11/1940)"
+          end
+        end
       end
     end
 
