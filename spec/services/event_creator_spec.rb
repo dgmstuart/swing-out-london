@@ -12,7 +12,7 @@ RSpec.describe EventCreator do
       described_class.new(repository).create!(params)
 
       expect(repository).to have_received(:create!).with(
-        { other: other_value, swing_dates: [], swing_cancellations: [] }
+        { other: other_value, event_instances: [], swing_dates: [], swing_cancellations: [] }
       )
     end
 
@@ -37,6 +37,17 @@ RSpec.describe EventCreator do
         event = described_class.new(Event).create!(params)
 
         expect(event.swing_dates.map(&:date)).to contain_exactly(date1, date2)
+      end
+
+      it "creates event instances from the dates" do
+        date1 = Date.tomorrow
+        date2 = 2.days.from_now.to_date
+        venue = create(:venue)
+        params = attributes_for(:event, venue_id: venue.id).merge(dates: [date1, date2])
+
+        event = described_class.new(Event).create!(params)
+
+        expect(event.event_instances.map(&:date)).to contain_exactly(date1, date2)
       end
     end
 

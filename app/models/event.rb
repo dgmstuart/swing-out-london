@@ -18,6 +18,8 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
+  has_many :event_instances, dependent: :destroy
+
   validates :frequency, presence: true
   validates :url, presence: true, uri: true
 

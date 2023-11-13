@@ -7,6 +7,7 @@ class EventCreator
   end
 
   def create!(attrs)
+    attrs.merge!(event_instances: event_instances(attrs[:dates])) if attrs[:dates]
     attrs_with_dates = attr_adaptor.transform(attrs)
     repository.create!(attrs_with_dates)
   end
@@ -14,4 +15,8 @@ class EventCreator
   private
 
   attr_reader :repository, :attr_adaptor
+
+  def event_instances(dates)
+    dates.map { |date| EventInstance.new(date:) }
+  end
 end

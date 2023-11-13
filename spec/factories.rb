@@ -81,6 +81,11 @@ FactoryBot.define do
     swing_date
   end
 
+  factory :event_instance do
+    event
+    date { rand(365).days.from_now }
+  end
+
   trait :event_form do
     title { Faker::Company.social_dance }
     event_type { "social_dance" }

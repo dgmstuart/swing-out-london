@@ -9,6 +9,10 @@ require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 
 RSpec.describe Event do
+  describe "(associations)" do
+    it { is_expected.to have_many(:event_instances).dependent(:destroy) }
+  end
+
   describe "#title" do
     it "strips whitespace before saving" do
       event = build(:event, title: " \tDance time! ")
