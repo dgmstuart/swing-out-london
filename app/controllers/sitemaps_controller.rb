@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SitemapsController < ApplicationController
+class SitemapsController < RobotsController
   def index
     respond_to do |format|
       format.xml
