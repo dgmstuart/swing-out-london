@@ -50,4 +50,7 @@ Rails.application.routes.draw do
   get "apple-touch-icon-:size-precomposed" => "application#not_found"
   get "apple-app-site-association" => "application#not_found"
   get "swingoutlondon_og.png" => redirect(ActionController::Base.helpers.image_path(CITY.opengraph_image))
+  get ".well-known" => "robots#no_content"
+  get ".well-known/apple-app-site-association" => "robots#empty_json"
+  get ".well-known/traffic-advice" => "robots#no_content"
 end
