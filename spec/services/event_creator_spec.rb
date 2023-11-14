@@ -7,12 +7,12 @@ RSpec.describe EventCreator do
     it "builds an event with the passed in params, except dates and cancellations" do
       repository = class_double("Event", create!: double)
       other_value = double
-      params = { dates: [], cancellations: [], other: other_value }
+      params = { dates: [], cancellations: [], frequency: 0, other: other_value }
 
       described_class.new(repository).create!(params)
 
       expect(repository).to have_received(:create!).with(
-        { other: other_value, event_instances: [], swing_dates: [], swing_cancellations: [] }
+        { other: other_value, frequency: 0, event_instances: [], swing_dates: [], swing_cancellations: [] }
       )
     end
 
@@ -20,7 +20,7 @@ RSpec.describe EventCreator do
       created_event = instance_double("Event")
       repository = class_double("Event", create!: created_event)
       venue = create(:venue)
-      params = attributes_for(:event, venue_id: venue.id)
+      params = attributes_for(:event, :occasional, venue_id: venue.id)
 
       result = described_class.new(repository).create!(params)
 
@@ -32,7 +32,7 @@ RSpec.describe EventCreator do
         date1 = Date.tomorrow
         date2 = 2.days.from_now.to_date
         venue = create(:venue)
-        params = attributes_for(:event, venue_id: venue.id).merge(dates: [date1, date2])
+        params = attributes_for(:event, :occasional, venue_id: venue.id).merge(dates: [date1, date2])
 
         event = described_class.new(Event).create!(params)
 
@@ -43,7 +43,7 @@ RSpec.describe EventCreator do
         date1 = Date.tomorrow
         date2 = 2.days.from_now.to_date
         venue = create(:venue)
-        params = attributes_for(:event, venue_id: venue.id).merge(dates: [date1, date2])
+        params = attributes_for(:event, :occasional, venue_id: venue.id).merge(dates: [date1, date2])
 
         event = described_class.new(Event).create!(params)
 
@@ -56,11 +56,57 @@ RSpec.describe EventCreator do
         date1 = Date.tomorrow
         date2 = 2.days.from_now.to_date
         venue = create(:venue)
-        params = attributes_for(:event, venue_id: venue.id).merge(cancellations: [date1, date2])
+        params = attributes_for(:event, :occasional, venue_id: venue.id).merge(cancellations: [date1, date2])
 
         event = described_class.new(Event).create!(params)
 
         expect(event.swing_cancellations.map(&:date)).to contain_exactly(date1, date2)
+      end
+
+      it "ignores cancelled dates which don't match dates" do
+        date1 = Date.tomorrow
+        date2 = 2.days.from_now.to_date
+        venue = create(:venue)
+        params = attributes_for(:event, :occasional, venue_id: venue.id).merge(cancellations: [date1, date2])
+
+        expect do
+          described_class.new(Event).create!(params)
+        end.not_to change(EventInstance, :count)
+      end
+
+      it "creates instances from the cancelled dates if weekly" do # rubocop:disable RSpec.example_length
+        date1 = Date.tomorrow
+        date2 = 2.days.from_now.to_date
+        venue = create(:venue)
+        params = attributes_for(:event, :weekly, venue_id: venue.id).merge(cancellations: [date1, date2])
+
+        aggregate_failures do
+          expect do
+            event = described_class.new(Event).create!(params)
+            instances = event.event_instances
+            expect(instances.map(&:date)).to contain_exactly(date1, date2)
+            expect(instances.map(&:cancelled)).to contain_exactly(true, true)
+          end.to change(EventInstance, :count).by(2)
+        end
+      end
+    end
+
+    context "when there is a date in both dates and cancellations" do
+      it "only creates one instance" do # rubocop:disable RSpec.example_length
+        pending("removing swingdates, which don't work in this scenario")
+        date1 = Date.tomorrow
+        date2 = 2.days.from_now.to_date
+        venue = create(:venue)
+        params = attributes_for(:event, :occasional, venue_id: venue.id).merge(dates: [date1, date2], cancellations: [date1])
+
+        aggregate_failures do
+          expect do
+            event = described_class.new(Event).create!(params)
+            instances = event.event_instances
+            expect(instances.map(&:date)).to contain_exactly(date1, date2)
+            expect(instances.map(&:cancelled)).to contain_exactly(true, false)
+          end.to change(EventInstance, :count).by(2)
+        end
       end
     end
 
@@ -71,7 +117,7 @@ RSpec.describe EventCreator do
         swing_date1 = create(:swing_date, date: date1)
         swing_date2 = create(:swing_date, date: date2)
         venue = create(:venue)
-        params = attributes_for(:event, venue_id: venue.id).merge(dates: [date1, date2], cancellations: [date1])
+        params = attributes_for(:event, :occasional, venue_id: venue.id).merge(dates: [date1, date2], cancellations: [date1])
 
         aggregate_failures do
           expect do

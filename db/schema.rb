@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_13_113653) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_13_150435) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_113653) do
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "cancelled", default: false, null: false
     t.index ["date"], name: "index_event_instances_on_date"
     t.index ["event_id", "date"], name: "index_event_instances_on_event_id_and_date", unique: true
   end
