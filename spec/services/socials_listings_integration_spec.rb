@@ -15,9 +15,12 @@ RSpec.describe SocialsListings do
           expect(result).to eq([["10 June 1935".to_date, [["Swing pit", false]]]])
         end
 
-        it "returns the correct array when that social has a cancellation" do
-          event = create(:intermittent_social, dates: ["10 June 1935".to_date, "12 June 1935".to_date], title: "Swing pit")
-          EventUpdater.new(event).update!(cancellations: ["12 June 1935".to_date])
+        it "returns the correct array when that social has a cancellation" do # rubocop:disable RSpec/ExampleLength
+          event_instances = [
+            build(:event_instance, date: "10 June 1935"),
+            build(:event_instance, date: "12 June 1935", cancelled: true)
+          ]
+          create(:intermittent_social, event_instances:, title: "Swing pit")
 
           dates = SOLDNTime.listing_dates("1 June 1935".to_date)
           result = described_class.new(presenter_class: test_presenter).build(dates)

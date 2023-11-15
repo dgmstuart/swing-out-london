@@ -35,15 +35,25 @@ RSpec.describe Event do
 
   describe ".dates" do
     it "returns an ordered list of dates" do
-      recent_date = create(:swing_date, date: Time.zone.today)
-      old_date = create(:swing_date, date: Time.zone.today - 1.year)
+      date1 = Date.current
+      date2 = 1.year.ago.to_date
+      old_instance = build(:event_instance, date: date2)
+      recent_instance = build(:event_instance, date: date1)
+      event = create(:event, event_instances: [recent_instance, old_instance])
 
-      event = create(:event)
-      event.swing_dates << recent_date
-      event.swing_dates << old_date
-      event.save!
+      expect(event.dates).to eq([date2, date1])
+    end
+  end
 
-      expect(event.reload.dates).to eq([Time.zone.today - 1.year, Time.zone.today])
+  describe ".cancellations" do
+    it "returns an ordered list of cancellations" do
+      date1 = Date.current
+      date2 = 1.year.ago.to_date
+      old_instance = build(:event_instance, date: date2, cancelled: true)
+      recent_instance = build(:event_instance, date: date1, cancelled: true)
+      event = create(:event, event_instances: [recent_instance, old_instance])
+
+      expect(event.cancellations).to eq([date1, date2])
     end
   end
 
@@ -210,6 +220,29 @@ RSpec.describe Event do
         build(:event, dates: [], last_date: Date.current.tomorrow)
       ]
       expect(events).not_to include(be_ended)
+    end
+  end
+
+  describe "#latest_date" do
+    context "when there are no instances" do
+      it "is nil" do
+        expect(described_class.new.latest_date).to be_nil
+      end
+    end
+
+    context "when there are several instances" do
+      it "creates the latest one" do
+        event = create(
+          :event,
+          event_instances: [
+            create(:event_instance, date: "2010-01-01"),
+            create(:event_instance, date: "2012-01-01"),
+            create(:event_instance, date: "2011-01-01")
+          ]
+        )
+
+        expect(event.latest_date).to eq "2012-01-01".to_date
+      end
     end
   end
 end

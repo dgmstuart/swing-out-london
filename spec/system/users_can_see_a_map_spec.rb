@@ -5,7 +5,11 @@ require "rails_helper"
 RSpec.describe "Users can view a map of upcoming events" do
   describe "socials page" do
     it "viewing the page" do
-      event = create(
+      event_instances = [
+        build(:event_instance, date: "2019-06-08"),
+        build(:event_instance, date: "2019-06-17", cancelled: true)
+      ]
+      create(
         :social,
         venue: build(
           :venue,
@@ -15,13 +19,11 @@ RSpec.describe "Users can view a map of upcoming events" do
         ),
         title: "Bedroom Bounce",
         url: "https://bb.com",
-        dates: [Date.new(2019, 6, 8), Date.new(2019, 6, 17)],
+        event_instances:,
         first_date: Date.new(2019, 6, 8),
         has_taster: true,
         class_style: "Balboa"
       )
-      # There's currently a bug whereby you can't create cancellations at the same time as the event
-      EventUpdater.new(event).update!(cancellations: ["2019-6-17".to_date])
 
       create(
         :social,

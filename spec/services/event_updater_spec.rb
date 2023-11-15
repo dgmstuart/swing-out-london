@@ -13,7 +13,7 @@ RSpec.describe EventUpdater do
       described_class.new(record).update!(params)
 
       expect(record).to have_received(:update!).with(
-        { title: other_value, frequency: 0, event_instances: [], swing_dates: [], swing_cancellations: [] }
+        { title: other_value, frequency: 0, event_instances: [] }
       )
     end
 
@@ -25,9 +25,7 @@ RSpec.describe EventUpdater do
 
         described_class.new(record).update!(params)
 
-        expect(record).to have_received(:update!).with(
-          { event_instances: [], swing_dates: [], swing_cancellations: [] }
-        )
+        expect(record).to have_received(:update!).with({ event_instances: [] })
       end
     end
 
@@ -41,22 +39,6 @@ RSpec.describe EventUpdater do
     end
 
     context "when there are dates" do
-      it "creates SwingDate records from the dates" do # rubocop:disable RSpec/ExampleLength
-        record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
-        params = attributes_for(:event, :occasional).merge(dates: [date1, date2])
-
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
-
-          aggregate_failures do
-            expect(event.swing_dates.map(&:date)).to contain_exactly(date1, date2)
-            expect(event.audits.last.comment).to eq "Updated dates: (old: ) (new: 13/11/1940,14/11/1940)"
-          end
-        end
-      end
-
       it "creates event instances from the dates" do # rubocop:disable RSpec/ExampleLength
         record = create(:event)
         date1 = Date.parse("1940-11-13")
@@ -74,25 +56,8 @@ RSpec.describe EventUpdater do
       end
     end
 
-    context "when there are cancellations" do
-      it "creates SwingDate records from the cancellations" do # rubocop:disable RSpec/ExampleLength
-        record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
-        params = attributes_for(:event, :occasional).merge(cancellations: [date1, date2])
-
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
-
-          aggregate_failures do
-            expect(event.swing_cancellations.map(&:date)).to contain_exactly(date1, date2)
-            expect(event.audits.last.comment).to eq "Updated cancellations: (old: ) (new: 13/11/1940,14/11/1940)"
-          end
-        end
-      end
-
+    context "when there are cancellations for an occasional event" do
       it "creates cancelled event instances from the cancellations" do # rubocop:disable RSpec/ExampleLength
-        pending("Fixing issue with creating swing dates at the same time as cancelling them")
         record = create(:event)
         date1 = Date.parse("1940-11-13")
         date2 = Date.parse("1940-11-14")
@@ -108,8 +73,10 @@ RSpec.describe EventUpdater do
           end
         end
       end
+    end
 
-      it "creates cancelled event instances from the cancellations when weekly" do # rubocop:disable RSpec/ExampleLength
+    context "when there are cancellations for a weekly event" do
+      it "creates cancelled event instances from the cancellations" do # rubocop:disable RSpec/ExampleLength
         record = create(:event)
         date1 = Date.parse("1940-11-13")
         date2 = Date.parse("1940-11-14")
@@ -128,17 +95,6 @@ RSpec.describe EventUpdater do
     end
 
     context "when removing dates" do
-      it "removes the relevant EventSwingDate records from the dates" do
-        date1 = Date.tomorrow
-        date2 = 2.days.from_now.to_date
-        record = create(:event, swing_dates: [build(:swing_date, date: date1), build(:swing_date, date: date2)])
-        params = attributes_for(:event, :occasional).merge(dates: [date1])
-
-        event = described_class.new(record).update!(params)
-
-        expect(event.swing_dates.map(&:date)).to contain_exactly(date1)
-      end
-
       it "removes the relevant EventInstance records" do
         date1 = Date.tomorrow
         date2 = 2.days.from_now.to_date
@@ -148,38 +104,6 @@ RSpec.describe EventUpdater do
         event = described_class.new(record).update!(params)
 
         expect(event.event_instances.map(&:date)).to contain_exactly(date1)
-      end
-    end
-
-    context "when removing cancelled dates" do
-      # This case shouldn't exist if we have validation
-      # which ensures that cancellations are always in the dates list.
-      it "removes the relevant EventSwingDate records from the cancellations" do
-        date1 = Date.tomorrow
-        date2 = 2.days.from_now.to_date
-        record = create(:event, swing_cancellations: [build(:swing_date, date: date1), build(:swing_date, date: date2)])
-        params = attributes_for(:event, :occasional).merge(cancellations: [date1])
-
-        event = described_class.new(record).update!(params)
-
-        expect(event.swing_cancellations.map(&:date)).to contain_exactly(date1)
-      end
-    end
-
-    context "when the dates already exist" do
-      it "uses the existing dates" do # rubocop:disable RSpec.example_length
-        record = create(:event)
-        date = Date.tomorrow
-        swing_date = create(:swing_date, date:)
-        params = attributes_for(:event, :occasional).merge(dates: [date], cancellations: [date])
-
-        aggregate_failures do
-          expect do
-            event = described_class.new(record).update!(params)
-            expect(event.swing_dates).to eq [swing_date]
-            expect(event.swing_cancellations).to eq [swing_date]
-          end.not_to change(SwingDate, :count)
-        end
       end
     end
 
@@ -217,11 +141,10 @@ RSpec.describe EventUpdater do
     end
 
     context "when a cancelled instance already exists" do
-      it "is still cancelled" do # rubocop:disable RSpec.example_length
+      it "is still cancelled" do
         record = create(:event)
         date = Date.tomorrow
         create(:event_instance, event: record, date:, cancelled: true)
-        create(:swing_date, date:)
         params = attributes_for(:event, :occasional).merge(dates: [date], cancellations: [date])
 
         aggregate_failures do
@@ -250,10 +173,9 @@ RSpec.describe EventUpdater do
     end
 
     context "when a non-cancelled instance already exists, and should now be cancelled" do
-      it "is now cancelled" do # rubocop:disable RSpec.example_length
+      it "is now cancelled" do
         record = create(:event)
         date = Date.tomorrow
-        create(:swing_date, date:)
         create(:event_instance, event: record, date:, cancelled: false)
         params = attributes_for(:event, :occasional).merge(dates: [date], cancellations: [date])
 
@@ -271,7 +193,6 @@ RSpec.describe EventUpdater do
         record = create(:event)
         date1 = Date.tomorrow
         date2 = 2.days.from_now
-        create(:swing_date, date: date1)
         create(:event_instance, event: record, date: date1, cancelled: false)
         params = attributes_for(:event, :occasional).merge(url: "not a valid url", dates: [date1, date2], cancellations: [date1])
 

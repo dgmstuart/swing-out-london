@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
 
   def index
     @today = today
-    @classes = Event.listing_classes.includes(:venue, :class_organiser, :swing_cancellations)
+    @classes = Event.listing_classes.includes(:venue, :class_organiser)
     dates = SOLDNTime.listing_dates
     @socials_dates = SocialsListings.new.build(dates)
 

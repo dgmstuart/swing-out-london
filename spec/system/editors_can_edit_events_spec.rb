@@ -141,9 +141,11 @@ RSpec.describe "Editors can edit events", :js do
 
   context "when changing from an occasional event to a weekly event" do
     it "removes any dates" do
-      event = create(:event, :occasional, dates: ["12/11/2012", "12/12/2012"])
-      # There's a bug which means that we can't create a swing date and cancellation at the same time:
-      event.swing_cancellations << SwingDate.find_by(date: "12/11/2012")
+      event_instances = [
+        build(:event_instance, date: "12/11/2012", cancelled: true),
+        build(:event_instance, date: "12/12/2012")
+      ]
+      event = create(:event, :occasional, event_instances:)
 
       skip_login
 

@@ -20,10 +20,10 @@ FactoryBot.define do
 
     after(:create) do |event, evaluator|
       evaluator.dates.each do |date|
-        create(:events_swing_date, event:, swing_date: build(:swing_date, date:))
+        create(:event_instance, event:, date:)
       end
       evaluator.cancellations.each do |date|
-        create(:events_swing_cancellation, event:, swing_date: build(:swing_date, date:))
+        create(:event_instance, event:, date:, cancelled: true)
       end
     end
 
@@ -65,20 +65,6 @@ FactoryBot.define do
 
   factory :organiser do
     name { Faker::Name.lindy_hop_name }
-  end
-
-  factory :swing_date do
-    date { Date.new }
-  end
-
-  factory :events_swing_date do
-    event
-    swing_date
-  end
-
-  factory :events_swing_cancellation do
-    event
-    swing_date
   end
 
   factory :event_instance do
