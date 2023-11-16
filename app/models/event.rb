@@ -42,13 +42,13 @@ class Event < ApplicationRecord
   class << self
     def socials_on_date(date)
       result = weekly_socials_on(date).includes(:venue)
-      result += non_weekly_socials_on(date).includes(:venue)
+      result += occasional_socials_on(date).includes(:venue)
       result
     end
 
     def socials_on_date_for_venue(date, venue)
       result = weekly_socials_on(date).where(venue_id: venue.id)
-      result += non_weekly_socials_on(date).where(venue_id: venue.id)
+      result += occasional_socials_on(date).where(venue_id: venue.id)
       result
     end
 
@@ -56,18 +56,11 @@ class Event < ApplicationRecord
       weekly.socials.active_on(date).on_same_day_of_week(date)
     end
 
-    def non_weekly_socials_on(date)
+    def occasional_socials_on(date)
       swing_date = SwingDate.find_by(date:)
       return none unless swing_date
 
-      swing_date.events.socials
-    end
-
-    def less_frequent_socials_on(date)
-      swing_date = SwingDate.find_by(date:)
-      return none unless swing_date
-
-      swing_date.events.socials.less_frequent
+      swing_date.events.occasional.socials
     end
 
     def cancelled_on_date(date)
@@ -114,7 +107,7 @@ class Event < ApplicationRecord
   scope :socials, -> { where(has_social: true) }
   scope :weekly, -> { where(frequency: 1) }
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
-  scope :less_frequent, -> { where(frequency: 0).or(where(frequency: 4..52)) }
+  scope :occasional, -> { where(frequency: 0) }
 
   scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
   scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.current) }

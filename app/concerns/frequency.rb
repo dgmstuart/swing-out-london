@@ -8,6 +8,6 @@ module Frequency
   def infrequent?
     return false if frequency.nil?
 
-    frequency.zero? || frequency >= 4
+    frequency.zero?
   end
 end

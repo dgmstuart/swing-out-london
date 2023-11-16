@@ -68,18 +68,6 @@ RSpec.describe CreateEventForm do
       expect(form.infrequent?).to be true
     end
 
-    it "is true if frequency is 4" do
-      form = described_class.new(frequency: 4)
-
-      expect(form.infrequent?).to be true
-    end
-
-    it "is true if frequency is more than 4" do
-      form = described_class.new(frequency: 5)
-
-      expect(form.infrequent?).to be true
-    end
-
     it "is false if frequency is 1" do
       form = described_class.new(frequency: 1)
 
