@@ -104,9 +104,9 @@ RSpec.describe SocialsListings do
 
           # included events:
           create(:intermittent_social, dates: [date(1)], title: "Tomorrow")
-          create(:social, frequency: 4, dates: [date(10), date(11)], title: "Twice")
-          create(:social, frequency: 4, dates: [date(8)], title: "Shown last")
-          create(:social, frequency: 2, dates: [date(8)], title: "Shown first")
+          create(:intermittent_social, dates: [date(10), date(11)], title: "Twice")
+          create(:intermittent_social, dates: [date(8)], title: "Shown last")
+          create(:intermittent_social, dates: [date(8)], title: "Shown first")
 
           dates = SOLDNTime.listing_dates(Time.zone.today)
           result = described_class.new(presenter_class: test_presenter).build(dates)
