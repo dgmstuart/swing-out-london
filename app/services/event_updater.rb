@@ -25,7 +25,7 @@ class EventUpdater
   def event_instances(dates, cancellations, frequency)
     return nil if dates.nil? && cancellations.nil?
 
-    case frequency
+    case frequency || record.frequency
     in 0
       build_occasional_instances(dates, cancellations)
     in 1

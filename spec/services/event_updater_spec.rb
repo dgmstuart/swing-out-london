@@ -17,6 +17,20 @@ RSpec.describe EventUpdater do
       )
     end
 
+    context "when the frequency isn't being updated" do
+      it "uses the frequency from the event record." do
+        record = create(:event, :weekly)
+        allow(record).to receive(:update!)
+        params = { dates: [], cancellations: [] }
+
+        described_class.new(record).update!(params)
+
+        expect(record).to have_received(:update!).with(
+          { event_instances: [], swing_dates: [], swing_cancellations: [] }
+        )
+      end
+    end
+
     it "returns the updated event" do
       record = create(:event)
       params = attributes_for(:event, title: "something different")
