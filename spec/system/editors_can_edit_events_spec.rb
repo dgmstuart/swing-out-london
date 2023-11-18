@@ -32,6 +32,9 @@ RSpec.describe "Editors can edit events", :js do
     choose "Monthly or occasionally"
     fill_in "First date", with: "10/10/2010"
 
+    fill_in "Upcoming dates", with: "10/10/2010,10/11/2010, 02/12/2011"
+    fill_in "Cancelled dates", with: "02/12/2011" # All cancellations need to be in the upcoming dates.
+
     Timecop.freeze(Time.zone.local(2010, 1, 2, 23, 17, 16)) do
       click_button "Update"
     end
@@ -43,6 +46,8 @@ RSpec.describe "Editors can edit events", :js do
       .and have_content("Social with taster")
       .and have_content("Class style:\nLindy Hop or general swing")
       .and have_content("Frequency:\nMonthly or occasionally")
+      .and have_content("Dates:\n10/10/2010, 10/11/2010, 02/12/2011")
+      .and have_content("Cancelled:\n02/12/2011")
       .and have_content("First date:\nSunday 10th October")
       .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
