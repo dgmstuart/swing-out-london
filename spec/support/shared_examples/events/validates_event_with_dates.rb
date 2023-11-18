@@ -10,6 +10,6 @@ RSpec.shared_examples "validates event with dates" do |model_name|
 
   it "is valid if it's occasional and has dates" do
     swing_dates = [build(:swing_date, date: "12/10/2010"), build(:swing_date, date: "12/11/2010")]
-    expect(build(model_name, frequency: 0, swing_dates:)).to be_valid
+    expect(build(model_name, :occasional, swing_dates:)).to be_valid
   end
 end

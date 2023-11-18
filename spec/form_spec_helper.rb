@@ -3,34 +3,13 @@
 require "spec_helper"
 require "active_model"
 require "factory_bot"
-require "faker"
 require "spec/support/forms/shoulda_matchers"
+
+FactoryBot.find_definitions if FactoryBot.factories.none?
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Shoulda::Matchers::ActiveModel
-end
-
-FactoryBot.define do
-  trait :event_form do
-    title { Faker::Company.social_dance }
-    event_type { "social_dance" }
-    frequency { 0 }
-    url { Faker::Internet.url }
-    venue_id { rand(999) }
-  end
-
-  factory :create_event_form do
-    event_form
-  end
-
-  factory :edit_event_form do
-    event_form
-  end
-
-  factory :organiser_edit_event_form do
-    venue_id { rand(999) }
-  end
 end
 
 # MONKEY PATCH
