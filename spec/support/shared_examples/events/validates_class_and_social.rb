@@ -35,7 +35,7 @@ RSpec.shared_examples "validates class and social" do |model_name|
   end
 
   it "is invalid if it has no social and is not weekly" do
-    model = build(model_name, has_taster: false, has_social: false, has_class: true, class_organiser_id: 7, frequency: 0)
+    model = build(model_name, :occasional, has_taster: false, has_social: false, has_class: true, class_organiser_id: 7)
     model.valid?
     expect(model.errors.messages).to eq(frequency: ["must be 1 (weekly) for events without a social"])
   end

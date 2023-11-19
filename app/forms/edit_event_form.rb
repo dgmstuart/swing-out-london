@@ -68,6 +68,7 @@ class EditEventForm
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
   validates_with Form::ValidEventWithDates
+  validates_with ValidCancellations
 
   def action
     "Update"
@@ -91,8 +92,8 @@ class EditEventForm
 
   def to_h
     attributes.merge(
-      "dates" => DatesStringParser.new.parse(dates),
-      "cancellations" => DatesStringParser.new.parse(cancellations),
+      "dates" => parsed_dates,
+      "cancellations" => parsed_cancellations,
       "has_class" => has_weekly_class?,
       "has_taster" => has_occasional_class?
     ).except(
@@ -107,6 +108,14 @@ class EditEventForm
 
   def has_class? # rubocop:disable Naming/PredicateName
     type_is_weekly_class? || !!social_has_class
+  end
+
+  def parsed_dates
+    date_parser.parse(dates)
+  end
+
+  def parsed_cancellations
+    date_parser.parse(cancellations)
   end
 
   private
@@ -125,5 +134,9 @@ class EditEventForm
 
   def has_occasional_class? # rubocop:disable Naming/PredicateName
     infrequent? && social_has_class
+  end
+
+  def date_parser
+    DatesStringParser.new
   end
 end

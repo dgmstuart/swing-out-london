@@ -36,6 +36,10 @@ FactoryBot.define do
     sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
   end
 
+  trait :occasional do
+    frequency { 0 }
+  end
+
   factory :venue do
     name { "test_venue" }
     area { "test_area" }
@@ -51,5 +55,25 @@ FactoryBot.define do
 
   factory :swing_date do
     date { Date.new }
+  end
+
+  trait :event_form do
+    title { Faker::Company.social_dance }
+    event_type { "social_dance" }
+    frequency { 0 }
+    url { Faker::Internet.url }
+    venue_id { rand(999) }
+  end
+
+  factory :create_event_form do
+    event_form
+  end
+
+  factory :edit_event_form do
+    event_form
+  end
+
+  factory :organiser_edit_event_form do
+    venue_id { rand(999) }
   end
 end

@@ -11,7 +11,7 @@ class ExternalEventsController < CmsBaseController
   def update # rubocop:disable Metrics/MethodLength
     @event = Event.find_by!(organiser_token: params[:id])
 
-    @form = OrganiserEditEventForm.new(event_params)
+    @form = OrganiserEditEventForm.new(event_params.merge(frequency: @event.frequency))
     if @form.valid?
       audit_comment = EventParamsCommenter.new.comment(@event, event_params)
       update_params = @form.to_h.merge!(audit_comment)
