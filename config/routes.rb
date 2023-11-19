@@ -53,4 +53,5 @@ Rails.application.routes.draw do
   get ".well-known" => "robots#no_content"
   get ".well-known/apple-app-site-association" => "robots#empty_json"
   get ".well-known/traffic-advice" => "robots#no_content"
+  get ".well-known/pki-validation" => "robots#no_content"
 end

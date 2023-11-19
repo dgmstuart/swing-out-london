@@ -12,6 +12,15 @@ RSpec.describe ".well-known/" do
     end
   end
 
+  it "returns 204 for requests to /.well-known/pki-validation/" do
+    get "/.well-known/pki-validation/"
+
+    aggregate_failures do
+      expect(response).to have_http_status(:no_content)
+      expect(response.body).to be_empty
+    end
+  end
+
   it "returns 204 for requests to /.well-known/" do
     get "/.well-known/"
 
