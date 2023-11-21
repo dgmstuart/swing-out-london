@@ -14,6 +14,13 @@ en:
   city:
     london: London
     bristol: Bristol
+  activerecord:
+    errors:
+      models:
+        event_instance:
+          attributes:
+            date:
+              taken: "The date '%{value}' has already been taken"
   flash:
     success: "%{model} was successfully %{action}"
     map:

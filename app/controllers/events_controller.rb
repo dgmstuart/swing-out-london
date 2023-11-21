@@ -30,7 +30,7 @@ class EventsController < CmsBaseController
     @form = CreateEventForm.new(create_event_params)
 
     if @form.valid?
-      event = Event.create!(@form.to_h)
+      event = EventCreator.new.create!(@form.to_h)
       flash[:notice] = t("flash.success", model: "Event", action: "created")
       redirect_to(event)
     else
@@ -38,15 +38,13 @@ class EventsController < CmsBaseController
     end
   end
 
-  def update # rubocop:disable Metrics/MethodLength
+  def update
     @event = Event.find(params[:id])
 
     @form = EditEventForm.from_event(@event)
     @form.assign_attributes(update_event_params)
     if @form.valid?
-      audit_comment = EventParamsCommenter.new.comment(@event, update_event_params)
-      update_params = @form.to_h.merge!(audit_comment)
-      @event.update!(update_params)
+      EventUpdater.new(@event).update!(@form.to_h)
       flash[:notice] = t("flash.success", model: "Event", action: "updated")
       redirect_to(@event)
     else

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Organisers can edit events" do
   context "when an organiser token exists" do
     it "allows an organiser to edit an occasional event" do
-      create(
+      event = create(
         :social,
         organiser_token: "abc123",
         title: "Midtown stomp",
@@ -13,6 +13,8 @@ RSpec.describe "Organisers can edit events" do
         frequency: 0,
         first_date: Date.new(2001, 2, 3)
       )
+      event.swing_dates << create(:swing_date, date: "12/12/2012")
+
       create(:venue, name: "The 100 Club", area: "central")
 
       visit("/external_events/abc123/edit")

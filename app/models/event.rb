@@ -18,6 +18,8 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
+  has_many :event_instances, dependent: :destroy
+
   validates :frequency, presence: true
   validates :url, presence: true, uri: true
 
@@ -143,27 +145,8 @@ class Event < ApplicationRecord
     Rails.cache.delete(dates_cache_key)
   end
 
-  def add_date(new_date)
-    swing_dates << SwingDate.find_or_initialize_by(date: new_date)
-  end
-
-  def dates=(array_of_new_dates)
-    clear_dates_cache
-    self.swing_dates = []
-    array_of_new_dates.each { |nd| add_date(nd) }
-  end
-
   def cancellations
     swing_cancellations.collect(&:date)
-  end
-
-  def cancellations=(array_of_new_cancellations)
-    self.swing_cancellations = []
-    array_of_new_cancellations.each { |nc| add_cancellation(nc) }
-  end
-
-  def add_cancellation(new_cancellation)
-    swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
   def future_cancellations

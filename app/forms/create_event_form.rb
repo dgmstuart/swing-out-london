@@ -60,15 +60,16 @@ class CreateEventForm
   end
 
   def to_h
-    attributes.merge(
-      "dates" => parsed_dates,
-      "cancellations" => parsed_cancellations,
-      "has_social" => type_is_social_dance?,
-      "has_class" => has_weekly_class?,
-      "has_taster" => has_occasional_class?
+    attributes.symbolize_keys.merge(
+      dates: parsed_dates,
+      cancellations: parsed_cancellations,
+      has_social: type_is_social_dance?,
+      has_class: has_weekly_class?,
+      has_taster: has_occasional_class?,
+      course_length: (course_length.to_i if course_length.present?)
     ).except(
-      "event_type",
-      "social_has_class"
+      :event_type,
+      :social_has_class
     )
   end
 

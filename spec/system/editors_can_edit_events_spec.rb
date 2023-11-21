@@ -96,7 +96,7 @@ RSpec.describe "Editors can edit events", :js do
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
     audit = Audit.last
     expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
-    expect(audit.comment).to eq "Updated dates: (old: 12/12/2012,13/12/2012) (new: 12/12/2012, 12/01/2013)"
+    expect(audit.comment).to eq "Updated dates: (old: 12/12/2012,13/12/2012) (new: 12/12/2012,12/01/2013)"
   end
 
   it "adding invalid dates" do
@@ -137,6 +137,27 @@ RSpec.describe "Editors can edit events", :js do
     audit = Audit.last
     expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
     expect(audit.comment).to eq "Updated cancellations: (old: ) (new: 12/12/2012)"
+  end
+
+  context "when changing from an occasional event to a weekly event" do
+    it "removes any dates" do
+      event = create(:event, :occasional, dates: ["12/11/2012", "12/12/2012"])
+      # There's a bug which means that we can't create a swing date and cancellation at the same time:
+      event.swing_cancellations << SwingDate.find_by(date: "12/11/2012")
+
+      skip_login
+
+      visit edit_event_path(event)
+
+      choose "Weekly"
+      select "Thursday", from: "Day"
+
+      click_button "Update"
+
+      expect(page).not_to have_content("Dates")
+      expect(page).to have_content("Cancelled:\n12/11/2012")
+      expect(event.reload.dates).to be_empty
+    end
   end
 
   context "when the event has an old frequency" do

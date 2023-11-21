@@ -8,14 +8,12 @@ class ExternalEventsController < CmsBaseController
     @form = OrganiserEditEventForm.from_event(@event)
   end
 
-  def update # rubocop:disable Metrics/MethodLength
+  def update
     @event = Event.find_by!(organiser_token: params[:id])
 
     @form = OrganiserEditEventForm.new(event_params.merge(frequency: @event.frequency))
     if @form.valid?
-      audit_comment = EventParamsCommenter.new.comment(@event, event_params)
-      update_params = @form.to_h.merge!(audit_comment)
-      @event.update!(update_params)
+      EventUpdater.new(@event).update!(@form.to_h)
       flash[:success] = t("flash.success", model: "Event", action: "updated")
       redirect_to edit_external_event_path(@event.organiser_token)
     else
