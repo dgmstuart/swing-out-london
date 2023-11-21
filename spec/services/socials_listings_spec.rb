@@ -4,16 +4,16 @@ require "spec_helper"
 require "app/services/socials_listings"
 require "active_support"
 require "active_support/core_ext/string/conversions"
+require "active_support/core_ext/object/blank"
 
 RSpec.describe SocialsListings do
   context "when there are several dates, and one event on one date" do
     it "returns an array with that event and date" do
-      event = instance_double("Event", id: 1, title: "Stompin")
+      event = double("Event", id: 1, title: "Stompin", cancelled: false) # rubocop:disable RSpec/VerifiedDoubles
       event_finder = fake_event_finder("11 June 1935".to_date => [event])
-      cancellation_finder = fake_cancellation_finder({})
 
       dates = ["10 June 1935", "11 June 1935", "12 June 1935"].map(&:to_date)
-      result = described_class.new(event_finder:, cancellation_finder:, presenter_class: test_presenter).build(dates)
+      result = described_class.new(event_finder:, presenter_class: test_presenter).build(dates)
 
       expect(result).to eq(
         [
@@ -25,12 +25,11 @@ RSpec.describe SocialsListings do
 
   context "when there are several dates, and one event on one date with a cancellation" do
     it "returns an array with that event and date and the event's id" do
-      event = instance_double("Event", id: 23, title: "Stompin")
+      event = double("Event", id: 23, title: "Stompin", cancelled: true) # rubocop:disable RSpec/VerifiedDoubles
       event_finder = fake_event_finder("11 June 1935".to_date => [event])
-      cancellation_finder = fake_cancellation_finder("11 June 1935".to_date => [event])
 
       dates = ["10 June 1935", "11 June 1935", "12 June 1935"].map(&:to_date)
-      result = described_class.new(event_finder:, cancellation_finder:, presenter_class: test_presenter).build(dates)
+      result = described_class.new(event_finder:, presenter_class: test_presenter).build(dates)
 
       expect(result).to eq(
         [
@@ -43,15 +42,14 @@ RSpec.describe SocialsListings do
   context "when there are several events" do
     it "sorts them alphabetically in the output" do
       events = [
-        instance_double("Event", id: 1, title: "Boogaloo"),
-        instance_double("Event", id: 2, title: "Cotton Club"),
-        instance_double("Event", id: 3, title: "Alhambra")
+        double("Event", id: 1, title: "Boogaloo", cancelled: false), # rubocop:disable RSpec/VerifiedDoubles
+        double("Event", id: 2, title: "Cotton Club", cancelled: false), # rubocop:disable RSpec/VerifiedDoubles
+        double("Event", id: 3, title: "Alhambra", cancelled: false) # rubocop:disable RSpec/VerifiedDoubles
       ]
       event_finder = fake_event_finder("11 June 1935".to_date => events)
-      cancellation_finder = fake_cancellation_finder({})
 
       dates = ["11 June 1935".to_date]
-      result = described_class.new(event_finder:, cancellation_finder:, presenter_class: test_presenter).build(dates)
+      result = described_class.new(event_finder:, presenter_class: test_presenter).build(dates)
 
       expect(result.first[1].map(&:first)).to eq(["Alhambra", "Boogaloo", "Cotton Club"])
     end
