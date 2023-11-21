@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_13_150435) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_21_200215) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -75,18 +75,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_150435) do
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
-  create_table "events_swing_cancellations", force: :cascade do |t|
-    t.integer "swing_date_id", null: false
-    t.integer "event_id", null: false
-    t.index ["swing_date_id", "event_id"], name: "index_events_swing_cancellations_on_swing_date_id_and_event_id", unique: true
-  end
-
-  create_table "events_swing_dates", force: :cascade do |t|
-    t.integer "swing_date_id", null: false
-    t.integer "event_id", null: false
-    t.index ["swing_date_id", "event_id"], name: "index_events_swing_dates_on_swing_date_id_and_event_id", unique: true
-  end
-
   create_table "organisers", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.string "website", limit: 255
@@ -95,13 +83,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_150435) do
     t.datetime "updated_at", precision: nil
     t.string "shortname", limit: 255
     t.index ["shortname"], name: "index_organisers_on_shortname", unique: true
-  end
-
-  create_table "swing_dates", id: :serial, force: :cascade do |t|
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.date "date"
-    t.index ["date"], name: "index_swing_dates_on_date", unique: true
   end
 
   create_table "venues", id: :serial, force: :cascade do |t|

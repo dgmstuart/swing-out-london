@@ -11,14 +11,6 @@
 RSpec/NestedGroups:
   Max: 4
 
-# Offense count: 2
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/HasAndBelongsToMany:
-  Exclude:
-    - 'app/models/swing_date.rb'
-
-# Offense count: 62
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Enabled: false
