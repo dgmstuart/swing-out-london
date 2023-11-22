@@ -46,7 +46,7 @@ class MapsController < ApplicationController
       )
   rescue Maps::Socials::Dates::DateOutOfRangeError
     logger.warn("Not a date in the visible range: #{@date}")
-    redirect_to map_socials_path
+    redirect_to map_socials_path, status: :moved_permanently
   end
 
   def action_cache_key

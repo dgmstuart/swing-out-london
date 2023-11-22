@@ -6,6 +6,8 @@ require "day_names"
 class Event < ApplicationRecord
   audited
 
+  include Frequency
+
   CONSIDERED_NEW_FOR = 1.month
 
   belongs_to :venue
@@ -16,12 +18,18 @@ class Event < ApplicationRecord
   has_many :events_swing_cancellations, dependent: :destroy
   has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
+  has_many :event_instances, dependent: :destroy
+
   validates :frequency, presence: true
   validates :url, presence: true, uri: true
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validates :organiser_token, uniqueness: true, allow_nil: true
+
+  validate :has_class_or_social
+  validate :must_be_weekly_if_no_social
+  validate :cannot_be_weekly_and_have_dates
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -36,13 +44,13 @@ class Event < ApplicationRecord
   class << self
     def socials_on_date(date)
       result = weekly_socials_on(date).includes(:venue)
-      result += non_weekly_socials_on(date).includes(:venue)
+      result += occasional_socials_on(date).includes(:venue)
       result
     end
 
     def socials_on_date_for_venue(date, venue)
       result = weekly_socials_on(date).where(venue_id: venue.id)
-      result += non_weekly_socials_on(date).where(venue_id: venue.id)
+      result += occasional_socials_on(date).where(venue_id: venue.id)
       result
     end
 
@@ -50,18 +58,11 @@ class Event < ApplicationRecord
       weekly.socials.active_on(date).on_same_day_of_week(date)
     end
 
-    def non_weekly_socials_on(date)
+    def occasional_socials_on(date)
       swing_date = SwingDate.find_by(date:)
       return none unless swing_date
 
-      swing_date.events.socials
-    end
-
-    def less_frequent_socials_on(date)
-      swing_date = SwingDate.find_by(date:)
-      return none unless swing_date
-
-      swing_date.events.socials.less_frequent
+      swing_date.events.occasional.socials
     end
 
     def cancelled_on_date(date)
@@ -70,6 +71,24 @@ class Event < ApplicationRecord
 
       swing_date.cancelled_events.pluck :id
     end
+  end
+
+  def has_class_or_social # rubocop:disable Naming/PredicateName
+    return true if has_class? || has_social?
+
+    errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed")
+  end
+
+  def must_be_weekly_if_no_social
+    return if has_social? || weekly? || frequency.nil?
+
+    errors.add(:frequency, "must be 1 (weekly) for events without a social")
+  end
+
+  def cannot_be_weekly_and_have_dates
+    return unless weekly? && swing_dates.any?
+
+    errors.add(:swing_dates, "must be empty for weekly events")
   end
 
   # ----- #
@@ -90,7 +109,7 @@ class Event < ApplicationRecord
   scope :socials, -> { where(has_social: true) }
   scope :weekly, -> { where(frequency: 1) }
   scope :weekly_or_fortnightly, -> { where(frequency: [1, 2]) }
-  scope :less_frequent, -> { where(frequency: 0).or(where(frequency: 4..52)) }
+  scope :occasional, -> { where(frequency: 0) }
 
   scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
   scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.current) }
@@ -126,27 +145,8 @@ class Event < ApplicationRecord
     Rails.cache.delete(dates_cache_key)
   end
 
-  def add_date(new_date)
-    swing_dates << SwingDate.find_or_initialize_by(date: new_date)
-  end
-
-  def dates=(array_of_new_dates)
-    clear_dates_cache
-    self.swing_dates = []
-    array_of_new_dates.each { |nd| add_date(nd) }
-  end
-
   def cancellations
     swing_cancellations.collect(&:date)
-  end
-
-  def cancellations=(array_of_new_cancellations)
-    self.swing_cancellations = []
-    array_of_new_cancellations.each { |nc| add_cancellation(nc) }
-  end
-
-  def add_cancellation(new_cancellation)
-    swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
   def future_cancellations
@@ -159,41 +159,6 @@ class Event < ApplicationRecord
   def filter_future(input_dates)
     # TODO: - should be able to simply replace this with some variant of ".future?", but need to test
     input_dates.select { |d| d >= Date.current }
-  end
-
-  public
-
-  def inactive?
-    ended? || (!future_dates? && one_off?)
-  end
-
-  # For the event listing tables:
-  def status_string
-    if inactive?
-      "inactive"
-    elsif !future_dates?
-      "no_future_dates"
-    end
-  end
-
-  # PRINT METHODS #
-
-  def print_dates_rows
-    if ended?
-      "Ended"
-    elsif weekly?
-      "Every week on #{day.pluralize}"
-    elsif dates.empty?
-      "(No dates)"
-    else
-      date_rows_printer.print(dates.reverse)
-    end
-  end
-
-  private
-
-  def date_rows_printer
-    DatePrinter.new(separator: ", ")
   end
 
   public
@@ -229,20 +194,6 @@ class Event < ApplicationRecord
     last_date < Date.current
   end
 
-  def one_off?
-    frequency.zero? && last_date == latest_date && first_date == latest_date
-  end
-
-  def weekly?
-    frequency == 1
-  end
-
-  def infrequent?
-    return false unless frequency
-
-    frequency.zero? || frequency >= 4
-  end
-
   def latest_date_cache_key
     caching_key("latest_date")
   end
@@ -265,18 +216,18 @@ class Event < ApplicationRecord
   ###########
 
   def archive!
+    # If there's already a last_date in the past, then the event should already be archived!
     return false if !last_date.nil? && last_date < Date.current
 
-    # If there's already a last_date in the past, then the event should already be archived!
+    ended_date =
+      if weekly?
+        Date.current.prev_occurring(day.downcase.to_sym)
+      elsif dates.blank?
+        Date.new # Earliest possible ruby date
+      else
+        latest_date
+      end
 
-    self[:last_date] = if weekly?
-                         Date.current.prev_occurring(day.downcase.to_sym)
-                       elsif dates.nil?
-                         Date.new # Earliest possible ruby date
-                       else
-                         latest_date
-                       end
-
-    true if save!
+    update!(last_date: ended_date)
   end
 end

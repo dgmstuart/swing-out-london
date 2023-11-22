@@ -37,9 +37,21 @@ Rails.application.routes.draw do
 
   resource :account, only: %i[show destroy], controller: :users
 
+  namespace :admin do
+    resource :audit_log, only: %i[show]
+    resource :cache, only: %i[show destroy]
+  end
+
   resource :audit_log, only: %i[show]
+
+  get "sitemap", to: "sitemaps#index", defaults: { format: "xml" }
 
   get "apple-touch-icon-precomposed" => "application#not_found"
   get "apple-touch-icon-:size-precomposed" => "application#not_found"
   get "apple-app-site-association" => "application#not_found"
+  get "swingoutlondon_og.png" => redirect(ActionController::Base.helpers.image_path(CITY.opengraph_image))
+  get ".well-known" => "robots#no_content"
+  get ".well-known/apple-app-site-association" => "robots#empty_json"
+  get ".well-known/traffic-advice" => "robots#no_content"
+  get ".well-known/pki-validation" => "robots#no_content"
 end

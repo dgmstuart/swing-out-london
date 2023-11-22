@@ -47,7 +47,7 @@ module Maps
       attr_reader :social_listing
 
       def date
-        @date.to_s(:listing_date)
+        @date.to_fs(:listing_date)
       end
     end
   end

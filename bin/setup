@@ -1,17 +1,13 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
-
-require 'fileutils'
+require "fileutils"
 
 class Setup
   include FileUtils
 
-  def initialize
-    @app_root = File.expand_path('..', __dir__)
-  end
+  APP_ROOT = File.expand_path("..", __dir__)
 
   def run
-    chdir app_root do
+    chdir APP_ROOT do
       puts '== Installing dependencies =='
       system! 'gem install bundler --conservative'
       system('bundle check') || system!('bundle install')

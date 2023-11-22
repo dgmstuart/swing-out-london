@@ -1,0 +1,16 @@
+@use "../shared/colours";
+
+// SMALL
+.login {
+  margin: 20px 30px 35px;
+
+  h2 {
+    font-size: 30px;
+  }
+
+  // AVERAGE VIEWING SIZE
+  @media only screen and (width >= 481px) {
+    margin-left: 70px;
+    margin-right: 70px;
+  }
+}

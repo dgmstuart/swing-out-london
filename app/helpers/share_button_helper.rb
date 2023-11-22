@@ -5,7 +5,7 @@ module ShareButtonHelper
     twitter_url = "https://twitter.com/intent/tweet"
 
     tweet_text = "If you want to learn to swing dance, #{tc('site_name')} lists all the classes in #{tc('city')}:"
-    via = "swingoutlondon"
+    via = tc("twitter_handle")
 
     query_parameters = [
       "url=#{tc('site_url')}",
@@ -52,7 +52,7 @@ module ShareButtonHelper
     alt_text = "Donate to help keep #{tc('site_name')} running"
 
     link_to "Donate",
-            Rails.application.config.x.donate_link,
+            Rails.configuration.x.donate_link,
             title: alt_text,
             alt: alt_text,
             target: "_blank",

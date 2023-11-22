@@ -1,0 +1,51 @@
+@use "colours";
+
+$body_font_size: 14px;
+
+body {
+  // Disable automatic font zooming:
+  text-size-adjust: 100%;
+  font-family: Futura, Jost, "Tw Cen MT", "Trebuchet MS", sans-serif;
+  color: colours.$text-colour;
+  font-size: $body_font_size;
+
+  #page {
+    background: colours.$background-colour none;
+    margin: auto;
+  }
+
+  line-height: 1.5;
+}
+
+p {
+  margin-bottom: 0.8em;
+
+  em {
+    font-style: italic;
+  }
+}
+
+a:hover {
+  border-bottom: solid 2px;
+}
+
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+
+.site_title {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+
+  em {
+    letter-spacing: 0;
+    display: block;
+  }
+}
+
+.hidden {
+  display: none;
+}

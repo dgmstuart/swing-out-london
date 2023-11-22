@@ -1,0 +1,329 @@
+@use "../shared/colours";
+@use "borders";
+
+$listing_font_size: 15px;
+$class_day_font_size: 17px;
+$social_date_font_size: 18px;
+$listing_heading_font_size: 41px;
+$listing_subheading_font_size: 22px;
+$small_font_size: 12px;
+
+// LAYOUT
+/////////////////////////////////////////////
+
+// SMALL
+
+#caveat {
+  text-align: center;
+  margin: auto;
+  padding: 15px 10px 0;
+}
+
+main {
+  padding: 0 10px;
+}
+
+.donation {
+  max-width: 400px;
+  margin: 25px auto;
+}
+
+// MOBILE ONLY
+@media only screen and (width <= 767px) {
+  #classes h2 {
+    padding-top: 50px;
+    margin: 0 30px;
+    border-top: borders.$basic-border;
+  }
+
+  .note {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+}
+
+// TABLET & SMALLER LAPTOPS */
+@media only screen and (width >= 768px) {
+  body.listings main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+
+  #caveat {
+    grid-column-start: span 2;
+    margin: 0 30px;
+  }
+
+  #classes {
+    order: 1;
+  }
+
+  #social_dances {
+    order: 2;
+  }
+
+  #key {
+    margin: 0 30px 20px;
+  }
+
+  .daylist {
+    padding: 0 28px 0 30px;
+    border-right: borders.$basic-border; // 3px wide
+  }
+
+  .datelist {
+    padding: 0 30px 0 29px;
+  }
+
+  #social_dances .note {
+    margin: 10px 30px 0 35px;
+  }
+
+  #social_dances .donation {
+    margin: 25px;
+  }
+}
+
+// Main listing styles
+/////////////////////////////////////////////
+
+#caveat {
+  font-style: italic;
+
+  strong {
+    color: colours.$highlight-colour;
+  }
+}
+
+#key {
+  font-size: 17px;
+  font-style: italic;
+}
+
+.daylist {
+  font-size: $listing_font_size;
+  padding-bottom: 10px;
+
+  h3 {
+    font-size: $class_day_font_size;
+    padding-left: 3px;
+    float: left;
+  }
+
+  .today h3 {
+    padding-left: 0;
+  }
+}
+
+.day_row {
+  padding: 10px;
+
+  li {
+    margin-left: 100px;
+    margin-bottom: 0.6em;
+    padding-left: 3px;
+
+    // (to account for the border we apply when it's today)
+    line-height: 1.4em;
+  }
+}
+
+.class_cancelled {
+  font-size: $small_font_size;
+  display: block;
+  font-style: italic;
+  padding-left: 1em;
+  margin-right: 1.5em;
+  color: colours.$highlight-colour;
+}
+
+.datelist {
+  font-size: $listing_font_size;
+
+  h3 {
+    font-size: $social_date_font_size;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+.date_row {
+  padding: 10px 10px 7px 7px;
+  margin-bottom: 13px;
+
+  li {
+    margin-bottom: 10px;
+    padding-left: 3px;
+
+    // (to account for the border we apply when it's today)
+    line-height: 1.4em;
+  }
+}
+
+.social_highlight {
+  background: url("highlight_icon.png") no-repeat 0 0.15em;
+  padding-left: 20px;
+}
+
+#social_dances .note {
+  font-style: italic;
+  font-size: 15px;
+}
+
+.listings-heading {
+  font-size: $listing_subheading_font_size;
+  text-align: center;
+  text-transform: none;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  line-height: 1;
+
+  em {
+    text-transform: uppercase;
+    font-size: $listing_heading_font_size;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+// Common listing styles
+/////////////////////////////////////////////
+section.listings {
+  .info {
+    font-size: $small_font_size;
+    font-style: italic;
+    color: colours.$lowlight-colour;
+    line-height: 0;
+  }
+
+  .details {
+    display: block;
+    margin-left: 3.4em;
+  }
+
+  .cancelled_label,
+  .new_label {
+    padding: 0.3em 0.6em;
+    margin-right: 0.2em;
+    position: relative;
+    bottom: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
+
+  .cancelled_label {
+    color: colours.$background-colour;
+    background-color: colours.$highlight-colour;
+  }
+
+  .new_label {
+    color: colours.$background-colour;
+    background-color: colours.$text-colour;
+  }
+
+  .postcode {
+    border: borders.$thin-border;
+    display: block;
+    float: left;
+    width: 3.5em;
+
+    // N.B. Longest displaying postcode is NW1W. This won't fit in this space,
+    // but we don't have any postcodes in that area a.t.m.
+    position: relative;
+    bottom: 0.1em;
+    padding-left: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    text-decoration: none;
+  }
+
+  .postcode:hover {
+    border: 1px solid colours.$link-colour;
+    background-color: colours.$link-colour;
+    color: colours.$background-colour;
+  }
+}
+
+// TODAY AND TOMORROW
+/////////////////////////////////////////////
+.today {
+  border: 3px dashed colours.$text-colour;
+
+  li {
+    padding: 0;
+  }
+
+  &:target {
+    border-color: colours.$highlight-colour;
+    transition: all 0.8s ease-in;
+  }
+}
+.datelist .today { margin-bottom: 1.7em; }
+.daylist .today { margin-bottom: 0.9em; }
+
+.today_label,
+.tomorrow_label { text-transform: uppercase; }
+
+.day_row .today_label {
+  display: block;
+  text-align: center;
+  font-size: 1.2em;
+  letter-spacing: 0.7em;
+  padding-left: 0.7em;
+  padding-bottom: 0.3em;
+}
+
+.date_row {
+  .today_label,
+  .tomorrow_label { letter-spacing: 0.1em; }
+
+  .today_label::after,
+  .tomorrow_label::after { content: ":"; }
+}
+
+// DONATION
+/////////////////////////////////////////////
+.donation {
+  padding: 10px 15px;
+  background-color: #fff8ea;
+  border: borders.$double-border;
+  text-align: center;
+
+  p {
+    width: 100%;
+  }
+}
+
+.share_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 15px;
+  justify-content: center;
+}
+
+.share_button {
+  display: inline-block;
+  padding: 8px 20px;
+
+  &:hover {
+    border: none;
+  }
+}
+
+.facebook {
+  background-color: colours.$facebook-blue;
+  color: white;
+}
+
+.twitter {
+  background-color: colours.$twitter-blue;
+  color: colours.$text-colour;
+}
+
+.donate_button {
+  background-color: colours.$highlight-colour;
+  color: white;
+}

@@ -23,7 +23,7 @@ class LastUpdated
     end
 
     def time_in_words
-      time.to_s(:last_updated)
+      time.to_fs(:last_updated)
     end
 
     def iso

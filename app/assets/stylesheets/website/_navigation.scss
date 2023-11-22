@@ -1,0 +1,33 @@
+@use "borders";
+
+.navigation {
+  text-align: center;
+  list-style-type: none;
+
+  li {
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &.primary-nav {
+    a {
+      padding: 10px;
+
+      // added here so we can take it away when we apply the border
+      &:hover {
+        padding: 8px;
+        border: borders.$nav-border;
+      }
+    }
+
+    .current {
+      padding: 8px;
+      border: borders.$double-border;
+    }
+
+    // We allow the current link to be a link on the map:
+    a.current:hover {
+      border: borders.$thick-border;
+    }
+  }
+}

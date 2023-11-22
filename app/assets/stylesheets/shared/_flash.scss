@@ -1,0 +1,17 @@
+@use "colours";
+
+.alert,
+.notice {
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.alert {
+  background-color: colours.$alert-colour;
+  color: white;
+}
+
+.notice {
+  background-color: colours.$notice-colour;
+  color: white;
+}

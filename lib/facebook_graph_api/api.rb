@@ -14,6 +14,12 @@ module FacebookGraphApi
       http_client.delete("/#{user_id}/permissions")
     end
 
+    def profile(user_id)
+      raise ArgumentError, "missing user id" if user_id.nil?
+
+      http_client.get("/#{user_id}")
+    end
+
     private
 
     attr_reader :http_client

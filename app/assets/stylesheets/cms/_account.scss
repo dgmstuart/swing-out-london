@@ -1,0 +1,21 @@
+@use "../shared/colours";
+
+// SMALL
+.account {
+  h2 {
+    font-size: 25px;
+    margin-top: 40px;
+  }
+
+  // AVERAGE VIEWING SIZE
+  @media only screen and (width >= 481px) {
+    margin-left: 70px;
+    margin-right: 70px;
+    max-width: 540px;
+
+    h1,
+    h2 {
+      text-align: left;
+    }
+  }
+}

@@ -6,9 +6,12 @@ class LoginSession
     @logger = logger
   end
 
-  def log_in!(auth_id:, name:, token:)
-    request.session[:user] = { "auth_id" => auth_id, "name" => name, "token" => token }
-    logger.info("Logged in as auth id #{auth_id}")
+  def log_in!(auth_id:, name:, token:, role:)
+    admin = role == :admin
+    request.session[:user] = { "auth_id" => auth_id, "name" => name, "token" => token, "admin" => admin }
+    log_message = "Logged in as auth id #{auth_id}"
+    log_message += " with Admin permissions" if admin
+    logger.info(log_message)
   end
 
   def log_out!
@@ -42,6 +45,18 @@ class LoginSession
       user.fetch("name")
     end
 
+    def name_with_role
+      if admin?
+        "#{name} (Admin)"
+      else
+        name
+      end
+    end
+
+    def admin?
+      user.fetch("admin", false)
+    end
+
     def auth_id
       user.fetch("auth_id")
     end
@@ -62,6 +77,14 @@ class LoginSession
 
     def name
       "Guest"
+    end
+
+    def name_with_role
+      name
+    end
+
+    def admin?
+      false
     end
 
     def auth_id

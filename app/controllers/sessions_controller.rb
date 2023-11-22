@@ -6,14 +6,17 @@ class SessionsController < ApplicationController
 
   def new; end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     user = AuthResponse.new(request.env)
-    if authorised?(user.id)
-      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token)
-      redirect_to events_path
+    role = authorisation_for(user.id)
+    if %i[editor admin].include?(role)
+      after_login_path = return_to_session.path(fallback: events_path)
+      reset_session # calling reset_session prevents "session fixation" attacks
+      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, role:)
+      redirect_to after_login_path
     else
       flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
-                    "If you've been invited to become an admin, please contact the main site admins and get them to add this ID"
+                    "If you've been invited to become an editor, please contact the main site admins and get them to add this ID"
       logger.warn("Auth id #{user.id} tried to log in, but was not in the allowed list")
       redirect_to action: :new
     end
@@ -33,11 +36,22 @@ class SessionsController < ApplicationController
 
   private
 
-  def authorised?(auth_id)
-    Rails.application.config.x.facebook.admin_user_ids.include?(auth_id)
+  def authorisation_for(auth_id)
+    config = Rails.configuration.x.facebook
+    if config.admin_user_ids.include?(auth_id)
+      :admin
+    elsif config.editor_user_ids.include?(auth_id)
+      :editor
+    else
+      :none
+    end
   end
 
   def login_session
     LoginSession.new(request)
+  end
+
+  def return_to_session
+    ReturnToSession.new(request)
   end
 end

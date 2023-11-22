@@ -1,0 +1,242 @@
+@use "borders";
+
+#map {
+  height: 100%;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body.classes,
+body.socials {
+  a {
+    color: inherit;
+  }
+
+  .venue_info {
+    h3 {
+      font-size: 1.2em;
+    }
+
+    .adr {
+      font-style: italic;
+      font-size: 0.9em;
+      margin-top: 0.3em;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  ul.listing_info {
+    margin-top: 15px;
+
+    li {
+      /* padding to allow for the bottom border applied to the link it contains on hover */
+      padding-bottom: 1px;
+    }
+
+    .social_date {
+      display: block;
+      float: left;
+      width: 190px;
+    }
+
+    .event_details {
+      display: block;
+      margin-left: 190px;
+      max-width: 400px;
+    }
+
+    .day {
+      margin-right: 5px;
+    }
+  }
+
+  .nota_bene {
+    margin: 15px 0 0;
+    font-size: 0.9em;
+    color: #666;
+  }
+
+  .page {
+    background: #fee6b8 none;
+  }
+
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 130px;
+    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.1em;
+      text-align: center;
+      margin-bottom: 20px;
+
+      em {
+        display: block;
+        font-size: 2em;
+      }
+    }
+
+    .primary-nav {
+      text-align: center;
+
+      // nuke the space which gets inserted in-between the elements for no good reason:
+      font-size: 0;
+
+      span {
+        font-size: 20px;
+      }
+
+      a {
+        font-size: 20px;
+        margin: 0 5px;
+
+        &.current {
+          margin: 0 3px;
+        }
+      }
+    }
+  }
+
+  .listings {
+    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+
+    li {
+      text-align: center;
+      border-bottom: solid 1px #bebebe;
+      box-shadow: 0 1px 0 #e4e4e4;
+
+      span#selected,
+      a.selected {
+        display: block;
+        padding: 10px;
+        color: #fee6b8;
+        background-color: #0f0f0f;
+      }
+
+      a {
+        padding: 10px;
+
+        &:hover {
+          border: none;
+          background-color: #e4e4e4;
+        }
+      }
+    }
+  }
+
+  .note {
+    padding: 30px 15px 20px;
+    font-size: 14px;
+  }
+
+  // SMALL
+  header {
+    padding: 20px 0;
+    font-size: 0.7em;
+
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+
+  .listings {
+    font-size: 14px;
+    position: absolute;
+    overflow: hidden auto;
+    top: 170px;
+    bottom: 0;
+    left: 0;
+
+    li a {
+      display: block;
+    }
+  }
+
+  .page {
+    width: 164px;
+  }
+
+  // SMALL ONLY
+  @media only screen and (width <= 767px) {
+    #map {
+      margin-left: 164px;
+    }
+
+    header .primary-nav {
+      display: block;
+      width: 140px;
+      margin: auto;
+
+      a {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+        padding: 5px 0;
+
+        &:hover {
+          padding: 3px 0;
+        }
+
+        &.current {
+          padding: 3px 0;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  // TABLET & SMALLER LAPTOPS
+  @media only screen and (width >= 768px) {
+    #map {
+      margin-left: 220px;
+    }
+
+    .page {
+      width: 220px;
+    }
+
+    header {
+      font-size: 0.9em;
+
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  // DESKTOP
+  @media only screen and (width >= 960px) {
+    #map {
+      margin-left: 320px;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .page {
+      width: 280px;
+    }
+
+    .listings {
+      font-size: 18px;
+      padding: 0 20px;
+    }
+
+    header {
+      font-size: 1em;
+    }
+  }
+}

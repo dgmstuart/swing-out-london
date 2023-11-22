@@ -1,0 +1,222 @@
+@use "../shared/colours";
+
+form {
+  .form-group {
+    margin-bottom: 0.5em;
+  }
+
+  .form-group-nested {
+    margin-left: 25px;
+
+    label {
+      font-weight: normal;
+    }
+  }
+
+  .radio-group {
+    label {
+      display: inline-block;
+    }
+  }
+
+  .help {
+    font-weight: normal;
+    font-style: italic;
+    color: colours.$lowlight-colour;
+  }
+
+  p.help {
+    margin-bottom: 5px;
+  }
+
+  .new-label {
+    padding: 0.3em 0.6em;
+    margin-right: 0.2em;
+    position: relative;
+    bottom: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: #fee6b8;
+    background-color: colours.$text-colour;
+    font-style: normal;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  input[type="text"] {
+    width: 30em;
+  }
+
+  input.shortfield {
+    width: inherit;
+  }
+}
+
+.show .actions {
+  margin-left: calc(135px + 20px);
+}
+
+div.actions {
+  line-height: 1.5;
+  clear: left;
+
+  .inactive {
+    color: colours.$lowlight-colour;
+    font-style: italic;
+  }
+
+  input[type="submit"] {
+    display: inline-block;
+  }
+}
+
+form.event-form,
+form.new_organiser,
+form.edit_organiser,
+form.new_venue,
+form.edit_venue {
+  margin: 0 10px;
+
+  @media only screen and (width >= 481px) {
+    margin: 0 40px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-family: sans-serif;
+  }
+
+  textarea {
+    white-space: pre;
+    width: 30em;
+    height: 5em;
+  }
+
+  .radio-group {
+    label {
+      display: inline-block;
+    }
+  }
+
+  .form-section-title {
+    font-size: 20px;
+    margin: 3px 0 5px;
+  }
+
+  .form-section-title label {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label,
+  .form-group-title {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  section {
+    padding: 10px 15px 5px;
+    margin: 20px 0;
+    border: 1px solid;
+  }
+}
+
+.lat-lng {
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    max-width: calc(30em + (4 * 2px));
+  }
+
+  .help {
+    margin-top: 5px;
+  }
+}
+
+#organiser_link_url {
+  width: 40em;
+  border: solid colours.$text-colour;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  background: inherit;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.button-on-input {
+  display: inline-block;
+  background-color: colours.$button-colour;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  border: solid colours.$text-colour;
+  padding: 5px 10px;
+  font-size: inherit;
+  line-height: normal;
+
+  &:hover {
+    color: colours.$text-colour;
+    background-color: colours.$button-active-colour;
+    border: solid colours.$text-colour;
+  }
+}
+
+a.normal-link {
+  text-decoration: underline;
+
+  &:hover {
+    border-bottom: none;
+  }
+}
+
+// Rails Errors
+/////////////////////////////////////////////
+#error-explanation {
+  border: 2px solid #c00;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error-explanation h2 {
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  margin-bottom: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error-explanation ul {
+  list-style: disc;
+  padding: 10px 5px 10px 30px;
+}
+
+#error-explanation li {
+  font-size: 14px;
+}
+
+.field_with_errors {
+  input,
+  select {
+    border: 2px solid #c00;
+  }
+}
+
+// For radio buttons, the input is inside the label
+label .field_with_errors {
+  display: inline-block;
+  border: 2px solid #c00;
+}

@@ -4,10 +4,15 @@ require "rails_helper"
 require "support/shoulda_matchers"
 require "spec/support/shared_examples/events/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
+require "spec/support/shared_examples/events/validates_event_with_dates"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 
-describe Event do
+RSpec.describe Event do
+  describe "(associations)" do
+    it { is_expected.to have_many(:event_instances).dependent(:destroy) }
+  end
+
   describe "#title" do
     it "strips whitespace before saving" do
       event = build(:event, title: " \tDance time! ")
@@ -70,75 +75,6 @@ describe Event do
     end
   end
 
-  # ultimately do away with date_array and test .dates= instead"
-  describe ".dates =" do
-    describe "empty strings" do
-      it "handles an event with with no dates and adding no dates" do
-        event = create(:event)
-        event.dates = []
-        expect(event.swing_dates).to eq([])
-      end
-    end
-
-    it "successfully adds one valid date to an event" do
-      event = create(:event)
-      event.dates = ["01/02/2012".to_date]
-      expect(event.dates).to eq([Date.new(2012, 2, 1)])
-    end
-
-    it "successfully adds two valid dates to an event with no dates and orders them" do
-      event = create(:event)
-      event.dates = ["01/02/2012", "30/11/2011"].map(&:to_date)
-      expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
-    end
-
-    it "blanks out a date array where there existing dates" do # rubocop:disable RSpec/MultipleExpectations
-      event = create(:event, dates: ["01/02/2012", "30/11/2011"].map(&:to_date))
-      expect(event.dates).to eq([Date.new(2011, 11, 30), Date.new(2012, 2, 1)])
-      event.dates = []
-      expect(event.dates).to eq([])
-    end
-
-    it "does not create multiple instances of the same date" do
-      event1 = create(:event)
-      event1.dates = ["05/05/2005".to_date]
-      event1.save!
-      event2 = create(:event)
-      event2.dates = ["05/05/2005".to_date]
-      event2.save!
-      expect(SwingDate.where(date: Date.new(2005, 5, 5)).length).to eq(1)
-    end
-  end
-
-  describe ".cancellations =" do
-    describe "empty strings" do
-      it "handles an event with with no cancellations and adding no cancellations" do
-        event = described_class.new
-        event.cancellations = []
-        expect(event.swing_cancellations).to eq([])
-      end
-    end
-
-    it "successfully adds one valid cancellation to an event with no cancellations" do
-      event = described_class.new
-      event.cancellations = ["01/02/2012".to_date]
-      expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
-    end
-
-    it "successfully adds two valid cancellations to an event with no cancellations and orders them" do
-      event = described_class.new
-      event.cancellations = ["01/02/2012", "30/11/2011"].map(&:to_date)
-      expect(event.cancellations).to eq([Date.new(2012, 2, 1), Date.new(2011, 11, 30)])
-    end
-
-    it "blanks out a cancellation array where there existing dates" do # rubocop:disable RSpec/MultipleExpectations
-      event = create(:event, cancellations: ["01/02/2012".to_date])
-      expect(event.cancellations).to eq([Date.new(2012, 2, 1)])
-      event.cancellations = []
-      expect(event.cancellations).to eq([])
-    end
-  end
-
   describe "active.classes" do
     it "returns classes with no 'last date'" do
       event = create(:class, last_date: nil)
@@ -182,6 +118,7 @@ describe Event do
 
     it_behaves_like "validates class and social", :event
     it_behaves_like "validates weekly", :event
+    it_behaves_like "validates event with dates", :event
     it_behaves_like "validates course length", :event
     it_behaves_like "validates url", :event
 

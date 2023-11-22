@@ -1,18 +1,21 @@
-/*
- *= require shared/reset
- *= require shared/base
- *= require shared/buttons
- *= require cms/admin_bar
- *= require cms/forms
- *= require cms/account
- *= require accessible-autocomplete/dist/accessible-autocomplete.min.css
- *= require cms/accessible-autocomplete-overrides
- *= require_self
- */
-@import "shared/colours";
+@use "sass:meta";
+@use "shared/reset";
+@use "shared/colours";
+@use "shared/base";
+@use "shared/buttons";
+@use "shared/flash";
+@use "cms/admin_bar";
+@use "cms/forms";
+@use "cms/account";
+@use "accessible-autocomplete/dist/accessible-autocomplete.min.css";
+@use "cms/accessible-autocomplete-overrides";
 
 body {
-  background-color: $background-colour;
+  background-color: colours.$background-colour;
+}
+
+main.page {
+  margin: 20px 30px 35px;
 }
 
 /* FONTS */
@@ -56,7 +59,7 @@ p.actions_panel {
 /////////////////////////////////////////////
 
 // SMALLER THAN DESKTOP
-@media only screen and (max-width: 900px) {
+@media only screen and (width <= 900px) {
   table {
     td.actions.last {
       display: none;
@@ -69,7 +72,7 @@ p.actions_panel {
 // }
 
 // SMALL
-@media only screen and (max-width: 480px) {
+@media only screen and (width <= 480px) {
   table {
     width: 100%;
     min-width: 1200px;
@@ -225,6 +228,6 @@ ol.show li ul {
   max-width: 550px;
 
   &.success {
-    background-color: $success-colour;
+    background-color: colours.$success-colour;
   }
 }

@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class EventParamsCommenter
+  def initialize
+    @date_printer = DatePrinter.new
+  end
+
   def comment(event, update_params)
     return {} if update_params.empty?
 
     dates = update_params[:dates]
     cancellations = update_params[:cancellations]
-    event = DatePrintableEvent.new(event)
 
     messages = []
 
@@ -20,27 +23,29 @@ class EventParamsCommenter
 
   private
 
+  attr_reader :date_printer
+
   def updated_dates_comment(event, dates)
-    comment_text("Updated dates", event.print_dates, dates)
+    comment_text("Updated dates", event.dates, dates)
   end
 
   def updated_cancellations_comment(event, cancellations)
-    comment_text("Updated cancellations", event.print_cancellations, cancellations)
+    comment_text("Updated cancellations", event.cancellations, cancellations)
   end
 
   def changed_dates?(event, dates)
     return false if dates.nil?
 
-    event.print_dates != dates
+    event.dates != dates
   end
 
   def changed_cancellations?(event, cancellations)
     return false if cancellations.nil?
 
-    event.print_cancellations != cancellations
+    event.cancellations != cancellations
   end
 
   def comment_text(message, old, new)
-    "#{message}: (old: #{old}) (new: #{new})"
+    "#{message}: (old: #{date_printer.print(old)}) (new: #{date_printer.print(new)})"
   end
 end

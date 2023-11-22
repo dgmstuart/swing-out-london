@@ -7,7 +7,7 @@ class DatePrinter
   end
 
   def print(dates)
-    dates.collect { |d| d.to_s(format) }.join(separator)
+    dates.collect { |d| d.to_fs(format) }.join(separator)
   end
 
   private

@@ -30,7 +30,7 @@ module ListingsHelper
       concat tag.span(event.location, class: "info")
     end
 
-    link_to text, event.url, id: "#{event.id}-#{date.to_s(:db)}"
+    link_to text, event.url, id: "#{event.id}-#{date.to_fs(:db)}"
   end
 
   def social_title(event)
@@ -73,7 +73,7 @@ module ListingsHelper
   def swingclass_details(event)
     details = []
     details << event.venue_area
-    details << "(from #{event.first_date.to_s(:short_date)})" unless event.first_date.nil? || event.started?
+    details << "(from #{event.first_date.to_fs(:short_date)})" unless event.first_date.nil? || event.started?
     details << "(#{event.class_style})" if event.class_style.present?
     details << "- #{event.course_length} week courses" unless event.course_length.nil?
     details.join(" ")

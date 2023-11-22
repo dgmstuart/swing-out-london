@@ -8,14 +8,12 @@ class ExternalEventsController < CmsBaseController
     @form = OrganiserEditEventForm.from_event(@event)
   end
 
-  def update # rubocop:disable Metrics/MethodLength
+  def update
     @event = Event.find_by!(organiser_token: params[:id])
 
-    @form = OrganiserEditEventForm.new(event_params)
+    @form = OrganiserEditEventForm.new(event_params.merge(frequency: @event.frequency))
     if @form.valid?
-      audit_comment = EventParamsCommenter.new.comment(@event, event_params)
-      update_params = @form.to_h.merge!(audit_comment)
-      @event.update!(update_params)
+      EventUpdater.new(@event).update!(@form.to_h)
       flash[:success] = t("flash.success", model: "Event", action: "updated")
       redirect_to edit_external_event_path(@event.organiser_token)
     else
@@ -27,11 +25,9 @@ class ExternalEventsController < CmsBaseController
 
   def authenticate
     organiser_token = params[:id]
-    if Event.where(organiser_token:).load.exists?
-      @current_user = OrganiserUser.new(organiser_token)
-    else
-      redirect_to root_path
-    end
+    Event.find_by!(organiser_token:)
+
+    @current_user = OrganiserUser.new(organiser_token)
   end
 
   def event_params

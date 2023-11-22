@@ -8,9 +8,19 @@ en:
   email_address:
     london: "swingoutlondon@gmail.com"
     bristol: "swingoutbristol@gmail.com"
+  twitter_handle:
+    london: "swingoutlondon"
+    bristol: "swingoutbristol"
   city:
     london: London
     bristol: Bristol
+  activerecord:
+    errors:
+      models:
+        event_instance:
+          attributes:
+            date:
+              taken: "The date '%{value}' has already been taken"
   flash:
     success: "%{model} was successfully %{action}"
     map:
@@ -21,6 +31,9 @@ en:
       dates: Enter dates separated with commas, eg. 25/6/2023,1/2/2024
     events:
       default_class_style: Lindy Hop or general swing
+      event_type:
+        social_dance: Social dance
+        weekly_class: Weekly class
 
   faker:
     name:

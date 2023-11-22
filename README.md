@@ -7,7 +7,18 @@ website based on a custom CMS for listing links to dance events.
 
 ### Prerequisites
 
-[Yarn](https://yarnpkg.com/en/docs/install/) is used in development.
+- [Yarn](https://yarnpkg.com/en/docs/install/) is used in development.
+- [Postgres](https://www.postgresql.org/) is the database. If you don't have a
+preference for how to run Postgres locally we recommend
+[Postgres.app](https://postgresapp.com/).
+
+The postgres version you run locally should match the version used in production.
+If the app is deployed on Heroku (and you have access to it) you can check this with the
+[Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+
+For example, to get the version used on Swing Out London production:
+
+    heroku pg:info --app soldneu
 
 Other dependencies (including ruby) are listed in
 [`.tool-versions`](.tool-versions).
@@ -17,7 +28,6 @@ install` to install these. If you're already managing dependencies in a
 different way, ensure that you install the versions listed in
 `.tool_versions`.
 
-
 Set up the app from scratch:
 
     bin/setup
@@ -25,6 +35,13 @@ Set up the app from scratch:
 Run the tests and linters:
 
     bin/rake
+
+### Local development
+
+See [`Procfile.dev`](Procfile.dev): run each command in its own terminal, or
+run them together using the heroku CLI (installed as part of the bundle):
+
+    heroku local -f Procfile.dev
 
 ## Environment Variables
 
@@ -50,3 +67,16 @@ are not included in the .env.example file:
   - `ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN` [Rollbar](https://rollbar.com/) is
     used for exception reporting. This value can be found in Account Settings
     => Account Access Tokens in your Rollbar account.
+  - `CANONICAL_HOST` - all variations of the domain will be `301` redirected
+    to this - eg. set it to `www.swingoutlondon.co.uk` to have
+    `swingoutlondon.co.uk` redirect to www.
+
+## Environments
+
+There are currently 3 sites deployed using this codebase on heroku:
+
+- London Production: https://www.swingoutlondon.co.uk/ (heroku app: `soldneu`)
+- Bristol Production: https://www.swingoutbristol.org/ (heroku app:
+  `swing-out-bristol`)
+- Staging: https://soldn-staging.herokuapp.com/ (heroku app: `soldn-staging`)- used for testing changes.
+(Protected by HTTP Basic Authentication)

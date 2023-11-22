@@ -1,0 +1,59 @@
+@use "colours";
+
+.button {
+  display: block;
+  padding: 15px 20px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  color: white;
+  background-color: colours.$button-colour;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.2s;
+
+  &.facebook-button {
+    color: white;
+    background-color: colours.$facebook-blue;
+  }
+
+  &.button-danger {
+    background-color: colours.$button-danger-colour;
+  }
+
+  &.button-secondary {
+    color: colours.$text-colour;
+    background-color: colours.$button-secondary-colour;
+  }
+}
+
+.button-smaller {
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+.button:hover {
+  color: colours.$text-colour;
+  background-color: colours.$button-active-colour;
+  border-bottom: none;
+
+  &.facebook-button {
+    color: black;
+    background-color: colours.$facebook-blue-highlight;
+  }
+
+  &.button-danger {
+    background-color: colours.$button-danger-active-colour;
+  }
+
+  &.button-secondary {
+    background-color: colours.$button-secondary-active-colour;
+  }
+}
+
+@media only screen and (width >= 481px) {
+  a.button {
+    display: inline-block;
+  }
+}

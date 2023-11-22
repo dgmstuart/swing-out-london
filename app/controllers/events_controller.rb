@@ -2,7 +2,12 @@
 
 class EventsController < CmsBaseController
   def index
-    @events = Event.includes(:venue, :social_organiser, :class_organiser).order(has_social: :desc).order("title, updated_at")
+    @events =
+      Event
+      .includes(:venue, :social_organiser, :class_organiser)
+      .order(has_social: :desc)
+      .order("title, updated_at")
+      .map { EventListItem.new(_1) }
   end
 
   def show
@@ -22,10 +27,10 @@ class EventsController < CmsBaseController
   end
 
   def create
-    @form = CreateEventForm.new(event_params)
+    @form = CreateEventForm.new(create_event_params)
 
     if @form.valid?
-      event = Event.create!(@form.to_h)
+      event = EventCreator.new.create!(@form.to_h)
       flash[:notice] = t("flash.success", model: "Event", action: "created")
       redirect_to(event)
     else
@@ -33,14 +38,13 @@ class EventsController < CmsBaseController
     end
   end
 
-  def update # rubocop:disable Metrics/MethodLength
+  def update
     @event = Event.find(params[:id])
 
-    @form = EditEventForm.new(event_params)
+    @form = EditEventForm.from_event(@event)
+    @form.assign_attributes(update_event_params)
     if @form.valid?
-      audit_comment = EventParamsCommenter.new.comment(@event, event_params)
-      update_params = @form.to_h.merge!(audit_comment)
-      @event.update!(update_params)
+      EventUpdater.new(@event).update!(@form.to_h)
       flash[:notice] = t("flash.success", model: "Event", action: "updated")
       redirect_to(@event)
     else
@@ -65,26 +69,15 @@ class EventsController < CmsBaseController
 
   private
 
-  def event_params
-    params.require(:event).permit(
-      %i[
-        title
-        venue_id
-        social_organiser_id
-        class_organiser_id
-        has_taster
-        has_class
-        has_social
-        class_style
-        course_length
-        day
-        frequency
-        dates
-        cancellations
-        first_date
-        last_date
-        url
-      ]
-    )
+  def create_event_params
+    event_params(CreateEventForm.attribute_names)
+  end
+
+  def update_event_params
+    event_params(EditEventForm.attribute_names)
+  end
+
+  def event_params(attribute_names)
+    params.require(:event).permit(attribute_names)
   end
 end

@@ -27,11 +27,11 @@ class ShowEvent
   end
 
   def first_date
-    event.first_date&.to_s(:listing_date)
+    event.first_date&.to_fs(:listing_date)
   end
 
   def last_date
-    event.last_date&.to_s(:listing_date)
+    event.last_date&.to_fs(:listing_date)
   end
 
   def event_type
