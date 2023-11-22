@@ -67,8 +67,8 @@ class Event < ApplicationRecord
     end
 
     def occasional_socials_on(date)
-      Event.socials.occasional.joins(:event_instances).where(event_instances: { date: })
-           .select("events.*", "event_instances.cancelled")
+      occasional.socials.joins(:event_instances).where(event_instances: { date: })
+                .select("events.*", "event_instances.cancelled")
     end
   end
 
