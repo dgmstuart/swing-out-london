@@ -1,21 +1,19 @@
 # frozen_string_literal: true
 
 class EventCreator
-  def initialize(repository = Event, attr_adaptor: EventDatesAttrs.new)
+  def initialize(repository = Event)
     @repository = repository
-    @attr_adaptor = attr_adaptor
   end
 
   def create!(attrs)
-    event_instances = event_instances(attrs[:dates], attrs[:cancellations], attrs[:frequency])
+    event_instances = event_instances(attrs.delete(:dates), attrs.delete(:cancellations), attrs[:frequency])
     attrs.merge!(event_instances:) unless event_instances.nil?
-    attrs_with_dates = attr_adaptor.transform(attrs)
-    repository.create!(attrs_with_dates)
+    repository.create!(attrs)
   end
 
   private
 
-  attr_reader :repository, :attr_adaptor
+  attr_reader :repository
 
   def event_instances(dates, cancellations, frequency)
     return nil if dates.nil? && cancellations.nil?

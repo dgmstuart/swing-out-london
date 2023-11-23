@@ -59,17 +59,11 @@ class Event < ApplicationRecord
     end
 
     def occasional_socials_on(date)
-      swing_date = SwingDate.find_by(date:)
-      return none unless swing_date
-
-      swing_date.events.occasional.socials
+      Event.socials.occasional.joins(:event_instances).where(event_instances: { date: })
     end
 
     def cancelled_on_date(date)
-      swing_date = SwingDate.find_by(date:)
-      return [] unless swing_date
-
-      swing_date.cancelled_events.pluck :id
+      Event.joins(:event_instances).where(event_instances: { date:, cancelled: true }).pluck :id
     end
   end
 
@@ -86,9 +80,9 @@ class Event < ApplicationRecord
   end
 
   def cannot_be_weekly_and_have_dates
-    return unless weekly? && swing_dates.any?
+    return unless weekly? && event_instances.any? { _1.cancelled == false }
 
-    errors.add(:swing_dates, "must be empty for weekly events")
+    errors.add(:event_instances, "must all be cancelled for weekly events")
   end
 
   # ----- #
@@ -135,8 +129,10 @@ class Event < ApplicationRecord
   end
 
   def dates
+    return [] if weekly?
+
     Rails.cache.fetch(dates_cache_key) do
-      swing_dates.order("date ASC").collect(&:date)
+      event_instances.order(date: :asc).map(&:date)
     end
   end
 
@@ -146,22 +142,12 @@ class Event < ApplicationRecord
   end
 
   def cancellations
-    swing_cancellations.collect(&:date)
+    event_instances.cancelled.map(&:date)
   end
 
   def future_cancellations
-    filter_future(cancellations)
+    event_instances.cancelled.where("date >= ?", Date.current).map(&:date)
   end
-
-  private
-
-  # Given an array of dates, return only those in the future
-  def filter_future(input_dates)
-    # TODO: - should be able to simply replace this with some variant of ".future?", but need to test
-    input_dates.select { |d| d >= Date.current }
-  end
-
-  public
 
   # COMPARISON METHODS #
 
@@ -202,7 +188,7 @@ class Event < ApplicationRecord
   # N.B. Assumes the date array is sorted!
   def latest_date
     Rails.cache.fetch(latest_date_cache_key) do
-      swing_dates.maximum(:date)
+      event_instances.maximum(:date)
     end
   end
 
@@ -222,7 +208,7 @@ class Event < ApplicationRecord
     ended_date =
       if weekly?
         Date.current.prev_occurring(day.downcase.to_sym)
-      elsif dates.blank?
+      elsif latest_date.blank?
         Date.new # Earliest possible ruby date
       else
         latest_date

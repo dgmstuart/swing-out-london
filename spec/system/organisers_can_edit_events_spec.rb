@@ -5,15 +5,15 @@ require "rails_helper"
 RSpec.describe "Organisers can edit events" do
   context "when an organiser token exists" do
     it "allows an organiser to edit an occasional event" do
-      event = create(
+      create(
         :social,
         organiser_token: "abc123",
         title: "Midtown stomp",
         url: "https://www.swingland.com/midtown",
         frequency: 0,
-        first_date: Date.new(2001, 2, 3)
+        first_date: Date.new(2001, 2, 3),
+        event_instances: [build(:event_instance, date: "12/12/2012")]
       )
-      event.swing_dates << create(:swing_date, date: "12/12/2012")
 
       create(:venue, name: "The 100 Club", area: "central")
 

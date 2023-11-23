@@ -123,6 +123,7 @@ RSpec.describe "Adding a new event", :js do
           expect(page).to have_content "Saturday 9th January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
           expect(page).to have_content "CANCELLED Stompin at the Savoy"
+          expect(page).to have_content("Stompin at the Savoy").once # Regression: check that cancelled weekly events don't show twice
           expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
         end
       end

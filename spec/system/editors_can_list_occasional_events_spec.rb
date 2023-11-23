@@ -16,7 +16,12 @@ RSpec.describe "Editors can list occasional events" do
       shortname: "Frankie"
     )
     Timecop.freeze("01/01/1937") do
-      event = create(
+      event_instances = [
+        build(:event_instance, date: "02/01/1937"),
+        build(:event_instance, date: "09/01/1937", cancelled: true),
+        build(:event_instance, date: "6/2/1937")
+      ]
+      create(
         :event,
         title: "Stompin at the Savoy",
         venue:,
@@ -29,12 +34,11 @@ RSpec.describe "Editors can list occasional events" do
         course_length: "",
         day: "Saturday",
         frequency: 0,
-        dates: [Date.parse("02/01/1937"), Date.parse("09/01/1937"), Date.parse("6/2/1937")],
+        event_instances:,
         first_date: Date.parse("12/03/1926"),
         last_date: Date.parse("11/10/1958"),
         url: "https://www.savoyballroom.com/stompin"
       )
-      EventUpdater.new(event).update!(cancellations: [Date.parse("09/01/1937")])
     end
 
     Timecop.freeze("02/01/1937") do

@@ -1,26 +1,25 @@
 # frozen_string_literal: true
 
 class EventUpdater
-  def initialize(record, attr_adaptor: EventDatesAttrs.new, audit_commenter: EventParamsCommenter.new)
+  def initialize(record, audit_commenter: EventParamsCommenter.new)
     @record = record
-    @attr_adaptor = attr_adaptor
     @audit_commenter = audit_commenter
   end
 
   def update!(attrs)
     audit_comment = audit_commenter.comment(record, attrs)
-    event_instances = event_instances(attrs[:dates], attrs[:cancellations], attrs[:frequency])
+    event_instances = event_instances(attrs.delete(:dates), attrs.delete(:cancellations), attrs[:frequency])
     attrs.merge!(event_instances:) unless event_instances.nil?
-    attrs_with_dates = attr_adaptor.transform(attrs)
+    attrs.merge!(audit_comment)
 
-    record.update!(attrs_with_dates.merge(audit_comment))
+    record.update!(attrs)
     record.event_instances.each(&:save!) unless event_instances.nil?
     record.reload
   end
 
   private
 
-  attr_reader :record, :attr_adaptor, :audit_commenter
+  attr_reader :record, :audit_commenter
 
   def event_instances(dates, cancellations, frequency)
     return nil if dates.nil? && cancellations.nil?
