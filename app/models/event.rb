@@ -43,27 +43,30 @@ class Event < ApplicationRecord
 
   class << self
     def socials_on_date(date)
-      result = weekly_socials_on(date).includes(:venue)
-      result += occasional_socials_on(date).includes(:venue)
-      result
+      weekly_socials_on(date).includes(:venue) +
+        occasional_socials_on(date).includes(:venue)
     end
 
     def socials_on_date_for_venue(date, venue)
-      result = weekly_socials_on(date).where(venue_id: venue.id)
-      result += occasional_socials_on(date).where(venue_id: venue.id)
-      result
+      weekly_socials_on(date).where(venue_id: venue.id) +
+        occasional_socials_on(date).where(venue_id: venue.id)
     end
 
     def weekly_socials_on(date)
+      join_sql = Event.sanitize_sql(
+        [
+          "LEFT OUTER JOIN event_instances ON (event_instances.event_id = events.id AND event_instances.date = :date)",
+          { date: }
+        ]
+      )
       weekly.socials.active_on(date).on_same_day_of_week(date)
+            .joins(join_sql)
+            .select("events.*", "event_instances.cancelled")
     end
 
     def occasional_socials_on(date)
-      Event.socials.occasional.joins(:event_instances).where(event_instances: { date: })
-    end
-
-    def cancelled_on_date(date)
-      Event.joins(:event_instances).where(event_instances: { date:, cancelled: true }).pluck :id
+      occasional.socials.joins(:event_instances).where(event_instances: { date: })
+                .select("events.*", "event_instances.cancelled")
     end
   end
 
