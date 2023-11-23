@@ -43,15 +43,13 @@ class Event < ApplicationRecord
 
   class << self
     def socials_on_date(date)
-      result = weekly_socials_on(date).includes(:venue)
-      result += occasional_socials_on(date).includes(:venue)
-      result
+      weekly_socials_on(date).includes(:venue) +
+        occasional_socials_on(date).includes(:venue)
     end
 
     def socials_on_date_for_venue(date, venue)
-      result = weekly_socials_on(date).where(venue_id: venue.id)
-      result += occasional_socials_on(date).where(venue_id: venue.id)
-      result
+      weekly_socials_on(date).where(venue_id: venue.id) +
+        occasional_socials_on(date).where(venue_id: venue.id)
     end
 
     def weekly_socials_on(date)
