@@ -146,18 +146,8 @@ class Event < ApplicationRecord
   end
 
   def future_cancellations
-    filter_future(cancellations)
+    event_instances.cancelled.where("date >= ?", Date.current).map(&:date)
   end
-
-  private
-
-  # Given an array of dates, return only those in the future
-  def filter_future(input_dates)
-    # TODO: - should be able to simply replace this with some variant of ".future?", but need to test
-    input_dates.select { |d| d >= Date.current }
-  end
-
-  public
 
   # COMPARISON METHODS #
 
