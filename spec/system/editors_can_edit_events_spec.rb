@@ -116,8 +116,8 @@ RSpec.describe "Editors can edit events", :js do
       .and have_content("Dates contained some dates unreasonably far in the future: 12/12/2025")
   end
 
-  it "adding cancellations" do
-    create(:event, dates: ["12/12/2012"])
+  it "adding cancellations to an occasional event" do
+    create(:event, :occasional, dates: ["12/12/2012"])
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
@@ -137,6 +137,21 @@ RSpec.describe "Editors can edit events", :js do
     audit = Audit.last
     expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
     expect(audit.comment).to eq "Updated cancellations: (old: ) (new: 12/12/2012)"
+  end
+
+  it "adding cancellations to a weekly event" do
+    event = create(:event, :weekly)
+    skip_login
+
+    visit "/events/#{event.id}/edit"
+
+    fill_in "Cancelled dates", with: "12/12/2012"
+
+    Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
+      click_button "Update"
+    end
+
+    expect(page).to have_content("Cancelled:\n12/12/2012")
   end
 
   context "when changing from an occasional event to a weekly event" do

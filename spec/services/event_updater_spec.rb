@@ -188,6 +188,40 @@ RSpec.describe EventUpdater do
       end
     end
 
+    context "when switching from occasional to weekly" do
+      it "removes any existing date records" do # rubocop:disable RSpec.example_length
+        date = Date.tomorrow
+        record = create(:event, :occasional)
+        create(:event_instance, event: record, date:, cancelled: true)
+        create(:event_instance, event: record, date: 1.week.from_now.to_date, cancelled: false)
+        # We shouldn't ever receive `dates` for weekly events (the form handles that),
+        # but let's be safe and test what happens when we do:
+        params = attributes_for(:event, :weekly).merge(dates: [date], cancellations: [date])
+
+        aggregate_failures do
+          expect do
+            event = described_class.new(record).update!(params)
+            expect(event.event_instances.map(&:cancelled)).to eq [true]
+          end.to change(EventInstance, :count).from(2).to(1)
+        end
+      end
+    end
+
+    context "when switching from occasional to weekly with no dates" do
+      it "removes any existing date records" do
+        date = Date.tomorrow
+        record = create(:event, :occasional)
+        create(:event_instance, event: record, date:, cancelled: true)
+        create(:event_instance, event: record, date: 1.week.from_now.to_date, cancelled: false)
+        # In reality we always post the whole form, so we should never end up with params without any date key,
+        # but let's be safe and test what happens when we do:
+        expect do
+          params = attributes_for(:event, :weekly)
+          described_class.new(record).update!(params)
+        end.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Event instances must all be cancelled for weekly events")
+      end
+    end
+
     context "when the event was invalid" do
       it "no changes to event instances are persisted" do # rubocop:disable RSpec.example_length
         record = create(:event)
