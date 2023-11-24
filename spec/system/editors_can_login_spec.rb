@@ -12,11 +12,11 @@ RSpec.describe "Editor Login" do
 
     visit "/events/new"
 
-    expect(page).not_to have_header("New event")
+    expect(page).not_to have_content("New event")
 
     click_button "Log in"
 
-    expect(page).to have_header("New event")
+    expect(page).to have_content("New event")
     expect(page).to have_content("Al Minns")
   end
 
@@ -26,11 +26,11 @@ RSpec.describe "Editor Login" do
 
     visit "/events"
 
-    expect(page).not_to have_header("Events")
+    expect(page).not_to have_content("Events")
 
     click_button "Log in"
 
-    expect(page).to have_header("Events")
+    expect(page).to have_content("Events")
     expect(page).to have_content("Herbert White (Admin)")
   end
 
@@ -46,7 +46,7 @@ RSpec.describe "Editor Login" do
       expect(page).to have_content(
         "Your Facebook ID for Swing Out London (76543210987654321) isn't in the approved list"
       )
-      expect(page).not_to have_header("Events")
+      expect(page).not_to have_content("Events")
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe "Editor Login" do
       click_button "Log in"
 
       expect(page).to have_content("There was a problem with your login to Facebook")
-      expect(page).not_to have_header("Events")
+      expect(page).not_to have_content("Events")
     end
   end
 
@@ -70,11 +70,11 @@ RSpec.describe "Editor Login" do
 
       visit "/login"
 
-      expect(page).not_to have_header("Events")
+      expect(page).not_to have_content("Events")
 
       click_button "Log in"
 
-      expect(page).to have_header("Events")
+      expect(page).to have_content("Events")
       expect(page).to have_content("Al Minns")
     end
   end

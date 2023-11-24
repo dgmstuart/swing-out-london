@@ -23,7 +23,7 @@ RSpec.describe "Editor Login Revocation" do
       click_button "Disable my login"
     end
 
-    expect(page).to have_header("Editor Login")
+    expect(page).to have_content("Editor Login")
     expect(page).to have_content("Your login permissions have been revoked in Facebook")
     expect(page).to have_button("Log in")
 
