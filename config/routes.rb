@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   resource :audit_log, only: %i[show]
 
+  get "robots.txt", to: "robots#index", format: "txt"
   get "sitemap", to: "sitemaps#index", defaults: { format: "xml" }
 
   get "apple-touch-icon-precomposed" => "application#not_found"
