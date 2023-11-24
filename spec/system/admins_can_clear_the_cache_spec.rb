@@ -15,7 +15,7 @@ RSpec.describe "Admins can clear the cache" do
     click_link "Cache"
     click_button "Clear"
 
-    expect(page).to have_header("Events")
+    expect(page).to have_content("Events")
     expect(Rails.cache.read("a_cache_key")).to be_nil
   end
 

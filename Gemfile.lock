@@ -121,9 +121,6 @@ GEM
       railties (>= 3.2)
     drb (2.2.0)
       ruby2_keywords
-    elabs_matchers (2.0.1)
-      rspec-core
-      rspec-expectations
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -430,7 +427,6 @@ DEPENDENCIES
   dalli
   dartsass-rails
   dotenv-rails
-  elabs_matchers
   factory_bot_rails
   faker
   geocoder
