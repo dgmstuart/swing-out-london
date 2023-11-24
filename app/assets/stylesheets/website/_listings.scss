@@ -154,8 +154,13 @@ main {
 }
 
 .social_highlight {
-  background: url("highlight_icon.png") no-repeat 0 0.15em;
-  padding-left: 20px;
+  &::before {
+    content: url("highlight_icon.svg");
+    display: inline-block;
+    width: 14px;
+    height: 16px;
+    padding-right: 5px;
+  }
 }
 
 #social_dances .note {
