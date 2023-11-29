@@ -14,5 +14,6 @@ Disallow: /map/classes/*
 User-agent: BLEXBot
 Disallow: /
 
-Sitemap: <%= canonical_sitemap_url %>
-
+<% if canonical_sitemap_url %>
+  Sitemap: <%= canonical_sitemap_url %>
+<% end %>
