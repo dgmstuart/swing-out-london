@@ -21,6 +21,24 @@ RSpec.describe "Sitemaps" do
     expect(response).to have_http_status(:ok)
   end
 
+  it "redirects requests for sitemap_index" do
+    get "/sitemap_index.xml"
+
+    aggregate_failures do
+      expect(response).to redirect_to("/sitemap.xml")
+      expect(response).to have_http_status(:moved_permanently)
+    end
+  end
+
+  it "redirects requests for sitemap.xml.gz" do
+    get "/sitemap.xml.gz"
+
+    aggregate_failures do
+      expect(response).to redirect_to("/sitemap.xml")
+      expect(response).to have_http_status(:moved_permanently)
+    end
+  end
+
   it "doesn't respond to other formats" do
     get "/sitemap.txt"
 

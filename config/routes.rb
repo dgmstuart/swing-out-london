@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 
   get "robots.txt", to: "robots#index", format: "txt"
   get "sitemap", to: "sitemaps#index", defaults: { format: "xml" }
+  get "sitemap_index.xml", to: redirect("/sitemap.xml"), status: 301
+  get "sitemap.xml.gz", to: redirect("/sitemap.xml"), status: 301
 
   get "apple-touch-icon-precomposed" => "application#not_found"
   get "apple-touch-icon-:size-precomposed" => "application#not_found"
