@@ -94,7 +94,6 @@ module ListingsHelper
   end
 
   def school_name(event)
-    raise "Tried to get class-related info from an event with no class" unless event.has_class? || event.has_taster?
     return if event.class_organiser.nil?
 
     if event.class_organiser.shortname.blank?

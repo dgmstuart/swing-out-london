@@ -2,13 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe EventsHelper do
+RSpec.describe ListingsHelper do
   describe "school_name" do
-    it "fails if called on a non-class" do
-      event = build(:event, has_class: false)
-      expect { helper.school_name(event) }.to raise_error(RuntimeError)
-    end
-
     context "when there is no organiser" do
       it "returns an empty string" do
         swingclass = build(:class, class_organiser: nil)
