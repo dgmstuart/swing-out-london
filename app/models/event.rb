@@ -171,7 +171,7 @@ class Event < ApplicationRecord
 
   # Has the first instance of the event happened yet?
   def started?
-    return false if first_date.nil?
+    return true if first_date.nil?
 
     first_date < Date.current
   end

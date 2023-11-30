@@ -73,7 +73,7 @@ module ListingsHelper
   def swingclass_details(event)
     details = []
     details << event.venue_area
-    details << "(from #{event.first_date.to_fs(:short_date)})" unless event.first_date.nil? || event.started?
+    details << "(from #{event.first_date.to_fs(:short_date)})" unless event.started?
     details << "(#{event.class_style})" if event.class_style.present?
     details << "- #{event.course_length} week courses" unless event.course_length.nil?
     details.join(" ")
