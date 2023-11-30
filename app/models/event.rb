@@ -36,11 +36,6 @@ class Event < ApplicationRecord
 
   strip_attributes only: %i[title url]
 
-  # display constants:
-  NOTAPPLICABLE = "n/a"
-  UNKNOWN_ORGANISER = "Unknown"
-  SEE_WEB = "(See Website)"
-
   class << self
     def socials_on_date(date)
       weekly_socials_on(date).includes(:venue) +
