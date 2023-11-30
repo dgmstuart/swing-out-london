@@ -194,6 +194,35 @@ RSpec.describe Event do
     end
   end
 
+  describe "started?" do
+    it "is always true if there is no first date" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], first_date: nil),
+        build(:event, dates: [Date.current.tomorrow], first_date: nil),
+        build(:event, dates: [], first_date: nil)
+      ]
+      expect(events).to all(be_started)
+    end
+
+    it "is true if there is a first date in the past" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], first_date: "October 1st 1958".to_date),
+        build(:event, dates: [Date.current.tomorrow], first_date: "October 1st 1958".to_date),
+        build(:event, dates: [], first_date: "October 1st 1958".to_date)
+      ]
+      expect(events).to all(be_started)
+    end
+
+    it "is false if there is a first date in the future" do
+      events = [
+        build(:event, dates: ["March 12 1926".to_date], first_date: Date.current.tomorrow),
+        build(:event, dates: [Date.current.tomorrow], first_date: Date.current.tomorrow),
+        build(:event, dates: [], first_date: Date.current.tomorrow)
+      ]
+      expect(events).not_to include(be_started)
+    end
+  end
+
   describe "ended?" do
     it "is always false if there is no last date" do
       events = [
