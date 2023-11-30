@@ -3,11 +3,65 @@
 require "spec_helper"
 require "active_support"
 require "active_support/core_ext/module/delegation"
-# require "active_support/core_ext/string/conversions"
+require "active_support/core_ext/object/blank"
+require "spec/support/time_formats_helper"
 require "app/presenters/class_listing"
-# require "spec/support/time_formats_helper"
 
 RSpec.describe ClassListing do
+  describe "details" do
+    context "when the event is a general/Lindy hop class" do
+      it "includes the area" do
+        event = instance_double("Event", venue_area: "Archway", class_style: nil, course_length: nil, started?: true)
+
+        social_listing = described_class.new(event)
+
+        expect(social_listing.details).to eq "Archway"
+      end
+    end
+
+    context "when the event is a Balboa class" do
+      it "includes the class style" do
+        event = instance_double("Event", venue_area: "Archway", class_style: "Balboa", course_length: nil, started?: true)
+
+        social_listing = described_class.new(event)
+
+        expect(social_listing.details).to eq "Archway (Balboa)"
+      end
+    end
+
+    context "when the event is a class which runs as courses" do
+      it "includes the course length" do
+        event = instance_double("Event", venue_area: "Archway", class_style: nil, course_length: 4, started?: true)
+
+        social_listing = described_class.new(event)
+
+        expect(social_listing.details).to eq "Archway - 4 week courses"
+      end
+    end
+
+    context "when the event has not started yet" do
+      it "includes the first date" do
+        first_date = Date.parse("2023-07-14")
+        event = instance_double("Event", venue_area: "Archway", class_style: nil, course_length: nil, started?: false, first_date:)
+
+        social_listing = described_class.new(event)
+
+        expect(social_listing.details).to eq "Archway (from 14th Jul)"
+      end
+    end
+
+    context "when the event is complicated" do
+      it "includes all the things" do
+        first_date = Date.parse("2023-07-14")
+        event = instance_double("Event", venue_area: "Archway", class_style: "Balboa", course_length: 6, started?: false, first_date:)
+
+        social_listing = described_class.new(event)
+
+        expect(social_listing.details).to eq "Archway (from 14th Jul) (Balboa) - 6 week courses"
+      end
+    end
+  end
+
   describe "#url" do
     it "delegates to the given event" do
       event = instance_double("Event", url: "https://archwayslide.com")
@@ -48,26 +102,6 @@ RSpec.describe ClassListing do
     end
   end
 
-  describe "#class_style" do
-    it "delegates to the given event" do
-      event = instance_double("Event", class_style: "Balboa")
-
-      social_listing = described_class.new(event)
-
-      expect(social_listing.class_style).to eq "Balboa"
-    end
-  end
-
-  describe "#course_length" do
-    it "delegates to the given event" do
-      event = instance_double("Event", course_length: 6)
-
-      social_listing = described_class.new(event)
-
-      expect(social_listing.course_length).to eq 6
-    end
-  end
-
   describe "#has_social?" do
     it "delegates to the given event" do
       has_social = double
@@ -87,27 +121,6 @@ RSpec.describe ClassListing do
       social_listing = described_class.new(event)
 
       expect(social_listing.new?).to eq new
-    end
-  end
-
-  describe "#started?" do
-    it "delegates to the given event" do
-      started = double
-      event = instance_double("Event", started?: started)
-
-      social_listing = described_class.new(event)
-
-      expect(social_listing.started?).to eq started
-    end
-  end
-
-  describe "#first_date" do
-    it "delegates to the given event" do
-      event = instance_double("Event", first_date: Date.new)
-
-      social_listing = described_class.new(event)
-
-      expect(social_listing.first_date).to eq Date.new
     end
   end
 
