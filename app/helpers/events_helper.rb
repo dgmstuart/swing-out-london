@@ -18,7 +18,7 @@ module EventsHelper
   # ----- #
 
   def organiser_link(organiser)
-    return Event::UNKNOWN_ORGANISER if organiser.nil?
+    return "Unknown" if organiser.nil?
 
     link_to_unless organiser.website.nil?, organiser.name, organiser.website
   end
