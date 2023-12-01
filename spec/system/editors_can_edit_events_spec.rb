@@ -31,6 +31,7 @@ RSpec.describe "Editors can edit events", :js do
 
     choose "Monthly or occasionally"
     fill_in "First date", with: "10/10/2010"
+    fill_in "Last date", with: "02/12/2011"
 
     fill_in "Upcoming dates", with: "10/10/2010,10/11/2010, 02/12/2011"
     fill_in "Cancelled dates", with: "02/12/2011" # All cancellations need to be in the upcoming dates.
@@ -49,6 +50,7 @@ RSpec.describe "Editors can edit events", :js do
       .and have_content("Dates:\n10/10/2010, 10/11/2010, 02/12/2011")
       .and have_content("Cancelled:\n02/12/2011")
       .and have_content("First date:\nSunday 10th October")
+      .and have_content("Last date:\nFriday 2nd December")
       .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Saturday 2nd January 2010 at 23:17:16")
