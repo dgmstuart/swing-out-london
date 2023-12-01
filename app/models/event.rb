@@ -34,6 +34,8 @@ class Event < ApplicationRecord
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
 
+  enum day: DAYNAMES.index_by { _1 }
+
   strip_attributes only: %i[title url]
 
   class << self

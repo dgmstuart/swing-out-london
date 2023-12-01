@@ -95,7 +95,7 @@ RSpec.describe "Editors can edit events", :js do
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
     audit = Audit.last
-    expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
+    expect(audit.audited_changes).to eq("class_style" => [nil, ""])
     expect(audit.comment).to eq "Updated dates: (old: 12/12/2012,13/12/2012) (new: 12/12/2012,12/01/2013)"
   end
 
@@ -135,7 +135,7 @@ RSpec.describe "Editors can edit events", :js do
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
     audit = Audit.last
-    expect(audit.audited_changes).to eq("day" => [nil, ""], "class_style" => [nil, ""])
+    expect(audit.audited_changes).to eq("class_style" => [nil, ""])
     expect(audit.comment).to eq "Updated cancellations: (old: ) (new: 12/12/2012)"
   end
 

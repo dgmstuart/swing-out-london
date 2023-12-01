@@ -144,6 +144,21 @@ RSpec.describe Event do
     it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
   end
 
+  describe "day" do
+    it "is an enum" do
+      expect(described_class.new).to define_enum_for(:day)
+        .with_values(
+          "Monday" => "Monday",
+          "Tuesday" => "Tuesday",
+          "Wednesday" => "Wednesday",
+          "Thursday" => "Thursday",
+          "Friday" => "Friday",
+          "Saturday" => "Saturday",
+          "Sunday" => "Sunday"
+        ).backed_by_column_of_type(:string)
+    end
+  end
+
   describe "#future_dates?" do
     context "when the event has no dates" do
       it "is false" do
