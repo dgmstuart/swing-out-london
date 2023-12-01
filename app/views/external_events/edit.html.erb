@@ -39,7 +39,7 @@
 
   <div class='form-group'>
     <%= f.label :last_date %>
-    <%= f.text_field :last_date, value: @form.last_date.to_s, size: 10, class: "shortfield" %>
+    <%= f.date_field :last_date, value: @form.last_date.to_s %>
     <span class='help'>The event will stop showing up on the site after this date</span>
   </div>
 

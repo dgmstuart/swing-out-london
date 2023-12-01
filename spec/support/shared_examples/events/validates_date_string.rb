@@ -5,7 +5,7 @@ require "app/validators/date_string_validator"
 RSpec.shared_examples "validates date string" do |attribute, model_name|
   describe attribute do
     it "is valid with a date" do
-      model = build(model_name, attribute => "30/06/2012")
+      model = build(model_name, attribute => "2023-06-30")
       model.valid?
       expect(model.errors.messages[attribute]).to be_empty
     end
@@ -17,7 +17,7 @@ RSpec.shared_examples "validates date string" do |attribute, model_name|
     end
 
     it "is invalid with a date-like string which is not a date" do
-      model = build(model_name, attribute => "31/06/2023")
+      model = build(model_name, attribute => "2023-06-31")
       model.valid?
       expect(model.errors.messages[attribute]).to eq(["is invalid"])
     end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Organisers can edit events" do
-  context "when an organiser token exists" do
+  context "when an organiser token exists", :js do
     it "allows an organiser to edit an occasional event" do
       create(
         :social,
@@ -23,7 +23,7 @@ RSpec.describe "Organisers can edit events" do
         .and have_link("https://www.swingland.com/midtown", href: "https://www.swingland.com/midtown")
         .and have_content("Frequency\nOccasional")
 
-      select "The 100 Club", from: "Venue"
+      autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
@@ -32,17 +32,17 @@ RSpec.describe "Organisers can edit events" do
       expect(page).to have_content("Event was successfully updated")
 
       aggregate_failures do
-        expect(page).to have_select("Venue", selected: "The 100 Club - central")
+        expect(page).to have_field("Venue", with: "The 100 Club - central")
         expect(page).to have_field("Upcoming dates", with: "12/12/2012,12/01/2013")
         expect(page).to have_field("Cancelled dates", with: "12/12/2012")
-        expect(page).to have_field("Last date", with: "12/01/2013")
+        expect(page).to have_field("Last date", with: "2013-01-12")
         expect(page).to have_content("Event was successfully updated")
       end
 
       expect(Audit.last.username).to eq("name" => "Organiser (abc123)", "auth_id" => "abc123")
     end
 
-    it "allows an organiser to edit a weekly event" do
+    it "allows an organiser to edit a weekly event", :js do
       create(
         :social,
         organiser_token: "abc123",
@@ -61,7 +61,7 @@ RSpec.describe "Organisers can edit events" do
         .and have_content("Frequency\nEvery Wednesday")
       expect(page).not_to have_content("Upcoming dates")
 
-      select "The 100 Club", from: "Venue"
+      autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
       click_button "Update"
@@ -69,17 +69,17 @@ RSpec.describe "Organisers can edit events" do
       expect(page).to have_content("Event was successfully updated")
 
       aggregate_failures do
-        expect(page).to have_select("Venue", selected: "The 100 Club - central")
+        expect(page).to have_field("Venue", with: "The 100 Club - central")
         expect(page).not_to have_content("Upcoming dates")
         expect(page).to have_field("Cancelled dates", with: "12/12/2012")
-        expect(page).to have_field("Last date", with: "12/01/2013")
+        expect(page).to have_field("Last date", with: "2013-01-12")
         expect(page).to have_content("Event was successfully updated")
       end
 
       expect(Audit.last.username).to eq("name" => "Organiser (abc123)", "auth_id" => "abc123")
     end
 
-    it "allows an organiser to cancel their changes" do
+    it "allows an organiser to cancel their changes", :js do
       create(
         :social,
         venue: build(:venue, name: "The Bishopsgate Centre", area: "Liverpool st"),
@@ -94,7 +94,7 @@ RSpec.describe "Organisers can edit events" do
 
       visit("/external_events/abc123/edit")
 
-      select "The 100 Club", from: "Venue"
+      autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
@@ -102,7 +102,7 @@ RSpec.describe "Organisers can edit events" do
       click_link "Cancel"
 
       aggregate_failures do
-        expect(page).to have_select("Venue", selected: "The Bishopsgate Centre - Liverpool st")
+        expect(page).to have_field("Venue", with: "The Bishopsgate Centre - Liverpool st")
         expect(page).to have_field("Upcoming dates", with: "01/02/2036")
         expect(page).to have_field("Cancelled dates", with: "")
         expect(page).to have_field("Last date", with: "")

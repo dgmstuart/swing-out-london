@@ -13,6 +13,6 @@ class DateStringValidator < ActiveModel::EachValidator
   private
 
   def parser
-    DateStringParser.new
+    DateStringParser.for_database_format
   end
 end

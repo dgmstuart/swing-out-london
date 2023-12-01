@@ -117,12 +117,12 @@
         A <span class="new-label">NEW!</span> label will be shown on the listing
         for <%= distance_of_time_in_words(Event::CONSIDERED_NEW_FOR) %> after this date.
       </p>
-      <%= f.text_field :first_date, size: 10, class: "shortfield" %>
+      <%= f.date_field :first_date %>
     </div>
     <div class='form-group'>
       <%= f.label :last_date %>
       <p class='help'>The event will stop being included in the listings after this date</p>
-      <%= f.text_field :last_date, size: 10, class: "shortfield" %>
+      <%= f.date_field :last_date %>
     </div>
   </section>
 
