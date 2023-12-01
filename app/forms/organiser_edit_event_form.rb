@@ -34,6 +34,7 @@ class OrganiserEditEventForm
   validates :venue_id, presence: true
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
+  validates :last_date, date_string: true
 
   validates_with ValidCancellations
 

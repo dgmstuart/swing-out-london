@@ -64,6 +64,8 @@ class EditEventForm
 
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
+  validates :first_date, date_string: true
+  validates :last_date, date_string: true
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent

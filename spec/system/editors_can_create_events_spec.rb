@@ -84,15 +84,21 @@ RSpec.describe "Editors can create events", :js do
 
       choose "Monthly"
       fill_in "Upcoming dates", with: "12//20012, 31/04/2013, 12/12/2011,   19/12/012, 19/12/20121"
+      fill_in "First date", with: "31/04/2013"
+      fill_in "Last date", with: "Never"
 
       click_button "Create"
 
-      expect(page).to have_content("3 errors prevented this record from being saved")
+      expect(page).to have_content("5 errors prevented this record from being saved")
         .and have_content('Dates contained some invalid dates: "12//20012", "31/04/2013"')
         .and have_content("Dates contained some dates in the past: 12/12/2011, 19/12/012")
         .and have_content("Dates contained some dates unreasonably far in the future: 19/12/20121")
+        .and have_content("First date is invalid")
+        .and have_content("Last date is invalid")
 
       fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
+      fill_in "First date", with: "12/12/2012"
+      fill_in "Last date", with: "30/04/2013"
 
       click_button "Create"
 
@@ -100,6 +106,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Social")
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 30/04/2013")
+        .and have_content("First date:\nWednesday 12th December")
+        .and have_content("Last date:\nTuesday 30th April")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
 
