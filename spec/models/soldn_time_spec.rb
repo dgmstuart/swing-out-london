@@ -20,7 +20,7 @@ RSpec.describe SOLDNTime, :time do
         it "is the current date" do
           Timecop.travel(Time.zone.parse("May 11, 1938 19:00"))
 
-          expect(described_class.today.to_fs).to eq "11/05/1938"
+          expect(described_class.today.to_s).to eq "1938-05-11"
         end
       end
 
@@ -28,7 +28,7 @@ RSpec.describe SOLDNTime, :time do
         it "is the date that this crazy night began (yesterday's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 03:59"))
 
-          expect(described_class.today.to_fs).to eq "11/05/1938"
+          expect(described_class.today.to_s).to eq "1938-05-11"
         end
       end
 
@@ -36,7 +36,7 @@ RSpec.describe SOLDNTime, :time do
         it "is time to go to bed (today's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 04:00"))
 
-          expect(described_class.today.to_fs).to eq "12/05/1938"
+          expect(described_class.today.to_s).to eq "1938-05-12"
         end
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe SOLDNTime, :time do
         it "is the date that this crazy night began (yesterday's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 03:59"))
 
-          expect(described_class.today.to_fs).to eq "11/05/1938"
+          expect(described_class.today.to_s).to eq "1938-05-11"
         end
       end
 
@@ -59,7 +59,7 @@ RSpec.describe SOLDNTime, :time do
         it "is time to go to bed (today's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 04:00"))
 
-          expect(described_class.today.to_fs).to eq "12/05/1938"
+          expect(described_class.today.to_s).to eq "1938-05-12"
         end
       end
 
@@ -67,7 +67,7 @@ RSpec.describe SOLDNTime, :time do
         it "is time to go to bed (today's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 05:00"))
 
-          expect(described_class.today.to_fs).to eq "12/05/1938"
+          expect(described_class.today.to_s).to eq "1938-05-12"
         end
       end
     end

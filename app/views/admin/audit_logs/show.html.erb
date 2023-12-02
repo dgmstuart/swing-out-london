@@ -4,7 +4,7 @@
   <% editor = Editor.build(audit) %>
   <p>
     <span class="timestamp">
-      <%= audit.created_at.to_fs %>
+      <%= I18n.l(audit.created_at) %>
     </span>
     <span class="editor" title="<%= editor.auth_id %>">
       <%= editor.name %>

@@ -1,4 +1,14 @@
 en:
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M:%S"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+  date:
+    formats:
+      default: "%d/%m/%Y" # 11/10/2015
+      # short is defined in en.rb
+      long: "%B %d, %Y"
   site_name:
     london: Swing Out London
     bristol: Swing Out Bristol

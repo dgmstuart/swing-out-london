@@ -1,14 +1,14 @@
 <% content_for :title do %>
   <%= tc("site_name") %>'s Lindy Map: Socials
   <% if @map_dates.selected_date %>
-    on <%= @map_dates.selected_date.to_fs(:listing_date) %>
+    on <%= I18n.l(@map_dates.selected_date, format: :listing_date) %>
   <% end %>
 <% end %>
 
 <% content_for :description do %>
   A map of all the opportunities to dance to DJs and Bands playing Swing, Hot Jazz, Trad Jazz and Manouche in <%= tc("city") %>
   <% if @map_dates.selected_date %>
-    on <%= @map_dates.selected_date.to_fs(:listing_date) %>
+    on <%= I18n.l(@map_dates.selected_date, format: :listing_date) %>
   <% end %>
 <% end %>
 
@@ -22,7 +22,7 @@
   <ul>
     <% @map_dates.listing_dates.each do |date| %>
       <li>
-        <%= link_to date.to_fs(:listing_date), { date: date.to_fs(:db) }, { class: ["js-update-map", (:selected if date == @map_dates.selected_date)], data: { url: map_socials_path(date.to_fs, format: :json) } } %>
+        <%= link_to I18n.l(date, format: :listing_date), { date: date.to_fs(:db) }, { class: ["js-update-map", (:selected if date == @map_dates.selected_date)], data: { url: map_socials_path(date.to_fs(:db), format: :json) } } %>
       </li>
     <% end %>
   </ul>

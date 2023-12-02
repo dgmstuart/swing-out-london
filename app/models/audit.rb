@@ -10,7 +10,7 @@ class Audit < ApplicationRecord
   def as_json
     {
       edited_by: editor.name,
-      created_at: created_at.to_fs,
+      created_at: I18n.l(created_at),
       action:,
       record: "#{auditable_type}(#{auditable_id})",
       changes: audited_changes,

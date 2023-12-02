@@ -9,7 +9,7 @@ class LastUpdate
   delegate :name, :auth_id, to: :editor
 
   def time_in_words
-    updated_at.to_fs(:human_timestamp)
+    I18n.l(updated_at, format: :audit_timestamp)
   end
 
   private

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class DatePrinter
-  def initialize(separator: ",", format: :uk_date)
+  def initialize(separator: ",", format: :default)
     @separator = separator
     @format = format
   end
 
   def print(dates)
-    dates.collect { |d| d.to_fs(format) }.join(separator)
+    dates.collect { |d| I18n.l(d, format:) }.join(separator)
   end
 
   private
