@@ -99,20 +99,6 @@ RSpec.describe "Users can view a map of upcoming events" do
       end
     end
 
-    context "when a social has no title (regression test)" do
-      # TODO: delete this and the related functionality when all records have been fixed on production.
-      it "silently doesn't render it" do
-        social = create(:social, dates: [Date.new(2019, 6, 8)])
-        social.update_attribute(:title, nil) # rubocop:disable Rails/SkipsModelValidations
-
-        Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
-          expect do
-            visit "/map/socials"
-          end.not_to raise_error
-        end
-      end
-    end
-
     it "viewing the map by clicking a postcode" do
       venue = create(:venue, postcode: "ZZ2 2ZZ")
       create(:weekly_social, venue:)
