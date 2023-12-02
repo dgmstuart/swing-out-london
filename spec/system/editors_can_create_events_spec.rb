@@ -107,6 +107,75 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
 
+    context "when switching from a class to a social" do
+      it "doesn't save any values from the class" do
+        create(:venue, name: "The 100 Club")
+        create(:organiser, name: "The London Swing Dance Society")
+        skip_login
+
+        visit "/events/new"
+
+        fill_in "Url", with: "http://www.lsds.co.uk/stompin"
+        autocomplete_select "The 100 Club", from: "Venue"
+
+        choose "Weekly class"
+
+        autocomplete_select "The London Swing Dance Society", from: "Class organiser"
+        choose "Other (balboa, shag etc)"
+        fill_in "Dance style", with: "Balboa"
+        fill_in "Course length", with: "6"
+
+        # CHANGE OUR MINDS: It's actually a social
+        choose "Social dance"
+        fill_in "Title", with: "Stompin'"
+        autocomplete_select "The London Swing Dance Society", from: "Social organiser"
+
+        choose "Weekly"
+        select "Wednesday", from: "Day"
+
+        click_button "Create"
+
+        event = Event.last
+        aggregate_failures do
+          expect(event.class_organiser).to be_nil
+          expect(event.class_style).to eq ""
+          expect(event.course_length).to be_nil
+        end
+      end
+    end
+
+    context "when switching from a social to a class" do
+      it "doesn't save any values from the social" do
+        create(:venue, name: "The 100 Club")
+        create(:organiser, name: "The London Swing Dance Society")
+        skip_login
+
+        visit "/events/new"
+
+        fill_in "Url", with: "http://www.lsds.co.uk/stompin"
+        autocomplete_select "The 100 Club", from: "Venue"
+
+        choose "Social dance"
+        fill_in "Title", with: "Stompin'"
+        autocomplete_select "The London Swing Dance Society", from: "Social organiser"
+
+        # CHANGE OUR MINDS: It's actually a class
+        choose "Weekly class"
+
+        autocomplete_select "The London Swing Dance Society", from: "Class organiser"
+
+        select "Wednesday", from: "Day"
+
+        click_button "Create"
+
+        event = Event.last
+        aggregate_failures do
+          expect(event.title).to be_nil
+          expect(event.social_organiser).to be_nil
+        end
+      end
+    end
+
     it "from the 'New event at this venue' button" do
       create(:venue, name: "93 feet east", area: "Brick Lane")
       skip_login
