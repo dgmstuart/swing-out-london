@@ -15,7 +15,7 @@ class OrganiserEditEventForm
           venue_id: event.venue_id,
           dates: date_printable_event.print_dates,
           cancellations: date_printable_event.print_cancellations,
-          last_date: event.last_date&.to_fs
+          last_date: event.last_date&.to_fs(:db)
         }
       )
     end
@@ -34,6 +34,7 @@ class OrganiserEditEventForm
   validates :venue_id, presence: true
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
+  validates :last_date, date_string: true
 
   validates_with ValidCancellations
 

@@ -46,8 +46,8 @@ class EditEventForm
           day: event.day,
           dates: date_printable_event.print_dates,
           cancellations: date_printable_event.print_cancellations,
-          first_date: event.first_date&.to_fs,
-          last_date: event.last_date&.to_fs
+          first_date: event.first_date&.to_fs(:db),
+          last_date: event.last_date&.to_fs(:db)
         }
       )
     end
@@ -64,6 +64,8 @@ class EditEventForm
 
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
+  validates :first_date, date_string: true
+  validates :last_date, date_string: true
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent

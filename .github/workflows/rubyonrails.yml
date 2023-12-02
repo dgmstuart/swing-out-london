@@ -23,10 +23,15 @@ jobs:
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     env:
+      LANG: en_GB.UTF-8
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       SKIP_JS_BUILD: true # prevent jsbundling-rails from installing and building JS
     steps:
+      - name: install locale
+        run: |
+          sudo locale-gen en_GB.UTF-8
+          sudo update-locale LANG=en_GB.UTF-8
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems

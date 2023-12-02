@@ -35,7 +35,8 @@ RSpec.describe "Editors can create events", :js do
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
       # TODO: Make this work:
       # fill_in 'Cancelled dates', with: '12/12/2012'
-      fill_in "First date", with: ""
+      fill_in "First date", with: "12/12/2012"
+      fill_in "Last date", with: "19/12/2012"
 
       Timecop.freeze(Time.zone.local(2012, 1, 2, 23, 17, 16)) do
         click_button "Create"
@@ -50,7 +51,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 19/12/2012")
         .and have_content("Cancelled:\nNone")
-        .and have_content("First date:")
+        .and have_content("First date:\nWednesday 12th December")
+        .and have_content("Last date:\nWednesday 19th December")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
       expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
@@ -91,6 +93,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Dates contained some dates unreasonably far in the future: 19/12/20121")
 
       fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
+      fill_in "First date", with: "12/12/2012"
+      fill_in "Last date", with: "30/04/2013"
 
       click_button "Create"
 
@@ -98,6 +102,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Social")
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 30/04/2013")
+        .and have_content("First date:\nWednesday 12th December")
+        .and have_content("Last date:\nTuesday 30th April")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
 
@@ -136,6 +142,7 @@ RSpec.describe "Editors can create events", :js do
 
       select "Wednesday", from: "Day"
       fill_in "First date", with: "16/02/2000"
+      fill_in "Last date", with: "16/02/2020"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
         click_button "Create"
@@ -147,6 +154,7 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Frequency:\nWeekly on Wednesdays")
         .and have_content("Cancelled:\nNone")
         .and have_content("First date:\nWednesday 16th February")
+        .and have_content("Last date:\nSunday 16th February")
         .and have_content("Url:\nhttps://sunshineswing.uk/events")
 
       expect(page).to have_content("Last updated by Leon James (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")

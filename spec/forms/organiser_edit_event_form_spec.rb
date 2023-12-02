@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require "form_spec_helper"
-require "spec/support/shared_examples/events/validates_date_string"
+require "spec/support/shared_examples/events/validates_dates_string"
 require "spec/support/shared_examples/events/validates_cancellations_in_dates"
+require "spec/support/shared_examples/events/validates_date_string"
 require "app/concerns/frequency"
 require "app/forms/organiser_edit_event_form"
 
@@ -14,9 +15,10 @@ RSpec.describe OrganiserEditEventForm do
 
     it { is_expected.to validate_presence_of(:venue_id) }
 
-    it_behaves_like "validates date string", :dates, :organiser_edit_event_form, { allow_past: true }
-    it_behaves_like "validates date string", :cancellations, :organiser_edit_event_form, { allow_past: true }
+    it_behaves_like "validates dates string", :dates, :organiser_edit_event_form, { allow_past: true }
+    it_behaves_like "validates dates string", :cancellations, :organiser_edit_event_form, { allow_past: true }
     it_behaves_like "validates dates in cancellations", :organiser_edit_event_form
+    it_behaves_like "validates date string", :last_date, :organiser_edit_event_form
   end
 
   describe ".persisted?" do

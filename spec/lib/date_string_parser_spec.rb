@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "spec/support/time_formats_helper"
 require "lib/date_string_parser"
 
 RSpec.describe DateStringParser do

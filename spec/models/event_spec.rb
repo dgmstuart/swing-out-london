@@ -6,6 +6,7 @@ require "spec/support/shared_examples/events/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/validates_event_with_dates"
 require "spec/support/shared_examples/events/validates_course_length"
+require "spec/support/shared_examples/events/validates_date_string"
 require "spec/support/shared_examples/validates_url"
 
 RSpec.describe Event do

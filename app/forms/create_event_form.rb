@@ -37,6 +37,8 @@ class CreateEventForm
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_blank: true }
   validates :dates, dates_string: true
   validates :cancellations, dates_string: true
+  validates :first_date, date_string: true
+  validates :last_date, date_string: true
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
