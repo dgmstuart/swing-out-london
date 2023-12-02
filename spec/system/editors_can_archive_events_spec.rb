@@ -48,21 +48,21 @@ RSpec.describe "Editors can archive events" do
   end
 
   context "when the event is already archived" do
-    it "behaves the same as success" do
+    it "succeeds but doesn't update the date" do
       skip_login
       event = create(:event, frequency: 0, dates: ["02/01/2000".to_date])
 
       visit "/events"
 
-      event.archive!
+      Timecop.freeze("2000-01-08") do
+        event.update(last_date: "2000-01-01")
 
-      Timecop.freeze(Time.zone.local(2000, 1, 8)) do
         click_link "Archive", match: :first
       end
 
       click_show
 
-      expect(page).to have_content("Last date: Sunday 2nd January")
+      expect(page).to have_content("Last date: Saturday 1st January")
     end
   end
 
@@ -76,10 +76,10 @@ RSpec.describe "Editors can archive events" do
       visit "/events"
 
       Timecop.freeze(Time.zone.local(2000, 1, 8)) do
-        expect do
-          click_link "Archive", match: :first
-        end.to raise_error(ActiveRecord::RecordInvalid)
+        click_link "Archive", match: :first
       end
+
+      expect(page).to have_content("This event could not be archived - try editing it first.")
     end
   end
 

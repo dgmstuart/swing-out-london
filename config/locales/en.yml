@@ -36,6 +36,8 @@ en:
     map:
       days_of_week: 'We can only show you classes for days of the week'
       14_days: 'We can only show you events for the next 14 days'
+    archive:
+      failed: This event could not be archived - try editing it first.
   forms:
     help:
       dates: Enter dates separated with commas, eg. 25/6/2023,1/2/2024

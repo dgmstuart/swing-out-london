@@ -30,7 +30,7 @@
     <td class="actions last">
       <%= link_to 'Show', event %>
       <%= link_to 'Delete', event, data: { turbo: true, turbo_confirm: "Are you sure you want to delete this event?", turbo_method: :delete } %>
-      <%= link_to 'Archive', archive_event_path(event), data: { turbo_method: :put } %>
+      <%= link_to 'Archive', archive_event_path(event), data: { turbo: true, turbo_method: :put } %>
     </td>
   </tr>
 <% end %>
