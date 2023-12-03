@@ -11,11 +11,6 @@ Lint/DuplicateMethods:
   Exclude:
     - 'app/models/event.rb'
 
-# Offense count: 14
-# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
-Metrics/AbcSize:
-  Max: 26
-
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:

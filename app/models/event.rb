@@ -202,8 +202,7 @@ class Event < ApplicationRecord
   ###########
 
   def archive
-    # If there's already a last_date in the past, then the event should already be archived!
-    return true if !last_date.nil? && last_date < Date.current
+    return true if ended? # if it's already ended, there's nothing to do
 
     ended_date =
       if weekly?

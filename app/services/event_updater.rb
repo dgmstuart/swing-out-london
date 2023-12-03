@@ -7,10 +7,9 @@ class EventUpdater
   end
 
   def update!(attrs)
-    audit_comment = audit_commenter.comment(record, attrs)
-    event_instances = event_instances(attrs.delete(:dates), attrs.delete(:cancellations), attrs[:frequency])
+    attrs.merge!(audit_commenter.comment(record, attrs))
+    event_instances = event_instances(attrs)
     attrs.merge!(event_instances:) unless event_instances.nil?
-    attrs.merge!(audit_comment)
 
     record.update!(attrs)
     record.event_instances.each(&:save!) unless event_instances.nil?
@@ -21,7 +20,10 @@ class EventUpdater
 
   attr_reader :record, :audit_commenter
 
-  def event_instances(dates, cancellations, frequency)
+  def event_instances(attrs)
+    dates = attrs.delete(:dates)
+    cancellations = attrs.delete(:cancellations)
+    frequency = attrs[:frequency]
     return nil if dates.nil? && cancellations.nil?
 
     case frequency || record.frequency

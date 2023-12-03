@@ -12,10 +12,8 @@ class MapsController < ApplicationController
   def classes
     @day = Maps::Classes::DayParser.parse(params[:day])
     venues = Maps::Classes::VenueQuery.new(@day).venues
+    marker_info_builder = Maps::MarkerInfoBuilder.for_classes(day: @day)
 
-    marker_info_builder = Maps::MarkerInfoBuilder.new(
-      event_finder: Maps::Classes::FinderFromVenue.new(day: @day)
-    )
     @map =
       Maps::Map.new(
         venues:,
@@ -31,11 +29,9 @@ class MapsController < ApplicationController
 
   def socials
     @map_dates = Maps::Socials::Dates.new(params[:date])
-
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
-    marker_info_builder = Maps::MarkerInfoBuilder.new(
-      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date)
-    )
+    marker_info_builder = Maps::MarkerInfoBuilder.for_socials(date: @map_dates.selected_date)
+
     @map =
       Maps::Map.new(
         venues:,

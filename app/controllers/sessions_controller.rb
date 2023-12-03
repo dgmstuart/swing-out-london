@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def new; end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def create # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     user = AuthResponse.new(request.env)
     role = authorisation_for(user.id)
     if %i[editor admin].include?(role)
