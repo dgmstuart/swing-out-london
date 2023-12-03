@@ -28,29 +28,19 @@ module MapListingsHelper
   end
 
   def mapinfo_class_info_tag(social)
-    class_info = capture do
-      if social.class_style.present?
-        concat social.class_style
-        concat " "
-      end
+    class_type = social.has_class? ? "class" : "taster"
 
-      class_type =
-        if social.has_class?
-          "class"
-        else
-          "taster"
-        end
-      concat class_type
+    class_info = []
+    class_info << social.class_style if social.class_style.present?
+    class_info << class_type
 
+    tag.span class: "info" do
+      concat "("
+      concat class_info.join(" ")
       if school_name(social)
         concat " by "
         concat school_name(social)
       end
-    end
-
-    tag.span class: "info" do
-      concat "("
-      concat class_info
       concat ")"
     end
   end

@@ -28,7 +28,7 @@ RSpec.describe MapsController do
 
       context "when the day is described in words" do
         before do
-          allow(controller).to receive(:today).and_return(Date.new(2012, 10, 11)) # A thursday
+          allow(SOLDNTime).to receive(:today).and_return(Date.new(2012, 10, 11)) # A thursday
         end
 
         it "@day should be today's day name (capitalised) if the url contained 'today'" do
@@ -41,10 +41,8 @@ RSpec.describe MapsController do
           expect(assigns[:day]).to eq("Friday")
         end
 
-        context "the url contained 'yesterday'" do
-          it "redirects to the main classes page" do
-            expect(get(:classes, params: { day: "yesterday" })).to redirect_to("/map/classes")
-          end
+        it "redirects to the main classes page if the url contained 'yesterday'" do
+          expect(get(:classes, params: { day: "yesterday" })).to redirect_to("/map/classes")
         end
       end
     end

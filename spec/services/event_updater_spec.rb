@@ -218,7 +218,7 @@ RSpec.describe EventUpdater do
         expect do
           params = attributes_for(:event, :weekly)
           described_class.new(record).update!(params)
-        end.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Event instances must all be cancelled for weekly events")
+        end.to raise_error(ActiveRecord::RecordInvalid, /Event instances must all be cancelled for weekly events/)
       end
     end
 
@@ -228,7 +228,8 @@ RSpec.describe EventUpdater do
         date1 = Date.tomorrow
         date2 = 2.days.from_now
         create(:event_instance, event: record, date: date1, cancelled: false)
-        params = attributes_for(:event, :occasional).merge(url: "not a valid url", dates: [date1, date2], cancellations: [date1])
+        params = attributes_for(:event, :occasional)
+                 .merge(url: "not a valid url", dates: [date1, date2], cancellations: [date1])
 
         aggregate_failures do
           expect do

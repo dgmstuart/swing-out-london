@@ -3,7 +3,7 @@
 require "dates_string_parser"
 require "day_names"
 
-class Event < ApplicationRecord
+class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   audited
 
   include Frequency
@@ -107,7 +107,12 @@ class Event < ApplicationRecord
 
   scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
   scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.current) }
-  scope :active_on, ->(date) { where("(first_date IS NULL OR first_date <= ?) AND (last_date IS NULL OR last_date >= ?)", date, date) }
+  scope :active_on, lambda { |date|
+    where(
+      "(first_date IS NULL OR first_date <= :date) AND (last_date IS NULL OR last_date >= :date)",
+      date:
+    )
+  }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
   scope :listing_classes_on_day, ->(day) { listing_classes.where(day:) }
@@ -202,8 +207,7 @@ class Event < ApplicationRecord
   ###########
 
   def archive
-    # If there's already a last_date in the past, then the event should already be archived!
-    return true if !last_date.nil? && last_date < Date.current
+    return true if ended? # if it's already ended, there's nothing to do
 
     ended_date =
       if weekly?

@@ -11,7 +11,7 @@ class ExternalEventsController < CmsBaseController
   def update
     @event = Event.find_by!(organiser_token: params[:id])
 
-    @form = OrganiserEditEventForm.new(event_params.merge(frequency: @event.frequency))
+    @form = OrganiserEditEventForm.new(event_params(@event))
     if @form.valid?
       EventUpdater.new(@event).update!(@form.to_h)
       flash[:success] = t("flash.success", model: "Event", action: "updated")
@@ -30,7 +30,7 @@ class ExternalEventsController < CmsBaseController
     @current_user = OrganiserUser.new(organiser_token)
   end
 
-  def event_params
+  def event_params(event)
     params.require(:event).permit(
       %i[
         venue_id
@@ -38,6 +38,6 @@ class ExternalEventsController < CmsBaseController
         cancellations
         last_date
       ]
-    )
+    ).merge(frequency: event.frequency)
   end
 end

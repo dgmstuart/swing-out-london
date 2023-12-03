@@ -11,7 +11,9 @@ RSpec.describe ClassListing do
   describe "details" do
     context "when the event is a general/Lindy hop class" do
       it "includes the area" do
-        event = instance_double("Event", venue_area: "Archway", class_style: nil, course_length: nil, started?: true)
+        event = instance_double(
+          "Event", venue_area: "Archway", class_style: nil, course_length: nil, started?: true
+        )
 
         social_listing = described_class.new(event)
 
@@ -21,7 +23,9 @@ RSpec.describe ClassListing do
 
     context "when the event is a Balboa class" do
       it "includes the class style" do
-        event = instance_double("Event", venue_area: "Archway", class_style: "Balboa", course_length: nil, started?: true)
+        event = instance_double(
+          "Event", venue_area: "Archway", class_style: "Balboa", course_length: nil, started?: true
+        )
 
         social_listing = described_class.new(event)
 
@@ -31,7 +35,9 @@ RSpec.describe ClassListing do
 
     context "when the event is a class which runs as courses" do
       it "includes the course length" do
-        event = instance_double("Event", venue_area: "Archway", class_style: nil, course_length: 4, started?: true)
+        event = instance_double(
+          "Event", venue_area: "Archway", class_style: nil, course_length: 4, started?: true
+        )
 
         social_listing = described_class.new(event)
 
@@ -42,7 +48,9 @@ RSpec.describe ClassListing do
     context "when the event has not started yet" do
       it "includes the first date" do
         first_date = Date.parse("2023-07-14")
-        event = instance_double("Event", venue_area: "Archway", class_style: nil, course_length: nil, started?: false, first_date:)
+        event = instance_double(
+          "Event", venue_area: "Archway", class_style: nil, course_length: nil, started?: false, first_date:
+        )
 
         social_listing = described_class.new(event)
 
@@ -53,7 +61,9 @@ RSpec.describe ClassListing do
     context "when the event is complicated" do
       it "includes all the things" do
         first_date = Date.parse("2023-07-14")
-        event = instance_double("Event", venue_area: "Archway", class_style: "Balboa", course_length: 6, started?: false, first_date:)
+        event = instance_double(
+          "Event", venue_area: "Archway", class_style: "Balboa", course_length: 6, started?: false, first_date:
+        )
 
         social_listing = described_class.new(event)
 

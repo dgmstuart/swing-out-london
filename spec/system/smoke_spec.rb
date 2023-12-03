@@ -123,7 +123,8 @@ RSpec.describe "Adding a new event", :js do
           expect(page).to have_content "Saturday 9th January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
           expect(page).to have_content "CANCELLED Stompin at the Savoy"
-          expect(page).to have_content("Stompin at the Savoy").once # Regression: check that cancelled weekly events don't show twice
+          # Regression: use .once to check that cancelled weekly events don't show twice
+          expect(page).to have_content("Stompin at the Savoy").once
           expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
         end
       end
@@ -156,7 +157,7 @@ RSpec.describe "Adding a new event", :js do
 
     aggregate_failures do
       expect(page).to have_css('meta[property="og:title"][content="Swing Out London"]', visible: :hidden)
-      expect(page).to have_css('meta[property="og:description"][content*="Swing Out London is a listing of"]', visible: :hidden)
+      expect(page).to have_css('meta[property="og:description"][content*="Swing Out London is a listing"]', visible: :hidden)
       expect(page).to have_css('meta[property="og:url"][content="https://www.swingoutlondon.co.uk"]', visible: :hidden)
       expect(page).to have_css('meta[property="og:image"]', visible: :hidden)
       image_url = find('meta[property="og:image"]', visible: :hidden)["content"]

@@ -7,7 +7,8 @@ RSpec.describe "Editors can edit events", :js do
 
   it "with valid data" do
     stub_login(id: 12345678901234567, name: "Al Minns")
-    create(:weekly_social, :with_class, class_style: "Balboa", first_date: "02/09/2010", cancellations: ["01/10/2010", "02/12/2011"])
+    cancellations = ["01/10/2010", "02/12/2011"]
+    create(:weekly_social, :with_class, class_style: "Balboa", first_date: "02/09/2010", cancellations:)
     create(:venue, name: "The 100 Club")
     create(:organiser, name: "The London Swing Dance Society")
 

@@ -19,7 +19,7 @@ class ClassListing
     to: :event
   )
 
-  def details
+  def details # rubocop:disable Metrics/AbcSize
     details = []
     details << event.venue_area
     details << "(from #{first_date})" unless event.started?

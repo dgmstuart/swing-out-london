@@ -21,16 +21,28 @@ class DatesStringParser
   def parse_strings(date_strings, &) # rubocop:disable Metrics/MethodLength
     date_strings.each_with_object(empty_result) do |date_string, result|
       date = date_string_parser.parse(date_string)
-      if date
-        if result[:dates].include?(date)
-          result[:errors][:duplicate] << date_string
-        else
-          result[:dates] << date
-          yield(date, date_string, result) if block_given?
-        end
-      else
+
+      case validate(date, result)
+      in :valid
+        result[:dates] << date
+        yield(date, date_string, result) if block_given?
+      in :duplicate
+        result[:errors][:duplicate] << date_string
+      in :invalid
         result[:errors][:invalid] << %("#{date_string}")
       end
+    end
+  end
+
+  def validate(date, result)
+    if date
+      if result[:dates].include?(date)
+        :duplicate
+      else
+        :valid
+      end
+    else
+      :invalid
     end
   end
 

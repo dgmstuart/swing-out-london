@@ -9,7 +9,7 @@ module Maps
         I18n.l(date, format: "%A")
       end
 
-      def self.parse(day_string, today)
+      def self.parse(day_string, today = SOLDNTime.today)
         return unless day_string
 
         day = day_string.titlecase

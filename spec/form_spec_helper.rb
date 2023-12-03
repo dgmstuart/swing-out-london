@@ -31,6 +31,8 @@ end
 I18n.load_path << "./config/locales/en.yml"
 
 def stub_model_name(model_class_name)
-  model_name = instance_double("ActiveModel::Name", human: model_class_name.downcase, i18n_key: model_class_name.downcase.to_sym)
+  model_name = instance_double("ActiveModel::Name",
+                               human: model_class_name.downcase,
+                               i18n_key: model_class_name.downcase.to_sym)
   stub_const(model_class_name, class_double(model_class_name, model_name:))
 end

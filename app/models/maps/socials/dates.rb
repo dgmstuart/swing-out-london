@@ -5,7 +5,7 @@ module Maps
     class Dates
       class DateOutOfRangeError < StandardError; end
 
-      def initialize(date_string, today)
+      def initialize(date_string, today = SOLDNTime.today)
         @date_string = date_string
         @today = today
       end

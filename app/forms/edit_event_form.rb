@@ -27,28 +27,7 @@ class EditEventForm
 
   class << self
     def from_event(event)
-      date_printable_event = DatePrintableEvent.new(event)
-
-      new(
-        {
-          title: event.title,
-          url: event.url,
-          venue_id: event.venue_id,
-          event_type: (event.has_social? ? "social_dance" : "weekly_class"),
-
-          social_organiser_id: event.social_organiser_id,
-          social_has_class: event.has_social? && (event.has_class? || event.has_taster?),
-
-          class_style: event.class_style, course_length: event.course_length, class_organiser_id: event.class_organiser_id,
-
-          frequency: event.frequency,
-          day: event.day,
-          dates: date_printable_event.print_dates,
-          cancellations: date_printable_event.print_cancellations,
-          first_date: event.first_date&.to_fs(:db),
-          last_date: event.last_date&.to_fs(:db)
-        }
-      )
+      new(EditableEvent.new(event).attributes)
     end
 
     def model_name
@@ -140,5 +119,84 @@ class EditEventForm
 
   def date_parser
     DatesStringParser.new
+  end
+
+  class EditableEvent
+    def initialize(event)
+      @event = event
+    end
+
+    delegate(
+      :title,
+      :url,
+      :venue_id,
+      :social_organiser_id,
+      :social_organiser_id,
+      :class_style,
+      :course_length,
+      :class_organiser_id,
+      :frequency,
+      :day,
+      to: :event
+    )
+
+    def event_type
+      event.has_social? ? "social_dance" : "weekly_class"
+    end
+
+    def social_has_class
+      event.has_social? && (event.has_class? || event.has_taster?)
+    end
+
+    def dates
+      date_printable_event.print_dates
+    end
+
+    def cancellations
+      date_printable_event.print_cancellations
+    end
+
+    def first_date
+      format_date(event.first_date)
+    end
+
+    def last_date
+      format_date(event.last_date)
+    end
+
+    def attributes
+      {
+        title:,
+        url:,
+        venue_id:,
+        event_type:,
+
+        social_organiser_id:,
+        social_has_class:,
+
+        class_style:,
+        course_length:,
+        class_organiser_id:,
+
+        frequency:,
+        day:,
+        dates:,
+        cancellations:,
+        first_date:,
+        last_date:
+      }
+    end
+
+    private
+
+    attr_reader :event
+
+    def format_date(date)
+      date&.to_fs(:db)
+    end
+
+    def date_printable_event
+      DatePrintableEvent.new(event)
+    end
   end
 end

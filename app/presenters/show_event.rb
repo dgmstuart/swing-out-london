@@ -42,17 +42,20 @@ class ShowEvent
     activities.join(" with ").capitalize
   end
 
-  def frequency # rubocop:disable Metrics/MethodLength
-    case event.frequency
-    when 0 then "Monthly or occasionally"
-    when 1 then "Weekly on #{event.day.pluralize}"
-    when 2 then "Fortnightly"
-    when 4..5 then "Monthly"
-    when 8 then "Bi-Monthly"
-    when 26 then "Twice-yearly"
-    when 52 then "Yearly"
-    when 1..100 then "Every #{event.frequency} weeks"
-    else "Unknown"
+  def frequency
+    {
+      2 => "Fortnightly",
+      4 => "Monthly",
+      8 => "Bi-Monthly",
+      26 => "Twice-yearly",
+      52 => "Yearly"
+    }.fetch(event.frequency) do |frequency|
+      case frequency
+      when 0 then "Monthly or occasionally"
+      when 1 then "Weekly on #{event.day.pluralize}"
+      else
+        "Every #{frequency} weeks"
+      end
     end
   end
 
