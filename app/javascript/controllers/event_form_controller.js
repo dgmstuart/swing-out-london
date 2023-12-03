@@ -3,8 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="event-form"
 export default class extends Controller {
   static #socialDanceFields = [ "title", "socialOrganiser", "socialHasClass" ]
-  static #weeklyClassFields = [ "classOrganiser", "socialHasClass" ]
-  static targets = [ "socialDetails", "classDetails", "when", "frequency", "frequencyWeekly", "daySelect", "datesInput", ...this.#socialDanceFields]
+  static #weeklyClassFields = [ "classOrganiser", "classStyle", "courseLength" ]
+  static #whenFields = [ "when", "frequency", "frequencyWeekly", "daySelect", "datesInput" ]
+  static targets = [ "socialDetails", "classDetails", ...this.#weeklyClassFields, ...this.#socialDanceFields, ...this.#whenFields ]
   static classes = [ "hidden" ]
 
   socialDance() {
@@ -13,7 +14,7 @@ export default class extends Controller {
     this.whenTarget.classList.remove(this.hiddenClass);
     this.frequencyTarget.classList.remove(this.hiddenClass);
     this.frequencyWeeklyTarget.checked = false;
-    // TODO: blank out fields which we're now hiding
+    this.#resetWeeklyClassFields();
   }
 
   weeklyClass() {
@@ -48,7 +49,13 @@ export default class extends Controller {
 
   #resetSocialDanceFields() {
     this.titleTarget.value = ""
-    this.socialOrganiserTarget.value = "",
+    this.socialOrganiserTarget.value = ""
     this.socialHasClassTarget.checked = false
+  }
+
+  #resetWeeklyClassFields() {
+    this.classOrganiserTarget.value = ""
+    this.classStyleTarget.value = ""
+    this.courseLengthTarget.value = ""
   }
 }

@@ -34,7 +34,6 @@ class EditEventForm
           title: event.title,
           url: event.url,
           venue_id: event.venue_id,
-          # TODO: it's not necessarily true that it's only one or the other: legacy events might be neither...
           event_type: (event.has_social? ? "social_dance" : "weekly_class"),
 
           social_organiser_id: event.social_organiser_id,

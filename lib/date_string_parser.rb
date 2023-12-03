@@ -33,7 +33,7 @@ class DateStringParser
   module Format
     class UK
       def format
-        Date::DATE_FORMATS[:uk_date]
+        I18n.t("date.formats.default")
       end
 
       def regexp

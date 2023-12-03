@@ -27,11 +27,11 @@ class ShowEvent
   end
 
   def first_date
-    event.first_date&.to_fs(:listing_date)
+    format_date(event.first_date)
   end
 
   def last_date
-    event.last_date&.to_fs(:listing_date)
+    format_date(event.last_date)
   end
 
   def event_type
@@ -85,4 +85,10 @@ class ShowEvent
   private
 
   attr_reader :event, :date_printer
+
+  def format_date(date)
+    return unless date
+
+    I18n.l(date, format: :listing_date)
+  end
 end

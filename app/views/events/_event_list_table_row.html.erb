@@ -25,12 +25,12 @@
       <%= truncate(event.print_dates_rows, length: ((12 * 8) + 3)) %>
     </td>
     <td class="updated">
-      <%= event.updated_at.to_fs(:uk_date) %>
+      <%= I18n.l(event.updated_at) %>
     </td>
     <td class="actions last">
       <%= link_to 'Show', event %>
       <%= link_to 'Delete', event, data: { turbo: true, turbo_confirm: "Are you sure you want to delete this event?", turbo_method: :delete } %>
-      <%= link_to 'Archive', archive_event_path(event), data: { turbo_method: :put } %>
+      <%= link_to 'Archive', archive_event_path(event), data: { turbo: true, turbo_method: :put } %>
     </td>
   </tr>
 <% end %>

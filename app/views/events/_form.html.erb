@@ -54,7 +54,7 @@
     <h3 class='form-section-title'>Class details</h3>
     <div class='form-group'>
       <%= f.label :class_organiser_id, 'Class organiser' %>
-      <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' } %>
+      <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' }, { data: { event_form_target: "classOrganiser" } } %>
       <p class='help'>Note: classes don't have names - just locations and organisers</p>
       <p class='help'>The location and organiser name are displayed in the listings.</>
     </div>
@@ -71,12 +71,12 @@
       </div>
       <div class='form-group form-group-nested <%= 'hidden' if @form.class_style.blank? %>' id="class-style-group">
         <%= f.label :class_style, "Dance style:" %>
-        <%= f.text_field :class_style %>
+        <%= f.text_field :class_style, data: { event_form_target: "classStyle" } %>
       </div>
     </div>
     <div class='form-group'>
       <%= f.label :course_length %>
-      <%= f.text_field :course_length, size: 2, class: "shortfield" %> weeks
+      <%= f.text_field :course_length, size: 2, class: "shortfield", data: { event_form_target: "courseLength" }  %> weeks
     </div>
   </section>
 

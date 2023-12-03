@@ -60,9 +60,10 @@ class EventsController < CmsBaseController
   end
 
   def archive
-    @event = Event.find(params[:id])
-    @event.archive!
-    # TODO: handle case where save fails or already archived (archive = false)
+    event = Event.find(params[:id])
+    succeeded = event.archive
+
+    flash.alert = t("flash.archive.failed") unless succeeded
 
     redirect_to events_path
   end

@@ -201,9 +201,9 @@ class Event < ApplicationRecord
   # ACTIONS #
   ###########
 
-  def archive!
+  def archive
     # If there's already a last_date in the past, then the event should already be archived!
-    return false if !last_date.nil? && last_date < Date.current
+    return true if !last_date.nil? && last_date < Date.current
 
     ended_date =
       if weekly?
@@ -214,6 +214,6 @@ class Event < ApplicationRecord
         latest_date
       end
 
-    update!(last_date: ended_date)
+    update(last_date: ended_date)
   end
 end

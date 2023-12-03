@@ -47,6 +47,42 @@ RSpec.describe "Editors can archive events" do
     expect(page).to have_content("Last date: Monday 1st January") # earliest possible Date
   end
 
+  context "when the event is already archived" do
+    it "succeeds but doesn't update the date" do
+      skip_login
+      event = create(:event, frequency: 0, dates: ["02/01/2000".to_date])
+
+      visit "/events"
+
+      Timecop.freeze("2000-01-08") do
+        event.update(last_date: "2000-01-01")
+
+        click_link "Archive", match: :first
+      end
+
+      click_show
+
+      expect(page).to have_content("Last date: Saturday 1st January")
+    end
+  end
+
+  context "when the event couldn't be saved for some reason" do
+    it "raises an error" do
+      skip_login
+      event = create(:event, frequency: 0, dates: ["02/01/2000".to_date])
+      # Set frequency to nil to simulate failed save by making the record invalid:
+      event.update_attribute(:frequency, nil) # rubocop:disable Rails/SkipsModelValidations
+
+      visit "/events"
+
+      Timecop.freeze(Time.zone.local(2000, 1, 8)) do
+        click_link "Archive", match: :first
+      end
+
+      expect(page).to have_content("This event could not be archived - try editing it first.")
+    end
+  end
+
   def click_show
     within ".actions.last", match: :first do
       click_link "Show"

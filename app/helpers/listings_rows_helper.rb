@@ -40,7 +40,7 @@ module ListingsRowsHelper
         concat label_prefix
         concat " "
       end
-      concat date.to_fs(:listing_date)
+      concat I18n.l(date, format: :listing_date)
     end
   end
 
