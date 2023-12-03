@@ -6,17 +6,10 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# Configuration parameters: Prefixes, AllowedPatterns.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/controllers/maps_controller_spec.rb'
-
 # Offense count: 21
 # Configuration parameters: AllowedGroups.
 RSpec/NestedGroups:
-  Max: 5
+  Max: 4
 
 # Offense count: 2
 # Configuration parameters: Include.

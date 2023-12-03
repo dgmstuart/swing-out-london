@@ -41,10 +41,8 @@ RSpec.describe MapsController do
           expect(assigns[:day]).to eq("Friday")
         end
 
-        context "the url contained 'yesterday'" do
-          it "redirects to the main classes page" do
-            expect(get(:classes, params: { day: "yesterday" })).to redirect_to("/map/classes")
-          end
+        it "redirects to the main classes page if the url contained 'yesterday'" do
+          expect(get(:classes, params: { day: "yesterday" })).to redirect_to("/map/classes")
         end
       end
     end
