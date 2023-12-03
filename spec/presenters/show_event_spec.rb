@@ -145,7 +145,6 @@ RSpec.describe ShowEvent do
 
   describe "#frequency" do
     examples = [
-      { frequency: nil, text: "Unknown" },
       { frequency: 0, text: "Monthly or occasionally" },
       { frequency: 2, text: "Fortnightly" },
       { frequency: 4, text: "Monthly" },

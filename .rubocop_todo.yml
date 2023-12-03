@@ -18,11 +18,6 @@ Metrics/ClassLength:
     - 'app/models/event.rb'
     - 'app/forms/edit_event_form.rb'
 
-# Offense count: 2
-# Configuration parameters: IgnoredMethods.
-Metrics/CyclomaticComplexity:
-  Max: 9
-
 # Offense count: 7
 # Configuration parameters: Prefixes.
 # Prefixes: when, with, without
