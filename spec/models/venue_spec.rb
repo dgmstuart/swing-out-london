@@ -2,6 +2,7 @@
 
 require "rails_helper"
 require "support/shoulda_matchers"
+require "spec/support/shared_examples/venues/validates_postcode_is_postcode_like"
 
 RSpec.describe Venue do
   describe "Associations" do
@@ -12,6 +13,8 @@ RSpec.describe Venue do
     it { is_expected.to validate_presence_of(:address) }
     it { is_expected.to validate_presence_of(:area) }
     it { is_expected.to validate_presence_of(:name) }
+
+    it_behaves_like "validates postcode is postcode-like", :venue
   end
 
   describe "#name" do

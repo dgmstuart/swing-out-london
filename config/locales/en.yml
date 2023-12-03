@@ -31,6 +31,10 @@ en:
           attributes:
             date:
               taken: "The date '%{value}' has already been taken"
+        venue:
+          attributes:
+            postcode:
+              invalid: is not a valid postcode
   flash:
     success: "%{model} was successfully %{action}"
     map:
