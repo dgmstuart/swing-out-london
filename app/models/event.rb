@@ -3,7 +3,7 @@
 require "dates_string_parser"
 require "day_names"
 
-class Event < ApplicationRecord
+class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   audited
 
   include Frequency
