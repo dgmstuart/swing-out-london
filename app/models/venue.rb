@@ -6,6 +6,8 @@ class Venue < ApplicationRecord
               longitude: :lng
   audited
 
+  POSTCODE_REGEXP = /\A^[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}\z/i
+
   has_many :events, dependent: :restrict_with_exception
 
   scope :all_with_classes_listed, -> { where(id: Event.listing_classes.select("distinct venue_id")) }
@@ -15,6 +17,7 @@ class Venue < ApplicationRecord
   validates :area, presence: true
   validates :name, presence: true
   validates :website, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
+  validates :postcode, format: { with: POSTCODE_REGEXP, allow_blank: true }
 
   strip_attributes only: %i[name postcode area website]
 
