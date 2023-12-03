@@ -10,7 +10,7 @@ class MapsController < ApplicationController
                 race_condition_ttl: 10
 
   def classes
-    @day = Maps::Classes::DayParser.parse(params[:day], today)
+    @day = Maps::Classes::DayParser.parse(params[:day])
     venues = Maps::Classes::VenueQuery.new(@day).venues
 
     marker_info_builder = Maps::MarkerInfoBuilder.new(
@@ -30,7 +30,7 @@ class MapsController < ApplicationController
   end
 
   def socials
-    @map_dates = Maps::Socials::Dates.new(params[:date], today)
+    @map_dates = Maps::Socials::Dates.new(params[:date])
 
     venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
     marker_info_builder = Maps::MarkerInfoBuilder.new(

@@ -29,10 +29,4 @@ class ApplicationController < ActionController::Base
       credentials == [user, password]
     end
   end
-
-  private
-
-  def today
-    SOLDNTime.today
-  end
 end
