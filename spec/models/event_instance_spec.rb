@@ -9,8 +9,11 @@ RSpec.describe EventInstance do
   end
 
   describe "(validations)" do
-    subject { build(:event_instance) }
-
-    it { is_expected.to validate_uniqueness_of(:date).scoped_to(:event_id).with_message(/The date '.*' has already been taken/) }
+    it "ensures that the combination of date and event_id is unique" do
+      instance = build(:event_instance)
+      expect(instance).to validate_uniqueness_of(:date)
+        .scoped_to(:event_id)
+        .with_message(/The date '.*' has already been taken/)
+    end
   end
 end

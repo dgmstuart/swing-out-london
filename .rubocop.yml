@@ -25,6 +25,9 @@ AllCops:
     # Old migrations
     - db/migrate/201*.rb
 
+Layout/LineLength:
+  Max: 125
+
 Security/YAMLLoad:
   Exclude:
     # Loading yaml from the cache containing serialized object:

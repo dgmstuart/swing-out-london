@@ -28,7 +28,8 @@ module ShareButtonHelper
 
     share_title = "#{tc('site_name')} - Lindy Hop Listings"
     share_summary =
-      "#{tc('site_name')} is a listing of all the swing dance classes in #{tc('city')}, and all the places you can go to dance."
+      "#{tc('site_name')} is a listing of all the swing dance classes in #{tc('city')}, " \
+      "and all the places you can go to dance."
 
     query_parameters = [
       "s=100",
