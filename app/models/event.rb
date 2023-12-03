@@ -13,11 +13,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :venue
   belongs_to :class_organiser, class_name: "Organiser", optional: true
   belongs_to :social_organiser, class_name: "Organiser", optional: true
-  has_many :events_swing_dates, dependent: :destroy
-  has_many :swing_dates, -> { distinct(true) }, through: :events_swing_dates
-  has_many :events_swing_cancellations, dependent: :destroy
-  has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
-
   has_many :event_instances, dependent: :destroy
 
   validates :frequency, presence: true
