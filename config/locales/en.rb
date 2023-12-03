@@ -12,20 +12,20 @@ end
   en: {
     time: {
       formats: {
-        audit_timestamp: lambda { |date|
+        audit_timestamp: lambda { |date, _options = {}|
           date.strftime("on #{human_date(date)} %Y at %H:%M:%S") # on Tuesday 5th December 2017 at 13:08:28
         },
-        last_updated: lambda { |date|
+        last_updated: lambda { |date, _options = {}|
           date.strftime("at %H:%M on #{human_date(date)}") # at 01:04 on Saturday 2nd December
         }
       }
     },
     date: {
       formats: {
-        short: lambda { |date|
+        short: lambda { |date, _options = {}|
           date.strftime("#{ordinal_day(date)} %b")
         },
-        listing_date: lambda { |date|
+        listing_date: lambda { |date, _options = {}|
           date.strftime(human_date(date)) # Monday 4th December
         }
       }
