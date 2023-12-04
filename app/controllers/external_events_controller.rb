@@ -14,7 +14,7 @@ class ExternalEventsController < CmsBaseController
     @form = OrganiserEditEventForm.new(event_params(@event))
     if @form.valid?
       EventUpdater.new(@event).update!(@form.to_h)
-      flash[:success] = t("flash.success", model: "Event", action: "updated")
+      flash[:notice] = t("flash.success", model: "Event", action: "updated")
       redirect_to edit_external_event_path(@event.organiser_token)
     else
       render action: "edit"
