@@ -147,7 +147,9 @@ RSpec.describe "Organisers can edit events" do
 
   context "when the organiser token is incorrect" do
     it "renders a 404" do
-      expect { visit("/external_events/abc123/edit") }.to raise_error(ActiveRecord::RecordNotFound)
+      visit("/external_events/abc123/edit")
+
+      expect(page).to have_content("The page you were looking for doesn't exist")
     end
   end
 end
