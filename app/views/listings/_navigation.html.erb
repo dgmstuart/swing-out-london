@@ -26,9 +26,9 @@
 <div id="soldn_on_the_web">
   <%= render 'advert', advert: ad %>
 
-  <% if CITY.has_facebook_page? %>
+  <% if CITY.has_facebook_page? && ENV.fetch("FACEBOOK_APP_ID", false) %>
     <div id="social_links">
-      <%= render 'facebook_buttons', text: "Like #{tc("site_name")} on Facebook", url: tc("site_url") %>
+      <%= render 'facebook_buttons', text: "Like #{tc("site_name")} on Facebook", url: tc("site_url"), facebook_app_id: ENV.fetch("FACEBOOK_APP_ID") %>
     </div>
   <% end %>
 </div>
