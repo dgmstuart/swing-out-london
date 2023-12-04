@@ -33,8 +33,7 @@ RSpec.describe "Editors can create events", :js do
 
       choose "Monthly or occasionally"
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
-      # TODO: Make this work:
-      # fill_in 'Cancelled dates', with: '12/12/2012'
+      fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "First date", with: "12/12/2012"
       fill_in "Last date", with: "19/12/2012"
 
@@ -50,7 +49,7 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Class style:\nBalboa")
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 19/12/2012")
-        .and have_content("Cancelled:\nNone")
+        .and have_content("Cancelled:\n12/12/2012")
         .and have_content("First date:\nWednesday 12th December")
         .and have_content("Last date:\nWednesday 19th December")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
