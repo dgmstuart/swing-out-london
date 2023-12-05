@@ -57,6 +57,20 @@ RSpec.describe "Editors can edit events", :js do
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Saturday 2nd January 2010 at 23:17:16")
   end
 
+  it "TEMP lists dates individually" do
+    skip_login
+    event_instances = [
+      build(:event_instance, date: "01/10/2010", cancelled: true),
+      build(:event_instance, date: "02/12/2011")
+    ]
+    social = create(:intermittent_social, first_date: "02/09/2010", event_instances:)
+
+    visit edit_event_path(social)
+
+    expect(page).to have_content "01/10/2010 (cancelled)"
+    expect(page).to have_content "02/12/2011"
+  end
+
   it "with invalid data" do
     stub_login(id: 12345678901234567, name: "Al Minns")
     create(:class)
