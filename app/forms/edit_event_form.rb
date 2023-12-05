@@ -25,6 +25,7 @@ class EditEventForm
   attribute :day, :string
   attribute :dates, :string
   attribute :cancellations, :string
+  attribute :instances, array: true
   attribute :first_date, :string
   attribute :last_date, :string
 
@@ -90,7 +91,8 @@ class EditEventForm
       has_taster: has_occasional_class?,
       course_length: (course_length.to_i if course_length.present?)
     ).except(
-      :social_has_class
+      :social_has_class,
+      :instances
     )
   end
 
@@ -160,6 +162,10 @@ class EditEventForm
       event.has_social? && (event.has_class? || event.has_taster?)
     end
 
+    def instances
+      event.event_instances
+    end
+
     def dates
       date_printable_event.print_dates
     end
@@ -192,6 +198,7 @@ class EditEventForm
 
         frequency:,
         day:,
+        instances:,
         dates:,
         cancellations:,
         first_date:,

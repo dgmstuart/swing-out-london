@@ -107,6 +107,9 @@
       <%= f.label :day %>
       <%= f.select :day, DAYNAMES, include_blank: true %>
     </div>
+    <% @form.instances.each do |instance| %>
+      <div><%= [instance.date, ("(cancelled)" if instance.cancelled?)].compact.join(" ") %></div>
+    <% end %>
     <div class='form-group <%= "hidden" unless @form.infrequent? %>' data-event-form-target="datesInput">
       <%= f.label :dates, 'Upcoming dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
