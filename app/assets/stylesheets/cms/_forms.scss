@@ -165,6 +165,21 @@ form.edit_venue {
   }
 }
 
+form.event-form {
+  .instance {
+    display: flex;
+    margin-bottom: 5px;
+
+    label {
+      margin: 0;
+    }
+
+    input {
+      margin-left: 10px;
+    }
+  }
+}
+
 .lat-lng {
   .row {
     display: flex;
