@@ -75,8 +75,8 @@ RSpec.describe "Editors can edit events", :js do
 
     visit edit_event_path(social)
 
-    expect(page).to have_content "01/10/2010 (cancelled)"
-    expect(page).to have_content "02/12/2011"
+    expect(page).to have_checked_field "01/10/2010"
+    expect(page).to have_unchecked_field "02/12/2011"
   end
 
   it "with invalid data" do

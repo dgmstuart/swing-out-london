@@ -107,8 +107,13 @@
       <%= f.label :day %>
       <%= f.select :day, DAYNAMES, include_blank: true %>
     </div>
-    <% @form.instances.each do |instance| %>
-      <div><%= [instance.date, ("(cancelled)" if instance.cancelled?)].compact.join(" ") %></div>
+    <% @form.instances.each_with_index do |instance, index| %>
+      <div class="instance" id="instance-<%= instance.id %>">
+        <%= f.fields_for :instances, instance, index: do |i| %>
+          <%= i.label :cancelled, I18n.l(instance.date) %>
+          <%= i.check_box :cancelled %>
+        <% end %>
+      </div>
     <% end %>
     <div class='form-group <%= "hidden" unless @form.infrequent? %>' data-event-form-target="datesInput">
       <%= f.label :dates, 'Upcoming dates' %>
