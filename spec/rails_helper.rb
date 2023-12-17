@@ -29,8 +29,10 @@ RSpec.configure do |config|
   require "support/auth_helper"
   require "support/system/drivers"
   require "support/system/form_helper"
+  require "support/custom_matchers/have_description_matching"
   config.include AuthHelper, type: :system
   config.include AuthHelper, type: :request
   config.include System::Drivers, type: :system
   config.include System::FormHelper, type: :system
+  config.include HaveDescriptionMatching, type: :system
 end
