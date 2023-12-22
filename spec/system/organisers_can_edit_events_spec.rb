@@ -26,7 +26,7 @@ RSpec.describe "Organisers can edit events" do
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
-      fill_in "Last date", with: "12/01/2013"
+      fill_in "Last date", with: "2013\t0112"
       click_button "Update"
 
       expect(page).to have_content("Event was successfully updated")
@@ -63,7 +63,7 @@ RSpec.describe "Organisers can edit events" do
 
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Cancelled dates", with: "12/12/2012"
-      fill_in "Last date", with: "12/01/2013"
+      fill_in "Last date", with: "2013\t0112"
       click_button "Update"
 
       expect(page).to have_content("Event was successfully updated")

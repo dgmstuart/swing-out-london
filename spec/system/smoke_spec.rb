@@ -69,8 +69,8 @@ RSpec.describe "Adding a new event", :js do
     choose "Weekly"
     select "Saturday", from: "Day"
     fill_in "Cancelled dates", with: "09/01/1937"
-    fill_in "First date", with: "12/03/1926"
-    fill_in "Last date", with: "11/10/1958"
+    fill_in "First date", with: "1926\t0312"
+    fill_in "Last date", with: "1958\t10/11"
 
     click_button "Create"
 

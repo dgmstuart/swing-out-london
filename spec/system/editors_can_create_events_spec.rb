@@ -34,8 +34,8 @@ RSpec.describe "Editors can create events", :js do
       choose "Monthly or occasionally"
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
       fill_in "Cancelled dates", with: "12/12/2012"
-      fill_in "First date", with: "12/12/2012"
-      fill_in "Last date", with: "19/12/2012"
+      fill_in "First date", with: "2012\t1212"
+      fill_in "Last date", with: "2012\t12/19"
 
       Timecop.freeze(Time.zone.local(2012, 1, 2, 23, 17, 16)) do
         click_button "Create"
@@ -92,8 +92,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Dates contained some dates unreasonably far in the future: 19/12/20121")
 
       fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
-      fill_in "First date", with: "12/12/2012"
-      fill_in "Last date", with: "30/04/2013"
+      fill_in "First date", with: "2012\t1212"
+      fill_in "Last date", with: "2013\t0430"
 
       click_button "Create"
 
@@ -209,8 +209,8 @@ RSpec.describe "Editors can create events", :js do
       autocomplete_select "Sunshine Swing", from: "Class organiser"
 
       select "Wednesday", from: "Day"
-      fill_in "First date", with: "16/02/2000"
-      fill_in "Last date", with: "16/02/2020"
+      fill_in "First date", with: "2000\t0216"
+      fill_in "Last date", with: "2020\t0216"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
         click_button "Create"

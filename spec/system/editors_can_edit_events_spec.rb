@@ -31,8 +31,8 @@ RSpec.describe "Editors can edit events", :js do
     fill_in "Course length", with: ""
 
     choose "Monthly or occasionally"
-    fill_in "First date", with: "10/10/2010"
-    fill_in "Last date", with: "02/12/2011"
+    fill_in "First date", with: "2010\t1010"
+    fill_in "Last date", with: "2011\t1202"
 
     fill_in "Upcoming dates", with: "10/10/2010,10/11/2010, 02/12/2011"
     fill_in "Cancelled dates", with: "02/12/2011" # All cancellations need to be in the upcoming dates.
