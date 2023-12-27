@@ -8,7 +8,9 @@ module System
       end
 
       config.before(:each, :js, type: :system) do
-        driven_by :selenium_chrome_headless
+        driven_by :selenium_chrome_headless do |driver_option|
+          driver_option.add_argument("headless=new")
+        end
       end
     end
   end
