@@ -354,7 +354,7 @@ GEM
       rake (>= 13.0.0)
     sass-embedded (1.69.5-x86_64-linux-gnu)
       google-protobuf (~> 3.23)
-    selenium-webdriver (4.15.0)
+    selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
