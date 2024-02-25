@@ -147,8 +147,8 @@ GEM
     geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (3.25.1)
-    google-protobuf (3.25.1-x86_64-linux)
+    google-protobuf (3.25.3)
+    google-protobuf (3.25.3-x86_64-linux)
     hashdiff (1.0.1)
     hashie (5.0.0)
     http (5.1.1)
@@ -467,7 +467,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.0p0
 
 BUNDLED WITH
    2.4.21
