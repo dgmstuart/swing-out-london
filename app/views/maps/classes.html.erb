@@ -1,7 +1,7 @@
 <% content_for :title do %>
   <%= tc("site_name") %>'s Lindy Map: Classes
   <% if @day %>
-    on #{ @day.pluralize }
+    on <%= @day.pluralize %>
   <% end %>
 <% end %>
 
@@ -9,7 +9,7 @@
   <% # This just about fits on a google search result: %>
   A map of all the Lindy Hop classes in <%= tc("city") %>
   <% if @day %>
-    on #{ @day.pluralize },
+    on <%= @day.pluralize %>,
   <% end %>
   also classes in other swing dance styles: Charleston, Balboa, Blues, Authentic Jazz and Collegiate Shag
 <% end %>
