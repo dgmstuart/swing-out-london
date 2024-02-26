@@ -45,7 +45,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara", github: "teamcapybara/capybara", branch: "master" # remove when new headless is in master (> 3.39.2)
+  gem "capybara", ">= 3.40"
   gem "climate_control"
   gem "launchy"
   gem "selenium-webdriver", require: false
