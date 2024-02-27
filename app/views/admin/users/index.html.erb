@@ -1,0 +1,13 @@
+<main class="page">
+  <h1>Users</h1>
+  <ul>
+    <% users.each do |user| %>
+      <li>
+        <%= user.id %>
+        <% if user.admin? %>
+          (Admin)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</main>
