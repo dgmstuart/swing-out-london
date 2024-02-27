@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "facebook_graph_api/user_api"
+
 class UserName
   def initialize(
     user:,

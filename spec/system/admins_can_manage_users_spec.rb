@@ -3,17 +3,23 @@
 require "rails_helper"
 
 RSpec.describe "Admins can manage users" do
-  it "viewing a list of users" do
-    stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [98765987659876598])
+  it "viewing a list of users", :vcr do
+    stub_facebook_config(
+      editor_user_ids: [12345678901234567],
+      admin_user_ids: [98765987659876598],
+      app_secret!: "super-secret-secret"
+    )
     stub_auth_hash(id: 98765987659876598)
 
     visit "/login"
     click_on "Log in"
 
-    click_on "Users"
+    VCR.use_cassette("fetch_facebook_names") do
+      click_on "Users"
+    end
 
-    expect(page).to have_content("12345678901234567")
-    expect(page).to have_content("98765987659876598 (Admin)")
+    expect(page).to have_content("Dawn Hampton")
+    expect(page).to have_content("Herbert White (Admin)")
   end
 
   context "when logged in as a non-admin" do

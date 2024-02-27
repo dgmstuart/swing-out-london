@@ -4,6 +4,7 @@
     <% users.each do |user| %>
       <li>
         <%= user.id %>
+        <%= user.name %>
         <% if user.admin? %>
           (Admin)
         <% end %>

@@ -3,7 +3,12 @@
 module Admin
   class UsersController < BaseController
     def index
-      render locals: { users: User.all }
+      users = UsersListing.new(
+        users: User.all,
+        user_name_finder: UserName.new(user: login_session.user)
+      ).users
+
+      render locals: { users: }
     end
   end
 end
