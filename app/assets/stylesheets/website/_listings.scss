@@ -23,11 +23,6 @@ main {
   padding: 0 10px;
 }
 
-.donation {
-  max-width: 400px;
-  margin: 25px auto;
-}
-
 // MOBILE ONLY
 @media only screen and (width <= 767px) {
   #classes h2 {
@@ -78,10 +73,6 @@ main {
 
   #social_dances .note {
     margin: 10px 30px 0 35px;
-  }
-
-  #social_dances .donation {
-    margin: 25px;
   }
 }
 
@@ -282,48 +273,4 @@ section.listings {
 
   .today_label::after,
   .tomorrow_label::after { content: ":"; }
-}
-
-// DONATION
-/////////////////////////////////////////////
-.donation {
-  padding: 10px 15px;
-  background-color: #fff8ea;
-  border: borders.$double-border;
-  text-align: center;
-
-  p {
-    width: 100%;
-  }
-}
-
-.share_buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 15px;
-  justify-content: center;
-}
-
-.share_button {
-  display: inline-block;
-  padding: 8px 20px;
-
-  &:hover {
-    border: none;
-  }
-}
-
-.facebook {
-  background-color: colours.$facebook-blue;
-  color: white;
-}
-
-.twitter {
-  background-color: colours.$twitter-blue;
-  color: colours.$text-colour;
-}
-
-.donate_button {
-  background-color: colours.$highlight-colour;
-  color: white;
 }

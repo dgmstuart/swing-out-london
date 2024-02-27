@@ -10,8 +10,8 @@ sometimes that means saying no to a listing.
 ### 2. Independent
 
 We are not affiliated with any dance school or organisation, and we don't take
-money for listings. Hosting costs are covered by donations and occasional
-banner advertising.
+money for listings. Hosting costs are covered by donations.
+
 
 ### 3. Accurate and Up-to-Date
 
