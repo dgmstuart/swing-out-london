@@ -20,7 +20,7 @@ RSpec.describe "Editors can list events" do
     end
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
     expect(page).to have_content("Stompin'")
       .and have_content("The 100 Club")

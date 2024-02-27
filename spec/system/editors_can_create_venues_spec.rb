@@ -7,9 +7,9 @@ RSpec.describe "Editors can create venues" do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "New Venue"
+    click_on "New Venue"
 
     fill_in "Name", with: "The 100 Club"
     fill_in "Address", with: "100 Oxford Street\nLondon"
@@ -18,7 +18,7 @@ RSpec.describe "Editors can create venues" do
     fill_in "Website", with: "https://www.the100club.co.uk/"
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
       VCR.use_cassette("geocode_100_club") do
-        click_button "Create"
+        click_on "Create"
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe "Editors can create venues" do
 
       fill_in "Website", with: "www.the100club.co.uk"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("5 errors prevented this record from being saved")
         .and have_content("Address can't be blank")
@@ -59,7 +59,7 @@ RSpec.describe "Editors can create venues" do
       fill_in "Latitude", with: "51.5164092"
       fill_in "Longitude", with: "-0.1345404"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("Name: The 100 Club")
         .and have_content("Address: 100 Oxford Street\r London")

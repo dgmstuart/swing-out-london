@@ -6,7 +6,7 @@ RSpec.describe "Users can see Info pages" do
   it "Users can see an about page" do
     visit "/"
     within "#main_nav" do
-      click_link "About"
+      click_on "About"
     end
 
     expect(page).to have_content("About Swing Out London")
@@ -15,7 +15,7 @@ RSpec.describe "Users can see Info pages" do
   it "Users can see a listings policy" do
     visit "/"
     within "#main_nav" do
-      click_link "Listings Policy"
+      click_on "Listings Policy"
     end
 
     expect(page).to have_content("Location")
@@ -28,7 +28,7 @@ RSpec.describe "Users can see Info pages" do
     it "Users can see an about page" do
       visit "/"
       within "#main_nav" do
-        click_link "About"
+        click_on "About"
       end
 
       expect(page).to have_content("About Swing Out Bristol")
@@ -37,7 +37,7 @@ RSpec.describe "Users can see Info pages" do
     it "Users can see a listings policy" do
       visit "/"
       within "#main_nav" do
-        click_link "Listings Policy"
+        click_on "Listings Policy"
       end
 
       expect(page).to have_content("Location")

@@ -9,17 +9,17 @@ RSpec.describe "Editors can delete organisers" do
       create(:organiser, name: "Herbert White")
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "Organisers", match: :first
+      click_on "Organisers", match: :first
 
       accept_confirm do
-        click_link "Delete", match: :first
+        click_on "Delete", match: :first
       end
 
       expect(page).to have_content("Listing organisers")
-      expect(page).not_to have_content("Delete")
-      expect(page).not_to have_content("Herbert White")
+      expect(page).to have_no_content("Delete")
+      expect(page).to have_no_content("Herbert White")
     end
 
     it "can be deleted from the edit page" do
@@ -27,19 +27,19 @@ RSpec.describe "Editors can delete organisers" do
       create(:organiser, name: "Herbert White")
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "Organisers", match: :first
+      click_on "Organisers", match: :first
 
-      click_link "Edit", match: :first
+      click_on "Edit", match: :first
 
       accept_confirm do
-        click_link "Delete"
+        click_on "Delete"
       end
 
       expect(page).to have_content("Listing organisers")
-      expect(page).not_to have_content("Delete")
-      expect(page).not_to have_content("Herbert White")
+      expect(page).to have_no_content("Delete")
+      expect(page).to have_no_content("Herbert White")
     end
   end
 
@@ -50,19 +50,19 @@ RSpec.describe "Editors can delete organisers" do
       create(:event, social_organiser: organiser)
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "Organisers", match: :first
+      click_on "Organisers", match: :first
 
-      expect(page).not_to have_content("Delete")
+      expect(page).to have_no_content("Delete")
 
-      click_link "Show"
+      click_on "Show"
 
-      expect(page).not_to have_content("Delete")
+      expect(page).to have_no_content("Delete")
 
-      click_link "Edit"
+      click_on "Edit"
 
-      expect(page).not_to have_content("Delete")
+      expect(page).to have_no_content("Delete")
       expect(page).to have_content("Can't be deleted: has associated events")
     end
   end

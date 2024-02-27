@@ -11,10 +11,10 @@ RSpec.describe "Adding a new event", :js do
     stub_login
     visit "/events"
 
-    click_button "Log in"
+    click_on "Log in"
 
     # VENUE
-    click_link "New Venue"
+    click_on "New Venue"
 
     fill_in "Name", with: "The Savoy Ballroom"
     fill_in "Address", with: "596 Lenox Avenue"
@@ -24,34 +24,34 @@ RSpec.describe "Adding a new event", :js do
     fill_in "Longitude", with: "73.938456"
     fill_in "Website", with: "https://www.savoyballroom.com"
 
-    click_button "Create"
+    click_on "Create"
 
-    expect(page).not_to have_content("error")
+    expect(page).to have_no_content("error")
 
     # SOCIAL ORGANISER
-    click_link "New Organiser"
+    click_on "New Organiser"
 
     fill_in "Name", with: "Herbert White"
     fill_in "Shortname", with: "Whitey"
     fill_in "Website", with: "https://hoppingmainacs.org"
     fill_in "Description", with: "Architect of Whitey's Lindy Hoppers"
 
-    click_button "Create"
+    click_on "Create"
 
-    expect(page).not_to have_content("error")
+    expect(page).to have_no_content("error")
 
     # CLASS ORGANISER
-    click_link "New Organiser"
+    click_on "New Organiser"
 
     fill_in "Name", with: "Frankie Manning"
     fill_in "Shortname", with: "Frankie"
 
-    click_button "Create"
+    click_on "Create"
 
-    expect(page).not_to have_content("error")
+    expect(page).to have_no_content("error")
 
     # EVENT WITH CANCELLED DATE
-    click_link "New Event"
+    click_on "New Event"
 
     fill_in "Url", with: "https://www.savoyballroom.com/stompin"
     autocomplete_select "The Savoy Ballroom", from: "Venue"
@@ -72,12 +72,12 @@ RSpec.describe "Adding a new event", :js do
     fill_in "First date", with: "12/03/1926"
     fill_in "Last date", with: "11/10/1958"
 
-    click_button "Create"
+    click_on "Create"
 
-    expect(page).not_to have_content("error")
+    expect(page).to have_no_content("error")
 
     # RECENTLY STARTED EVENT (NEW!)
-    click_link "New Event"
+    click_on "New Event"
 
     fill_in "Url", with: "https://www.savoyballroom.com/ladies"
     autocomplete_select "The Savoy Ballroom", from: "Venue"
@@ -89,15 +89,15 @@ RSpec.describe "Adding a new event", :js do
     fill_in "Upcoming dates", with: "01/01/1937,14/01/1937"
     fill_in "First date", with: "01/01/1937"
 
-    click_button "Create"
+    click_on "Create"
 
-    expect(page).not_to have_content("error")
+    expect(page).to have_no_content("error")
 
-    click_link "Swing Out London"
+    click_on "Swing Out London"
 
     venue_id = Venue.first.id
 
-    expect(page).not_to have_content("error prevented this record from being saved")
+    expect(page).to have_no_content("error prevented this record from being saved")
 
     within "#social_dances" do
       rows = page.all(".date_row")
@@ -151,9 +151,9 @@ RSpec.describe "Adding a new event", :js do
       end
     end
 
-    expect(page).not_to have_content("<")
-    expect(page).not_to have_content(">")
-    expect(page).not_to have_content("abbr title=")
+    expect(page).to have_no_content("<")
+    expect(page).to have_no_content(">")
+    expect(page).to have_no_content("abbr title=")
 
     aggregate_failures do
       expect(page).to have_css('meta[property="og:title"][content="Swing Out London"]', visible: :hidden)

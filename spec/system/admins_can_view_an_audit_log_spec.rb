@@ -7,13 +7,13 @@ RSpec.describe "Admins can view an audit log" do
     stub_login(admin: true)
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
     create(:event)
     create(:venue)
     create(:organiser)
 
-    click_link "Audit Log"
+    click_on "Audit Log"
 
     expect(page).to have_content("Missing name create Event")
     expect(page).to have_content("Missing name create Venue")
@@ -25,9 +25,9 @@ RSpec.describe "Admins can view an audit log" do
       stub_login(admin: false)
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      expect(page).not_to have_content("Audit Log")
+      expect(page).to have_no_content("Audit Log")
 
       visit "/admin/audit_log"
 

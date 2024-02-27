@@ -8,11 +8,11 @@ RSpec.describe "Editors can navigate" do
     create(:event, url: "https://navigating.se")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Show", match: :first
+    click_on "Show", match: :first
 
-    click_link "Edit"
+    click_on "Edit"
 
     expect(page).to have_content("Editing event")
   end
