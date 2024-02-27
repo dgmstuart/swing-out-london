@@ -11,7 +11,7 @@ RSpec.describe "Editors can archive events" do
 
     # 8th Jan 2000 was a saturday
     Timecop.freeze(Time.zone.local(2000, 1, 8)) do
-      click_link "Archive", match: :first
+      click_on "Archive", match: :first
     end
 
     click_show
@@ -26,7 +26,7 @@ RSpec.describe "Editors can archive events" do
     visit "/events"
 
     Timecop.freeze(Time.zone.local(2000, 1, 8)) do
-      click_link "Archive", match: :first
+      click_on "Archive", match: :first
     end
 
     click_show
@@ -40,7 +40,7 @@ RSpec.describe "Editors can archive events" do
 
     visit "/events"
 
-    click_link "Archive", match: :first
+    click_on "Archive", match: :first
 
     click_show
 
@@ -57,7 +57,7 @@ RSpec.describe "Editors can archive events" do
       Timecop.freeze("2000-01-08") do
         event.update(last_date: "2000-01-01")
 
-        click_link "Archive", match: :first
+        click_on "Archive", match: :first
       end
 
       click_show
@@ -76,7 +76,7 @@ RSpec.describe "Editors can archive events" do
       visit "/events"
 
       Timecop.freeze(Time.zone.local(2000, 1, 8)) do
-        click_link "Archive", match: :first
+        click_on "Archive", match: :first
       end
 
       expect(page).to have_content("This event could not be archived - try editing it first.")
@@ -85,7 +85,7 @@ RSpec.describe "Editors can archive events" do
 
   def click_show
     within ".actions.last", match: :first do
-      click_link "Show"
+      click_on "Show"
     end
   end
 end

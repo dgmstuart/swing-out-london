@@ -8,17 +8,17 @@ RSpec.describe "Editors can delete events" do
     create(:event, title: "Balboa at Bobby McGee's")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
     # The delete link only shows above 900px wide
     page.driver.browser.manage.window.resize_to(901, 600)
 
     accept_confirm do
-      click_link "Delete", match: :first
+      click_on "Delete", match: :first
     end
 
     expect(page).to have_content("Event Name")
-    expect(page).not_to have_content("Delete")
-    expect(page).not_to have_content("Balboa at Bobby McGee's")
+    expect(page).to have_no_content("Delete")
+    expect(page).to have_no_content("Balboa at Bobby McGee's")
   end
 end

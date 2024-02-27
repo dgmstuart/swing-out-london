@@ -8,11 +8,11 @@ RSpec.describe "Editor Login" do
 
     visit "/events"
 
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Al Minns"
+    click_on "Al Minns"
 
-    click_button "Log out"
+    click_on "Log out"
     expect(page).to have_button("Log in")
 
     visit "/events"

@@ -10,10 +10,10 @@ RSpec.describe "Admins can clear the cache" do
     expect(Rails.cache.read("a_cache_key")).to eq("a value")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Cache"
-    click_button "Clear"
+    click_on "Cache"
+    click_on "Clear"
 
     expect(page).to have_content("Events")
     expect(Rails.cache.read("a_cache_key")).to be_nil
@@ -24,9 +24,9 @@ RSpec.describe "Admins can clear the cache" do
       stub_login(admin: false)
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      expect(page).not_to have_content("Cache")
+      expect(page).to have_no_content("Cache")
 
       visit "/admin/cache"
 

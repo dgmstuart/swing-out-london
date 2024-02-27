@@ -17,10 +17,10 @@ RSpec.describe "Editor Login Revocation" do
 
     visit "/account"
 
-    click_button "Log in"
+    click_on "Log in"
 
     VCR.use_cassette("disable_login") do
-      click_button "Disable my login"
+      click_on "Disable my login"
     end
 
     expect(page).to have_content("Editor Login")

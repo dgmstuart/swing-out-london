@@ -167,7 +167,7 @@ RSpec.describe "Users can view a map of upcoming events" do
 
       visit "/"
 
-      click_link("ZZ2 2ZZ")
+      click_on("ZZ2 2ZZ")
 
       expect(page).to have_content("Lindy Map")
     end

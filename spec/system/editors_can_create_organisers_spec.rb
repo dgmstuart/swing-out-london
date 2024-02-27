@@ -7,9 +7,9 @@ RSpec.describe "Editors can create organisers" do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "New Organiser"
+    click_on "New Organiser"
 
     fill_in "Name", with: "The London Swing Dance Society"
     fill_in "Shortname", with: "LSDS"
@@ -17,7 +17,7 @@ RSpec.describe "Editors can create organisers" do
     fill_in "Website", with: "http://www.lsds.co.uk"
 
     Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-      click_button "Create"
+      click_on "Create"
     end
 
     expect(page).to have_content("Name: The London Swing Dance Society")
@@ -32,14 +32,14 @@ RSpec.describe "Editors can create organisers" do
     stub_login
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "New Organiser"
+    click_on "New Organiser"
 
     fill_in "Name", with: "The London Swing Dance Society"
     fill_in "Shortname", with: ""
 
-    click_button "Create"
+    click_on "Create"
 
     expect(page).to have_content("Last updated by")
   end
@@ -52,7 +52,7 @@ RSpec.describe "Editors can create organisers" do
 
       fill_in "Shortname", with: "12345678901234567890+"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("2 errors prevented this record from being saved")
         .and have_content("Name can't be blank")
@@ -61,7 +61,7 @@ RSpec.describe "Editors can create organisers" do
       fill_in "Name", with: "The London Swing Dance Society"
       fill_in "Shortname", with: "12345678901234567890"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("Name: The London Swing Dance Society")
         .and have_content("Shortname: 12345678901234567890")

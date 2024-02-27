@@ -12,9 +12,9 @@ RSpec.describe "Editors can create events", :js do
       create(:organiser, name: "The London Swing Dance Society")
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "New event", match: :first
+      click_on "New event", match: :first
 
       fill_in "Url", with: "http://www.lsds.co.uk/stompin"
       autocomplete_select "The 100 Club", from: "Venue"
@@ -38,7 +38,7 @@ RSpec.describe "Editors can create events", :js do
       fill_in "Last date", with: "19/12/2012"
 
       Timecop.freeze(Time.zone.local(2012, 1, 2, 23, 17, 16)) do
-        click_button "Create"
+        click_on "Create"
       end
 
       expect(page).to have_content("Title:\nStompin'")
@@ -63,11 +63,11 @@ RSpec.describe "Editors can create events", :js do
       travel_to "2012-01-01"
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "New event", match: :first
+      click_on "New event", match: :first
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("4 errors prevented this record from being saved")
         .and have_content("Venue can't be blank")
@@ -84,7 +84,7 @@ RSpec.describe "Editors can create events", :js do
       choose "Monthly"
       fill_in "Upcoming dates", with: "12//20012, 31/04/2013, 12/12/2011,   19/12/012, 19/12/20121"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("3 errors prevented this record from being saved")
         .and have_content('Dates contained some invalid dates: "12//20012", "31/04/2013"')
@@ -95,7 +95,7 @@ RSpec.describe "Editors can create events", :js do
       fill_in "First date", with: "12/12/2012"
       fill_in "Last date", with: "30/04/2013"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("Venue:\nThe 100 Club")
         .and have_content("Social")
@@ -132,7 +132,7 @@ RSpec.describe "Editors can create events", :js do
         choose "Weekly"
         select "Wednesday", from: "Day"
 
-        click_button "Create"
+        click_on "Create"
 
         event = Event.last
         aggregate_failures do
@@ -165,7 +165,7 @@ RSpec.describe "Editors can create events", :js do
 
         select "Wednesday", from: "Day"
 
-        click_button "Create"
+        click_on "Create"
 
         event = Event.last
         aggregate_failures do
@@ -180,11 +180,11 @@ RSpec.describe "Editors can create events", :js do
       skip_login
 
       visit venues_path
-      click_link "Show", match: :first
+      click_on "Show", match: :first
 
       expect(page).to have_content("93 feet east")
 
-      click_link "New Event at this venue"
+      click_on "New Event at this venue"
 
       expect(page).to have_content("New event")
       expect(page).to have_autocomplete_field("Venue", "93 feet east - Brick Lane")
@@ -198,9 +198,9 @@ RSpec.describe "Editors can create events", :js do
       create(:organiser, name: "Sunshine Swing")
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "New event", match: :first
+      click_on "New event", match: :first
 
       fill_in "Url", with: "https://sunshineswing.uk/events"
       autocomplete_select "Dogstar", from: "Venue"
@@ -213,7 +213,7 @@ RSpec.describe "Editors can create events", :js do
       fill_in "Last date", with: "16/02/2020"
 
       Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-        click_button "Create"
+        click_on "Create"
       end
 
       expect(page).to have_content("Venue:\nDogstar")
@@ -234,11 +234,11 @@ RSpec.describe "Editors can create events", :js do
       create(:organiser, name: "Sunshine Swing")
 
       visit "/login"
-      click_button "Log in"
+      click_on "Log in"
 
-      click_link "New event", match: :first
+      click_on "New event", match: :first
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("4 errors prevented this record from being saved")
         .and have_content("Venue can't be blank")
@@ -252,13 +252,13 @@ RSpec.describe "Editors can create events", :js do
       select "Tuesday", from: "Day"
       fill_in "Url", with: "https://sunshineswing.uk/events"
 
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("1 error prevented this record from being saved")
         .and have_content("Class organiser must be present for classes")
 
       autocomplete_select "Sunshine Swing", from: "Class organiser"
-      click_button "Create"
+      click_on "Create"
 
       expect(page).to have_content("Venue:\nDogstar")
         .and have_content("Class Organiser:\nSunshine Swing")

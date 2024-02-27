@@ -27,7 +27,7 @@ RSpec.describe "Organisers can edit events" do
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_content("Event was successfully updated")
 
@@ -59,18 +59,18 @@ RSpec.describe "Organisers can edit events" do
       expect(page).to have_content("Midtown stomp")
         .and have_link("https://www.swingland.com/midtown", href: "https://www.swingland.com/midtown")
         .and have_content("Frequency\nEvery Wednesday")
-      expect(page).not_to have_content("Upcoming dates")
+      expect(page).to have_no_content("Upcoming dates")
 
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_content("Event was successfully updated")
 
       aggregate_failures do
         expect(page).to have_field("Venue", with: "The 100 Club - central")
-        expect(page).not_to have_content("Upcoming dates")
+        expect(page).to have_no_content("Upcoming dates")
         expect(page).to have_field("Cancelled dates", with: "12/12/2012")
         expect(page).to have_field("Last date", with: "2013-01-12")
         expect(page).to have_content("Event was successfully updated")
@@ -99,7 +99,7 @@ RSpec.describe "Organisers can edit events" do
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "12/01/2013"
 
-      click_link "Cancel"
+      click_on "Cancel"
 
       aggregate_failures do
         expect(page).to have_field("Venue", with: "The Bishopsgate Centre - Liverpool st")
@@ -138,7 +138,7 @@ RSpec.describe "Organisers can edit events" do
       visit("/external_events/abc123/edit")
 
       select "", from: "Venue"
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_content("1 error prevented this record from being saved:")
         .and have_content("Venue can't be blank")

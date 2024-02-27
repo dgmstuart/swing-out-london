@@ -13,9 +13,9 @@ RSpec.describe "Editors can edit events", :js do
     create(:organiser, name: "The London Swing Dance Society")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Edit", match: :first
+    click_on "Edit", match: :first
 
     expect(page).to have_content("Event Type\nSocial dance")
     expect(page).to have_field("Cancelled dates", with: "01/10/2010,02/12/2011")
@@ -38,7 +38,7 @@ RSpec.describe "Editors can edit events", :js do
     fill_in "Cancelled dates", with: "02/12/2011" # All cancellations need to be in the upcoming dates.
 
     Timecop.freeze(Time.zone.local(2010, 1, 2, 23, 17, 16)) do
-      click_button "Update"
+      click_on "Update"
     end
 
     expect(page).to have_content("Title:\nStompin'")
@@ -62,15 +62,15 @@ RSpec.describe "Editors can edit events", :js do
     create(:class)
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Edit", match: :first
+    click_on "Edit", match: :first
 
     empty_autocomplete_field "Venue", "xyz"
     select "", from: "Day"
     fill_in "Url", with: ""
 
-    click_button "Update"
+    click_on "Update"
 
     expect(page).to have_content("2 errors prevented this record from being saved:")
       .and have_content("Url can't be blank")
@@ -82,16 +82,16 @@ RSpec.describe "Editors can edit events", :js do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Edit", match: :first
+    click_on "Edit", match: :first
 
     expect(page).to have_field("Upcoming dates", with: "12/12/2012,13/12/2012")
 
     fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
-      click_button "Update"
+      click_on "Update"
     end
 
     expect(page).to have_content("Dates:\n12/12/2012, 12/01/2013")
@@ -108,12 +108,12 @@ RSpec.describe "Editors can edit events", :js do
     travel_to "2023-11-05"
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Edit", match: :first
+    click_on "Edit", match: :first
 
     fill_in "Upcoming dates", with: "12/12/2025, 03/11/2023"
-    click_button "Update"
+    click_on "Update"
 
     expect(page).to have_content("1 error prevented this record from being saved")
       .and have_content("Dates contained some dates unreasonably far in the future: 12/12/2025")
@@ -124,14 +124,14 @@ RSpec.describe "Editors can edit events", :js do
     stub_login(id: 12345678901234567, name: "Al Minns")
 
     visit "/login"
-    click_button "Log in"
+    click_on "Log in"
 
-    click_link "Edit", match: :first
+    click_on "Edit", match: :first
 
     fill_in "Cancelled dates", with: "12/12/2012"
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
-      click_button "Update"
+      click_on "Update"
     end
 
     expect(page).to have_content("Cancelled:\n12/12/2012")
@@ -151,7 +151,7 @@ RSpec.describe "Editors can edit events", :js do
     fill_in "Cancelled dates", with: "12/12/2012"
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
-      click_button "Update"
+      click_on "Update"
     end
 
     expect(page).to have_content("Cancelled:\n12/12/2012")
@@ -172,9 +172,9 @@ RSpec.describe "Editors can edit events", :js do
       choose "Weekly"
       select "Thursday", from: "Day"
 
-      click_button "Update"
+      click_on "Update"
 
-      expect(page).not_to have_content("Dates")
+      expect(page).to have_no_content("Dates")
       expect(page).to have_content("Cancelled:\n12/11/2012")
       expect(event.reload.dates).to be_empty
     end
