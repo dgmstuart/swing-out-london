@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "spec/support/time_formats_helper"
 require "lib/dates_string_parser"
 require "active_support"
 require "active_support/core_ext/string/conversions"
