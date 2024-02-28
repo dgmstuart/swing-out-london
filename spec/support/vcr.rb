@@ -16,6 +16,9 @@ VCR.configure do |c|
     query = URI.parse(interaction.request.uri).query
     CGI.parse(query)["appsecret_proof"].first
   end
+  c.filter_sensitive_data("<BEARER_TOKEN>") do |interaction|
+    interaction.request.headers.fetch("Authorization", "").first.gsub(/Bearer \S+/, "Bearer <BEARER_TOKEN>")
+  end
 end
 
 VCR.turn_off!

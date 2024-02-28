@@ -1,0 +1,131 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/12345678901234567?appsecret_proof=<APPSECRET_PROOF>
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+        - Bearer <BEARER_TOKEN>
+      Connection:
+      - close
+      Host:
+      - graph.facebook.com
+      User-Agent:
+      - http.rb/5.2.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"7958ad230c6c09f764091d38e6ae96fe295fdfc6"'
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Access-Control-Allow-Origin:
+      - "*"
+      Facebook-Api-Version:
+      - v17.0
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - Ah_jOHuRT4HOm6qnH7XW9zC
+      X-Fb-Trace-Id:
+      - BQYq6LPd2L0
+      X-Fb-Rev:
+      - '1011679643'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - FO8y5xJr32aIfjAbylQ/uSVBAOQ6OylhP0RKuJg9ekfc+xVPXdLZYzTtGKMmEBi8suZ+ZU7A/4cPZ/RITVzS7g==
+      Date:
+      - Tue, 27 Feb 2024 15:28:06 GMT
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - close
+      Content-Length:
+      - '46'
+    body:
+      encoding: UTF-8
+      string: '{"name":"Dawn Hampton","id":"12345678901234567"}'
+  recorded_at: Tue, 27 Feb 2024 15:28:06 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/98765987659876598?appsecret_proof=<APPSECRET_PROOF>
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+        - Bearer <BEARER_TOKEN>
+      Connection:
+      - close
+      Host:
+      - graph.facebook.com
+      User-Agent:
+      - http.rb/5.2.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"05efa669ec1b3a0568648a7506a86348c79c8308"'
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Access-Control-Allow-Origin:
+      - "*"
+      Facebook-Api-Version:
+      - v17.0
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AB9NScNFAghaxuHG_y1YmOT
+      X-Fb-Trace-Id:
+      - Gcy65z64t6B
+      X-Fb-Rev:
+      - '1011679643'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - moOznSQloorRwtyIQduj3q5zSOu5lI7O5zEcgpTRNiZMIuva0WX+wMKXlS8+OlLvpLNz/F5fV7fk1zO74ap7Ow==
+      Date:
+      - Tue, 27 Feb 2024 15:28:06 GMT
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - close
+      Content-Length:
+      - '66'
+    body:
+      encoding: UTF-8
+      string: '{"name":"Herbert White","id":"98765987659876598"}'
+  recorded_at: Tue, 27 Feb 2024 15:28:06 GMT
+recorded_with: VCR 6.2.0
