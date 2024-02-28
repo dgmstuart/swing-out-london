@@ -4,17 +4,21 @@ require "facebook_graph_api/user_api"
 
 class UserName
   def initialize(
-    user:,
-    api_builder: FacebookGraphApi::UserApi,
+    api:,
     error_reporter: Rollbar
   )
-    @user = user
-    @api_builder = api_builder
+    @api = api
     @error_reporter = error_reporter
   end
 
+  class << self
+    def as_user(user)
+      api = FacebookGraphApi::UserApi.for_user(user)
+      new(api:)
+    end
+  end
+
   def name_for(user_id)
-    api = api_builder.for_user(user)
     profile = api.profile(user_id)
     profile.fetch("name")
   rescue FacebookGraphApi::HttpClient::ResponseError => e
@@ -24,5 +28,5 @@ class UserName
 
   private
 
-  attr_reader :user, :api_builder, :error_reporter
+  attr_reader :api, :error_reporter
 end

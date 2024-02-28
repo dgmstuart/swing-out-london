@@ -5,26 +5,24 @@ require "app/services/user_name"
 require "facebook_graph_api/http_client" # for the ResponseError class
 
 RSpec.describe UserName do
-  describe "#name_for" do
+  describe ".as_user" do
     it "builds an API client based on the user" do
-      profile = { "name" => "Willamae Ricker", "id" => 123456 }
-      api = instance_double("FacebookGraphApi::UserApi", profile:)
-      api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
-      user = instance_double("LoginSession::User")
+      stub_const("Rollbar", double)
+      user = instance_double("User")
+      allow(FacebookGraphApi::UserApi).to receive(:for_user)
 
-      service = described_class.new(api_builder:, user:, error_reporter: double)
-      service.name_for(double)
+      described_class.as_user(user)
 
-      expect(api_builder).to have_received(:for_user).with(user)
+      expect(FacebookGraphApi::UserApi).to have_received(:for_user).with(user)
     end
+  end
 
+  describe "#name_for" do
     it "makes a call to the Facebook API" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
       api = instance_double("FacebookGraphApi::UserApi", profile:)
-      api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
-      user = instance_double("LoginSession::User")
 
-      service = described_class.new(api_builder:, user:, error_reporter: double)
+      service = described_class.new(api:, error_reporter: double)
       service.name_for(123456)
 
       expect(api).to have_received(:profile).with(123456)
@@ -33,27 +31,23 @@ RSpec.describe UserName do
     it "returns the name of the specified user" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
       api = instance_double("FacebookGraphApi::UserApi", profile:)
-      api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
-      user = instance_double("LoginSession::User")
 
-      service = described_class.new(api_builder:, user:, error_reporter: double)
+      service = described_class.new(api:, error_reporter: double)
       result = service.name_for(123456)
 
       expect(result).to eq "Willamae Ricker"
     end
 
     context "when the user name couldn't be retrieved" do
-      it "returns an unknown value" do # rubocop:disable RSpec/ExampleLength
+      it "returns an unknown value" do
         api = instance_double("FacebookGraphApi::UserApi")
         allow(api).to receive(:profile).and_raise(
           FacebookGraphApi::HttpClient::ResponseError,
           "Unsupported get request. Object with ID '123456' does not exist..."
         )
-        api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
         error_reporter = class_double("Rollbar", error: double)
-        user = instance_double("LoginSession::User")
 
-        service = described_class.new(api_builder:, user:, error_reporter:)
+        service = described_class.new(api:, error_reporter:)
         result = service.name_for(123456)
 
         expect(result).to eq "[Unknown user]"
@@ -65,11 +59,9 @@ RSpec.describe UserName do
           FacebookGraphApi::HttpClient::ResponseError,
           "Unsupported get request. Object with ID '123456' does not exist..."
         )
-        api_builder = class_double("FacebookGraphApi::UserApi", for_user: api)
         error_reporter = class_double("Rollbar", error: double)
-        user = instance_double("LoginSession::User")
 
-        service = described_class.new(api_builder:, user:, error_reporter:)
+        service = described_class.new(api:, error_reporter:)
         service.name_for(123456)
 
         expect(error_reporter).to have_received(:error).with(
