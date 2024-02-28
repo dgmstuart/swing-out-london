@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "facebook_graph_api/user_api"
+require "facebook_graph_api/api"
 
 class UserName
   def initialize(
@@ -13,7 +13,7 @@ class UserName
 
   class << self
     def as_user(user)
-      api = FacebookGraphApi::UserApi.for_user(user)
+      api = FacebookGraphApi::Api.for_token(user.token)
       new(api:)
     end
   end

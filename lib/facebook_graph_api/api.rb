@@ -8,6 +8,13 @@ module FacebookGraphApi
       @http_client = http_client
     end
 
+    class << self
+      def for_token(auth_token)
+        http_client = FacebookGraphApi::HttpClient.new(auth_token:)
+        new(http_client)
+      end
+    end
+
     def revoke_login(user_id)
       raise ArgumentError, "missing user id" if user_id.nil?
 
