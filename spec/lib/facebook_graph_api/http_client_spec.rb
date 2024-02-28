@@ -50,7 +50,38 @@ RSpec.describe FacebookGraphApi::HttpClient do
       expect(result).to eq({ "some" => "data" })
     end
 
-    context "when the response was not successful" do
+    context "when the response was 401: unauthorized" do
+      it "raises an error" do
+        error_json = {
+          error: {
+            message: "Invalid OAuth access token - Cannot parse access token",
+            type: "OAuthException",
+            code: 190,
+            fbtrace_id: "AWyOeaT0b00LZxCcxbMFfaw"
+          }
+        }.to_json
+
+        stub_request(:get, "https://example.com/path")
+          .with(query: { appsecret_proof: "app-secret-proof-token" })
+          .to_return(status: 401, body: error_json)
+        proof_generator = instance_double("FacebookGraphApi::AppsecretProofGenerator",
+                                          generate: "app-secret-proof-token")
+
+        client = described_class.new(
+          base_url: "https://example.com/",
+          auth_token: "super-secret-token",
+          proof_generator:
+        )
+
+        expect { client.get("/path") }
+          .to raise_error(
+            described_class::UnauthorizedError,
+            "401 OAuthException (code: 190) Invalid OAuth access token - Cannot parse access token"
+          )
+      end
+    end
+
+    context "when the response was otherwise not successful" do
       it "raises an error" do
         error_json = {
           error: {
@@ -106,7 +137,38 @@ RSpec.describe FacebookGraphApi::HttpClient do
       ).to have_been_made
     end
 
-    context "when the response was not successful" do
+    context "when the response was 401: unauthorized" do
+      it "raises an error" do
+        error_json = {
+          error: {
+            message: "Invalid OAuth access token - Cannot parse access token",
+            type: "OAuthException",
+            code: 190,
+            fbtrace_id: "AWyOeaT0b00LZxCcxbMFfaw"
+          }
+        }.to_json
+
+        stub_request(:delete, "https://example.com/path")
+          .with(query: { appsecret_proof: "app-secret-proof-token" })
+          .to_return(status: 401, body: error_json)
+        proof_generator = instance_double("FacebookGraphApi::AppsecretProofGenerator",
+                                          generate: "app-secret-proof-token")
+
+        client = described_class.new(
+          base_url: "https://example.com/",
+          auth_token: "super-secret-token",
+          proof_generator:
+        )
+
+        expect { client.delete("/path") }
+          .to raise_error(
+            described_class::UnauthorizedError,
+            "401 OAuthException (code: 190) Invalid OAuth access token - Cannot parse access token"
+          )
+      end
+    end
+
+    context "when the response was not successful for another reason" do
       it "raises an error" do
         error_json = {
           error: {

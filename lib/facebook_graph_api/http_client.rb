@@ -4,7 +4,8 @@ require "facebook_graph_api/appsecret_proof_generator"
 
 module FacebookGraphApi
   class HttpClient
-    class ResponseError < RuntimeError; end
+    ResponseError = Class.new(RuntimeError)
+    UnauthorizedError = Class.new(ResponseError)
 
     def initialize(
       auth_token:, base_url: Rails.configuration.x.facebook.api_base!,
@@ -43,6 +44,8 @@ module FacebookGraphApi
       case response.code
       when 200
         yield(response)
+      when 401
+        raise UnauthorizedError, error_message_for(response)
       else
         raise ResponseError, error_message_for(response)
       end
