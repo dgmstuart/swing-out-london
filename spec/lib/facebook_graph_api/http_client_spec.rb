@@ -17,7 +17,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
       client = described_class.new(
         base_url: "https://example.com/",
         auth_token: "super-secret-token",
-        proof_generator:
+        proof_generator:,
+        logger: fake_logger
       )
       client.get("/path")
 
@@ -43,7 +44,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
       client = described_class.new(
         base_url: "https://example.com/",
         auth_token: "super-secret-token",
-        proof_generator:
+        proof_generator:,
+        logger: fake_logger
       )
       result = client.get("/path")
 
@@ -70,7 +72,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
         client = described_class.new(
           base_url: "https://example.com/",
           auth_token: "super-secret-token",
-          proof_generator:
+          proof_generator:,
+          logger: fake_logger
         )
 
         expect { client.get("/path") }
@@ -100,7 +103,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
         client = described_class.new(
           base_url: "https://example.com/",
           auth_token: "super-secret-token",
-          proof_generator:
+          proof_generator:,
+          logger: fake_logger
         )
 
         expect { client.get("/path") }
@@ -124,7 +128,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
       client = described_class.new(
         base_url: "https://example.com/",
         auth_token: "super-secret-token",
-        proof_generator:
+        proof_generator:,
+        logger: fake_logger
       )
       client.delete("/path")
 
@@ -157,7 +162,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
         client = described_class.new(
           base_url: "https://example.com/",
           auth_token: "super-secret-token",
-          proof_generator:
+          proof_generator:,
+          logger: fake_logger
         )
 
         expect { client.delete("/path") }
@@ -187,7 +193,8 @@ RSpec.describe FacebookGraphApi::HttpClient do
         client = described_class.new(
           base_url: "https://example.com/",
           auth_token: "super-secret-token",
-          proof_generator:
+          proof_generator:,
+          logger: fake_logger
         )
 
         expect { client.delete("/path") }
@@ -197,5 +204,9 @@ RSpec.describe FacebookGraphApi::HttpClient do
           )
       end
     end
+  end
+
+  def fake_logger
+    instance_double("Logger", debug: nil, info: nil)
   end
 end

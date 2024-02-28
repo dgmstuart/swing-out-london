@@ -8,11 +8,13 @@ module FacebookGraphApi
     UnauthorizedError = Class.new(ResponseError)
 
     def initialize(
-      auth_token:, base_url: Rails.configuration.x.facebook.api_base!,
-      proof_generator: FacebookGraphApi::AppsecretProofGenerator.new
+      auth_token:,
+      base_url: Rails.configuration.x.facebook.api_base!,
+      proof_generator: FacebookGraphApi::AppsecretProofGenerator.new,
+      logger: Rails.logger
     )
       @base_url = base_url
-      @client = HTTP.auth("Bearer #{auth_token}")
+      @client = HTTP.auth("Bearer #{auth_token}").use(logging: { logger: })
       @appsecret_proof = proof_generator.generate(auth_token)
     end
 
