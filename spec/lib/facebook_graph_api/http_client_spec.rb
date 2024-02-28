@@ -75,7 +75,7 @@ RSpec.describe FacebookGraphApi::HttpClient do
         expect { client.get("/path") }
           .to raise_error(
             described_class::ResponseError,
-            "OAuthException (code: 104) An access token is required to request this resource."
+            "400 OAuthException (code: 104) An access token is required to request this resource."
           )
       end
     end
@@ -131,7 +131,7 @@ RSpec.describe FacebookGraphApi::HttpClient do
         expect { client.delete("/path") }
           .to raise_error(
             described_class::ResponseError,
-            "OAuthException (code: 104) An access token is required to request this resource."
+            "400 OAuthException (code: 104) An access token is required to request this resource."
           )
       end
     end

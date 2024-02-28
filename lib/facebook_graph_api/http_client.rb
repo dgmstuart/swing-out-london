@@ -44,13 +44,13 @@ module FacebookGraphApi
       when 200
         yield(response)
       else
-        raise ResponseError, error_message_for(response.body)
+        raise ResponseError, error_message_for(response)
       end
     end
 
-    def error_message_for(json)
-      message = JSON.parse(json).fetch("error")
-      "#{message.fetch('type')} (code: #{message.fetch('code')}) #{message.fetch('message')}"
+    def error_message_for(response)
+      message = JSON.parse(response.body).fetch("error")
+      "#{response.code} #{message.fetch('type')} (code: #{message.fetch('code')}) #{message.fetch('message')}"
     end
   end
 end
