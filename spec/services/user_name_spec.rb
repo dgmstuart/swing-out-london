@@ -8,19 +8,19 @@ RSpec.describe UserName do
   describe ".as_user" do
     it "builds an API client based on the user" do
       stub_const("Rollbar", double)
-      user = instance_double("User")
-      allow(FacebookGraphApi::UserApi).to receive(:for_user)
+      user = instance_double("LoginSession::User", token: "abc987")
+      allow(FacebookGraphApi::Api).to receive(:for_token)
 
       described_class.as_user(user)
 
-      expect(FacebookGraphApi::UserApi).to have_received(:for_user).with(user)
+      expect(FacebookGraphApi::Api).to have_received(:for_token).with("abc987")
     end
   end
 
   describe "#name_for" do
     it "makes a call to the Facebook API" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
-      api = instance_double("FacebookGraphApi::UserApi", profile:)
+      api = instance_double("FacebookGraphApi::Api", profile:)
 
       service = described_class.new(api:, error_reporter: double)
       service.name_for(123456)
@@ -30,7 +30,7 @@ RSpec.describe UserName do
 
     it "returns the name of the specified user" do
       profile = { "name" => "Willamae Ricker", "id" => 123456 }
-      api = instance_double("FacebookGraphApi::UserApi", profile:)
+      api = instance_double("FacebookGraphApi::Api", profile:)
 
       service = described_class.new(api:, error_reporter: double)
       result = service.name_for(123456)
@@ -40,7 +40,7 @@ RSpec.describe UserName do
 
     context "when the user name couldn't be retrieved" do
       it "returns an unknown value" do
-        api = instance_double("FacebookGraphApi::UserApi")
+        api = instance_double("FacebookGraphApi::Api")
         allow(api).to receive(:profile).and_raise(
           FacebookGraphApi::HttpClient::ResponseError,
           "Unsupported get request. Object with ID '123456' does not exist..."
@@ -54,7 +54,7 @@ RSpec.describe UserName do
       end
 
       it "reports the error" do # rubocop:disable RSpec/ExampleLength
-        api = instance_double("FacebookGraphApi::UserApi")
+        api = instance_double("FacebookGraphApi::Api")
         allow(api).to receive(:profile).and_raise(
           FacebookGraphApi::HttpClient::ResponseError,
           "Unsupported get request. Object with ID '123456' does not exist..."

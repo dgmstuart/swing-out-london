@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "facebook_graph_api/user_api"
+require "facebook_graph_api/api"
 
 class RevokeLogin
   def initialize(
-    api_builder: FacebookGraphApi::UserApi,
+    api_builder: FacebookGraphApi::Api,
     logger: Rails.logger
   )
     @api_builder = api_builder
@@ -12,8 +12,8 @@ class RevokeLogin
   end
 
   def revoke!(user)
-    api = api_builder.for_user(user)
-    api.revoke_login
+    api = api_builder.for_token(user.token)
+    api.revoke_login(user.auth_id)
     logger.info("Auth id #{user.auth_id} revoked their login permissions")
   end
 
