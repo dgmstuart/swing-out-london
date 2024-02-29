@@ -6,9 +6,15 @@ class LoginSession
     @logger = logger
   end
 
-  def log_in!(auth_id:, name:, token:, role:)
+  def log_in!(auth_id:, name:, token:, token_expires_at:, role:)
     admin = role == :admin
-    request.session[:user] = { "auth_id" => auth_id, "name" => name, "token" => token, "admin" => admin }
+    request.session[:user] = {
+      "auth_id" => auth_id,
+      "name" => name,
+      "token" => token,
+      "token_expires_at" => token_expires_at,
+      "admin" => admin
+    }
     log_message = "Logged in as auth id #{auth_id}"
     log_message += " with Admin permissions" if admin
     logger.info(log_message)
@@ -65,6 +71,10 @@ class LoginSession
       user.fetch("token")
     end
 
+    def token_expires_at
+      user.fetch("token_expires_at")
+    end
+
     private
 
     attr_reader :user
@@ -93,6 +103,10 @@ class LoginSession
 
     def token
       "NO TOKEN"
+    end
+
+    def token_expires_at
+      0
     end
   end
 end

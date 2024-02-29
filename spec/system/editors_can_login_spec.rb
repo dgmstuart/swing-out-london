@@ -7,7 +7,7 @@ RSpec.describe "Editor Login" do
   include FacebookHelper
 
   it "Editors can login and access editor pages" do
-    stub_auth_hash(id: 12345678901234567, name: "Al Minns")
+    stub_auth_hash(id: 12345678901234567, name: "Al Minns", expires_at: 1709166148)
     stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [])
 
     visit "/events/new"
@@ -18,6 +18,10 @@ RSpec.describe "Editor Login" do
 
     expect(page).to have_content("New event")
     expect(page).to have_content("Al Minns")
+
+    click_on "Al Minns"
+
+    expect(page).to have_content("Facebook access token will expire at 2024-02-29 00:22:28 +0000")
   end
 
   it "Admins can login and access editor pages" do

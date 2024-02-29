@@ -11,11 +11,12 @@ class OmniauthTestResponseBuilder
   def stub_auth_hash(
     id: Faker::Facebook.uid,
     name: Faker::Name.lindy_hop_name,
-    token: SecureRandom.hex
+    token: SecureRandom.hex,
+    expires_at: 60.days.from_now.to_i
   )
     raise "Can't stub authentication in production" if Rails.env.production?
 
-    auth_hash = facebook_auth_hash(id:, name:, token:)
+    auth_hash = facebook_auth_hash(id:, name:, token:, expires_at:)
     mock_auth_config[:facebook] = auth_hash
   end
 
@@ -23,7 +24,7 @@ class OmniauthTestResponseBuilder
 
   attr_reader :hash_builder, :mock_auth_config
 
-  def facebook_auth_hash(id:, name:, token:)
+  def facebook_auth_hash(id:, name:, token:, expires_at:)
     hash_builder.new(
       "provider" => "facebook",
       "uid" => id,
@@ -33,7 +34,7 @@ class OmniauthTestResponseBuilder
       },
       "credentials" => {
         "token" => token,
-        "expires_at" => 1546086985,
+        "expires_at" => expires_at,
         "expires" => true
       },
       "extra" => {

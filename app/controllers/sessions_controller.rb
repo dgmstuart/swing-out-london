@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if %i[editor admin].include?(role)
       after_login_path = return_to_session.path(fallback: events_path)
       reset_session # calling reset_session prevents "session fixation" attacks
-      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, role:)
+      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, token_expires_at: user.expires_at, role:)
       redirect_to after_login_path
     else
       flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
