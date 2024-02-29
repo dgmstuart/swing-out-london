@@ -84,4 +84,31 @@ RSpec.describe AuthResponse do
       expect(response.token).to eq "0469a691b47c1df413e95edabd336ca3"
     end
   end
+
+  describe "#expires_at" do
+    it "returns the token expiry timestamp from the auth hash" do
+      request_env = {
+        "omniauth.auth" => {
+          "provider" => "facebook",
+          "uid" => "72432833316128378",
+          "info" => {
+            "name" => "Felipe Goyette Jr.",
+            "image" => "http://graph.facebook.com/v2.10/72432833316128378/picture"
+          },
+          "credentials" => {
+            "token" => "0469a691b47c1df413e95edabd336ca3",
+            "expires_at" => 1546086985,
+            "expires" => true
+          },
+          "extra" => {
+            "raw_info" => { "name" => "72432833316128378", "id" => "72432833316128378" }
+          }
+        }
+      }
+
+      response = described_class.new(request_env)
+
+      expect(response.expires_at).to eq 1546086985
+    end
+  end
 end

@@ -1,5 +1,8 @@
 <main class="page account">
   <h1>Account</h1>
+
+  <p>Facebook access token will expire at <%= access_token_expires_at %></p>
+
   <%= button_to 'Log out', logout_path, method: :delete, class: "button" %>
 
   <h2>Revoke login permissions</h2>

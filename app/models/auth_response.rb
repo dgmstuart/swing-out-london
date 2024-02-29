@@ -2,7 +2,7 @@
 
 class AuthResponse
   def initialize(request_env)
-    @request_env = request_env
+    @auth_hash = request_env.fetch("omniauth.auth")
   end
 
   def id
@@ -14,14 +14,18 @@ class AuthResponse
   end
 
   def token
-    auth_hash.fetch("credentials").fetch("token")
+    credentials.fetch("token")
+  end
+
+  def expires_at
+    credentials.fetch("expires_at")
   end
 
   private
 
-  def auth_hash
-    request_env.fetch("omniauth.auth")
-  end
+  attr_reader :auth_hash
 
-  attr_reader :request_env
+  def credentials
+    auth_hash.fetch("credentials")
+  end
 end
