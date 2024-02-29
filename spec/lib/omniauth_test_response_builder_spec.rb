@@ -5,12 +5,15 @@ require "lib/omniauth_test_response_builder"
 
 RSpec.describe OmniauthTestResponseBuilder do
   describe "#stub_auth_hash" do
+    before { stub_const("Rails", double(env: double(production?: false))) } # rubocop:disable RSpec/VerifiedDoubles
+
     it "configures Omniauth to return a fixed hash from all requests" do
       auth_hash = instance_double("OmniAuth::AuthHash")
       hash_builder = class_double("OmniAuth::AuthHash", new: auth_hash)
       mock_auth_config = {}
 
-      described_class.new(hash_builder:, mock_auth_config:).stub_auth_hash
+      described_class.new(hash_builder:, mock_auth_config:).stub_auth_hash(id: double, name: double)
+
       expect(mock_auth_config).to eq(facebook: auth_hash)
     end
 
