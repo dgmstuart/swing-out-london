@@ -15,12 +15,14 @@ module FacebookGraphApi
       end
     end
 
+    # https://developers.facebook.com/docs/graph-api/reference/user/permissions/#Deleting
     def revoke_login(user_id)
       raise ArgumentError, "missing user id" if user_id.nil?
 
       http_client.delete("/#{user_id}/permissions")
     end
 
+    # https://developers.facebook.com/docs/graph-api/reference/user/#example
     def profile(user_id)
       raise ArgumentError, "missing user id" if user_id.nil?
 
