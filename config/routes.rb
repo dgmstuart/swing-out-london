@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get "auth/failure" => "sessions#failure"
   delete "logout" => "sessions#destroy", as: "logout"
 
+  put "facebook_access_token" => "facebook_access_tokens#refresh", as: "facebook_access_token"
+
   resource :account, only: %i[show destroy], controller: :users
 
   namespace :admin do
