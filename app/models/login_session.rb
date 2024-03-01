@@ -72,7 +72,7 @@ class LoginSession
     end
 
     def token_expires_at
-      user.fetch("token_expires_at")
+      user.fetch("token_expires_at", 0)
     end
 
     private

@@ -252,6 +252,14 @@ RSpec.describe LoginSession do
         login_session = described_class.new(request, logger: fake_logger)
         expect(login_session.user.token_expires_at).to eq 1714347729
       end
+
+      it "is 0 if this token hasn't been set yet [MIGRATION]" do
+        session = { user: {} }
+        request = instance_double("ActionDispatch::Request", session:)
+
+        login_session = described_class.new(request, logger: fake_logger)
+        expect(login_session.user.token_expires_at).to eq 0
+      end
     end
 
     context "when the session has not been set" do
