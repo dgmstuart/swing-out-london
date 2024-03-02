@@ -4,7 +4,7 @@ class UsersController < CmsBaseController
   layout "cms"
 
   def show
-    render locals: { access_token_expires_at: Time.zone.at(login_session.user.token_expires_at) }
+    render locals: { access_token_expiry: AccessTokenExpiry.new(user: login_session.user) }
   end
 
   def destroy
