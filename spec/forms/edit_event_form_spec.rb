@@ -53,6 +53,20 @@ RSpec.describe EditEventForm do
     end
   end
 
+  describe ".type_is_weekly_class?" do
+    it "is true if the event_type is weekly class" do
+      form = described_class.new(event_type: "weekly_class")
+
+      expect(form.type_is_weekly_class?).to be true
+    end
+
+    it "is false if the event is social dance" do
+      form = described_class.new(event_type: "social_dance")
+
+      expect(form.type_is_weekly_class?).to be false
+    end
+  end
+
   describe "#to_h" do
     it "returns the attributes as a symbol hash" do # rubocop:disable RSpec/ExampleLength
       form = described_class.new(

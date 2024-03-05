@@ -88,10 +88,13 @@
         <%= f.radio_button(:frequency, 1, data: { action: "event-form#setWeekly", "event-form-target" => "frequencyWeekly" }) %>
         Weekly
       </label>
-      <label>
-        <%= f.radio_button(:frequency, 0, data: { action: "event-form#setInfrequently" }) %>
-        Monthly or occasionally
-      </label>
+
+      <% unless (@form.persisted? && @form.type_is_weekly_class?) %>
+        <label>
+          <%= f.radio_button(:frequency, 0, data: { action: "event-form#setInfrequently" }) %>
+          Monthly or occasionally
+        </label>
+      <% end %>
       <% if @form.persisted? && [0, 1].exclude?(@form.frequency) %>
         <p class="help">Legacy frequency: <%= @form.frequency %></p>
       <% end %>

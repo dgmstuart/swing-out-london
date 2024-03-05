@@ -99,14 +99,14 @@ class EditEventForm
     date_parser.parse(cancellations)
   end
 
+  def type_is_weekly_class?
+    event_type == "weekly_class"
+  end
+
   private
 
   def type_is_social_dance?
     event_type == "social_dance"
-  end
-
-  def type_is_weekly_class?
-    event_type == "weekly_class"
   end
 
   def has_weekly_class? # rubocop:disable Naming/PredicateName

@@ -180,6 +180,21 @@ RSpec.describe "Editors can edit events", :js do
     end
   end
 
+  context "when the event is a weekly class" do
+    it "doesn't allow the frequency to be edited" do
+      event = create(:class)
+      skip_login
+
+      visit edit_event_path(event)
+
+      aggregate_failures do
+        expect(page).to have_no_content("Monthly")
+        expect(page).to have_no_content("occasionally")
+        expect(page).to have_no_content("Upcoming dates")
+      end
+    end
+  end
+
   context "when the event has an old frequency" do
     it "shows a message" do
       event = create(:event, frequency: 4)
