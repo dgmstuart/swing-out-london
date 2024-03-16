@@ -5,7 +5,7 @@ class AuditLogsController < ApplicationController
   include CityHelper
 
   def show
-    @audits = Audit.order(created_at: :desc).map { AuditLogEntry.new(_1) }
+    @audits = AuditLogEntry.all
     respond_to do |format|
       format.atom { render xml: audits_rss(@audits).to_xml }
     end
@@ -26,11 +26,10 @@ class AuditLogsController < ApplicationController
 
       audits.each do |audit|
         editor = Editor.build(audit)
-        auditable = record(audit.auditable_type, audit.auditable_id)
         maker.items.new_item do |item|
-          item.link = audit_show_link(auditable)
-          item.id = "#{audit_show_link(auditable)}?action=#{audit.action}&updated_at=#{audit.created_at.to_i}"
-          item.title = audit_title(audit.action, auditable)
+          item.link = audit_show_link(audit)
+          item.id = "#{audit_show_link(audit)}?action=#{audit.action}&updated_at=#{audit.created_at.to_i}"
+          item.title = audit_title(audit)
           item.updated = audit.created_at.iso8601
           item.author = editor.name
           item.description = JSON.pretty_generate(audit.as_json)
@@ -39,44 +38,20 @@ class AuditLogsController < ApplicationController
     end
   end
 
-  def audit_title(action, record)
-    if action == "destroy"
-      "Delete #{record.class} (id: #{record.id})"
+  def audit_title(audit)
+    if audit.action == "destroy"
+      "Delete #{audit.auditable_type} (id: #{audit.auditable_id})"
     else
-      "#{action.capitalize} #{auditable_name(record)} (id: #{record.id})"
+      "#{audit.action.capitalize} #{audit.auditable_name} (id: #{audit.auditable_id})"
     end
   end
 
-  def record(class_name, id)
+  def audit_show_link(audit)
     {
-      "Event" => -> { Event.find_by(id:) || Event.new(id:) },
-      "Venue" => -> { Venue.find_by(id:) || Venue.new(id:) },
-      "Organiser" => -> { Organiser.find_by(id:) || Organiser.new(id:) }
-    }.fetch(class_name).call
-  end
-
-  def auditable_name(record)
-    {
-      "Event" => -> { auditable_event_name(record) },
-      "Venue" => -> { "Venue: \"#{record.name}\"" },
-      "Organiser" => -> { "Organiser: \"#{record.name}\"" }
-    }.fetch(record.class.name).call
-  end
-
-  def auditable_event_name(record)
-    if record.title.blank? && record.has_class? && !record.has_social?
-      "Class"
-    else
-      "Event: \"#{record.title}\""
-    end
-  end
-
-  def audit_show_link(record)
-    {
-      "Event" => -> { event_url(record) },
-      "Venue" => -> { venue_url(record) },
-      "Organiser" => -> { organiser_url(record) }
-    }.fetch(record.class.name).call
+      "Event" => -> { event_url(audit.auditable_id) },
+      "Venue" => -> { venue_url(audit.auditable_id) },
+      "Organiser" => -> { organiser_url(audit.auditable_id) }
+    }.fetch(audit.auditable_type).call
   end
 
   def authenticate

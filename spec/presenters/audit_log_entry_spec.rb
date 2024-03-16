@@ -45,6 +45,62 @@ RSpec.describe AuditLogEntry do
     end
   end
 
+  describe "#auditable_name" do
+    context "when the auditable record is a dance class" do
+      it "is Class" do
+        auditable = instance_double("Event", has_class?: true, has_social?: false)
+        audit = instance_double("Audit", auditable:, auditable_type: "Event")
+
+        expect(described_class.new(audit).auditable_name).to eq "Class"
+      end
+    end
+
+    context "when the auditable record has a social dance" do
+      it "is the name of that event" do
+        auditable = instance_double("Event", has_class?: true, has_social?: true, title: "Stomp")
+        audit = instance_double("Audit", auditable:, auditable_type: "Event")
+
+        expect(described_class.new(audit).auditable_name).to eq 'Event: "Stomp"'
+      end
+
+      it "shows an empty name if the event has been deleted" do
+        audit = instance_double("Audit", auditable: nil, auditable_type: "Event")
+
+        expect(described_class.new(audit).auditable_name).to eq 'Event: ""'
+      end
+    end
+
+    context "when the auditable record is a venue" do
+      it "is the name of the venue" do
+        auditable = instance_double("Venue", name: "The Bar")
+        audit = instance_double("Audit", auditable:, auditable_type: "Venue")
+
+        expect(described_class.new(audit).auditable_name).to eq 'Venue: "The Bar"'
+      end
+
+      it "shows an empty name if the venue has been deleted" do
+        audit = instance_double("Audit", auditable: nil, auditable_type: "Venue")
+
+        expect(described_class.new(audit).auditable_name).to eq 'Venue: ""'
+      end
+    end
+
+    context "when the auditable record is an organiser" do
+      it "is the name of the organiser" do
+        auditable = instance_double("Organiser", name: "Bob")
+        audit = instance_double("Audit", auditable:, auditable_type: "Organiser")
+
+        expect(described_class.new(audit).auditable_name).to eq 'Organiser: "Bob"'
+      end
+
+      it "shows an empty name if the organiser has been deleted" do
+        audit = instance_double("Audit", auditable: nil, auditable_type: "Organiser")
+
+        expect(described_class.new(audit).auditable_name).to eq 'Organiser: ""'
+      end
+    end
+  end
+
   describe "#audited_changes" do
     it "delegates to the audit" do
       audit = instance_double("Audit", audited_changes: "something changed")

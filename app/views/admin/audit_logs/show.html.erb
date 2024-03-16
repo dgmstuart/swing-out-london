@@ -14,7 +14,7 @@
         <%= audit.action %>
       </span>
       <span class="record">
-        <%= "#{audit.auditable_type}(#{audit.auditable_id})" %>
+        <%= "#{audit.auditable_name}(#{audit.auditable_id})" %>
       </span>
       <span class="changes">
         <%= audit.audited_changes.to_json %>

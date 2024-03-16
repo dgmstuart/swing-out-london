@@ -3,7 +3,7 @@
 module Admin
   class AuditLogsController < BaseController
     def show
-      @audits = Audit.order(created_at: :desc).map { AuditLogEntry.new(_1) }
+      @audits = AuditLogEntry.all
     end
   end
 end
