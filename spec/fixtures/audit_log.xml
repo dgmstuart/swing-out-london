@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <author>
+    <name>Swing Out London</name>
+  </author>
+  <id>https://www.swingoutlondon.co.uk</id>
+  <link href="https://www.swingoutlondon.co.uk/audit_log.atom"
+    rel="self"/>
+  <subtitle>Audit Log for Swing Out London</subtitle>
+  <title>Swing Out London Audit Log</title>
+  <updated>{{updated_timestamp}}</updated>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;delete&quot;,
+  &quot;record&quot;: &quot;Organiser({{organiser_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;name&quot;: &quot;Jimmy Fire&quot;,
+    &quot;website&quot;: null,
+    &quot;shortname&quot;: null,
+    &quot;description&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Delete Organiser (id: {{organiser_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;update&quot;,
+  &quot;record&quot;: &quot;Organiser({{organiser_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;name&quot;: [
+      &quot;Johnny Waters&quot;,
+      &quot;Jimmy Fire&quot;
+    ]
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Update Organiser [DELETED] (id: {{organiser_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Organiser({{organiser_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;name&quot;: &quot;Johnny Waters&quot;,
+    &quot;website&quot;: null,
+    &quot;shortname&quot;: null,
+    &quot;description&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Organiser [DELETED] (id: {{organiser_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/events/{{dance_class_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{dance_class_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Event({{dance_class_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;day&quot;: &quot;{{dance_class_day}}&quot;,
+    &quot;url&quot;: &quot;https://weds&quot;,
+    &quot;title&quot;: null,
+    &quot;venue_id&quot;: {{dance_class_venue_id}},
+    &quot;frequency&quot;: 1,
+    &quot;has_class&quot;: true,
+    &quot;last_date&quot;: null,
+    &quot;first_date&quot;: null,
+    &quot;has_social&quot;: false,
+    &quot;has_taster&quot;: false,
+    &quot;class_style&quot;: null,
+    &quot;course_length&quot;: null,
+    &quot;organiser_token&quot;: null,
+    &quot;class_organiser_id&quot;: {{dance_class_organiser_id}},
+    &quot;social_organiser_id&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Class (id: {{dance_class_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/venues/{{dance_class_venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{dance_class_venue_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Venue({{dance_class_venue_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;lat&quot;: &quot;0.0&quot;,
+    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;area&quot;: &quot;test_area&quot;,
+    &quot;name&quot;: &quot;test_venue&quot;,
+    &quot;address&quot;: &quot;London&quot;,
+    &quot;website&quot;: &quot;http://www.example.com&quot;,
+    &quot;postcode&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Venue: &quot;test_venue&quot; (id: {{dance_class_venue_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{dance_class_organiser_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{dance_class_organiser_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Organiser({{dance_class_organiser_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;name&quot;: &quot;Maggie McMillan&quot;,
+    &quot;website&quot;: null,
+    &quot;shortname&quot;: null,
+    &quot;description&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Organiser: &quot;Maggie McMillan&quot; (id: {{dance_class_organiser_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/events/{{social_dance_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{social_dance_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;delete&quot;,
+  &quot;record&quot;: &quot;Event({{social_dance_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;day&quot;: null,
+    &quot;url&quot;: &quot;https://stomp.uk&quot;,
+    &quot;title&quot;: &quot;The Tuesday Stamp&quot;,
+    &quot;venue_id&quot;: {{social_dance_venue_id}},
+    &quot;frequency&quot;: 0,
+    &quot;has_class&quot;: false,
+    &quot;last_date&quot;: null,
+    &quot;first_date&quot;: null,
+    &quot;has_social&quot;: true,
+    &quot;has_taster&quot;: false,
+    &quot;class_style&quot;: null,
+    &quot;course_length&quot;: null,
+    &quot;organiser_token&quot;: null,
+    &quot;class_organiser_id&quot;: null,
+    &quot;social_organiser_id&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Delete Event (id: {{social_dance_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/events/{{social_dance_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{social_dance_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;update&quot;,
+  &quot;record&quot;: &quot;Event({{social_dance_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;title&quot;: [
+      &quot;The Wednesday Stomp&quot;,
+      &quot;The Tuesday Stamp&quot;
+    ]
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Update Event [DELETED] (id: {{social_dance_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/events/{{social_dance_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{social_dance_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Event({{social_dance_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;day&quot;: null,
+    &quot;url&quot;: &quot;https://stomp.uk&quot;,
+    &quot;title&quot;: &quot;The Wednesday Stomp&quot;,
+    &quot;venue_id&quot;: {{social_dance_venue_id}},
+    &quot;frequency&quot;: 0,
+    &quot;has_class&quot;: false,
+    &quot;last_date&quot;: null,
+    &quot;first_date&quot;: null,
+    &quot;has_social&quot;: true,
+    &quot;has_taster&quot;: false,
+    &quot;class_style&quot;: null,
+    &quot;course_length&quot;: null,
+    &quot;organiser_token&quot;: null,
+    &quot;class_organiser_id&quot;: null,
+    &quot;social_organiser_id&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Event [DELETED] (id: {{social_dance_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/venues/{{social_dance_venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{social_dance_venue_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Venue({{social_dance_venue_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;lat&quot;: &quot;0.0&quot;,
+    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;area&quot;: &quot;test_area&quot;,
+    &quot;name&quot;: &quot;test_venue&quot;,
+    &quot;address&quot;: &quot;London&quot;,
+    &quot;website&quot;: &quot;http://www.example.com&quot;,
+    &quot;postcode&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Venue: &quot;test_venue&quot; (id: {{social_dance_venue_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/venues/{{venue_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{venue_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;delete&quot;,
+  &quot;record&quot;: &quot;Venue({{venue_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;lat&quot;: &quot;0.0&quot;,
+    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;area&quot;: &quot;test_area&quot;,
+    &quot;name&quot;: &quot;La Mesquita&quot;,
+    &quot;address&quot;: &quot;London&quot;,
+    &quot;website&quot;: &quot;http://www.example.com&quot;,
+    &quot;postcode&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Delete Venue (id: {{venue_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/venues/{{venue_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{venue_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;update&quot;,
+  &quot;record&quot;: &quot;Venue({{venue_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;name&quot;: [
+      &quot;The Alhambra&quot;,
+      &quot;La Mesquita&quot;
+    ]
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Update Venue [DELETED] (id: {{venue_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <entry>
+    <author>
+      <name>Pepsi Bethel</name>
+    </author>
+    <id>https://www.swingoutlondon.co.uk/venues/{{venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{venue_id}}"/>
+    <summary>{
+  &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
+  &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
+  &quot;action&quot;: &quot;create&quot;,
+  &quot;record&quot;: &quot;Venue({{venue_id}})&quot;,
+  &quot;changes&quot;: {
+    &quot;lat&quot;: &quot;0.0&quot;,
+    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;area&quot;: &quot;test_area&quot;,
+    &quot;name&quot;: &quot;The Alhambra&quot;,
+    &quot;address&quot;: &quot;London&quot;,
+    &quot;website&quot;: &quot;http://www.example.com&quot;,
+    &quot;postcode&quot;: null
+  },
+  &quot;comment&quot;: null
+}</summary>
+    <title>Create Venue [DELETED] (id: {{venue_id}})</title>
+    <updated>{{updated_timestamp}}</updated>
+    <dc:date>{{updated_timestamp}}</dc:date>
+  </entry>
+  <dc:date>{{updated_timestamp}}</dc:date>
+</feed>

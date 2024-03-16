@@ -1,21 +1,16 @@
 # frozen_string_literal: true
 
 class Audit < ApplicationRecord
+  belongs_to :auditable, polymorphic: true
+
   class << self
     def last_updated_at
       last&.created_at
     end
   end
 
-  def as_json
-    {
-      edited_by: editor.name,
-      created_at: I18n.l(created_at),
-      action:,
-      record: "#{auditable_type}(#{auditable_id})",
-      changes: audited_changes,
-      comment:
-    }
+  def editor_name
+    editor.name
   end
 
   def editor

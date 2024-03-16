@@ -3,6 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "Admins can view an audit log" do
+  around do |example|
+    ClimateControl.modify(CANONICAL_HOST: "www.swingoutlondon.co.uk") { example.run }
+  end
+
   it "showing a list of audited events" do
     stub_login(admin: true)
 
