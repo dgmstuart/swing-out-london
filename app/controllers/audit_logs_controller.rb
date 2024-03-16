@@ -5,7 +5,7 @@ class AuditLogsController < ApplicationController
   include CityHelper
 
   def show
-    @audits = Audit.order(created_at: :desc)
+    @audits = Audit.order(created_at: :desc).map { AuditLogEntry.new(_1) }
     respond_to do |format|
       format.atom { render xml: audits_rss(@audits).to_xml }
     end

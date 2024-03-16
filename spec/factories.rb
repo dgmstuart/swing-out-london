@@ -91,4 +91,6 @@ FactoryBot.define do
   factory :organiser_edit_event_form do
     venue_id { rand(999) }
   end
+
+  factory :audit
 end

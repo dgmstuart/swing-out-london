@@ -7,15 +7,8 @@ class Audit < ApplicationRecord
     end
   end
 
-  def as_json
-    {
-      edited_by: editor.name,
-      created_at: I18n.l(created_at),
-      action:,
-      record: "#{auditable_type}(#{auditable_id})",
-      changes: audited_changes,
-      comment:
-    }
+  def editor_name
+    editor.name
   end
 
   def editor
