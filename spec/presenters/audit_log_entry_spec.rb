@@ -63,10 +63,10 @@ RSpec.describe AuditLogEntry do
         expect(described_class.new(audit).auditable_name).to eq 'Event: "Stomp"'
       end
 
-      it "shows an empty name if the event has been deleted" do
+      it "shows deleted if the event has been deleted" do
         audit = instance_double("Audit", auditable: nil, auditable_type: "Event")
 
-        expect(described_class.new(audit).auditable_name).to eq 'Event: ""'
+        expect(described_class.new(audit).auditable_name).to eq "Event [DELETED]"
       end
     end
 
@@ -78,10 +78,10 @@ RSpec.describe AuditLogEntry do
         expect(described_class.new(audit).auditable_name).to eq 'Venue: "The Bar"'
       end
 
-      it "shows an empty name if the venue has been deleted" do
+      it "shows deleted if the venue has been deleted" do
         audit = instance_double("Audit", auditable: nil, auditable_type: "Venue")
 
-        expect(described_class.new(audit).auditable_name).to eq 'Venue: ""'
+        expect(described_class.new(audit).auditable_name).to eq "Venue [DELETED]"
       end
     end
 
@@ -93,10 +93,10 @@ RSpec.describe AuditLogEntry do
         expect(described_class.new(audit).auditable_name).to eq 'Organiser: "Bob"'
       end
 
-      it "shows an empty name if the organiser has been deleted" do
+      it "shows deleted if the organiser has been deleted" do
         audit = instance_double("Audit", auditable: nil, auditable_type: "Organiser")
 
-        expect(described_class.new(audit).auditable_name).to eq 'Organiser: ""'
+        expect(described_class.new(audit).auditable_name).to eq "Organiser [DELETED]"
       end
     end
   end

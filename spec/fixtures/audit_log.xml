@@ -52,7 +52,7 @@
   },
   &quot;comment&quot;: null
 }</summary>
-    <title>Update Organiser: &quot;&quot; (id: {{organiser_id}})</title>
+    <title>Update Organiser [DELETED] (id: {{organiser_id}})</title>
     <updated>{{updated_timestamp}}</updated>
     <dc:date>{{updated_timestamp}}</dc:date>
   </entry>
@@ -75,7 +75,7 @@
   },
   &quot;comment&quot;: null
 }</summary>
-    <title>Create Organiser: &quot;&quot; (id: {{organiser_id}})</title>
+    <title>Create Organiser [DELETED] (id: {{organiser_id}})</title>
     <updated>{{updated_timestamp}}</updated>
     <dc:date>{{updated_timestamp}}</dc:date>
   </entry>
@@ -215,7 +215,7 @@
   },
   &quot;comment&quot;: null
 }</summary>
-    <title>Update Event: &quot;&quot; (id: {{social_dance_id}})</title>
+    <title>Update Event [DELETED] (id: {{social_dance_id}})</title>
     <updated>{{updated_timestamp}}</updated>
     <dc:date>{{updated_timestamp}}</dc:date>
   </entry>
@@ -249,7 +249,7 @@
   },
   &quot;comment&quot;: null
 }</summary>
-    <title>Create Event: &quot;&quot; (id: {{social_dance_id}})</title>
+    <title>Create Event [DELETED] (id: {{social_dance_id}})</title>
     <updated>{{updated_timestamp}}</updated>
     <dc:date>{{updated_timestamp}}</dc:date>
   </entry>
@@ -324,7 +324,7 @@
   },
   &quot;comment&quot;: null
 }</summary>
-    <title>Update Venue: &quot;&quot; (id: {{venue_id}})</title>
+    <title>Update Venue [DELETED] (id: {{venue_id}})</title>
     <updated>{{updated_timestamp}}</updated>
     <dc:date>{{updated_timestamp}}</dc:date>
   </entry>
@@ -350,7 +350,7 @@
   },
   &quot;comment&quot;: null
 }</summary>
-    <title>Create Venue: &quot;&quot; (id: {{venue_id}})</title>
+    <title>Create Venue [DELETED] (id: {{venue_id}})</title>
     <updated>{{updated_timestamp}}</updated>
     <dc:date>{{updated_timestamp}}</dc:date>
   </entry>

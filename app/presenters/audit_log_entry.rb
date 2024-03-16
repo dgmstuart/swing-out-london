@@ -20,6 +20,8 @@ class AuditLogEntry
   def audited_changes = audit.audited_changes
   def comment = audit.comment
 
+  def auditable_name = auditable.name
+
   def as_json
     {
       edited_by: audit.editor_name,
@@ -31,55 +33,57 @@ class AuditLogEntry
     }
   end
 
-  def auditable_name
-    case auditable_type
-    in "Event"
-      auditable_event_name(record)
-    in "Organiser"
-      "Organiser: \"#{record.name}\""
-    in "Venue"
-      "Venue: \"#{record.name}\""
-    end
-  end
-
   private
 
   attr_reader :audit, :time_formatter
 
-  def record
-    audit.auditable || deleted_record
-  end
+  def auditable
+    return DeletedRecord.new(type: auditable_type) if record.nil?
 
-  def deleted_record
     case auditable_type
     in "Event"
-      DeletedEvent.new
-    in "Organiser"
-      DeletedOrganiser.new
-    in "Venue"
-      DeletedVenue.new
+      AuditableEvent.new(record)
+    in "Organiser" | "Venue"
+      AuditableRecord.new(record:, type: auditable_type)
     end
   end
 
-  def auditable_event_name(event)
-    if event.has_class? && !event.has_social?
-      "Class"
-    else
-      "Event: \"#{event.title}\""
+  def record
+    audit.auditable
+  end
+
+  class AuditableEvent
+    def initialize(event)
+      @event = event
+    end
+
+    def name
+      if @event.has_class? && !@event.has_social?
+        "Class"
+      else
+        "Event: \"#{@event.title}\""
+      end
     end
   end
 
-  class DeletedEvent
-    def has_class? = false # rubocop:disable Naming/PredicateName
-    def has_social? = false # rubocop:disable Naming/PredicateName
-    def title = nil
+  class AuditableRecord
+    def initialize(record:, type:)
+      @record = record
+      @type = type
+    end
+
+    def name
+      "#{@type}: \"#{@record.name}\""
+    end
   end
 
-  class DeletedVenue
-    def name = nil
-  end
+  class DeletedRecord
+    def initialize(type:)
+      @type = type
+    end
 
-  class DeletedOrganiser
-    def name = nil
+    def name
+      "#{@type} [DELETED]"
+    end
   end
 end
