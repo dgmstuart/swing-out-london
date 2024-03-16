@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class AuditLogEntry
-  def initialize(audit, time_formatter: ->(time) { I18n.l(time) })
+  def initialize(audit, time_formatter: ->(time) { I18n.l(time) }, url_helpers: UrlHelpers.new)
     @audit = audit
     @time_formatter = time_formatter
+    @url_helpers = url_helpers
   end
 
   class << self
@@ -14,7 +15,6 @@ class AuditLogEntry
 
   def created_at = audit.created_at
   def username = audit.username
-  def auditable_type = audit.auditable_type
   def auditable_id = audit.auditable_id
   def audited_changes = audit.audited_changes
   def comment = audit.comment
@@ -31,6 +31,17 @@ class AuditLogEntry
     auditable.name
   end
 
+  def auditable_url
+    case auditable_type
+    in "Event"
+      url_helpers.event_url(auditable_id)
+    in "Venue"
+      url_helpers.venue_url(auditable_id)
+    in "Organiser"
+      url_helpers.organiser_url(auditable_id)
+    end
+  end
+
   def as_json
     {
       edited_by: audit.editor_name,
@@ -44,7 +55,9 @@ class AuditLogEntry
 
   private
 
-  attr_reader :audit, :time_formatter
+  attr_reader :audit, :time_formatter, :url_helpers
+
+  def auditable_type = audit.auditable_type
 
   def auditable
     return DeletedRecord.new(type: auditable_type) if record.nil?

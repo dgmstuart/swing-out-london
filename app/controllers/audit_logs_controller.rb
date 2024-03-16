@@ -27,8 +27,8 @@ class AuditLogsController < ApplicationController
       audits.each do |audit|
         editor = Editor.build(audit)
         maker.items.new_item do |item|
-          item.link = audit_show_link(audit)
-          item.id = "#{audit_show_link(audit)}?action=#{audit.action}&updated_at=#{audit.created_at.to_i}"
+          item.link = audit.auditable_url
+          item.id = "#{audit.auditable_url}?action=#{audit.action}&updated_at=#{audit.created_at.to_i}"
           item.title = "#{audit.action.capitalize} #{audit.auditable_name} (id: #{audit.auditable_id})"
           item.updated = audit.created_at.iso8601
           item.author = editor.name
@@ -36,14 +36,6 @@ class AuditLogsController < ApplicationController
         end
       end
     end
-  end
-
-  def audit_show_link(audit)
-    {
-      "Event" => -> { event_url(audit.auditable_id) },
-      "Venue" => -> { venue_url(audit.auditable_id) },
-      "Organiser" => -> { organiser_url(audit.auditable_id) }
-    }.fetch(audit.auditable_type).call
   end
 
   def authenticate

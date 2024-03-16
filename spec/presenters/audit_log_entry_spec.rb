@@ -9,7 +9,7 @@ RSpec.describe AuditLogEntry do
       created_at = DateTime.new
       audit = instance_double("Audit", created_at:)
 
-      expect(described_class.new(audit).created_at).to eq created_at
+      expect(described_class.new(audit, url_helpers:).created_at).to eq created_at
     end
   end
 
@@ -17,7 +17,7 @@ RSpec.describe AuditLogEntry do
     it "delegates to the audit" do
       audit = instance_double("Audit", username: "Bob")
 
-      expect(described_class.new(audit).username).to eq "Bob"
+      expect(described_class.new(audit, url_helpers:).username).to eq "Bob"
     end
   end
 
@@ -25,21 +25,13 @@ RSpec.describe AuditLogEntry do
     it "delegates to the audit" do
       audit = instance_double("Audit", action: "create")
 
-      expect(described_class.new(audit).action).to eq "create"
+      expect(described_class.new(audit, url_helpers:).action).to eq "create"
     end
 
     it "is 'delete' if the action was 'destroy'" do
       audit = instance_double("Audit", action: "destroy")
 
-      expect(described_class.new(audit).action).to eq "delete"
-    end
-  end
-
-  describe "#auditable_type" do
-    it "delegates to the audit" do
-      audit = instance_double("Audit", auditable_type: "Event")
-
-      expect(described_class.new(audit).auditable_type).to eq "Event"
+      expect(described_class.new(audit, url_helpers:).action).to eq "delete"
     end
   end
 
@@ -47,7 +39,7 @@ RSpec.describe AuditLogEntry do
     it "delegates to the audit" do
       audit = instance_double("Audit", auditable_id: 23)
 
-      expect(described_class.new(audit).auditable_id).to eq 23
+      expect(described_class.new(audit, url_helpers:).auditable_id).to eq 23
     end
   end
 
@@ -57,7 +49,7 @@ RSpec.describe AuditLogEntry do
         auditable = instance_double("Event", has_class?: true, has_social?: false)
         audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Event")
 
-        expect(described_class.new(audit).auditable_name).to eq "Class"
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq "Class"
       end
     end
 
@@ -66,13 +58,13 @@ RSpec.describe AuditLogEntry do
         auditable = instance_double("Event", has_class?: true, has_social?: true, title: "Stomp")
         audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Event")
 
-        expect(described_class.new(audit).auditable_name).to eq 'Event: "Stomp"'
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq 'Event: "Stomp"'
       end
 
       it "shows deleted if the event has been deleted" do
         audit = instance_double("Audit", action: "update", auditable: nil, auditable_type: "Event")
 
-        expect(described_class.new(audit).auditable_name).to eq "Event [DELETED]"
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq "Event [DELETED]"
       end
     end
 
@@ -81,13 +73,13 @@ RSpec.describe AuditLogEntry do
         auditable = instance_double("Venue", name: "The Bar")
         audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Venue")
 
-        expect(described_class.new(audit).auditable_name).to eq 'Venue: "The Bar"'
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq 'Venue: "The Bar"'
       end
 
       it "shows deleted if the venue has been deleted" do
         audit = instance_double("Audit", action: "update", auditable: nil, auditable_type: "Venue")
 
-        expect(described_class.new(audit).auditable_name).to eq "Venue [DELETED]"
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq "Venue [DELETED]"
       end
     end
 
@@ -96,13 +88,13 @@ RSpec.describe AuditLogEntry do
         auditable = instance_double("Organiser", name: "Bob")
         audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Organiser")
 
-        expect(described_class.new(audit).auditable_name).to eq 'Organiser: "Bob"'
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq 'Organiser: "Bob"'
       end
 
       it "shows deleted if the organiser has been deleted" do
         audit = instance_double("Audit", action: "update", auditable: nil, auditable_type: "Organiser")
 
-        expect(described_class.new(audit).auditable_name).to eq "Organiser [DELETED]"
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq "Organiser [DELETED]"
       end
     end
 
@@ -110,7 +102,7 @@ RSpec.describe AuditLogEntry do
       it "is just the record type" do
         audit = instance_double("Audit", action: "destroy", auditable: nil, auditable_type: "Organiser")
 
-        expect(described_class.new(audit).auditable_name).to eq "Organiser"
+        expect(described_class.new(audit, url_helpers:).auditable_name).to eq "Organiser"
       end
     end
   end
@@ -119,7 +111,7 @@ RSpec.describe AuditLogEntry do
     it "delegates to the audit" do
       audit = instance_double("Audit", audited_changes: "something changed")
 
-      expect(described_class.new(audit).audited_changes).to eq "something changed"
+      expect(described_class.new(audit, url_helpers:).audited_changes).to eq "something changed"
     end
   end
 
@@ -127,7 +119,36 @@ RSpec.describe AuditLogEntry do
     it "delegates to the audit" do
       audit = instance_double("Audit", comment: "something changed")
 
-      expect(described_class.new(audit).comment).to eq "something changed"
+      expect(described_class.new(audit, url_helpers:).comment).to eq "something changed"
+    end
+  end
+
+  describe "#record_url" do
+    context "when the auditable record is an event" do
+      it "is the url of that event" do
+        audit = instance_double("Audit", auditable_type: "Event", auditable_id: "23")
+        url_helpers = instance_double("UrlHelpers", event_url: "a/url")
+
+        expect(described_class.new(audit, url_helpers:).auditable_url).to eq "a/url"
+      end
+    end
+
+    context "when the auditable record is a venue" do
+      it "is the url of that venue" do
+        audit = instance_double("Audit", auditable_type: "Venue", auditable_id: "23")
+        url_helpers = instance_double("UrlHelpers", venue_url: "a/url")
+
+        expect(described_class.new(audit, url_helpers:).auditable_url).to eq "a/url"
+      end
+    end
+
+    context "when the auditable record is an organiser" do
+      it "is the url of that organiser" do
+        audit = instance_double("Audit", auditable_type: "Organiser", auditable_id: "23")
+        url_helpers = instance_double("UrlHelpers", organiser_url: "a/url")
+
+        expect(described_class.new(audit, url_helpers:).auditable_url).to eq "a/url"
+      end
     end
   end
 
@@ -146,7 +167,7 @@ RSpec.describe AuditLogEntry do
       )
       time_formatter = ->(time) { time.strftime("%Y-%m-%d %H:%M:%S") }
 
-      expect(described_class.new(audit, time_formatter:).as_json).to eq(
+      expect(described_class.new(audit, time_formatter:, url_helpers:).as_json).to eq(
         action: "create",
         changes: audited_changes,
         comment: "more changes",
@@ -155,5 +176,9 @@ RSpec.describe AuditLogEntry do
         record: "Event(17)"
       )
     end
+  end
+
+  def url_helpers
+    double
   end
 end

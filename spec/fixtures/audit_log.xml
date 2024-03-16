@@ -14,8 +14,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/organisers/{{organiser_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/organisers/{{organiser_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -37,8 +37,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/organisers/{{organiser_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/organisers/{{organiser_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -60,8 +60,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/organisers/{{organiser_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/organisers/{{organiser_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{organiser_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -83,8 +83,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/events/{{dance_class_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/events/{{dance_class_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/events/{{dance_class_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{dance_class_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -117,8 +117,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/venues/{{dance_class_venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/venues/{{dance_class_venue_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/venues/{{dance_class_venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{dance_class_venue_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -143,8 +143,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/organisers/{{dance_class_organiser_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/organisers/{{dance_class_organiser_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/organisers/{{dance_class_organiser_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/organisers/{{dance_class_organiser_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -166,8 +166,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/events/{{social_dance_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/events/{{social_dance_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/events/{{social_dance_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{social_dance_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -200,8 +200,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/events/{{social_dance_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/events/{{social_dance_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/events/{{social_dance_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{social_dance_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -223,8 +223,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/events/{{social_dance_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/events/{{social_dance_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/events/{{social_dance_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/events/{{social_dance_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -257,8 +257,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/venues/{{social_dance_venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/venues/{{social_dance_venue_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/venues/{{social_dance_venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{social_dance_venue_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -283,8 +283,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/venues/{{venue_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/venues/{{venue_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/venues/{{venue_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{venue_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -309,8 +309,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/venues/{{venue_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/venues/{{venue_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/venues/{{venue_id}}?action=update&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{venue_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
@@ -332,8 +332,8 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/venues/{{venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
-    <link href="http://www.example.com/venues/{{venue_id}}"/>
+    <id>https://www.swingoutlondon.co.uk/venues/{{venue_id}}?action=create&amp;updated_at={{updated_seconds}}</id>
+    <link href="https://www.swingoutlondon.co.uk/venues/{{venue_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
