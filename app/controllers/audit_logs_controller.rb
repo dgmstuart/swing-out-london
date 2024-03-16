@@ -29,20 +29,12 @@ class AuditLogsController < ApplicationController
         maker.items.new_item do |item|
           item.link = audit_show_link(audit)
           item.id = "#{audit_show_link(audit)}?action=#{audit.action}&updated_at=#{audit.created_at.to_i}"
-          item.title = audit_title(audit)
+          item.title = "#{audit.action.capitalize} #{audit.auditable_name} (id: #{audit.auditable_id})"
           item.updated = audit.created_at.iso8601
           item.author = editor.name
           item.description = JSON.pretty_generate(audit.as_json)
         end
       end
-    end
-  end
-
-  def audit_title(audit)
-    if audit.action == "destroy"
-      "Delete #{audit.auditable_type} (id: #{audit.auditable_id})"
-    else
-      "#{audit.action.capitalize} #{audit.auditable_name} (id: #{audit.auditable_id})"
     end
   end
 

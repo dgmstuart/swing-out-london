@@ -27,6 +27,12 @@ RSpec.describe AuditLogEntry do
 
       expect(described_class.new(audit).action).to eq "create"
     end
+
+    it "is 'delete' if the action was 'destroy'" do
+      audit = instance_double("Audit", action: "destroy")
+
+      expect(described_class.new(audit).action).to eq "delete"
+    end
   end
 
   describe "#auditable_type" do
@@ -49,7 +55,7 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record is a dance class" do
       it "is Class" do
         auditable = instance_double("Event", has_class?: true, has_social?: false)
-        audit = instance_double("Audit", auditable:, auditable_type: "Event")
+        audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Event")
 
         expect(described_class.new(audit).auditable_name).to eq "Class"
       end
@@ -58,13 +64,13 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record has a social dance" do
       it "is the name of that event" do
         auditable = instance_double("Event", has_class?: true, has_social?: true, title: "Stomp")
-        audit = instance_double("Audit", auditable:, auditable_type: "Event")
+        audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Event")
 
         expect(described_class.new(audit).auditable_name).to eq 'Event: "Stomp"'
       end
 
       it "shows deleted if the event has been deleted" do
-        audit = instance_double("Audit", auditable: nil, auditable_type: "Event")
+        audit = instance_double("Audit", action: "update", auditable: nil, auditable_type: "Event")
 
         expect(described_class.new(audit).auditable_name).to eq "Event [DELETED]"
       end
@@ -73,13 +79,13 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record is a venue" do
       it "is the name of the venue" do
         auditable = instance_double("Venue", name: "The Bar")
-        audit = instance_double("Audit", auditable:, auditable_type: "Venue")
+        audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Venue")
 
         expect(described_class.new(audit).auditable_name).to eq 'Venue: "The Bar"'
       end
 
       it "shows deleted if the venue has been deleted" do
-        audit = instance_double("Audit", auditable: nil, auditable_type: "Venue")
+        audit = instance_double("Audit", action: "update", auditable: nil, auditable_type: "Venue")
 
         expect(described_class.new(audit).auditable_name).to eq "Venue [DELETED]"
       end
@@ -88,15 +94,23 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record is an organiser" do
       it "is the name of the organiser" do
         auditable = instance_double("Organiser", name: "Bob")
-        audit = instance_double("Audit", auditable:, auditable_type: "Organiser")
+        audit = instance_double("Audit", action: "update", auditable:, auditable_type: "Organiser")
 
         expect(described_class.new(audit).auditable_name).to eq 'Organiser: "Bob"'
       end
 
       it "shows deleted if the organiser has been deleted" do
-        audit = instance_double("Audit", auditable: nil, auditable_type: "Organiser")
+        audit = instance_double("Audit", action: "update", auditable: nil, auditable_type: "Organiser")
 
         expect(described_class.new(audit).auditable_name).to eq "Organiser [DELETED]"
+      end
+    end
+
+    context "when the audit is for the action which deleted the record" do
+      it "is just the record type" do
+        audit = instance_double("Audit", action: "destroy", auditable: nil, auditable_type: "Organiser")
+
+        expect(described_class.new(audit).auditable_name).to eq "Organiser"
       end
     end
   end

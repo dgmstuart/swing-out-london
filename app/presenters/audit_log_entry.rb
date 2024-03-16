@@ -14,13 +14,22 @@ class AuditLogEntry
 
   def created_at = audit.created_at
   def username = audit.username
-  def action = audit.action
   def auditable_type = audit.auditable_type
   def auditable_id = audit.auditable_id
   def audited_changes = audit.audited_changes
   def comment = audit.comment
 
-  def auditable_name = auditable.name
+  def action
+    return "delete" if audit.action == "destroy"
+
+    audit.action
+  end
+
+  def auditable_name
+    return auditable_type if audit.action == "destroy"
+
+    auditable.name
+  end
 
   def as_json
     {

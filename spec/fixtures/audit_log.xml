@@ -14,12 +14,12 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/organisers/{{organiser_id}}?action=destroy&amp;updated_at={{updated_seconds}}</id>
+    <id>http://www.example.com/organisers/{{organiser_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
     <link href="http://www.example.com/organisers/{{organiser_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
-  &quot;action&quot;: &quot;destroy&quot;,
+  &quot;action&quot;: &quot;delete&quot;,
   &quot;record&quot;: &quot;Organiser({{organiser_id}})&quot;,
   &quot;changes&quot;: {
     &quot;name&quot;: &quot;Jimmy Fire&quot;,
@@ -166,12 +166,12 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/events/{{social_dance_id}}?action=destroy&amp;updated_at={{updated_seconds}}</id>
+    <id>http://www.example.com/events/{{social_dance_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
     <link href="http://www.example.com/events/{{social_dance_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
-  &quot;action&quot;: &quot;destroy&quot;,
+  &quot;action&quot;: &quot;delete&quot;,
   &quot;record&quot;: &quot;Event({{social_dance_id}})&quot;,
   &quot;changes&quot;: {
     &quot;day&quot;: null,
@@ -283,12 +283,12 @@
     <author>
       <name>Pepsi Bethel</name>
     </author>
-    <id>http://www.example.com/venues/{{venue_id}}?action=destroy&amp;updated_at={{updated_seconds}}</id>
+    <id>http://www.example.com/venues/{{venue_id}}?action=delete&amp;updated_at={{updated_seconds}}</id>
     <link href="http://www.example.com/venues/{{venue_id}}"/>
     <summary>{
   &quot;edited_by&quot;: &quot;Pepsi Bethel&quot;,
   &quot;created_at&quot;: &quot;{{updated_timestamp}}&quot;,
-  &quot;action&quot;: &quot;destroy&quot;,
+  &quot;action&quot;: &quot;delete&quot;,
   &quot;record&quot;: &quot;Venue({{venue_id}})&quot;,
   &quot;changes&quot;: {
     &quot;lat&quot;: &quot;0.0&quot;,
