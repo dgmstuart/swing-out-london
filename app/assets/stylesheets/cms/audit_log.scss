@@ -1,0 +1,19 @@
+@use "../shared/colours";
+
+.audit_logs {
+  .timestamp {
+    // color: colours.$lowlight-colour;
+  }
+
+  .editor {
+    color: colours.$green;
+  }
+
+  .action {
+    color: colours.$blue;
+  }
+
+  .changes {
+    color: colours.$gray;
+  }
+}
