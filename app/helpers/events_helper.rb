@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 module EventsHelper
+  def reasonable_date_field(form, method, allow_past: true)
+    min =
+      if allow_past
+        DistantPastDateValidator::SOLDN_START_DATE
+      else
+        Date.current
+      end
+    form.date_field method, min:, max: 2.years.from_now
+  end
+
   # ------- #
   # SELECTS #
   # ------- #
