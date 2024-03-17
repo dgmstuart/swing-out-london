@@ -10,6 +10,7 @@ RSpec.describe "Editors can create events", :js do
       stub_login(id: 12345678901234567, name: "Al Minns")
       create(:venue, name: "The 100 Club")
       create(:organiser, name: "The London Swing Dance Society")
+      travel_to Time.zone.local(2012, 1, 2, 23, 17, 16)
 
       visit "/login"
       click_on "Log in"
@@ -37,9 +38,7 @@ RSpec.describe "Editors can create events", :js do
       fill_in "First date", with: "12/12/2012"
       fill_in "Last date", with: "19/12/2012"
 
-      Timecop.freeze(Time.zone.local(2012, 1, 2, 23, 17, 16)) do
-        click_on "Create"
-      end
+      click_on "Create"
 
       expect(page).to have_content("Title:\nStompin'")
         .and have_content("Venue:\nThe 100 Club")
@@ -196,6 +195,7 @@ RSpec.describe "Editors can create events", :js do
       stub_login(id: 12345678901234567, name: "Leon James")
       create(:venue, name: "Dogstar")
       create(:organiser, name: "Sunshine Swing")
+      travel_to Time.zone.local(2012, 1, 2, 23, 17, 16)
 
       visit "/login"
       click_on "Log in"
@@ -209,23 +209,21 @@ RSpec.describe "Editors can create events", :js do
       autocomplete_select "Sunshine Swing", from: "Class organiser"
 
       select "Wednesday", from: "Day"
-      fill_in "First date", with: "16/02/2000"
-      fill_in "Last date", with: "16/02/2020"
+      fill_in "First date", with: "15/02/2012"
+      fill_in "Last date", with: "13/02/2013"
 
-      Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-        click_on "Create"
-      end
+      click_on "Create"
 
       expect(page).to have_content("Venue:\nDogstar")
         .and have_content("Class Organiser:\nSunshine Swing")
         .and have_content("Class")
         .and have_content("Frequency:\nWeekly on Wednesdays")
         .and have_content("Cancelled:\nNone")
-        .and have_content("First date:\nWednesday 16th February")
-        .and have_content("Last date:\nSunday 16th February")
+        .and have_content("First date:\nWednesday 15th February")
+        .and have_content("Last date:\nWednesday 13th February")
         .and have_content("Url:\nhttps://sunshineswing.uk/events")
 
-      expect(page).to have_content("Last updated by Leon James (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+      expect(page).to have_content("Last updated by Leon James (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
     end
 
     it "with missing data" do

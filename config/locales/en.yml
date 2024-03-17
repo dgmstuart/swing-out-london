@@ -35,6 +35,12 @@ en:
           attributes:
             postcode:
               invalid: is not a valid postcode
+  errors:
+    attributes:
+      date:
+        past: "can't be in the past"
+        distant_past: "can't be too far in the past"
+        distant_future: "can't be too far in the future"
   flash:
     success: "%{model} was successfully %{action}"
     map:

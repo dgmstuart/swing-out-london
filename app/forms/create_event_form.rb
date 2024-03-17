@@ -38,7 +38,7 @@ class CreateEventForm
   validates :dates, dates_string: true
   validates :cancellations, dates_string: true
   validates :first_date, date_string: true
-  validates :last_date, date_string: true
+  validates :last_date, date_string: { allow_past: false }
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent

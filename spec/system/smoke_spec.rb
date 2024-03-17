@@ -7,6 +7,8 @@ RSpec.describe "Adding a new event", :js do
     Timecop.freeze("01/01/1937T12:00") { example.run }
   end
 
+  before { stub_const("DistantPastDateValidator::SOLDN_START_DATE", Date.parse("1926-03-12")) }
+
   it "with a social and a dance class" do
     stub_login
     visit "/events"
@@ -70,7 +72,7 @@ RSpec.describe "Adding a new event", :js do
     select "Saturday", from: "Day"
     fill_in "Cancelled dates", with: "09/01/1937"
     fill_in "First date", with: "12/03/1926"
-    fill_in "Last date", with: "11/10/1958"
+    fill_in "Last date", with: "01/01/1939" # the Savoy closed in 1958, but we only allow last dates to be set 2 years ahead
 
     click_on "Create"
 
