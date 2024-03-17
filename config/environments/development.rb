@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "filtering_logger_formatter"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -71,6 +72,8 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
+
+  config.log_formatter = FilteringLoggerFormatter.new(ActiveSupport::Logger::SimpleFormatter.new)
 
   config.hosts << ENV["HOST"] if ENV["HOST"]
 end

@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "filtering_logger_formatter"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -48,7 +49,7 @@ Rails.application.configure do
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new($stdout)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
+    .tap  { |logger| logger.formatter = FilteringLoggerFormatter.new(::Logger::Formatter.new) }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
   # Prepend all log lines with the following tags.
