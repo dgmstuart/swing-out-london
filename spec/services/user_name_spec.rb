@@ -2,9 +2,17 @@
 
 require "spec_helper"
 require "app/services/user_name"
+require "active_support"
+require "active_support/cache"
+require "active_support/core_ext/integer/time"
 require "facebook_graph_api/http_client" # for the ResponseError class
 
 RSpec.describe UserName do
+  before do
+    cache = ActiveSupport::Cache::NullStore.new
+    stub_const("Rails", class_double("Rails", cache:))
+  end
+
   describe ".as_user" do
     it "builds an API client based on the user" do
       stub_const("Rollbar", double)

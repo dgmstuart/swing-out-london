@@ -5,10 +5,12 @@ require "facebook_graph_api/api"
 class UserName
   def initialize(
     api:,
-    error_reporter: Rollbar
+    error_reporter: Rollbar,
+    cache: Rails.cache
   )
     @api = api
     @error_reporter = error_reporter
+    @cache = cache
   end
 
   class << self
@@ -19,8 +21,10 @@ class UserName
   end
 
   def name_for(user_id)
-    profile = api.profile(user_id)
-    profile.fetch("name")
+    cache.fetch("fb-user-name-#{user_id}", expires_in: 1.month) do
+      profile = api.profile(user_id)
+      profile.fetch("name")
+    end
   rescue FacebookGraphApi::HttpClient::ResponseError => e
     error_reporter.error(e)
     "[Unknown user]"
@@ -28,5 +32,5 @@ class UserName
 
   private
 
-  attr_reader :api, :error_reporter
+  attr_reader :api, :error_reporter, :cache
 end
