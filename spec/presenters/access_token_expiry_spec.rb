@@ -67,4 +67,26 @@ RSpec.describe AccessTokenExpiry do
       end
     end
   end
+
+  describe "#allow_refresh?" do
+    context "when the expiry time is 60 days" do
+      it "is false" do
+        user = instance_double("LoginSession::User", token_expires_at: (1709475483 + 5184000)) # 5184000 = 60 days
+        now_in_seconds = 1709475483 # 1709475483 = 2024-03-03 15:18:03 +0100
+        presenter = described_class.new(user:, now_in_seconds:)
+
+        expect(presenter.allow_refresh?).to be false
+      end
+    end
+
+    context "when the expiry time is less than 59 days" do
+      it "is false" do
+        user = instance_double("LoginSession::User", token_expires_at: (1709475483 + 5011200)) # 5011200 = 58 days
+        now_in_seconds = 1709475483 # 1709475483 = 2024-03-03 15:18:03 +0100
+        presenter = described_class.new(user:, now_in_seconds:)
+
+        expect(presenter.allow_refresh?).to be true
+      end
+    end
+  end
 end
