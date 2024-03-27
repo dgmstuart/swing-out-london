@@ -20,6 +20,11 @@ class LoginSession
     logger.info(log_message)
   end
 
+  def set_token!(token:, token_expires_at:)
+    request.session[:user]["token"] = token
+    request.session[:user]["token_expires_at"] = token_expires_at
+  end
+
   def log_out!
     auth_id = user.auth_id
     request.reset_session

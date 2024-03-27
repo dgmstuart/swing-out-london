@@ -3,9 +3,15 @@
 
   <%= button_to 'Log out', logout_path, method: :delete, class: "button" %>
 
+
   <h2>Facebook Graph API Access Token</h2>
 
   <p>Your Facebook access token <%= access_token_expiry.offset_string %></p>
+
+  <% if access_token_expiry.allow_refresh? %>
+    <%= button_to 'Refresh token', facebook_access_token_path, method: :put, class: 'button facebook-button' %>
+  <% end %>
+
 
   <h2>Revoke login permissions</h2>
 

@@ -17,6 +17,10 @@ class AccessTokenExpiry
     end
   end
 
+  def allow_refresh?
+    days_offset < 59
+  end
+
   private
 
   def days_offset
