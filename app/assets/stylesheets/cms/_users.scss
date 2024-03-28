@@ -26,10 +26,8 @@
   }
 
   @media only screen and (width >= 767px) {
-    .user-list {
-      width: fit-content;
-      min-width: 700px;
-    }
+    width: fit-content;
+    min-width: 700px;
 
     .user {
       flex-direction: row;
