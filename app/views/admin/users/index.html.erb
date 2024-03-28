@@ -1,13 +1,25 @@
 <main class="page">
   <h1>Users</h1>
-  <ul>
+  <ul class="user-list">
+    <div class="user-list-header">
+      <div class="user-id">Facebook ID</div>
+      <div>Name</div>
+    </div>
+
     <% users.each do |user| %>
-      <li>
-        <%= user.id %>
-        <%= user.name %>
-        <% if user.admin? %>
-          (Admin)
-        <% end %>
+      <li class="user">
+        <div class="user-data user-id">
+          <div class="label">Facebook ID:</div>
+          <div><%= user.id %></div>
+        </div>
+        <div class="user-data">
+          <div class="label">Name:</div>
+            <%= user.name %>
+            <% if user.admin? %>
+              (Admin)
+            <% end %>
+          </div>
+        </div>
       </li>
     <% end %>
   </ul>
