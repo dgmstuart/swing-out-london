@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^7.3.0",
+    "@hotwired/turbo-rails": "^8.0.4",
     "accessible-autocomplete": "^2.0.4",
     "cheet.js": "^0.3.3",
     "timeago.js": "^4.0.2",
@@ -15,7 +15,7 @@
     "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
-    "stylelint": "^15.11.0",
-    "stylelint-config-standard-scss": "^11.1.0"
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard-scss": "^13.0.0"
   }
 }
