@@ -14,3 +14,4 @@ vendor/bundle
 !/app/assets/builds/.keep
 
 /node_modules
+.yardoc

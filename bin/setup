@@ -29,6 +29,9 @@ class Setup
 
       puts "\n== Restarting application server =="
       system! 'bin/rails restart'
+
+      puts "\n== Installing gem documentation (errors and warnings are expected) =="
+      system! 'yard gems'
     end
   end
 
