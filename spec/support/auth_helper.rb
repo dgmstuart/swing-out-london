@@ -10,12 +10,11 @@ module AuthHelper
 
   def stub_login(id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name, admin: false)
     stub_auth_hash(id:, name:)
-    ids = if admin
-            { editor_user_ids: [], admin_user_ids: [id] }
-          else
-            { editor_user_ids: [id], admin_user_ids: [] }
-          end
-    stub_facebook_config(ids)
+    if admin
+      create(:admin, facebook_ref: id)
+    else
+      create(:editor, facebook_ref: id)
+    end
   end
 
   def skip_login

@@ -4,7 +4,7 @@ module Admin
   class UsersController < BaseController
     def index
       users = UsersListing.new(
-        users: User.all,
+        roles: Role.all,
         user_name_finder: UserName.as_user(current_user)
       ).users
 

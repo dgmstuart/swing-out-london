@@ -93,4 +93,14 @@ FactoryBot.define do
   end
 
   factory :audit
+
+  factory :role, aliases: %i[editor] do
+    facebook_ref { Faker::Number.number(digits: 17) }
+
+    role { "editor" }
+
+    factory :admin do
+      role { "admin" }
+    end
+  end
 end

@@ -7,7 +7,7 @@ class LoginSession
   end
 
   def log_in!(auth_id:, name:, token:, token_expires_at:, role:)
-    admin = role == :admin
+    admin = role == "admin"
     request.session[:user] = {
       "auth_id" => auth_id,
       "name" => name,

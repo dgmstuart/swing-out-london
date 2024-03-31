@@ -4,12 +4,10 @@ require "rails_helper"
 
 RSpec.describe "Admins can manage users" do
   it "viewing a list of users", :vcr do
-    stub_facebook_config(
-      editor_user_ids: [12345678901234567],
-      admin_user_ids: [98765987659876598],
-      app_secret!: "super-secret-secret"
-    )
+    stub_facebook_config(app_secret!: "super-secret-secret")
     stub_auth_hash(id: 98765987659876598)
+    create(:editor, facebook_ref: 12345678901234567)
+    create(:admin, facebook_ref: 98765987659876598)
 
     visit "/login"
     click_on "Log in"
@@ -24,8 +22,8 @@ RSpec.describe "Admins can manage users" do
 
   context "when logged in as a non-admin" do
     it "does not allow access" do
-      stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [98765987659876598])
       stub_auth_hash(id: 12345678901234567)
+      create(:editor, facebook_ref: 12345678901234567)
 
       visit "/login"
       click_on "Log in"

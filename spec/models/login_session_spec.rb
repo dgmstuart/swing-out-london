@@ -18,7 +18,7 @@ RSpec.describe LoginSession do
         name: "Willa Mae Ricker",
         token:,
         token_expires_at: 1714347729,
-        role: :editor
+        role: "editor"
       )
 
       aggregate_failures do
@@ -35,18 +35,18 @@ RSpec.describe LoginSession do
       request = instance_double("ActionDispatch::Request", session: {})
 
       login_session = described_class.new(request, logger:)
-      login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double, role: :editor)
+      login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double, role: "editor")
 
       expect(logger).to have_received(:info).with("Logged in as auth id 1234567890123456")
     end
 
-    context "when the role was :admin" do
+    context "when the role was admin" do
       it "sets admin in the session" do
         session = {}
         request = instance_double("ActionDispatch::Request", session:)
 
         login_session = described_class.new(request, logger: fake_logger)
-        login_session.log_in!(auth_id: double, name: double, token: double, token_expires_at: double, role: :admin)
+        login_session.log_in!(auth_id: double, name: double, token: double, token_expires_at: double, role: "admin")
 
         expect(session[:user]["admin"]).to be true
       end
@@ -56,7 +56,7 @@ RSpec.describe LoginSession do
         request = instance_double("ActionDispatch::Request", session: {})
 
         login_session = described_class.new(request, logger:)
-        login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double, role: :admin)
+        login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double, role: "admin")
 
         expect(logger).to have_received(:info).with("Logged in as auth id 1234567890123456 with Admin permissions")
       end

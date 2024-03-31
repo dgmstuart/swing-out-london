@@ -10,11 +10,10 @@ RSpec.describe "Refreshing Facebook access tokens" do
   it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, expires_at: 1709166148)
     stub_facebook_config(
-      editor_user_ids: [12345678901234567],
-      admin_user_ids: [],
       app_id!: "4pp1D",
       app_secret!: "4pp53cr3t"
     )
+    create(:editor, facebook_ref: 12345678901234567)
     travel_to "2024-02-01"
 
     visit "/account"

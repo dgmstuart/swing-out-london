@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   def create # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     user = AuthResponse.new(request.env)
     role = authorisation_for(user.id)
-    if %i[editor admin].include?(role)
+    if Role::ROLES.include?(role)
       after_login_path = return_to_session.path(fallback: events_path)
       reset_session # calling reset_session prevents "session fixation" attacks
       login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, token_expires_at: user.expires_at, role:)
@@ -38,14 +38,7 @@ class SessionsController < ApplicationController
   private
 
   def authorisation_for(auth_id)
-    config = Rails.configuration.x.facebook
-    if config.admin_user_ids.include?(auth_id)
-      :admin
-    elsif config.editor_user_ids.include?(auth_id)
-      :editor
-    else
-      :none
-    end
+    Role.find_by(facebook_ref: auth_id)&.role || "none"
   end
 
   def login_session

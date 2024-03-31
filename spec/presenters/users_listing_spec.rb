@@ -6,9 +6,9 @@ require "app/presenters/users_listing"
 RSpec.describe UsersListing do
   describe "#users" do
     it "returns a list of users" do
-      users = [instance_double("User", id: 23, admin?: false)]
+      roles = [instance_double("Role", facebook_ref: 23, admin?: false)]
       user_name_finder = instance_double("UserName", name_for: "Mildred Pollard")
-      listing = described_class.new(users:, user_name_finder:)
+      listing = described_class.new(roles:, user_name_finder:)
 
       results = listing.users
 
