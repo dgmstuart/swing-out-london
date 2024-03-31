@@ -12,13 +12,12 @@ RSpec.describe LoginSession do
       request = instance_double("ActionDispatch::Request", session:)
       token = double
 
-      login_session = described_class.new(request, logger: fake_logger)
+      login_session = described_class.new(request, role_finder: double, logger: fake_logger)
       login_session.log_in!(
         auth_id: 12345678901234567,
         name: "Willa Mae Ricker",
         token:,
-        token_expires_at: 1714347729,
-        role: "editor"
+        token_expires_at: 1714347729
       )
 
       aggregate_failures do
@@ -26,7 +25,6 @@ RSpec.describe LoginSession do
         expect(session[:user]["name"]).to eq "Willa Mae Ricker"
         expect(session[:user]["token"]).to eq token
         expect(session[:user]["token_expires_at"]).to eq 1714347729
-        expect(session[:user]["admin"]).to be false
       end
     end
 
@@ -34,32 +32,10 @@ RSpec.describe LoginSession do
       logger = instance_double("Logger", info: true)
       request = instance_double("ActionDispatch::Request", session: {})
 
-      login_session = described_class.new(request, logger:)
-      login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double, role: "editor")
+      login_session = described_class.new(request, role_finder: double, logger:)
+      login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double)
 
       expect(logger).to have_received(:info).with("Logged in as auth id 1234567890123456")
-    end
-
-    context "when the role was admin" do
-      it "sets admin in the session" do
-        session = {}
-        request = instance_double("ActionDispatch::Request", session:)
-
-        login_session = described_class.new(request, logger: fake_logger)
-        login_session.log_in!(auth_id: double, name: double, token: double, token_expires_at: double, role: "admin")
-
-        expect(session[:user]["admin"]).to be true
-      end
-
-      it "logs that the user logged in as an admin" do
-        logger = instance_double("Logger", info: true)
-        request = instance_double("ActionDispatch::Request", session: {})
-
-        login_session = described_class.new(request, logger:)
-        login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double, role: "admin")
-
-        expect(logger).to have_received(:info).with("Logged in as auth id 1234567890123456 with Admin permissions")
-      end
     end
   end
 
@@ -68,7 +44,7 @@ RSpec.describe LoginSession do
       session = { user: { "auth_id" => double } }
       request = instance_double("ActionDispatch::Request", session:, reset_session: double)
 
-      login_session = described_class.new(request, logger: fake_logger)
+      login_session = described_class.new(request, role_finder: double, logger: fake_logger)
       login_session.log_out!
 
       expect(request).to have_received(:reset_session)
@@ -79,7 +55,7 @@ RSpec.describe LoginSession do
       session = { user: { "auth_id" => 12345678901234567 } }
       request = instance_double("ActionDispatch::Request", session:, reset_session: double)
 
-      login_session = described_class.new(request, logger:)
+      login_session = described_class.new(request, role_finder: double, logger:)
       login_session.log_out!
 
       expect(logger).to have_received(:info).with("Logged out as auth id 12345678901234567")
@@ -92,7 +68,7 @@ RSpec.describe LoginSession do
         session = { user: { auth_id: 12345678901234567 } }
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.logged_in?).to be true
       end
     end
@@ -101,7 +77,7 @@ RSpec.describe LoginSession do
       it "is false" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.logged_in?).to be false
       end
     end
@@ -113,7 +89,7 @@ RSpec.describe LoginSession do
         session = { user: { "name" => "Leon James" } }
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.name).to eq "Leon James"
       end
     end
@@ -122,29 +98,31 @@ RSpec.describe LoginSession do
       it "is guest" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.name).to eq "Guest"
       end
     end
   end
 
   describe "#user.admin?" do
-    context "when the session has been set as a non-admin" do
-      it "is the just the name from the session" do
-        session = { user: { "admin" => false } }
+    context "when the id in the session matches a non-admin role" do
+      it "is false" do
+        session = { user: { "auth_id" => double } }
+        role_finder = fake_role_finder(result: instance_double("Role", admin?: false))
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
         expect(login_session.user.admin?).to be false
       end
     end
 
-    context "when the session has been set as an admin" do
-      it "is the just the name from the session" do
-        session = { user: { "admin" => true } }
+    context "when the id in session matches an admin role" do
+      it "is true" do
+        session = { user: { "auth_id" => double } }
+        role_finder = fake_role_finder(result: instance_double("Role", admin?: true))
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
         expect(login_session.user.admin?).to be true
       end
     end
@@ -153,17 +131,7 @@ RSpec.describe LoginSession do
       it "is false" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
-        expect(login_session.user.admin?).to be false
-      end
-    end
-
-    context "when the session doesn't contain an 'admin' key" do
-      it "is false" do
-        session = { user: { name: "Jimmy Valentine" } }
-        request = instance_double("ActionDispatch::Request", session:)
-
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.admin?).to be false
       end
     end
@@ -172,20 +140,22 @@ RSpec.describe LoginSession do
   describe "#user.name_with_role" do
     context "when the session has been set" do
       it "is the just the name from the session" do
-        session = { user: { "name" => "Leon James", "admin" => false } }
+        session = { user: { "name" => "Leon James", "auth_id" => double } }
+        role_finder = fake_role_finder(result: instance_double("Role", admin?: false))
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
         expect(login_session.user.name_with_role).to eq "Leon James"
       end
     end
 
     context "when the session has been set as an admin" do
       it "is the just the name from the session" do
-        session = { user: { "name" => "Herbert White", "admin" => true } }
+        session = { user: { "name" => "Herbert White", "auth_id" => double } }
+        role_finder = fake_role_finder(result: instance_double("Role", admin?: true))
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
         expect(login_session.user.name_with_role).to eq "Herbert White (Admin)"
       end
     end
@@ -194,7 +164,7 @@ RSpec.describe LoginSession do
       it "is guest" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.name_with_role).to eq "Guest"
       end
     end
@@ -206,7 +176,7 @@ RSpec.describe LoginSession do
         session = { user: { "auth_id" => 76543210987654321 } }
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.auth_id).to eq 76543210987654321
       end
     end
@@ -215,7 +185,7 @@ RSpec.describe LoginSession do
       it "is a string representing that there is no id" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.auth_id).to eq "NO ID"
       end
     end
@@ -228,7 +198,7 @@ RSpec.describe LoginSession do
         session = { user: { "token" => token } }
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.token).to eq token
       end
     end
@@ -237,7 +207,7 @@ RSpec.describe LoginSession do
       it "is a string representing that there is no token" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.token).to eq "NO TOKEN"
       end
     end
@@ -249,7 +219,7 @@ RSpec.describe LoginSession do
         session = { user: { "token_expires_at" => 1714347729 } }
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.token_expires_at).to eq 1714347729
       end
 
@@ -257,7 +227,7 @@ RSpec.describe LoginSession do
         session = { user: {} }
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.token_expires_at).to eq 0
       end
     end
@@ -266,7 +236,7 @@ RSpec.describe LoginSession do
       it "is a number representing 'expired'" do
         request = instance_double("ActionDispatch::Request", session: {})
 
-        login_session = described_class.new(request, logger: fake_logger)
+        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
         expect(login_session.user.token_expires_at).to eq 0
       end
     end
@@ -277,7 +247,7 @@ RSpec.describe LoginSession do
       session = { user: { "token" => "old-token", "token_expires_at" => double } }
       request = instance_double("ActionDispatch::Request", session:)
 
-      login_session = described_class.new(request, logger: fake_logger)
+      login_session = described_class.new(request, role_finder: double, logger: fake_logger)
       login_session.set_token!(
         token: "new-token",
         token_expires_at: 1714347729
@@ -292,5 +262,9 @@ RSpec.describe LoginSession do
 
   def fake_logger
     instance_double("Logger", info: true)
+  end
+
+  def fake_role_finder(result:)
+    class_double("Role", find_by: result)
   end
 end

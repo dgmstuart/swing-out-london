@@ -8,11 +8,10 @@ class SessionsController < ApplicationController
 
   def create # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     user = AuthResponse.new(request.env)
-    role = authorisation_for(user.id)
-    if Role::ROLES.include?(role)
+    if authorised(user.id)
       after_login_path = return_to_session.path(fallback: events_path)
       reset_session # calling reset_session prevents "session fixation" attacks
-      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, token_expires_at: user.expires_at, role:)
+      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, token_expires_at: user.expires_at)
       redirect_to after_login_path
     else
       flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
@@ -37,8 +36,8 @@ class SessionsController < ApplicationController
 
   private
 
-  def authorisation_for(auth_id)
-    Role.find_by(facebook_ref: auth_id)&.role || "none"
+  def authorised(auth_id)
+    Role.find_by(facebook_ref: auth_id).present?
   end
 
   def login_session
