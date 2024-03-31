@@ -5,7 +5,7 @@ module Admin
     def index
       users = UsersListing.new(
         users: User.all,
-        user_name_finder: UserName.as_user(login_session.user)
+        user_name_finder: UserName.as_user(current_user)
       ).users
 
       render locals: { users: }
