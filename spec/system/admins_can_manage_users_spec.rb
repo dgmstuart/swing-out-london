@@ -37,8 +37,4 @@ RSpec.describe "Admins can manage users" do
       expect(page).to have_content("You are not authorised to view this page")
     end
   end
-
-  def enable_cache
-    allow(Rails).to receive(:cache).and_return(ActiveSupport::Cache::MemoryStore.new)
-  end
 end
