@@ -38,11 +38,11 @@
         <% unless user.current? %>
           <div class="actions">
             <% if user.admin? %>
-              <%= link_to "Remove admin", admin_user_path(user, role: Role::EDITOR), data: { turbo: true, turbo_method: :patch }, class: "button button-smaller" %>
+              <%= link_to "Remove admin", admin_user_path(user, role: Role::EDITOR), data: { turbo: true, turbo_method: :patch }, class: "button button-small" %>
             <% else %>
-              <%= link_to "Make admin", admin_user_path(user, role: Role::ADMIN), data: { turbo: true, turbo_confirm: "Are you sure you want to give this user Admin privileges?", turbo_method: :patch }, class: "button button-smaller" %>
+              <%= link_to "Make admin", admin_user_path(user, role: Role::ADMIN), data: { turbo: true, turbo_confirm: "Are you sure you want to give this user Admin privileges?", turbo_method: :patch }, class: "button button-small" %>
             <% end %>
-            <%= link_to "Delete", admin_user_path(user), data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "button button-smaller button-danger" %>
+            <%= link_to "Delete", admin_user_path(user), data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "button button-small button-danger" %>
           </div>
         <% end %>
       </li>
