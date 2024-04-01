@@ -15,6 +15,12 @@ module Admin
       redirect_to admin_users_path
     end
 
+    def update
+      Role.find_by(facebook_ref: params[:id]).update!(update_role_params)
+
+      redirect_to admin_users_path
+    end
+
     def destroy
       Role.find_by(facebook_ref: params[:id]).destroy!
 
@@ -25,6 +31,10 @@ module Admin
 
     def new_role_params
       params.require(:role).permit(:facebook_ref, :role)
+    end
+
+    def update_role_params
+      params.permit(:role)
     end
   end
 end

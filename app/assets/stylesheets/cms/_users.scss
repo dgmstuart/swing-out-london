@@ -27,6 +27,12 @@
 
   .actions {
     align-self: flex-start;
+    display: flex;
+    gap: 15px;
+
+    .button {
+      margin: 0;
+    }
   }
 
   @media only screen and (width >= 767px) {
@@ -60,6 +66,7 @@
     .actions {
       align-self: auto; // Reset the style applied at the mobile size
       margin-left: auto;
+      gap: 20px;
     }
   }
 }

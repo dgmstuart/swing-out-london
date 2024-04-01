@@ -89,6 +89,58 @@ RSpec.describe "Admins can manage users" do
     end
   end
 
+  it "promoting an editor to an admin", :js, :vcr do
+    stub_facebook_config(app_secret!: "super-secret-secret")
+    stub_auth_hash(id: 98765987659876598)
+    create(:editor, facebook_ref: 12345678901234567)
+    create(:admin, facebook_ref: 98765987659876598)
+
+    visit "/login"
+    click_on "Log in"
+
+    VCR.use_cassette("fetch_facebook_names") do
+      click_on "Users"
+      expect(page).to have_content("Dawn Hampton")
+    end
+
+    within(user_row("Dawn Hampton")) do
+      accept_alert { click_on("Make admin") }
+    end
+
+    VCR.use_cassette("fetch_facebook_names") do
+      expect(page).to have_content("Dawn Hampton (Admin)")
+      expect(user_row("Dawn Hampton")).to have_no_content("Make admin")
+      expect(user_row("Dawn Hampton")).to have_link("Remove admin")
+    end
+  end
+
+  it "removing admin privileges from a user", :js, :vcr do
+    stub_facebook_config(app_secret!: "super-secret-secret")
+    stub_auth_hash(id: 98765987659876598)
+    create(:admin, facebook_ref: 12345678901234567)
+    create(:admin, facebook_ref: 98765987659876598)
+
+    visit "/login"
+    click_on "Log in"
+
+    VCR.use_cassette("fetch_facebook_names") do
+      click_on "Users"
+      expect(page).to have_content("Dawn Hampton (Admin)")
+    end
+
+    within(user_row("Dawn Hampton")) do
+      click_on("Remove admin")
+    end
+
+    VCR.use_cassette("fetch_facebook_names") do
+      within(user_row("Dawn Hampton")) do
+        expect(page).to have_no_content("(Admin)")
+        expect(page).to have_no_content("Remove admin")
+        expect(page).to have_link("Make admin")
+      end
+    end
+  end
+
   context "when logged in as a non-admin" do
     it "does not allow access" do
       stub_auth_hash(id: 12345678901234567)
