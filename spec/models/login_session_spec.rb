@@ -63,13 +63,25 @@ RSpec.describe LoginSession do
   end
 
   describe "#user.logged_in" do
-    context "when the session has been set" do
+    context "when the session has been set and a role exists" do
       it "is true" do
-        session = { user: { auth_id: 12345678901234567 } }
+        session = { user: { "auth_id" => double } }
+        role_finder = fake_role_finder(result: instance_double("Role", admin?: false))
         request = instance_double("ActionDispatch::Request", session:)
 
-        login_session = described_class.new(request, role_finder: double, logger: fake_logger)
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
         expect(login_session.user.logged_in?).to be true
+      end
+    end
+
+    context "when the session has been set but a role no longer exists (eg. because it's been removed by an admin)" do
+      it "is true" do
+        session = { user: { "auth_id" => double } }
+        role_finder = fake_role_finder(result: nil)
+        request = instance_double("ActionDispatch::Request", session:)
+
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
+        expect(login_session.user.logged_in?).to be false
       end
     end
 
@@ -124,6 +136,17 @@ RSpec.describe LoginSession do
 
         login_session = described_class.new(request, role_finder:, logger: fake_logger)
         expect(login_session.user.admin?).to be true
+      end
+    end
+
+    context "when the id in session doesn't match a role (e.g. permissions removed by an admin)" do
+      it "is false" do
+        session = { user: { "auth_id" => double } }
+        role_finder = fake_role_finder(result: nil)
+        request = instance_double("ActionDispatch::Request", session:)
+
+        login_session = described_class.new(request, role_finder:, logger: fake_logger)
+        expect(login_session.user.admin?).to be false
       end
     end
 

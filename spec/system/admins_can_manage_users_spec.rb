@@ -20,6 +20,49 @@ RSpec.describe "Admins can manage users" do
     expect(page).to have_content("Herbert White (Admin)")
   end
 
+  it "removing a role", :js, :vcr do
+    stub_facebook_config(app_secret!: "super-secret-secret")
+    create(:editor, facebook_ref: 12345678901234567)
+    create(:admin, facebook_ref: 98765987659876598)
+
+    Capybara.using_session("editor_session") do
+      stub_auth_hash(id: "12345678901234567")
+      visit "/login"
+      click_on "Log in"
+
+      expect(page).to have_content("Events")
+    end
+
+    Capybara.using_session("admin_session") do
+      stub_auth_hash(id: "98765987659876598")
+      visit "/login"
+      click_on "Log in"
+
+      VCR.use_cassette("fetch_facebook_names") do
+        click_on "Users"
+      end
+
+      expect(page).to have_content("Dawn Hampton")
+      expect(page).to have_content("Herbert White (Admin)")
+
+      within(user_row("Dawn Hampton")) do
+        accept_alert { click_on("Delete") }
+      end
+
+      VCR.use_cassette("fetch_facebook_names") do
+        # We need the cassette here because the page gets reloaded after clicking the button
+        expect(page).to have_no_content("Dawn Hampton")
+        expect(page).to have_content("Herbert White (Admin)")
+      end
+    end
+
+    Capybara.using_session("editor_session") do
+      click_on "Events"
+
+      expect(page).to have_content("Editor Login")
+    end
+  end
+
   context "when logged in as a non-admin" do
     it "does not allow access" do
       stub_auth_hash(id: 12345678901234567)
@@ -34,5 +77,9 @@ RSpec.describe "Admins can manage users" do
 
       expect(page).to have_content("You are not authorised to view this page")
     end
+  end
+
+  def user_row(user_name)
+    find("li.user", text: user_name)
   end
 end

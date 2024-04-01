@@ -10,5 +10,11 @@ module Admin
 
       render locals: { users: }
     end
+
+    def destroy
+      Role.find_by(facebook_ref: params[:id]).destroy!
+
+      redirect_to admin_users_path
+    end
   end
 end

@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resource :account, only: %i[show destroy], controller: :users
 
   namespace :admin do
-    resources :users, only: %i[index]
+    resources :users, only: %i[index destroy]
     resource :audit_log, only: %i[show]
     resource :cache, only: %i[show destroy]
   end

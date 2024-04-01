@@ -10,7 +10,11 @@ class UsersListing
     @roles.map { build_user(_1) }
   end
 
-  User = Data.define(:id, :admin?, :name)
+  User = Data.define(:id, :admin?, :name) do
+    def to_param
+      id.to_s
+    end
+  end
 
   private
 

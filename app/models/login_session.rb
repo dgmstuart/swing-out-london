@@ -48,7 +48,7 @@ class LoginSession
     end
 
     def logged_in?
-      true
+      role.present?
     end
 
     def name
@@ -64,7 +64,7 @@ class LoginSession
     end
 
     def admin?
-      role.admin?
+      !!role&.admin?
     end
 
     def auth_id
