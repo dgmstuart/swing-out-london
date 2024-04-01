@@ -47,11 +47,35 @@ form {
   }
 
   input[type="text"] {
-    width: 30em;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px;
+  }
+
+  @media only screen and (width >= 481px) {
+    input[type="text"] {
+      width: 30em;
+    }
   }
 
   input.shortfield {
     width: inherit;
+  }
+
+  select {
+    font-family: inherit;
+    padding: 5px;
+  }
+
+  @media only screen and (width < 481px) {
+    select {
+      width: 100%;
+    }
+  }
+
+  input[type="submit"] {
+    border-radius: 0; // ios applies border radius
+    font-weight: normal; // ios applies bold font-weight
   }
 }
 
@@ -92,8 +116,16 @@ form.edit_venue {
 
   textarea {
     white-space: pre;
-    width: 30em;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
     height: 5em;
+  }
+
+  @media only screen and (width >= 481px) {
+    textarea {
+      width: 30em;
+    }
   }
 
   .radio-group {
