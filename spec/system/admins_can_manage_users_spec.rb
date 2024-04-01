@@ -45,6 +45,8 @@ RSpec.describe "Admins can manage users" do
       expect(page).to have_content("Dawn Hampton")
       expect(page).to have_content("Herbert White (Admin)")
 
+      expect(user_row("Herbert White")).to have_no_content("Delete") # You shouldn't be able to delete yourself!
+
       within(user_row("Dawn Hampton")) do
         accept_alert { click_on("Delete") }
       end

@@ -20,9 +20,11 @@
             <% end %>
           </div>
         </div>
-        <div class="actions">
-          <%= link_to "Delete", admin_user_path(user), data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "button button-smaller button-danger" %>
-        </div>
+        <% unless user.current? %>
+          <div class="actions">
+            <%= link_to "Delete", admin_user_path(user), data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "button button-smaller button-danger" %>
+          </div>
+        <% end %>
       </li>
     <% end %>
   </ul>
