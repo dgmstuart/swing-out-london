@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_21_200215) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_005709) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -83,6 +83,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_200215) do
     t.datetime "updated_at", precision: nil
     t.string "shortname", limit: 255
     t.index ["shortname"], name: "index_organisers_on_shortname", unique: true
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "facebook_ref", null: false
+    t.string "role", default: "editor", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facebook_ref"], name: "index_roles_on_facebook_ref", unique: true
   end
 
   create_table "venues", id: :serial, force: :cascade do |t|

@@ -4,11 +4,11 @@ class UsersController < CmsBaseController
   layout "cms"
 
   def show
-    render locals: { access_token_expiry: AccessTokenExpiry.new(user: login_session.user) }
+    render locals: { access_token_expiry: AccessTokenExpiry.new(user: current_user) }
   end
 
   def destroy
-    RevokeLogin.new.revoke!(login_session.user)
+    RevokeLogin.new.revoke!(current_user)
     login_session.log_out!
     flash.notice = "Your login permissions have been revoked in Facebook"
 

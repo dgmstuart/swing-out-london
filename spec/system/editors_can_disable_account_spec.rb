@@ -9,11 +9,10 @@ RSpec.describe "Editor Login Revocation" do
     stub_facebook_config(
       api_base!: "https://graph.facebook.com/",
       api_auth_token!: "super-secret-token",
-      app_secret!: "super-secret-secret",
-      editor_user_ids: [12345678901234567]
+      app_secret!: "super-secret-secret"
     )
-
     stub_auth_hash(id: 12345678901234567)
+    create(:editor, facebook_ref: 12345678901234567)
 
     visit "/account"
 

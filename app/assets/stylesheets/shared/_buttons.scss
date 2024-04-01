@@ -33,6 +33,11 @@
   padding: 10px 15px;
 }
 
+.button-small {
+  font-size: 14px;
+  padding: 7px 12px;
+}
+
 .button:hover {
   color: colours.$text-colour;
   background-color: colours.$button-active-colour;

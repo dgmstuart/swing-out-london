@@ -8,7 +8,7 @@ RSpec.describe "Editor Login" do
 
   it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, name: "Al Minns", expires_at: 60.days.from_now.to_i)
-    stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [])
+    create(:editor, facebook_ref: 12345678901234567)
 
     visit "/events/new"
 
@@ -26,7 +26,7 @@ RSpec.describe "Editor Login" do
 
   it "Admins can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, name: "Herbert White")
-    stub_facebook_config(editor_user_ids: [], admin_user_ids: [12345678901234567])
+    create(:admin, facebook_ref: 12345678901234567)
 
     visit "/events"
 
@@ -41,7 +41,6 @@ RSpec.describe "Editor Login" do
   context "when the user isn't in the approved list" do
     it "disallows the user from signing in, but shows them their Facebook ID" do
       stub_auth_hash(id: 76543210987654321, name: "Fred Astaire")
-      stub_facebook_config(editor_user_ids: [], admin_user_ids: [])
 
       visit "/events"
 
@@ -70,7 +69,7 @@ RSpec.describe "Editor Login" do
   context "when starting login from /login (ie. no return_to page)" do
     it "lands on the event list page after successful login" do
       stub_auth_hash(id: 12345678901234567, name: "Al Minns")
-      stub_facebook_config(editor_user_ids: [12345678901234567], admin_user_ids: [])
+      create(:editor, facebook_ref: 12345678901234567)
 
       visit "/login"
 
