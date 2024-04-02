@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Prints out dates in a list
 class DatePrinter
   def initialize(separator: ",", format: :default)
     @separator = separator

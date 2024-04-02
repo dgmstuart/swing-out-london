@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Presenter for displaying a list of "Users" based on the {Role}s stored in the
+# database.
 class UsersListing
   def initialize(current_user_id:, user_name_finder:, roles: Role.all)
     @roles = roles

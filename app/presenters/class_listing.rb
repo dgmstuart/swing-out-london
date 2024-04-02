@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter for displaying {Event}s with dance classes as listings.
 class ClassListing
   def initialize(event)
     @event = event

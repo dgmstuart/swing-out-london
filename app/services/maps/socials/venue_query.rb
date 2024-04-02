@@ -2,6 +2,8 @@
 
 module Maps
   module Socials
+    # Query object for returning {Venue}s which have social dances somewhere in
+    # the given list of dates.
     class VenueQuery
       def venues(dates)
         events_on(dates).map(&:venue).uniq

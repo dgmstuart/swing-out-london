@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 require:
   - rubocop-rspec
   - rubocop-rails
@@ -69,6 +67,8 @@ Style/Documentation:
     - app/controllers/**/*.rb
     - app/helpers/**/*.rb
     - app/models/**/*.rb
+    - app/validators/**/*.rb
+    - config/application.rb
     - db/migrate/**/*.rb
 
 Style/FrozenStringLiteralComment:

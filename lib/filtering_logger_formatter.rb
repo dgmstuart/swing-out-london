@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Filters sensitive data out of logs.
+#
+# Rails only handles filtering sensitive _parameters_.
 class FilteringLoggerFormatter
   def initialize(base_formatter)
     @base_formatter = base_formatter

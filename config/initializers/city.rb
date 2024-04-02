@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Data object for configuring the starting location and zoom level of a map.
 class MapConfig
   def initialize(center:, zoom:)
     @center = center

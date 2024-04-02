@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Presenter for showing an event as being associated with another record
+# (eg. a {Venue})
 class AssociatedEvent
   def initialize(event, summarizer: EventSummarizer.new, url_helpers: Rails.application.routes.url_helpers)
     @event = event

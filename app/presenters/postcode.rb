@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter exposing different ways to format a Postcode
 class Postcode
   class << self
     def build(postcode_string)
@@ -16,14 +17,14 @@ class Postcode
   end
 
   def short
-    # Match the first part of the postcode:
-    regexp = /^([A-Z0-9]{2,4})(?:\s*[A-Z0-9]{3})?$/
+    # Match the first part of the postcode - the "outward code":
+    regexp = /^(?<outward_code>[A-Z0-9]{2,4})(?:\s*[A-Z0-9]{3})?$/
 
-    matches = regexp.match(postcode_string.strip.upcase)
+    matches = postcode_string.strip.upcase.match(regexp)
 
-    raise ArgumentError, "Couldn't parse #{postcode_string} as a postcode" unless matches
+    raise(ArgumentError, "Couldn't parse #{postcode_string} as a postcode") if matches.nil?
 
-    matches[1]
+    matches[:outward_code]
   end
 
   def description
@@ -35,6 +36,7 @@ class Postcode
   attr_reader :postcode_string
 end
 
+# Handles events which don't publicise their address
 class SecretPostcode
   def short
     "???"

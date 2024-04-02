@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Creates a short summary string of an {Event}
 class EventSummarizer
   def summarize(event)
     if event.has_social?

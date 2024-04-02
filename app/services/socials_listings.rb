@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Glues together information for listings of {Event}s with social dances:
+# fetches the list of {Event}s happening on a given set of dates, wraps each
+# one in a presenter suitable for rendering the listings, and groups them by
+# date.
 class SocialsListings
   def initialize(
     event_finder: ->(date) { Event.socials_on_date(date) },

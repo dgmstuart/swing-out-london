@@ -15,7 +15,8 @@ class MarkdownHandler
 end
 
 module ActionView
-  class Template # :nodoc:
+  # @private
+  class Template
     register_template_handler(:md, MarkdownHandler.new)
     register_template_handler(:mdown, MarkdownHandler.new)
     register_template_handler(:markdown, MarkdownHandler.new)

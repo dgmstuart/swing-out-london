@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Form object backing the HTML form for editing events.
+#
+# Responsible for managing validations and translating data between what is
+# required by the form and the ActiveRecord model.
 class EditEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -121,6 +125,7 @@ class EditEventForm
     DatesStringParser.new
   end
 
+  # @private
   class EditableEvent
     def initialize(event)
       @event = event

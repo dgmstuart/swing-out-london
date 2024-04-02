@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter for displaying {Event}s with social dances as occasional listings.
 class OccasionalSocialListing < SocialListing
   def highlight?
     false

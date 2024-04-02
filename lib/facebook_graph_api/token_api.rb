@@ -3,6 +3,7 @@
 require "facebook_graph_api/http_client"
 
 module FacebookGraphApi
+  # API client for auth token operations in the Facebook Graph API
   class TokenApi
     def initialize(
       base_url: Rails.configuration.x.facebook.api_base!,
@@ -16,7 +17,9 @@ module FacebookGraphApi
       @client_secret = client_secret
     end
 
-    # https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived
+    # Exchange the current auth token for a new long-lived token
+    #
+    # @see https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived
     def exchange_token(auth_token)
       http_client.get(
         uri("/oauth/access_token"),

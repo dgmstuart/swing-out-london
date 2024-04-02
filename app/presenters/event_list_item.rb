@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter for displaying {Event}s to editors in a list
 class EventListItem
   def initialize(event, date_printer: DatePrinter.new(separator: ", "))
     @event = event

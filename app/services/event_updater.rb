@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Responsible for updating an {Event} and its associated {EventInstance}s
 class EventUpdater
   def initialize(record, audit_commenter: EventParamsCommenter.new)
     @record = record

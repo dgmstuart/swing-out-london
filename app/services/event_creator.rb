@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Responsible for creating an {Event} and the {EventInstance}s associated with
+# its dates
 class EventCreator
   def initialize(repository = Event)
     @repository = repository

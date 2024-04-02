@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Presenter for creating a message describing who last updated a given record,
+# and when.
 class LastUpdate
   def initialize(resource, editor_builder: Editor)
     @resource = resource

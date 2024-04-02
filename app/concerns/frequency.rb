@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# @private
 module Frequency
   def weekly?
     frequency == 1

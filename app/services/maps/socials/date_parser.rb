@@ -2,6 +2,7 @@
 
 module Maps
   module Socials
+    # Parses a string as a date, including "today" and "tomorrow"
     class DateParser
       class << self
         def parse(date_string, today)

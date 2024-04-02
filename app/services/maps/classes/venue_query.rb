@@ -2,6 +2,7 @@
 
 module Maps
   module Classes
+    # Query object for returning {Venue}s which have dance classes.
     class VenueQuery
       def venues(day)
         if day

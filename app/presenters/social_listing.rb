@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter for displaying {Event}s with social dances as listings.
 class SocialListing
   def initialize(event, cancelled: false, url_helpers: Rails.application.routes.url_helpers)
     @event = event

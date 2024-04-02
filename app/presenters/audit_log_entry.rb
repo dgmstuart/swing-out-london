@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter for exposing {Audit}s as entries in an audit log.
 class AuditLogEntry
   def initialize(audit, time_formatter: ->(time) { I18n.l(time) }, url_helpers: UrlHelpers.new)
     @audit = audit
@@ -74,6 +75,7 @@ class AuditLogEntry
     audit.auditable
   end
 
+  # @private
   class AuditableEvent
     def initialize(event)
       @event = event
@@ -88,6 +90,7 @@ class AuditLogEntry
     end
   end
 
+  # @private
   class AuditableRecord
     def initialize(record:, type:)
       @record = record
@@ -99,6 +102,7 @@ class AuditLogEntry
     end
   end
 
+  # @private
   class DeletedRecord
     def initialize(type:)
       @type = type

@@ -2,6 +2,11 @@
 
 require "faker"
 
+# Allows skipping actual login by creating a fake response object mimicking what
+# {https://github.com/omniauth/omniauth OmniAuth} posts as the response body
+# after logging in with Facebook.
+#
+# See also: {https://github.com/omniauth/omniauth/wiki/Integration-Testing#omniauthconfigmock_auth OmniAuth.config.mock_auth}
 class OmniauthTestResponseBuilder
   def initialize(hash_builder: OmniAuth::AuthHash, mock_auth_config: OmniAuth.config.mock_auth)
     @hash_builder = hash_builder
