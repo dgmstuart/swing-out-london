@@ -16,7 +16,7 @@ RSpec.describe SOLDNTime, :time do
         Timecop.return
       end
 
-      context "when the time is before midnight" do
+      context "when the time is before midnight" do # rubocop:disable RSpec/NestedGroups
         it "is the current date" do
           Timecop.travel(Time.zone.parse("May 11, 1938 19:00"))
 
@@ -24,7 +24,7 @@ RSpec.describe SOLDNTime, :time do
         end
       end
 
-      context "when the time is before 4am" do
+      context "when the time is before 4am" do # rubocop:disable RSpec/NestedGroups
         it "is the date that this crazy night began (yesterday's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 03:59"))
 
@@ -32,7 +32,7 @@ RSpec.describe SOLDNTime, :time do
         end
       end
 
-      context "when the time is 4am" do
+      context "when the time is 4am" do # rubocop:disable RSpec/NestedGroups
         it "is time to go to bed (today's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 04:00"))
 
@@ -47,7 +47,7 @@ RSpec.describe SOLDNTime, :time do
         Timecop.return
       end
 
-      context "when the time is before 4am" do
+      context "when the time is before 4am" do # rubocop:disable RSpec/NestedGroups
         it "is the date that this crazy night began (yesterday's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 03:59"))
 
@@ -55,7 +55,7 @@ RSpec.describe SOLDNTime, :time do
         end
       end
 
-      context "when the time is 4am" do
+      context "when the time is 4am" do # rubocop:disable RSpec/NestedGroups
         it "is time to go to bed (today's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 04:00"))
 
@@ -63,7 +63,7 @@ RSpec.describe SOLDNTime, :time do
         end
       end
 
-      context "when the time is 5am" do
+      context "when the time is 5am" do # rubocop:disable RSpec/NestedGroups
         it "is time to go to bed (today's date)" do
           Timecop.travel(Time.zone.parse("May 12, 1938 05:00"))
 
