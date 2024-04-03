@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "dates_string_parser"
-require "day_names"
 
 class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   audited
@@ -114,7 +113,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :listing_classes_at_venue, ->(venue) { listing_classes.where(venue_id: venue.id) }
   scope :listing_classes_on_day_at_venue, ->(day, venue) { listing_classes_on_day(day).where(venue_id: venue.id) }
 
-  scope :on_same_day_of_week, ->(date) { where(day: DayNames.name(date)) }
+  scope :on_same_day_of_week, ->(date) { where(day: I18n.l(date, format: :day_name)) }
 
   def caching_key(suffix)
     "event_#{id}_#{suffix}"

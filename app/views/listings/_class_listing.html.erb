@@ -1,5 +1,4 @@
 <%= day_row day, @today do %>
-  <%= today_label if DayNames.same_weekday?(day, @today) -%>
   <h3><%= day_header(day) -%></h3>
   <ul class="unstyled">
     <%if classes_on_day(@classes, day).empty? %>
