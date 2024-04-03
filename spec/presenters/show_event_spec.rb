@@ -131,7 +131,7 @@ RSpec.describe ShowEvent do
     it "formats the date" do
       event = instance_double("Event", first_date: Date.new(2011, 5, 14))
 
-      expect(described_class.new(event).first_date).to eq "Saturday 14th May"
+      expect(described_class.new(event).first_date).to eq "14/05/2011"
     end
 
     context "when there is no first date" do
@@ -176,7 +176,7 @@ RSpec.describe ShowEvent do
     it "formats the date" do
       event = instance_double("Event", last_date: Date.new(2011, 5, 14))
 
-      expect(described_class.new(event).last_date).to eq "Saturday 14th May"
+      expect(described_class.new(event).last_date).to eq "14/05/2011"
     end
 
     context "when there is no last date" do
@@ -184,6 +184,14 @@ RSpec.describe ShowEvent do
         event = instance_double("Event", last_date: nil)
 
         expect(described_class.new(event).last_date).to be_nil
+      end
+    end
+
+    context "when the event has been archived" do
+      it "displays (archived)" do
+        event = instance_double("Event", last_date: Date.new)
+
+        expect(described_class.new(event).last_date).to eq "(archived)"
       end
     end
   end

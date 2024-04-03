@@ -16,7 +16,7 @@ RSpec.describe "Editors can archive events" do
 
     click_show
 
-    expect(page).to have_content("Last date: Sunday 2nd January")
+    expect(page).to have_content("Last date: 02/01/2000") # the previous Sunday
   end
 
   it "with an occasional event" do
@@ -31,7 +31,7 @@ RSpec.describe "Editors can archive events" do
 
     click_show
 
-    expect(page).to have_content("Last date: Sunday 2nd January")
+    expect(page).to have_content("Last date: 02/01/2000")
   end
 
   it "with an event with no dates" do
@@ -44,7 +44,7 @@ RSpec.describe "Editors can archive events" do
 
     click_show
 
-    expect(page).to have_content("Last date: Monday 1st January") # earliest possible Date
+    expect(page).to have_content("Last date: (archived)")
   end
 
   context "when the event is already archived" do
@@ -62,7 +62,7 @@ RSpec.describe "Editors can archive events" do
 
       click_show
 
-      expect(page).to have_content("Last date: Saturday 1st January")
+      expect(page).to have_content("Last date: 01/01/2000")
     end
   end
 

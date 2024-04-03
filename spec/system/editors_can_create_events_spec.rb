@@ -49,8 +49,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 19/12/2012")
         .and have_content("Cancelled:\n12/12/2012")
-        .and have_content("First date:\nWednesday 12th December")
-        .and have_content("Last date:\nWednesday 19th December")
+        .and have_content("First date:\n12/12/2012")
+        .and have_content("Last date:\n19/12/2012")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
       expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
@@ -100,8 +100,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Social")
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 30/04/2013")
-        .and have_content("First date:\nWednesday 12th December")
-        .and have_content("Last date:\nTuesday 30th April")
+        .and have_content("First date:\n12/12/2012")
+        .and have_content("Last date:\n30/04/2013")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
     end
 
@@ -219,8 +219,8 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Class")
         .and have_content("Frequency:\nWeekly on Wednesdays")
         .and have_content("Cancelled:\nNone")
-        .and have_content("First date:\nWednesday 15th February")
-        .and have_content("Last date:\nWednesday 13th February")
+        .and have_content("First date:\n15/02/2012")
+        .and have_content("Last date:\n13/02/2013")
         .and have_content("Url:\nhttps://sunshineswing.uk/events")
 
       expect(page).to have_content("Last updated by Leon James (12345678901234567) on Monday 2nd January 2012 at 23:17:16")

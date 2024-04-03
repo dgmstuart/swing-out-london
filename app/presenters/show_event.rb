@@ -91,7 +91,8 @@ class ShowEvent
 
   def format_date(date)
     return unless date
+    return "(archived)" if date == Date.new
 
-    I18n.l(date, format: :listing_date)
+    I18n.l(date)
   end
 end
