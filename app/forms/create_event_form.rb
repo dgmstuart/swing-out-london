@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Form object backing the HTML form for creating events.
+#
+# Responsible for managing validations and translating data between what is
+# required by the form and the ActiveRecord model.
 class CreateEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes

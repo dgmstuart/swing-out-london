@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-module Map
+module Maps
+  # Presenter for displaying {Event}s with social dances as listings on the Map.
   class SocialListing < ::SocialListing
     delegate(
       :has_class?,

@@ -3,6 +3,8 @@
 require "facebook_graph_api/appsecret_proof_generator"
 
 module FacebookGraphApi
+  # Basic client for making requests to the Facebook Graph API with an +appsecret_proof+
+  # @see https://developers.facebook.com/docs/graph-api/securing-requests%20/#appsecret_proof appsecret_proof
   class HttpClient
     ResponseError = Class.new(RuntimeError)
     UnauthorizedError = Class.new(ResponseError)

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 module ListingsRowsHelper
-  def day_row(day, today, &)
-    html_options =
-      if DayNames.same_weekday?(day, today)
-        { class: "day_row today", id: "classes_today" }
-      else
-        { class: "day_row" }
+  def day_row(day_name, today, &)
+    if Date::DAYNAMES.index(day_name) == today.wday
+      tag.li(class: "day_row today", id: "classes_today") do
+        concat(today_label)
+        yield
       end
-
-    tag.li(**html_options, &)
+    else
+      tag.li(class: "day_row", &)
+    end
   end
 
   def date_row(date, today, &)

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Presenter for creating a message describing when any data on the site was
+# last updated
 class LastUpdated
   def initialize(scope = Audit)
     time = scope.last_updated_at
@@ -17,6 +19,7 @@ class LastUpdated
 
   attr_reader :time
 
+  # @private
   class ActualTime
     def initialize(time)
       @time = time
@@ -33,6 +36,7 @@ class LastUpdated
     attr_reader :time
   end
 
+  # @private
   class Never
     def time_in_words
       "never"

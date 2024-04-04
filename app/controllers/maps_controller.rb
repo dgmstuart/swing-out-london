@@ -11,16 +11,13 @@ class MapsController < ApplicationController
 
   def classes
     @day = Maps::Classes::DayParser.parse(params[:day])
-    venues = Maps::Classes::VenueQuery.new(@day).venues
-    marker_info_builder = Maps::MarkerInfoBuilder.for_classes(day: @day)
-
-    @map =
-      Maps::Map.new(
-        venues:,
-        highlighted_venue_id: params[:venue_id].to_i,
-        marker_info_builder:,
-        info_window_partial: "classes_map_info",
+    @map_markers =
+      Maps::Markers.for_classes(
+        selected_day: @day,
         renderer: self
+      ).for_venues(
+        venues: Maps::Classes::VenueQuery.new.venues(@day),
+        highlighted_venue_id: params[:venue_id].to_i
       )
   rescue Maps::Classes::DayParser::NonDayError
     logger.warn("Not a recognised day: #{@day}")
@@ -29,16 +26,13 @@ class MapsController < ApplicationController
 
   def socials
     @map_dates = Maps::Socials::Dates.new(params[:date])
-    venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
-    marker_info_builder = Maps::MarkerInfoBuilder.for_socials(date: @map_dates.selected_date)
-
-    @map =
-      Maps::Map.new(
-        venues:,
-        highlighted_venue_id: params[:venue_id].to_i,
-        marker_info_builder:,
-        info_window_partial: "socials_map_info",
+    @map_markers =
+      Maps::Markers.for_socials(
+        selected_date: @map_dates.selected_date,
         renderer: self
+      ).for_venues(
+        venues: Maps::Socials::VenueQuery.new.venues(@map_dates.display_dates),
+        highlighted_venue_id: params[:venue_id].to_i
       )
   rescue Maps::Socials::Dates::DateOutOfRangeError
     logger.warn("Not a date in the visible range: #{@date}")

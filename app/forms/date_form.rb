@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# Form object to ensure that we catch dates which are valid, but probably typos
+# because they're unrealistically far in the past or future.
+#
+# Not a form object in the same sense as the others - it doesn't back an HTML
+# form and only deals with validations.
 class DateForm
   include ActiveModel::Validations
 

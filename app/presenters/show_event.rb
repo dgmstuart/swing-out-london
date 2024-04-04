@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter for displaying the details of a single {Event} to editors.
 class ShowEvent
   def initialize(event)
     @event = event

@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
+# Custom handler to allow markdown files to be used as partials
+class MarkdownHandler
+  def initialize
+    renderer = Redcarpet::Render::HTML
+    options = { autolink: true, space_after_headers: true }
+    @markdown = Redcarpet::Markdown.new(renderer, options)
+    @base_handler = ActionView::Template::Handlers::Raw.new
+  end
+
+  def call(template, source)
+    @base_handler.call(template, @markdown.render(source))
+  end
+end
+
 module ActionView
+  # @private
   class Template
-    module Handlers
-      class Markdown
-        class_attribute :default_format
-        self.default_format = Mime[:html]
-
-        def call(_template, source)
-          markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
-          "#{markdown.render(source).inspect}.html_safe"
-        end
-      end
-    end
-
-    register_template_handler(:md, ActionView::Template::Handlers::Markdown.new)
-    register_template_handler(:mdown, ActionView::Template::Handlers::Markdown.new)
-    register_template_handler(:markdown, ActionView::Template::Handlers::Markdown.new)
+    register_template_handler(:md, MarkdownHandler.new)
+    register_template_handler(:mdown, MarkdownHandler.new)
+    register_template_handler(:markdown, MarkdownHandler.new)
   end
 end

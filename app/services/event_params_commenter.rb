@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Creates a comment to augment an audit log entry for an {Event} with
+# information about changes to dates and cancellations
 class EventParamsCommenter
   def initialize
     @date_printer = DatePrinter.new

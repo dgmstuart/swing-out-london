@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module FacebookGraphApi
+  # Generates a string proving that we know the `app_secret`, which we can pass
+  # in certain calls to the Facbook Graph API.
+  #
+  # @see https://developers.facebook.com/docs/graph-api/securing-requests%20/#appsecret_proof appsecret_proof
   class AppsecretProofGenerator
     def initialize(app_secret: Rails.configuration.x.facebook.app_secret!)
       @app_secret = app_secret

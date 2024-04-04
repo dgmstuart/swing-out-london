@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+# Parses a comma-separated string of dates in the given format and returns an
+# array of Date objects.
+#
+# @example
+#   DateStringParser.new.parse("12/05/2022") #=> #<Date: 2022-05-12>
+# @example
+#   DateStringParser.for_database_format.parse("2022-05-12") #=> #<Date: 2022-05-12>
 class DateStringParser
   def initialize(format = Format::UK.new)
     @format = format
@@ -31,6 +38,7 @@ class DateStringParser
   end
 
   module Format
+    # @private
     class UK
       def format
         I18n.t("date.formats.default")
@@ -41,6 +49,7 @@ class DateStringParser
       end
     end
 
+    # @private
     class Database
       def format
         Date::DATE_FORMATS[:db]

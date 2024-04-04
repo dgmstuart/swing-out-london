@@ -9,6 +9,7 @@ en:
       default: "%d/%m/%Y" # 11/10/2015
       # short is defined in en.rb
       long: "%B %d, %Y"
+      day_name: "%A" # Wednesday
   site_name:
     london: Swing Out London
     bristol: Swing Out Bristol

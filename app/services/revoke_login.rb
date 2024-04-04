@@ -2,6 +2,8 @@
 
 require "facebook_graph_api/api"
 
+# Uses the Facebook Graph API to revoke the app permissions which the user
+# granted when first sigining in with Facebook.
 class RevokeLogin
   def initialize(
     api_builder: FacebookGraphApi::Api,

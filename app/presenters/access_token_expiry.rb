@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Presenter exposing information about a user's Facebook Graph API access token.
 class AccessTokenExpiry
   include ActionView::Helpers::TextHelper
 

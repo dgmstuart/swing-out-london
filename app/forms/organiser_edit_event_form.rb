@@ -2,6 +2,11 @@
 
 require "dates_string_parser"
 
+# Form object backing the HTML form for external users (eg. organisers) to edit
+# events.
+#
+# Responsible for managing validations and translating data between what is
+# required by the form and the ActiveRecord model.
 class OrganiserEditEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes

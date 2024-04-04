@@ -2,6 +2,7 @@
 
 module Maps
   module Classes
+    # Normalises strings into uppercase weekday names
     class DayParser
       class NonDayError < StandardError; end
 
