@@ -16,7 +16,7 @@ class MapsController < ApplicationController
         selected_day: @day,
         renderer: self
       ).for_venues(
-        venues: Maps::Classes::VenueQuery.new(@day).venues,
+        venues: Maps::Classes::VenueQuery.new.venues(@day),
         highlighted_venue_id: params[:venue_id].to_i
       )
   rescue Maps::Classes::DayParser::NonDayError
@@ -31,7 +31,7 @@ class MapsController < ApplicationController
         selected_date: @map_dates.selected_date,
         renderer: self
       ).for_venues(
-        venues: Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues,
+        venues: Maps::Socials::VenueQuery.new.venues(@map_dates.display_dates),
         highlighted_venue_id: params[:venue_id].to_i
       )
   rescue Maps::Socials::Dates::DateOutOfRangeError

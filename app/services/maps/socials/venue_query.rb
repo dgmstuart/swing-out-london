@@ -3,20 +3,14 @@
 module Maps
   module Socials
     class VenueQuery
-      def initialize(display_dates)
-        @display_dates = display_dates
-      end
-
-      def venues
-        events.map(&:venue).uniq
+      def venues(dates)
+        events_on(dates).map(&:venue).uniq
       end
 
       private
 
-      attr_reader :display_dates
-
-      def events
-        display_dates.inject([]) do |events, date|
+      def events_on(dates)
+        dates.inject([]) do |events, date|
           events + Event.socials_on_date(date)
         end
       end
