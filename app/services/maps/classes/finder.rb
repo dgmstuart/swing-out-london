@@ -2,12 +2,14 @@
 
 module Maps
   module Classes
-    class FinderFromVenue
+    # Responsible for finding the list of {Event}s with dance classes happening
+    # at a {Venue} during the listing period.
+    class Finder
       def initialize(day:)
         @day = day
       end
 
-      def find(venue)
+      def find_for_venue(venue)
         # TODO: ADD IN CANCELLATIONS!
         if day
           Event.listing_classes_on_day_at_venue(day, venue).includes(:class_organiser)

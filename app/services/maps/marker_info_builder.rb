@@ -9,18 +9,18 @@ module Maps
 
     class << self
       def for_classes(day:)
-        event_finder = Maps::Classes::FinderFromVenue.new(day:)
+        event_finder = Maps::Classes::Finder.new(day:)
         new(event_finder:)
       end
 
       def for_socials(date:)
-        event_finder = Maps::Socials::FinderFromVenue.new(date:)
+        event_finder = Maps::Socials::Finder.new(date:)
         new(event_finder:)
       end
     end
 
     def build(venue)
-      events = event_finder.find(venue)
+      events = event_finder.find_for_venue(venue)
       presenter_klass.new(venue:, events:)
     end
 
