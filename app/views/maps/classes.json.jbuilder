@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.markers @map.markers
+json.markers @map_markers

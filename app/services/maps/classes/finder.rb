@@ -10,7 +10,6 @@ module Maps
       end
 
       def find_for_venue(venue)
-        # TODO: ADD IN CANCELLATIONS!
         if day
           Event.listing_classes_on_day_at_venue(day, venue).includes(:class_organiser)
         else

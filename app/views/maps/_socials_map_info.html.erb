@@ -1,7 +1,7 @@
-<%= render partial: "map_info_address", locals: { marker_info: marker_info } %>
+<%= render partial: "map_info_address", locals: { venue: } %>
 
 <ul class="listing_info">
-  <% marker_info.social_listings_rows.each do |social_listings_row| %>
+  <% listings.each do |social_listings_row| %>
     <li>
       <span class="social_date">
         <%= "#{ social_listings_row.date }:" %>

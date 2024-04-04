@@ -4,9 +4,9 @@ require "spec_helper"
 require "active_support"
 require "active_support/core_ext/module/delegation"
 require "app/presenters/social_listing"
-require "app/presenters/map/social_listing"
+require "app/presenters/maps/social_listing"
 
-RSpec.describe Map::SocialListing do
+RSpec.describe Maps::SocialListing do
   describe ".has_class?" do
     it "delegates to the given event" do
       has_class = instance_double("Boolean")
