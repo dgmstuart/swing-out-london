@@ -1,23 +1,26 @@
-// SMALL
 #admin_bar {
   font-family: Helvetica, Arial, sans-serif;
-
-  .navlink--wrapper {
-    background-color: #464646;
-    color: #ccc;
-    border-top: 1px solid #333;
-    display: flex;
-    flex-wrap: wrap;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  background-color: #464646;
 
   .navlink {
     text-align: center;
     border: 1px solid #333;
+    background-color: #464646;
+    color: #ccc;
     border-left: 0;
     border-top: 0;
+  }
+
+  .home {
     flex-grow: 1;
   }
 
+  .menu-toggle-btn,
   a {
     display: block;
     padding: 8px 15px;
@@ -27,23 +30,63 @@
       border-bottom: 0;
     }
   }
-}
 
-// Links stop wrapping above this
-@media only screen and (width >= 845px) {
-  #admin_bar {
-    z-index: 100;
-    position: sticky;
-    top: 0;
+  .menu-items {
+    width: 100%;
+    display: none;
+  }
 
-    .navlink {
+  .account-link {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: none;
+
+    &:checked ~ .menu-items {
+      display: block;
+    }
+
+    &:checked ~ .account-link {
+      display: block;
+    }
+  }
+
+  .menu-toggle-btn {
+    display: block;
+  }
+
+  .account-link {
+    width: 100%
+  }
+
+  @media (width >= 600px) {
+    .account-link {
+      display: block;
+      width: auto;
+      flex-basis: fit-content;
+      border-right: none;
+      margin-left: auto;
+    }
+  }
+
+  @media (width >= 1260px) {
+    .home {
       flex-grow: 0;
     }
 
-    .navlink-right {
-      border-right: none;
+    .account-link {
       border-left: 1px solid #333;
-      margin-left: auto;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-basis: fit-content;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      cursor: pointer;
     }
   }
 }

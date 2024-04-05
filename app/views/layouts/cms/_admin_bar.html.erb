@@ -1,19 +1,14 @@
 <nav id="admin_bar">
-  <ul class="navlink--wrapper">
-    <li class="navlink"><%= link_to tc("site_name"), root_path %></li>
-    <li class="navlink"><%= link_to "New Event", new_event_path %></li>
-    <li class="navlink"><%= link_to "Events", events_path%></li>
-    <li class="navlink"><%= link_to "New Venue", new_venue_path %></li>
-    <li class="navlink"><%= link_to "Venues", venues_path %></li>
-    <li class="navlink"><%= link_to "New Organiser", new_organiser_path %></li>
-    <li class="navlink"><%= link_to "Organisers", organisers_path %></li>
+  <div class="navlink home"><%= link_to tc("site_name"), root_path %></div>
 
-    <% if current_user.admin? %>
-      <li class="navlink"><%= link_to "Users", admin_users_path %></li>
-      <li class="navlink"><%= link_to "Audit Log", admin_audit_log_path %></li>
-      <li class="navlink"><%= link_to "Cache", admin_cache_path %></li>
+  <input type="checkbox" hidden id="menu-toggle" class="menu-toggle" />
+  <label for="menu-toggle" class="menu-toggle-btn navlink navlink-right">Menu</label>
+
+  <ul class="menu-items">
+    <% navlinks.each do |navlink| %>
+      <li class="navlink"><%= link_to navlink.name, navlink.url %></li>
     <% end %>
-
-    <li class="navlink navlink-right"><%= link_to current_user.name_with_role, account_path %></li>
   </ul>
+
+  <div class="navlink account-link"><%= link_to current_user.name_with_role, account_path %></div>
 </nav>

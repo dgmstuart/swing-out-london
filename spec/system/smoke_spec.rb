@@ -16,6 +16,7 @@ RSpec.describe "Adding a new event", :js do
     click_on "Log in"
 
     # VENUE
+    open_menu
     click_on "New Venue"
 
     fill_in "Name", with: "The Savoy Ballroom"
@@ -31,6 +32,7 @@ RSpec.describe "Adding a new event", :js do
     expect(page).to have_no_content("error")
 
     # SOCIAL ORGANISER
+    open_menu
     click_on "New Organiser"
 
     fill_in "Name", with: "Herbert White"
@@ -43,6 +45,7 @@ RSpec.describe "Adding a new event", :js do
     expect(page).to have_no_content("error")
 
     # CLASS ORGANISER
+    open_menu
     click_on "New Organiser"
 
     fill_in "Name", with: "Frankie Manning"
@@ -53,6 +56,7 @@ RSpec.describe "Adding a new event", :js do
     expect(page).to have_no_content("error")
 
     # EVENT WITH CANCELLED DATE
+    open_menu
     click_on "New Event"
 
     fill_in "Url", with: "https://www.savoyballroom.com/stompin"
@@ -79,6 +83,7 @@ RSpec.describe "Adding a new event", :js do
     expect(page).to have_no_content("error")
 
     # RECENTLY STARTED EVENT (NEW!)
+    open_menu
     click_on "New Event"
 
     fill_in "Url", with: "https://www.savoyballroom.com/ladies"
