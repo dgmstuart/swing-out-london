@@ -11,6 +11,7 @@ RSpec.describe "Editors can delete venues" do
       visit "/login"
       click_on "Log in"
 
+      open_menu
       click_on "Venues", match: :first
 
       accept_confirm do
@@ -29,6 +30,7 @@ RSpec.describe "Editors can delete venues" do
       visit "/login"
       click_on "Log in"
 
+      open_menu
       click_on "Venues", match: :first
 
       click_on "Edit", match: :first

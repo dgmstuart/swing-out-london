@@ -11,6 +11,7 @@ RSpec.describe "Editors can delete organisers" do
       visit "/login"
       click_on "Log in"
 
+      open_menu
       click_on "Organisers", match: :first
 
       accept_confirm do
@@ -29,6 +30,7 @@ RSpec.describe "Editors can delete organisers" do
       visit "/login"
       click_on "Log in"
 
+      open_menu
       click_on "Organisers", match: :first
 
       click_on "Edit", match: :first
@@ -52,6 +54,7 @@ RSpec.describe "Editors can delete organisers" do
       visit "/login"
       click_on "Log in"
 
+      open_menu
       click_on "Organisers", match: :first
 
       expect(page).to have_no_content("Delete")

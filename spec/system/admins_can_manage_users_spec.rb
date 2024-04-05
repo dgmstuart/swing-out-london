@@ -29,6 +29,7 @@ RSpec.describe "Admins can manage users" do
     click_on "Log in"
 
     VCR.use_cassette("fetch_facebook_names") do
+      open_menu
       click_on "Users"
 
       expect(page).to have_no_content("Dawn Hampton")
@@ -63,6 +64,7 @@ RSpec.describe "Admins can manage users" do
       click_on "Log in"
 
       VCR.use_cassette("fetch_facebook_names") do
+        open_menu
         click_on "Users"
       end
 
@@ -83,6 +85,7 @@ RSpec.describe "Admins can manage users" do
     end
 
     Capybara.using_session("editor_session") do
+      open_menu
       click_on "Events"
 
       expect(page).to have_content("Editor Login")
@@ -99,6 +102,7 @@ RSpec.describe "Admins can manage users" do
     click_on "Log in"
 
     VCR.use_cassette("fetch_facebook_names") do
+      open_menu
       click_on "Users"
       expect(page).to have_content("Dawn Hampton")
     end
@@ -124,6 +128,7 @@ RSpec.describe "Admins can manage users" do
     click_on "Log in"
 
     VCR.use_cassette("fetch_facebook_names") do
+      open_menu
       click_on "Users"
       expect(page).to have_content("Dawn Hampton (Admin)")
     end
