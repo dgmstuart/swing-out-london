@@ -179,14 +179,20 @@ form.edit_venue {
   }
 }
 
+.organiser-link-input {
+  display:flex;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
 #organiser_link_url {
-  width: 40em;
+  width: 100%;
+  max-width: 660px;
   border: solid colours.$text-colour;
   border-right: none;
   border-radius: 5px 0 0 5px;
   background: inherit;
   padding: 5px;
-  margin-bottom: 10px;
 }
 
 .button-on-input {
