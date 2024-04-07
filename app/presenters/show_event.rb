@@ -7,10 +7,6 @@ class ShowEvent
     @date_printer = DatePrinter.new(separator: ", ")
   end
 
-  def anchor
-    "event_#{event.id}"
-  end
-
   def cancellations
     return "None" if event.cancellations.empty?
 

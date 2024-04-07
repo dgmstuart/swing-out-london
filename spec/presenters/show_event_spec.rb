@@ -7,14 +7,6 @@ require "app/presenters/show_event"
 require "app/presenters/date_printer"
 
 RSpec.describe ShowEvent do
-  describe "#anchor" do
-    it "includes the ID of the event" do
-      event = instance_double("Event", id: 123)
-
-      expect(described_class.new(event).anchor).to eq "event_123"
-    end
-  end
-
   describe "#cancellations" do
     it "prints out a list of dates" do
       event = instance_double("Event", cancellations: [Date.new(2011, 5, 14), Date.new(2015, 6, 24)])
