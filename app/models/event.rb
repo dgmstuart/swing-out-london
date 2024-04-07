@@ -196,23 +196,4 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def clear_latest_dates_cache
     Rails.cache.delete(latest_date_cache_key)
   end
-
-  ###########
-  # ACTIONS #
-  ###########
-
-  def archive
-    return true if ended? # if it's already ended, there's nothing to do
-
-    ended_date =
-      if weekly?
-        Date.current.prev_occurring(day.downcase.to_sym)
-      elsif latest_date.blank?
-        Date.new # Earliest possible ruby date
-      else
-        latest_date
-      end
-
-    update(last_date: ended_date)
-  end
 end
