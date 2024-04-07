@@ -81,7 +81,7 @@ RSpec.describe CreateEventForm do
   end
 
   describe "#to_h" do
-    it "returns the attributes as a symbol hash" do # rubocop:disable RSpec/ExampleLength
+    it "returns the attributes as a symbol hash" do
       form = described_class.new(
         url: "https://savoy.com",
         venue_id: 1,
@@ -128,7 +128,7 @@ RSpec.describe CreateEventForm do
     end
 
     context "when the event is weekly with no course length" do
-      it "returns the attributes as a symbol hash" do # rubocop:disable RSpec/ExampleLength
+      it "returns the attributes as a symbol hash" do
         form = described_class.new(
           url: "https://savoy.com",
           venue_id: 1,

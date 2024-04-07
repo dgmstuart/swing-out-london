@@ -275,7 +275,7 @@ RSpec.describe LoginSession do
   end
 
   describe "#set_token!" do
-    it "updates the token in the session" do # rubocop:disable RSpec/ExampleLength
+    it "updates the token in the session" do
       session = { user: { "token" => "old-token", "token_expires_at" => double } }
       request = instance_double("ActionDispatch::Request", session:)
 

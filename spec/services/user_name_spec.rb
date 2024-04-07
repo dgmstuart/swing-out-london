@@ -61,7 +61,7 @@ RSpec.describe UserName do
         expect(result).to eq "[Unknown user]"
       end
 
-      it "reports the error" do # rubocop:disable RSpec/ExampleLength
+      it "reports the error" do
         api = instance_double("FacebookGraphApi::Api")
         allow(api).to receive(:profile).and_raise(
           FacebookGraphApi::HttpClient::ResponseError,

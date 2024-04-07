@@ -54,7 +54,7 @@ RSpec.describe EventCreator do
     end
 
     context "when there are cancellations for a weekly event" do
-      it "creates instances from the cancelled dates" do # rubocop:disable RSpec.example_length
+      it "creates instances from the cancelled dates" do # .example_length
         date1 = Date.tomorrow
         date2 = 2.days.from_now.to_date
         venue = create(:venue)
@@ -72,7 +72,7 @@ RSpec.describe EventCreator do
     end
 
     context "when there is a date in both dates and cancellations" do
-      it "only creates one instance" do # rubocop:disable RSpec.example_length
+      it "only creates one instance" do # .example_length
         date1 = Date.tomorrow
         date2 = 2.days.from_now.to_date
         venue = create(:venue)

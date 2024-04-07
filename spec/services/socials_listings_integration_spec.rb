@@ -14,7 +14,7 @@ RSpec.describe SocialsListings do
         expect(result).to eq([["10 June 1935".to_date, [["Swing pit", false]]]])
       end
 
-      it "returns the correct array when that social has a cancellation" do # rubocop:disable RSpec/ExampleLength
+      it "returns the correct array when that social has a cancellation" do
         event_instances = [
           build(:event_instance, date: "10 June 1935"),
           build(:event_instance, date: "12 June 1935", cancelled: true)
@@ -73,7 +73,7 @@ RSpec.describe SocialsListings do
     end
 
     context "when there is a weekly event and two occasional events on the same day" do
-      it "returns an array with both events on that day, sorted alphabetically" do # rubocop:disable RSpec/ExampleLength
+      it "returns an array with both events on that day, sorted alphabetically" do
         create(:social, title: "Roseland Tuesdays", frequency: 1, day: "Tuesday")
         create(:social, title: "Battle of the bands", frequency: 0, dates: ["May 11 1937".to_date])
         create(:social, title: "Stomping at the Cotton club", frequency: 0, dates: ["May 18 1937".to_date])

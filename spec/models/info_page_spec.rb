@@ -5,7 +5,7 @@ require "app/models/info_page"
 
 RSpec.describe InfoPage do
   describe "#content_partials" do
-    it "returns the list of content partials for the current city" do # rubocop:disable RSpec/ExampleLength
+    it "returns the list of content partials for the current city" do
       config = {
         dir_path: "foo/about",
         london: {
@@ -30,7 +30,7 @@ RSpec.describe InfoPage do
   end
 
   describe "#sidebar_partials" do
-    it "returns the list of content partials for the current city" do # rubocop:disable RSpec/ExampleLength
+    it "returns the list of content partials for the current city" do
       config = {
         dir_path: "foo/about",
         london: {

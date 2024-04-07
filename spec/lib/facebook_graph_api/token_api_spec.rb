@@ -5,7 +5,7 @@ require "lib/facebook_graph_api/token_api"
 
 RSpec.describe FacebookGraphApi::TokenApi do
   describe "#exchange_token" do
-    it "makes an API request to exchange an auth token for a new long-lived auth token" do # rubocop:disable RSpec/ExampleLength
+    it "makes an API request to exchange an auth token for a new long-lived auth token" do
       http_client = instance_double("HTTP::Chainable", get: double)
       api = described_class.new(
         base_url: "https://example.com",
