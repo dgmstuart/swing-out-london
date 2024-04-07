@@ -8,6 +8,7 @@ class LoginSession
   end
 
   def log_in!(auth_id:, name:, token:, token_expires_at:)
+    request.reset_session # calling reset_session prevents "session fixation" attacks
     request.session[:user] = {
       "auth_id" => auth_id,
       "name" => name,
