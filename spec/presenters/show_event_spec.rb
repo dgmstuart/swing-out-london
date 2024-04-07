@@ -237,32 +237,6 @@ RSpec.describe ShowEvent do
     end
   end
 
-  describe "#warning" do
-    it "returns nothing by default" do
-      event = instance_double("Event", has_class?: true, has_social?: false, has_taster?: false)
-
-      expect(described_class.new(event).warning).to be_nil
-    end
-
-    context "when the event has neither class nor social, and no taster" do
-      it "returns a warning message" do
-        event = instance_double("Event", has_class?: false, has_social?: false, has_taster?: false)
-
-        expect(described_class.new(event).warning)
-          .to eq "This event doesn't have class or social, so it won't show up in the listings"
-      end
-    end
-
-    context "when the event has a taster, but neither class nor social" do
-      it "returns a warning message" do
-        event = instance_double("Event", has_class?: false, has_social?: false, has_taster?: true)
-
-        expect(described_class.new(event).warning)
-          .to eq "This event has a taster but no class or social, so it won't show up in the listings"
-      end
-    end
-  end
-
   describe "#weekly?" do
     it "delegates to the event" do
       event = instance_double("Event", weekly?: false)

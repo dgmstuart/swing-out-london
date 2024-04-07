@@ -60,16 +60,6 @@ class ShowEvent
     end
   end
 
-  def warning
-    return if event.has_class? || event.has_social?
-
-    if event.has_taster?
-      "This event has a taster but no class or social, so it won't show up in the listings"
-    else
-      "This event doesn't have class or social, so it won't show up in the listings"
-    end
-  end
-
   def to_model
     event
   end

@@ -14,7 +14,6 @@ class EventsController < CmsBaseController
     event = Event.find(params[:id])
     @last_update = LastUpdate.new(event)
     @event = ShowEvent.new(event)
-    @warning = @event.warning
   end
 
   def new

@@ -1,12 +1,5 @@
 <%= render partial: 'shared/last_updated_by', locals: { last_update: @last_update } %>
 
-<% if @warning %>
-  <p class="warning-message">
-    <strong>Warning:</strong>
-    <%= @warning %>
-  </p>
-<% end %>
-
 <ol class="show">
   <li>
     <span>Title:</span>
