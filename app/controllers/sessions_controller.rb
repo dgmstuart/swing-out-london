@@ -6,17 +6,13 @@ class SessionsController < ApplicationController
 
   def new; end
 
-  def create # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def create
     user = AuthResponse.new(request.env)
-    if authorised(user.id)
-      after_login_path = return_to_session.path(fallback: events_path)
-      login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, token_expires_at: user.expires_at)
+    after_login_path = return_to_session.path(fallback: events_path)
+    if SessionCreator.new(login_session:).create(user)
       redirect_to after_login_path
     else
-      flash.alert = "Your Facebook ID for #{tc('site_name')} (#{user.id}) isn't in the approved list.\n" \
-                    "If you've been invited to become an editor, " \
-                    "please contact the main site admins and get them to add this ID"
-      logger.warn("Auth id #{user.id} tried to log in, but was not in the allowed list")
+      flash.alert = unknown_facebook_id_message(user.id)
       redirect_to action: :new
     end
   end
@@ -35,8 +31,10 @@ class SessionsController < ApplicationController
 
   private
 
-  def authorised(auth_id)
-    Role.find_by(facebook_ref: auth_id).present?
+  def unknown_facebook_id_message(user_id)
+    "Your Facebook ID for #{tc('site_name')} (#{user_id}) isn't in the approved list.\n" \
+      "If you've been invited to become an editor, " \
+      "please contact the main site admins and get them to add this ID"
   end
 
   def login_session
