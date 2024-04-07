@@ -61,7 +61,7 @@ class EventsController < CmsBaseController
 
   def archive
     event = Event.find(params[:id])
-    succeeded = event.archive
+    succeeded = EventArchiver.new.archive(event)
 
     flash.alert = t("flash.archive.failed") unless succeeded
 
