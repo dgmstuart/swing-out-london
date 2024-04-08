@@ -1,4 +1,5 @@
 @use "borders";
+@use "../shared/colours";
 
 #map {
   height: 100%;
@@ -56,6 +57,17 @@ body.socials {
 
     .day {
       margin-right: 5px;
+    }
+
+    .new_label {
+      color: white;
+      background-color: colours.$text-colour;
+      padding: 0.3em 0.6em;
+      margin-right: 0.2em;
+      position: relative;
+      bottom: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.8em;
     }
   }
 
