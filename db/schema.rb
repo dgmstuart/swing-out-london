@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_005709) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_005709) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.integer "venue_id", null: false
-    t.integer "frequency"
+    t.integer "frequency", null: false
     t.string "url", limit: 255, null: false
     t.date "first_date"
     t.date "last_date"

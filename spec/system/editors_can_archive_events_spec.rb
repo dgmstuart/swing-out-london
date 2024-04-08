@@ -70,8 +70,8 @@ RSpec.describe "Editors can archive events" do
     it "raises an error" do
       skip_login
       event = create(:event, frequency: 0, dates: ["02/01/2000".to_date])
-      # Set frequency to nil to simulate failed save by making the record invalid:
-      event.update_attribute(:frequency, nil) # rubocop:disable Rails/SkipsModelValidations
+      # Set url to an invalid value to simulate failed save
+      event.update_attribute(:url, "not-a-url") # rubocop:disable Rails/SkipsModelValidations
 
       visit "/events"
 
