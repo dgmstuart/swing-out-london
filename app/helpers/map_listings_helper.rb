@@ -51,6 +51,10 @@ module MapListingsHelper
       concat " "
       concat mapinfo_swingclass_details(event)
       concat tag.span swingclass_info(event), class: "info" if swingclass_info(event)
+      if event.new?
+        concat " "
+        concat new_event_label
+      end
     end
 
     link_to text, event.url
@@ -58,7 +62,6 @@ module MapListingsHelper
 
   def mapinfo_swingclass_details(event)
     details = []
-    details << new_event_label if event.new?
     details << "(from #{I18n.l(event.first_date, format: :short)})" unless event.started?
     details << "(#{event.class_style})" if event.class_style.present?
     details << "- #{event.course_length} week courses" unless event.course_length.nil?

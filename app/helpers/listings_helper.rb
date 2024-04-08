@@ -95,7 +95,7 @@ module ListingsHelper
   end
 
   def new_event_label
-    tag.strong("New!", class: "new_label")
+    tag.strong("New!", class: "new-label")
   end
 
   def cancelled_label

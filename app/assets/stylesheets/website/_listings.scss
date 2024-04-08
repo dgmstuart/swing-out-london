@@ -196,7 +196,7 @@ section.listings {
   }
 
   .cancelled_label,
-  .new_label {
+  .new-label {
     padding: 0.3em 0.6em;
     margin-right: 0.2em;
     position: relative;
@@ -210,7 +210,7 @@ section.listings {
     background-color: colours.$highlight-colour;
   }
 
-  .new_label {
+  .new-label {
     color: colours.$background-colour;
     background-color: colours.$text-colour;
   }
