@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require "simplecov"
-SimpleCov.start "rails" do
-  add_group "Services", "app/services"
-  add_group "Presenters", "app/presenters"
-end
-
+require "support/simplecov"
 require "spec_helper"
 
 ENV["RAILS_ENV"] ||= "test"
