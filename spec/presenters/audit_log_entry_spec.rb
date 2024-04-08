@@ -153,7 +153,7 @@ RSpec.describe AuditLogEntry do
   end
 
   describe "#as_json" do
-    it "presents the key fields as a hash" do # rubocop:disable RSpec/ExampleLength
+    it "presents the key fields as a hash" do
       audited_changes = double
       audit = instance_double(
         "Audit",

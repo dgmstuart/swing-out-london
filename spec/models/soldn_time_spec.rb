@@ -88,7 +88,7 @@ RSpec.describe SOLDNTime, :time do
     end
 
     context "when the number of days is not specified" do
-      it "defaults to showing 14 days" do # rubocop:disable RSpec/ExampleLength
+      it "defaults to showing 14 days" do
         result = described_class.listing_dates("1st January 1928".to_date)
 
         expect(result).to eq(

@@ -45,7 +45,7 @@ Metrics/BlockLength:
     - spec/factories.rb
 
 Metrics/MethodLength:
-  CountAsOne: ['array', 'hash', 'heredoc']
+  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
   Exclude:
     - db/**/*.rb
       # Files where the methods are basically html templates:
@@ -145,13 +145,9 @@ RSpec/DescribeClass:
 
 RSpec/ExampleLength:
   Max: 10
+  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
   Exclude:
     - spec/system/**/*_spec.rb
-    # tests involving omniauth response hashes
-    - spec/models/auth_response_spec.rb
-    - spec/lib/omniauth_test_response_builder_spec.rb
-    # tests involving http requests and responses
-    - spec/lib/facebook_graph_api/http_client_spec.rb
 
 RSpec/MultipleExpectations:
   Exclude:

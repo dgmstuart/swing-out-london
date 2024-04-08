@@ -9,7 +9,7 @@ RSpec.describe LoginSession do
   describe "log_in!" do
     it "sets user data in the session" do # rubocop:disable RSpec/ExampleLength
       session = {}
-      request = instance_double("ActionDispatch::Request", session:)
+      request = instance_double("ActionDispatch::Request", session:, reset_session: double)
       token = double
 
       login_session = described_class.new(request, role_finder: double, logger: fake_logger)
@@ -28,9 +28,18 @@ RSpec.describe LoginSession do
       end
     end
 
+    it "resets the session first" do
+      request = instance_double("ActionDispatch::Request", session: {}, reset_session: double)
+
+      login_session = described_class.new(request, role_finder: double, logger: fake_logger)
+      login_session.log_in!(auth_id: double, name: double, token: double, token_expires_at: double)
+
+      expect(request).to have_received(:reset_session)
+    end
+
     it "logs that the user logged in" do
       logger = instance_double("Logger", info: true)
-      request = instance_double("ActionDispatch::Request", session: {})
+      request = instance_double("ActionDispatch::Request", session: {}, reset_session: double)
 
       login_session = described_class.new(request, role_finder: double, logger:)
       login_session.log_in!(auth_id: 1234567890123456, name: double, token: double, token_expires_at: double)
@@ -266,7 +275,7 @@ RSpec.describe LoginSession do
   end
 
   describe "#set_token!" do
-    it "updates the token in the session" do # rubocop:disable RSpec/ExampleLength
+    it "updates the token in the session" do
       session = { user: { "token" => "old-token", "token_expires_at" => double } }
       request = instance_double("ActionDispatch::Request", session:)
 

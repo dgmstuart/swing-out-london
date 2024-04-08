@@ -28,7 +28,7 @@ RSpec.describe OrganiserEditEventForm do
   end
 
   describe "#to_h" do
-    it "returns the attributes as a symbol hash" do # rubocop:disable RSpec/ExampleLength
+    it "returns the attributes as a symbol hash" do
       form = described_class.new(
         venue_id: 1,
         dates: "10/12/2020, 12/01/2021",

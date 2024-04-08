@@ -124,7 +124,7 @@ RSpec.describe EventUpdater do
     end
 
     context "when an instance already exists matching the date but not the event ID" do
-      it "creates a new instance" do # rubocop:disable RSpec.example_length
+      it "creates a new instance" do # .example_length
         record = create(:event)
         date = Date.tomorrow
         event_instance = create(:event_instance, event: build(:event), date:)
@@ -189,7 +189,7 @@ RSpec.describe EventUpdater do
     end
 
     context "when switching from occasional to weekly" do
-      it "removes any existing date records" do # rubocop:disable RSpec.example_length
+      it "removes any existing date records" do # .example_length
         date = Date.tomorrow
         record = create(:event, :occasional)
         create(:event_instance, event: record, date:, cancelled: true)
@@ -223,7 +223,7 @@ RSpec.describe EventUpdater do
     end
 
     context "when the event was invalid" do
-      it "no changes to event instances are persisted" do # rubocop:disable RSpec.example_length
+      it "no changes to event instances are persisted" do # .example_length
         record = create(:event)
         date1 = Date.tomorrow
         date2 = 2.days.from_now
