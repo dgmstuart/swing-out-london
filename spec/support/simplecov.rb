@@ -18,3 +18,4 @@ SimpleCov.start do
 
   %w[config spec].each { add_filter(_1) }
 end
+SimpleCov.minimum_coverage 100
