@@ -28,7 +28,7 @@ RSpec.describe MapListingsHelper do
           '<a href="https://www.facebook.com/thejazzbourne/events">' \
           "Class (from 9th Apr) (Solo Jazz) - 6 week courses" \
           '<span class="info"> at The Wednesday Club with Sharon Davis</span> ' \
-          '<strong class="new_label">New!</strong>' \
+          '<strong class="new-label">New!</strong>' \
           "</a>"
         expect(helper.mapinfo_swingclass_link(event)).to eq(result)
       end
