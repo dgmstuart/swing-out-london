@@ -4,11 +4,9 @@ require "rails_helper"
 
 RSpec.describe "Editors can delete events" do
   it "can be deleted from the event list", :js do
-    stub_login
     create(:event, title: "Balboa at Bobby McGee's")
 
-    visit "/login"
-    click_on "Log in"
+    skip_login
 
     # The delete link only shows above 900px wide
     page.driver.browser.manage.window.resize_to(901, 600)

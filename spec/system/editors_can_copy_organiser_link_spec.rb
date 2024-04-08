@@ -11,8 +11,7 @@ RSpec.describe "Editors can copy an organiser link" do
       event = create(:event, organiser_token: "abc123")
       grant_clipboard_permissions
 
-      skip_login
-      visit "/events/#{event.id}/edit"
+      skip_login("/events/#{event.id}/edit")
 
       url = URI.join(page.server_url, "/external_events/abc123/edit").to_s
       expect(page).to have_field("Organiser edit link", with: url)
@@ -42,8 +41,7 @@ RSpec.describe "Editors can copy an organiser link" do
       grant_clipboard_permissions
       allow(SecureRandom).to receive(:hex).and_return("abc123")
 
-      skip_login
-      visit "/events/#{event.id}/edit"
+      skip_login("/events/#{event.id}/edit")
 
       expect(page).to have_content("No organiser edit link exists for this event")
 
@@ -64,8 +62,7 @@ RSpec.describe "Editors can copy an organiser link" do
       event = create(:event)
       allow(event).to receive(:update).and_return false
 
-      skip_login
-      visit "/events/#{event.id}/edit"
+      skip_login("/events/#{event.id}/edit")
 
       click_on "Generate link"
 

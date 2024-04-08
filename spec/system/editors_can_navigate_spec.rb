@@ -4,11 +4,9 @@ require "rails_helper"
 
 RSpec.describe "Editors can navigate" do
   it "from a show page to an edit page" do
-    stub_login
     create(:event, url: "https://navigating.se")
 
-    visit "/login"
-    click_on "Log in"
+    skip_login
 
     click_on "Show", match: :first
 

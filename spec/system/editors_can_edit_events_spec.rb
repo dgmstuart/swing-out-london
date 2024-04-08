@@ -6,14 +6,12 @@ RSpec.describe "Editors can edit events", :js do
   include ActiveSupport::Testing::TimeHelpers
 
   it "with valid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
     cancellations = ["01/10/2010", "02/12/2011"]
     create(:weekly_social, :with_class, class_style: "Balboa", first_date: "02/09/2010", cancellations:)
     create(:venue, name: "The 100 Club")
     create(:organiser, name: "The London Swing Dance Society")
 
-    visit "/login"
-    click_on "Log in"
+    skip_login(id: 12345678901234567, name: "Al Minns")
 
     click_on "Edit", match: :first
 
@@ -58,11 +56,9 @@ RSpec.describe "Editors can edit events", :js do
   end
 
   it "with invalid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
     create(:class)
 
-    visit "/login"
-    click_on "Log in"
+    skip_login
 
     click_on "Edit", match: :first
 
@@ -79,10 +75,8 @@ RSpec.describe "Editors can edit events", :js do
 
   it "adding dates" do
     create(:event, frequency: 0, dates: ["12/12/2012", "13/12/2012"])
-    stub_login(id: 12345678901234567, name: "Al Minns")
 
-    visit "/login"
-    click_on "Log in"
+    skip_login(id: 12345678901234567, name: "Al Minns")
 
     click_on "Edit", match: :first
 
@@ -104,11 +98,9 @@ RSpec.describe "Editors can edit events", :js do
 
   it "adding invalid dates" do
     create(:event)
-    stub_login
     travel_to "2023-11-05"
 
-    visit "/login"
-    click_on "Log in"
+    skip_login
 
     click_on "Edit", match: :first
 
@@ -121,10 +113,8 @@ RSpec.describe "Editors can edit events", :js do
 
   it "adding cancellations to an occasional event" do
     create(:event, :occasional, dates: ["12/12/2012"])
-    stub_login(id: 12345678901234567, name: "Al Minns")
 
-    visit "/login"
-    click_on "Log in"
+    skip_login(id: 12345678901234567, name: "Al Minns")
 
     click_on "Edit", match: :first
 
@@ -144,9 +134,8 @@ RSpec.describe "Editors can edit events", :js do
 
   it "adding cancellations to a weekly event" do
     event = create(:event, :weekly)
-    skip_login
 
-    visit "/events/#{event.id}/edit"
+    skip_login("/events/#{event.id}/edit")
 
     fill_in "Cancelled dates", with: "12/12/2012"
 
@@ -165,9 +154,7 @@ RSpec.describe "Editors can edit events", :js do
       ]
       event = create(:event, :occasional, event_instances:)
 
-      skip_login
-
-      visit edit_event_path(event)
+      skip_login(edit_event_path(event))
 
       choose "Weekly"
       select "Thursday", from: "Day"
@@ -183,9 +170,8 @@ RSpec.describe "Editors can edit events", :js do
   context "when the event is a weekly class" do
     it "doesn't allow the frequency to be edited" do
       event = create(:class)
-      skip_login
 
-      visit edit_event_path(event)
+      skip_login(edit_event_path(event))
 
       aggregate_failures do
         expect(page).to have_no_content("Monthly")
@@ -198,9 +184,8 @@ RSpec.describe "Editors can edit events", :js do
   context "when the event has an old frequency" do
     it "shows a message" do
       event = create(:event, frequency: 4)
-      skip_login
 
-      visit edit_event_path(event)
+      skip_login(edit_event_path(event))
 
       expect(page).to have_content("Legacy frequency: 4")
     end

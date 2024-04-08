@@ -4,10 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Editors can create venues" do
   it "with valid data", :vcr do
-    stub_login(id: 12345678901234567, name: "Al Minns")
-
-    visit "/login"
-    click_on "Log in"
+    skip_login(id: 12345678901234567, name: "Al Minns")
 
     click_on "New Venue"
 
@@ -37,9 +34,7 @@ RSpec.describe "Editors can create venues" do
 
   context "with invalid data" do
     it "shows an error" do
-      skip_login
-
-      visit "/venues/new"
+      skip_login("/venues/new")
 
       fill_in "Website", with: "www.the100club.co.uk"
 

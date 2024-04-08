@@ -5,14 +5,9 @@ require "rails_helper"
 RSpec.describe "Editors can delete venues" do
   context "when the venue has no associated events", :js do
     it "can be deleted from the venue list" do
-      stub_login
       create(:venue, name: "Bobby McGee's")
 
-      visit "/login"
-      click_on "Log in"
-
-      open_menu
-      click_on "Venues", match: :first
+      skip_login("/venues")
 
       accept_confirm do
         click_on "Delete", match: :first
@@ -24,14 +19,9 @@ RSpec.describe "Editors can delete venues" do
     end
 
     it "can be deleted from the edit page" do
-      stub_login
       create(:venue, name: "Bobby McGee's")
 
-      visit "/login"
-      click_on "Log in"
-
-      open_menu
-      click_on "Venues", match: :first
+      skip_login("/venues")
 
       click_on "Edit", match: :first
 
@@ -51,8 +41,7 @@ RSpec.describe "Editors can delete venues" do
       venue = create(:venue)
       create(:event, venue:)
 
-      visit "/login"
-      click_on "Log in"
+      skip_login("/venues")
 
       click_on "Venues", match: :first
 

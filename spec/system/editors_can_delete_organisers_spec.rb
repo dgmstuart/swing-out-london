@@ -5,14 +5,9 @@ require "rails_helper"
 RSpec.describe "Editors can delete organisers" do
   context "when the organiser has no associated events", :js do
     it "can be deleted from the organiser list" do
-      stub_login
       create(:organiser, name: "Herbert White")
 
-      visit "/login"
-      click_on "Log in"
-
-      open_menu
-      click_on "Organisers", match: :first
+      skip_login("/organisers")
 
       accept_confirm do
         click_on "Delete", match: :first
@@ -24,14 +19,9 @@ RSpec.describe "Editors can delete organisers" do
     end
 
     it "can be deleted from the edit page" do
-      stub_login
       create(:organiser, name: "Herbert White")
 
-      visit "/login"
-      click_on "Log in"
-
-      open_menu
-      click_on "Organisers", match: :first
+      skip_login("/organisers")
 
       click_on "Edit", match: :first
 
@@ -47,15 +37,10 @@ RSpec.describe "Editors can delete organisers" do
 
   context "when the organiser has associated events" do
     it "cannot be deleted" do
-      stub_login
       organiser = create(:organiser)
       create(:event, social_organiser: organiser)
 
-      visit "/login"
-      click_on "Log in"
-
-      open_menu
-      click_on "Organisers", match: :first
+      skip_login("/organisers")
 
       expect(page).to have_no_content("Delete")
 

@@ -8,14 +8,11 @@ RSpec.describe "Admins can view an audit log" do
   end
 
   it "showing a list of audited events" do
-    stub_login(admin: true)
-
-    visit "/login"
-    click_on "Log in"
-
     create(:event)
     create(:venue)
     create(:organiser)
+
+    skip_login(admin: true)
 
     click_on "Audit Log"
 
@@ -26,10 +23,7 @@ RSpec.describe "Admins can view an audit log" do
 
   context "when logged in as a non-admin" do
     it "does not allow access" do
-      stub_login(admin: false)
-
-      visit "/login"
-      click_on "Log in"
+      skip_login(admin: false)
 
       expect(page).to have_no_content("Audit Log")
 

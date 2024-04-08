@@ -4,10 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Editors can create organisers" do
   it "with valid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
-
-    visit "/login"
-    click_on "Log in"
+    skip_login(id: 12345678901234567, name: "Al Minns")
 
     click_on "New Organiser"
 
@@ -29,12 +26,7 @@ RSpec.describe "Editors can create organisers" do
   end
 
   it "with an empty shortname" do
-    stub_login
-
-    visit "/login"
-    click_on "Log in"
-
-    click_on "New Organiser"
+    skip_login("/organisers/new")
 
     fill_in "Name", with: "The London Swing Dance Society"
     fill_in "Shortname", with: ""
@@ -46,9 +38,7 @@ RSpec.describe "Editors can create organisers" do
 
   context "with invalid data" do
     it "shows an error" do
-      skip_login
-
-      visit "/organisers/new"
+      skip_login("/organisers/new")
 
       fill_in "Shortname", with: "12345678901234567890+"
 

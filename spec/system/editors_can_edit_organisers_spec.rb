@@ -4,7 +4,6 @@ require "rails_helper"
 
 RSpec.describe "Editors can edit organisers" do
   it "with valid data" do
-    stub_login(id: 12345678901234567, name: "Al Minns")
     create(
       :organiser,
       name: "The London Swing Dance Society",
@@ -13,8 +12,7 @@ RSpec.describe "Editors can edit organisers" do
       description: "A long-running business"
     )
 
-    visit "/login"
-    click_on "Log in"
+    skip_login(id: 12345678901234567, name: "Al Minns")
 
     click_on "Organisers"
 
@@ -46,9 +44,7 @@ RSpec.describe "Editors can edit organisers" do
         shortname: "lsds",
         description: "A long-running business"
       )
-      skip_login
-
-      visit "/organisers/#{organiser.to_param}/edit"
+      skip_login("/organisers/#{organiser.to_param}/edit")
 
       fill_in "Name", with: ""
       fill_in "Shortname", with: "12345678901234567890+"
