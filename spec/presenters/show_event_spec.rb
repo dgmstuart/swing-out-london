@@ -196,14 +196,6 @@ RSpec.describe ShowEvent do
     end
   end
 
-  describe "#to_model" do
-    it "returns the given event" do
-      event = instance_double("Event")
-
-      expect(described_class.new(event).to_model).to eq event
-    end
-  end
-
   describe "#to_param" do
     it "delegates to the event" do
       event = instance_double("Event", to_param: "123")

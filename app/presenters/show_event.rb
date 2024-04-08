@@ -56,10 +56,6 @@ class ShowEvent
     end
   end
 
-  def to_model
-    event
-  end
-
   delegate :class_organiser,
            :class_style,
            :course_length,
