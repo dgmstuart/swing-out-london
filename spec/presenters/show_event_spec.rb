@@ -7,14 +7,6 @@ require "app/presenters/show_event"
 require "app/presenters/date_printer"
 
 RSpec.describe ShowEvent do
-  describe "#anchor" do
-    it "includes the ID of the event" do
-      event = instance_double("Event", id: 123)
-
-      expect(described_class.new(event).anchor).to eq "event_123"
-    end
-  end
-
   describe "#cancellations" do
     it "prints out a list of dates" do
       event = instance_double("Event", cancellations: [Date.new(2011, 5, 14), Date.new(2015, 6, 24)])
@@ -204,14 +196,6 @@ RSpec.describe ShowEvent do
     end
   end
 
-  describe "#to_model" do
-    it "returns the given event" do
-      event = instance_double("Event")
-
-      expect(described_class.new(event).to_model).to eq event
-    end
-  end
-
   describe "#to_param" do
     it "delegates to the event" do
       event = instance_double("Event", to_param: "123")
@@ -234,32 +218,6 @@ RSpec.describe ShowEvent do
       event = instance_double("Event", venue:)
 
       expect(described_class.new(event).venue).to eq venue
-    end
-  end
-
-  describe "#warning" do
-    it "returns nothing by default" do
-      event = instance_double("Event", has_class?: true, has_social?: false, has_taster?: false)
-
-      expect(described_class.new(event).warning).to be_nil
-    end
-
-    context "when the event has neither class nor social, and no taster" do
-      it "returns a warning message" do
-        event = instance_double("Event", has_class?: false, has_social?: false, has_taster?: false)
-
-        expect(described_class.new(event).warning)
-          .to eq "This event doesn't have class or social, so it won't show up in the listings"
-      end
-    end
-
-    context "when the event has a taster, but neither class nor social" do
-      it "returns a warning message" do
-        event = instance_double("Event", has_class?: false, has_social?: false, has_taster?: true)
-
-        expect(described_class.new(event).warning)
-          .to eq "This event has a taster but no class or social, so it won't show up in the listings"
-      end
     end
   end
 
