@@ -7,13 +7,11 @@ RSpec.describe "Editors can create events", :js do
 
   context "an intermittent social with a taster" do # rubocop:disable RSpec/ContextWording
     it "with valid data" do
-      stub_login(id: 12345678901234567, name: "Al Minns")
       create(:venue, name: "The 100 Club")
       create(:organiser, name: "The London Swing Dance Society")
       travel_to Time.zone.local(2012, 1, 2, 23, 17, 16)
 
-      visit "/login"
-      click_on "Log in"
+      skip_login(id: 12345678901234567, name: "Al Minns")
 
       click_on "New event", match: :first
 
@@ -57,14 +55,10 @@ RSpec.describe "Editors can create events", :js do
     end
 
     it "with invalid data" do
-      stub_login(id: 12345678901234567, name: "Al Minns")
       create(:venue, name: "The 100 Club")
       travel_to "2012-01-01"
 
-      visit "/login"
-      click_on "Log in"
-
-      click_on "New event", match: :first
+      skip_login("/events/new")
 
       click_on "Create"
 
@@ -109,9 +103,8 @@ RSpec.describe "Editors can create events", :js do
       it "doesn't save any values from the class" do
         create(:venue, name: "The 100 Club")
         create(:organiser, name: "The London Swing Dance Society")
-        skip_login
 
-        visit "/events/new"
+        skip_login("/events/new")
 
         fill_in "Url", with: "http://www.lsds.co.uk/stompin"
         autocomplete_select "The 100 Club", from: "Venue"
@@ -146,9 +139,8 @@ RSpec.describe "Editors can create events", :js do
       it "doesn't save any values from the social" do
         create(:venue, name: "The 100 Club")
         create(:organiser, name: "The London Swing Dance Society")
-        skip_login
 
-        visit "/events/new"
+        skip_login("/events/new")
 
         fill_in "Url", with: "http://www.lsds.co.uk/stompin"
         autocomplete_select "The 100 Club", from: "Venue"
@@ -176,9 +168,9 @@ RSpec.describe "Editors can create events", :js do
 
     it "from the 'New event at this venue' button" do
       create(:venue, name: "93 feet east", area: "Brick Lane")
-      skip_login
 
-      visit venues_path
+      skip_login(venues_path)
+
       click_on "Show", match: :first
 
       expect(page).to have_content("93 feet east")
@@ -192,15 +184,11 @@ RSpec.describe "Editors can create events", :js do
 
   context "a weekly class" do # rubocop:disable RSpec/ContextWording
     it "with valid data" do
-      stub_login(id: 12345678901234567, name: "Leon James")
       create(:venue, name: "Dogstar")
       create(:organiser, name: "Sunshine Swing")
       travel_to Time.zone.local(2012, 1, 2, 23, 17, 16)
 
-      visit "/login"
-      click_on "Log in"
-
-      click_on "New event", match: :first
+      skip_login("/events/new", id: 12345678901234567, name: "Leon James")
 
       fill_in "Url", with: "https://sunshineswing.uk/events"
       autocomplete_select "Dogstar", from: "Venue"
@@ -227,14 +215,10 @@ RSpec.describe "Editors can create events", :js do
     end
 
     it "with missing data" do
-      stub_login(id: 12345678901234567, name: "Leon James")
       create(:venue, name: "Dogstar")
       create(:organiser, name: "Sunshine Swing")
 
-      visit "/login"
-      click_on "Log in"
-
-      click_on "New event", match: :first
+      skip_login("/events/new")
 
       click_on "Create"
 

@@ -42,8 +42,7 @@ RSpec.describe "Editors can list occasional events" do
     end
 
     Timecop.freeze("02/01/1937") do
-      skip_login
-      visit "/occasional"
+      skip_login("/occasional")
     end
 
     within "section.listings" do

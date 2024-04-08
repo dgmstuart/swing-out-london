@@ -6,7 +6,6 @@ RSpec.describe "Editors can list events" do
   include ActiveSupport::Testing::TimeHelpers
 
   it "shows a list of events" do
-    stub_login
     Timecop.freeze(Time.zone.local(1997, 5, 23)) do
       create(
         :event,
@@ -19,8 +18,7 @@ RSpec.describe "Editors can list events" do
       )
     end
 
-    visit "/login"
-    click_on "Log in"
+    skip_login
 
     expect(page).to have_content("Stompin'")
       .and have_content("The 100 Club")
@@ -39,7 +37,6 @@ RSpec.describe "Editors can list events" do
     )
 
     skip_login
-    visit "/events"
 
     expect(page).to have_content("Ended")
   end

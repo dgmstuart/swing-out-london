@@ -25,12 +25,10 @@ RSpec.describe "Admins can manage users" do
     stub_auth_hash(id: 98765987659876598)
     create(:admin, facebook_ref: 98765987659876598)
 
-    visit "/login"
-    click_on "Log in"
+    visit "/admin/users"
 
     VCR.use_cassette("fetch_facebook_names") do
-      open_menu
-      click_on "Users"
+      click_on "Log in"
 
       expect(page).to have_no_content("Dawn Hampton")
     end
@@ -60,12 +58,10 @@ RSpec.describe "Admins can manage users" do
 
     Capybara.using_session("admin_session") do
       stub_auth_hash(id: "98765987659876598")
-      visit "/login"
-      click_on "Log in"
+      visit "/admin/users"
 
       VCR.use_cassette("fetch_facebook_names") do
-        open_menu
-        click_on "Users"
+        click_on "Log in"
       end
 
       expect(page).to have_content("Dawn Hampton")
@@ -94,16 +90,10 @@ RSpec.describe "Admins can manage users" do
 
   it "promoting an editor to an admin", :js, :vcr do
     stub_facebook_config(app_secret!: "super-secret-secret")
-    stub_auth_hash(id: 98765987659876598)
     create(:editor, facebook_ref: 12345678901234567)
-    create(:admin, facebook_ref: 98765987659876598)
-
-    visit "/login"
-    click_on "Log in"
 
     VCR.use_cassette("fetch_facebook_names") do
-      open_menu
-      click_on "Users"
+      skip_login("/admin/users", admin: true)
       expect(page).to have_content("Dawn Hampton")
     end
 
@@ -120,16 +110,10 @@ RSpec.describe "Admins can manage users" do
 
   it "removing admin privileges from a user", :js, :vcr do
     stub_facebook_config(app_secret!: "super-secret-secret")
-    stub_auth_hash(id: 98765987659876598)
     create(:admin, facebook_ref: 12345678901234567)
-    create(:admin, facebook_ref: 98765987659876598)
-
-    visit "/login"
-    click_on "Log in"
 
     VCR.use_cassette("fetch_facebook_names") do
-      open_menu
-      click_on "Users"
+      skip_login("/admin/users", admin: true)
       expect(page).to have_content("Dawn Hampton (Admin)")
     end
 
@@ -148,11 +132,7 @@ RSpec.describe "Admins can manage users" do
 
   context "when logged in as a non-admin" do
     it "does not allow access" do
-      stub_auth_hash(id: 12345678901234567)
-      create(:editor, facebook_ref: 12345678901234567)
-
-      visit "/login"
-      click_on "Log in"
+      skip_login(admin: false)
 
       expect(page).to have_no_content("Users")
 

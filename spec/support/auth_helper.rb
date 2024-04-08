@@ -17,15 +17,16 @@ module AuthHelper
     end
   end
 
-  def skip_login
-    name = Faker::Name.lindy_hop_name
+  def skip_login(after_login_path = "/events", id: Faker::Facebook.uid, name: Faker::Name.lindy_hop_name, admin: false)
     user = instance_double(LoginSession::User,
                            name:,
                            name_with_role: name,
-                           admin?: false,
-                           auth_id: Faker::Facebook.uid,
+                           admin?: admin,
+                           auth_id: id,
+                           token: "a-super-secret-token",
                            logged_in?: true)
     login_session = instance_double(LoginSession, "Fake login", user:)
     allow(LoginSession).to receive(:new).and_return(login_session)
+    visit after_login_path
   end
 end
