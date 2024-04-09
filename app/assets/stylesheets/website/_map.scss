@@ -123,6 +123,12 @@ body.socials {
 
   .listings {
     box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+    font-size: 14px;
+    position: absolute;
+    overflow: hidden auto;
+    top: 170px;
+    bottom: 0;
+    left: 0;
 
     li {
       text-align: center;
@@ -139,6 +145,7 @@ body.socials {
 
       a {
         padding: 10px;
+        display: block;
 
         &:hover {
           border: none;
@@ -160,19 +167,6 @@ body.socials {
 
     h1 {
       margin-bottom: 10px;
-    }
-  }
-
-  .listings {
-    font-size: 14px;
-    position: absolute;
-    overflow: hidden auto;
-    top: 170px;
-    bottom: 0;
-    left: 0;
-
-    li a {
-      display: block;
     }
   }
 
