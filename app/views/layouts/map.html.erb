@@ -12,22 +12,30 @@
 
     <div id="map" data-map-target="map"></div>
 
-    <header class="page">
-      <h1>
-        <%= link_to "#{tc("site_name")}'s", root_path %>
-        <em>
-          Lindy Map
-        </em>
-      </h1>
-      <div class="navigation primary-nav">
-        <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
-        <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
-      </div>
-    </header>
+    <nav class="page" data-controller="map-menu" data-map-menu-open-class="open">
+      <header>
+        <h1>
+          <%= link_to "#{tc("site_name")}'s", root_path %>
+          <em>
+            Lindy Map
+          </em>
+        </h1>
+        <div class="map-menu">
+          <div class="navigation primary-nav">
+            <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
+            <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
+          </div>
 
-    <div class="listings page">
-      <%= yield :listings %>
-    </div>
+          <a class="currently-shown" data-map-menu-target="currentlyShown" data-action="map-menu#toggle:prevent">
+            ALL
+          </a>
+        </div>
+      </header>
+
+      <div class="listings" data-map-menu-target="menu">
+        <%= yield :listings %>
+      </div>
+    </nav>
   </div>
 <% end %>
 

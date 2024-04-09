@@ -26,7 +26,7 @@
           { date: date.to_fs(:db) },
           {
             class: (:selected if date == @map_dates.selected_date),
-            data: { action: "map#update:prevent", map_target: "updateControl", url: map_socials_path(date.to_fs(:db), format: :json) }
+            data: { action: "map#update:prevent map-menu#choose:prevent", map_target: "updateControl", url: map_socials_path(date.to_fs(:db), format: :json) }
           }
         %>
       </li>
