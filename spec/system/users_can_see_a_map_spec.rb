@@ -60,7 +60,7 @@ RSpec.describe "Users can view a map of upcoming events" do
         .and have_content("Sunday 16th June")
         .and have_content("Monday 17th June")
 
-      marker_json = page.find_by_id("map")["data-markers"]
+      marker_json = page.find(".map-container")["data-map-markers-value"]
       markers = JSON.parse(marker_json)
       expect(markers.count).to eq 2
 
@@ -139,7 +139,7 @@ RSpec.describe "Users can view a map of upcoming events" do
         .and have_content("Saturday")
         .and have_content("Sunday")
 
-      marker_json = page.find_by_id("map")["data-markers"]
+      marker_json = page.find(".map-container")["data-map-markers-value"]
       markers = JSON.parse(marker_json)
       expect(markers.count).to eq 1
       info_window_string = markers.first.fetch("infoWindowContent")

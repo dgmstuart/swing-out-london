@@ -1,6 +1,10 @@
 @use "borders";
 @use "../shared/colours";
 
+.map-container {
+  height: 100%;
+}
+
 #map {
   height: 100%;
   margin: 0;

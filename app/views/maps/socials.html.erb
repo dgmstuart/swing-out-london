@@ -25,8 +25,8 @@
         <%= link_to I18n.l(date, format: :listing_date),
           { date: date.to_fs(:db) },
           {
-            class: ["js-update-map", (:selected if date == @map_dates.selected_date)],
-            data: { url: map_socials_path(date.to_fs(:db), format: :json) }
+            class: (:selected if date == @map_dates.selected_date),
+            data: { action: "map#update:prevent", map_target: "updateControl", url: map_socials_path(date.to_fs(:db), format: :json) }
           }
         %>
       </li>

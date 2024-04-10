@@ -1,26 +1,32 @@
 <% content_for :content do %>
-  <div id="map" data-markers='<%= @map_markers.to_json %>' data-config='<%= CITY.map_config.to_h.to_json %>'></div>
+  <div class="map-container"
+       data-controller="map"
+       data-map-api-key-value='<%=ENV["GOOGLE_MAPS_JAVASCRIPT_API_KEY"]%>'
+       data-map-markers-value='<%= @map_markers.to_json %>'
+       data-map-config-value='<%= CITY.map_config.to_h.to_json %>'
+       data-map-selected-class='selected'>
 
-  <header class="page">
-    <h1>
-      <%= link_to "#{tc("site_name")}'s", root_path %>
-      <em>
-        Lindy Map
-      </em>
-    </h1>
-    <div class="navigation primary-nav">
-      <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
-      <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
+    <div id="map" data-map-target="map"></div>
+
+    <header class="page">
+      <h1>
+        <%= link_to "#{tc("site_name")}'s", root_path %>
+        <em>
+          Lindy Map
+        </em>
+      </h1>
+      <div class="navigation primary-nav">
+        <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
+        <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
+      </div>
+    </header>
+
+    <div class="listings page">
+      <%= yield :listings %>
     </div>
-  </header>
-
-  <div class="listings page">
-    <%= yield :listings %>
   </div>
 
   <%= javascript_include_tag('application_map') %>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>
-
 <% end %>
 
 <%= render template: 'layouts/application' %>
