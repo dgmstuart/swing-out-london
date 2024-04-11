@@ -1,3 +1,3 @@
-require('./maps/create_markers.js')
-require('./maps/update_map.js')
-window.markers = []
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
+import "./controllers"

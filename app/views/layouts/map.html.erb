@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= javascript_include_tag('application_map') %>
+<% end %>
+
 <% content_for :content do %>
   <div class="map-container"
        data-controller="map"
@@ -25,8 +29,6 @@
       <%= yield :listings %>
     </div>
   </div>
-
-  <%= javascript_include_tag('application_map') %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

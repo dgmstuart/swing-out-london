@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { createMarkers } from '../maps/create_markers'
-import { updateMap } from '../maps/update_map'
+import { Map } from '../maps/map'
 
 // Connects to data-controller="map"
 export default class extends Controller {
@@ -12,51 +11,23 @@ export default class extends Controller {
   }
   static classes = [ "selected" ]
 
-  #mapInstance = null;
+  #map = null
 
   connect() {
-    if (window.google && window.google.maps) {
-      // Google Maps API is already loaded and available
-      this.initMap()
-    } else {
-      // Google Maps API needs to be loaded
-      window.initMap = this._initMap.bind(this)
-      this._loadGoogleMapsAPI()
-    }
+    this.#map = new Map({
+      apiKey: this.apiKeyValue,
+      config: this.configValue,
+      initialMarkers: this.markersValue.map(this._markerData),
+      mapElement: this.mapTarget
+    })
   }
 
   update(event) {
     this._setSelected(event.target)
-    updateMap(event.target, this.#mapInstance)
-  }
-
-  _initMap() {
-    this.#mapInstance = new window.google.maps.Map(this.mapTarget, this._mapOptions())
-    createMarkers(this.#mapInstance, this.markersValue)
-  }
-
-  _loadGoogleMapsAPI() {
-    const script = document.createElement('script')
-    script.async = true
-    script.defer = true
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKeyValue}&callback=initMap&loading=async`
-    document.head.appendChild(script)
-  }
-
-  _mapOptions() {
-    return {
-      center: this.configValue.center,
-      zoom: this.configValue.zoom,
-      maxZoom: 19,
-
-      zoomControl: true,
-      zoomControlOptions: {
-        style: window.google.maps.ZoomControlStyle.LARGE,
-        position: window.google.maps.ControlPosition.RIGHT_TOP
-      },
-      fullscreenControl: false,
-      mapTypeControl: false
-    }
+    this._updateFromUrl({
+      url: event.target.dataset.url,
+      callback: this._updateWithVenues.bind(this)
+    })
   }
 
   _setSelected(updateControl) {
@@ -64,5 +35,30 @@ export default class extends Controller {
       element.classList.remove(this.selectedClass)
     })
     updateControl.classList.add(this.selectedClass)
+  }
+
+  _updateWithVenues(venues) {
+    const markersData = venues.map(this._markerData)
+    this.#map.updateMarkers(markersData)
+  }
+
+  _updateFromUrl({url, callback}) {
+    fetch(url)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        callback(data.markers)
+      })
+  }
+
+  _markerData(venue) {
+    return {
+      lat: venue.position.lat,
+      lng: venue.position.lng,
+      title: venue.title,
+      icon: venue.icon,
+      content: venue.infoWindowContent
+    }
   }
 }
