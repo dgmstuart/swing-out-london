@@ -1,18 +1,20 @@
-import { GoogleMapsApi } from './google_maps_api'
+import { Loader } from "@googlemaps/js-api-loader"
 
 export class Map {
   constructor({ apiKey, config, initialMarkers, mapElement }) {
     this.apiKey = apiKey;
     this.config = config;
-    this.initialMarkers = initialMarkers;
     this.mapElement = mapElement;
 
-    const mapsApi = new GoogleMapsApi({ apiKey })
-    if (mapsApi.isLoaded()) {
-      this._initMap();
-    } else {
-      mapsApi.load(this._initMap.bind(this))
-    }
+    const loader = new Loader({
+      apiKey: apiKey,
+      version: "weekly"
+    });
+
+    loader.load().then(async () => {
+      this.#mapInstance = await this._createMap()
+      this._createMarkers(initialMarkers)
+    })
   }
 
   #mapInstance = null
@@ -70,13 +72,10 @@ export class Map {
     if (this.#activeInfoWindow) { this.#activeInfoWindow.close() }
   }
 
-  _initMap() {
-    this.#mapInstance = this._createMap()
-    this._createMarkers(this.initialMarkers)
-  }
+  async _createMap() {
+    const { Map } = await google.maps.importLibrary("maps");
 
-  _createMap() {
-    return new window.google.maps.Map(this.mapElement, {
+    return new Map(this.mapElement, {
       center: this.config.center,
       zoom: this.config.zoom,
       maxZoom: 19,
