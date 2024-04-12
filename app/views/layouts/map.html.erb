@@ -6,6 +6,7 @@
   <div class="map-container"
        data-controller="map"
        data-map-api-key-value='<%=ENV["GOOGLE_MAPS_JAVASCRIPT_API_KEY"]%>'
+       data-map-map-id-value='<%=ENV["GOOGLE_MAPS_MAP_ID"]%>'
        data-map-markers-value='<%= @map_markers.to_json %>'
        data-map-config-value='<%= CITY.map_config.to_h.to_json %>'>
 

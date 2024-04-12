@@ -6,6 +6,7 @@ export default class extends Controller {
   static targets = [ "map" ]
   static values = {
     apiKey: String,
+    mapId: String,
     config: Object,
     markers: Array
   }
@@ -15,6 +16,7 @@ export default class extends Controller {
   connect() {
     this.#map = new Map({
       apiKey: this.apiKeyValue,
+      mapId: this.mapIdValue,
       config: this.configValue,
       initialMarkers: this.markersValue.map(this._markerData),
       mapElement: this.mapTarget
@@ -48,7 +50,7 @@ export default class extends Controller {
       lat: venue.position.lat,
       lng: venue.position.lng,
       title: venue.title,
-      icon: venue.icon,
+      highlighted: venue.highlighted,
       content: venue.infoWindowContent
     }
   }

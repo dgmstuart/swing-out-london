@@ -1,8 +1,9 @@
 import { Loader } from "@googlemaps/js-api-loader"
 
 export class Map {
-  constructor({ apiKey, config, initialMarkers, mapElement }) {
+  constructor({ apiKey, mapId, config, initialMarkers, mapElement }) {
     this.apiKey = apiKey;
+    this.mapId = mapId;
     this.config = config;
     this.mapElement = mapElement;
 
@@ -12,6 +13,9 @@ export class Map {
     });
 
     loader.load().then(async () => {
+      const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+      this.AdvancedMarkerElement = AdvancedMarkerElement;
+      this.PinElement = PinElement;
       this.#mapInstance = await this._createMap()
       this._createMarkers(initialMarkers)
     })
@@ -41,12 +45,12 @@ export class Map {
     this.#mapInstance.fitBounds(bounds);
   }
 
-  _createMarker({ position, title, icon, content }) {
-    const marker = new google.maps.Marker({
+  async _createMarker({ position, title, highlighted, content }) {
+    const marker = new this.AdvancedMarkerElement({
       position: position,
       title: title,
-      icon: icon,
-      map: this.#mapInstance
+      map: this.#mapInstance,
+      ...(highlighted ? { content: this._highlightedPin() } : {})
     });
 
     const infoWindow = new google.maps.InfoWindow({ content })
@@ -58,6 +62,16 @@ export class Map {
     });
 
     this.#markers.push(marker)
+  }
+
+  _highlightedPin() {
+    const pin =  new this.PinElement({
+      scale: 1.2,
+      background: "#3D6399",
+      borderColor: "#384f6e",
+      glyphColor: "#ffffff"
+    })
+    return pin.element
   }
 
   _clearAllMarkers() {
@@ -76,6 +90,7 @@ export class Map {
     const { Map } = await google.maps.importLibrary("maps");
 
     return new Map(this.mapElement, {
+      mapId: this.mapId,
       center: this.config.center,
       zoom: this.config.zoom,
       maxZoom: 19,
