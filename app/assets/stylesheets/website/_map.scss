@@ -129,14 +129,6 @@ body.socials {
       border-bottom: solid 1px #bebebe;
       display: none;
 
-      &.selected {
-        display: list-item;
-
-        a:hover {
-          background-color: inherit;
-        }
-      }
-
       a {
         padding: 10px;
         display: block;
@@ -145,6 +137,16 @@ body.socials {
           border: none;
           background-color: #e4e4e4;
         }
+      }
+    }
+
+    .selected{
+      color: colours.$background-colour;
+      background-color: colours.$text-colour;
+
+      &:hover {
+        color: inherit;
+        background-color: #e4e4e4;
       }
     }
 
@@ -267,12 +269,6 @@ body.socials {
       li {
         display: list-item;
         box-shadow: 0 1px 0 #e4e4e4;
-
-        a.selected{
-          padding: 10px;
-          color: colours.$background-colour;
-          background-color: colours.$text-colour;
-        }
       }
 
       .note {
