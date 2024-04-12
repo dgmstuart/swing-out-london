@@ -3,9 +3,12 @@
 require "rails_helper"
 
 RSpec.describe MapListingsHelper do
+  include ActiveSupport::Testing::TimeHelpers
+
   describe "#mapinfo_swingclass_link" do
     context "with all the possible parts" do
       it "generates a link with information about the class" do
+        travel_to "2024-04-08"
         organiser = instance_double(
           "Organiser",
           shortname: nil,
