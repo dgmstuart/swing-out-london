@@ -1,8 +1,8 @@
 <%= render partial: "map_info_address", locals: { venue: } %>
 
-<ul class="listing_info">
+<ul class="info-listings">
   <% listings.each do |class_listing| %>
-    <li>
+    <li class="info-listing">
       <span class="day">
         <%= "#{ class_listing.day }:" %>
       </span>
