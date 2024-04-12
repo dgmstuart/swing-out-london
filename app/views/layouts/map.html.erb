@@ -1,26 +1,42 @@
-<% content_for :content do %>
-  <div id="map" data-markers='<%= @map_markers.to_json %>' data-config='<%= CITY.map_config.to_h.to_json %>'></div>
-
-  <header class="page">
-    <h1>
-      <%= link_to "#{tc("site_name")}'s", root_path %>
-      <em>
-        Lindy Map
-      </em>
-    </h1>
-    <div class="navigation primary-nav">
-      <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
-      <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
-    </div>
-  </header>
-
-  <div class="listings page">
-    <%= yield :listings %>
-  </div>
-
+<% content_for :head do %>
   <%= javascript_include_tag('application_map') %>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>
+<% end %>
 
+<% content_for :content do %>
+  <div class="map-container"
+       data-controller="map"
+       data-map-api-key-value='<%=ENV["GOOGLE_MAPS_JAVASCRIPT_API_KEY"]%>'
+       data-map-markers-value='<%= @map_markers.to_json %>'
+       data-map-config-value='<%= CITY.map_config.to_h.to_json %>'
+       data-map-selected-class='selected'>
+
+    <div id="map" data-map-target="map"></div>
+
+    <nav class="page" data-controller="map-menu" data-map-menu-open-class="open">
+      <header>
+        <h1>
+          <%= link_to "#{tc("site_name")}'s", root_path %>
+          <em>
+            Lindy Map
+          </em>
+        </h1>
+        <div class="map-menu">
+          <div class="navigation primary-nav">
+            <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
+            <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
+          </div>
+
+          <a class="currently-shown" data-map-menu-target="currentlyShown" data-action="map-menu#toggle:prevent">
+            ALL
+          </a>
+        </div>
+      </header>
+
+      <div class="listings" data-map-menu-target="menu">
+        <%= yield :listings %>
+      </div>
+    </nav>
+  </div>
 <% end %>
 
 <%= render template: 'layouts/application' %>

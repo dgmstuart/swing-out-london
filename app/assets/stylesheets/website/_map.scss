@@ -1,6 +1,12 @@
 @use "borders";
 @use "../shared/colours";
 
+.map-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 #map {
   height: 100%;
   margin: 0;
@@ -74,30 +80,24 @@ body.socials {
   .nota_bene {
     margin: 15px 0 0;
     font-size: 0.9em;
-    color: #666;
+    color: colours.$greybrown;
   }
 
   .page {
-    background: #fee6b8 none;
+    background: colours.$background-colour none;
+    width: 100%;
   }
 
   header {
-    position: absolute;
-    top: 0;
-    left: 0;
     height: 130px;
-    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
+    width: 100%;
+    box-shadow: 0 9px 12px rgba(50, 50, 50, 0.75);
+    font-size: 0.7em;
 
     h1 {
       text-transform: uppercase;
       font-size: 1.1em;
       text-align: center;
-      margin-bottom: 20px;
-
-      em {
-        display: block;
-        font-size: 2em;
-      }
     }
 
     .primary-nav {
@@ -122,23 +122,24 @@ body.socials {
   }
 
   .listings {
-    box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+    font-size: 14px;
 
     li {
       text-align: center;
       border-bottom: solid 1px #bebebe;
-      box-shadow: 0 1px 0 #e4e4e4;
+      display: none;
 
-      span#selected,
-      a.selected {
-        display: block;
-        padding: 10px;
-        color: #fee6b8;
-        background-color: #0f0f0f;
+      &.selected {
+        display: list-item;
+
+        a:hover {
+          background-color: inherit;
+        }
       }
 
       a {
         padding: 10px;
+        display: block;
 
         &:hover {
           border: none;
@@ -146,109 +147,138 @@ body.socials {
         }
       }
     }
-  }
 
-  .note {
-    padding: 30px 15px 20px;
-    font-size: 14px;
-  }
+    &.open {
+      width: 100%;
 
-  // SMALL
-  header {
-    padding: 20px 0;
-    font-size: 0.7em;
-
-    h1 {
-      margin-bottom: 10px;
+      li {
+        display: list-item;
+      }
     }
-  }
-
-  .listings {
-    font-size: 14px;
-    position: absolute;
-    overflow: hidden auto;
-    top: 170px;
-    bottom: 0;
-    left: 0;
-
-    li a {
-      display: block;
-    }
-  }
-
-  .page {
-    width: 164px;
   }
 
   // SMALL ONLY
   @media only screen and (width <= 767px) {
-    #map {
-      margin-left: 164px;
+    .page {
+      position: relative; // otherwise it doesn't show the block-shadow
     }
 
-    header .primary-nav {
-      display: block;
-      width: 140px;
-      margin: auto;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: auto;
+      border-right: solid 1px colours.$text-colour;
 
-      a {
-        display: block;
-        font-size: 16px;
-        margin-bottom: 5px;
-        padding: 5px 0;
+      h1 {
+        padding: 10px;
 
-        &:hover {
-          padding: 3px 0;
-        }
-
-        &.current {
-          padding: 3px 0;
-          margin-bottom: 5px;
+        em {
+          display: block;
         }
       }
+
+      .primary-nav {
+        display: flex;
+        align-items: baseline;
+
+        a {
+          display: block;
+          font-size: 16px;
+          margin-bottom: 5px;
+          padding: 5px;
+
+          &:hover {
+            padding: 3px;
+          }
+
+          &.current {
+            padding: 3px;
+          }
+        }
+      }
+
+      .map-menu {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .currently-shown {
+      border: none;
+      border-left: 1px solid colours.$text-colour;
+      padding: 5px 10px;
+      margin-left: 7px;
+      font-size: 12px;
+      text-align: center;
+
+      a {
+        border: none;
+      }
+    }
+
+    .note {
+      display: none; // TODO: find a way to incorporate it
     }
   }
 
   // TABLET & SMALLER LAPTOPS
   @media only screen and (width >= 768px) {
-    #map {
-      margin-left: 220px;
+    body {
+      display: block
     }
 
     .page {
       width: 220px;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+    }
+
+    #map {
+      margin-left: 220px;
     }
 
     header {
       font-size: 0.9em;
+      padding: 20px 0;
 
       h1 {
         margin-bottom: 20px;
+
+        em {
+          display: block;
+          font-size: 2em;
+        }
       }
-    }
-  }
 
-  // DESKTOP
-  @media only screen and (width >= 960px) {
-    #map {
-      margin-left: 320px;
-    }
-
-    header {
-      padding: 20px;
-    }
-
-    .page {
-      width: 280px;
+      .currently-shown {
+        display: none;
+      }
     }
 
     .listings {
-      font-size: 18px;
-      padding: 0 20px;
-    }
+      overflow: auto;
 
-    header {
-      font-size: 1em;
+      li {
+        display: list-item;
+        box-shadow: 0 1px 0 #e4e4e4;
+
+        a.selected{
+          padding: 10px;
+          color: colours.$background-colour;
+          background-color: colours.$text-colour;
+        }
+      }
+
+      .note {
+        padding: 30px 15px 20px;
+        font-size: 14px;
+      }
     }
   }
 }
