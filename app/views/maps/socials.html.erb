@@ -22,13 +22,12 @@
   <ul>
     <% @map_dates.listing_dates.each do |date| %>
       <li>
-        <%= link_to I18n.l(date, format: :listing_date),
+        <%= map_update_control_link(
+          I18n.l(date, format: :listing_date),
           { date: date.to_fs(:db) },
-          {
-            class: (:selected if date == @map_dates.selected_date),
-            data: { action: "map#update:prevent map-menu#choose:prevent", map_target: "updateControl", url: map_socials_path(date.to_fs(:db), format: :json) }
-          }
-        %>
+          selected: date == @map_dates.selected_date,
+          url: map_socials_path(date.to_fs(:db), format: :json)
+        ) %>
       </li>
     <% end %>
   </ul>

@@ -18,13 +18,12 @@
   <ul>
     <% DAYNAMES.each do |day| %>
       <li>
-        <%= link_to day.pluralize,
-          { day: day },
-          {
-            class: (:selected if day == @day),
-            data: { action: "map#update:prevent map-menu#choose:prevent", map_target: "updateControl", url: map_classes_path(day, format: :json) }
-          }
-        %>
+        <%= map_update_control_link(
+          day.pluralize,
+          { day: },
+          selected: day == @day,
+          url: map_classes_path(day, format: :json)
+        ) %>
       </li>
     <% end %>
   </ul>
