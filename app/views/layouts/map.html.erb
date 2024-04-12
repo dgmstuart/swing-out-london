@@ -7,12 +7,11 @@
        data-controller="map"
        data-map-api-key-value='<%=ENV["GOOGLE_MAPS_JAVASCRIPT_API_KEY"]%>'
        data-map-markers-value='<%= @map_markers.to_json %>'
-       data-map-config-value='<%= CITY.map_config.to_h.to_json %>'
-       data-map-selected-class='selected'>
+       data-map-config-value='<%= CITY.map_config.to_h.to_json %>'>
 
     <div id="map" data-map-target="map"></div>
 
-    <nav class="page" data-controller="map-menu" data-map-menu-open-class="open">
+    <nav class="page" data-controller="map-menu" data-map-menu-open-class="open" data-map-menu-selected-class='selected'>
       <header>
         <h1>
           <%= link_to "#{tc("site_name")}'s", root_path %>

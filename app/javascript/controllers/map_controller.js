@@ -3,13 +3,12 @@ import { Map } from '../maps/map'
 
 // Connects to data-controller="map"
 export default class extends Controller {
-  static targets = [ "map", "updateControl" ]
+  static targets = [ "map" ]
   static values = {
     apiKey: String,
     config: Object,
     markers: Array
   }
-  static classes = [ "selected" ]
 
   #map = null
 
@@ -23,18 +22,10 @@ export default class extends Controller {
   }
 
   update(event) {
-    this._setSelected(event.target)
     this._updateFromUrl({
       url: event.target.dataset.url,
       callback: this._updateWithVenues.bind(this)
     })
-  }
-
-  _setSelected(updateControl) {
-    this.updateControlTargets.forEach((element) => {
-      element.classList.remove(this.selectedClass)
-    })
-    updateControl.classList.add(this.selectedClass)
   }
 
   _updateWithVenues(venues) {
