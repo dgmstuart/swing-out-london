@@ -1,6 +1,8 @@
 @use "borders";
 @use "../shared/colours";
 
+$map-shadow: 0 9px 12px rgba(50, 50, 50, 0.75);
+
 .map-container {
   height: 100%;
   display: flex;
@@ -49,7 +51,6 @@ body.socials {
   header {
     height: 130px;
     width: 100%;
-    box-shadow: 0 9px 12px rgba(50, 50, 50, 0.75);
     font-size: 0.7em;
 
     h1 {
@@ -87,6 +88,7 @@ body.socials {
     font-size: 14px;
     overflow: auto;
     display: none;
+    background: colours.$background-colour;
 
     li {
       text-align: center;
@@ -122,6 +124,7 @@ body.socials {
   @media only screen and (width <= 767px) {
     .page {
       position: relative; // otherwise it doesn't show the block-shadow
+      box-shadow: $map-shadow;
     }
 
     header {
@@ -160,6 +163,13 @@ body.socials {
       }
     }
 
+    .listings {
+      max-height: 75vh; // without a height or max-height, the list doesn't scroll on mobile (landscape)
+      position: absolute; // position: absolute makes the menu expand over the top of the map rather than pushing it down
+      border-top: borders.$thin-border;
+      box-shadow: $map-shadow; // the page's shadow isn't shown because position:absolute removes this element from the flow
+    }
+
     .currently-shown {
       border: none;
       border-left: 1px solid colours.$text-colour;
@@ -189,7 +199,7 @@ body.socials {
       left: 0;
       display: flex;
       flex-direction: column;
-      box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
+      box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
     }
 
     #map {
@@ -199,6 +209,8 @@ body.socials {
     header {
       font-size: 0.9em;
       padding: 20px 0;
+      box-shadow: $map-shadow;
+      position: relative; // otherwise it doesn't show the block-shadow
 
       h1 {
         margin-bottom: 20px;
