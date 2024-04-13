@@ -6,7 +6,7 @@ module MapHelper
       class: (:selected if selected),
       data: {
         action: "map#update:prevent map-menu#choose:prevent",
-        map_target: "updateControl",
+        map_menu_target: "updateControl",
         url:
       }
     }

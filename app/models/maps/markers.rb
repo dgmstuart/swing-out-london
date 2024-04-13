@@ -48,14 +48,9 @@ module Maps
         id: venue.id,
         title: venue.name,
         position:,
+        highlighted:,
         infoWindowContent: info_window_content(venue)
-      }.tap do |options|
-        options[:icon] = highlighted_marker_icon if highlighted
-      end
-    end
-
-    def highlighted_marker_icon
-      "https://maps.google.com/mapfiles/marker_purple.png"
+      }
     end
 
     def info_window_content(venue)

@@ -41,7 +41,7 @@ body.socials {
     }
   }
 
-  ul.listing_info {
+  ul.info-listings {
     margin-top: 15px;
 
     li {
@@ -49,19 +49,24 @@ body.socials {
       padding-bottom: 1px;
     }
 
+    .info-listing {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
     .social_date {
-      display: block;
-      float: left;
-      width: 190px;
+      font-weight: bold;
+      min-width: 80px;
+      max-width: 30%;
     }
 
     .event_details {
-      display: block;
-      margin-left: 190px;
-      max-width: 400px;
+      flex-grow: 1;
     }
 
     .day {
+      font-weight: bold;
       margin-right: 5px;
     }
 
