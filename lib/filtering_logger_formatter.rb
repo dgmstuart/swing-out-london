@@ -16,5 +16,8 @@ class FilteringLoggerFormatter
 
   def filter(message)
     message.gsub(/(Authorization: Bearer )\w+/, '\1[FILTERED]')
+    message.gsub(/(fb_exchange_token=)\w+/, '\1[FILTERED]')
+    message.gsub(/(client_secret=)\w+/, '\1[FILTERED]')
+    message.gsub(/(appsecret_proof=)\w+/, '\1[FILTERED]')
   end
 end
