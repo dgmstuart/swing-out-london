@@ -87,7 +87,6 @@ body.socials {
   .listings {
     font-size: 14px;
     overflow: auto;
-    display: none;
     background: colours.$background-colour;
 
     li {
@@ -117,7 +116,6 @@ body.socials {
 
     &.open {
       display: block;
-      width: 100%;
     }
   }
 
@@ -164,8 +162,11 @@ body.socials {
     }
 
     .listings {
+      display: none;
       max-height: 75vh; // without a height or max-height, the list doesn't scroll on mobile (landscape)
       position: absolute; // position: absolute makes the menu expand over the top of the map rather than pushing it down
+      right: 0;
+      width: 230px;
       border-top: borders.$thin-border;
       box-shadow: $map-shadow; // the page's shadow isn't shown because position:absolute removes this element from the flow
     }
@@ -186,7 +187,7 @@ body.socials {
     .note {
       background-color: colours.$background-light-colour;
       margin: 0;
-      padding: 12px 40px;
+      padding: 20px 30px;
     }
   }
 
