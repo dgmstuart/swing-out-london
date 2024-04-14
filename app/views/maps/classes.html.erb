@@ -26,6 +26,14 @@
         ) %>
       </li>
     <% end %>
+    <li>
+      <%= map_update_control_link(
+        "All",
+        "#",
+        selected: @day.blank?,
+        url: map_classes_path(format: :json)
+      ) %>
+    </li>
   </ul>
   <p class="note">
     <em>Unless otherwise stated all classes are primarily Lindy Hop</em>
