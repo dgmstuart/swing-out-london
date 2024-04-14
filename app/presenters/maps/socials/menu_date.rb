@@ -21,6 +21,10 @@ module Maps
       def selected?
         @selected
       end
+
+      def events?
+        EventInstance.exists?(date: @date) || Event.weekly_socials_on(@date).exists?
+      end
     end
   end
 end

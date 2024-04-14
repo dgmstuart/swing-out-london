@@ -21,14 +21,20 @@
 <% content_for :listings do %>
   <ul>
     <% @map_dates.menu_dates.each do |date| %>
-      <li>
-        <%= map_update_control_link(
-          date.to_s,
-          { date: date.to_param },
-          selected: date.selected?,
-          url: map_socials_path(date.to_param, format: :json)
-        ) %>
-      </li>
+      <% if date.events? %>
+        <li>
+          <%= map_update_control_link(
+            date.to_s,
+            { date: date.to_param },
+            selected: date.selected?,
+            url: map_socials_path(date.to_param, format: :json)
+          ) %>
+        </li>
+      <% else %>
+        <li class="no-events">
+          <%= date.to_s %>
+        </li>
+      <% end %>
     <% end %>
     <li>
       <%= map_update_control_link(
