@@ -1,36 +1,42 @@
 <% content_for :title do %>
   <%= tc("site_name") %>'s Lindy Map: Classes
-  <% if @day %>
-    on <%= @day.pluralize %>
+  <% if @days.selected_day %>
+    on <%= @days.selected_day.pluralize %>
   <% end %>
 <% end %>
 
 <% content_for :description do %>
   <% # This just about fits on a google search result: %>
   A map of all the Lindy Hop classes in <%= tc("city") %>
-  <% if @day %>
-    on <%= @day.pluralize %>,
+  <% if @days.selected_day %>
+    on <%= @days.selected_day.pluralize %>,
   <% end %>
   also classes in other swing dance styles: Charleston, Balboa, Blues, Authentic Jazz and Collegiate Shag
 <% end %>
 
 <% content_for :listings do %>
   <ul>
-    <% DAYNAMES.each do |day| %>
-      <li>
-        <%= map_update_control_link(
-          day.pluralize,
-          { day: },
-          selected: day == @day,
-          url: map_classes_path(day, format: :json)
-        ) %>
-      </li>
+    <% @days.menu_days.each do |day| %>
+      <% if day.events? %>
+        <li>
+          <%= map_update_control_link(
+            day.to_s,
+            { day: day.to_param},
+            selected: day.selected?,
+            url: map_classes_path(day.to_param, format: :json)
+          ) %>
+        </li>
+      <% else %>
+        <li class="no-events">
+          <%= day.to_s %>
+        </li>
+      <% end %>
     <% end %>
     <li>
       <%= map_update_control_link(
         "All",
         "#",
-        selected: @day.blank?,
+        selected: @days.selected_day.blank?,
         url: map_classes_path(format: :json)
       ) %>
     </li>

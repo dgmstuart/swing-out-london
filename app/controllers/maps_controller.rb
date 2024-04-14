@@ -10,17 +10,18 @@ class MapsController < ApplicationController
                 race_condition_ttl: 10
 
   def classes
-    @day = Maps::Classes::DayParser.parse(params[:day])
+    day_string = params[:day]
+    @days = Maps::Classes::Days.new(day_string)
     @map_markers =
       Maps::Markers.for_classes(
-        selected_day: @day,
+        selected_day: @days.selected_day,
         renderer: self
       ).for_venues(
-        venues: Maps::Classes::VenueQuery.new.venues(@day),
+        venues: Maps::Classes::VenueQuery.new.venues(@days.selected_day),
         highlighted_venue_id: params[:venue_id].to_i
       )
   rescue Maps::Classes::DayParser::NonDayError
-    logger.warn("Not a recognised day: #{@day}")
+    logger.warn("Not a recognised day: #{day_string}")
     redirect_to map_classes_path
   end
 
