@@ -91,7 +91,10 @@ body.socials {
 
     li {
       text-align: center;
-      border-bottom: solid 1px #bebebe;
+
+      &:not(:last-child) {
+        border-bottom: solid 1px #bebebe;
+      }
 
       a {
         padding: 10px;
