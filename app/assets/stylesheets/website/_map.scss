@@ -1,6 +1,8 @@
 @use "borders";
 @use "../shared/colours";
 
+$map-shadow: 0 9px 12px rgba(50, 50, 50, 0.75);
+
 .map-container {
   height: 100%;
   display: flex;
@@ -41,53 +43,6 @@ body.socials {
     }
   }
 
-  ul.info-listings {
-    margin-top: 15px;
-
-    li {
-      /* padding to allow for the bottom border applied to the link it contains on hover */
-      padding-bottom: 1px;
-    }
-
-    .info-listing {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .social_date {
-      font-weight: bold;
-      min-width: 80px;
-      max-width: 30%;
-    }
-
-    .event_details {
-      flex-grow: 1;
-    }
-
-    .day {
-      font-weight: bold;
-      margin-right: 5px;
-    }
-
-    .new-label {
-      color: white;
-      background-color: colours.$text-colour;
-      padding: 0.3em 0.6em;
-      margin-right: 0.2em;
-      position: relative;
-      bottom: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.8em;
-    }
-  }
-
-  .nota_bene {
-    margin: 15px 0 0;
-    font-size: 0.9em;
-    color: colours.$greybrown;
-  }
-
   .page {
     background: colours.$background-colour none;
     width: 100%;
@@ -96,13 +51,16 @@ body.socials {
   header {
     height: 130px;
     width: 100%;
-    box-shadow: 0 9px 12px rgba(50, 50, 50, 0.75);
     font-size: 0.7em;
 
     h1 {
       text-transform: uppercase;
       font-size: 1.1em;
       text-align: center;
+
+      em {
+        display: block;
+      }
     }
 
     .primary-nav {
@@ -128,11 +86,12 @@ body.socials {
 
   .listings {
     font-size: 14px;
+    overflow: auto;
+    background: colours.$background-colour;
 
     li {
       text-align: center;
       border-bottom: solid 1px #bebebe;
-      display: none;
 
       a {
         padding: 10px;
@@ -156,18 +115,14 @@ body.socials {
     }
 
     &.open {
-      width: 100%;
-
-      li {
-        display: list-item;
-      }
+      display: block;
     }
   }
 
-  // SMALL ONLY
   @media only screen and (width <= 767px) {
     .page {
       position: relative; // otherwise it doesn't show the block-shadow
+      box-shadow: $map-shadow;
     }
 
     header {
@@ -175,14 +130,9 @@ body.socials {
       align-items: center;
       justify-content: space-between;
       height: auto;
-      border-right: solid 1px colours.$text-colour;
 
       h1 {
         padding: 10px;
-
-        em {
-          display: block;
-        }
       }
 
       .primary-nav {
@@ -211,6 +161,16 @@ body.socials {
       }
     }
 
+    .listings {
+      display: none;
+      max-height: 75vh; // without a height or max-height, the list doesn't scroll on mobile (landscape)
+      position: absolute; // position: absolute makes the menu expand over the top of the map rather than pushing it down
+      right: 0;
+      width: 230px;
+      border-top: borders.$thin-border;
+      box-shadow: $map-shadow; // the page's shadow isn't shown because position:absolute removes this element from the flow
+    }
+
     .currently-shown {
       border: none;
       border-left: 1px solid colours.$text-colour;
@@ -225,40 +185,34 @@ body.socials {
     }
 
     .note {
-      display: none; // TODO: find a way to incorporate it
+      background-color: colours.$background-light-colour;
+      margin: 0;
+      padding: 20px 30px;
     }
   }
 
-  // TABLET & SMALLER LAPTOPS
   @media only screen and (width >= 768px) {
-    body {
-      display: block
-    }
-
     .page {
       width: 220px;
-      height: 100vh;
+      max-height: 100vh;
       position: absolute;
       top: 0;
       left: 0;
       display: flex;
       flex-direction: column;
-      box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75), inset 0 18px 20px -20px rgba(50, 50, 50, 0.75);
-    }
-
-    #map {
-      margin-left: 220px;
+      box-shadow: 9px 9px 12px rgba(50, 50, 50, 0.75);
     }
 
     header {
       font-size: 0.9em;
       padding: 20px 0;
+      box-shadow: $map-shadow;
+      position: relative; // otherwise it doesn't show the block-shadow
 
       h1 {
         margin-bottom: 20px;
 
         em {
-          display: block;
           font-size: 2em;
         }
       }
@@ -270,11 +224,7 @@ body.socials {
 
     .listings {
       overflow: auto;
-
-      li {
-        display: list-item;
-        box-shadow: 0 1px 0 #e4e4e4;
-      }
+      display: block;
 
       .note {
         padding: 30px 15px 20px;

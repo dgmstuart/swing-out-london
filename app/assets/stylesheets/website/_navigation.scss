@@ -29,5 +29,17 @@
     a.current:hover {
       border: borders.$thick-border;
     }
+
+    .nav-map a::after {
+      content: "";
+      display: inline-block;
+      width: 1.2em;
+      height: 1.2em;
+      background-image: url("map.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      vertical-align: text-bottom;
+      margin-left: 8px;
+    }
   }
 }

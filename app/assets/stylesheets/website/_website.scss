@@ -18,21 +18,18 @@
     }
   }
 
-  #footer {
+  .website-footer {
     margin: 30px 20px 0;
+  }
+
+  #footer_nav {
+    width: 100%;
   }
 }
 
 // SMALL
-address,
-#valid_statement,
-#footer_nav {
-  margin-bottom: 20px;
-}
 
-address,
-#valid_statement,
-#last_updated {
+.last-updated {
   text-align: center;
 }
 
@@ -46,6 +43,23 @@ address,
       width: 250px;
     }
   }
+}
+
+.website-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 0.6ch; // 0.6ch is roughly the width of a space?
+  border-top: borders.$basic-border;
+  padding: 30px 20px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.last-updated {
+  width: 100%
 }
 
 #footer_nav {
@@ -72,7 +86,7 @@ address,
     }
   }
 
-  #footer {
+  .website-footer {
     margin: 30px 40px 0;
   }
 
@@ -116,21 +130,12 @@ address,
     }
   }
 
-  #footer_nav {
-    float: left;
-    text-align: left;
-    width: 480px;
-    height: 31px;
+  address {
+    margin-left: auto;
   }
 
-  address,
-  #valid_statement {
-    text-align: right;
-    margin-bottom: 0;
-  }
-
-  #last_updated {
-    clear: both;
+  .last-updated {
+    width: 100%;
   }
 
   .banner {
@@ -204,11 +209,7 @@ address,
 
 // Footer
 /////////////////////////////////////////////
-#footer {
-  border-top: borders.$basic-border;
-  padding: 30px 20px;
-  clear: both;
-
+.website-footer {
   p,
   address {
     a {

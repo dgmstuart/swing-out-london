@@ -4,7 +4,7 @@
     <%= nav_link 'Listings', root_path,  { :rel => "start" } %>
   </li>
   <% links.each do |link| %>
-    <li class="<%=link.fetch(:class) %>">
+    <li class="<%=link.fetch(:class) %> nav-<%= link.fetch(:text).parameterize %>">
       <%= nav_link link.fetch(:text), link.fetch(:path), { :rel => "section" } %>
     </li>
   <% end %>

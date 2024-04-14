@@ -30,5 +30,13 @@
         ) %>
       </li>
     <% end %>
+    <li>
+      <%= map_update_control_link(
+        "All",
+        "#",
+        selected: @map_dates.selected_date.blank?,
+        url: map_socials_path(format: :json)
+      ) %>
+    </li>
   </ul>
 <% end %>

@@ -1,0 +1,51 @@
+@use "../shared/colours";
+
+body.classes,
+body.socials {
+  ul.info-listings {
+    margin-top: 15px;
+
+    li {
+      /* padding to allow for the bottom border applied to the link it contains on hover */
+      padding-bottom: 1px;
+    }
+
+    .info-listing {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .social_date {
+      font-weight: bold;
+      min-width: 80px;
+      max-width: 30%;
+    }
+
+    .event_details {
+      flex-grow: 1;
+    }
+
+    .day {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .new-label {
+      color: white;
+      background-color: colours.$text-colour;
+      padding: 0.3em 0.6em;
+      margin-right: 0.2em;
+      position: relative;
+      bottom: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.8em;
+    }
+  }
+
+  .nota_bene {
+    margin: 15px 0 0;
+    font-size: 0.9em;
+    color: colours.$greybrown;
+  }
+}

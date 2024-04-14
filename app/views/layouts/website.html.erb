@@ -27,16 +27,17 @@
       <%= content_for?(:page_content) ? yield(:page_content) : yield %>
     </main>
 
-    <div id="footer">
+    <footer class="website-footer">
       <%= render 'layouts/website/navigation', :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link %>
       <address>
         Site by
-        <%= link_to "@dgmstuart", "https://twitter.com/dgmstuart" %>
+        <%= link_to "@dgmstuart", "https://www.threads.net/@dgmstuart" %>.
       </address>
-      <p id="last_updated">
+      <p>Map icon by <a href="https://icons8.com">icons8</a></p>
+      <p class="last-updated">
         Last updated <%= @last_updated.time_in_words %>
       </p>
-    </div>
+    </footer>
   </div>
 <% end %>
 
