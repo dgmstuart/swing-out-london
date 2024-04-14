@@ -1,10 +1,11 @@
 import { Loader } from "@googlemaps/js-api-loader"
 
 export class Map {
-  constructor({ apiKey, mapId, config, initialMarkers, mapElement }) {
+  constructor({ apiKey, mapId, config, initialMarkers, boundsOffsetX, mapElement }) {
     this.apiKey = apiKey;
     this.mapId = mapId;
     this.config = config;
+    this.boundsOffsetX = boundsOffsetX;
     this.mapElement = mapElement;
 
     const loader = new Loader({
@@ -13,10 +14,11 @@ export class Map {
     });
 
     loader.load().then(async () => {
+      this.#mapInstance = await this._createMap()
+
       const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
       this.AdvancedMarkerElement = AdvancedMarkerElement;
       this.PinElement = PinElement;
-      this.#mapInstance = await this._createMap()
       this._createMarkers(initialMarkers)
     })
   }
@@ -42,7 +44,8 @@ export class Map {
       bounds.extend(position)
     })
 
-    this.#mapInstance.fitBounds(bounds);
+    const padding = this._boundsPadding()
+    this.#mapInstance.fitBounds(bounds, padding)
   }
 
   async _createMarker({ position, title, highlighted, content }) {
@@ -72,6 +75,16 @@ export class Map {
       glyphColor: "#ffffff"
     })
     return pin.element
+  }
+
+  _boundsPadding() {
+    const padding = 45 // if we don't pass any padding, GoogleMaps sets 45px
+    return {
+      left:(padding + this.boundsOffsetX()),
+      right:padding,
+      top:padding,
+      bottom:padding
+    }
   }
 
   _clearAllMarkers() {

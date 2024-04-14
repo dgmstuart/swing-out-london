@@ -3,7 +3,7 @@ import { Map } from '../maps/map'
 
 // Connects to data-controller="map"
 export default class extends Controller {
-  static targets = [ "map" ]
+  static targets = [ "map", "sidebar" ]
   static values = {
     apiKey: String,
     mapId: String,
@@ -19,6 +19,7 @@ export default class extends Controller {
       mapId: this.mapIdValue,
       config: this.configValue,
       initialMarkers: this.markersValue.map(this._markerData),
+      boundsOffsetX: this._sidebarWidth.bind(this),
       mapElement: this.mapTarget
     })
   }
@@ -53,5 +54,18 @@ export default class extends Controller {
       highlighted: venue.highlighted,
       content: venue.infoWindowContent
     }
+  }
+
+  _sidebarWidth() {
+    if (this._sidebarVisible()) {
+      return this.sidebarTarget.offsetWidth
+    } else {
+      return 0;
+    }
+  }
+
+  _sidebarVisible() {
+    const style = window.getComputedStyle(this.sidebarTarget);
+    return style.display !== 'none'
   }
 }
