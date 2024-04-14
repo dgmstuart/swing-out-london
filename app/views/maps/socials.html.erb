@@ -20,13 +20,13 @@
 
 <% content_for :listings do %>
   <ul>
-    <% @map_dates.listing_dates.each do |date| %>
+    <% @map_dates.menu_dates.each do |date| %>
       <li>
         <%= map_update_control_link(
-          I18n.l(date, format: :listing_date),
-          { date: date.to_fs(:db) },
-          selected: date == @map_dates.selected_date,
-          url: map_socials_path(date.to_fs(:db), format: :json)
+          date.to_s,
+          { date: date.to_param },
+          selected: date.selected?,
+          url: map_socials_path(date.to_param, format: :json)
         ) %>
       </li>
     <% end %>
