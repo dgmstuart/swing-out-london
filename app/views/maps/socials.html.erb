@@ -22,18 +22,18 @@
   <ul>
     <% @map_dates.menu_dates.each do |date| %>
       <% if date.events? %>
-        <li>
+        <%= tag.li class: ("end-of-week" if date.sunday?) do %>
           <%= map_update_control_link(
             date.to_s,
             { date: date.to_param },
             selected: date.selected?,
             url: map_socials_path(date.to_param, format: :json)
           ) %>
-        </li>
+        <% end %>
       <% else %>
-        <li class="no-events">
+        <%= tag.li class: ["no-events", ("end-of-week" if date.sunday?)] do %>
           <%= date.to_s %>
-        </li>
+        <% end %>
       <% end %>
     <% end %>
     <li>

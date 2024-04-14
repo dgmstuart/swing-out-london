@@ -25,6 +25,10 @@ module Maps
       def events?
         EventInstance.exists?(date: @date) || Event.weekly_socials_on(@date).exists?
       end
+
+      def sunday?
+        @date.sunday?
+      end
     end
   end
 end

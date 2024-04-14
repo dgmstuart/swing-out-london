@@ -96,6 +96,11 @@ body.socials {
         border-bottom: solid 1px #bebebe;
       }
 
+      &.end-of-week,
+      &:nth-last-child(2) { // apply to second to last to separate the "All" control from the others
+        border-bottom: borders.$double-thin-border;
+      }
+
       a {
         padding: 10px;
         display: block;
