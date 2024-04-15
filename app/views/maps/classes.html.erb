@@ -19,12 +19,7 @@
     <% @days.menu_days.each do |day| %>
       <% if day.events? %>
         <li>
-          <%= map_update_control_link(
-            day.to_s,
-            map_classes_day_path(day.to_param),
-            selected: day.selected?,
-            url: map_classes_day_path(day.to_param, format: :json)
-          ) %>
+          <%= map_update_control_link_item(:map_classes_day_path, day) %>
         </li>
       <% else %>
         <li class="no-events">
@@ -33,12 +28,7 @@
       <% end %>
     <% end %>
     <li>
-      <%= map_update_control_link(
-        "All",
-        map_classes_path,
-        selected: @days.selected_day.blank?,
-        url: map_classes_path(format: :json)
-      ) %>
+      <%= map_update_control_link_all("All", :map_classes_path, selected: @days.selected_day.blank?) %>
     </li>
   </ul>
   <p class="note">
