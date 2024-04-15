@@ -130,6 +130,10 @@ body.socials {
     &.open {
       display: block;
     }
+
+    .note {
+      border-top: borders.$double-thin-border;
+    }
   }
 
   @media only screen and (width <= 767px) {

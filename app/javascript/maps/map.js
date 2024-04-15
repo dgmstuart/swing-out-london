@@ -38,9 +38,11 @@ export class Map {
 
     var bounds = new google.maps.LatLngBounds();
 
+    const only = markersParams.length === 1
+
     markersParams.forEach(({ lat, lng, ...others }) => {
       const position = new google.maps.LatLng(lat, lng)
-      this._createMarker({ position, ...others } )
+      this._createMarker({ position, only, ...others } )
       bounds.extend(position)
     })
 
@@ -48,7 +50,7 @@ export class Map {
     this.#mapInstance.fitBounds(bounds, padding)
   }
 
-  async _createMarker({ position, title, highlighted, content }) {
+  async _createMarker({ position, title, highlighted, only, content }) {
     const marker = new this.AdvancedMarkerElement({
       position: position,
       title: title,
@@ -57,18 +59,27 @@ export class Map {
     });
 
     const infoWindow = new google.maps.InfoWindow({ content })
+    const infoWindowOpenArgs = { markerCoordinates: position, marker, infoWindow }
 
-    marker.addListener('click', (event) => {
-      google.maps.event.addListener(infoWindow, 'visible', () => {
-        this._ensureInfoWindowIsVisible({ markerCoordinates: event.latLng })
-      });
-
-      this._closeActiveWindow()
-      infoWindow.open(this.#mapInstance, marker)
-      this.#activeInfoWindow = infoWindow
-    });
+    marker.addListener('click', () =>
+      this._openInfoWindow(infoWindowOpenArgs)
+    );
 
     this.#markers.push(marker)
+
+    if (only || highlighted) {
+      this._openInfoWindow(infoWindowOpenArgs)
+    }
+  }
+
+  _openInfoWindow({ markerCoordinates, marker, infoWindow }) {
+    google.maps.event.addListener(infoWindow, 'visible', () => {
+      this._ensureInfoWindowIsVisible({ markerCoordinates })
+    })
+
+    this._closeActiveWindow()
+    infoWindow.open(this.#mapInstance, marker)
+    this.#activeInfoWindow = infoWindow
   }
 
   _ensureInfoWindowIsVisible({ markerCoordinates }) {
