@@ -23,7 +23,7 @@ xml.tag!(
   render("url", builder: xml, link_url: map_classes_url, change_frequency: "weekly", priority: 0.9)
 
   DAYNAMES.each do |day|
-    render("url", builder: xml, link_url: map_classes_url(day:), change_frequency: "weekly", priority: 0.7)
+    render("url", builder: xml, link_url: map_classes_day_url(day:), change_frequency: "weekly", priority: 0.7)
   end
 
   render("url", builder: xml, link_url: privacy_url, change_frequency: "yearly", priority: 0.4)

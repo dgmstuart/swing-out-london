@@ -57,7 +57,7 @@ module ListingsHelper
   end
 
   def class_map_url(day, venue)
-    map_classes_path(day:, venue_id: venue.id) unless venue.coordinates.nil?
+    map_classes_day_path(day:, venue_id: venue.id) unless venue.coordinates.nil?
   end
 
   def swingclass_link(event)
