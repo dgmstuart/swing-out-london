@@ -18,7 +18,7 @@ class MapsController < ApplicationController
         renderer: self
       ).for_venues(
         venues: Maps::Classes::VenueQuery.new.venues(@days.selected_day),
-        highlighted_venue_id: params[:venue_id].to_i
+        highlighted_venue_id:
       )
   rescue Maps::Classes::DayParser::NonDayError
     logger.warn("Not a recognised day: #{day_string}")
@@ -33,7 +33,7 @@ class MapsController < ApplicationController
         renderer: self
       ).for_venues(
         venues: Maps::Socials::VenueQuery.new.venues(@map_dates.display_dates),
-        highlighted_venue_id: params[:venue_id].to_i
+        highlighted_venue_id:
       )
   rescue Maps::Socials::Dates::DateOutOfRangeError
     logger.warn("Not a date in the visible range: #{@date}")
@@ -45,4 +45,8 @@ class MapsController < ApplicationController
     values << Audit.last.cache_key if Audit.any?
     values.join("-")
   end
+
+  private
+
+  def highlighted_venue_id = params[:venue_id].to_i
 end
