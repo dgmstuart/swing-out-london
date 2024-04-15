@@ -25,9 +25,9 @@
         <%= tag.li class: ("end-of-week" if date.sunday?) do %>
           <%= map_update_control_link(
             date.to_s,
-            { date: date.to_param },
+            map_socials_date_path(date.to_param),
             selected: date.selected?,
-            url: map_socials_path(date.to_param, format: :json)
+            url: map_socials_date_path(date.to_param, format: :json)
           ) %>
         <% end %>
       <% else %>
@@ -39,7 +39,7 @@
     <li>
       <%= map_update_control_link(
         "All",
-        "#",
+        map_socials_path,
         selected: @map_dates.selected_date.blank?,
         url: map_socials_path(format: :json)
       ) %>

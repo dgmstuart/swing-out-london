@@ -18,8 +18,10 @@ Rails.application.routes.draw do
 
   resources :external_events, only: %i[edit update]
 
-  get "map/classes/(:day)" => "maps#classes", as: :map_classes
-  get "map/socials/(:date)" => "maps#socials", as: :map_socials
+  get "map/classes" => "maps#classes", as: :map_classes
+  get "map/classes/:day" => "maps#classes", as: :map_classes_day
+  get "map/socials" => "maps#socials", as: :map_socials
+  get "map/socials/:date" => "maps#socials", as: :map_socials_date
   get "map" => "maps#socials"
   get "venue_map_info/:id" => "maps#venue_map_info", :as => :venue_map_info
   get "occasional" => "occasional_events#index"

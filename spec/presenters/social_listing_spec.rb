@@ -4,6 +4,7 @@ require "spec_helper"
 require "active_support"
 require "active_support/core_ext/module/delegation"
 require "active_support/core_ext/string/conversions"
+require "active_support/core_ext/object/blank" # needed for String#to_date
 require "app/presenters/social_listing"
 require "spec/support/time_formats_helper"
 
@@ -76,13 +77,13 @@ RSpec.describe SocialListing do
     context "when the venue has coordinates" do
       it "is a link to the venue on the map" do
         event = instance_double("Event", venue_id: 5, venue_coordinates: double)
-        url_helpers = double(map_socials_path: "a-map-url") # rubocop:disable RSpec/VerifiedDoubles
+        url_helpers = double(map_socials_date_path: "a-map-url") # rubocop:disable RSpec/VerifiedDoubles
 
         social_listing = described_class.new(event, url_helpers:)
 
         aggregate_failures do
           expect(social_listing.map_url("11 July 1936".to_date)).to eq("a-map-url")
-          expect(url_helpers).to have_received(:map_socials_path)
+          expect(url_helpers).to have_received(:map_socials_date_path)
             .with(date: "1936-07-11", venue_id: 5)
         end
       end

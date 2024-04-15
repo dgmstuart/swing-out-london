@@ -32,7 +32,7 @@ class SocialListing
   def map_url(date)
     return unless show_on_map?
 
-    url_helpers.map_socials_path(date: date.to_fs(:db), venue_id: event.venue_id)
+    url_helpers.map_socials_date_path(date: date.to_fs(:db), venue_id: event.venue_id)
   end
 
   private
