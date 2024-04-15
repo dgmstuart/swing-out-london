@@ -58,13 +58,30 @@ export class Map {
 
     const infoWindow = new google.maps.InfoWindow({ content })
 
-    marker.addListener('click', () => {
+    marker.addListener('click', (event) => {
+      google.maps.event.addListener(infoWindow, 'visible', () => {
+        this._ensureInfoWindowIsVisible({ markerCoordinates: event.latLng })
+      });
+
       this._closeActiveWindow()
-      infoWindow.open(this.#mapInstance, marker);
-      this.#activeInfoWindow = infoWindow;
+      infoWindow.open(this.#mapInstance, marker)
+      this.#activeInfoWindow = infoWindow
     });
 
     this.#markers.push(marker)
+  }
+
+  _ensureInfoWindowIsVisible({ markerCoordinates }) {
+    // Use the coordinates of the clicked marker as the reference point:
+    var markerBounds = new google.maps.LatLngBounds(markerCoordinates)
+
+    // ensure that the portion of the info window to the left of the marker (half the width) doesn't overlap the menu:
+    const infoWindowElement = document.querySelector('.gm-style-iw-d')
+    const infoWindowWidth = infoWindowElement.offsetWidth
+    const padding = this._boundsPadding(infoWindowWidth / 2)
+
+    // scroll the minimum amount to ensure that the info window is fully visible
+    this.#mapInstance.panToBounds(markerBounds, padding)
   }
 
   _highlightedPin() {
@@ -77,10 +94,10 @@ export class Map {
     return pin.element
   }
 
-  _boundsPadding() {
+  _boundsPadding(extraOffset = 0) {
     const padding = 45 // if we don't pass any padding, GoogleMaps sets 45px
     return {
-      left:(padding + this.boundsOffsetX()),
+      left:(padding + this.boundsOffsetX() + extraOffset),
       right:padding,
       top:padding,
       bottom:padding
