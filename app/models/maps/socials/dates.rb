@@ -10,8 +10,10 @@ module Maps
         @today = today
       end
 
-      def listing_dates
-        SOLDNTime.listing_dates
+      def menu_dates
+        listing_dates.map do |date|
+          MenuDate.new(date:, selected: date == selected_date)
+        end
       end
 
       def display_dates
@@ -29,6 +31,10 @@ module Maps
       private
 
       attr_reader :date_string, :today
+
+      def listing_dates
+        SOLDNTime.listing_dates
+      end
 
       def date
         DateParser.parse(date_string, today).tap do |date|

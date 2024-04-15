@@ -91,7 +91,15 @@ body.socials {
 
     li {
       text-align: center;
-      border-bottom: solid 1px #bebebe;
+
+      &:not(:last-child) {
+        border-bottom: solid 1px #bebebe;
+      }
+
+      &.end-of-week,
+      &:nth-last-child(2) { // apply to second to last to separate the "All" control from the others
+        border-bottom: borders.$double-thin-border;
+      }
 
       a {
         padding: 10px;
@@ -102,6 +110,11 @@ body.socials {
           background-color: #e4e4e4;
         }
       }
+    }
+
+    .no-events {
+      padding: 10px;
+      color: #a5a5a5;
     }
 
     .selected{
