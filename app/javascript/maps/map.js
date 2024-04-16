@@ -97,10 +97,9 @@ export class Map {
 
   _highlightedPin() {
     const pin =  new this.PinElement({
-      scale: 1.2,
-      background: "#3D6399",
-      borderColor: "#384f6e",
-      glyphColor: "#ffffff"
+      background: "#fab64a",
+      borderColor: "#d48101",
+      glyphColor: "#d48101"
     })
     return pin.element
   }
