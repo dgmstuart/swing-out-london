@@ -3,15 +3,15 @@
 module MapListingsHelper
   def mapinfo_social_listing(social_listing)
     capture do
-      if social_listing.cancelled?
-        concat cancelled_label
-        concat " "
-      end
       if social_listing.new?
         concat new_event_label
         concat " "
       end
       concat mapinfo_social_link(social_listing)
+      if social_listing.cancelled?
+        concat cancelled_label
+        concat " "
+      end
     end
   end
 

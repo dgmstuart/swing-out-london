@@ -16,14 +16,31 @@ body.socials {
       margin-bottom: 8px;
     }
 
-    .social_date {
+    .social-date {
       font-weight: bold;
       min-width: 80px;
       max-width: 30%;
+
+      &.cancelled {
+        text-decoration: line-through;
+      }
     }
 
     .event_details {
       flex-grow: 1;
+
+      .cancelled_label {
+        margin-left: 0.5ch;
+        color: colours.$red;
+
+        &::before {
+          content: "(";
+        }
+
+        &::after {
+          content: ")";
+        }
+      }
     }
 
     .day {

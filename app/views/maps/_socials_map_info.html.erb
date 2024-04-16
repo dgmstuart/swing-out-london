@@ -3,7 +3,7 @@
 <ul class="info-listings">
   <% listings.each do |social_listings_row| %>
     <li class="info-listing">
-      <div class="social_date">
+      <div class="social-date<%= ' cancelled' if social_listings_row.social_listing.cancelled? %>">
         <%= "#{ social_listings_row.date }:" %>
       </div>
       <div class="event_details">
