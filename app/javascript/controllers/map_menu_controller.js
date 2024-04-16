@@ -10,22 +10,42 @@ export default class extends Controller {
     if (selected) {
       this.currentlyShownTarget.textContent = selected.text
     }
+
+    this.closeListener = document.addEventListener('click', this.#closeIfOutside.bind(this))
   }
 
-  toggle(event) {
+  disconnect() {
+    document.removeEventListener('click', this.closeListener)
+  }
+
+  toggle() {
     this.menuTarget.classList.toggle(this.openClass)
   }
 
   choose(event) {
-    this._setSelected(event.target)
-    this.menuTarget.classList.remove(this.openClass)
+    this.#setSelected(event.target)
+    this.#close()
     this.currentlyShownTarget.textContent = event.target.text
   }
 
-  _setSelected(updateControl) {
+  #setSelected(updateControl) {
     this.updateControlTargets.forEach((element) => {
       element.classList.remove(this.selectedClass)
     })
     updateControl.classList.add(this.selectedClass)
+  }
+
+  #closeIfOutside(event) {
+    if (!this.element.contains(event.target) && this.#isOpen()) {
+      this.#close()
+    }
+  }
+
+  #close() {
+    this.menuTarget.classList.remove(this.openClass)
+  }
+
+  #isOpen() {
+    return this.menuTarget.classList.contains(this.openClass)
   }
 }
