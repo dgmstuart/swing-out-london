@@ -2,6 +2,7 @@
   <% if Rails.configuration.x.facebook.app_id %>
     <meta content="<%= Rails.configuration.x.facebook.app_id %>" property="fb:app_id"/>
   <% end %>
+  <%= opengraph_image_meta_tag %>
 <% end %>
 
 <section class="login">
