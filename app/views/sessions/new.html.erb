@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <% if Rails.configuration.x.facebook.app_id %>
+    <meta content="<%= Rails.configuration.x.facebook.app_id %>" property="fb:app_id"/>
+  <% end %>
+<% end %>
+
 <section class="login">
   <%= render "shared/flash" %>
 
