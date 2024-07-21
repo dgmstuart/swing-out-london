@@ -105,7 +105,8 @@
     &quot;course_length&quot;: null,
     &quot;organiser_token&quot;: null,
     &quot;class_organiser_id&quot;: {{dance_class_organiser_id}},
-    &quot;social_organiser_id&quot;: null
+    &quot;social_organiser_id&quot;: null,
+    &quot;reminder_email_address&quot;: null
   },
   &quot;comment&quot;: null
 }</summary>
@@ -188,7 +189,8 @@
     &quot;course_length&quot;: null,
     &quot;organiser_token&quot;: null,
     &quot;class_organiser_id&quot;: null,
-    &quot;social_organiser_id&quot;: null
+    &quot;social_organiser_id&quot;: null,
+    &quot;reminder_email_address&quot;: null
   },
   &quot;comment&quot;: null
 }</summary>
@@ -245,7 +247,8 @@
     &quot;course_length&quot;: null,
     &quot;organiser_token&quot;: null,
     &quot;class_organiser_id&quot;: null,
-    &quot;social_organiser_id&quot;: null
+    &quot;social_organiser_id&quot;: null,
+    &quot;reminder_email_address&quot;: null
   },
   &quot;comment&quot;: null
 }</summary>

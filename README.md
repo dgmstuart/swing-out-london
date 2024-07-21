@@ -43,6 +43,11 @@ run them together using the heroku CLI (installed as part of the bundle):
 
     heroku local -f Procfile.dev
 
+#### Previewing emails
+
+Emails sent by the site can be previewed in the development environment at
+[/rails/mailers](http://localhost:3000/rails/mailers).
+
 ## Environment Variables
 
 This project uses [.env](https://github.com/bkeepers/dotenv) to manage

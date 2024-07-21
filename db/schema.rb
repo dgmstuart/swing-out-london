@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_16_131900) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
     t.integer "class_organiser_id"
     t.integer "social_organiser_id"
     t.string "organiser_token"
+    t.string "reminder_email_address"
     t.index ["frequency", "day", "has_class"], name: "index_events_on_fq_and_day_and_has_class"
     t.index ["frequency", "day", "has_social"], name: "index_events_on_fq_and_day_and_has_social"
     t.index ["frequency", "has_class"], name: "index_events_on_fq_and_has_class"

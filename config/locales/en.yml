@@ -58,6 +58,12 @@ en:
         social_dance: Social dance
         weekly_class: Weekly class
 
+  organiser_mailer:
+    reminder_email:
+      subject: '%{site_name} is missing dates for "%{event_name}"'
+      title: "We're missing dates"
+      intro: "We don't seem to have any future dates for your event: \"%{event_name}\""
+
   faker:
     name:
       lindy_hop_name:

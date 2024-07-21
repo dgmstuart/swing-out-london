@@ -3,7 +3,8 @@
 Rails.application.configure do
   config.dartsass.builds = {
     "application.scss" => "application.css",
-    "application_cms.scss" => "application_cms.css"
+    "application_cms.scss" => "application_cms.css",
+    "mail.scss" => "mail.css"
   }
   config.dartsass.build_options =
     if Rails.env.development?
