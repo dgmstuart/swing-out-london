@@ -64,6 +64,21 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
+  if ENV["SMTP_USER_NAME"].present?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: "example.com",
+      user_name: ENV.fetch("SMTP_USER_NAME"),
+      password: ENV.fetch("SMTP_PASSWORD"),
+      authentication: "plain",
+      enable_starttls: true,
+      open_timeout: 5,
+      read_timeout: 5
+    }
+  end
+
   # Bullet gem:
   config.after_initialize do
     Bullet.enable = true
