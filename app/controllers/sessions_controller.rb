@@ -33,8 +33,13 @@ class SessionsController < ApplicationController
 
   def unknown_facebook_id_message(user_id)
     "Your Facebook ID for #{tc('site_name')} (#{user_id}) isn't in the approved list.\n" \
+      "\n" \
       "If you've been invited to become an editor, " \
-      "please contact the main site admins and get them to add this ID"
+      "please contact the main site admins and get them to add this ID. \n" \
+      "\n" \
+      "IF YOU ARE A TESTER FROM META:\n" \
+      "Please read the testing instructions which we've written for you on the app dashboard! \n" \
+      "We've given you credentials for a test user - PLEASE USE THOSE AND STOP DISABLING OUR ACCESS!"
   end
 
   def login_session
