@@ -14,4 +14,8 @@ module OrganiserLinkHelper
       html_options
     )
   end
+
+  def organiser_event_url(event)
+    edit_external_event_url(event.organiser_token)
+  end
 end

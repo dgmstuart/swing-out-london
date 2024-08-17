@@ -3,7 +3,7 @@
   <turbo-frame id="organiser_link">
     <% if event.organiser_token %>
       <div class="organiser-link-input">
-        <input id="organiser_link_url" type="text" value="<%= edit_external_event_url(event.organiser_token) %>" data-organiser-link-target="source" readonly><!--
+        <input id="organiser_link_url" type="text" value="<%= organiser_event_url(event) %>" data-organiser-link-target="source" readonly><!--
      --><a href="#" class="button-on-input" data-action="organiser-link#copy">Copy</a>
       </div>
     <% else %>
