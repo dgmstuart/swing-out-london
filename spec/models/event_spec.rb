@@ -284,4 +284,45 @@ RSpec.describe Event do
       end
     end
   end
+
+  describe "#generate_organiser_token" do
+    context "when there is no existing token" do
+      it "sets a token and returns a truthy result" do
+        event = create(:event, organiser_token: nil)
+
+        result = event.generate_organiser_token
+
+        aggregate_failures do
+          expect(event.reload.organiser_token.length).to eq 32
+          expect(result).to be_truthy
+        end
+      end
+    end
+
+    context "when there is an existing token" do
+      it "sets a new token and returns a truthy result" do
+        existing_token = SecureRandom.hex
+        event = create(:event, organiser_token: existing_token)
+
+        result = event.generate_organiser_token
+
+        aggregate_failures do
+          expect(event.reload.organiser_token.length).to eq 32
+          expect(event.reload.organiser_token).not_to eq existing_token
+          expect(result).to be_truthy
+        end
+      end
+    end
+
+    context "when the event failed to update" do
+      it "returns false" do
+        event = create(:event)
+        event.frequency = nil # events with nil frequency are invalid
+
+        result = event.generate_organiser_token
+
+        expect(result).to be false
+      end
+    end
+  end
 end

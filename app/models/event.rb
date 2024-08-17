@@ -204,4 +204,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def clear_latest_dates_cache
     Rails.cache.delete(latest_date_cache_key)
   end
+
+  def generate_organiser_token
+    update(organiser_token: SecureRandom.hex)
+  end
 end
