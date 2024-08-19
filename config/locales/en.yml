@@ -63,6 +63,7 @@ en:
       subject: '%{site_name} is missing dates for "%{event_name}"'
       title: "We're missing dates"
       intro: "We don't seem to have any future dates for your event: \"%{event_name}\""
+      link_text: "You can add new dates using this link:"
 
   faker:
     name:

@@ -3,4 +3,8 @@
   <p>
   <%= t("organiser_mailer.reminder_email.intro", event_name: @event_name) %>
   </p>
+  <p>
+  <%= t("organiser_mailer.reminder_email.link_text") %>
+  <%= link_to @event_url, @event_url %>
+  </p>
 </body>

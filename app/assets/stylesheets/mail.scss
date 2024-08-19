@@ -1,5 +1,6 @@
 @use "shared/reset";
 @use "shared/base";
+@use "shared/colours";
 
 body {
   margin: 20px;
@@ -13,5 +14,11 @@ h1 {
 p {
   font-size: 16px;
   margin-bottom: 5px;
+}
+
+a {
+  color: colours.$darkblue;
+  filter: brightness(150%); // A lighter colour looks better on a white background
+  text-decoration: underline;
 }
 

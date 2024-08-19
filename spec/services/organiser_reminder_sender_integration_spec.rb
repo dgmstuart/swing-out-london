@@ -6,8 +6,21 @@ RSpec.describe OrganiserReminderSender do
   include ActionMailer::TestHelper # assert_emails is defined in ActionMailer::TestHelper
 
   describe "INTEGRATION TEST" do
+    around do |example|
+      ClimateControl.modify CANONICAL_HOST: "example.com" do
+        example.run
+      end
+    end
+
     it "sends a reminder email about the event" do
-      event = create(:event, :occasional, title: "The Hot One", reminder_email_address: "herbert@white.com")
+      organiser_token = "41b783b5e27fb2eddd5456a182db56c4"
+      event = create(
+        :event,
+        :occasional,
+        title: "The Hot One",
+        organiser_token:,
+        reminder_email_address: "herbert@white.com"
+      )
       sender = described_class.new
 
       assert_emails 1 do
@@ -24,8 +37,11 @@ RSpec.describe OrganiserReminderSender do
 
         html_body = Capybara.string(html_part)
         expect(html_body).to have_content "We don't seem to have any future dates for your event: \"The Hot One\""
+        expect(html_body).to have_content "You can add new dates using this link:"
+        expect(html_body).to have_link "https://example.com/external_events/41b783b5e27fb2eddd5456a182db56c4/edit"
 
         expect(text_part).to include "We don't seem to have any future dates for your event: \"The Hot One\""
+        expect(text_part).to include "You can add new dates using this link:"
       end
     end
   end
