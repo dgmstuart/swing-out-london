@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Organisers can edit events" do
+  include ActiveSupport::Testing::TimeHelpers
+
   context "when an organiser token exists", :js do
     it "allows an organiser to edit an occasional event" do
       create(
@@ -14,6 +16,7 @@ RSpec.describe "Organisers can edit events" do
         first_date: Date.new(2001, 2, 3),
         event_instances: [build(:event_instance, date: "12/12/2012")]
       )
+      travel_to("2013-01-01")
 
       create(:venue, name: "The 100 Club", area: "central")
 
@@ -22,6 +25,7 @@ RSpec.describe "Organisers can edit events" do
       expect(page).to have_content("Midtown stomp")
         .and have_link("https://www.swingland.com/midtown", href: "https://www.swingland.com/midtown")
         .and have_content("Frequency\nOccasional")
+        .and have_content("Status\nNot listed (no future dates)")
 
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
@@ -30,6 +34,7 @@ RSpec.describe "Organisers can edit events" do
       click_on "Update"
 
       expect(page).to have_content("Event was successfully updated")
+        .and have_content("Status\nWill be listed until 12/01/2013")
 
       aggregate_failures do
         expect(page).to have_field("Venue", with: "The 100 Club - central")
