@@ -6,9 +6,12 @@ require "active_support/core_ext/date/conversions"
 require "active_support/core_ext/time/conversions"
 require "active_support/core_ext/integer/inflections"
 
-# Allow reference to translations in isolated specs:
-%w[en.yml en.rb].each do |locale_file|
-  I18n.load_path.push(
-    File.expand_path(locale_file, File.expand_path("../../config/locales", __dir__))
-  )
+locale_files = %w[en.yml en.rb].map do |locale_file|
+  File.expand_path(locale_file, File.expand_path("../../config/locales", __dir__))
+end
+
+# Allow reference to translations in isolated specs,
+# but only load the files if they're not already in the load path
+locale_files.each do |file|
+  I18n.load_path.push(file) unless I18n.load_path.include?(file)
 end
