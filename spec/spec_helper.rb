@@ -20,6 +20,10 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+    if config.files_to_run.count > 1
+      # Don't verify that doubled objects exist if only runnig one file
+      mocks.verify_doubled_constant_names = true
+    end
   end
 
   # used for --seed when randomising specs

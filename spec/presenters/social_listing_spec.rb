@@ -132,7 +132,7 @@ RSpec.describe SocialListing do
 
   describe ".new?" do
     it "delegates to the given event" do
-      new = instance_double("Boolean")
+      new = double("Boolean") # rubocop:disable RSpec/VerifiedDoubles
       event = instance_double("Event", new?: new)
 
       social_listing = described_class.new(event, url_helpers: double)

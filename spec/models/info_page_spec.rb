@@ -15,7 +15,7 @@ RSpec.describe InfoPage do
           content: %w[about_bristol bristol_history]
         }
       }
-      pages = instance_double("InfoPages", page: config)
+      pages = instance_double("InfoPage::InfoPages", page: config)
 
       page = described_class.new(:about, pages:, city: :london)
 
@@ -40,7 +40,7 @@ RSpec.describe InfoPage do
           sidebar: %w[lindy_hop about_us_bristol]
         }
       }
-      pages = instance_double("InfoPages", page: config)
+      pages = instance_double("InfoPage::InfoPages", page: config)
 
       page = described_class.new(:about, pages:, city: :bristol)
 

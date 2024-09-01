@@ -7,7 +7,7 @@ RSpec.describe SessionCreator do
   describe "#create" do
     context "when the user has a role in the system" do
       it "logs the user in" do
-        authoriser = instance_double("described_class::Authoriser", authorised?: true)
+        authoriser = instance_double("SessionCreator::Authoriser", authorised?: true)
         login_session = instance_double("LoginSession", log_in!: double)
         creator = described_class.new(authoriser:, login_session:, logger: fake_logger)
 
@@ -25,7 +25,7 @@ RSpec.describe SessionCreator do
       end
 
       it "returns true" do
-        authoriser = instance_double("described_class::Authoriser", authorised?: true)
+        authoriser = instance_double("SessionCreator::Authoriser", authorised?: true)
         login_session = instance_double("LoginSession", log_in!: double)
         creator = described_class.new(authoriser:, login_session:, logger: fake_logger)
 
@@ -38,7 +38,7 @@ RSpec.describe SessionCreator do
 
     context "when the user doesn't have a role in the system" do
       it "does not log the user in" do
-        authoriser = instance_double("described_class::Authoriser", authorised?: false)
+        authoriser = instance_double("SessionCreator::Authoriser", authorised?: false)
         login_session = instance_double("LoginSession", log_in!: double)
         creator = described_class.new(authoriser:, login_session:, logger: fake_logger)
 
@@ -49,7 +49,7 @@ RSpec.describe SessionCreator do
       end
 
       it "returns false" do
-        authoriser = instance_double("described_class::Authoriser", authorised?: false)
+        authoriser = instance_double("SessionCreator::Authoriser", authorised?: false)
         login_session = instance_double("LoginSession", log_in!: double)
         creator = described_class.new(authoriser:, login_session:, logger: fake_logger)
 
@@ -60,7 +60,7 @@ RSpec.describe SessionCreator do
       end
 
       it "logs" do
-        authoriser = instance_double("described_class::Authoriser", authorised?: false)
+        authoriser = instance_double("SessionCreator::Authoriser", authorised?: false)
         login_session = instance_double("LoginSession", log_in!: double)
         logger = fake_logger
         creator = described_class.new(authoriser:, login_session:, logger:)
