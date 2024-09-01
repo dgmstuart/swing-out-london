@@ -18,7 +18,7 @@ RSpec.describe AssociatedEvent do
   describe "#link" do
     it "links to the event" do
       event = instance_double("Event")
-      url_helpers = instance_double("Rails.application.routes.url_helpers")
+      url_helpers = double("Rails.application.routes.url_helpers") # rubocop:disable RSpec/VerifiedDoubles
       allow(url_helpers).to receive(:event_path).with(event).and_return("/path/to/event")
 
       associated_event = described_class.new(event, summarizer: double, url_helpers:)

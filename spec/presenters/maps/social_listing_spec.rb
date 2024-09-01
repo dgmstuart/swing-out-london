@@ -9,7 +9,7 @@ require "app/presenters/maps/social_listing"
 RSpec.describe Maps::SocialListing do
   describe ".has_class?" do
     it "delegates to the given event" do
-      has_class = instance_double("Boolean")
+      has_class = double("Boolean") # rubocop:disable RSpec/VerifiedDoubles
       event = instance_double("Event", has_class?: has_class)
 
       social_listing = described_class.new(event, url_helpers: double)
@@ -20,7 +20,7 @@ RSpec.describe Maps::SocialListing do
 
   describe ".has_taster?" do
     it "delegates to the given event" do
-      has_taster = instance_double("Boolean")
+      has_taster = double("Boolean") # rubocop:disable RSpec/VerifiedDoubles
       event = instance_double("Event", has_taster?: has_taster)
 
       social_listing = described_class.new(event, url_helpers: double)
