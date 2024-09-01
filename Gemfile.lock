@@ -317,7 +317,7 @@ GEM
       rack (>= 1.4)
     reverse_markdown (2.1.1)
       nokogiri
-    rexml (3.3.4)
+    rexml (3.3.6)
       strscan
     rollbar (3.5.2)
     rspec-core (3.13.0)
