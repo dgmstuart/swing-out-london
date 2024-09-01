@@ -136,7 +136,6 @@ class EditEventForm
       :url,
       :venue_id,
       :social_organiser_id,
-      :social_organiser_id,
       :class_style,
       :course_length,
       :class_organiser_id,
