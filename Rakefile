@@ -6,7 +6,7 @@ task lint_styles: :environment do
   system("yarn stylelint") || exit($CHILD_STATUS.exitstatus)
 end
 
-if Rails.env.test?
+if Rails.env.local?
   require "rubocop/rake_task"
   RuboCop::RakeTask.new
 

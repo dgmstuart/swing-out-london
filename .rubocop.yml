@@ -1,6 +1,7 @@
 require:
-  - rubocop-rspec
   - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
   - rubocop-faker
   - rubocop-capybara
   - rubocop-factory_bot

@@ -146,7 +146,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def future_cancellations
-    event_instances.cancelled.where("date >= ?", Date.current).map(&:date)
+    event_instances.cancelled.where(date: Date.current..).map(&:date)
   end
 
   # COMPARISON METHODS #
