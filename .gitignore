@@ -16,3 +16,5 @@ vendor/bundle
 
 /node_modules
 .yardoc
+
+/config/master.key
