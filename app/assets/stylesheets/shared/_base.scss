@@ -8,13 +8,12 @@ body {
   font-family: Futura, Jost, "Tw Cen MT", "Trebuchet MS", sans-serif;
   color: colours.$text-colour;
   font-size: $body_font_size;
+  line-height: 1.5;
 
   #page {
     background: colours.$background-colour none;
     margin: auto;
   }
-
-  line-height: 1.5;
 }
 
 p {

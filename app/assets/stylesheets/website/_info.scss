@@ -143,12 +143,11 @@ table {
     td {
       width: 180px;
       vertical-align: middle;
+      padding-bottom: 10px;
 
       &.row_title {
         width: 150px;
       }
-
-      padding-bottom: 10px;
     }
 
     tr:not(:first-child) {

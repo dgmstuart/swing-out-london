@@ -7,8 +7,8 @@ Rails.application.configure do
   }
   config.dartsass.build_options =
     if Rails.env.development?
-      "--style=compressed --embed-sources"
+      %w[--style=compressed --embed-sources]
     else
-      "--style=compressed --no-source-map"
+      %w[--style=compressed --no-source-map]
     end
 end
