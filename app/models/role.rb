@@ -5,7 +5,7 @@ class Role < ApplicationRecord
     ADMIN = "admin",
     EDITOR = "editor"
   ].freeze
-  enum role: {
+  enum :role, {
     admin: ADMIN,
     editor: EDITOR
   }
