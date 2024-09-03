@@ -16,6 +16,7 @@ require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/form/validates_event_with_dates"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
+require "app/forms/date_form"
 
 RSpec.describe EditEventForm do
   describe "(validations)" do

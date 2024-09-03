@@ -6,6 +6,7 @@ require "spec/support/shared_examples/events/validates_cancellations_in_dates"
 require "spec/support/shared_examples/events/validates_date_string"
 require "app/concerns/frequency"
 require "app/forms/organiser_edit_event_form"
+require "app/forms/date_form"
 
 RSpec.describe OrganiserEditEventForm do
   describe "(validations)" do
