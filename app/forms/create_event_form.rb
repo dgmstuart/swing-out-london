@@ -47,6 +47,7 @@ class CreateEventForm
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
   validates_with Form::ValidEventWithDates
+  validates_with Form::ValidEventWithLastDate
   validates_with ValidCancellations
 
   def action

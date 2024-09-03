@@ -25,6 +25,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validate :has_class_or_social
   validate :must_be_weekly_if_no_social
   validate :cannot_be_weekly_and_have_dates
+  validate :cannot_have_dates_after_last_date
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -78,6 +79,14 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return unless weekly? && event_instances.any? { _1.cancelled == false }
 
     errors.add(:event_instances, "must all be cancelled for weekly events")
+  end
+
+  def cannot_have_dates_after_last_date
+    return if latest_date.blank?
+    return if last_date.blank?
+    return unless latest_date > last_date
+
+    errors.add(:dates, "can't include dates after the last date")
   end
 
   # ----- #
@@ -153,7 +162,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def future_dates?
     return true if weekly? # Weekly events don't have date arrays but implicitly will be running in the future
-    return false if last_date
     return false unless latest_date
 
     latest_date > Date.current

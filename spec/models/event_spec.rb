@@ -5,6 +5,7 @@ require "support/shoulda_matchers"
 require "spec/support/shared_examples/events/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/validates_event_with_dates"
+require "spec/support/shared_examples/events/validates_event_with_last_date"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/events/validates_date_string"
 require "spec/support/shared_examples/validates_url"
@@ -130,6 +131,7 @@ RSpec.describe Event do
     it_behaves_like "validates class and social", :event
     it_behaves_like "validates weekly", :event
     it_behaves_like "validates event with dates", :event
+    it_behaves_like "validates event with last date", :event
     it_behaves_like "validates course length", :event
     it_behaves_like "validates url", :event
 
@@ -198,14 +200,6 @@ RSpec.describe Event do
         event = create(:weekly_social)
 
         expect(event.future_dates?).to be true
-      end
-    end
-
-    context "when the event has an end date" do
-      it "is true" do
-        event = create(:event, dates: [], last_date: (Time.zone.today + 1.year))
-
-        expect(event.future_dates?).to be false
       end
     end
   end
