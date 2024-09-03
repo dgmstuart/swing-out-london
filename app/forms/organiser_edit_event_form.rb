@@ -42,6 +42,7 @@ class OrganiserEditEventForm
   validates :last_date, date_string: true
 
   validates_with ValidCancellations
+  validates_with Form::ValidEventWithLastDate
 
   def to_h
     attributes.symbolize_keys.merge(

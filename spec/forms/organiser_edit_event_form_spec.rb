@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require "form_spec_helper"
+require "app/validators/form/valid_event_with_last_date"
 require "spec/support/shared_examples/events/validates_dates_string"
 require "spec/support/shared_examples/events/validates_cancellations_in_dates"
 require "spec/support/shared_examples/events/validates_date_string"
+require "spec/support/shared_examples/events/form/validates_event_with_last_date"
 require "app/concerns/frequency"
 require "app/forms/organiser_edit_event_form"
 require "app/forms/date_form"
@@ -20,6 +22,7 @@ RSpec.describe OrganiserEditEventForm do
     it_behaves_like "validates dates string", :cancellations, :organiser_edit_event_form, { allow_past: true }
     it_behaves_like "validates dates in cancellations", :organiser_edit_event_form
     it_behaves_like "validates date string", :last_date, :organiser_edit_event_form
+    it_behaves_like "validates event with last date (form)", :organiser_edit_event_form
   end
 
   describe ".persisted?" do

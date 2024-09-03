@@ -55,14 +55,14 @@ RSpec.describe "Editors can archive events" do
       visit "/events"
 
       Timecop.freeze("2000-01-08") do
-        event.update(last_date: "2000-01-01")
+        event.update!(last_date: "2000-01-02")
 
         click_on "Archive", match: :first
       end
 
       click_show
 
-      expect(page).to have_content("Last date: 01/01/2000")
+      expect(page).to have_content("Last date: 02/01/2000")
     end
   end
 

@@ -6,6 +6,7 @@ require "app/validators/uri_validator"
 require "app/validators/valid_social_or_class"
 require "app/validators/valid_weekly_event"
 require "app/validators/form/valid_event_with_dates"
+require "app/validators/form/valid_event_with_last_date"
 require "spec/support/shared_examples/events/validates_dates_string"
 require "spec/support/shared_examples/events/validates_cancellations_in_dates"
 require "spec/support/shared_examples/events/validates_date_string"
@@ -14,6 +15,7 @@ require "app/forms/create_event_form"
 require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/form/validates_event_with_dates"
+require "spec/support/shared_examples/events/form/validates_event_with_last_date"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 require "app/forms/date_form"
@@ -27,6 +29,7 @@ RSpec.describe CreateEventForm do
     it_behaves_like "validates class and social (form)", :create_event_form
     it_behaves_like "validates weekly", :create_event_form
     it_behaves_like "validates event with dates (form)", :create_event_form
+    it_behaves_like "validates event with last date (form)", :create_event_form
     it_behaves_like "validates course length", :create_event_form
     it_behaves_like "validates dates string", :dates, :create_event_form
     it_behaves_like "validates dates string", :cancellations, :create_event_form

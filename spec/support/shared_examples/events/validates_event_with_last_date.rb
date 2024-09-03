@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "validates event with dates" do |model_name|
+RSpec.shared_examples "validates event with last date" do |model_name|
   it "is valid if it's occasional with no dates but has a last date" do
     model = build(model_name, :occasional, last_date: "2011-11-01")
     expect(model).to be_valid
