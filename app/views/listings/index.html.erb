@@ -34,7 +34,7 @@
       <%= image_tag "highlight_icon.png", alt: "asterisk", width: "14", height: "16" %>
     </p>
     <%= render "social_listings" %>
-    <p class="note"><%= tc("site_name") %> lists the next 14 days of events</p>
+    <p class="note"><%= tc("site_name") %> lists the next <%= SOLDNTime::MAX_LISTING_DATES %> days of events</p>
   </section>
 
   <section id="classes" class="listings">
