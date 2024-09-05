@@ -15,6 +15,10 @@ class EventListItem
     event.to_param
   end
 
+  def cache_key_with_version
+    event.cache_key_with_version
+  end
+
   def venue
     event.venue
   end

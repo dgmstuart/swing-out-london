@@ -31,6 +31,14 @@ RSpec.describe EventListItem do
     end
   end
 
+  describe "#cache_key_with_version" do
+    it "delegates to the event" do
+      event = instance_double("Event", cache_key_with_version: "key123")
+
+      expect(item_instance(event).cache_key_with_version).to eq "key123"
+    end
+  end
+
   describe "#url" do
     it "delegates to the event" do
       event = instance_double("Event", url: "https://webb.com")
