@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventInstance < ApplicationRecord
-  belongs_to :event
+  belongs_to :event, touch: true
 
   validates :date, uniqueness: { scope: :event_id }
 
