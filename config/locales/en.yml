@@ -28,6 +28,10 @@ en:
   activerecord:
     errors:
       models:
+        event:
+          attributes:
+            reminder_email_address:
+              present: "must be blank if there is no organiser token"
         event_instance:
           attributes:
             date:

@@ -21,6 +21,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validates :organiser_token, uniqueness: true, allow_nil: true
+  validates :reminder_email_address, absence: true, if: -> { organiser_token.blank? }
 
   validate :has_class_or_social
   validate :must_be_weekly_if_no_social

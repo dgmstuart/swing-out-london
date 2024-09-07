@@ -145,6 +145,13 @@ RSpec.describe Event do
     it { is_expected.to validate_presence_of(:url) }
 
     it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
+
+    it "is invalid with a reminder email address but no organiser token" do
+      event = build(:event, reminder_email_address: "x@example.com", organiser_token: nil)
+      event.valid?
+
+      expect(event.errors.messages).to eq({ reminder_email_address: ["must be blank if there is no organiser token"] })
+    end
   end
 
   describe "day" do
