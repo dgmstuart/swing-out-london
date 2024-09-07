@@ -2,11 +2,11 @@
 
 require "spec_helper"
 require "support/time_formats_helper"
-require "app/presenters/event_status"
+require "app/presenters/event_status_description"
 require "active_support"
 require "active_support/testing/time_helpers"
 
-RSpec.describe EventStatus do
+RSpec.describe EventStatusDescription do
   include ActiveSupport::Testing::TimeHelpers
 
   describe "#description" do

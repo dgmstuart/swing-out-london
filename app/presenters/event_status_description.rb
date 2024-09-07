@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Presenter for displaying whether an event is currently listed or not, and why
-class EventStatus
+class EventStatusDescription
   def initialize(event)
     @event = event
   end
