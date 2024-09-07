@@ -125,6 +125,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   scope :on_same_day_of_week, ->(date) { where(day: I18n.l(date, format: :day_name)) }
 
+  scope :notifiable, -> { where.not(reminder_email_address: nil) }
+
   def caching_key(suffix)
     "event_#{id}_#{suffix}"
   end
