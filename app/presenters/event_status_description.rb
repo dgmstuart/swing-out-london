@@ -2,8 +2,9 @@
 
 # Presenter for displaying whether an event is currently listed or not, and why
 class EventStatusDescription
-  def initialize(event)
+  def initialize(event, status_calculator: EventStatus.new)
     @event = event
+    @status_calculator = status_calculator
   end
 
   def description
@@ -26,15 +27,9 @@ class EventStatusDescription
 
   private
 
-  attr_reader :event
+  attr_reader :event, :status_calculator
 
   def status
-    return :listed if event.latest_date == Date.current
-
-    if event.future_dates?
-      :listed
-    else
-      :not_listed
-    end
+    status_calculator.status_for(event)
   end
 end
