@@ -9,6 +9,7 @@ require "spec/support/shared_examples/events/validates_event_with_last_date"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/events/validates_date_string"
 require "spec/support/shared_examples/validates_url"
+require "spec/support/shared_examples/validates_email"
 
 RSpec.describe Event do
   describe "(associations)" do
@@ -134,6 +135,7 @@ RSpec.describe Event do
     it_behaves_like "validates event with last date", :event
     it_behaves_like "validates course length", :event
     it_behaves_like "validates url", :event
+    it_behaves_like "validates email", :event_with_organiser_token, :reminder_email_address
 
     it "is invalid with no venue" do
       event = build(:event, venue_id: nil)

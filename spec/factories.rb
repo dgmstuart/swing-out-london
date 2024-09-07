@@ -47,6 +47,10 @@ FactoryBot.define do
     trait :with_organiser_token do
       organiser_token { SecureRandom.hex }
     end
+
+    factory :event_with_organiser_token do
+      with_organiser_token
+    end
   end
 
   trait :weekly do

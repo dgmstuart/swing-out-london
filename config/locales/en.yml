@@ -32,6 +32,7 @@ en:
           attributes:
             reminder_email_address:
               present: "must be blank if there is no organiser token"
+              invalid: "doesn't look like a valid email address"
         event_instance:
           attributes:
             date:
