@@ -18,7 +18,7 @@ class OrganiserRemindersSender
     event_finder.notifiable.each do |event|
       status = event_status_calculator.status_for(event)
       email_sender.send!(event) if status == :not_listed
-    end
+    end.count
   end
 
   private

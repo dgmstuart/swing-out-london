@@ -30,6 +30,17 @@ RSpec.describe OrganiserRemindersSender do
 
         expect(email_sender).to have_received(:send!).with(event)
       end
+
+      it "returns the number of events for which emails needed to be sent" do
+        email_sender = instance_double("OrganiserReminderSender", send!: double)
+        event_finder = class_double("Event", notifiable: [double, double, double])
+        event_status_calculator = instance_double("EventStatus", status_for: :not_listed)
+        sender = described_class.new(email_sender:, event_finder:, event_status_calculator:)
+
+        result = sender.send_unlisted
+
+        expect(result).to eq 3
+      end
     end
 
     context "when all events with an organiser email are listed" do
