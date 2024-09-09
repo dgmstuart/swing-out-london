@@ -9,10 +9,12 @@ require "spec/support/shared_examples/events/validates_event_with_last_date"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/events/validates_date_string"
 require "spec/support/shared_examples/validates_url"
+require "spec/support/shared_examples/validates_email"
 
 RSpec.describe Event do
   describe "(associations)" do
     it { is_expected.to have_many(:event_instances).dependent(:destroy) }
+    it { is_expected.to have_many(:email_deliveries).dependent(:destroy) }
   end
 
   describe "#title" do
@@ -134,6 +136,7 @@ RSpec.describe Event do
     it_behaves_like "validates event with last date", :event
     it_behaves_like "validates course length", :event
     it_behaves_like "validates url", :event
+    it_behaves_like "validates email", :event_with_organiser_token, :reminder_email_address
 
     it "is invalid with no venue" do
       event = build(:event, venue_id: nil)
@@ -145,6 +148,13 @@ RSpec.describe Event do
     it { is_expected.to validate_presence_of(:url) }
 
     it { is_expected.to validate_uniqueness_of(:organiser_token).allow_nil }
+
+    it "is invalid with a reminder email address but no organiser token" do
+      event = build(:event, reminder_email_address: "x@example.com", organiser_token: nil)
+      event.valid?
+
+      expect(event.errors.messages).to eq({ reminder_email_address: ["must be blank if there is no organiser token"] })
+    end
   end
 
   describe "day" do
@@ -281,6 +291,70 @@ RSpec.describe Event do
         )
 
         expect(event.latest_date).to eq "2012-01-01".to_date
+      end
+    end
+  end
+
+  describe "#generate_organiser_token" do
+    context "when there is no existing token" do
+      it "sets a token and returns a truthy result" do
+        event = create(:event, organiser_token: nil)
+
+        result = event.generate_organiser_token
+
+        aggregate_failures do
+          expect(event.reload.organiser_token.length).to eq 32
+          expect(result).to be_truthy
+        end
+      end
+    end
+
+    context "when there is an existing token" do
+      it "sets a new token and returns a truthy result" do
+        existing_token = SecureRandom.hex
+        event = create(:event, organiser_token: existing_token)
+
+        result = event.generate_organiser_token
+
+        aggregate_failures do
+          expect(event.reload.organiser_token.length).to eq 32
+          expect(event.reload.organiser_token).not_to eq existing_token
+          expect(result).to be_truthy
+        end
+      end
+    end
+
+    context "when the event failed to update" do
+      it "returns false" do
+        event = create(:event)
+        event.frequency = nil # events with nil frequency are invalid
+
+        result = event.generate_organiser_token
+
+        expect(result).to be false
+      end
+    end
+  end
+
+  describe "#last_reminder_delivered_at" do
+    context "when there are no deliveries" do
+      it "is nil" do
+        expect(build(:event).last_reminder_delivered_at).to be_nil
+      end
+    end
+
+    context "when there is a reminder email delivery" do
+      it "is the time that that delivery was created" do
+        time = 1.day.ago
+        event = build(
+          :event,
+          email_deliveries: [
+            build(:email_delivery, created_at: 9.days.ago),
+            build(:email_delivery, created_at: time)
+          ]
+        )
+
+        expect(event.last_reminder_delivered_at.iso8601).to eq(time.iso8601) # use iso8601 to avoid comparison fails on CI
       end
     end
   end

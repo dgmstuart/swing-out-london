@@ -149,6 +149,7 @@ RSpec/ExampleLength:
   CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
   Exclude:
     - spec/system/**/*_spec.rb
+    - spec/**/*integration_spec.rb
 
 RSpec/MultipleExpectations:
   Exclude:

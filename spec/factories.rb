@@ -43,6 +43,14 @@ FactoryBot.define do
         class_organiser factory: :organiser
       end
     end
+
+    trait :with_organiser_token do
+      organiser_token { SecureRandom.hex }
+    end
+
+    factory :event_with_organiser_token do
+      with_organiser_token
+    end
   end
 
   trait :weekly do
@@ -91,6 +99,8 @@ FactoryBot.define do
   factory :organiser_edit_event_form do
     venue_id { rand(999) }
   end
+
+  factory :email_delivery
 
   factory :audit
 

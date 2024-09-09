@@ -14,6 +14,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :class_organiser, class_name: "Organiser", optional: true
   belongs_to :social_organiser, class_name: "Organiser", optional: true
   has_many :event_instances, dependent: :destroy
+  has_many :email_deliveries, dependent: :destroy
 
   validates :frequency, presence: true
   validates :url, presence: true, uri: true
@@ -21,6 +22,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 
   validates :organiser_token, uniqueness: true, allow_nil: true
+  validates :reminder_email_address, absence: true, if: -> { organiser_token.blank? }
+  validates :reminder_email_address, email: { allow_blank: true }
 
   validate :has_class_or_social
   validate :must_be_weekly_if_no_social
@@ -125,6 +128,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   scope :on_same_day_of_week, ->(date) { where(day: I18n.l(date, format: :day_name)) }
 
+  scope :notifiable, -> { where.not(reminder_email_address: nil) }
+
   def caching_key(suffix)
     "event_#{id}_#{suffix}"
   end
@@ -203,5 +208,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   after_save :clear_latest_dates_cache
   def clear_latest_dates_cache
     Rails.cache.delete(latest_date_cache_key)
+  end
+
+  def generate_organiser_token
+    update(organiser_token: SecureRandom.hex)
+  end
+
+  def last_reminder_delivered_at
+    email_deliveries.last&.created_at
   end
 end

@@ -28,6 +28,11 @@ en:
   activerecord:
     errors:
       models:
+        event:
+          attributes:
+            reminder_email_address:
+              present: "must be blank if there is no organiser token"
+              invalid: "doesn't look like a valid email address"
         event_instance:
           attributes:
             date:
@@ -57,6 +62,13 @@ en:
       event_type:
         social_dance: Social dance
         weekly_class: Weekly class
+
+  organiser_mailer:
+    reminder_email:
+      subject: '%{site_name} is missing dates for "%{event_name}"'
+      title: "We're missing dates"
+      intro: "We don't seem to have any future dates for your event: \"%{event_name}\""
+      link_text: "You can add new dates using this link:"
 
   faker:
     name:

@@ -87,4 +87,19 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   config.secret_key_base = ENV.fetch("SECRET_KEY_BASE")
+
+  if ENV["SMTP_USER_NAME"].present?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: "example.com",
+      user_name: ENV.fetch("SMTP_USER_NAME"),
+      password: ENV.fetch("SMTP_PASSWORD"),
+      authentication: "plain",
+      enable_starttls: true,
+      open_timeout: 5,
+      read_timeout: 5
+    }
+  end
 end

@@ -55,6 +55,8 @@ Rails.application.configure do
 
   config.log_formatter = FilteringLoggerFormatter.new(ActiveSupport::Logger::SimpleFormatter.new)
 
+  config.action_mailer.delivery_method = :test
+
   # Disable rate limiting in test
   config.middleware.delete Rack::Attack
 

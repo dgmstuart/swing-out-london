@@ -95,7 +95,7 @@ RSpec.describe SocialsListings do
         Time.zone.today + offset
       end
 
-      it "returns the correct array with a bunch of classes and socials" do # rubocop:disable RSpec/ExampleLength
+      it "returns the correct array with a bunch of classes and socials" do
         # create one class for each day, starting on monday. None of these should be included
         create_list(:class, 7)
 

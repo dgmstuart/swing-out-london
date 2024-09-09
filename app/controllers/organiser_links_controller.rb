@@ -4,7 +4,7 @@ class OrganiserLinksController < CmsBaseController
   def create
     @event = Event.find(params.fetch(:event_id))
 
-    if @event.update(organiser_token: SecureRandom.hex)
+    if @event.generate_organiser_token
       render "organiser_links/show"
     else
       logger.error "Failed to save organiser token for Event##{@event.id}"

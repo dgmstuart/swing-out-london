@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_09_162313) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -37,6 +37,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "email_deliveries", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "recipient", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_email_deliveries_on_event_id"
   end
 
   create_table "event_instances", force: :cascade do |t|
@@ -67,6 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
     t.integer "class_organiser_id"
     t.integer "social_organiser_id"
     t.string "organiser_token"
+    t.string "reminder_email_address"
     t.index ["frequency", "day", "has_class"], name: "index_events_on_fq_and_day_and_has_class"
     t.index ["frequency", "day", "has_social"], name: "index_events_on_fq_and_day_and_has_social"
     t.index ["frequency", "has_class"], name: "index_events_on_fq_and_has_class"
@@ -105,5 +114,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_125449) do
     t.decimal "lng", precision: 15, scale: 10
   end
 
+  add_foreign_key "email_deliveries", "events"
   add_foreign_key "event_instances", "events"
 end
