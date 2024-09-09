@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe OrganiserReminderSender do
   include ActionMailer::TestHelper # assert_emails is defined in ActionMailer::TestHelper
+  include ActiveSupport::Testing::TimeHelpers
 
   describe "INTEGRATION TEST" do
     around do |example|
@@ -42,6 +43,48 @@ RSpec.describe OrganiserReminderSender do
 
         expect(text_part).to include "We don't seem to have any future dates for your event: \"The Hot One\""
         expect(text_part).to include "You can add new dates using this link:"
+
+        expect(EmailDelivery.sole.recipient).to eq("herbert@white.com")
+      end
+    end
+
+    context "when the service is run several times in the same week" do
+      it "only sends one email" do
+        organiser_token = "41b783b5e27fb2eddd5456a182db56c4"
+        event = create(
+          :event,
+          :occasional,
+          organiser_token:,
+          reminder_email_address: "herbert@white.com"
+        )
+        sender = described_class.new
+
+        assert_emails 1 do
+          sender.send!(event)
+          travel 1.day
+          sender.send!(event)
+          travel 5.days
+          sender.send!(event)
+        end
+      end
+    end
+
+    context "when the service is run twice with a week in-between" do
+      it "sends two emails" do
+        organiser_token = "41b783b5e27fb2eddd5456a182db56c4"
+        event = create(
+          :event,
+          :occasional,
+          organiser_token:,
+          reminder_email_address: "herbert@white.com"
+        )
+        sender = described_class.new
+
+        assert_emails 2 do
+          sender.send!(event)
+          travel 8.days
+          sender.send!(event)
+        end
       end
     end
   end

@@ -14,6 +14,7 @@ require "spec/support/shared_examples/validates_email"
 RSpec.describe Event do
   describe "(associations)" do
     it { is_expected.to have_many(:event_instances).dependent(:destroy) }
+    it { is_expected.to have_many(:email_deliveries).dependent(:destroy) }
   end
 
   describe "#title" do
@@ -331,6 +332,29 @@ RSpec.describe Event do
         result = event.generate_organiser_token
 
         expect(result).to be false
+      end
+    end
+  end
+
+  describe "#last_reminder_delivered_at" do
+    context "when there are no deliveries" do
+      it "is nil" do
+        expect(build(:event).last_reminder_delivered_at).to be_nil
+      end
+    end
+
+    context "when there is a reminder email delivery" do
+      it "is the time that that delivery was created" do
+        time = 1.day.ago
+        event = build(
+          :event,
+          email_deliveries: [
+            build(:email_delivery, created_at: 9.days.ago),
+            build(:email_delivery, created_at: time)
+          ]
+        )
+
+        expect(event.last_reminder_delivered_at.iso8601).to eq(time.iso8601) # use iso8601 to avoid comparison fails on CI
       end
     end
   end

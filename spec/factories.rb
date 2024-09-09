@@ -100,6 +100,8 @@ FactoryBot.define do
     venue_id { rand(999) }
   end
 
+  factory :email_delivery
+
   factory :audit
 
   factory :role, aliases: %i[editor] do
