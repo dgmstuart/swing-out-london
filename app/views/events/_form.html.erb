@@ -4,11 +4,13 @@
   <section>
     <div class='form-group'>
       <%= f.label :url %>
+      <p class='help'>If the event will repeat, this should be one link for the whole series of events</p>
       <%= f.text_field :url %>
     </div>
 
     <div class='form-group'>
       <%= f.label :venue_id, 'Venue' %>
+      <p class='help'>If the venue doesn't already exist, <%= link_to "create one here", new_venue_path %></p>
       <%= f.select :venue_id, venue_select, { include_blank: true} %>
     </div>
 
@@ -42,6 +44,7 @@
     </div>
     <div class='form-group'>
       <%= f.label :social_organiser_id, 'Social organiser' %>
+      <p class='help'>If the organiser doesn't already exist, <%= link_to "create one here", new_organiser_path %></p>
       <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' }, { data: { event_form_target: "socialOrganiser" } } %>
     </div>
     <div class='form-group'>
@@ -54,6 +57,7 @@
     <h3 class='form-section-title'>Class details</h3>
     <div class='form-group'>
       <%= f.label :class_organiser_id, 'Class organiser' %>
+      <p class='help'>If the organiser doesn't already exist, <%= link_to "create one here", new_organiser_path %></p>
       <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' }, { data: { event_form_target: "classOrganiser" } } %>
       <p class='help'>Note: classes don't have names - just locations and organisers</p>
       <p class='help'>The location and organiser name are displayed in the listings.</>
@@ -66,7 +70,7 @@
         <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
       </div>
       <div class='radio-group'>
-        <%= radio_button_tag 'class_style_option', 'other', !@form.class_style.blank?, data: { target: 'class-style-group' }%>
+        <%= radio_button_tag 'class_style_option', 'other', !@form.class_style.blank?, data: { target: 'class-style-group' } %>
         <%= label_tag 'class_style_option_other', 'Other (balboa, shag etc)' %>
       </div>
       <div class='form-group form-group-nested <%= 'hidden' if @form.class_style.blank? %>' id="class-style-group">
@@ -76,7 +80,7 @@
     </div>
     <div class='form-group'>
       <%= f.label :course_length %>
-      <%= f.text_field :course_length, size: 2, class: "shortfield", data: { event_form_target: "courseLength" }  %> weeks
+      <%= f.text_field :course_length, size: 2, class: "shortfield", data: { event_form_target: "courseLength" } %> weeks
     </div>
   </section>
 

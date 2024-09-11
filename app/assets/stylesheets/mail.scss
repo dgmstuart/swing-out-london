@@ -17,8 +17,7 @@ p {
 }
 
 a {
-  color: colours.$darkblue;
-  filter: brightness(150%); // A lighter colour looks better on a white background
+  color: colours.$link-colour-light; // A lighter colour looks better on a white background
   text-decoration: underline;
 }
 
