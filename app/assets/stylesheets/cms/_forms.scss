@@ -27,6 +27,10 @@ form {
 
   p.help {
     margin-bottom: 5px;
+
+    a {
+      color: colours.$link-colour-light; // A lighter colour contrasts better with the grey help text
+    }
   }
 
   .new-label {
