@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Editor Login" do
   it "Editors can login and access editor pages" do
-    stub_auth_hash(id: 12345678901234567, name: "Al Minns", expires_at: 59.days.from_now.to_i)
+    stub_auth_hash(id: 12345678901234567, name: "Al Minns", expires_at: 60.days.from_now.to_i)
     create(:editor, facebook_ref: 12345678901234567)
 
     visit "/events/new"
