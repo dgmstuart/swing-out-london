@@ -25,6 +25,7 @@ module System
 
       config.before(:each, :js, type: :system) do
         driven_by :selenium_chrome_headless
+        current_window.resize_to(750, 1900) # 750x1900 is enough to fit the whole event form
       end
     end
   end
