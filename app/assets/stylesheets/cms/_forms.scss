@@ -23,6 +23,10 @@ form {
     font-weight: normal;
     font-style: italic;
     color: colours.$lowlight-colour;
+
+    .highlighted {
+      color: colours.$highlight-colour;
+    }
   }
 
   p.help {
