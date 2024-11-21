@@ -47,4 +47,73 @@ RSpec.shared_examples "validates class and social" do |model_name|
     model.valid?
     expect(model.errors.messages).to eq(frequency: ["can't be blank"])
   end
+
+  it "is invalid for socials with classes which are weekly but only happening on just one date" do
+    model = build(
+      model_name,
+      :weekly,
+      has_taster: false,
+      has_social: true,
+      has_class: true,
+      class_organiser_id: 7,
+      first_date: "2011-11-01",
+      last_date: "2011-11-01"
+    )
+
+    model.valid?
+    expect(model.errors.messages)
+      .to eq(frequency: ['must be "Monthly or occasionally" if a social is only happening once'])
+  end
+
+  it "is invalid for socials with no classes which are weekly but only happening on just one date" do
+    model = build(
+      model_name,
+      :weekly,
+      has_taster: false,
+      has_social: true,
+      has_class: false,
+      class_organiser_id: 7,
+      first_date: "2011-11-01",
+      last_date: "2011-11-01"
+    )
+
+    model.valid?
+    expect(model.errors.messages)
+      .to eq(frequency: ['must be "Monthly or occasionally" if a social is only happening once'])
+  end
+
+  it "is invalid for classes happening on just one date" do
+    model = build(
+      model_name,
+      :weekly,
+      has_taster: false,
+      has_social: false,
+      has_class: true,
+      class_organiser_id: 7,
+      first_date: "2011-11-01",
+      last_date: "2011-11-01"
+    )
+
+    model.valid?
+    message = <<~MESSAGE.chomp
+      It looks like you're trying to list a one-off workshop.
+      Please don't do this: we only list weekly classes on SOLDN.
+    MESSAGE
+    expect(model.errors.messages).to eq(base: [message])
+  end
+
+  it "is valid for occasional socials with classes happening on just one date" do
+    model = build(
+      model_name,
+      :occasional,
+      has_taster: false,
+      has_social: true,
+      has_class: true,
+      class_organiser_id: 7,
+      first_date: "2011-11-01",
+      last_date: "2011-11-01"
+    )
+
+    expect(model).to be_valid
+  end
 end
