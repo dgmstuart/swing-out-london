@@ -88,6 +88,21 @@ FactoryBot.define do
     venue_id { rand(999) }
   end
 
+  trait(:social_dance) do
+    # default
+  end
+
+  trait(:with_class) do
+    social_has_class { true }
+    class_organiser_id { rand(999) }
+  end
+
+  trait(:weekly_class) do
+    title { "" }
+    event_type { "weekly_class" }
+    class_organiser_id { rand(999) }
+  end
+
   factory :create_event_form do
     event_form
   end
