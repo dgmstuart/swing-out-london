@@ -33,7 +33,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
 
-  enum day: DAYNAMES.index_by { _1 }
+  enum :day, DAYNAMES.index_by { _1 }
 
   strip_attributes only: %i[title url]
 

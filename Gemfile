@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
-gem "rails", "~> 7.1.1"
+gem "rails", "~> 7.2.2"
 
 gem "actionpack-action_caching" # to support pre rails-4 style action caching
 gem "audited"
