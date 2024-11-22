@@ -155,5 +155,8 @@ RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**/*_spec.rb
 
+RSpec/StringAsInstanceDoubleConstant:
+  Enabled: false
+
 RSpec/VerifiedDoubleReference:
   Enabled: false
