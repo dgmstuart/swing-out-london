@@ -1,7 +1,9 @@
 {
   "engines": {
+    "node": "^22.11.0",
     "yarn": "^4.2.2"
   },
+  "engineStrict": true,
   "scripts": {
     "stylelint": "stylelint app/assets/stylesheets",
     "style-fix": "stylelint --fix app/assets/stylesheets",
