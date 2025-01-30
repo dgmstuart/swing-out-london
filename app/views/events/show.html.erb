@@ -63,3 +63,34 @@
 <div class="actions">
   <%= link_to 'Edit', edit_event_path(@event), class: "button" %>
 </div>
+
+<% if current_user.admin? %>
+  <section class="audit_logs">
+    <h3>Activity</h3>
+
+    <% if @audits.none? %>
+      (No audit log entries - probably this event pre-dates the audit log)
+    <% else %>
+      <% @audits.each do |audit| %>
+        <% editor = Editor.build(audit) %>
+        <p>
+        <span class="timestamp">
+          [<%= audit.created_at.to_fs(:db) %>]
+        </span>
+        <span class="editor" title="<%= editor.auth_id %>">
+          <%= editor.name %>
+        </span>
+        <span class="action">
+          <%= audit.action %>
+        </span>
+        <span class="changes">
+          <%= audit.audited_changes.to_json %>
+        </span>
+        <span class="changes">
+          <%= audit.comment %>
+        </span>
+        </p>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
