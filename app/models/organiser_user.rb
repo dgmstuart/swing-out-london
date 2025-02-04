@@ -10,7 +10,7 @@ class OrganiserUser
   end
 
   def name
-    "Organiser (#{token})"
+    "Organiser"
   end
 
   def auth_id
