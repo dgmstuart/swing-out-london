@@ -14,6 +14,7 @@ class EventsController < CmsBaseController
     event = Event.find(params[:id])
     @last_update = LastUpdate.new(event)
     @event = ShowEvent.new(event)
+    @audits = AuditLogEntry.for_event(event)
   end
 
   def new

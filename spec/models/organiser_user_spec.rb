@@ -12,9 +12,9 @@ RSpec.describe OrganiserUser do
   end
 
   describe "name" do
-    it "includes the token" do
-      user = described_class.new("xyz")
-      expect(user.name).to eq("Organiser (xyz)")
+    it "is a static string" do
+      user = described_class.new(double)
+      expect(user.name).to eq("Organiser")
     end
   end
 
