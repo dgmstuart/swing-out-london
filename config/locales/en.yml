@@ -26,6 +26,9 @@ en:
     london: London
     bristol: Bristol
   activerecord:
+    attributes:
+      role:
+        facebook_ref: "Facebook ID"
     errors:
       models:
         event:

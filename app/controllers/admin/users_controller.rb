@@ -3,16 +3,16 @@
 module Admin
   class UsersController < BaseController
     def index
-      users = UsersListing.for_user(current_user).users
-      role_select_options = Role::ROLES.map { |role| [role.capitalize, role] }
-
-      render locals: { users:, new_user: Role.new, role_select_options: }
+      render locals: index_locals(new_user: Role.new)
     end
 
     def create
-      Role.create!(new_role_params)
-
-      redirect_to admin_users_path
+      role = Role.new(new_role_params)
+      if role.save
+        redirect_to admin_users_path
+      else
+        render :index, locals: index_locals(new_user: role)
+      end
     end
 
     def update
@@ -28,6 +28,13 @@ module Admin
     end
 
     private
+
+    def index_locals(new_user:)
+      users = UsersListing.for_user(current_user).users
+      role_select_options = Role::ROLES.map { |role| [role.capitalize, role] }
+
+      { users:, new_user:, role_select_options: }
+    end
 
     def new_role_params
       params.require(:role).permit(:facebook_ref, :role)

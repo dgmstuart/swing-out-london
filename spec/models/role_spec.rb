@@ -9,6 +9,9 @@ RSpec.describe Role do
 
     it { is_expected.to validate_uniqueness_of(:facebook_ref).case_insensitive }
     it { is_expected.to validate_presence_of(:facebook_ref) }
+    it { is_expected.to allow_value("123456789").for(:facebook_ref) }
+    it { is_expected.not_to allow_value("abc123").for(:facebook_ref) }
+    it { is_expected.not_to allow_value("12345abc").for(:facebook_ref) }
     it { is_expected.to validate_presence_of(:role) }
   end
 
