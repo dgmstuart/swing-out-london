@@ -10,6 +10,7 @@ class Role < ApplicationRecord
     editor: EDITOR
   }
 
-  validates :facebook_ref, presence: true, uniqueness: true
+  validates :facebook_ref, presence: true, uniqueness: true, numeric_string: { allow_blank: true }
+
   validates :role, presence: true
 end

@@ -2,6 +2,8 @@
   <h1>Users</h1>
 
   <%= form_with model: new_user, url: admin_users_path, class: "new-user-form" do |f| %>
+    <%= render "shared/error_messages", target: new_user %>
+
     <div class="form-group">
       <%= f.label :facebook_ref, "Facebook ID" %>
       <%= f.text_field :facebook_ref %>

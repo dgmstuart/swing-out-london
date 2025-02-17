@@ -43,6 +43,29 @@ RSpec.describe "Admins can manage users" do
     end
   end
 
+  context "when the facebook ref is the wrong format" do
+    it "shows a validation error", :js, :vcr do
+      stub_facebook_config(app_secret!: "super-secret-secret")
+      stub_auth_hash(id: 98765987659876598)
+      create(:admin, facebook_ref: 98765987659876598)
+
+      visit "/admin/users"
+
+      VCR.use_cassette("fetch_facebook_names") do
+        click_on "Log in"
+      end
+
+      fill_in "Facebook ID", with: "dawn.hampton"
+      select "Editor", from: "Role"
+
+      VCR.use_cassette("fetch_facebook_names") do
+        click_on "Add user"
+
+        expect(page).to have_content("Facebook ID must contain only digits")
+      end
+    end
+  end
+
   it "removing a role", :js, :vcr do
     stub_facebook_config(app_secret!: "super-secret-secret")
     create(:editor, facebook_ref: 12345678901234567)
