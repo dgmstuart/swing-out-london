@@ -3,7 +3,7 @@
 # Presenter for displaying a list of "Users" based on the {Role}s stored in the
 # database.
 class UsersListing
-  def initialize(current_user_id:, user_name_finder:, roles: Role.all)
+  def initialize(current_user_id:, user_name_finder:, roles: Role.real)
     @roles = roles
     @current_user_id = current_user_id
     @user_name_finder = user_name_finder
