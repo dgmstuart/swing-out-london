@@ -140,17 +140,29 @@ RSpec.describe "Admins can manage users" do
       expect(page).to have_content("Dawn Hampton (Admin)")
     end
 
-    within(user_row("Dawn Hampton")) do
-      click_on("Remove admin")
-    end
-
     VCR.use_cassette("fetch_facebook_names") do
+      within(user_row("Dawn Hampton")) do
+        click_on("Remove admin")
+      end
+
       within(user_row("Dawn Hampton")) do
         expect(page).to have_no_content("(Admin)")
         expect(page).to have_no_content("Remove admin")
         expect(page).to have_link("Make admin")
       end
     end
+  end
+
+  it "does not show the facebook test user", :vcr do
+    test_user_app_id = "12345678901234567"
+    stub_facebook_config(test_user_app_id:, app_secret!: "super-secret-secret")
+    create(:editor, facebook_ref: test_user_app_id)
+
+    VCR.use_cassette("fetch_facebook_names") do
+      skip_login("/admin/users", admin: true)
+    end
+
+    expect(page).to have_no_content(test_user_app_id)
   end
 
   context "when logged in as a non-admin" do
