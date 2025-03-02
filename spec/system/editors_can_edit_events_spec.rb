@@ -53,6 +53,14 @@ RSpec.describe "Editors can edit events", :js do
       .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Saturday 2nd January 2010 at 23:17:16")
+
+    expect(page).to have_no_content("Activity")
+
+    # view the page as an admin:
+    skip_login(page.current_path, admin: true)
+
+    expect(page).to have_content("Activity")
+    expect(page).to have_content("[2010-01-02 23:17:16] Al Minns update")
   end
 
   it "with invalid data" do

@@ -44,7 +44,7 @@ RSpec.describe "Organisers can edit events" do
         expect(page).to have_content("Event was successfully updated")
       end
 
-      expect(Audit.last.username).to eq("name" => "Organiser (abc123)", "auth_id" => "abc123")
+      expect(Audit.last.username).to eq("name" => "Organiser", "auth_id" => "abc123")
     end
 
     it "allows an organiser to edit a weekly event", :js do
@@ -81,7 +81,7 @@ RSpec.describe "Organisers can edit events" do
         expect(page).to have_content("Event was successfully updated")
       end
 
-      expect(Audit.last.username).to eq("name" => "Organiser (abc123)", "auth_id" => "abc123")
+      expect(Audit.last.username).to eq("name" => "Organiser", "auth_id" => "abc123")
     end
 
     it "allows an organiser to cancel their changes", :js do

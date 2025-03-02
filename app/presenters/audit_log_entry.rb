@@ -9,8 +9,12 @@ class AuditLogEntry
   end
 
   class << self
-    def all
-      Audit.order(created_at: :desc).includes(:auditable).map { new(_1) }
+    def all(scope = Audit.all)
+      scope.order(created_at: :desc).includes(:auditable).map { new(_1) }
+    end
+
+    def for_event(event)
+      all(Audit.where(auditable_type: "Event", auditable_id: event.id))
     end
   end
 
