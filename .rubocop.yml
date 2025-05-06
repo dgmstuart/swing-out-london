@@ -1,5 +1,4 @@
 require:
-  - rubocop-rspec
   - rubocop-rspec_rails
 
 plugins:
@@ -7,6 +6,7 @@ plugins:
   - rubocop-factory_bot
   - rubocop-faker
   - rubocop-rails
+  - rubocop-rspec
 
 inherit_mode:
   merge:
@@ -156,9 +156,6 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**/*_spec.rb
-
-RSpec/StringAsInstanceDoubleConstant:
-  Enabled: false
 
 RSpec/VerifiedDoubleReference:
   Enabled: false

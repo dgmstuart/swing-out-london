@@ -45,7 +45,7 @@ group :development, :test do
   gem "rubocop-factory_bot", require: false
   gem "rubocop-faker", require: false
   gem "rubocop-rails", require: false
-  gem "rubocop-rspec", "3.2.0", require: false
+  gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", "2.30.0", require: false
   gem "solargraph-rails"
 end
