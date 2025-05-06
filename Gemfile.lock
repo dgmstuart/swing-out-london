@@ -390,11 +390,12 @@ GEM
       faker (>= 2.12.0)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
-    rubocop-rails (2.27.0)
+    rubocop-rails (2.31.0)
       activesupport (>= 4.2.0)
+      lint_roller (~> 1.1)
       rack (>= 1.1)
-      rubocop (>= 1.52.0, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
+      rubocop (>= 1.75.0, < 2.0)
+      rubocop-ast (>= 1.38.0, < 2.0)
     rubocop-rspec (3.2.0)
       rubocop (~> 1.61)
     rubocop-rspec_rails (2.30.0)
@@ -538,7 +539,7 @@ DEPENDENCIES
   rubocop-capybara
   rubocop-factory_bot
   rubocop-faker
-  rubocop-rails (= 2.27.0)
+  rubocop-rails
   rubocop-rspec (= 3.2.0)
   rubocop-rspec_rails (= 2.30.0)
   selenium-webdriver

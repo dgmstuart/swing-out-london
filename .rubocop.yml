@@ -1,5 +1,4 @@
 require:
-  - rubocop-rails
   - rubocop-rspec
   - rubocop-rspec_rails
 
@@ -7,6 +6,7 @@ plugins:
   - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-faker
+  - rubocop-rails
 
 inherit_mode:
   merge:
