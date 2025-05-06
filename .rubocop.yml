@@ -1,10 +1,10 @@
-require:
+plugins:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-faker
   - rubocop-rails
   - rubocop-rspec
   - rubocop-rspec_rails
-  - rubocop-faker
-  - rubocop-capybara
-  - rubocop-factory_bot
 
 inherit_mode:
   merge:
@@ -154,9 +154,6 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**/*_spec.rb
-
-RSpec/StringAsInstanceDoubleConstant:
-  Enabled: false
 
 RSpec/VerifiedDoubleReference:
   Enabled: false

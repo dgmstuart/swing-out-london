@@ -9,6 +9,7 @@ RSpec.describe "Editor Login" do
 
     visit "/events/new"
 
+    expect(page).to have_button("Log in")
     expect(page).to have_no_content("New event")
 
     click_on "Log in"
@@ -27,6 +28,7 @@ RSpec.describe "Editor Login" do
 
     visit "/events"
 
+    expect(page).to have_button("Log in")
     expect(page).to have_no_content("Events")
 
     click_on "Log in"
@@ -70,6 +72,7 @@ RSpec.describe "Editor Login" do
 
       visit "/login"
 
+      expect(page).to have_button("Log in")
       expect(page).to have_no_content("Events")
 
       click_on "Log in"
