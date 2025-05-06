@@ -2,11 +2,11 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-rspec_rails
-  - rubocop-faker
 
 plugins:
   - rubocop-capybara
   - rubocop-factory_bot
+  - rubocop-faker
 
 inherit_mode:
   merge:
