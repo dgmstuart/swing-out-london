@@ -399,9 +399,10 @@ GEM
     rubocop-rspec (3.6.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
-    rubocop-rspec_rails (2.30.0)
-      rubocop (~> 1.61)
-      rubocop-rspec (~> 3, >= 3.0.1)
+    rubocop-rspec_rails (2.31.0)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
+      rubocop-rspec (~> 3.5)
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
     sass-embedded (1.87.0)
@@ -542,7 +543,7 @@ DEPENDENCIES
   rubocop-faker
   rubocop-rails
   rubocop-rspec
-  rubocop-rspec_rails (= 2.30.0)
+  rubocop-rspec_rails
   selenium-webdriver
   shoulda-matchers
   simplecov
