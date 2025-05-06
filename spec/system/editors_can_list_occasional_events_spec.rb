@@ -46,7 +46,7 @@ RSpec.describe "Editors can list occasional events" do
     end
 
     within "section.listings" do
-      within page.all(".date_row")[0] do
+      within page.first(".date_row") do
         expect(page).to have_content "Saturday 2nd January"
         expect(page).to have_content "WC2R"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
