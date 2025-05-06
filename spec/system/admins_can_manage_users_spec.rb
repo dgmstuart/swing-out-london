@@ -14,10 +14,9 @@ RSpec.describe "Admins can manage users" do
 
     VCR.use_cassette("fetch_facebook_names") do
       click_on "Users"
+      expect(page).to have_content("Dawn Hampton")
+      expect(page).to have_content("Herbert White (Admin)")
     end
-
-    expect(page).to have_content("Dawn Hampton")
-    expect(page).to have_content("Herbert White (Admin)")
   end
 
   it "adding a role", :js, :vcr do
@@ -31,10 +30,10 @@ RSpec.describe "Admins can manage users" do
       click_on "Log in"
 
       expect(page).to have_no_content("Dawn Hampton")
-    end
 
-    fill_in "Facebook ID", with: 12345678901234567
-    select "Editor", from: "Role"
+      fill_in "Facebook ID", with: 12345678901234567
+      select "Editor", from: "Role"
+    end
 
     VCR.use_cassette("fetch_facebook_names") do
       click_on "Add user"
@@ -53,10 +52,10 @@ RSpec.describe "Admins can manage users" do
 
       VCR.use_cassette("fetch_facebook_names") do
         click_on "Log in"
-      end
 
-      fill_in "Facebook ID", with: "dawn.hampton"
-      select "Editor", from: "Role"
+        fill_in "Facebook ID", with: "dawn.hampton"
+        select "Editor", from: "Role"
+      end
 
       VCR.use_cassette("fetch_facebook_names") do
         click_on "Add user"
@@ -85,15 +84,15 @@ RSpec.describe "Admins can manage users" do
 
       VCR.use_cassette("fetch_facebook_names") do
         click_on "Log in"
-      end
 
-      expect(page).to have_content("Dawn Hampton")
-      expect(page).to have_content("Herbert White (Admin)")
+        expect(page).to have_content("Dawn Hampton")
+        expect(page).to have_content("Herbert White (Admin)")
 
-      expect(user_row("Herbert White")).to have_no_content("Delete") # You shouldn't be able to delete yourself!
+        expect(user_row("Herbert White")).to have_no_content("Delete") # You shouldn't be able to delete yourself!
 
-      within(user_row("Dawn Hampton")) do
-        accept_alert { click_on("Delete") }
+        within(user_row("Dawn Hampton")) do
+          accept_alert { click_on("Delete") }
+        end
       end
 
       VCR.use_cassette("fetch_facebook_names") do
@@ -118,10 +117,10 @@ RSpec.describe "Admins can manage users" do
     VCR.use_cassette("fetch_facebook_names") do
       skip_login("/admin/users", admin: true)
       expect(page).to have_content("Dawn Hampton")
-    end
 
-    within(user_row("Dawn Hampton")) do
-      accept_alert { click_on("Make admin") }
+      within(user_row("Dawn Hampton")) do
+        accept_alert { click_on("Make admin") }
+      end
     end
 
     VCR.use_cassette("fetch_facebook_names") do
@@ -143,12 +142,10 @@ RSpec.describe "Admins can manage users" do
     VCR.use_cassette("fetch_facebook_names") do
       within(user_row("Dawn Hampton")) do
         click_on("Remove admin")
-      end
 
-      within(user_row("Dawn Hampton")) do
+        expect(page).to have_link("Make admin")
         expect(page).to have_no_content("(Admin)")
         expect(page).to have_no_content("Remove admin")
-        expect(page).to have_link("Make admin")
       end
     end
   end
