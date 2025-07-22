@@ -134,6 +134,8 @@ RSpec.describe "Editors can create events", :js do
 
         click_on "Create"
 
+        expect(page).to have_content("Event was successfully created")
+
         event = Event.last
         aggregate_failures do
           expect(event.class_organiser).to be_nil
@@ -165,6 +167,8 @@ RSpec.describe "Editors can create events", :js do
         select "Wednesday", from: "Day"
 
         click_on "Create"
+
+        expect(page).to have_content("Event was successfully created")
 
         event = Event.last
         aggregate_failures do
