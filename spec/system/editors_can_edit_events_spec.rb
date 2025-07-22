@@ -37,6 +37,8 @@ RSpec.describe "Editors can edit events", :js do
 
     Timecop.freeze(Time.zone.local(2010, 1, 2, 23, 17, 16)) do
       click_on "Update"
+
+      expect(page).to have_content("Event was successfully updated")
     end
 
     expect(page).to have_content("Title:\nStompin'")
@@ -94,6 +96,8 @@ RSpec.describe "Editors can edit events", :js do
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
       click_on "Update"
+
+      expect(page).to have_content("Event was successfully updated")
     end
 
     expect(page).to have_content("Dates:\n12/12/2012, 12/01/2013")
@@ -130,10 +134,11 @@ RSpec.describe "Editors can edit events", :js do
 
     Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
       click_on "Update"
+
+      expect(page).to have_content("Event was successfully updated")
     end
 
     expect(page).to have_content("Cancelled:\n12/12/2012")
-
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Friday 2nd January 2015 at 23:17:16")
     audit = Audit.last
     expect(audit.audited_changes).to eq("class_style" => [nil, ""])
