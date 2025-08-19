@@ -34,10 +34,10 @@ RSpec.describe OrganiserRemindersSender do
 
         sent_emails = ActionMailer::Base.deliveries
 
-        aggregate_failures do
-          expect(sent_emails.first.subject).to match(/missing dates for "No dates"/)
-          expect(sent_emails.last.subject).to match(/missing dates for "No future dates"/)
-        end
+        expect(sent_emails.map(&:subject)).to contain_exactly(
+          match(/missing dates for "No dates"/),
+          match(/missing dates for "No future dates"/)
+        )
       end
     end
 
