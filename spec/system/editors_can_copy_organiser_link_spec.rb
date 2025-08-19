@@ -27,6 +27,8 @@ RSpec.describe "Editors can copy an organiser link" do
         click_on "revoke this link"
       end
 
+      new_url = URI.join(page.server_url, "/external_events/xyz789/edit").to_s
+      expect(page).to have_field("Organiser edit link", with: new_url)
       expect(page).to have_no_field("Organiser edit link", with: url)
 
       event.reload
