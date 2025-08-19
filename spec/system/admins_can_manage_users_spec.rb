@@ -14,6 +14,7 @@ RSpec.describe "Admins can manage users" do
 
     VCR.use_cassette("fetch_facebook_names") do
       click_on "Users"
+      wait_for_user_page_load
     end
 
     expect(page).to have_content("Dawn Hampton")
@@ -29,6 +30,7 @@ RSpec.describe "Admins can manage users" do
 
     VCR.use_cassette("fetch_facebook_names") do
       click_on "Log in"
+      wait_for_user_page_load
 
       expect(page).to have_no_content("Dawn Hampton")
     end
@@ -53,6 +55,7 @@ RSpec.describe "Admins can manage users" do
 
       VCR.use_cassette("fetch_facebook_names") do
         click_on "Log in"
+        wait_for_user_page_load
       end
 
       fill_in "Facebook ID", with: "dawn.hampton"
@@ -85,6 +88,7 @@ RSpec.describe "Admins can manage users" do
 
       VCR.use_cassette("fetch_facebook_names") do
         click_on "Log in"
+        wait_for_user_page_load
       end
 
       expect(page).to have_content("Dawn Hampton")
@@ -98,8 +102,8 @@ RSpec.describe "Admins can manage users" do
 
       VCR.use_cassette("fetch_facebook_names") do
         # We need the cassette here because the page gets reloaded after clicking the button
-        expect(page).to have_no_content("Dawn Hampton")
         expect(page).to have_content("Herbert White (Admin)")
+        expect(page).to have_no_content("Dawn Hampton")
       end
     end
 
@@ -146,9 +150,9 @@ RSpec.describe "Admins can manage users" do
       end
 
       within(user_row("Dawn Hampton")) do
+        expect(page).to have_link("Make admin")
         expect(page).to have_no_content("(Admin)")
         expect(page).to have_no_content("Remove admin")
-        expect(page).to have_link("Make admin")
       end
     end
   end
@@ -160,6 +164,7 @@ RSpec.describe "Admins can manage users" do
 
     VCR.use_cassette("fetch_facebook_names") do
       skip_login("/admin/users", admin: true)
+      wait_for_user_page_load
     end
 
     expect(page).to have_no_content(test_user_app_id)
@@ -179,5 +184,9 @@ RSpec.describe "Admins can manage users" do
 
   def user_row(user_name)
     find("li.user", text: user_name)
+  end
+
+  def wait_for_user_page_load
+    expect(page).to have_button("Add user")
   end
 end
