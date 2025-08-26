@@ -8,6 +8,7 @@ class EditEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes
   include Frequency
+  include Urls
 
   attribute :url, :string
   attribute :venue_id, :integer
@@ -39,10 +40,11 @@ class EditEventForm
     end
   end
 
-  validates :url, presence: true, uri: true
+  validates :url, presence: true, uri: true, length: { maximum: 175 }
   validates :venue_id, presence: true
   validates :frequency, presence: true, inclusion: { in: [0, 1], allow_blank: true }
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_blank: true }
+  validates :title, length: { maximum: 125 }
 
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
@@ -77,6 +79,7 @@ class EditEventForm
 
   def to_h
     attributes.symbolize_keys.merge(
+      url: strip_redundant_query_params(url),
       dates: parsed_dates,
       cancellations: parsed_cancellations,
       has_class: has_weekly_class?,

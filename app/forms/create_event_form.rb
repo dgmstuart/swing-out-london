@@ -8,6 +8,7 @@ class CreateEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes
   include Frequency
+  include Urls
 
   attribute :url, :string
   attribute :venue_id, :integer
@@ -34,9 +35,10 @@ class CreateEventForm
     end
   end
 
-  validates :url, presence: true, uri: true
+  validates :url, presence: true, uri: true, length: { maximum: 175 }
   validates :venue_id, presence: true
   validates :event_type, presence: true, inclusion: { in: %w[social_dance weekly_class], allow_blank: true }
+  validates :title, length: { maximum: 125 }
   validates :frequency, presence: true, inclusion: { in: [0, 1], allow_blank: true }
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_blank: true }
   validates :dates, dates_string: true
@@ -68,6 +70,7 @@ class CreateEventForm
 
   def to_h
     attributes.symbolize_keys.merge(
+      url: strip_redundant_query_params(url),
       dates: parsed_dates,
       cancellations: parsed_cancellations,
       has_social: type_is_social_dance?,
