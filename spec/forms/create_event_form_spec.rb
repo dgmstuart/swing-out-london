@@ -44,7 +44,9 @@ RSpec.describe CreateEventForm do
     it { is_expected.to validate_presence_of(:frequency) }
     it { is_expected.to validate_inclusion_of(:frequency).in_array([0, 1]) }
     it { is_expected.to validate_presence_of(:url) }
+    it { is_expected.to validate_length_of(:url).is_at_most(175) }
     it { is_expected.to validate_presence_of(:venue_id) }
+    it { is_expected.to validate_length_of(:title).is_at_most(125) }
   end
 
   describe "#action" do

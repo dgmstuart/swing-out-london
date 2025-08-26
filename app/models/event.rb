@@ -17,7 +17,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :email_deliveries, dependent: :destroy
 
   validates :frequency, presence: true
-  validates :url, presence: true, uri: true
+  validates :title, length: { maximum: 125 }
+  validates :url, presence: true, uri: true, length: { maximum: 175 }
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
 

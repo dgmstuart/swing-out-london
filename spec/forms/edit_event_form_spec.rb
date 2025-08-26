@@ -40,6 +40,7 @@ RSpec.describe EditEventForm do
 
     it { is_expected.to validate_presence_of(:frequency) }
     it { is_expected.to validate_presence_of(:url) }
+    it { is_expected.to validate_length_of(:url).is_at_most(175) }
     it { is_expected.to validate_presence_of(:venue_id) }
   end
 
