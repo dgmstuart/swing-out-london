@@ -2,7 +2,7 @@
 
 class VenuesController < CmsBaseController
   def index
-    @venues = Venue.order("name ASC").includes(:events)
+    @venues = Venue.order(:name).includes(:events)
   end
 
   def show
