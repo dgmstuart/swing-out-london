@@ -8,6 +8,7 @@ class EditEventForm
   include ActiveModel::Model
   include ActiveModel::Attributes
   include Frequency
+  include Urls
 
   attribute :url, :string
   attribute :venue_id, :integer
@@ -78,6 +79,7 @@ class EditEventForm
 
   def to_h
     attributes.symbolize_keys.merge(
+      url: strip_redundant_query_params(url),
       dates: parsed_dates,
       cancellations: parsed_cancellations,
       has_class: has_weekly_class?,

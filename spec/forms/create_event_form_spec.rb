@@ -11,6 +11,7 @@ require "spec/support/shared_examples/events/validates_dates_string"
 require "spec/support/shared_examples/events/validates_cancellations_in_dates"
 require "spec/support/shared_examples/events/validates_date_string"
 require "app/concerns/frequency"
+require "app/concerns/urls"
 require "app/forms/create_event_form"
 require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
@@ -179,6 +180,15 @@ RSpec.describe CreateEventForm do
           last_date: ""
         )
       end
+    end
+
+    it "strips query params from facebook URLS" do
+      form = described_class.new(
+        url: "https://www.facebook.com/events/1269384081753075/1269384101753073?acontext=%7B%22event_action_history%22%3A[%7"
+      )
+
+      expect(form.to_h.fetch(:url))
+        .to eq("https://www.facebook.com/events/1269384081753075/1269384101753073")
     end
   end
 end
