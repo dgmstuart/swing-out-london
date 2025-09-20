@@ -7,6 +7,15 @@ module System
       # because it's trying to autocomplete based on the current value.
       # Because of this, we need to delete the value from the field first.
       input = empty_autocomplete_field(from)
+
+      listbox_id = input[:"aria-owns"] || input[:"aria-controls"]
+      menu_selector = "##{listbox_id}"
+
+      expect(page).to have_css("#{menu_selector}.autocomplete__menu--visible", wait: 5)
+
+      # If items are fetched/filtered async, wait for at least one option
+      expect(page).to have_css("#{menu_selector} li.autocomplete__option[role='option']", minimum: 1, wait: 10)
+
       option = input.sibling(".autocomplete__menu").find("li", text: option_text)
       option.click
     end
