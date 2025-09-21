@@ -22,7 +22,7 @@ VCR.configure do |c|
   end
 end
 
-VCR.turn_off!
+VCR.turn_off!(ignore_cassettes: true)
 
 RSpec.configure do |config|
   config.before(:all, :vcr) do
@@ -30,6 +30,6 @@ RSpec.configure do |config|
   end
 
   config.after(:all, :vcr) do
-    VCR.turn_off!
+    VCR.turn_off!(ignore_cassettes: true)
   end
 end
