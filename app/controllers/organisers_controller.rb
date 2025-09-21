@@ -42,6 +42,7 @@ class OrganisersController < CmsBaseController
 
   def destroy
     @organiser = Organiser.find(params[:id])
+    flash[:notice] = t("flash.success", model: "Organiser", action: "deleted")
     @organiser.destroy
 
     redirect_to(organisers_url)
