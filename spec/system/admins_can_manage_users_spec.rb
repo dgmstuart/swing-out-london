@@ -126,21 +126,19 @@ RSpec.describe "Admins can manage users" do
     stub_facebook_config(app_secret!: "super-secret-secret")
     create(:admin, facebook_ref: 12345678901234567)
 
-    VCR.use_cassette("fetch_facebook_names") do
-      skip_login("/admin/users", admin: true)
-      expect(page).to have_content("Dawn Hampton (Admin)")
+    skip_login("/admin/users", admin: true)
+    expect(page).to have_content("Dawn Hampton (Admin)")
+
+    within(user_row("Dawn Hampton")) do
+      click_on("Remove admin")
     end
 
-    VCR.use_cassette("fetch_facebook_names") do
-      within(user_row("Dawn Hampton")) do
-        click_on("Remove admin")
-      end
+    wait_for_turbo_preview
 
-      within(user_row("Dawn Hampton")) do
-        expect(page).to have_link("Make admin")
-        expect(page).to have_no_content("(Admin)")
-        expect(page).to have_no_content("Remove admin")
-      end
+    within(user_row("Dawn Hampton")) do
+      expect(page).to have_link("Make admin")
+      expect(page).to have_no_content("(Admin)")
+      expect(page).to have_no_content("Remove admin")
     end
   end
 
@@ -173,5 +171,11 @@ RSpec.describe "Admins can manage users" do
 
   def wait_for_user_page_load
     expect(page).to have_button("Add user")
+  end
+
+  def wait_for_turbo_preview
+    turbo_preview_window_selector = "html[data-turbo-preview]"
+    page.has_css?(turbo_preview_window_selector, wait: 0.5) # don't hang if we already missed it
+    expect(page).to have_no_css(turbo_preview_window_selector)
   end
 end
