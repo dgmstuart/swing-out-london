@@ -3,6 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "Admins can manage users" do
+  around do |example|
+    VCR.use_cassette("fetch_facebook_names", allow_playback_repeats: true) do
+      example.run
+    end
+  end
+
   it "viewing a list of users", :vcr do
     stub_facebook_config(app_secret!: "super-secret-secret")
     stub_auth_hash(id: 98765987659876598)
@@ -12,10 +18,8 @@ RSpec.describe "Admins can manage users" do
     visit "/login"
     click_on "Log in"
 
-    VCR.use_cassette("fetch_facebook_names") do
-      click_on "Users"
-      wait_for_user_page_load
-    end
+    click_on "Users"
+    wait_for_user_page_load
 
     expect(page).to have_content("Dawn Hampton")
     expect(page).to have_content("Herbert White (Admin)")
@@ -28,21 +32,17 @@ RSpec.describe "Admins can manage users" do
 
     visit "/admin/users"
 
-    VCR.use_cassette("fetch_facebook_names") do
-      click_on "Log in"
-      wait_for_user_page_load
+    click_on "Log in"
+    wait_for_user_page_load
 
-      expect(page).to have_no_content("Dawn Hampton")
-    end
+    expect(page).to have_no_content("Dawn Hampton")
 
     fill_in "Facebook ID", with: 12345678901234567
     select "Editor", from: "Role"
 
-    VCR.use_cassette("fetch_facebook_names") do
-      click_on "Add user"
+    click_on "Add user"
 
-      expect(page).to have_content("Dawn Hampton")
-    end
+    expect(page).to have_content("Dawn Hampton")
   end
 
   context "when the facebook ref is the wrong format" do
@@ -53,19 +53,15 @@ RSpec.describe "Admins can manage users" do
 
       visit "/admin/users"
 
-      VCR.use_cassette("fetch_facebook_names") do
-        click_on "Log in"
-        wait_for_user_page_load
-      end
+      click_on "Log in"
+      wait_for_user_page_load
 
       fill_in "Facebook ID", with: "dawn.hampton"
       select "Editor", from: "Role"
 
-      VCR.use_cassette("fetch_facebook_names") do
-        click_on "Add user"
+      click_on "Add user"
 
-        expect(page).to have_content("Facebook ID must contain only digits")
-      end
+      expect(page).to have_content("Facebook ID must contain only digits")
     end
   end
 
@@ -86,10 +82,8 @@ RSpec.describe "Admins can manage users" do
       stub_auth_hash(id: "98765987659876598")
       visit "/admin/users"
 
-      VCR.use_cassette("fetch_facebook_names") do
-        click_on "Log in"
-        wait_for_user_page_load
-      end
+      click_on "Log in"
+      wait_for_user_page_load
 
       expect(page).to have_content("Dawn Hampton")
       expect(page).to have_content("Herbert White (Admin)")
@@ -100,11 +94,8 @@ RSpec.describe "Admins can manage users" do
         accept_alert { click_on("Delete") }
       end
 
-      VCR.use_cassette("fetch_facebook_names") do
-        # We need the cassette here because the page gets reloaded after clicking the button
-        expect(page).to have_content("Herbert White (Admin)")
-        expect(page).to have_no_content("Dawn Hampton")
-      end
+      expect(page).to have_content("Herbert White (Admin)")
+      expect(page).to have_no_content("Dawn Hampton")
     end
 
     Capybara.using_session("editor_session") do
@@ -119,20 +110,16 @@ RSpec.describe "Admins can manage users" do
     stub_facebook_config(app_secret!: "super-secret-secret")
     create(:editor, facebook_ref: 12345678901234567)
 
-    VCR.use_cassette("fetch_facebook_names") do
-      skip_login("/admin/users", admin: true)
-      expect(page).to have_content("Dawn Hampton")
-    end
+    skip_login("/admin/users", admin: true)
+    expect(page).to have_content("Dawn Hampton")
 
     within(user_row("Dawn Hampton")) do
       accept_alert { click_on("Make admin") }
     end
 
-    VCR.use_cassette("fetch_facebook_names") do
-      expect(page).to have_content("Dawn Hampton (Admin)")
-      expect(user_row("Dawn Hampton")).to have_no_content("Make admin")
-      expect(user_row("Dawn Hampton")).to have_link("Remove admin")
-    end
+    expect(page).to have_content("Dawn Hampton (Admin)")
+    expect(user_row("Dawn Hampton")).to have_no_content("Make admin")
+    expect(user_row("Dawn Hampton")).to have_link("Remove admin")
   end
 
   it "removing admin privileges from a user", :js, :vcr do
@@ -162,15 +149,13 @@ RSpec.describe "Admins can manage users" do
     stub_facebook_config(test_user_app_id:, app_secret!: "super-secret-secret")
     create(:editor, facebook_ref: test_user_app_id)
 
-    VCR.use_cassette("fetch_facebook_names") do
-      skip_login("/admin/users", admin: true)
-      wait_for_user_page_load
-    end
+    skip_login("/admin/users", admin: true)
+    wait_for_user_page_load
 
     expect(page).to have_no_content(test_user_app_id)
   end
 
-  context "when logged in as a non-admin" do
+  context "when logged in as a non-admin", :ignore_cassettes do
     it "does not allow access" do
       skip_login(admin: false)
 
