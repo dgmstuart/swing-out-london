@@ -9,6 +9,10 @@
     <meta content="initial-scale=1" name="viewport"/>
     <meta content="Duncan Stuart" name="author"/>
     <meta content="<%= content_for?(:description) ? yield(:description) : "#{tc("site_name")} is a listing of weekly Lindy Hop classes, regular socials, swing gigs and vintage clubs" %>" name="description"/>
+    <% if Rails.env.test? %>
+      <meta name="turbo-cache-control" content="no-preview">
+    <% end %>
+
     <link href="humans.txt" rel="author"></link>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
