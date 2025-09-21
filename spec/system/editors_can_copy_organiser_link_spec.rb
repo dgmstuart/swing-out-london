@@ -27,6 +27,8 @@ RSpec.describe "Editors can copy an organiser link" do
         click_on "revoke this link"
       end
 
+      wait_for_turbo_refresh(turbo_frame_id: "organiser_link")
+
       new_url = URI.join(page.server_url, "/external_events/xyz789/edit").to_s
       expect(page).to have_field("Organiser edit link", with: new_url)
       expect(page).to have_no_field("Organiser edit link", with: url)
@@ -49,6 +51,8 @@ RSpec.describe "Editors can copy an organiser link" do
       expect(page).to have_content("No organiser edit link exists for this event")
 
       click_on "Generate link"
+
+      wait_for_turbo_refresh(turbo_frame_id: "organiser_link")
 
       url = URI.join(page.server_url, "/external_events/abc123/edit").to_s
       expect(page).to have_field("Organiser edit link", with: url)
@@ -76,5 +80,13 @@ RSpec.describe "Editors can copy an organiser link" do
 
   def organiser_link_url
     find("#organiser_link input").value
+  end
+
+  def wait_for_turbo_refresh(turbo_frame_id:)
+    turbo_frame_selector = "turbo-frame##{turbo_frame_id}"
+    expect(page).to have_css(turbo_frame_selector) # check: are we correctly referencing the frame
+    busy_selector = "#{turbo_frame_selector}[busy]"
+    page.has_css?(busy_selector, wait: 0.5) # short, don't hang if we're checking after the busyness has already happened
+    expect(page).to have_no_css(busy_selector)
   end
 end
