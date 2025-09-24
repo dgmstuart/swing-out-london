@@ -44,11 +44,14 @@
     <%= f.text_field :cancellations %>
   </div>
 
-  <div class='form-group'>
-    <%= f.label :last_date %>
-    <p class='help'>The event will stop showing up on the site after this date</p>
-    <%= f.date_field :last_date, value: @form.last_date %>
-  </div>
+  <section>
+    <h3 class="form-section-title">Is this event ending or taking a break?</h3>
+    <div class='form-group'>
+      <%= f.label :last_date %>
+      <p class='help'>The event will stop showing up on the site after this date</p>
+      <%= f.date_field :last_date, value: @form.last_date %>
+    </div>
+  </section>
 
   <div class='form-group actions'>
     <%= f.submit 'Update', class: 'button' %>
