@@ -25,4 +25,15 @@ RSpec.shared_examples "validates event with last date (form)" do |model_name|
       ]
     )
   end
+
+  it "is invalid if it's weekly with a cancellation past the last date" do
+    model = build(model_name, :weekly, cancellations: "02/11/2011,31/10/2011", last_date: "2011-11-01")
+    model.valid?
+    expect(model.errors.messages).to eq(
+      cancellations: [
+        "can't include dates after the last date. " \
+        "Change or remove the \"Last date\" or remove the cancelled dates which are later than this"
+      ]
+    )
+  end
 end
