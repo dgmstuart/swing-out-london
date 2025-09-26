@@ -248,6 +248,7 @@ RSpec.describe "Editors can create events", :js do
 
       expect(page).to have_content("1 error prevented this record from being saved")
         .and have_content("Class organiser must be present for classes")
+      expect(page).to have_no_content("Monthly") # This radio button should be hidden
 
       autocomplete_select "Sunshine Swing", from: "Class organiser"
       click_on "Create"
