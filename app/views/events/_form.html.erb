@@ -86,7 +86,7 @@
 
   <section data-event-form-target="when" class="<%= 'hidden' unless @form.show_when? %>">
     <h3 class='form-section-title'>When?</h3>
-    <div class='form-group' data-event-form-target="frequency">
+    <div class='form-group <%= "hidden" unless @form.show_frequency? %>' data-event-form-target="frequency">
       <h4 class="form-group-title">Frequency</h4>
       <label>
         <%= f.radio_button(:frequency, 1, data: { action: "event-form#setWeekly", "event-form-target" => "frequencyWeekly" }) %>

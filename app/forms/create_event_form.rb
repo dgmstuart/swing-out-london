@@ -68,6 +68,10 @@ class CreateEventForm
     !event_type.nil?
   end
 
+  def show_frequency?
+    type_is_social_dance?
+  end
+
   def to_h
     attributes.symbolize_keys.merge(
       url: strip_redundant_query_params(url),
