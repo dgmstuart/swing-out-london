@@ -67,6 +67,7 @@
 <% if current_user.admin? %>
   <section class="audit_logs">
     <h3>Activity</h3>
+    <p><%= t("audit_log.timezone_note") %></p>
 
     <% if @audits.none? %>
       (No audit log entries - probably this event pre-dates the audit log)
