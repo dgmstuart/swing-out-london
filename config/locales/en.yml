@@ -4,6 +4,7 @@ en:
       default: "%d/%m/%Y %H:%M:%S"
       short: "%d %b %H:%M"
       long: "%B %d, %Y %H:%M"
+      iso_no_zone: "%Y-%m-%d %H:%M:%S"
   date:
     formats:
       default: "%d/%m/%Y" # 11/10/2015
@@ -65,6 +66,8 @@ en:
       event_type:
         social_dance: Social dance
         weekly_class: Weekly class
+  audit_log:
+    timezone_note: Entries are show in London time
 
   organiser_mailer:
     reminder_email:

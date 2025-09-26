@@ -1,11 +1,12 @@
 <main class="page">
   <h1>Audit Log</h1>
+  <p><%= t("audit_log.timezone_note") %></p>
 
   <% @audits.each do |audit| %>
     <% editor = Editor.build(audit) %>
     <p>
       <span class="timestamp">
-        [<%= audit.created_at.to_fs(:db) %>]
+        [<%= l(audit.created_at, format: :iso_no_zone) %>]
       </span>
       <span class="editor" title="<%= editor.auth_id %>">
         <%= editor.name %>
