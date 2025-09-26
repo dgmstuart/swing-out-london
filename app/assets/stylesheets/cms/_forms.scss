@@ -173,6 +173,10 @@ form.edit_venue {
   }
 }
 
+form.edit_event section {
+  max-width: 500px;
+}
+
 .lat-lng {
   .row {
     display: flex;

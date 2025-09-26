@@ -30,7 +30,6 @@ RSpec.describe "Organisers can edit events" do
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
-      fill_in "Last date", with: "12/01/2013"
       click_on "Update"
 
       expect(page).to have_content("Event was successfully updated")
@@ -40,7 +39,6 @@ RSpec.describe "Organisers can edit events" do
         expect(page).to have_field("Venue", with: "The 100 Club - central")
         expect(page).to have_field("Upcoming dates", with: "12/12/2012,12/01/2013")
         expect(page).to have_field("Cancelled dates", with: "12/12/2012")
-        expect(page).to have_field("Last date", with: "2013-01-12")
         expect(page).to have_content("Event was successfully updated")
       end
 
@@ -102,7 +100,6 @@ RSpec.describe "Organisers can edit events" do
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
-      fill_in "Last date", with: "12/01/2013"
 
       click_on "Cancel"
 
@@ -110,7 +107,31 @@ RSpec.describe "Organisers can edit events" do
         expect(page).to have_field("Venue", with: "The Bishopsgate Centre - Liverpool st")
         expect(page).to have_field("Upcoming dates", with: "01/02/2036")
         expect(page).to have_field("Cancelled dates", with: "")
-        expect(page).to have_field("Last date", with: "")
+      end
+    end
+
+    context "when the event is occasional but a last date has already been set" do
+      it "allows an organiser to remove it" do
+        create(
+          :social,
+          organiser_token: "abc123",
+          frequency: 0,
+          last_date: Date.new(2013, 1, 12),
+          event_instances: [build(:event_instance, date: "12/12/2012")]
+        )
+        travel_to("2013-01-01")
+
+        visit("/external_events/abc123/edit")
+
+        expect(page).to have_field("Last date", with: "2013-01-12")
+
+        fill_in "Last date", with: ""
+        click_on "Update"
+
+        aggregate_failures do
+          expect(page).to have_content("Event was successfully updated")
+          expect(page).to have_no_content("Last date")
+        end
       end
     end
 

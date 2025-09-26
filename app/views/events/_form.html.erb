@@ -126,11 +126,15 @@
       </p>
       <%= reasonable_date_field f, :first_date %>
     </div>
-    <div class='form-group'>
-      <%= f.label :last_date %>
-      <p class='help'>The event will stop being included in the listings after this date</p>
-      <%= reasonable_date_field f, :last_date, allow_past: @form.persisted? %>
-    </div>
+    <section>
+      <h3 class="form-section-title">Is this event ending or taking a break?</h3>
+      <p class='help'>If not, then please leave this blank</p>
+      <div class='form-group'>
+        <%= f.label :last_date %>
+        <p class='help'>The event will stop being included in the listings after this date</p>
+        <%= reasonable_date_field f, :last_date, allow_past: @form.persisted? %>
+      </div>
+    </section>
 
   </section>
 
