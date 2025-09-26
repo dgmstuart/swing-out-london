@@ -152,9 +152,7 @@ RSpec.describe "Editors can edit events", :js do
 
     fill_in "Cancelled dates", with: "12/12/2012"
 
-    Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
-      click_on "Update"
-    end
+    click_on "Update"
 
     expect(page).to have_content("Cancelled:\n12/12/2012")
   end

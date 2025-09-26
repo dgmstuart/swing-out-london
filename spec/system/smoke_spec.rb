@@ -29,7 +29,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_no_content("error")
+    expect(page).to have_content("Venue was successfully created")
 
     # SOCIAL ORGANISER
     open_menu
@@ -42,7 +42,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_no_content("error")
+    expect(page).to have_content("Organiser was successfully created")
 
     # CLASS ORGANISER
     open_menu
@@ -53,7 +53,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_no_content("error")
+    expect(page).to have_content("Organiser was successfully created")
 
     # EVENT WITH CANCELLED DATE
     open_menu
@@ -80,7 +80,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_no_content("error")
+    expect(page).to have_content("Event was successfully created")
 
     # RECENTLY STARTED EVENT (NEW!)
     open_menu
@@ -98,7 +98,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_no_content("error")
+    expect(page).to have_content("Event was successfully created")
 
     click_on "Swing Out London"
 

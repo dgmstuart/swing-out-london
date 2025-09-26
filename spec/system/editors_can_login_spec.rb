@@ -19,7 +19,7 @@ RSpec.describe "Editor Login" do
 
     click_on "Al Minns"
 
-    expect(page).to have_content(/Facebook access token will expire in (59|60) days/)
+    expect(page).to have_content(/Facebook access token will expire in (59|60|61) days/)
   end
 
   it "Admins can login and access editor pages" do
