@@ -171,6 +171,21 @@ RSpec.describe "Organisers can edit events" do
     end
   end
 
+  context "when the cancellation dates are past the last date [REGRESSION]" do
+    it "shows validation errors" do
+      create(:class, organiser_token: "abc123")
+
+      visit("/external_events/abc123/edit")
+
+      fill_in "Cancelled dates", with: "29/09/2025"
+      fill_in "Last date", with: "2025-09-27"
+      click_on "Update"
+
+      expect(page).to have_content("1 error prevented this record from being saved:")
+        .and have_content("Cancellations can't include dates after the last date")
+    end
+  end
+
   context "when the organiser token is incorrect" do
     it "renders a 404" do
       visit("/external_events/abc123/edit")
