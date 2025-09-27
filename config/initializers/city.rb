@@ -18,24 +18,24 @@ class MapConfig
   end
 end
 
-Coordinates = Struct.new(:lat, :lng)
+Coordinates = Data.define(:lat, :lng)
 
-City = Struct.new(:key, :map_config, :opengraph_image) do
+City = Data.define(:key, :map_config, :opengraph_image) do
   class << self
     def build_london
       map_config = MapConfig.new(
-        center: Coordinates.new(51.526532, -0.087777), # Bar Nightjar
+        center: Coordinates.new(lat: 51.526532, lng: -0.087777), # Bar Nightjar
         zoom: 11
       )
-      new(:london, map_config, "swingoutlondon_og.png")
+      new(key: :london, map_config:, opengraph_image: "swingoutlondon_og.png")
     end
 
     def build_bristol
       map_config = MapConfig.new(
-        center: Coordinates.new(51.4750364, -2.5659198),
+        center: Coordinates.new(lat: 51.4750364, lng: -2.5659198),
         zoom: 12
       )
-      new(:bristol, map_config, "swingoutbristol_og.png")
+      new(key: :bristol, map_config:, opengraph_image: "swingoutbristol_og.png")
     end
   end
 
