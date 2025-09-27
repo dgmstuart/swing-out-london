@@ -47,6 +47,7 @@ module Maps
       {
         id: venue.id,
         title: venue.name,
+        url: venue.website,
         position:,
         highlighted:,
         infoWindowContent: info_window_content(venue)

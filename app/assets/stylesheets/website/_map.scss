@@ -27,12 +27,12 @@ body.socials {
     color: inherit;
   }
 
-  .venue_info {
-    h3 {
-      font-size: 1.2em;
-    }
+  .venue-info-header {
+    font-size: 1.2em;
+  }
 
-    .adr {
+  .venue-info-body {
+    .address {
       font-style: italic;
       font-size: 0.9em;
       margin-top: 0.3em;

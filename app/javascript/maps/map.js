@@ -50,7 +50,7 @@ export class Map {
     this.#mapInstance.fitBounds(bounds, padding)
   }
 
-  async _createMarker({ position, title, highlighted, only, content }) {
+  async _createMarker({ position, title, url, highlighted, only, content }) {
     const marker = new this.AdvancedMarkerElement({
       position: position,
       title: title,
@@ -58,7 +58,7 @@ export class Map {
       ...(highlighted ? { content: this._highlightedPin() } : {})
     });
 
-    const infoWindow = new google.maps.InfoWindow({ content })
+    const infoWindow = new google.maps.InfoWindow({ content, headerContent: this._infoHeader(title, url) })
     const infoWindowOpenArgs = { markerCoordinates: position, marker, infoWindow }
 
     marker.addListener('click', () =>
@@ -70,6 +70,18 @@ export class Map {
     if (only || highlighted) {
       this._openInfoWindow(infoWindowOpenArgs)
     }
+  }
+
+  _infoHeader(title, url) {
+    const h3 = document.createElement("h3")
+    h3.className = "venue-info-header"
+
+    const link = document.createElement("a")
+    link.href = url
+    link.textContent = title
+
+    h3.appendChild(link)
+    return h3
   }
 
   _openInfoWindow({ markerCoordinates, marker, infoWindow }) {
