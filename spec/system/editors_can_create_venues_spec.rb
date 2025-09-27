@@ -13,9 +13,13 @@ RSpec.describe "Editors can create venues" do
     fill_in "Postcode", with: "W1D 1LL"
     fill_in "Area", with: "Oxford Street"
     fill_in "Website", with: "https://www.the100club.co.uk/"
-    Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
-      VCR.use_cassette("geocode_100_club") do
-        click_on "Create"
+    ClimateControl.modify(GOOGLE_MAPS_STATIC_API_KEY: "A1b2C3", GOOGLE_MAPS_MAP_ID: "9876") do
+      Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
+        VCR.use_cassette("geocode_100_club") do
+          click_on "Create"
+
+          expect(page).to have_content("Venue was successfully created")
+        end
       end
     end
 
@@ -28,6 +32,15 @@ RSpec.describe "Editors can create venues" do
     expect(page).to have_content("Coordinates: [ 51.5161046, -0.1353113 ]")
     expect(page.find("a", text: "[ 51.5161046, -0.1353113 ]")["href"])
       .to eq("https://www.google.co.uk/maps/place/51.5161046,-0.1353113/@51.5161046,-0.1353113,15z")
+    expect(page.find("img")["src"]).to eq(
+      "https://maps.googleapis.com/maps/api/staticmap?" \
+      "center=51.5161046%2C-0.1353113" \
+      "&key=A1b2C3" \
+      "&map_id=9876" \
+      "&maptype=roadmap" \
+      "&markers=51.5161046%2C-0.1353113" \
+      "&size=500x400&zoom=17"
+    )
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
   end

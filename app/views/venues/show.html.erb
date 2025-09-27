@@ -7,6 +7,11 @@
   </li>
 
   <li>
+    <span>Website:</span>
+    <%= link_to @venue.website, @venue.website %>
+  </li>
+
+  <li>
     <span>Address:</span>
     <%=h @venue.address %>
   </li>
@@ -26,10 +31,14 @@
     <%= link_to @venue.coordinates, google_maps_url(@venue.lat, @venue.lng) %>
   </li>
 
-  <li>
-    <span>Website:</span>
-    <%= link_to @venue.website, @venue.website %>
-  </li>
+  <% if @map.url %>
+    <li>
+      <span>Location:</span>
+      <%= link_to google_maps_url(@venue.lat, @venue.lng) do %>
+        <img src="<%= @map.url %>">
+      <% end %>
+    </li>
+  <% end %>
 </ol>
 
 <% if @associated_events.any? %>
