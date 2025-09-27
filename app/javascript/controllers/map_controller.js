@@ -51,6 +51,7 @@ export default class extends Controller {
       lat: venue.position.lat,
       lng: venue.position.lng,
       title: venue.title,
+      url: venue.url,
       highlighted: venue.highlighted,
       content: venue.infoWindowContent
     }

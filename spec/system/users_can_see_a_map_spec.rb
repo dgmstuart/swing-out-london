@@ -67,7 +67,6 @@ RSpec.describe "Users can view a map of upcoming events" do
       info_window_string = markers.first.fetch("infoWindowContent")
       info_window = Capybara.string(info_window_string)
       aggregate_failures do
-        expect(info_window).to have_content("The Alhambra")
         expect(info_window).to have_content("17-19 Argyle St")
         expect(info_window).to have_content("WC1H 8EJ")
         expect(info_window).to have_content("Thursday 6th June:")
@@ -79,7 +78,6 @@ RSpec.describe "Users can view a map of upcoming events" do
       info_window_string = markers.last.fetch("infoWindowContent")
       info_window = Capybara.string(info_window_string)
       aggregate_failures do
-        expect(info_window).to have_content("The Boudoir Club")
         expect(info_window).to have_content("22 Night Street")
         expect(info_window).to have_content("ZZ2 2ZZ")
         expect(info_window).to have_content("Saturday 8th June:")
@@ -144,7 +142,6 @@ RSpec.describe "Users can view a map of upcoming events" do
       expect(markers.count).to eq 1
       info_window_string = markers.first.fetch("infoWindowContent")
       info_window = Capybara.string(info_window_string)
-      expect(info_window).to have_content("The Daylight Centre")
       expect(info_window).to have_content("9 Mornington Crescent")
       expect(info_window).to have_content("DA7 1GH")
       expect(info_window).to have_content("Wednesdays")

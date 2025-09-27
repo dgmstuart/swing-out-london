@@ -1,15 +1,11 @@
-<div class="venue_info vcard">
-  <h3 class="url fn">
-    <%= link_to venue.name, venue.url %>
-  </h3>
-
-  <div class="adr">
+<div class="venue-info-body">
+  <div class="address">
     <% venue.address_lines.each do |address_line| %>
       <p>
         <%= address_line %>
       </p>
     <% end %>
-    <p class="postal-code">
+    <p>
       <%= venue.postcode %>
     </p>
   </div>
