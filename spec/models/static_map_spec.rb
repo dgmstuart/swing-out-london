@@ -53,7 +53,8 @@ RSpec.describe StaticMap do
         venue:,
         width: 400,
         height: 300,
-        api_key: "A1B2C3"
+        api_key: "A1B2C3",
+        map_id: nil
       )
 
       expect(map.url).to eq(
