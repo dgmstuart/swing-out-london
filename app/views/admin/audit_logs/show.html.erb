@@ -2,27 +2,31 @@
   <h1>Audit Log</h1>
   <p><%= t("audit_log.timezone_note") %></p>
 
+  <table>
   <% @audits.each do |audit| %>
     <% editor = Editor.build(audit) %>
-    <p>
-      <span class="timestamp">
-        [<%= l(audit.created_at, format: :iso_no_zone) %>]
-      </span>
-      <span class="editor" title="<%= editor.auth_id %>">
+    <tr>
+      <td class="timestamp" style="min-width: 70px">
+        <%= l(audit.created_at, format: :iso_no_zone) %>
+      </td>
+      <td class="editor" title="<%= editor.auth_id %>">
         <%= editor.name %>
-      </span>
-      <span class="action">
+      </td>
+      <td class="action">
         <%= audit.action %>
-      </span>
-      <span class="record">
+      </td>
+      <td class="record">
         <%= link_to "#{audit.auditable_name}(#{audit.auditable_id})", audit.auditable_url %>
-      </span>
-      <span class="changes">
-        <%= audit.audited_changes.to_json %>
-      </span>
-      <span class="changes">
-        <%= audit.comment %>
-      </span>
-    </p>
+      </td>
+      <td>
+        <span class="changes">
+          <%= audit.audited_changes.to_json %>
+        </span>
+        <span class="changes">
+          <%= audit.comment %>
+        </span>
+      </td>
+    </tr>
   <% end %>
+  </table>
 </main>

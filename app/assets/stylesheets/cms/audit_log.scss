@@ -1,8 +1,12 @@
 @use "../shared/colours";
 
 .audit_logs {
+  table {
+    margin: 10px 0;
+  }
+
   .timestamp {
-    // color: colours.$lowlight-colour;
+    min-width: 70px;
   }
 
   .editor {
@@ -13,7 +17,13 @@
     color: colours.$blue;
   }
 
+  .record {
+    min-width: 250px;
+  }
+
   .changes {
     color: colours.$gray;
+    max-width: 500px;
+    word-break: break-all;
   }
 }
