@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static #socialDanceFields = [ "title", "socialOrganiser", "socialHasClass" ]
   static #weeklyClassFields = [ "classOrganiser", "classStyle", "courseLength" ]
-  static #whenFields = [ "when", "frequency", "frequencyWeekly", "daySelect", "datesInput" ]
+  static #whenFields = [ "when", "frequency", "frequencyWeekly", "daySelect", "datesInput", "cancellationsInput" ]
   static targets = [ "socialDetails", "classDetails", ...this.#weeklyClassFields, ...this.#socialDanceFields, ...this.#whenFields ]
   static classes = [ "hidden" ]
 
@@ -39,12 +39,15 @@ export default class extends Controller {
     this.daySelectTarget.classList.remove(this.hiddenClass);
     this.datesInputTarget.classList.add(this.hiddenClass);
     this.datesInputTarget.querySelectorAll('input').forEach(el => { el.value = "" })
+    this.cancellationsInputTarget.classList.remove(this.hiddenClass);
   }
 
   setInfrequently() {
     this.daySelectTarget.classList.add(this.hiddenClass);
     this.datesInputTarget.classList.remove(this.hiddenClass);
     this.daySelectTarget.querySelectorAll('select').forEach(el => { el.selectedIndex = null })
+    this.cancellationsInputTarget.classList.add(this.hiddenClass);
+    this.cancellationsInputTarget.querySelectorAll('input').forEach(el => { el.value = "" })
   }
 
   #resetSocialDanceFields() {

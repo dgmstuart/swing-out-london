@@ -32,7 +32,6 @@ RSpec.describe "Editors can create events", :js do
 
       choose "Monthly or occasionally"
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
-      fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "First date", with: "12/12/2012"
       fill_in "Last date", with: "19/12/2012"
 
@@ -46,7 +45,7 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Class style:\nBalboa")
         .and have_content("Frequency:\nMonthly or occasionally")
         .and have_content("Dates:\n12/12/2012, 19/12/2012")
-        .and have_content("Cancelled:\n12/12/2012")
+        .and have_content("Cancelled:\nNone")
         .and have_content("First date:\n12/12/2012")
         .and have_content("Last date:\n19/12/2012")
         .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
@@ -207,6 +206,7 @@ RSpec.describe "Editors can create events", :js do
       autocomplete_select "Sunshine Swing", from: "Class organiser"
 
       select "Wednesday", from: "Day"
+      fill_in "Cancelled dates", with: "23/02/2012"
       fill_in "First date", with: "15/02/2012"
       fill_in "Last date", with: "13/02/2013"
 
@@ -216,7 +216,7 @@ RSpec.describe "Editors can create events", :js do
         .and have_content("Class Organiser:\nSunshine Swing")
         .and have_content("Class")
         .and have_content("Frequency:\nWeekly on Wednesdays")
-        .and have_content("Cancelled:\nNone")
+        .and have_content("Cancelled:\n23/02/2012")
         .and have_content("First date:\n15/02/2012")
         .and have_content("Last date:\n13/02/2013")
         .and have_content("Url:\nhttps://sunshineswing.uk/events")

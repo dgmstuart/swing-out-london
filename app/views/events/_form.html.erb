@@ -112,7 +112,7 @@
       <p class='help'><%= t('forms.help.dates') %></p>
       <%= f.text_field :dates %>
     </div>
-    <div class='form-group'>
+    <div class='form-group <%= "hidden" unless @form.weekly? %>' data-event-form-target="cancellationsInput">
       <%= f.label :cancellations, 'Cancelled dates' %>
       <p class='help'><%= t('forms.help.dates') %></p>
       <%= f.text_field :cancellations %>
