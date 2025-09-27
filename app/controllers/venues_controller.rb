@@ -9,6 +9,7 @@ class VenuesController < CmsBaseController
     @venue = Venue.find(params[:id])
     @associated_events = @venue.events.map { |event| AssociatedEvent.new(event) }
     @last_update = LastUpdate.new(@venue)
+    @map = StaticMap.from_venue(venue: @venue, width: 500, height: 400)
   end
 
   def new
