@@ -7,6 +7,8 @@ class MapConfig
     @zoom = zoom
   end
 
+  attr_reader :center
+
   def to_h
     {
       center: {
@@ -18,29 +20,39 @@ class MapConfig
   end
 end
 
-Coordinates = Struct.new(:lat, :lng)
+Coordinates = Data.define(:lat, :lng) do
+  def distance_to(coordinates)
+    Geocoder::Calculations.distance_between(deconstruct, coordinates.deconstruct)
+  end
+end
 
-City = Struct.new(:key, :map_config, :opengraph_image) do
+City = Data.define(:key, :map_config, :max_radius_miles, :opengraph_image) do
   class << self
     def build_london
       map_config = MapConfig.new(
-        center: Coordinates.new(51.526532, -0.087777), # Bar Nightjar
+        center: Coordinates.new(lat: 51.526532, lng: -0.087777), # Bar Nightjar
         zoom: 11
       )
-      new(:london, map_config, "swingoutlondon_og.png")
+      max_radius_miles = 16 # Greater than the distance between Nightjar and Heathrow
+      new(key: :london, map_config:, max_radius_miles:, opengraph_image: "swingoutlondon_og.png")
     end
 
     def build_bristol
       map_config = MapConfig.new(
-        center: Coordinates.new(51.4750364, -2.5659198),
+        center: Coordinates.new(lat: 51.4750364, lng: -2.5659198),
         zoom: 12
       )
-      new(:bristol, map_config, "swingoutbristol_og.png")
+      max_radius_miles = 4.5 # Greater than the distance between central Bristol and Keynsham
+      new(key: :bristol, map_config:, max_radius_miles:, opengraph_image: "swingoutbristol_og.png")
     end
   end
 
   def london?
     key == :london
+  end
+
+  def center_coordinates
+    map_config.center
   end
 end
 

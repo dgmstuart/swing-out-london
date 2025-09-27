@@ -18,6 +18,7 @@ class Venue < ApplicationRecord
   validates :name, presence: true
   validates :website, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validates :postcode, format: { with: POSTCODE_REGEXP, allow_blank: true }
+  validate :coordinates_within_the_city
 
   strip_attributes only: %i[name postcode area website]
 
@@ -47,5 +48,17 @@ class Venue < ApplicationRecord
     raise "Can't delete a Venue which is not persisted" unless persisted?
 
     events.empty?
+  end
+
+  private
+
+  def coordinates_within_the_city
+    return unless lat && lng
+
+    distance_to_center_miles = distance_to(CITY.center_coordinates.deconstruct)
+
+    return unless distance_to_center_miles > CITY.max_radius_miles
+
+    errors.add(:coordinates, "seem to be very far outside the city")
   end
 end

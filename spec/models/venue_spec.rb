@@ -15,6 +15,50 @@ RSpec.describe Venue do
     it { is_expected.to validate_presence_of(:name) }
 
     it_behaves_like "validates postcode is postcode-like", :venue
+
+    context "when given coordinates which are within London" do
+      it "is invalid" do
+        venue = build(:venue, name: "Heathrow Airport", lat: 51.479639, lng: -0.449026)
+
+        venue.valid?
+
+        expect(venue.errors.messages).to be_empty
+      end
+    end
+
+    context "when given coordinates which are far from the centre of London" do
+      it "is invalid" do
+        venue = build(:venue, name: "WCJ", lat: 57.6832541, lng: 11.968709)
+
+        venue.valid?
+
+        expect(venue.errors.messages).to eq(coordinates: ["seem to be very far outside the city"])
+      end
+    end
+
+    context "when the city is Bristol, given coordinates which are inside Bristol" do
+      before { stub_const("CITY", City.build_bristol) }
+
+      it "is valid" do
+        venue = build(:venue, name: "Keynsham Leisure Centre", lat: 51.418499, lng: -2.517267)
+
+        venue.valid?
+
+        expect(venue.errors.messages).to be_empty
+      end
+    end
+
+    context "when the city is Bristol, given coordinates which are outside Bristol" do
+      before { stub_const("CITY", City.build_bristol) }
+
+      it "is invalid" do
+        venue = build(:venue, name: "The Bath Priory", lat: 51.3828832, lng: -2.4014063)
+
+        venue.valid?
+
+        expect(venue.errors.messages).to eq(coordinates: ["seem to be very far outside the city"])
+      end
+    end
   end
 
   describe "#name" do
