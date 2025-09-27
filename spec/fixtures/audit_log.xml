@@ -126,8 +126,8 @@
   &quot;action&quot;: &quot;create&quot;,
   &quot;record&quot;: &quot;Venue({{dance_class_venue_id}})&quot;,
   &quot;changes&quot;: {
-    &quot;lat&quot;: &quot;0.0&quot;,
-    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;lat&quot;: &quot;51.5423414&quot;,
+    &quot;lng&quot;: &quot;-0.078134&quot;,
     &quot;area&quot;: &quot;test_area&quot;,
     &quot;name&quot;: &quot;test_venue&quot;,
     &quot;address&quot;: &quot;London&quot;,
@@ -268,8 +268,8 @@
   &quot;action&quot;: &quot;create&quot;,
   &quot;record&quot;: &quot;Venue({{social_dance_venue_id}})&quot;,
   &quot;changes&quot;: {
-    &quot;lat&quot;: &quot;0.0&quot;,
-    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;lat&quot;: &quot;51.5423414&quot;,
+    &quot;lng&quot;: &quot;-0.078134&quot;,
     &quot;area&quot;: &quot;test_area&quot;,
     &quot;name&quot;: &quot;test_venue&quot;,
     &quot;address&quot;: &quot;London&quot;,
@@ -294,8 +294,8 @@
   &quot;action&quot;: &quot;delete&quot;,
   &quot;record&quot;: &quot;Venue({{venue_id}})&quot;,
   &quot;changes&quot;: {
-    &quot;lat&quot;: &quot;0.0&quot;,
-    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;lat&quot;: &quot;51.5423414&quot;,
+    &quot;lng&quot;: &quot;-0.078134&quot;,
     &quot;area&quot;: &quot;test_area&quot;,
     &quot;name&quot;: &quot;La Mesquita&quot;,
     &quot;address&quot;: &quot;London&quot;,
@@ -343,8 +343,8 @@
   &quot;action&quot;: &quot;create&quot;,
   &quot;record&quot;: &quot;Venue({{venue_id}})&quot;,
   &quot;changes&quot;: {
-    &quot;lat&quot;: &quot;0.0&quot;,
-    &quot;lng&quot;: &quot;0.0&quot;,
+    &quot;lat&quot;: &quot;51.5423414&quot;,
+    &quot;lng&quot;: &quot;-0.078134&quot;,
     &quot;area&quot;: &quot;test_area&quot;,
     &quot;name&quot;: &quot;The Alhambra&quot;,
     &quot;address&quot;: &quot;London&quot;,

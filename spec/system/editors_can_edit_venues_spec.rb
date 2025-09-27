@@ -11,8 +11,8 @@ RSpec.describe "Editors can edit venues", :vcr do
       postcode: "W1D 1KK",
       area: "Burford Street",
       website: "https://www.the99club.co.uk/",
-      lat: 0,
-      lng: 1
+      lat: 51.5423414,
+      lng: -0.078134
     )
 
     skip_login(id: 12345678901234567, name: "Al Minns")
@@ -56,8 +56,8 @@ RSpec.describe "Editors can edit venues", :vcr do
         postcode: "W1D 1KK",
         area: "Burford Street",
         website: "https://www.the99club.co.uk/",
-        lat: 0,
-        lng: 1
+        lat: 51.5423414,
+        lng: -0.078134
       )
 
       skip_login("/venues/#{venue.to_param}/edit")

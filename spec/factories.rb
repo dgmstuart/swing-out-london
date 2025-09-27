@@ -66,8 +66,8 @@ FactoryBot.define do
     name { "test_venue" }
     area { "test_area" }
     address { "London" }
-    lat { 0.0 }
-    lng { 0.0 }
+    lat { 51.5423414 }
+    lng { -0.078134 }
     website { "http://www.example.com" }
   end
 
