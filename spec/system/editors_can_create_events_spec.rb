@@ -34,6 +34,7 @@ RSpec.describe "Editors can create events", :js do
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "First date", with: "12/12/2012"
+      check "End date is known"
       fill_in "Last date", with: "19/12/2012"
 
       click_on "Create"
@@ -94,6 +95,7 @@ RSpec.describe "Editors can create events", :js do
 
       fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
       fill_in "First date", with: "12/12/2012"
+      check "End date is known"
       fill_in "Last date", with: "30/04/2013"
 
       click_on "Create"
@@ -208,6 +210,7 @@ RSpec.describe "Editors can create events", :js do
 
       select "Wednesday", from: "Day"
       fill_in "First date", with: "15/02/2012"
+      check "End date is known"
       fill_in "Last date", with: "13/02/2013"
 
       click_on "Create"
@@ -249,6 +252,7 @@ RSpec.describe "Editors can create events", :js do
       expect(page).to have_content("1 error prevented this record from being saved")
         .and have_content("Class organiser must be present for classes")
       expect(page).to have_no_content("Monthly") # This radio button should be hidden
+      expect(page).to have_no_content("Last date") # This guarded field should be closed
 
       autocomplete_select "Sunshine Swing", from: "Class organiser"
       click_on "Create"
