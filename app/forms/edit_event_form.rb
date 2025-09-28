@@ -27,6 +27,7 @@ class EditEventForm
   attribute :cancellations, :string
   attribute :first_date, :string
   attribute :last_date, :string
+  attribute :show_last_date, :boolean
 
   attr_accessor :event_type
 
@@ -49,7 +50,7 @@ class EditEventForm
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
   validates :first_date, date_string: true
-  validates :last_date, date_string: true
+  validates :last_date, date_string: true, presence: { if: :show_last_date }
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -90,7 +91,8 @@ class EditEventForm
       has_taster: has_occasional_class?,
       course_length: (course_length.to_i if course_length.present?)
     ).except(
-      :social_has_class
+      :social_has_class,
+      :show_last_date
     )
   end
 
@@ -113,6 +115,10 @@ class EditEventForm
 
   def type_is_weekly_class?
     event_type == "weekly_class"
+  end
+
+  def last_date_guard_text
+    "Stop listing this event"
   end
 
   private
@@ -176,6 +182,10 @@ class EditEventForm
       format_date(event.last_date)
     end
 
+    def show_last_date
+      event.last_date.present?
+    end
+
     def attributes
       {
         title:,
@@ -195,7 +205,8 @@ class EditEventForm
         dates:,
         cancellations:,
         first_date:,
-        last_date:
+        last_date:,
+        show_last_date:
       }
     end
 
