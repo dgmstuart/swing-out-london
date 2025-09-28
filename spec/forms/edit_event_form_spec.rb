@@ -17,6 +17,7 @@ require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/form/validates_event_with_dates"
 require "spec/support/shared_examples/events/form/validates_event_with_last_date"
+require "spec/support/shared_examples/events/form/validates_last_date_visibility"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 require "app/forms/date_form"
@@ -37,6 +38,7 @@ RSpec.describe EditEventForm do
     it_behaves_like "validates date string", :first_date, :edit_event_form
     it_behaves_like "validates date string", :last_date, :edit_event_form
     it_behaves_like "validates dates in cancellations", :edit_event_form
+    it_behaves_like "validates last date visibility", :edit_event_form
     it_behaves_like "validates url", :edit_event_form
 
     it { is_expected.to validate_presence_of(:frequency) }
