@@ -12,9 +12,7 @@ module Maps
       private
 
       def events_on(dates)
-        dates.inject([]) do |events, date|
-          events + Event.socials_on_date(date)
-        end
+        dates.flat_map { |date| Event.socials_on_date(date) }
       end
     end
   end
