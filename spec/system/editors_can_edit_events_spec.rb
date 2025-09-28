@@ -157,6 +157,21 @@ RSpec.describe "Editors can edit events", :js do
     expect(page).to have_content("Cancelled:\n12/12/2012")
   end
 
+  it "TEMP lists cancellations individually for weekly events" do
+    skip_login
+    event_instances = [
+      build(:event_instance, date: "01/10/2010", cancelled: true),
+      build(:event_instance, date: "02/12/2011", cancelled: true)
+    ]
+    social = create(:event, :weekly, first_date: "02/09/2010", event_instances:)
+
+    visit edit_event_path(social)
+
+    expect(page).to have_content "Cancelled on the following dates:"
+    expect(page).to have_content "01/10/2010"
+    expect(page).to have_content "02/12/2011"
+  end
+
   context "when changing from an occasional event to a weekly event" do
     it "removes any dates" do
       event_instances = [
