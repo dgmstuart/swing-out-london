@@ -36,8 +36,8 @@ module Maps
       # @private
       class SocialInstanceListings
         def build(events)
-          events.inject([]) do |listings, (date, social_listings_on_date)|
-            listings + social_listings_on_date.map do |social_listing|
+          events.flat_map do |(date, social_listings_on_date)|
+            social_listings_on_date.map do |social_listing|
               SocialInstanceListing.new(date, social_listing)
             end
           end
@@ -61,8 +61,8 @@ module Maps
       # @private
       class ClassListings
         def build(events)
-          events.inject([]) do |listings, event|
-            listings << ClassListing.new(event)
+          events.flat_map do |event|
+            ClassListing.new(event)
           end
         end
       end
