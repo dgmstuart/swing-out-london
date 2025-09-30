@@ -117,10 +117,16 @@ RSpec.describe "Editors can edit events", :js do
     click_on "Edit", match: :first
 
     fill_in "Upcoming dates", with: "12/12/2025, 03/11/2023"
+    fill_in "Cancelled dates", with: "12/12/2025, 02/11/2023"
+    fill_in "Last date", with: "05/11/2023"
     click_on "Update"
 
-    expect(page).to have_content("1 error prevented this record from being saved")
+    expect(page).to have_content("5 errors prevented this record from being saved")
       .and have_content("Dates contained some dates unreasonably far in the future: 12/12/2025")
+      .and have_content("Cancellations contained some dates unreasonably far in the future: 12/12/2025")
+      .and have_content("Cancellations contained dates which are not in the list of upcoming dates: 02/11/2023")
+      .and have_content("Dates can't include dates after the last date")
+      .and have_content("Cancellations can't include dates after the last date")
   end
 
   it "adding cancellations to an occasional event" do
