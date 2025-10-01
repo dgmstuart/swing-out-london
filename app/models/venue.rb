@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Venue < ApplicationRecord
-  geocoded_by :postcode,
+  geocoded_by :geocoding_info,
               latitude: :lat,
               longitude: :lng
   audited
@@ -60,5 +60,9 @@ class Venue < ApplicationRecord
     return unless distance_to_center_miles > CITY.max_radius_miles
 
     errors.add(:coordinates, "seem to be very far outside the city")
+  end
+
+  def geocoding_info
+    [address, postcode].compact.join(",")
   end
 end
