@@ -180,6 +180,10 @@ form.edit_venue {
     &.danger {
       border: 3px solid colours.$red;
     }
+
+    &.ok {
+      border: 3px solid colours.$green;
+    }
   }
 }
 

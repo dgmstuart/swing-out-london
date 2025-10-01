@@ -6,6 +6,9 @@ application.register("event-form", EventFormController)
 import RadioGuardedFields from "./radio_guarded_fields_controller"
 application.register("radio-guarded-fields", RadioGuardedFields)
 
+import GoodBad from "./good_bad_controller"
+application.register("good-bad", GoodBad)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
