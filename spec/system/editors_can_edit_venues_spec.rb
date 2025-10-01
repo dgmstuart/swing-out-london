@@ -40,9 +40,9 @@ RSpec.describe "Editors can edit venues", :vcr do
     expect(page).to have_content("Area: Oxford Street")
     expect(page).to have_content("Website: https://www.the100club.co.uk/")
     expect(page.find("a", text: "https://www.the100club.co.uk/")["href"]).to eq("https://www.the100club.co.uk/")
-    expect(page).to have_content("Coordinates: [ 51.5161046, -0.1353113 ]")
-    expect(page.find("a", text: "[ 51.5161046, -0.1353113 ]")["href"])
-      .to eq("https://www.google.co.uk/maps/place/51.5161046,-0.1353113/@51.5161046,-0.1353113,15z")
+    expect(page).to have_content("Coordinates: [ 51.5161082, -0.1353568 ]")
+    expect(page.find("a", text: "[ 51.5161082, -0.1353568 ]")["href"])
+      .to eq("https://www.google.co.uk/maps/place/51.5161082,-0.1353568/@51.5161082,-0.1353568,15z")
 
     expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
   end

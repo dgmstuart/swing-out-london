@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://nominatim.openstreetmap.org/search?accept-language=en&addressdetails=1&format=json&q=W1D%201LL
+    uri: https://nominatim.openstreetmap.org/search?accept-language=en&addressdetails=1&format=json&q=100%20Oxford%20Street%0D%0ALondon,W1D%201LL
     body:
       encoding: US-ASCII
       string: ''
@@ -18,30 +18,23 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Date:
-      - Sat, 10 Nov 2018 21:39:53 GMT
       Server:
-      - Apache/2.4.29 (Ubuntu)
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - OPTIONS,GET
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Expect-Ct:
-      - max-age=0, report-uri="https://openstreetmap.report-uri.com/r/d/ct/reportOnly"
-      Upgrade:
-      - h2
-      Connection:
-      - Upgrade, close
-      Transfer-Encoding:
-      - chunked
+      - nginx
+      Date:
+      - Wed, 01 Oct 2025 15:00:15 GMT
       Content-Type:
-      - application/json; charset=UTF-8
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1698'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Vary:
+      - accept-language
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        W3sicGxhY2VfaWQiOiIxOTk3MDIwNjYiLCJsaWNlbmNlIjoiRGF0YSDCqSBPcGVuU3RyZWV0TWFwIGNvbnRyaWJ1dG9ycywgT0RiTCAxLjAuIGh0dHBzOlwvXC9vc20ub3JnXC9jb3B5cmlnaHQiLCJib3VuZGluZ2JveCI6WyI1MS41MTYwNTQ2IiwiNTEuNTE2MTU0NiIsIi0wLjEzNTM2MTMiLCItMC4xMzUyNjEzIl0sImxhdCI6IjUxLjUxNjEwNDYiLCJsb24iOiItMC4xMzUzMTEzIiwiZGlzcGxheV9uYW1lIjoiV2VzdG1pbnN0ZXIsIFcxRCAxTEwsIFVuaXRlZCBLaW5nZG9tIiwiY2xhc3MiOiJwbGFjZSIsInR5cGUiOiJwb3N0Y29kZSIsImltcG9ydGFuY2UiOjAuMzI1LCJhZGRyZXNzIjp7ImNpdHkiOiJXZXN0bWluc3RlciIsInBvc3Rjb2RlIjoiVzFEIDFMTCIsImNvdW50cnkiOiJVbml0ZWQgS2luZ2RvbSIsImNvdW50cnlfY29kZSI6ImdiIn19XQ==
-    http_version: 
-  recorded_at: Sat, 10 Nov 2018 21:39:53 GMT
-recorded_with: VCR 4.0.0
+        W3sicGxhY2VfaWQiOjI1OTgyODI2MywibGljZW5jZSI6IkRhdGEgwqkgT3BlblN0cmVldE1hcCBjb250cmlidXRvcnMsIE9EYkwgMS4wLiBodHRwOi8vb3NtLm9yZy9jb3B5cmlnaHQiLCJvc21fdHlwZSI6Im5vZGUiLCJvc21faWQiOjMxMzM0OTM1NCwibGF0IjoiNTEuNTE2MTA4MiIsImxvbiI6Ii0wLjEzNTM1NjgiLCJjbGFzcyI6ImFtZW5pdHkiLCJ0eXBlIjoibmlnaHRjbHViIiwicGxhY2VfcmFuayI6MzAsImltcG9ydGFuY2UiOjAuMzg3ODM2NTMxOTI2MTg0NSwiYWRkcmVzc3R5cGUiOiJhbWVuaXR5IiwibmFtZSI6IjEwMCBDbHViIiwiZGlzcGxheV9uYW1lIjoiMTAwIENsdWIsIDEwMCwgT3hmb3JkIFN0cmVldCwgRWFzdCBNYXJ5bGVib25lLCBGaXR6cm92aWEsIENhbWRlbiBUb3duLCBMb25kb24sIEdyZWF0ZXIgTG9uZG9uLCBFbmdsYW5kLCBXMUQgMUxMLCBVbml0ZWQgS2luZ2RvbSIsImFkZHJlc3MiOnsiYW1lbml0eSI6IjEwMCBDbHViIiwiaG91c2VfbnVtYmVyIjoiMTAwIiwicm9hZCI6Ik94Zm9yZCBTdHJlZXQiLCJxdWFydGVyIjoiRWFzdCBNYXJ5bGVib25lIiwic3VidXJiIjoiRml0enJvdmlhIiwidG93biI6IkNhbWRlbiBUb3duIiwiY2l0eSI6IkxvbmRvbiIsInN0YXRlX2Rpc3RyaWN0IjoiR3JlYXRlciBMb25kb24iLCJzdGF0ZSI6IkVuZ2xhbmQiLCJJU08zMTY2LTItbHZsNCI6IkdCLUVORyIsInBvc3Rjb2RlIjoiVzFEIDFMTCIsImNvdW50cnkiOiJVbml0ZWQgS2luZ2RvbSIsImNvdW50cnlfY29kZSI6ImdiIn0sImJvdW5kaW5nYm94IjpbIjUxLjUxNjA1ODIiLCI1MS41MTYxNTgyIiwiLTAuMTM1NDA2OCIsIi0wLjEzNTMwNjgiXX0seyJwbGFjZV9pZCI6MjU5MDI1NzExLCJsaWNlbmNlIjoiRGF0YSDCqSBPcGVuU3RyZWV0TWFwIGNvbnRyaWJ1dG9ycywgT0RiTCAxLjAuIGh0dHA6Ly9vc20ub3JnL2NvcHlyaWdodCIsIm9zbV90eXBlIjoibm9kZSIsIm9zbV9pZCI6MTE5MDM2MzE4NzEsImxhdCI6IjUxLjUxNjEyNTEiLCJsb24iOiItMC4xMzUyNjU4IiwiY2xhc3MiOiJzaG9wIiwidHlwZSI6InRveXMiLCJwbGFjZV9yYW5rIjozMCwiaW1wb3J0YW5jZSI6OS4zMDc5MjcwNjE4NzA3ODNlLTA1LCJhZGRyZXNzdHlwZSI6InNob3AiLCJuYW1lIjoiTWluaXNvIiwiZGlzcGxheV9uYW1lIjoiTWluaXNvLCAxMDAsIE94Zm9yZCBTdHJlZXQsIEVhc3QgTWFyeWxlYm9uZSwgRml0enJvdmlhLCBDYW1kZW4gVG93biwgQ2l0eSBvZiBXZXN0bWluc3RlciwgR3JlYXRlciBMb25kb24sIEVuZ2xhbmQsIFcxRCAxTEwsIFVuaXRlZCBLaW5nZG9tIiwiYWRkcmVzcyI6eyJzaG9wIjoiTWluaXNvIiwiaG91c2VfbnVtYmVyIjoiMTAwIiwicm9hZCI6Ik94Zm9yZCBTdHJlZXQiLCJxdWFydGVyIjoiRWFzdCBNYXJ5bGVib25lIiwic3VidXJiIjoiRml0enJvdmlhIiwidG93biI6IkNhbWRlbiBUb3duIiwiY2l0eSI6IkNpdHkgb2YgV2VzdG1pbnN0ZXIiLCJJU08zMTY2LTItbHZsOCI6IkdCLVdTTSIsInN0YXRlX2Rpc3RyaWN0IjoiR3JlYXRlciBMb25kb24iLCJzdGF0ZSI6IkVuZ2xhbmQiLCJJU08zMTY2LTItbHZsNCI6IkdCLUVORyIsInBvc3Rjb2RlIjoiVzFEIDFMTCIsImNvdW50cnkiOiJVbml0ZWQgS2luZ2RvbSIsImNvdW50cnlfY29kZSI6ImdiIn0sImJvdW5kaW5nYm94IjpbIjUxLjUxNjA3NTEiLCI1MS41MTYxNzUxIiwiLTAuMTM1MzE1OCIsIi0wLjEzNTIxNTgiXX1d
+  recorded_at: Sun, 02 Jan 2000 23:17:16 GMT
+recorded_with: VCR 6.3.1

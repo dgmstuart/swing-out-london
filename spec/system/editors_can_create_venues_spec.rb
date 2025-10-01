@@ -29,16 +29,16 @@ RSpec.describe "Editors can create venues" do
     expect(page).to have_content("Area: Oxford Street")
     expect(page).to have_content("Website: https://www.the100club.co.uk/")
     expect(page.find("a", text: "https://www.the100club.co.uk/")["href"]).to eq("https://www.the100club.co.uk/")
-    expect(page).to have_content("Coordinates: [ 51.5161046, -0.1353113 ]")
-    expect(page.find("a", text: "[ 51.5161046, -0.1353113 ]")["href"])
-      .to eq("https://www.google.co.uk/maps/place/51.5161046,-0.1353113/@51.5161046,-0.1353113,15z")
+    expect(page).to have_content("Coordinates: [ 51.5161082, -0.1353568 ]")
+    expect(page.find("a", text: "[ 51.5161082, -0.1353568 ]")["href"])
+      .to eq("https://www.google.co.uk/maps/place/51.5161082,-0.1353568/@51.5161082,-0.1353568,15z")
     expect(page.find("img")["src"]).to eq(
       "https://maps.googleapis.com/maps/api/staticmap?" \
-      "center=51.5161046%2C-0.1353113" \
+      "center=51.5161082%2C-0.1353568" \
       "&key=A1b2C3" \
       "&map_id=9876" \
       "&maptype=roadmap" \
-      "&markers=51.5161046%2C-0.1353113" \
+      "&markers=51.5161082%2C-0.1353568" \
       "&size=500x400&zoom=17"
     )
 
