@@ -127,9 +127,14 @@
       <%= reasonable_date_field f, :first_date %>
     </div>
     <section
-      class="danger"
-      data-controller="radio-guarded-fields"
+      class=<%= @form.status == EditEventForm::STATUS_ONGOING ? "ok" : "danger" %>
+      data-controller="radio-guarded-fields good-bad"
       data-radio-guarded-fields-hidden-class="hidden"
+      data-good-bad-good-value="<%= EditEventForm::STATUS_ONGOING %>"
+      data-good-bad-good-class="ok"
+      data-good-bad-bad-class="danger"
+      data-good-bad-target="target"
+      data-action="radio-guarded-fields:selected@window->good-bad#toggle"
     >
       <div>
         <label>

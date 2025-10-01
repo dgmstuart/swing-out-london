@@ -7,6 +7,7 @@ export default class extends Controller {
 
   toggle(event) {
     const selectedValue = event.target.value
+    this.dispatch("selected", { detail: { value: selectedValue } })
 
     this.formGroupTargets.forEach(formGroup => {
       if (formGroup.dataset.formGroupFor === selectedValue){
