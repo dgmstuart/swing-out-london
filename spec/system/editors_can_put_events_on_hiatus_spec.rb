@@ -19,6 +19,7 @@ RSpec.describe "Editors can put events on hiatus", :js do
         click_on "Update"
 
         expect(page).to have_content("Event was successfully updated")
+        expect(page).to have_content("On hiatus:\nFrom 25/06/2012, returning 20/08/2012")
 
         click_on "Edit"
 

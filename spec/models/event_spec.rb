@@ -375,6 +375,38 @@ RSpec.describe Event do
     end
   end
 
+  describe "#current_hiatus_start" do
+    it "returns the start of the current hiatus" do
+      travel_to "2012-05-22"
+
+      event = create(:event, :weekly)
+      create(
+        :event_hiatus,
+        event:,
+        start_date: Date.parse("2012-05-22"),
+        return_date: Date.parse("2012-05-29")
+      )
+
+      expect(event.current_hiatus_start).to eq(Date.parse("2012-05-22"))
+    end
+  end
+
+  describe "#current_hiatus_return" do
+    it "returns the return date of the current hiatus" do
+      travel_to "2012-05-22"
+
+      event = create(:event, :weekly)
+      create(
+        :event_hiatus,
+        event:,
+        start_date: Date.parse("2012-05-22"),
+        return_date: Date.parse("2012-05-29")
+      )
+
+      expect(event.current_hiatus_return).to eq(Date.parse("2012-05-29"))
+    end
+  end
+
   describe "#generate_organiser_token" do
     context "when there is no existing token" do
       it "sets a token and returns a truthy result" do

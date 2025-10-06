@@ -50,6 +50,12 @@
     <span>First date:</span>
     <%= @event.first_date %>
   </li>
+  <% if @event.on_hiatus? %>
+    <li>
+      <span>On hiatus:</span>
+      <%= @event.hiatus_description %>
+    </li>
+  <% end %>
   <li>
     <span>Last date:</span>
     <%= @event.last_date %>

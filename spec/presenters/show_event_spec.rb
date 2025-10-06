@@ -3,6 +3,7 @@
 require "spec_helper"
 require "spec/support/time_formats_helper"
 require "active_support/core_ext/module/delegation"
+require "active_support/core_ext/object/blank"
 require "app/presenters/show_event"
 require "app/presenters/date_printer"
 
@@ -184,6 +185,38 @@ RSpec.describe ShowEvent do
         event = instance_double("Event", last_date: Date.new)
 
         expect(described_class.new(event).last_date).to eq "(archived)"
+      end
+    end
+  end
+
+  describe "#hiatus_description" do
+    it "describes the hiatus" do
+      event = instance_double(
+        "Event",
+        current_hiatus_start: Date.new(2011, 5, 14),
+        current_hiatus_return: Date.new(2011, 8, 16)
+      )
+
+      expect(described_class.new(event).hiatus_description).to eq(
+        "From 14/05/2011, returning 16/08/2011"
+      )
+    end
+  end
+
+  describe "#on_hiatus?" do
+    context "when there is a current hiatus" do
+      it "is true" do
+        event = instance_double("Event", current_hiatus: double)
+
+        expect(described_class.new(event).on_hiatus?).to be true
+      end
+    end
+
+    context "when there is no current hiatus" do
+      it "is false" do
+        event = instance_double("Event", current_hiatus: nil)
+
+        expect(described_class.new(event).on_hiatus?).to be false
       end
     end
   end

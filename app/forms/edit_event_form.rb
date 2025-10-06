@@ -199,11 +199,11 @@ class EditEventForm
     end
 
     def start_of_break
-      format_date(event.current_hiatus&.start_date)
+      format_date(event.current_hiatus_start)
     end
 
     def first_date_back
-      format_date(event.current_hiatus&.return_date)
+      format_date(event.current_hiatus_return)
     end
 
     def status
