@@ -218,6 +218,14 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     event_hiatuses.first
   end
 
+  def current_hiatus_start
+    current_hiatus&.start_date
+  end
+
+  def current_hiatus_return
+    current_hiatus&.return_date
+  end
+
   after_save :clear_latest_dates_cache
   def clear_latest_dates_cache
     Rails.cache.delete(latest_date_cache_key)
