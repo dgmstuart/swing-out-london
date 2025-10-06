@@ -51,15 +51,30 @@ FactoryBot.define do
     factory :event_with_organiser_token do
       with_organiser_token
     end
-  end
 
-  trait :weekly do
-    frequency { 1 }
-    sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
-  end
+    trait :weekly do
+      frequency { 1 }
+      sequence(:day) { |wd| Date::DAYNAMES[wd % 7] }
+    end
 
-  trait :occasional do
-    frequency { 0 }
+    trait :occasional do
+      frequency { 0 }
+    end
+
+    trait(:social_dance) do
+      # default
+    end
+
+    trait(:with_class) do
+      social_has_class { true }
+      class_organiser_id { rand(999) }
+    end
+
+    trait(:weekly_class) do
+      title { "" }
+      event_type { "weekly_class" }
+      class_organiser_id { rand(999) }
+    end
   end
 
   factory :venue do
@@ -86,21 +101,6 @@ FactoryBot.define do
     frequency { 0 }
     url { Faker::Internet.url }
     venue_id { rand(999) }
-  end
-
-  trait(:social_dance) do
-    # default
-  end
-
-  trait(:with_class) do
-    social_has_class { true }
-    class_organiser_id { rand(999) }
-  end
-
-  trait(:weekly_class) do
-    title { "" }
-    event_type { "weekly_class" }
-    class_organiser_id { rand(999) }
   end
 
   factory :create_event_form do
