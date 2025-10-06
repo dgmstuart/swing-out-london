@@ -188,6 +188,20 @@ RSpec.describe ShowEvent do
     end
   end
 
+  describe "#hiatus_description" do
+    it "describes the hiatus" do
+      event = instance_double(
+        "Event",
+        current_hiatus_start: Date.new(2011, 5, 14),
+        current_hiatus_end: Date.new(2011, 8, 16)
+      )
+
+      expect(described_class.new(event).hiatus_description).to eq(
+        "From 14/05/2011, returning 16/08/2011"
+      )
+    end
+  end
+
   describe "#title" do
     it "delegates to the event" do
       event = instance_double("Event", title: "Black Cotton")
