@@ -156,7 +156,7 @@
           <%= f.label :start_of_break %>
           <p class='help'>The first date that the event will NOT be running</p>
           <%= reasonable_date_field f, :start_of_break, allow_past: true %>
-          <%= f.label :first_date_back %>
+          <%= f.label :first_date_back, "First date back after the break" %>
           <p class='help'>The first date that the event will be running again after the break</p>
           <%= reasonable_date_field f, :first_date_back, allow_past: false %>
         </div>
