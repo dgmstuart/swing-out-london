@@ -299,7 +299,7 @@ RSpec.describe EventUpdater do
           expect(record.event_instances.sole.cancelled).to be false
 
           expect { described_class.new(record).update!(params) }
-            .to raise_error(ActiveRecord::RecordNotSaved)
+            .to raise_error(ActiveRecord::RecordInvalid)
 
           expect(record.reload.title).to eq("stomp")
           expect(record.reload.event_instances.count).to eq 1
