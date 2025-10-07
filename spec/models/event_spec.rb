@@ -12,6 +12,8 @@ require "spec/support/shared_examples/validates_url"
 require "spec/support/shared_examples/validates_email"
 
 RSpec.describe Event do
+  include ActiveSupport::Testing::TimeHelpers
+
   describe "(associations)" do
     it { is_expected.to have_many(:event_instances).dependent(:destroy) }
     it { is_expected.to have_many(:email_deliveries).dependent(:destroy) }
@@ -293,6 +295,68 @@ RSpec.describe Event do
         )
 
         expect(event.latest_date).to eq "2013-01-01".to_date
+      end
+    end
+  end
+
+  describe "#current_hiatus_start" do
+    it "returns the start of the current hiatus" do
+      travel_to "2012-05-22"
+
+      event = create(:event, :weekly)
+      hiatus = create(:event_hiatus, start_date: Date.parse("2012-05-22"), event:)
+
+      expect(event.current_hiatus_start).to eq(Date.parse("2012-05-22"))
+    end
+
+    context "when there's a hiatus starting in the future" do
+
+    end
+
+    context "when there are several hiatuses in the future [EDGE CASE]" do
+      # This shouldn't be possible to create via the UI
+
+    end
+
+    context "when there's a hiatus in the past" do
+
+    end
+
+    context "when there are no hiatuses" do
+      it "is nil" do
+        event = create(:event)
+        expect(event.current_hiatus_start).to be_nil
+      end
+    end
+  end
+
+  describe "#current_hiatus_return" do
+    it "returns the return date of the current hiatus" do
+      travel_to "2012-05-22"
+
+      event = create(:event, :weekly)
+      hiatus = create(:event_hiatus, return_date: Date.parse("2012-05-22"), event:)
+
+      expect(event.current_hiatus_return).to eq(Date.parse("2012-05-22"))
+    end
+
+    context "when there's a hiatus starting in the future" do
+
+    end
+
+    context "when there are several hiatuses in the future [EDGE CASE]" do
+      # This shouldn't be possible to create via the UI
+
+    end
+
+    context "when there's a hiatus in the past" do
+
+    end
+
+    context "when there are no hiatuses" do
+      it "is nil" do
+        event = create(:event)
+        expect(event.current_hiatus_return).to be_nil
       end
     end
   end

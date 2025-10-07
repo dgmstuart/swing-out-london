@@ -33,7 +33,7 @@ class ShowEvent
 
   def hiatus_description
     "From #{format_date(event.current_hiatus_start)}, " \
-      "returning #{format_date(event.current_hiatus_end)}"
+      "returning #{format_date(event.current_hiatus_return)}"
   end
 
   def event_type

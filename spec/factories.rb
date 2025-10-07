@@ -95,6 +95,12 @@ FactoryBot.define do
     date { rand(365).days.from_now }
   end
 
+  factory :event_hiatus do
+    event { nil }
+    start_date { "2025-10-07" }
+    return_date { "2025-10-14" }
+  end
+
   trait :event_form do
     title { Faker::Company.social_dance }
     event_type { "social_dance" }

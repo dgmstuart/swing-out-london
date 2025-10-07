@@ -14,6 +14,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :class_organiser, class_name: "Organiser", optional: true
   belongs_to :social_organiser, class_name: "Organiser", optional: true
   has_many :event_instances, dependent: :destroy
+  has_many :event_hiatuses, dependent: :destroy
   has_many :email_deliveries, dependent: :destroy
 
   validates :frequency, presence: true
@@ -204,6 +205,14 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     Rails.cache.fetch(latest_date_cache_key) do
       event_instances.maximum(:date)
     end
+  end
+
+  def current_hiatus_start
+    event_hiatuses.sole.start_date
+  end
+
+  def current_hiatus_return
+    event_hiatuses.sole.return_date
   end
 
   after_save :clear_latest_dates_cache

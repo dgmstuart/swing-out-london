@@ -27,6 +27,8 @@ class EditEventForm
   attribute :cancellations, :string
   attribute :first_date, :string
   attribute :last_date, :string
+  attribute :start_of_break, :string
+  attribute :first_date_back, :string
   attribute :status, :string
 
   STATUSES = [
