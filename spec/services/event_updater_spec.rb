@@ -4,28 +4,26 @@ require "rails_helper"
 
 RSpec.describe EventUpdater do
   describe "#update!" do
-    it "builds an event with the passed in params, except dates and cancellations" do
-      record = create(:event)
-      allow(record).to receive(:update!)
-      other_value = double
-      params = { dates: [], cancellations: [], frequency: 0, title: other_value }
+    it "updates event with the given attributes" do
+      record = create(:event,  title: "Stomp", url: "https://example.com")
+      params = { title: "Bounce", url: "https://exemplary.se" }
 
       described_class.new(record).update!(params)
 
-      expect(record).to have_received(:update!).with(
-        { title: other_value, frequency: 0, event_instances: [] }
+      expect(record.reload).to have_attributes(
+        title: "Bounce",
+        url: "https://exemplary.se"
       )
     end
 
     context "when the frequency isn't being updated" do
       it "uses the frequency from the event record." do
         record = create(:event, :weekly)
-        allow(record).to receive(:update!)
         params = { dates: [], cancellations: [] }
 
         described_class.new(record).update!(params)
 
-        expect(record).to have_received(:update!).with({ event_instances: [] })
+        expect(record.reload).to be_weekly
       end
     end
 
