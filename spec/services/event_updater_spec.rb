@@ -124,7 +124,7 @@ RSpec.describe EventUpdater do
     end
 
     context "when an instance already exists matching the date but not the event ID" do
-      it "creates a new instance" do # .example_length
+      it "creates a new instance" do
         record = create(:event)
         date = Date.tomorrow
         event_instance = create(:event_instance, event: build(:event), date:)
