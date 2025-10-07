@@ -240,17 +240,26 @@ RSpec.describe EventUpdater do
       end
     end
 
-    context "when no cancellations or dates are passed" do
-      it "builds an event" do
-        record = instance_double("Event", update!: double, reload: double, event_instances: [])
-        other_value = double
-        params = { other: other_value }
+    context "when empty cancellations and dates are passed" do
+      it "removes any existing instances" do
+        record = create(:event, dates: [Date.parse("2012-01-07")], cancellations: [Date.parse("2012-01-14")])
+        params = { dates: [], cancellations: [] }
 
         described_class.new(record).update!(params)
 
-        expect(record).to have_received(:update!).with(
-          { other: other_value }
-        )
+        expect(record.reload.event_instances).to be_empty
+      end
+    end
+
+    context "when no cancellations or dates are passed [EDGE CASE]" do
+      # Edge case because in reality we always pass canellations and dates
+      it "doesn't remove any existing instances" do
+        record = create(:event, dates: [Date.parse("2012-01-07")], cancellations: [Date.parse("2012-01-14")])
+        params = {}
+
+        described_class.new(record).update!(params)
+
+        expect(record.reload.event_instances.count).to eq(2)
       end
     end
   end
