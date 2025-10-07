@@ -15,11 +15,11 @@ RSpec.describe "Editors can list occasional events" do
       :organiser,
       shortname: "Frankie"
     )
-    Timecop.freeze("01/01/1937") do
+    Timecop.freeze("01/01/2012") do
       event_instances = [
-        build(:event_instance, date: "02/01/1937"),
-        build(:event_instance, date: "09/01/1937", cancelled: true),
-        build(:event_instance, date: "6/2/1937")
+        build(:event_instance, date: "02/01/2012"),
+        build(:event_instance, date: "09/01/2012", cancelled: true),
+        build(:event_instance, date: "6/2/2012")
       ]
       create(
         :event,
@@ -41,26 +41,26 @@ RSpec.describe "Editors can list occasional events" do
       )
     end
 
-    Timecop.freeze("02/01/1937") do
+    Timecop.freeze("02/01/2012") do
       skip_login("/occasional")
     end
 
     within "section.listings" do
       within page.first(".date_row") do
-        expect(page).to have_content "Saturday 2nd January"
+        expect(page).to have_content "Monday 2nd January"
         expect(page).to have_content "WC2R"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
       end
 
       within page.all(".date_row")[1] do
-        expect(page).to have_content "Saturday 9th January"
+        expect(page).to have_content "Monday 9th January"
         expect(page).to have_content "WC2R"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
         expect(page).to have_content "Cancelled Stompin at the Savoy"
       end
 
       within page.all(".date_row")[2] do
-        expect(page).to have_content "Saturday 6th February"
+        expect(page).to have_content "Monday 6th February"
         expect(page).to have_content "WC2R"
         expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
       end

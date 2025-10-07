@@ -37,57 +37,51 @@ RSpec.describe EventUpdater do
     end
 
     context "when there are dates" do
-      it "creates event instances from the dates" do # rubocop:disable RSpec/ExampleLength
+      it "creates event instances from the dates" do
         record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
+        date1 = Date.parse("2012-11-13")
+        date2 = Date.parse("2012-11-14")
         params = attributes_for(:event, :occasional).merge(dates: [date1, date2])
 
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
+        event = described_class.new(record).update!(params)
 
-          aggregate_failures do
-            expect(event.event_instances.map(&:date)).to contain_exactly(date1, date2)
-            expect(event.audits.last.comment).to eq "Updated dates: (old: ) (new: 13/11/1940,14/11/1940)"
-          end
+        aggregate_failures do
+          expect(event.event_instances.map(&:date)).to contain_exactly(date1, date2)
+          expect(event.audits.last.comment).to eq "Updated dates: (old: ) (new: 13/11/2012,14/11/2012)"
         end
       end
     end
 
     context "when there are cancellations for an occasional event" do
-      it "creates cancelled event instances from the cancellations" do # rubocop:disable RSpec/ExampleLength
+      it "creates cancelled event instances from the cancellations" do
         record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
+        date1 = Date.parse("2012-11-13")
+        date2 = Date.parse("2012-11-14")
         params = attributes_for(:event, :occasional).merge(dates: [date1, date2], cancellations: [date1, date2])
 
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
+        event = described_class.new(record).update!(params)
 
-          aggregate_failures do
-            instances = event.event_instances
-            expect(instances.map(&:date)).to contain_exactly(date1, date2)
-            expect(instances.map(&:cancelled)).to contain_exactly(true, true)
-          end
+        aggregate_failures do
+          instances = event.event_instances
+          expect(instances.map(&:date)).to contain_exactly(date1, date2)
+          expect(instances.map(&:cancelled)).to contain_exactly(true, true)
         end
       end
     end
 
     context "when there are cancellations for a weekly event" do
-      it "creates cancelled event instances from the cancellations" do # rubocop:disable RSpec/ExampleLength
+      it "creates cancelled event instances from the cancellations" do
         record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
+        date1 = Date.parse("2012-11-13")
+        date2 = Date.parse("2012-11-14")
         params = attributes_for(:event, :weekly).merge(cancellations: [date1, date2])
 
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
+        event = described_class.new(record).update!(params)
 
-          aggregate_failures do
-            instances = event.event_instances
-            expect(instances.map(&:date)).to contain_exactly(date1, date2)
-            expect(instances.map(&:cancelled)).to contain_exactly(true, true)
-          end
+        aggregate_failures do
+          instances = event.event_instances
+          expect(instances.map(&:date)).to contain_exactly(date1, date2)
+          expect(instances.map(&:cancelled)).to contain_exactly(true, true)
         end
       end
     end
