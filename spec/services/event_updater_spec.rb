@@ -121,6 +121,19 @@ RSpec.describe EventUpdater do
       end
     end
 
+    context "when cancelling a non-cancelled instance" do
+      it "updates the existing instance" do
+        record = create(:event)
+        date = Date.tomorrow
+        create(:event_instance, event: record, date:)
+        params = attributes_for(:event, :occasional).merge(dates: [date], cancellations: [date])
+
+        described_class.new(record).update!(params)
+
+        expect(EventInstance.sole.cancelled).to be(true)
+      end
+    end
+
     context "when an instance already exists matching the date but not the event ID" do
       it "creates a new instance" do
         record = create(:event)
