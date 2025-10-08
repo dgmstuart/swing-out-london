@@ -267,5 +267,45 @@ RSpec.describe EventUpdater do
         expect(record.reload.event_instances.count).to eq(2)
       end
     end
+
+    context "when saving the event fails" do
+      it "doesn't change any instances" do
+        record = create(:event)
+        params = attributes_for(:event, :occasional)
+                 .merge(dates: [Date.parse("2012-11-13")], url: nil) # invalid because url is nil
+
+        aggregate_failures do
+          expect(record.event_instances).to be_empty
+
+          expect { described_class.new(record).update!(params) }
+            .to raise_error(ActiveRecord::RecordInvalid)
+
+          expect(record.reload.event_instances).to be_empty
+        end
+      end
+    end
+
+    context "when saving an event instance fails [EDGE CASE]" do
+      it "doesn't change the event" do
+        record = create(:event, title: "stomp")
+        create(:event_instance, event: record, date: Date.parse("2012-06-01"), cancelled: false)
+        params = attributes_for(:event, :occasional).merge(
+          dates: [Date.parse("1940-11-13"), Date.parse("2012-06-01")],
+          cancellations: [Date.parse("2012-06-01")],
+          title: "bounce"
+        ) # invalid because one date is too far in the past
+
+        aggregate_failures do
+          expect(record.event_instances.sole.cancelled).to be false
+
+          expect { described_class.new(record).update!(params) }
+            .to raise_error(ActiveRecord::RecordNotSaved)
+
+          expect(record.reload.title).to eq("stomp")
+          expect(record.reload.event_instances.count).to eq 1
+          expect(record.event_instances.sole.cancelled).to be false
+        end
+      end
+    end
   end
 end
