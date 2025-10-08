@@ -3,7 +3,7 @@
 class EventInstance < ApplicationRecord
   belongs_to :event, touch: true
 
-  validates :date, uniqueness: { scope: :event_id }
+  validates :date, uniqueness: { scope: :event_id }, distant_past_date: true
 
   scope :cancelled, -> { where(cancelled: true) }
   scope :not_cancelled, -> { where(cancelled: false) }
