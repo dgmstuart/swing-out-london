@@ -9,11 +9,15 @@ class EventUpdater
 
   def update!(attrs)
     attrs.merge!(audit_commenter.comment(record, attrs))
-    event_instances = event_instances(attrs)
-    attrs.merge!(event_instances:) unless event_instances.nil?
 
-    record.update!(attrs)
-    record.event_instances.each(&:save!) unless event_instances.nil?
+    instances_attrs = extract_instances_attrs(attrs)
+    record.transaction do
+      unless instances_attrs.nil?
+        delete_instances!(instances_attrs)
+        upsert_instances!(instances_attrs)
+      end
+      record.update!(attrs)
+    end
     record.reload
   end
 
@@ -21,31 +25,45 @@ class EventUpdater
 
   attr_reader :record, :audit_commenter
 
-  def event_instances(attrs)
+  def delete_instances!(instances_attrs)
+    dates = instances_attrs.map { |attrs| attrs.fetch(:date) }
+    record.event_instances.where.not(date: dates).destroy_all
+  end
+
+  def upsert_instances!(instances_attrs)
+    instances_attrs.each do |instance_attrs|
+      upsert_instance!(instance_attrs)
+    end
+  end
+
+  def upsert_instance!(attrs)
+    instance = record.event_instances.find_or_initialize_by(attrs.slice(:date))
+    instance.assign_attributes(attrs)
+    instance.save!
+  end
+
+  def extract_instances_attrs(attrs)
     dates = attrs.delete(:dates)
     cancellations = attrs.delete(:cancellations)
-    frequency = attrs[:frequency]
     return nil if dates.nil? && cancellations.nil?
 
-    case frequency || record.frequency
+    case attrs.fetch(:frequency, record.frequency)
     in 0
-      build_occasional_instances(dates, cancellations)
+      occasional_instances_attrs(dates, cancellations)
     in 1
-      build_weekly_instances(cancellations)
+      weekly_instances_attrs(cancellations)
     end
   end
 
-  def build_occasional_instances(dates, cancellations)
+  def occasional_instances_attrs(dates, cancellations)
     Array(dates).map do |date|
-      EventInstance.find_or_initialize_by(event_id: record.id, date:).tap do |instance|
-        instance.cancelled = Array(cancellations).include?(date)
-      end
+      { date:, cancelled: Array(cancellations).include?(date) }
     end
   end
 
-  def build_weekly_instances(cancellations)
+  def weekly_instances_attrs(cancellations)
     Array(cancellations).map do |date|
-      EventInstance.find_or_initialize_by(event_id: record.id, date:, cancelled: true)
+      { date:, cancelled: true }
     end
   end
 end

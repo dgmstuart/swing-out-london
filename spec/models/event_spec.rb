@@ -286,13 +286,13 @@ RSpec.describe Event do
         event = create(
           :event,
           event_instances: [
-            create(:event_instance, date: "2010-01-01"),
-            create(:event_instance, date: "2012-01-01"),
-            create(:event_instance, date: "2011-01-01")
+            create(:event_instance, date: "2011-01-01"),
+            create(:event_instance, date: "2013-01-01"),
+            create(:event_instance, date: "2012-01-01")
           ]
         )
 
-        expect(event.latest_date).to eq "2012-01-01".to_date
+        expect(event.latest_date).to eq "2013-01-01".to_date
       end
     end
   end

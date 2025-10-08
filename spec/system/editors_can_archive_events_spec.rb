@@ -9,29 +9,29 @@ RSpec.describe "Editors can archive events" do
 
     visit "/events"
 
-    # 8th Jan 2000 was a saturday
-    Timecop.freeze(Time.zone.local(2000, 1, 8)) do
+    # 7th Jan 2012 was a saturday
+    Timecop.freeze(Time.zone.local(2012, 1, 7)) do
       click_on "Archive", match: :first
     end
 
     click_show
 
-    expect(page).to have_content("Last date: 02/01/2000") # the previous Sunday
+    expect(page).to have_content("Last date: 01/01/2012") # the previous Sunday
   end
 
   it "with an occasional event" do
     skip_login
-    create(:event, frequency: 0, dates: ["02/01/2000".to_date])
+    create(:event, frequency: 0, dates: ["02/01/2012".to_date])
 
     visit "/events"
 
-    Timecop.freeze(Time.zone.local(2000, 1, 8)) do
+    Timecop.freeze(Time.zone.local(2012, 1, 8)) do
       click_on "Archive", match: :first
     end
 
     click_show
 
-    expect(page).to have_content("Last date: 02/01/2000")
+    expect(page).to have_content("Last date: 02/01/2012")
   end
 
   it "with an event with no dates" do
@@ -50,32 +50,32 @@ RSpec.describe "Editors can archive events" do
   context "when the event is already archived" do
     it "succeeds but doesn't update the date" do
       skip_login
-      event = create(:event, frequency: 0, dates: ["02/01/2000".to_date])
+      event = create(:event, frequency: 0, dates: ["02/01/2012".to_date])
 
       visit "/events"
 
-      Timecop.freeze("2000-01-08") do
-        event.update!(last_date: "2000-01-02")
+      Timecop.freeze("2012-01-08") do
+        event.update!(last_date: "2012-01-02")
 
         click_on "Archive", match: :first
       end
 
       click_show
 
-      expect(page).to have_content("Last date: 02/01/2000")
+      expect(page).to have_content("Last date: 02/01/2012")
     end
   end
 
   context "when the event couldn't be saved for some reason" do
     it "raises an error" do
       skip_login
-      event = create(:event, frequency: 0, dates: ["02/01/2000".to_date])
+      event = create(:event, frequency: 0, dates: ["02/01/2012".to_date])
       # Set url to an invalid value to simulate failed save
       event.update_attribute(:url, "not-a-url") # rubocop:disable Rails/SkipsModelValidations
 
       visit "/events"
 
-      Timecop.freeze(Time.zone.local(2000, 1, 8)) do
+      Timecop.freeze(Time.zone.local(2012, 1, 8)) do
         click_on "Archive", match: :first
       end
 

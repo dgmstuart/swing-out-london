@@ -6,7 +6,7 @@ RSpec.describe "Editors can list events" do
   include ActiveSupport::Testing::TimeHelpers
 
   it "shows a list of events" do
-    Timecop.freeze(Time.zone.local(1997, 5, 23)) do
+    Timecop.freeze(Time.zone.local(2012, 5, 23)) do
       create(
         :event,
         title: "Stompin'",
@@ -14,7 +14,7 @@ RSpec.describe "Editors can list events" do
         class_organiser: create(:organiser, name: "Simon Selmon"),
         social_organiser: create(:organiser, name: "The London Swing Dance Society"),
         frequency: 0,
-        dates: [Date.new(1997, 6, 1), Date.new(1997, 7, 5)]
+        dates: [Date.new(2012, 6, 1), Date.new(2012, 7, 5)]
       )
     end
 
@@ -26,7 +26,7 @@ RSpec.describe "Editors can list events" do
       .and have_content("Simon Selmon")
       .and have_content("The London Swing Dance Society")
       .and have_content(0)
-      .and have_content("05/07/1997, 01/06/1997")
+      .and have_content("05/07/2012, 01/06/2012")
   end
 
   it "notes when an event has ended" do

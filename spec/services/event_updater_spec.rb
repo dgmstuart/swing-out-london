@@ -4,28 +4,26 @@ require "rails_helper"
 
 RSpec.describe EventUpdater do
   describe "#update!" do
-    it "builds an event with the passed in params, except dates and cancellations" do
-      record = create(:event)
-      allow(record).to receive(:update!)
-      other_value = double
-      params = { dates: [], cancellations: [], frequency: 0, title: other_value }
+    it "updates event with the given attributes" do
+      record = create(:event,  title: "Stomp", url: "https://example.com")
+      params = { title: "Bounce", url: "https://exemplary.se" }
 
       described_class.new(record).update!(params)
 
-      expect(record).to have_received(:update!).with(
-        { title: other_value, frequency: 0, event_instances: [] }
+      expect(record.reload).to have_attributes(
+        title: "Bounce",
+        url: "https://exemplary.se"
       )
     end
 
     context "when the frequency isn't being updated" do
       it "uses the frequency from the event record." do
         record = create(:event, :weekly)
-        allow(record).to receive(:update!)
         params = { dates: [], cancellations: [] }
 
         described_class.new(record).update!(params)
 
-        expect(record).to have_received(:update!).with({ event_instances: [] })
+        expect(record.reload).to be_weekly
       end
     end
 
@@ -39,57 +37,51 @@ RSpec.describe EventUpdater do
     end
 
     context "when there are dates" do
-      it "creates event instances from the dates" do # rubocop:disable RSpec/ExampleLength
+      it "creates event instances from the dates" do
         record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
+        date1 = Date.parse("2012-11-13")
+        date2 = Date.parse("2012-11-14")
         params = attributes_for(:event, :occasional).merge(dates: [date1, date2])
 
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
+        event = described_class.new(record).update!(params)
 
-          aggregate_failures do
-            expect(event.event_instances.map(&:date)).to contain_exactly(date1, date2)
-            expect(event.audits.last.comment).to eq "Updated dates: (old: ) (new: 13/11/1940,14/11/1940)"
-          end
+        aggregate_failures do
+          expect(event.event_instances.map(&:date)).to contain_exactly(date1, date2)
+          expect(event.audits.last.comment).to eq "Updated dates: (old: ) (new: 13/11/2012,14/11/2012)"
         end
       end
     end
 
     context "when there are cancellations for an occasional event" do
-      it "creates cancelled event instances from the cancellations" do # rubocop:disable RSpec/ExampleLength
+      it "creates cancelled event instances from the cancellations" do
         record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
+        date1 = Date.parse("2012-11-13")
+        date2 = Date.parse("2012-11-14")
         params = attributes_for(:event, :occasional).merge(dates: [date1, date2], cancellations: [date1, date2])
 
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
+        event = described_class.new(record).update!(params)
 
-          aggregate_failures do
-            instances = event.event_instances
-            expect(instances.map(&:date)).to contain_exactly(date1, date2)
-            expect(instances.map(&:cancelled)).to contain_exactly(true, true)
-          end
+        aggregate_failures do
+          instances = event.event_instances
+          expect(instances.map(&:date)).to contain_exactly(date1, date2)
+          expect(instances.map(&:cancelled)).to contain_exactly(true, true)
         end
       end
     end
 
     context "when there are cancellations for a weekly event" do
-      it "creates cancelled event instances from the cancellations" do # rubocop:disable RSpec/ExampleLength
+      it "creates cancelled event instances from the cancellations" do
         record = create(:event)
-        date1 = Date.parse("1940-11-13")
-        date2 = Date.parse("1940-11-14")
+        date1 = Date.parse("2012-11-13")
+        date2 = Date.parse("2012-11-14")
         params = attributes_for(:event, :weekly).merge(cancellations: [date1, date2])
 
-        Timecop.freeze("1940-11-01") do
-          event = described_class.new(record).update!(params)
+        event = described_class.new(record).update!(params)
 
-          aggregate_failures do
-            instances = event.event_instances
-            expect(instances.map(&:date)).to contain_exactly(date1, date2)
-            expect(instances.map(&:cancelled)).to contain_exactly(true, true)
-          end
+        aggregate_failures do
+          instances = event.event_instances
+          expect(instances.map(&:date)).to contain_exactly(date1, date2)
+          expect(instances.map(&:cancelled)).to contain_exactly(true, true)
         end
       end
     end
@@ -123,8 +115,21 @@ RSpec.describe EventUpdater do
       end
     end
 
+    context "when cancelling a non-cancelled instance" do
+      it "updates the existing instance" do
+        record = create(:event)
+        date = Date.tomorrow
+        create(:event_instance, event: record, date:)
+        params = attributes_for(:event, :occasional).merge(dates: [date], cancellations: [date])
+
+        described_class.new(record).update!(params)
+
+        expect(EventInstance.sole.cancelled).to be(true)
+      end
+    end
+
     context "when an instance already exists matching the date but not the event ID" do
-      it "creates a new instance" do # .example_length
+      it "creates a new instance" do
         record = create(:event)
         date = Date.tomorrow
         event_instance = create(:event_instance, event: build(:event), date:)
@@ -240,17 +245,66 @@ RSpec.describe EventUpdater do
       end
     end
 
-    context "when no cancellations or dates are passed" do
-      it "builds an event" do
-        record = instance_double("Event", update!: double, reload: double, event_instances: [])
-        other_value = double
-        params = { other: other_value }
+    context "when empty cancellations and dates are passed" do
+      it "removes any existing instances" do
+        record = create(:event, dates: [Date.parse("2012-01-07")], cancellations: [Date.parse("2012-01-14")])
+        params = { dates: [], cancellations: [] }
 
         described_class.new(record).update!(params)
 
-        expect(record).to have_received(:update!).with(
-          { other: other_value }
-        )
+        expect(record.reload.event_instances).to be_empty
+      end
+    end
+
+    context "when no cancellations or dates are passed [EDGE CASE]" do
+      # Edge case because in reality we always pass canellations and dates
+      it "doesn't remove any existing instances" do
+        record = create(:event, dates: [Date.parse("2012-01-07")], cancellations: [Date.parse("2012-01-14")])
+        params = {}
+
+        described_class.new(record).update!(params)
+
+        expect(record.reload.event_instances.count).to eq(2)
+      end
+    end
+
+    context "when saving the event fails" do
+      it "doesn't change any instances" do
+        record = create(:event)
+        params = attributes_for(:event, :occasional)
+                 .merge(dates: [Date.parse("2012-11-13")], url: nil) # invalid because url is nil
+
+        aggregate_failures do
+          expect(record.event_instances).to be_empty
+
+          expect { described_class.new(record).update!(params) }
+            .to raise_error(ActiveRecord::RecordInvalid)
+
+          expect(record.reload.event_instances).to be_empty
+        end
+      end
+    end
+
+    context "when saving an event instance fails [EDGE CASE]" do
+      it "doesn't change the event" do
+        record = create(:event, title: "stomp")
+        create(:event_instance, event: record, date: Date.parse("2012-06-01"), cancelled: false)
+        params = attributes_for(:event, :occasional).merge(
+          dates: [Date.parse("1940-11-13"), Date.parse("2012-06-01")],
+          cancellations: [Date.parse("2012-06-01")],
+          title: "bounce"
+        ) # invalid because one date is too far in the past
+
+        aggregate_failures do
+          expect(record.event_instances.sole.cancelled).to be false
+
+          expect { described_class.new(record).update!(params) }
+            .to raise_error(ActiveRecord::RecordInvalid)
+
+          expect(record.reload.title).to eq("stomp")
+          expect(record.reload.event_instances.count).to eq 1
+          expect(record.event_instances.sole.cancelled).to be false
+        end
       end
     end
   end
