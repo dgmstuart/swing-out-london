@@ -75,8 +75,38 @@ RSpec.describe Event do
     end
 
     it "returns weekly socials on the same day as a given date" do
-      date = Date.current.next_occurring(:thursday)
+      date = Date.parse("2025-10-09")
       social = create(:weekly_social, day: "Thursday")
+
+      socials = described_class.socials_on_date(date)
+
+      expect(socials).to eq [social]
+    end
+
+    it "doesn't return weekly socials which are on hiatus on that date" do
+      date = Date.parse("2025-10-09")
+      social = create(:weekly_social, day: "Thursday")
+      create(:event_hiatus, start_date: "2025-10-02", return_date: "2025-10-16", event: social)
+
+      socials = described_class.socials_on_date(date)
+
+      expect(socials).to be_empty
+    end
+
+    it "doesn't return weekly socials with a hiatus starting on that date" do
+      date = Date.parse("2025-10-09")
+      social = create(:weekly_social, day: "Thursday")
+      create(:event_hiatus, start_date: "2025-10-09", return_date: "2025-10-16", event: social)
+
+      socials = described_class.socials_on_date(date)
+
+      expect(socials).to be_empty
+    end
+
+    it "returns weekly socials with a hiatus returning on that date" do
+      date = Date.parse("2025-10-09")
+      social = create(:weekly_social, day: "Thursday")
+      create(:event_hiatus, start_date: "2025-10-02", return_date: "2025-10-09", event: social)
 
       socials = described_class.socials_on_date(date)
 

@@ -117,10 +117,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :active, -> { where("last_date IS NULL OR last_date > ?", Date.current) }
   scope :ended, -> { where("last_date IS NOT NULL AND last_date < ?", Date.current) }
   scope :active_on, lambda { |date|
-    where(
-      "(first_date IS NULL OR first_date <= :date) AND (last_date IS NULL OR last_date >= :date)",
-      date:
-    )
+    sql = <<~SQL.squish
+      (events.first_date IS NULL OR events.first_date <= :date)
+      AND (events.last_date  IS NULL OR events.last_date  >= :date)
+      AND NOT EXISTS (
+        SELECT 1
+        FROM event_hiatuses AS event_hiatuses
+        WHERE event_hiatuses.event_id = events.id
+          AND daterange(event_hiatuses.start_date, event_hiatuses.return_date, '[)') @> CAST(:date AS date)
+      )
+    SQL
+    where(sql, date:)
   }
 
   scope :listing_classes, -> { active.weekly_or_fortnightly.classes }
