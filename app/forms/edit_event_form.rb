@@ -27,10 +27,13 @@ class EditEventForm
   attribute :cancellations, :string
   attribute :first_date, :string
   attribute :last_date, :string
+  attribute :start_of_break, :string
+  attribute :first_date_back, :string
   attribute :status, :string
 
   STATUSES = [
     STATUS_ONGOING = "ongoing",
+    STATUS_TAKING_A_BREAK = "taking_a_break",
     STATUS_ENDING = "ending"
   ].freeze
 
@@ -130,6 +133,10 @@ class EditEventForm
     status == STATUS_ENDING
   end
 
+  def taking_a_break?
+    status == STATUS_TAKING_A_BREAK
+  end
+
   private
 
   def type_is_social_dance?
@@ -191,15 +198,25 @@ class EditEventForm
       format_date(event.last_date)
     end
 
+    def start_of_break
+      format_date(event.current_hiatus&.start_date)
+    end
+
+    def first_date_back
+      format_date(event.current_hiatus&.return_date)
+    end
+
     def status
       if event.last_date.present?
         STATUS_ENDING
+      elsif event.current_hiatus.present?
+        STATUS_TAKING_A_BREAK
       else
         STATUS_ONGOING
       end
     end
 
-    def attributes
+    def attributes # rubocop:disable Metrics/AbcSize
       {
         title:,
         url:,
@@ -219,6 +236,8 @@ class EditEventForm
         cancellations:,
         first_date:,
         last_date:,
+        start_of_break:,
+        first_date_back:,
         status:
       }
     end

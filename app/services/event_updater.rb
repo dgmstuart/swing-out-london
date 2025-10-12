@@ -11,7 +11,8 @@ class EventUpdater
     attrs.merge!(audit_commenter.comment(record, attrs))
 
     instances_attrs = extract_instances_attrs(attrs)
-    persist_updates!(event_attrs: attrs, instances_attrs:)
+    hiatus_attrs = extract_hiatus_attrs(attrs)
+    persist_updates!(event_attrs: attrs, instances_attrs:, hiatus_attrs:)
     record.reload
   end
 
@@ -19,13 +20,14 @@ class EventUpdater
 
   attr_reader :record, :audit_commenter
 
-  def persist_updates!(event_attrs:, instances_attrs:)
+  def persist_updates!(event_attrs:, instances_attrs:, hiatus_attrs:)
     record.transaction do
       unless instances_attrs.nil?
         delete_instances!(instances_attrs)
         upsert_instances!(instances_attrs)
       end
       record.update!(event_attrs)
+      create_hiatus!(hiatus_attrs)
     end
   end
 
@@ -69,5 +71,18 @@ class EventUpdater
     Array(cancellations).map do |date|
       { date:, cancelled: true }
     end
+  end
+
+  def create_hiatus!(attrs)
+    return unless attrs.values.all?(&:present?)
+
+    record.event_hiatuses.create!(attrs)
+  end
+
+  def extract_hiatus_attrs(attrs)
+    {
+      start_date: attrs.delete(:start_of_break),
+      return_date: attrs.delete(:first_date_back)
+    }
   end
 end

@@ -307,5 +307,20 @@ RSpec.describe EventUpdater do
         end
       end
     end
+
+    context "when hiatus params are passed" do
+      it "creates a hiatus" do
+        record = create(:event)
+        params = attributes_for(:event, :weekly)
+                 .merge(start_of_break: Date.parse("2025-10-07"), first_date_back: Date.parse("2025-10-14"))
+
+        result = described_class.new(record).update!(params)
+
+        expect(result.event_hiatuses.sole).to have_attributes(
+          start_date: Date.parse("2025-10-07"),
+          return_date: Date.parse("2025-10-14")
+        )
+      end
+    end
   end
 end

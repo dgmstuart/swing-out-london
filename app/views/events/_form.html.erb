@@ -143,6 +143,31 @@
         </label>
       </div>
 
+      <% if @form.persisted? %>
+        <div>
+          <label>
+            <%= f.radio_button(:status, EditEventForm::STATUS_TAKING_A_BREAK, data: { action: "radio-guarded-fields#toggle" }) %>
+            This event is taking a break
+          </label>
+          <div
+              class='form-group form-group-nested-bar <%= "hidden" unless @form.taking_a_break? %>'
+              data-radio-guarded-fields-target="formGroup"
+              data-form-group-for="<%= EditEventForm::STATUS_TAKING_A_BREAK %>"
+              >
+              <div class="form-group">
+                <%= f.label :start_of_break %>
+                <p class='help'>The first date that the event will NOT be running</p>
+                <%= reasonable_date_field f, :start_of_break, allow_past: true %>
+              </div>
+              <div>
+                <%= f.label :first_date_back, "First date back after the break" %>
+                <p class='help'>The first date that the event will be running again after the break</p>
+                <%= reasonable_date_field f, :first_date_back, allow_past: false %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+
       <div>
         <label>
           <%= f.radio_button(:status, EditEventForm::STATUS_ENDING, data: { action: "radio-guarded-fields#toggle" }) %>
