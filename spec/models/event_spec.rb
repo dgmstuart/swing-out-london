@@ -14,6 +14,7 @@ require "spec/support/shared_examples/validates_email"
 RSpec.describe Event do
   describe "(associations)" do
     it { is_expected.to have_many(:event_instances).dependent(:destroy) }
+    it { is_expected.to have_many(:event_hiatuses).dependent(:destroy) }
     it { is_expected.to have_many(:email_deliveries).dependent(:destroy) }
   end
 
