@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_09_162313) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_06_225659) do
   create_schema "heroku_ext"
 
   # These are extensions that must be enabled in order to support this database
@@ -45,6 +45,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_09_162313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_email_deliveries_on_event_id"
+  end
+
+  create_table "event_hiatuses", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.date "start_date", null: false
+    t.date "return_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_hiatuses_on_event_id"
   end
 
   create_table "event_instances", force: :cascade do |t|
@@ -115,5 +124,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_09_162313) do
   end
 
   add_foreign_key "email_deliveries", "events"
+  add_foreign_key "event_hiatuses", "events"
   add_foreign_key "event_instances", "events"
 end
