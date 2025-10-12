@@ -34,7 +34,7 @@ RSpec.describe "Editors can create events", :js do
       fill_in "Upcoming dates", with: "12/12/2012, 19/12/2012"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "First date", with: "12/12/2012"
-      check "End date is known"
+      choose "End date is known"
       fill_in "Last date", with: "19/12/2012"
 
       click_on "Create"
@@ -95,7 +95,7 @@ RSpec.describe "Editors can create events", :js do
 
       fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
       fill_in "First date", with: "12/12/2012"
-      check "End date is known"
+      choose "End date is known"
       fill_in "Last date", with: "30/04/2013"
 
       click_on "Create"
@@ -210,7 +210,7 @@ RSpec.describe "Editors can create events", :js do
 
       select "Wednesday", from: "Day"
       fill_in "First date", with: "15/02/2012"
-      check "End date is known"
+      choose "End date is known"
       fill_in "Last date", with: "13/02/2013"
 
       click_on "Create"

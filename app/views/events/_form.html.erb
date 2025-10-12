@@ -126,17 +126,28 @@
       </p>
       <%= reasonable_date_field f, :first_date %>
     </div>
-    <section class="danger">
-      <div
-        class='form-group'
-        data-controller="checkbox-guarded-field"
-        data-checkbox-guarded-field-hidden-class="hidden"
-      >
+    <section
+      class="danger"
+      data-controller="radio-guarded-fields"
+      data-radio-guarded-fields-hidden-class="hidden"
+    >
+      <div>
         <label>
-          <%= @form.last_date_guard_text %>
-          <div><%= f.check_box "show_last_date", data: { action: "checkbox-guarded-field#toggle" } %></div>
+          <%= f.radio_button(:status, EditEventForm::STATUS_ONGOING, data: { action: "radio-guarded-fields#toggle" }) %>
+          This event is ongoing
         </label>
-        <div class='form-group form-group-nested-bar <%= "hidden" unless @form.show_last_date %>' data-checkbox-guarded-field-target="formGroup">
+      </div>
+
+      <div>
+        <label>
+          <%= f.radio_button(:status, EditEventForm::STATUS_ENDING, data: { action: "radio-guarded-fields#toggle" }) %>
+          <%= @form.last_date_guard_text %>
+        </label>
+        <div
+          class='form-group form-group-nested-bar <%= "hidden" unless @form.ending? %>'
+          data-radio-guarded-fields-target="formGroup"
+          data-form-group-for="<%= EditEventForm::STATUS_ENDING %>"
+        >
           <%= f.label :last_date %>
           <p class='help'>The event will stop being included in the listings after this date</p>
           <%= reasonable_date_field f, :last_date, allow_past: @form.persisted? %>

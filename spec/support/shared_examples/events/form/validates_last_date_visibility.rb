@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "validates last date visibility" do |model_name|
-  context "when show_last_date is true" do
-    subject { build(model_name, show_last_date: true) }
+  context "when status is ending" do
+    subject { build(model_name, status: "ending") }
 
     it { is_expected.to validate_presence_of(:last_date) }
   end
 
-  context "when show_last_date is false" do
-    subject { build(model_name, show_last_date: false) }
+  context "when status is ongoing" do
+    subject { build(model_name, status: "ongoing") }
 
     it { is_expected.not_to validate_presence_of(:last_date) }
+    it { is_expected.to validate_absence_of(:last_date) }
   end
 
-  context "when show_last_date is nil" do
-    subject { build(model_name, show_last_date: nil) }
+  context "when status is nil" do
+    subject { build(model_name, status: nil) }
 
     it { is_expected.not_to validate_presence_of(:last_date) }
   end

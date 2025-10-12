@@ -29,7 +29,7 @@ RSpec.describe "Editors can edit events", :js do
     fill_in "Course length", with: ""
 
     choose "Monthly or occasionally"
-    check "Stop listing this event"
+    choose "This event is ending or has ended"
     fill_in "First date", with: "10/10/2010"
     fill_in "Last date", with: "02/12/2011"
 
@@ -85,7 +85,7 @@ RSpec.describe "Editors can edit events", :js do
   end
 
   context "when the event already has a last date" do
-    it "is shown, and unchecking the checkbox removes it" do
+    it "is shown, and deselecting the radio button removes it" do
       event = create(:event, last_date: Date.parse("2012-12-13"))
 
       skip_login(id: 12345678901234567, name: "Al Minns")
@@ -94,11 +94,11 @@ RSpec.describe "Editors can edit events", :js do
 
       expect(page).to have_field("Last date", with: "2012-12-13")
 
-      uncheck "Stop listing this event"
+      choose "This event is ongoing"
 
       expect(page).to have_no_field("Last date")
 
-      check "Stop listing this event"
+      choose "This event is ending or has ended"
 
       expect(page).to have_field("Last date", with: "")
       click_on "Update"
@@ -106,7 +106,7 @@ RSpec.describe "Editors can edit events", :js do
       expect(page).to have_content("1 error prevented this record from being saved:")
         .and have_content("Last date can't be blank if the event is ending")
 
-      uncheck "Stop listing this event"
+      choose "This event is ongoing"
       click_on "Update"
 
       expect(page).to have_content("Last date:\nUrl:")
@@ -148,7 +148,7 @@ RSpec.describe "Editors can edit events", :js do
 
     fill_in "Upcoming dates", with: "12/12/2025, 03/11/2023"
     fill_in "Cancelled dates", with: "12/12/2025, 02/11/2023"
-    check "Stop listing this event"
+    choose "This event is ending or has ended"
     fill_in "Last date", with: "05/11/2023"
     click_on "Update"
 

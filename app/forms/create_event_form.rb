@@ -28,7 +28,12 @@ class CreateEventForm
   attribute :cancellations, :string
   attribute :first_date, :string
   attribute :last_date, :string
-  attribute :show_last_date, :boolean
+  attribute :status, :string
+
+  STATUSES = [
+    STATUS_ONGOING = "ongoing",
+    STATUS_ENDING = "ending"
+  ].freeze
 
   class << self
     def model_name
@@ -45,7 +50,7 @@ class CreateEventForm
   validates :dates, dates_string: true
   validates :cancellations, dates_string: true
   validates :first_date, date_string: true
-  validates :last_date, date_string: { allow_past: false }, presence: { if: :show_last_date }
+  validates :last_date, date_string: { allow_past: false }, presence: { if: :ending? }, absence: { unless: :ending? }
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -85,7 +90,7 @@ class CreateEventForm
     ).except(
       :event_type,
       :social_has_class,
-      :show_last_date
+      :status
     )
   end
 
@@ -108,6 +113,10 @@ class CreateEventForm
 
   def last_date_guard_text
     "End date is known"
+  end
+
+  def ending?
+    status == STATUS_ENDING
   end
 
   private

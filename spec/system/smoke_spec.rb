@@ -90,7 +90,7 @@ RSpec.describe "Adding a new event", :js do
     select "Saturday", from: "Day"
     fill_in "Cancelled dates", with: "09/01/1937"
     fill_in "First date", with: "12/03/1926"
-    check "End date is known"
+    choose "End date is known"
     fill_in "Last date", with: "01/01/1939" # the Savoy closed in 1958, but we only allow last dates to be set 2 years ahead
 
     click_on "Create"

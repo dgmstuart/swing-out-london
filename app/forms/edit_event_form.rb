@@ -27,7 +27,12 @@ class EditEventForm
   attribute :cancellations, :string
   attribute :first_date, :string
   attribute :last_date, :string
-  attribute :show_last_date, :boolean
+  attribute :status, :string
+
+  STATUSES = [
+    STATUS_ONGOING = "ongoing",
+    STATUS_ENDING = "ending"
+  ].freeze
 
   attr_accessor :event_type
 
@@ -50,7 +55,7 @@ class EditEventForm
   validates :dates, dates_string: { allow_past: true }
   validates :cancellations, dates_string: { allow_past: true }
   validates :first_date, date_string: true
-  validates :last_date, date_string: true, presence: { if: :show_last_date }
+  validates :last_date, date_string: true, presence: { if: :ending? }, absence: { unless: :ending? }
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -92,7 +97,7 @@ class EditEventForm
       course_length: (course_length.to_i if course_length.present?)
     ).except(
       :social_has_class,
-      :show_last_date
+      :status
     )
   end
 
@@ -118,7 +123,11 @@ class EditEventForm
   end
 
   def last_date_guard_text
-    "Stop listing this event"
+    "This event is ending or has ended"
+  end
+
+  def ending?
+    status == STATUS_ENDING
   end
 
   private
@@ -182,8 +191,12 @@ class EditEventForm
       format_date(event.last_date)
     end
 
-    def show_last_date
-      event.last_date.present?
+    def status
+      if event.last_date.present?
+        STATUS_ENDING
+      else
+        STATUS_ONGOING
+      end
     end
 
     def attributes
@@ -206,7 +219,7 @@ class EditEventForm
         cancellations:,
         first_date:,
         last_date:,
-        show_last_date:
+        status:
       }
     end
 
