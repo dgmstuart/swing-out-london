@@ -89,6 +89,20 @@ RSpec.describe EditEventForm do
     end
   end
 
+  describe "taking_a_break?" do
+    it "is true if the status is taking_a_break" do
+      form = described_class.new(status: "taking_a_break")
+
+      expect(form.taking_a_break?).to be true
+    end
+
+    it "is false if the status is something else" do
+      form = described_class.new(status: "active")
+
+      expect(form.taking_a_break?).to be false
+    end
+  end
+
   describe "#to_h" do
     it "returns the attributes as a symbol hash" do
       form = described_class.new(
@@ -130,7 +144,9 @@ RSpec.describe EditEventForm do
         dates: ["2020-12-10".to_date, "2021-01-12".to_date],
         cancellations: ["2020-12-10".to_date],
         first_date: "01/02/2018",
-        last_date: "10/02/2024"
+        last_date: "10/02/2024",
+        start_of_break: nil,
+        first_date_back: nil
       )
     end
 
@@ -155,7 +171,9 @@ RSpec.describe EditEventForm do
           dates: "",
           cancellations: "",
           first_date: "",
-          last_date: ""
+          last_date: "",
+          start_of_break: "2012-07-09",
+          first_date_back: "2012-07-23"
         )
 
         expect(form.to_h).to eq(
@@ -177,7 +195,9 @@ RSpec.describe EditEventForm do
           dates: [],
           cancellations: [],
           first_date: "",
-          last_date: ""
+          last_date: "",
+          start_of_break: "2012-07-09",
+          first_date_back: "2012-07-23"
         )
       end
     end
