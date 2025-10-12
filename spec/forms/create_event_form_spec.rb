@@ -88,6 +88,20 @@ RSpec.describe CreateEventForm do
     end
   end
 
+  describe "ending?" do
+    it "is true if the status is ending" do
+      form = described_class.new(status: "ending")
+
+      expect(form.ending?).to be true
+    end
+
+    it "is false if the status is something else" do
+      form = described_class.new(status: "ongoing")
+
+      expect(form.ending?).to be false
+    end
+  end
+
   describe "#to_h" do
     it "returns the attributes as a symbol hash" do
       form = described_class.new(
