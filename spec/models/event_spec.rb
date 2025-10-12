@@ -12,6 +12,8 @@ require "spec/support/shared_examples/validates_url"
 require "spec/support/shared_examples/validates_email"
 
 RSpec.describe Event do
+  include ActiveSupport::Testing::TimeHelpers
+
   describe "(associations)" do
     it { is_expected.to have_many(:event_instances).dependent(:destroy) }
     it { is_expected.to have_many(:event_hiatuses).dependent(:destroy) }
@@ -294,6 +296,51 @@ RSpec.describe Event do
         )
 
         expect(event.latest_date).to eq "2013-01-01".to_date
+      end
+    end
+  end
+
+  describe "#current_hiatus" do
+    context "when we're currently in the middle of a hiatus" do
+      it "returns this hiatus" do
+        travel_to "2012-05-22"
+
+        event = create(:event, :weekly)
+        hiatus = create(
+          :event_hiatus,
+          event:,
+          start_date: Date.parse("2012-05-22"),
+          return_date: Date.parse("2012-05-29")
+        )
+
+        expect(event.current_hiatus).to eq(hiatus)
+      end
+    end
+
+    context "when there's a hiatus starting in the future" do
+      it "returns this hiatus" do
+        # TODO
+      end
+    end
+
+    context "when there are several hiatuses in the future [EDGE CASE]" do
+      # This shouldn't be possible to create via the UI
+
+      it "returns the next one" do
+        # TODO
+      end
+    end
+
+    context "when there's a hiatus in the past" do
+      it "is nil" do
+        # TODO
+      end
+    end
+
+    context "when there are no hiatuses" do
+      it "is nil" do
+        event = create(:event)
+        expect(event.current_hiatus).to be_nil
       end
     end
   end
