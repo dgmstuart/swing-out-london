@@ -538,7 +538,7 @@ DEPENDENCIES
   puma
   rack-attack
   rack-canonical-host
-  rails (~> 8.0.0)
+  rails (~> 8.0.3)
   redcarpet
   rollbar
   rspec-rails
