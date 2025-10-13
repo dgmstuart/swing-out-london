@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
-gem "rails", "~> 8.0.0"
+gem "rails", "~> 8.0.3"
 
 gem "actionpack-action_caching" # to support pre rails-4 style action caching
 gem "audited"
@@ -54,7 +54,7 @@ group :test do
   gem "capybara", ">= 3.40"
   gem "climate_control"
   gem "launchy"
-  gem "selenium-webdriver", require: false
+  gem "selenium-webdriver", ">= 4.36", require: false
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
