@@ -54,7 +54,7 @@ group :test do
   gem "capybara", ">= 3.40"
   gem "climate_control"
   gem "launchy"
-  gem "selenium-webdriver", require: false
+  gem "selenium-webdriver", ">= 4.36", require: false
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
