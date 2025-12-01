@@ -20,4 +20,16 @@ RSpec.shared_examples "validates url" do |model_name|
     model.valid?
     expect(model.errors.messages).to eq(url: ["is not a valid URI"])
   end
+
+  it "is allows whitespace before the URL (this is expected to be stripped)" do
+    model = build(model_name, url: "  https://foo.com")
+    model.valid?
+    expect(model.errors.messages).to be_empty
+  end
+
+  it "is invalid when other content is before the URL" do
+    model = build(model_name, url: "Here's the link: https://foo.com")
+    model.valid?
+    expect(model.errors.messages).to eq(url: ["is not a valid URI"])
+  end
 end
