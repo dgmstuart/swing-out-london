@@ -166,13 +166,22 @@ RSpec.describe EditEventForm do
       end
     end
 
-    it "strips query params from facebook URLS" do
+    it "strips query params from facebook event URLS" do
       form = described_class.new(
         url: "https://www.facebook.com/events/1269384081753075/1269384101753073?acontext=%7B%22event_action_history%22%3A[%7"
       )
 
       expect(form.to_h.fetch(:url))
         .to eq("https://www.facebook.com/events/1269384081753075/1269384101753073")
+    end
+
+    it "doesn't strip query params from facebook profile URLS" do
+      form = described_class.new(
+        url: "https://www.facebook.com/profile.php?id=61578761353154&sk=events"
+      )
+
+      expect(form.to_h.fetch(:url))
+        .to eq("https://www.facebook.com/profile.php?id=61578761353154&sk=events")
     end
   end
 end
