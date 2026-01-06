@@ -190,5 +190,14 @@ RSpec.describe CreateEventForm do
       expect(form.to_h.fetch(:url))
         .to eq("https://www.facebook.com/events/1269384081753075/1269384101753073")
     end
+
+    it "doesn't strip query params from facebook profile URLS" do
+      form = described_class.new(
+        url: "https://www.facebook.com/profile.php?id=61578761353154&sk=events"
+      )
+
+      expect(form.to_h.fetch(:url))
+        .to eq("https://www.facebook.com/profile.php?id=61578761353154&sk=events")
+    end
   end
 end
