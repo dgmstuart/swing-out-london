@@ -522,6 +522,7 @@ DEPENDENCIES
   bullet
   capybara (>= 3.40)
   climate_control
+  connection_pool (~> 2.5)
   dalli
   dartsass-rails
   dotenv-rails

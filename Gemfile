@@ -63,6 +63,7 @@ group :test do
 end
 
 group :production do
+  gem "connection_pool", "~> 2.5" # Higher versions are incompatible with 8.0.4. Remove this line after upgrading to 8.1
   gem "dalli"
   gem "oj" # For Rollbar
   gem "rack-canonical-host"
