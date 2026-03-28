@@ -15,7 +15,7 @@ VCR.configure do |c|
   c.filter_sensitive_data("<FACEBOOK_API_AUTH_TOKEN>") { ENV.fetch("FACEBOOK_API_AUTH_TOKEN", nil) }
   c.filter_sensitive_data("<APPSECRET_PROOF>") do |interaction|
     query = URI.parse(interaction.request.uri).query
-    CGI.parse(query)["appsecret_proof"].first
+    Rack::Utils.parse_query(query)["appsecret_proof"]
   end
   c.filter_sensitive_data("<BEARER_TOKEN>") do |interaction|
     interaction.request.headers.fetch("Authorization", "").first.gsub(/Bearer \S+/, "Bearer <BEARER_TOKEN>")
