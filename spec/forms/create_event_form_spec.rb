@@ -17,6 +17,7 @@ require "spec/support/shared_examples/events/form/validates_class_and_social"
 require "spec/support/shared_examples/events/validates_weekly"
 require "spec/support/shared_examples/events/form/validates_event_with_dates"
 require "spec/support/shared_examples/events/form/validates_event_with_last_date"
+require "spec/support/shared_examples/events/form/validates_last_date_visibility"
 require "spec/support/shared_examples/events/validates_course_length"
 require "spec/support/shared_examples/validates_url"
 require "app/forms/date_form"
@@ -37,6 +38,7 @@ RSpec.describe CreateEventForm do
     it_behaves_like "validates dates in cancellations", :create_event_form
     it_behaves_like "validates date string", :first_date, :create_event_form
     it_behaves_like "validates date string", :last_date, :create_event_form, allow_past: false
+    it_behaves_like "validates last date visibility", :create_event_form
     it_behaves_like "validates url", :create_event_form
 
     it { is_expected.to validate_presence_of(:event_type) }
