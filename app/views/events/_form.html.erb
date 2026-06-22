@@ -126,13 +126,21 @@
       </p>
       <%= reasonable_date_field f, :first_date %>
     </div>
-    <section>
-      <h3 class="form-section-title">Is this event ending or taking a break?</h3>
-      <p class='help'>If not, then please leave this blank</p>
-      <div class='form-group'>
-        <%= f.label :last_date %>
-        <p class='help'>The event will stop being included in the listings after this date</p>
-        <%= reasonable_date_field f, :last_date, allow_past: @form.persisted? %>
+    <section class="danger">
+      <div
+        class='form-group'
+        data-controller="checkbox-guarded-field"
+        data-checkbox-guarded-field-hidden-class="hidden"
+      >
+        <label>
+          <%= @form.last_date_guard_text %>
+          <div><%= f.check_box "show_last_date", data: { action: "checkbox-guarded-field#toggle" } %></div>
+        </label>
+        <div class='form-group form-group-nested-bar <%= "hidden" unless @form.show_last_date %>' data-checkbox-guarded-field-target="formGroup">
+          <%= f.label :last_date %>
+          <p class='help'>The event will stop being included in the listings after this date</p>
+          <%= reasonable_date_field f, :last_date, allow_past: @form.persisted? %>
+        </div>
       </div>
     </section>
 

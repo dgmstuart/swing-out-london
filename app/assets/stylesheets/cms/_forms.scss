@@ -13,6 +13,12 @@ form {
     }
   }
 
+  .form-group-nested-bar {
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 3px solid colours.$gray;
+  }
+
   .radio-group {
     label {
       display: inline-block;
@@ -170,6 +176,10 @@ form.edit_venue {
     padding: 10px 15px 5px;
     margin: 20px 0;
     border: 1px solid;
+
+    &.danger {
+      border: 3px solid colours.$red;
+    }
   }
 }
 
