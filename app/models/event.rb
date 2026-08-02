@@ -147,7 +147,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return [] if weekly?
 
     Rails.cache.fetch(dates_cache_key) do
-      event_instances.order(date: :asc).map(&:date)
+      event_instances.order(date: :asc).pluck(:date)
     end
   end
 
@@ -157,11 +157,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def cancellations
-    event_instances.cancelled.map(&:date)
+    event_instances.cancelled.order(date: :asc).pluck(:date)
   end
 
   def future_cancellations
-    event_instances.cancelled.where(date: Date.current..).map(&:date)
+    event_instances.cancelled.where(date: Date.current..).order(date: :asc).pluck(:date)
   end
 
   # COMPARISON METHODS #
