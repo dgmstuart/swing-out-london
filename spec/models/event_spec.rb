@@ -57,7 +57,19 @@ RSpec.describe Event do
       recent_instance = build(:event_instance, date: date1, cancelled: true)
       event = create(:event, event_instances: [recent_instance, old_instance])
 
-      expect(event.cancellations).to eq([date1, date2])
+      expect(event.cancellations).to eq([date2, date1])
+    end
+  end
+
+  describe ".future_cancellations" do
+    it "returns an ordered list of future cancellations" do
+      date1 = 1.year.from_now.to_date
+      date2 = 2.days.from_now.to_date
+      later_instance = build(:event_instance, date: date1, cancelled: true)
+      sooner_instance = build(:event_instance, date: date2, cancelled: true)
+      event = create(:event, event_instances: [later_instance, sooner_instance])
+
+      expect(event.future_cancellations).to eq([date2, date1])
     end
   end
 
