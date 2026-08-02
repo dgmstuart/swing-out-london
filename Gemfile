@@ -6,7 +6,6 @@ ruby File.read(".ruby-version").strip
 
 gem "rails", "~> 8.0.3"
 
-gem "actionpack-action_caching" # to support pre rails-4 style action caching
 gem "audited"
 gem "bootsnap"
 gem "dartsass-rails"

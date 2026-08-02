@@ -3,7 +3,7 @@
 class ListingsController < ApplicationController
   layout "website"
 
-  caches_action :index, cache_path: -> { action_cache_key }, layout: true, expires_in: 1.hour, race_condition_ttl: 10
+  around_action :cache_index, only: :index
 
   def index
     @today = SOLDNTime.today
@@ -12,9 +12,15 @@ class ListingsController < ApplicationController
     @socials_dates = SocialsListings.new.build(dates)
   end
 
-  def action_cache_key
+  private
+
+  def cache_key
     return if Audit.none?
 
     "listings-#{Audit.last.cache_key}"
+  end
+
+  def cache_index(&)
+    cache_action(cache_key, &)
   end
 end

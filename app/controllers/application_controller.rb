@@ -29,4 +29,19 @@ class ApplicationController < ActionController::Base
       credentials == [user, password]
     end
   end
+
+  def cache_action(cache_key, &)
+    return yield unless cache_key
+
+    cached = fetch_response("#{cache_key}-#{request.format}", &)
+
+    render body: cached[:body], content_type: cached[:content_type] unless performed?
+  end
+
+  def fetch_response(key)
+    Rails.cache.fetch(key, expires_in: 1.hour, race_condition_ttl: 10, skip_nil: true) do
+      yield
+      { body: response.body, content_type: response.media_type } if response.successful?
+    end
+  end
 end

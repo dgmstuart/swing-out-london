@@ -3,11 +3,7 @@
 class MapsController < ApplicationController
   layout "map"
 
-  caches_action :socials, :classes,
-                cache_path: ->(c) { c.action_cache_key },
-                layout: true,
-                expires_in: 1.hour,
-                race_condition_ttl: 10
+  around_action :cache_map, only: %i[socials classes]
 
   def classes
     day_string = params[:day]
@@ -38,6 +34,10 @@ class MapsController < ApplicationController
   rescue Maps::Socials::Dates::DateOutOfRangeError
     logger.warn("Not a date in the visible range: #{@date}")
     redirect_to map_socials_path, status: :moved_permanently
+  end
+
+  def cache_map(&)
+    cache_action(action_cache_key, &)
   end
 
   def action_cache_key
