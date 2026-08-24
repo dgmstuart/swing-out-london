@@ -45,6 +45,9 @@ Metrics/BlockLength:
     - spec/**/*_spec.rb
     - spec/factories.rb
 
+Metrics/ClassLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+
 Metrics/MethodLength:
   CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
   Exclude:

@@ -45,6 +45,13 @@ en:
           attributes:
             postcode:
               invalid: is not a valid postcode
+  activemodel:
+    errors:
+      models:
+        event:
+          attributes:
+            last_date:
+              blank: "can't be blank if the event is ending or ended"
   errors:
     attributes:
       date:

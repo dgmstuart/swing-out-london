@@ -28,6 +28,7 @@ class CreateEventForm
   attribute :cancellations, :string
   attribute :first_date, :string
   attribute :last_date, :string
+  attribute :show_last_date, :boolean
 
   class << self
     def model_name
@@ -44,7 +45,7 @@ class CreateEventForm
   validates :dates, dates_string: true
   validates :cancellations, dates_string: true
   validates :first_date, date_string: true
-  validates :last_date, date_string: { allow_past: false }
+  validates :last_date, date_string: { allow_past: false }, presence: { if: :show_last_date }
 
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
@@ -83,7 +84,8 @@ class CreateEventForm
       course_length: (course_length.to_i if course_length.present?)
     ).except(
       :event_type,
-      :social_has_class
+      :social_has_class,
+      :show_last_date
     )
   end
 
@@ -102,6 +104,10 @@ class CreateEventForm
 
   def parsed_cancellations
     date_parser.parse(cancellations)
+  end
+
+  def last_date_guard_text
+    "End date is known"
   end
 
   private
