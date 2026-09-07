@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe "Organisers can edit events" do
   include ActiveSupport::Testing::TimeHelpers
 
-  context "when an organiser token exists", :js do
-    it "allows an organiser to edit an occasional event" do
+  context "when an organiser token exists" do
+    it "allows an organiser to edit an occasional event", :js do
       create(
         :social,
         organiser_token: "abc123",

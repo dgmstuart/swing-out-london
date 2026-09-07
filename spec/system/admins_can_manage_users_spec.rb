@@ -21,7 +21,7 @@ RSpec.describe "Admins can manage users" do
     expect(page).to have_content("Herbert White (Admin)")
   end
 
-  it "adding a role", :js, :vcr do
+  it "adding a role", :vcr do
     stub_facebook_config(app_secret!: "super-secret-secret")
     stub_auth_hash(id: 98765987659876598)
     create(:admin, facebook_ref: 98765987659876598)
@@ -46,7 +46,7 @@ RSpec.describe "Admins can manage users" do
   end
 
   context "when the facebook ref is the wrong format" do
-    it "shows a validation error", :js, :vcr do
+    it "shows a validation error", :vcr do
       stub_facebook_config(app_secret!: "super-secret-secret")
       stub_auth_hash(id: 98765987659876598)
       create(:admin, facebook_ref: 98765987659876598)
