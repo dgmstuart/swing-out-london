@@ -89,8 +89,9 @@ RSpec.describe "Adding a new event", :js do
     choose "Weekly"
     select "Saturday", from: "Day"
     fill_in "Cancelled dates", with: "09/01/1937"
-    fill_in "First date", with: "12/03/1926"
-    fill_in "Last date", with: "01/01/1939" # the Savoy closed in 1958, but we only allow last dates to be set 2 years ahead
+    fill_in "First date", with: "1926-03-12"
+    # the Savoy closed in 1958, but we only allow last dates to be set 2 years ahead
+    fill_in "Last date", with: "1939-01-01"
 
     click_on "Create"
 
@@ -108,7 +109,7 @@ RSpec.describe "Adding a new event", :js do
     choose "Monthly or occasionally"
 
     fill_in "Upcoming dates", with: "01/01/1937,14/01/1937"
-    fill_in "First date", with: "01/01/1937"
+    fill_in "First date", with: "1937-01-01"
 
     click_on "Create"
 

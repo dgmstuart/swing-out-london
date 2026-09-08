@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe "Organisers can edit events" do
   include ActiveSupport::Testing::TimeHelpers
 
-  context "when an organiser token exists", :js do
-    it "allows an organiser to edit an occasional event" do
+  context "when an organiser token exists" do
+    it "allows an organiser to edit an occasional event", :js do
       create(
         :social,
         organiser_token: "abc123",
@@ -66,7 +66,7 @@ RSpec.describe "Organisers can edit events" do
 
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Cancelled dates", with: "12/12/2012"
-      fill_in "Last date", with: "12/01/2013"
+      fill_in "Last date", with: "2013-01-12"
       click_on "Update"
 
       expect(page).to have_content("Event was successfully updated")

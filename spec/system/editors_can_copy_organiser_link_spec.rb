@@ -9,7 +9,6 @@ RSpec.describe "Editors can copy an organiser link" do
   context "when an organiser token exists", :js do
     it "shows a url which will allow an organiser to edit an event, and allows the editor to change the link" do
       event = create(:event, organiser_token: "abc123")
-      grant_clipboard_permissions
 
       skip_login("/events/#{event.id}/edit")
 
@@ -41,7 +40,6 @@ RSpec.describe "Editors can copy an organiser link" do
   context "when an organiser token does not exist", :js do
     it "allows one to be generated" do
       event = create(:event, organiser_token: nil)
-      grant_clipboard_permissions
       allow(SecureRandom).to receive(:hex).and_return("abc123")
 
       skip_login("/events/#{event.id}/edit")

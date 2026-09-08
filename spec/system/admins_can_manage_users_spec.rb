@@ -21,7 +21,7 @@ RSpec.describe "Admins can manage users" do
     expect(page).to have_content("Herbert White (Admin)")
   end
 
-  it "adding a role", :js, :vcr do
+  it "adding a role", :vcr do
     stub_facebook_config(app_secret!: "super-secret-secret")
     stub_auth_hash(id: 98765987659876598)
     create(:admin, facebook_ref: 98765987659876598)
@@ -46,7 +46,7 @@ RSpec.describe "Admins can manage users" do
   end
 
   context "when the facebook ref is the wrong format" do
-    it "shows a validation error", :js, :vcr do
+    it "shows a validation error", :vcr do
       stub_facebook_config(app_secret!: "super-secret-secret")
       stub_auth_hash(id: 98765987659876598)
       create(:admin, facebook_ref: 98765987659876598)
@@ -96,12 +96,12 @@ RSpec.describe "Admins can manage users" do
 
       expect(user_row("Herbert White")).to have_no_content("Delete") # You shouldn't be able to delete yourself!
 
-      within(user_row("Dawn Hampton")) do
-        accept_alert { click_on("Delete") }
-      end
-
       VCR.use_cassette("fetch_facebook_names") do
         # We need the cassette here because the page gets reloaded after clicking the button
+        within(user_row("Dawn Hampton")) do
+          accept_alert { click_on("Delete") }
+        end
+
         expect(page).to have_content("Herbert White (Admin)")
         expect(page).to have_no_content("Dawn Hampton")
       end
@@ -124,11 +124,13 @@ RSpec.describe "Admins can manage users" do
       expect(page).to have_content("Dawn Hampton")
     end
 
-    within(user_row("Dawn Hampton")) do
-      accept_alert { click_on("Make admin") }
-    end
-
+    # The cassette covers the click as well as the assertions, because clicking makes a
+    # request which reloads the page.
     VCR.use_cassette("fetch_facebook_names") do
+      within(user_row("Dawn Hampton")) do
+        accept_alert { click_on("Make admin") }
+      end
+
       expect(page).to have_content("Dawn Hampton (Admin)")
       expect(user_row("Dawn Hampton")).to have_no_content("Make admin")
       expect(user_row("Dawn Hampton")).to have_link("Remove admin")

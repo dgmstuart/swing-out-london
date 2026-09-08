@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-# Override Capybara's selenium_chrome_headless driver to disable the chrome search engine selection modal
-# If Capybara adds the --disable-search-engine-choice-screen option as a default, we can delete this override.
-# This is mostly a copy of the definition from the Capybara source:
-Capybara.register_driver :selenium_chrome_headless do |app|
-  version = Capybara::Selenium::Driver.load_selenium
-  options_key = Capybara::Selenium::Driver::CAPS_VERSION.satisfied_by?(version) ? :capabilities : :options
-  browser_options = Selenium::WebDriver::Chrome::Options.new.tap do |opts|
-    opts.add_argument("--headless=new")
-    opts.add_argument("--disable-gpu") if Gem.win_platform?
-    opts.add_argument("--disable-site-isolation-trials")
-    opts.add_argument("--disable-search-engine-choice-screen")
-  end
+# Override Capybara's default selenium_headless driver:
+Capybara.register_driver :selenium_headless do |app|
+  Capybara::Selenium::Driver.load_selenium # selenium-webdriver is require: false in the Gemfile
 
-  Capybara::Selenium::Driver.new(app, **{ :browser => :chrome, options_key => browser_options })
+  browser_options = Selenium::WebDriver::Firefox::Options.new(
+    # 750x1900 is enough to fit the whole event form:
+    args: ["-headless", "-width=750", "-height=1900"],
+    prefs: {
+      "dom.events.asyncClipboard.readText" => true,
+      "dom.events.testing.asyncClipboard" => true
+    }
+  )
+
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options: browser_options)
 end
 
 module System
@@ -24,8 +24,7 @@ module System
       end
 
       config.before(:each, :js, type: :system) do
-        driven_by :selenium_chrome_headless
-        current_window.resize_to(750, 1900) # 750x1900 is enough to fit the whole event form
+        driven_by :selenium_headless
       end
     end
   end

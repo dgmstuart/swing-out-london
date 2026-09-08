@@ -8,9 +8,9 @@ RSpec.describe "Admins can view an audit log" do
   end
 
   it "showing a list of audited events" do
-    create(:event)
-    create(:venue)
-    create(:organiser)
+    event = create(:event)
+    venue = create(:venue)
+    organiser = create(:organiser)
 
     skip_login(admin: true)
 
@@ -19,6 +19,10 @@ RSpec.describe "Admins can view an audit log" do
     expect(page).to have_content("Missing name create Event")
     expect(page).to have_content("Missing name create Venue")
     expect(page).to have_content("Missing name create Organiser")
+
+    expect(page).to have_link(href: %r{/events/#{event.id}\z})
+    expect(page).to have_link(href: %r{/venues/#{venue.id}\z})
+    expect(page).to have_link(href: %r{/organisers/#{organiser.id}\z})
   end
 
   context "when logged in as a non-admin" do
