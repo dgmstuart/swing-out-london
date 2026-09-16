@@ -1,7 +1,7 @@
 <% cache [event, event.venue, event.social_organiser, event.class_organiser] do %>
   <tr class="<%= event.css_class %>" id="<%= event.html_id %>">
     <td class="actions first">
-      <%= link_to 'Edit', edit_event_path(event), class: "button button-smaller button-secondary" %>
+      <%= link_to "Edit", edit_event_path(event), class: "button button-smaller button-secondary" %>
     </td>
     <td class="name">
       <%= link_to event.title, event.url %>
@@ -28,10 +28,9 @@
       <%= I18n.l(event.updated_at) %>
     </td>
     <td class="actions last">
-      <%= link_to 'Show', event %>
-      <%= link_to 'Delete', event, data: { turbo: true, turbo_confirm: "Are you sure you want to delete this event?", turbo_method: :delete } %>
-      <%= link_to 'Archive', archive_event_path(event), data: { turbo: true, turbo_method: :put } %>
+      <%= link_to "Show", event %>
+      <%= link_to "Delete", event, data: { turbo: true, turbo_confirm: "Are you sure you want to delete this event?", turbo_method: :delete } %>
+      <%= link_to "Archive", archive_event_path(event), data: { turbo: true, turbo_method: :put } %>
     </td>
   </tr>
 <% end %>
-

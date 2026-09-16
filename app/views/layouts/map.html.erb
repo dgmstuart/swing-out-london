@@ -1,12 +1,12 @@
 <% content_for :head do %>
-  <%= javascript_include_tag('application_map') %>
+  <%= javascript_include_tag("application_map") %>
 <% end %>
 
 <% content_for :content do %>
   <div class="map-container"
        data-controller="map"
-       data-map-api-key-value='<%=ENV["GOOGLE_MAPS_JAVASCRIPT_API_KEY"]%>'
-       data-map-map-id-value='<%=ENV["GOOGLE_MAPS_MAP_ID"]%>'
+       data-map-api-key-value='<%= ENV.fetch("GOOGLE_MAPS_JAVASCRIPT_API_KEY", nil) %>'
+       data-map-map-id-value='<%= ENV.fetch("GOOGLE_MAPS_MAP_ID", nil) %>'
        data-map-markers-value='<%= @map_markers.to_json %>'
        data-map-config-value='<%= CITY.map_config.to_h.to_json %>'>
 
@@ -15,15 +15,15 @@
     <nav class="page" data-controller="map-menu" data-map-menu-open-class="open" data-map-menu-selected-class='selected'>
       <header>
         <h1>
-          <%= link_to "#{tc("site_name")}'s", root_path %>
+          <%= link_to "#{tc('site_name')}'s", root_path %>
           <em>
             Lindy Map
           </em>
         </h1>
         <div class="map-menu">
           <div class="navigation primary-nav">
-            <%= link_to "Socials", { action: :socials, date: nil }, :class => ("current" if params[:action] == "socials") %>
-            <%= link_to "Classes", { action: :classes, day: nil }, :class => ("current" if params[:action] == "classes") %>
+            <%= link_to "Socials", { action: :socials, date: nil }, class: ("current" if params[:action] == "socials") %>
+            <%= link_to "Classes", { action: :classes, day: nil }, class: ("current" if params[:action] == "classes") %>
           </div>
 
           <a href="#" class="currently-shown" data-map-menu-target="currentlyShown" data-action="map-menu#toggle:prevent">
@@ -39,4 +39,4 @@
   </div>
 <% end %>
 
-<%= render template: 'layouts/application' %>
+<%= render template: "layouts/application" %>

@@ -1,14 +1,14 @@
 <div id="site_intro">
   <p>
     <%= tc("site_name") %> lists all of the regular
-    <%= link_to "Swing Dance classes", {anchor: "classes_today"}, {rel: "subsection"} %>
+    <%= link_to "Swing Dance classes", { anchor: "classes_today" }, { rel: "subsection" } %>
     in <%= tc("city") %> which teach
-    <%= link_to "Lindy Hop", about_path(anchor: "about_lindy"), {rel: "subsection"} %>,
+    <%= link_to "Lindy Hop", about_path(anchor: "about_lindy"), { rel: "subsection" } %>,
     Charleston, Balboa, Blues, Collegiate Shag and Authentic Jazz.
   </p>
   <p>
     It also lists all of the opportunities for
-    <%= link_to "social dancing", {anchor: "socials_today"}, {rel: "subsection"} %>
+    <%= link_to "social dancing", { anchor: "socials_today" }, { rel: "subsection" } %>
     to vintage jazz music.
   </p>
 </div>
@@ -23,6 +23,6 @@
   </p>
 </div>
 
-<%= render "listings/donate_message"%>
+<%= render "listings/donate_message" %>
 
-<%= render 'shared/header_navigation' %>
+<%= render "shared/header_navigation" %>

@@ -36,6 +36,7 @@ end
 
 group :development, :test do
   gem "dotenv-rails"
+  gem "erb_lint", require: false
   gem "factory_bot_rails"
   gem "faker"
   gem "rspec-rails"
