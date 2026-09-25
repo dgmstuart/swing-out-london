@@ -9,9 +9,9 @@
     </div>
 
     <div class='form-group'>
-      <%= f.label :venue_id, 'Venue' %>
+      <%= f.label :venue_id, "Venue" %>
       <p class='help'>If the venue doesn't already exist, <%= link_to "create one here", new_venue_path %></p>
-      <%= f.select :venue_id, venue_select, { include_blank: true} %>
+      <%= f.select :venue_id, venue_select, { include_blank: true } %>
     </div>
 
     <div class='form-group'>
@@ -35,7 +35,7 @@
     <%= render "events/organiser_link", event: @event %>
   <% end %>
 
-  <section data-event-form-target="socialDetails" class="<%= 'hidden' unless @form.show_social_details? %>">
+  <section data-event-form-target="socialDetails" class="<%= "hidden" unless @form.show_social_details? %>">
     <h3 class='form-section-title'>Social details</h3>
     <div class='form-group'>
       <%= f.label :title %>
@@ -43,9 +43,9 @@
       <%= f.text_field :title, data: { event_form_target: "title" } %>
     </div>
     <div class='form-group'>
-      <%= f.label :social_organiser_id, 'Social organiser' %>
+      <%= f.label :social_organiser_id, "Social organiser" %>
       <p class='help'>If the organiser doesn't already exist, <%= link_to "create one here", new_organiser_path %></p>
-      <%= f.select :social_organiser_id, organiser_select, { include_blank: '(none)' }, { data: { event_form_target: "socialOrganiser" } } %>
+      <%= f.select :social_organiser_id, organiser_select, { include_blank: "(none)" }, { data: { event_form_target: "socialOrganiser" } } %>
     </div>
     <div class='form-group'>
       <%= f.label :social_has_class, "Has a class?" %>
@@ -53,12 +53,12 @@
     </div>
   </section>
 
-  <section data-event-form-target="classDetails" class="<%= 'hidden' unless @form.show_class_details? %>">
+  <section data-event-form-target="classDetails" class="<%= "hidden" unless @form.show_class_details? %>">
     <h3 class='form-section-title'>Class details</h3>
     <div class='form-group'>
-      <%= f.label :class_organiser_id, 'Class organiser' %>
+      <%= f.label :class_organiser_id, "Class organiser" %>
       <p class='help'>If the organiser doesn't already exist, <%= link_to "create one here", new_organiser_path %></p>
-      <%= f.select :class_organiser_id, organiser_select, { include_blank: '(none)' }, { data: { event_form_target: "classOrganiser" } } %>
+      <%= f.select :class_organiser_id, organiser_select, { include_blank: "(none)" }, { data: { event_form_target: "classOrganiser" } } %>
       <p class='help'>Note: classes don't have names - just locations and organisers</p>
       <p class='help'>The location and organiser name are displayed in the listings.</>
     </div>
@@ -66,14 +66,14 @@
     <div class='form-group' id="class-style-selection">
       <h4 class='form-group-title'>Class style</h3>
       <div class='radio-group'>
-        <%= radio_button_tag 'class_style_option', 'lindy', @form.class_style.blank? %>
-        <%= label_tag :class_style_option_lindy, t('forms.events.default_class_style') %>
+        <%= radio_button_tag "class_style_option", "lindy", @form.class_style.blank? %>
+        <%= label_tag :class_style_option_lindy, t("forms.events.default_class_style") %>
       </div>
       <div class='radio-group'>
-        <%= radio_button_tag 'class_style_option', 'other', !@form.class_style.blank?, data: { target: 'class-style-group' } %>
-        <%= label_tag 'class_style_option_other', 'Other (balboa, shag etc)' %>
+        <%= radio_button_tag "class_style_option", "other", @form.class_style.present?, data: { target: "class-style-group" } %>
+        <%= label_tag "class_style_option_other", "Other (balboa, shag etc)" %>
       </div>
-      <div class='form-group form-group-nested <%= 'hidden' if @form.class_style.blank? %>' id="class-style-group">
+      <div class='form-group form-group-nested <%= "hidden" if @form.class_style.blank? %>' id="class-style-group">
         <%= f.label :class_style, "Dance style:" %>
         <%= f.text_field :class_style, data: { event_form_target: "classStyle" } %>
       </div>
@@ -84,7 +84,7 @@
     </div>
   </section>
 
-  <section data-event-form-target="when" class="<%= 'hidden' unless @form.show_when? %>">
+  <section data-event-form-target="when" class="<%= "hidden" unless @form.show_when? %>">
     <h3 class='form-section-title'>When?</h3>
     <div class='form-group <%= "hidden" unless @form.show_frequency? %>' data-event-form-target="frequency">
       <h4 class="form-group-title">Frequency</h4>
@@ -108,13 +108,13 @@
       <%= f.select :day, DAYNAMES, include_blank: true %>
     </div>
     <div class='form-group <%= "hidden" unless @form.infrequent? %>' data-event-form-target="datesInput">
-      <%= f.label :dates, 'Upcoming dates' %>
-      <p class='help'><%= t('forms.help.dates') %></p>
+      <%= f.label :dates, "Upcoming dates" %>
+      <p class='help'><%= t("forms.help.dates") %></p>
       <%= f.text_field :dates %>
     </div>
     <div class='form-group'>
-      <%= f.label :cancellations, 'Cancelled dates' %>
-      <p class='help'><%= t('forms.help.dates') %></p>
+      <%= f.label :cancellations, "Cancelled dates" %>
+      <p class='help'><%= t("forms.help.dates") %></p>
       <%= f.text_field :cancellations %>
     </div>
     <div class='form-group'>
@@ -139,7 +139,7 @@
   </section>
 
   <div class='form-group actions'>
-    <%= f.submit @form.action, class: 'button' %>
-    <%= link_to 'Cancel', cancel_path, class: "button button-secondary" %>
+    <%= f.submit @form.action, class: "button" %>
+    <%= link_to "Cancel", cancel_path, class: "button button-secondary" %>
   </div>
 <% end %>

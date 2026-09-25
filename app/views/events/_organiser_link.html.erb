@@ -3,7 +3,7 @@
   <turbo-frame id="organiser_link">
     <% if event.organiser_token %>
       <div class="organiser-link-input">
-        <input id="organiser_link_url" type="text" value="<%= organiser_event_url(event) %>" data-organiser-link-target="source" readonly><!--
+        <input id="organiser_link_url" type="text" value="<%= organiser_event_url(event) %>" data-organiser-link-target="source" readonly autocomplete="off"><!--
      --><a href="#" class="button-on-input" data-action="organiser-link#copy">Copy</a>
       </div>
     <% else %>
@@ -14,14 +14,14 @@
       <p class='help'>
         You can
         <%= link_to_generate_organiser(
-          'revoke this link', event, class: "normal-link", data: {
-            action: "organiser-link#revoke",
+          "revoke this link", event, class: "normal-link", data: {
+            action: "organiser-link#revoke"
           }
-        )%>
+        ) %>
         and generate a new one if you think the link isn't being used properly
       </p>
     <% else %>
-      <%= link_to_generate_organiser('Generate link', event, class: class_names('button', 'button-smaller'), data: { action: "organiser-link#delayedCopy" }) %>
+      <%= link_to_generate_organiser("Generate link", event, class: class_names("button", "button-smaller"), data: { action: "organiser-link#delayedCopy" }) %>
     <% end %>
   </turbo-frame>
 </section>

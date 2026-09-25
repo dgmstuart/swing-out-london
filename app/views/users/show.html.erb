@@ -1,17 +1,15 @@
 <main class="page account">
   <h1>Account</h1>
 
-  <%= button_to 'Log out', logout_path, method: :delete, class: "button" %>
-
+  <%= button_to "Log out", logout_path, method: :delete, class: "button" %>
 
   <h2>Facebook Graph API Access Token</h2>
 
   <p>Your Facebook access token <%= access_token_expiry.offset_string %></p>
 
   <% if access_token_expiry.allow_refresh? %>
-    <%= button_to 'Refresh token', facebook_access_token_path, method: :put, class: 'button facebook-button' %>
+    <%= button_to "Refresh token", facebook_access_token_path, method: :put, class: "button facebook-button" %>
   <% end %>
-
 
   <h2>Revoke login permissions</h2>
 
@@ -19,5 +17,5 @@
 
   <p>If you later decide to log in again, you'll be asked to grant <%= tc("site_name") %> those permissions again.</p>
 
-  <%= button_to 'Disable my login', account_path, method: :delete, class: 'button button-danger' %>
+  <%= button_to "Disable my login", account_path, method: :delete, class: "button button-danger" %>
 </main>

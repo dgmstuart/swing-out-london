@@ -1,7 +1,7 @@
 <%= day_row day, @today do %>
   <h3><%= day_header(day) -%></h3>
   <ul class="unstyled">
-    <%if classes_on_day(@classes, day).empty? %>
+    <% if classes_on_day(@classes, day).empty? %>
       <%= content_tag :li, "There are no classes on this day" %>
     <% else %>
       <% classes_on_day(@classes, day).each do |swingclass| %>

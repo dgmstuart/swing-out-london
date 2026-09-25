@@ -2,10 +2,10 @@
   <% if ENV['BANNER_HEAD'].present? %>
     <div class="banner">
       <h3>
-        <%= ENV['BANNER_HEAD'] %>
+        <%= ENV.fetch("BANNER_HEAD", nil) %>
       </h3>
       <p>
-        <%= ENV['BANNER_BODY'] %>
+        <%= ENV.fetch("BANNER_BODY", nil) %>
       </p>
     </div>
     <div class="non-semantic-padding"></div>
@@ -13,7 +13,7 @@
 
   <div id="page">
     <div id="header">
-      <%= heading_hn(params[:action], :class=>"site_title") do %>
+      <%= heading_hn(params[:action], class: "site_title") do %>
         <em>
           <%= link_to_unless_current tc("site_name"), root_path %>
         </em>
@@ -28,7 +28,7 @@
     </main>
 
     <footer class="website-footer">
-      <%= render 'layouts/website/navigation', :nav_id => 'footer_nav', nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link %>
+      <%= render "layouts/website/navigation", nav_id: "footer_nav", nav_class: "navigation secondary-nav", links: main_navigation_links << privacy_policy_link %>
       <address>
         Site by
         <%= link_to "@dgmstuart", "https://www.threads.net/@dgmstuart" %>.
@@ -41,4 +41,4 @@
   </div>
 <% end %>
 
-<%= render :template => 'layouts/application' %>
+<%= render template: "layouts/application" %>

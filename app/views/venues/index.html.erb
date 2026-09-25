@@ -1,5 +1,5 @@
 <h1>Listing venues</h1>
-<%= link_to 'New venue', new_venue_path, class: "button" %>
+<%= link_to "New venue", new_venue_path, class: "button" %>
 
 <table id="venues">
   <tr>
@@ -11,20 +11,19 @@
 
 <% @venues.each do |venue| %>
   <%= venue_row_tag(venue) %>
-    <td class="name"><%= link_to venue.name, venue.website%></td>
-    <td><%=h venue.address %></td>
-    <td style="width:70px"><%=h venue.postcode %></td>
-    <td style="width:180px"><%=h venue.area %></td>
+    <td class="name"><%= link_to venue.name, venue.website %></td>
+    <td><%= h venue.address %></td>
+    <td style="width:70px"><%= h venue.postcode %></td>
+    <td style="width:180px"><%= h venue.area %></td>
     <td class="actions">
-      <%= link_to 'Show', venue %>
-      <%= link_to 'Edit', edit_venue_path(venue) %>
+      <%= link_to "Show", venue %>
+      <%= link_to "Edit", edit_venue_path(venue) %>
       <% if venue.can_delete? %>
-        <%= link_to 'Delete', venue, data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+        <%= link_to "Delete", venue, data: { turbo: true, turbo_confirm: "Are you sure?", turbo_method: :delete } %>
       <% end %>
     </td>
   </tr>
 <% end %>
 </table>
 
-<%= link_to 'New venue', new_venue_path %>
-
+<%= link_to "New venue", new_venue_path %>

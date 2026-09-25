@@ -1,4 +1,4 @@
-<h1><%= @event.has_social? ? @event.title : "Dance class by #{ @event.class_organiser.name }" %></h1>
+<h1><%= @event.has_social? ? @event.title : "Dance class by #{@event.class_organiser.name}" %></h1>
 
 <%= form_for(@form, url: external_event_path(@event.organiser_token)) do |f| %>
   <%= render "shared/flash" %>
@@ -17,8 +17,8 @@
   </div>
 
   <div class='form-group'>
-    <%= f.label :venue_id, 'Venue' %>
-    <%= f.select :venue_id, venue_select, {include_blank: true} %>
+    <%= f.label :venue_id, "Venue" %>
+    <%= f.select :venue_id, venue_select, { include_blank: true } %>
   </div>
 
   <div class='form-group'>
@@ -32,15 +32,15 @@
 
   <% unless @event.weekly? %>
     <div class='form-group'>
-      <%= f.label :dates, 'Upcoming dates' %>
-      <p class='help'><%= t('forms.help.dates') %></p>
+      <%= f.label :dates, "Upcoming dates" %>
+      <p class='help'><%= t("forms.help.dates") %></p>
       <%= f.text_field :dates %>
     </div>
   <% end %>
 
   <div class='form-group'>
-    <%= f.label :cancellations, 'Cancelled dates' %>
-    <p class='help'><%= t('forms.help.dates') %></p>
+    <%= f.label :cancellations, "Cancelled dates" %>
+    <p class='help'><%= t("forms.help.dates") %></p>
     <%= f.text_field :cancellations %>
   </div>
 
@@ -56,7 +56,7 @@
   <% end %>
 
   <div class='form-group actions'>
-    <%= f.submit 'Update', class: 'button' %>
-    <%= link_to 'Cancel', edit_external_event_path(@event.organiser_token), class: "button button-secondary" %>
+    <%= f.submit "Update", class: "button" %>
+    <%= link_to "Cancel", edit_external_event_path(@event.organiser_token), class: "button button-secondary" %>
   </div>
 <% end %>

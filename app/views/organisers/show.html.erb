@@ -1,26 +1,26 @@
-<%= render partial: 'shared/last_updated_by', locals: { last_update: @last_update } %>
+<%= render partial: "shared/last_updated_by", locals: { last_update: @last_update } %>
 
 <ol class="show">
   <li>
     <span>Name:</span>
-    <%=h @organiser.name %>
+    <%= h @organiser.name %>
   </li>
   <li>
     <span>Shortname:</span>
-    <%=h @organiser.shortname %>
+    <%= h @organiser.shortname %>
   </li>
 
   <li>
     <span>Website:</span>
-    <%=h @organiser.website %>
+    <%= h @organiser.website %>
   </li>
 
   <li>
     <span>Description:</span>
-    <%=h @organiser.description %>
+    <%= h @organiser.description %>
   </li>
 </ol>
 
 <div class="actions">
-  <%= link_to 'Edit', edit_organiser_path(@organiser), class: "button" %>
+  <%= link_to "Edit", edit_organiser_path(@organiser), class: "button" %>
 </div>

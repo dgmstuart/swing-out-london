@@ -4,7 +4,7 @@
   <% listings.each do |class_listing| %>
     <li class="info-listing">
       <span class="day">
-        <%= "#{ class_listing.day }:" %>
+        <%= "#{class_listing.day}:" %>
       </span>
       <%= mapinfo_swingclass_link(class_listing.event) %>
       <%= swingclass_cancelledmsg(class_listing.event) %>

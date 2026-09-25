@@ -1,4 +1,4 @@
-<%= render partial: 'shared/last_updated_by', locals: { last_update: @last_update } %>
+<%= render partial: "shared/last_updated_by", locals: { last_update: @last_update } %>
 
 <ol class="show">
   <li>
@@ -30,7 +30,7 @@
   <% end %>
   <li>
     <span>Class style:</span>
-    <%= @event.class_style.presence || t('forms.events.default_class_style') %>
+    <%= @event.class_style.presence || t("forms.events.default_class_style") %>
   </li>
   <li>
     <span>Frequency:</span>
@@ -61,7 +61,7 @@
 </ol>
 
 <div class="actions">
-  <%= link_to 'Edit', edit_event_path(@event), class: "button" %>
+  <%= link_to "Edit", edit_event_path(@event), class: "button" %>
 </div>
 
 <% if current_user.admin? %>
