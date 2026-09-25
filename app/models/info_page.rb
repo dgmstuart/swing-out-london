@@ -17,7 +17,7 @@ class InfoPage
   private
 
   def partials(key)
-    @page.fetch(@city).fetch(key).map { Partial.new(root, _1) }
+    @page.fetch(@city).fetch(key).map { Partial.new(root, it) }
   end
 
   def root

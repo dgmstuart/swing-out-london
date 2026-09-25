@@ -16,6 +16,6 @@ SimpleCov.start do
   end
   group "Libraries", "lib"
 
-  %w[config spec].each { skip(_1) }
+  %w[config spec].each { skip(it) }
 end
 SimpleCov.minimum_coverage 100

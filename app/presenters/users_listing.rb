@@ -19,7 +19,7 @@ class UsersListing
   end
 
   def users
-    @roles.map { build_user(_1) }
+    @roles.map { build_user(it) }
   end
 
   User = Data.define(:id, :admin?, :current?, :name) do
