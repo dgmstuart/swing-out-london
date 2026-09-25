@@ -24,13 +24,13 @@ class ValidSocialOrClass < ActiveModel::Validator
   end
 
   def one_off_socials_occasional(event)
-    return unless event.has_social? && event.weekly? && one_off(event)
+    return unless event.has_social? && event.weekly? && one_off?(event)
 
     event.errors.add(:frequency, 'must be "Monthly or occasionally" if a social is only happening once')
   end
 
   def no_one_off_workshops(event)
-    return unless event.has_class? && one_off(event) && !event.has_social?
+    return unless event.has_class? && one_off?(event) && !event.has_social?
 
     message = <<~MESSAGE.chomp
       It looks like you're trying to list a one-off workshop.
@@ -39,7 +39,7 @@ class ValidSocialOrClass < ActiveModel::Validator
     event.errors.add(:base, message)
   end
 
-  def one_off(event)
+  def one_off?(event)
     event.first_date.present? && event.first_date == event.last_date
   end
 end
