@@ -11,11 +11,22 @@ Rack::Attack.blocklist("block dodgy IP addresses") do |request|
 end
 
 WORDPRESS_PATHS = %w[wp-login wp-admin wp-includes wp-content xmlrpc wordpress].freeze
-OTHER_PROGRAMMING_LANGUAGES = %w[php .asp].freeze
+OTHER_PROGRAMMING_LANGUAGES = %w[php .asp .aspx cgi-bin].freeze
 MALWARE_PATHS = %w[alfacgiapi ALFA_DATA cgialfa].freeze
-GIT_PATHS = %w[git-secret gitignore gitlab].freeze
+GIT_PATHS = %w[git-secret gitignore gitlab .git/].freeze
 DIRECTORY_TRAVERSAL_PATHS = %w[backup backend credentials].freeze
-SUSPICIOUS_PATHS = WORDPRESS_PATHS + OTHER_PROGRAMMING_LANGUAGES + MALWARE_PATHS + GIT_PATHS + DIRECTORY_TRAVERSAL_PATHS
+NEXTJS_PATHS = %w[_next/ __nextjs].freeze
+ENV_FILE_PATHS = %w[.env .environment .aws .docker].freeze
+SUSPICIOUS_PATHS = (
+  WORDPRESS_PATHS +
+  OTHER_PROGRAMMING_LANGUAGES +
+  MALWARE_PATHS +
+  GIT_PATHS +
+  DIRECTORY_TRAVERSAL_PATHS +
+  NEXTJS_PATHS +
+  ENV_FILE_PATHS
+).freeze
+
 # If we receive 3 requests which look like attempted hacks, in the span of 10 mins, ban that IP for 15 mins
 Rack::Attack.blocklist("Block suspicious requests") do |request|
   Rack::Attack::Fail2Ban.filter("suspicious-#{request.ip}", maxretry: 3, findtime: 10.minutes, bantime: 15.minutes) do
