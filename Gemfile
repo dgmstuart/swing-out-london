@@ -18,7 +18,6 @@ gem "omniauth-facebook"
 gem "omniauth-rails_csrf_protection"
 gem "pg"
 gem "premailer-rails"
-gem "pry-rails"
 gem "puma"
 gem "rack-attack"
 gem "redcarpet" # Markdown
@@ -47,7 +46,6 @@ group :development, :test do
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
-  gem "solargraph-rails"
 end
 
 group :test do
