@@ -88,11 +88,11 @@ class CreateEventForm
   end
 
   # has_class? and has_social? are only used in validations - not ideal
-  def has_social? # rubocop:disable Naming/PredicateName
+  def has_social? # rubocop:disable Naming/PredicatePrefix
     type_is_social_dance?
   end
 
-  def has_class? # rubocop:disable Naming/PredicateName
+  def has_class? # rubocop:disable Naming/PredicatePrefix
     type_is_weekly_class? || !!social_has_class
   end
 
@@ -114,11 +114,11 @@ class CreateEventForm
     event_type == "weekly_class"
   end
 
-  def has_weekly_class? # rubocop:disable Naming/PredicateName
+  def has_weekly_class? # rubocop:disable Naming/PredicatePrefix
     type_is_weekly_class? || (type_is_social_dance? && social_has_class && weekly?)
   end
 
-  def has_occasional_class? # rubocop:disable Naming/PredicateName
+  def has_occasional_class? # rubocop:disable Naming/PredicatePrefix
     infrequent? && social_has_class
   end
 

@@ -20,7 +20,7 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
-    if config.files_to_run.many?
+    if config.files_to_run.count > 1 # rubocop:disable Style/CollectionQuerying
       # Don't verify that doubled objects exist if only running one file
       mocks.verify_doubled_constant_names = true
     end

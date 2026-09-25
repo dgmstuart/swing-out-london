@@ -30,7 +30,7 @@ RSpec.describe "Audit Log RSS feed" do
       get "/audit_log.atom?password=pass"
     end
 
-    # rubocop:disable Layout/MultilineMethodCallIndentation
+    # rubocop:disable-next Layout/MultilineMethodCallIndentation
     aggregate_failures do
       expect(response.media_type).to eq("application/atom+xml")
       expected_xml = File.read(fixture_file("audit_log.xml"))
@@ -51,7 +51,6 @@ RSpec.describe "Audit Log RSS feed" do
         .gsub(/day&quot;: &quot;.*&quot;/, "day&quot;: &quot;{{dance_class_day}}&quot;")
       expect(normalised_body).to eq(expected_xml)
     end
-    # rubocop:enable Layout/MultilineMethodCallIndentation
   end
 
   private

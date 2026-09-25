@@ -67,7 +67,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def has_class_or_social # rubocop:disable Naming/PredicateName
+  def has_class_or_social # rubocop:disable Naming/PredicatePrefix
     return true if has_class? || has_social?
 
     errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed")

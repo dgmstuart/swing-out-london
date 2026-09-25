@@ -5,7 +5,7 @@ require "lib/omniauth_test_response_builder"
 
 RSpec.describe OmniauthTestResponseBuilder do
   describe "#stub_auth_hash" do
-    before { stub_const("Rails", double(env: double(production?: false))) } # rubocop:disable RSpec/VerifiedDoubles
+    before { stub_const("Rails", double(env: double(production?: false))) }
 
     it "configures Omniauth to return a fixed hash from all requests" do
       auth_hash = instance_double("OmniAuth::AuthHash")

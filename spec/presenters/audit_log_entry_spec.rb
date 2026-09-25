@@ -127,7 +127,7 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record is an event" do
       it "is the url of that event" do
         audit = instance_double("Audit", auditable_type: "Event", auditable_id: "23")
-        url_helpers = double(event_url: "a/url") # rubocop:disable RSpec/VerifiedDoubles
+        url_helpers = double(event_url: "a/url")
 
         expect(described_class.new(audit, url_helpers:).auditable_url).to eq "a/url"
       end
@@ -136,7 +136,7 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record is a venue" do
       it "is the url of that venue" do
         audit = instance_double("Audit", auditable_type: "Venue", auditable_id: "23")
-        url_helpers = double(venue_url: "a/url") # rubocop:disable RSpec/VerifiedDoubles
+        url_helpers = double(venue_url: "a/url")
 
         expect(described_class.new(audit, url_helpers:).auditable_url).to eq "a/url"
       end
@@ -145,7 +145,7 @@ RSpec.describe AuditLogEntry do
     context "when the auditable record is an organiser" do
       it "is the url of that organiser" do
         audit = instance_double("Audit", auditable_type: "Organiser", auditable_id: "23")
-        url_helpers = double(organiser_url: "a/url") # rubocop:disable RSpec/VerifiedDoubles
+        url_helpers = double(organiser_url: "a/url")
 
         expect(described_class.new(audit, url_helpers:).auditable_url).to eq "a/url"
       end
