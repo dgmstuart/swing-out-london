@@ -80,7 +80,7 @@ class CreateEventForm
       has_social: type_is_social_dance?,
       has_class: has_weekly_class?,
       has_taster: has_occasional_class?,
-      course_length: (course_length.to_i if course_length.present?)
+      course_length: course_length.presence&.to_i
     ).except(
       :event_type,
       :social_has_class
