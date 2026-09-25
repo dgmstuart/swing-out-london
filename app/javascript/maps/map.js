@@ -61,7 +61,7 @@ export class Map {
     const infoWindow = new google.maps.InfoWindow({ content, headerContent: this._infoHeader(title, url) })
     const infoWindowOpenArgs = { markerCoordinates: position, marker, infoWindow }
 
-    marker.addListener('click', () =>
+    marker.addEventListener('gmp-click', () =>
       this._openInfoWindow(infoWindowOpenArgs)
     );
 
