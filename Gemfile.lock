@@ -156,12 +156,6 @@ GEM
       logger
     faraday-net_http (3.4.4)
       net-http (~> 0.5)
-    ffi (1.17.4)
-    ffi (1.17.4-arm64-darwin)
-    ffi (1.17.4-x86_64-linux-gnu)
-    ffi-compiler (1.4.2)
-      ffi (>= 1.15.5)
-      rake
     geocoder (1.8.6)
       base64 (>= 0.1.0)
       csv (>= 3.0.0)
@@ -180,14 +174,11 @@ GEM
     hashie (5.1.0)
       logger
     htmlentities (4.4.2)
-    http (5.3.1)
-      addressable (~> 2.8)
+    http (6.0.4)
       http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      llhttp-ffi (~> 0.5.0)
+      llhttp (~> 0.6.1)
     http-cookie (1.1.6)
       domain_name (~> 0.5)
-    http-form_data (2.3.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     io-console (0.9.4)
@@ -210,9 +201,7 @@ GEM
       childprocess (~> 5.0)
       logger (~> 1.6)
     lint_roller (1.1.0)
-    llhttp-ffi (0.5.1)
-      ffi-compiler (~> 1.0)
-      rake (~> 13.0)
+    llhttp (0.6.2)
     logger (1.7.0)
     loofah (2.25.2)
       crass (~> 1.0.2)
@@ -514,7 +503,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   geocoder
-  http (= 5.3.1)
+  http
   jbuilder
   jsbundling-rails
   launchy

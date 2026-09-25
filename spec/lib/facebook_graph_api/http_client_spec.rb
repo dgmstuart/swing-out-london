@@ -207,6 +207,6 @@ RSpec.describe FacebookGraphApi::HttpClient do
   end
 
   def fake_logger
-    instance_double("Logger", debug: nil, info: nil)
+    instance_double("Logger", debug: nil, info: nil, debug?: true)
   end
 end
