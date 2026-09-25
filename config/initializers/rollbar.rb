@@ -55,6 +55,8 @@ Rollbar.configure do |config|
   # https://devcenter.heroku.com/articles/deploying-to-a-custom-rails-environment
   config.environment = ENV["ROLLBAR_ENV"] || Rails.env
 
+  config.exception_level_filters.merge!("ActionController::RoutingError" => "ignore")
+
   # Don't include sensitive information in Rollbar data
   config.scrub_fields |= ["request.session.user.token"]
 end

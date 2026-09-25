@@ -10,7 +10,7 @@ Rack::Attack.blocklist("block dodgy IP addresses") do |request|
   ip_blocklist.include? request.ip
 end
 
-WORDPRESS_PATHS = %w[wp-login wp-admin wp-includes wp-content xmlrpc wordpress].freeze
+WORDPRESS_PATHS = %w[wp- wp_ xmlrpc wordpress].freeze
 OTHER_PROGRAMMING_LANGUAGES = %w[php .asp .aspx cgi-bin].freeze
 MALWARE_PATHS = %w[alfacgiapi ALFA_DATA cgialfa].freeze
 GIT_PATHS = %w[git-secret gitignore gitlab .git/].freeze
