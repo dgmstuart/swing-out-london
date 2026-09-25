@@ -17,8 +17,8 @@ RSpec.describe "Admins can manage users" do
       wait_for_user_page_load
     end
 
-    expect(page).to have_content("Dawn Hampton")
-    expect(page).to have_content("Herbert White (Admin)")
+    expect(page).to have_text("Dawn Hampton")
+    expect(page).to have_text("Herbert White (Admin)")
   end
 
   it "adding a role", :vcr do
@@ -32,7 +32,7 @@ RSpec.describe "Admins can manage users" do
       click_on "Log in"
       wait_for_user_page_load
 
-      expect(page).to have_no_content("Dawn Hampton")
+      expect(page).to have_no_text("Dawn Hampton")
     end
 
     fill_in "Facebook ID", with: 12345678901234567
@@ -41,7 +41,7 @@ RSpec.describe "Admins can manage users" do
     VCR.use_cassette("fetch_facebook_names") do
       click_on "Add user"
 
-      expect(page).to have_content("Dawn Hampton")
+      expect(page).to have_text("Dawn Hampton")
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe "Admins can manage users" do
       VCR.use_cassette("fetch_facebook_names") do
         click_on "Add user"
 
-        expect(page).to have_content("Facebook ID must contain only digits")
+        expect(page).to have_text("Facebook ID must contain only digits")
       end
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe "Admins can manage users" do
       visit "/login"
       click_on "Log in"
 
-      expect(page).to have_content("Events")
+      expect(page).to have_text("Events")
     end
 
     Capybara.using_session("admin_session") do
@@ -91,10 +91,10 @@ RSpec.describe "Admins can manage users" do
         wait_for_user_page_load
       end
 
-      expect(page).to have_content("Dawn Hampton")
-      expect(page).to have_content("Herbert White (Admin)")
+      expect(page).to have_text("Dawn Hampton")
+      expect(page).to have_text("Herbert White (Admin)")
 
-      expect(user_row("Herbert White")).to have_no_content("Delete") # You shouldn't be able to delete yourself!
+      expect(user_row("Herbert White")).to have_no_text("Delete") # You shouldn't be able to delete yourself!
 
       VCR.use_cassette("fetch_facebook_names") do
         # We need the cassette here because the page gets reloaded after clicking the button
@@ -102,8 +102,8 @@ RSpec.describe "Admins can manage users" do
           accept_alert { click_on("Delete") }
         end
 
-        expect(page).to have_content("Herbert White (Admin)")
-        expect(page).to have_no_content("Dawn Hampton")
+        expect(page).to have_text("Herbert White (Admin)")
+        expect(page).to have_no_text("Dawn Hampton")
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe "Admins can manage users" do
       open_menu
       click_on "Events"
 
-      expect(page).to have_content("Editor Login")
+      expect(page).to have_text("Editor Login")
     end
   end
 
@@ -121,7 +121,7 @@ RSpec.describe "Admins can manage users" do
 
     VCR.use_cassette("fetch_facebook_names") do
       skip_login("/admin/users", admin: true)
-      expect(page).to have_content("Dawn Hampton")
+      expect(page).to have_text("Dawn Hampton")
     end
 
     # The cassette covers the click as well as the assertions, because clicking makes a
@@ -131,8 +131,8 @@ RSpec.describe "Admins can manage users" do
         accept_alert { click_on("Make admin") }
       end
 
-      expect(page).to have_content("Dawn Hampton (Admin)")
-      expect(user_row("Dawn Hampton")).to have_no_content("Make admin")
+      expect(page).to have_text("Dawn Hampton (Admin)")
+      expect(user_row("Dawn Hampton")).to have_no_text("Make admin")
       expect(user_row("Dawn Hampton")).to have_link("Remove admin")
     end
   end
@@ -143,7 +143,7 @@ RSpec.describe "Admins can manage users" do
 
     VCR.use_cassette("fetch_facebook_names") do
       skip_login("/admin/users", admin: true)
-      expect(page).to have_content("Dawn Hampton (Admin)")
+      expect(page).to have_text("Dawn Hampton (Admin)")
     end
 
     VCR.use_cassette("fetch_facebook_names") do
@@ -153,8 +153,8 @@ RSpec.describe "Admins can manage users" do
 
       within(user_row("Dawn Hampton")) do
         expect(page).to have_link("Make admin")
-        expect(page).to have_no_content("(Admin)")
-        expect(page).to have_no_content("Remove admin")
+        expect(page).to have_no_text("(Admin)")
+        expect(page).to have_no_text("Remove admin")
       end
     end
   end
@@ -169,18 +169,18 @@ RSpec.describe "Admins can manage users" do
       wait_for_user_page_load
     end
 
-    expect(page).to have_no_content(test_user_app_id)
+    expect(page).to have_no_text(test_user_app_id)
   end
 
   context "when logged in as a non-admin" do
     it "does not allow access" do
       skip_login(admin: false)
 
-      expect(page).to have_no_content("Users")
+      expect(page).to have_no_text("Users")
 
       visit "/admin/users"
 
-      expect(page).to have_content("You are not authorised to view this page")
+      expect(page).to have_text("You are not authorised to view this page")
     end
   end
 

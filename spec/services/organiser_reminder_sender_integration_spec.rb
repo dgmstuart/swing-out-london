@@ -37,8 +37,8 @@ RSpec.describe OrganiserReminderSender do
         text_part, html_part = email.parts.map { |part| part.body.to_s }
 
         html_body = Capybara.string(html_part)
-        expect(html_body).to have_content "We don't seem to have any future dates for your event: \"The Hot One\""
-        expect(html_body).to have_content "You can add new dates using this link:"
+        expect(html_body).to have_text "We don't seem to have any future dates for your event: \"The Hot One\""
+        expect(html_body).to have_text "You can add new dates using this link:"
         expect(html_body).to have_link "https://example.com/external_events/41b783b5e27fb2eddd5456a182db56c4/edit"
 
         expect(text_part).to include "We don't seem to have any future dates for your event: \"The Hot One\""

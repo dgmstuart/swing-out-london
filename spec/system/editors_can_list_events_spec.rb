@@ -20,13 +20,13 @@ RSpec.describe "Editors can list events" do
 
     skip_login
 
-    expect(page).to have_content("Stompin'")
-      .and have_content("The 100 Club")
-      .and have_content("Oxford Street")
-      .and have_content("Simon Selmon")
-      .and have_content("The London Swing Dance Society")
-      .and have_content(0)
-      .and have_content("05/07/2012, 01/06/2012")
+    expect(page).to have_text("Stompin'")
+      .and have_text("The 100 Club")
+      .and have_text("Oxford Street")
+      .and have_text("Simon Selmon")
+      .and have_text("The London Swing Dance Society")
+      .and have_text(0)
+      .and have_text("05/07/2012, 01/06/2012")
   end
 
   it "notes when an event has ended" do
@@ -38,6 +38,6 @@ RSpec.describe "Editors can list events" do
 
     skip_login
 
-    expect(page).to have_content("Ended")
+    expect(page).to have_text("Ended")
   end
 end

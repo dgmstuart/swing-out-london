@@ -17,7 +17,7 @@ RSpec.describe "Editors can copy an organiser link" do
 
       click_on "Copy"
 
-      expect(page).to have_content("Copied")
+      expect(page).to have_text("Copied")
       expect(clipboard_text).to eq(url)
 
       allow(SecureRandom).to receive(:hex).and_return("xyz789")
@@ -44,14 +44,14 @@ RSpec.describe "Editors can copy an organiser link" do
 
       skip_login("/events/#{event.id}/edit")
 
-      expect(page).to have_content("No organiser edit link exists for this event")
+      expect(page).to have_text("No organiser edit link exists for this event")
 
       click_on "Generate link"
 
       url = URI.join(page.server_url, "/external_events/abc123/edit").to_s
       expect(page).to have_field("Organiser edit link", with: url)
       expect(page).to have_link("revoke this link")
-      expect(page).to have_content("Copied")
+      expect(page).to have_text("Copied")
       expect(clipboard_text).to eq(url)
       expect(page).to have_link("Copy")
     end
@@ -68,7 +68,7 @@ RSpec.describe "Editors can copy an organiser link" do
 
       click_on "Generate link"
 
-      expect(page).to have_content("Something went wrong")
+      expect(page).to have_text("Something went wrong")
     end
   end
 

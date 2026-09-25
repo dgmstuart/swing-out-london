@@ -13,7 +13,7 @@ RSpec.describe "Admins can clear the cache" do
     click_on "Cache"
     click_on "Clear"
 
-    expect(page).to have_content("Events")
+    expect(page).to have_text("Events")
     expect(Rails.cache.read("a_cache_key")).to be_nil
   end
 
@@ -21,11 +21,11 @@ RSpec.describe "Admins can clear the cache" do
     it "does not allow access" do
       skip_login(admin: false)
 
-      expect(page).to have_no_content("Cache")
+      expect(page).to have_no_text("Cache")
 
       visit "/admin/cache"
 
-      expect(page).to have_content("You are not authorised to view this page")
+      expect(page).to have_text("You are not authorised to view this page")
     end
   end
 

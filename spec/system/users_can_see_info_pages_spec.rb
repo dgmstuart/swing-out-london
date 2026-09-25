@@ -9,7 +9,7 @@ RSpec.describe "Users can see Info pages" do
       click_on "About"
     end
 
-    expect(page).to have_content("About Swing Out London")
+    expect(page).to have_text("About Swing Out London")
   end
 
   it "Users can see a listings policy" do
@@ -18,8 +18,8 @@ RSpec.describe "Users can see Info pages" do
       click_on "Listings Policy"
     end
 
-    expect(page).to have_content("Location")
-      .and have_content("swingoutlondon@gmail.com")
+    expect(page).to have_text("Location")
+      .and have_text("swingoutlondon@gmail.com")
   end
 
   context "when the city is Bristol" do
@@ -31,7 +31,7 @@ RSpec.describe "Users can see Info pages" do
         click_on "About"
       end
 
-      expect(page).to have_content("About Swing Out Bristol")
+      expect(page).to have_text("About Swing Out Bristol")
     end
 
     it "Users can see a listings policy" do
@@ -40,8 +40,8 @@ RSpec.describe "Users can see Info pages" do
         click_on "Listings Policy"
       end
 
-      expect(page).to have_content("Location")
-        .and have_content("swingoutbristol@gmail.com")
+      expect(page).to have_text("Location")
+        .and have_text("swingoutbristol@gmail.com")
     end
   end
 end

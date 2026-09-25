@@ -13,9 +13,9 @@ RSpec.describe "Editors can delete venues" do
         click_on "Delete", match: :first
       end
 
-      expect(page).to have_content("Listing venues")
-      expect(page).to have_no_content("Delete")
-      expect(page).to have_no_content("Bobby McGee's")
+      expect(page).to have_text("Listing venues")
+      expect(page).to have_no_text("Delete")
+      expect(page).to have_no_text("Bobby McGee's")
     end
 
     it "can be deleted from the edit page" do
@@ -29,9 +29,9 @@ RSpec.describe "Editors can delete venues" do
         click_on "Delete"
       end
 
-      expect(page).to have_content("Listing venues")
-      expect(page).to have_no_content("Delete")
-      expect(page).to have_no_content("Bobby McGee's")
+      expect(page).to have_text("Listing venues")
+      expect(page).to have_no_text("Delete")
+      expect(page).to have_no_text("Bobby McGee's")
     end
   end
 
@@ -45,16 +45,16 @@ RSpec.describe "Editors can delete venues" do
 
       click_on "Venues", match: :first
 
-      expect(page).to have_no_content("Delete")
+      expect(page).to have_no_text("Delete")
 
       click_on "Show"
 
-      expect(page).to have_no_content("Delete")
+      expect(page).to have_no_text("Delete")
 
       click_on "Edit"
 
-      expect(page).to have_no_content("Delete")
-      expect(page).to have_content("Can't be deleted: has associated events")
+      expect(page).to have_no_text("Delete")
+      expect(page).to have_text("Can't be deleted: has associated events")
     end
   end
 end

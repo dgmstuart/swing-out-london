@@ -38,28 +38,28 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("Title:\nStompin'")
-        .and have_content("Venue:\nThe 100 Club")
-        .and have_content("Social Organiser:\nThe London Swing Dance Society")
-        .and have_content("Class Organiser:\nThe London Swing Dance Society")
-        .and have_content("Social with taster")
-        .and have_content("Class style:\nBalboa")
-        .and have_content("Frequency:\nMonthly or occasionally")
-        .and have_content("Dates:\n12/12/2012, 19/12/2012")
-        .and have_content("Cancelled:\n12/12/2012")
-        .and have_content("First date:\n12/12/2012")
-        .and have_content("Last date:\n19/12/2012")
-        .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
+      expect(page).to have_text("Title:\nStompin'")
+        .and have_text("Venue:\nThe 100 Club")
+        .and have_text("Social Organiser:\nThe London Swing Dance Society")
+        .and have_text("Class Organiser:\nThe London Swing Dance Society")
+        .and have_text("Social with taster")
+        .and have_text("Class style:\nBalboa")
+        .and have_text("Frequency:\nMonthly or occasionally")
+        .and have_text("Dates:\n12/12/2012, 19/12/2012")
+        .and have_text("Cancelled:\n12/12/2012")
+        .and have_text("First date:\n12/12/2012")
+        .and have_text("Last date:\n19/12/2012")
+        .and have_text("Url:\nhttp://www.lsds.co.uk/stompin")
 
-      expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
+      expect(page).to have_text("Last updated by Al Minns (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
 
-      expect(page).to have_no_content("Activity")
+      expect(page).to have_no_text("Activity")
 
       # view the page as an admin:
       skip_login(page.current_path, admin: true)
 
-      expect(page).to have_content("Activity")
-      expect(page).to have_content("[2012-01-02 23:17:16] Al Minns create")
+      expect(page).to have_text("Activity")
+      expect(page).to have_text("[2012-01-02 23:17:16] Al Minns create")
     end
 
     it "with invalid data" do
@@ -70,11 +70,11 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("4 errors prevented this record from being saved")
-        .and have_content("Venue can't be blank")
-        .and have_content("Url can't be blank")
-        .and have_content("Frequency can't be blank")
-        .and have_content("Event type can't be blank")
+      expect(page).to have_text("4 errors prevented this record from being saved")
+        .and have_text("Venue can't be blank")
+        .and have_text("Url can't be blank")
+        .and have_text("Frequency can't be blank")
+        .and have_text("Event type can't be blank")
 
       fill_in "Url", with: "http://www.lsds.co.uk/stompin"
       autocomplete_select "The 100 Club", from: "Venue"
@@ -87,10 +87,10 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("3 errors prevented this record from being saved")
-        .and have_content('Dates contained some invalid dates: "12//20012", "31/04/2013"')
-        .and have_content("Dates contained some dates in the past: 12/12/2011, 19/12/012")
-        .and have_content("Dates contained some dates unreasonably far in the future: 19/12/20121")
+      expect(page).to have_text("3 errors prevented this record from being saved")
+        .and have_text('Dates contained some invalid dates: "12//20012", "31/04/2013"')
+        .and have_text("Dates contained some dates in the past: 12/12/2011, 19/12/012")
+        .and have_text("Dates contained some dates unreasonably far in the future: 19/12/20121")
 
       fill_in "Upcoming dates", with: "12/12/2012, 30/04/2013"
       fill_in "First date", with: "2012-12-12"
@@ -98,13 +98,13 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("Venue:\nThe 100 Club")
-        .and have_content("Social")
-        .and have_content("Frequency:\nMonthly or occasionally")
-        .and have_content("Dates:\n12/12/2012, 30/04/2013")
-        .and have_content("First date:\n12/12/2012")
-        .and have_content("Last date:\n30/04/2013")
-        .and have_content("Url:\nhttp://www.lsds.co.uk/stompin")
+      expect(page).to have_text("Venue:\nThe 100 Club")
+        .and have_text("Social")
+        .and have_text("Frequency:\nMonthly or occasionally")
+        .and have_text("Dates:\n12/12/2012, 30/04/2013")
+        .and have_text("First date:\n12/12/2012")
+        .and have_text("Last date:\n30/04/2013")
+        .and have_text("Url:\nhttp://www.lsds.co.uk/stompin")
     end
 
     context "when switching from a class to a social" do
@@ -133,7 +133,7 @@ RSpec.describe "Editors can create events", :js do
         select "Wednesday", from: "Day"
 
         click_on "Create"
-        expect(page).to have_content("Event was successfully created")
+        expect(page).to have_text("Event was successfully created")
 
         event = Event.sole
         aggregate_failures do
@@ -166,7 +166,7 @@ RSpec.describe "Editors can create events", :js do
         select "Wednesday", from: "Day"
 
         click_on "Create"
-        expect(page).to have_content("Event was successfully created")
+        expect(page).to have_text("Event was successfully created")
 
         event = Event.sole
         aggregate_failures do
@@ -183,11 +183,11 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Show", match: :first
 
-      expect(page).to have_content("93 feet east")
+      expect(page).to have_text("93 feet east")
 
       click_on "New Event at this venue"
 
-      expect(page).to have_content("New event")
+      expect(page).to have_text("New event")
       expect(page).to have_autocomplete_field("Venue", "93 feet east - Brick Lane")
     end
   end
@@ -212,16 +212,16 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("Venue:\nDogstar")
-        .and have_content("Class Organiser:\nSunshine Swing")
-        .and have_content("Class")
-        .and have_content("Frequency:\nWeekly on Wednesdays")
-        .and have_content("Cancelled:\nNone")
-        .and have_content("First date:\n15/02/2012")
-        .and have_content("Last date:\n13/02/2013")
-        .and have_content("Url:\nhttps://sunshineswing.uk/events")
+      expect(page).to have_text("Venue:\nDogstar")
+        .and have_text("Class Organiser:\nSunshine Swing")
+        .and have_text("Class")
+        .and have_text("Frequency:\nWeekly on Wednesdays")
+        .and have_text("Cancelled:\nNone")
+        .and have_text("First date:\n15/02/2012")
+        .and have_text("Last date:\n13/02/2013")
+        .and have_text("Url:\nhttps://sunshineswing.uk/events")
 
-      expect(page).to have_content("Last updated by Leon James (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
+      expect(page).to have_text("Last updated by Leon James (12345678901234567) on Monday 2nd January 2012 at 23:17:16")
     end
 
     it "with missing data" do
@@ -232,11 +232,11 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("4 errors prevented this record from being saved")
-        .and have_content("Venue can't be blank")
-        .and have_content("Url can't be blank")
-        .and have_content("Frequency can't be blank")
-        .and have_content("Event type can't be blank")
+      expect(page).to have_text("4 errors prevented this record from being saved")
+        .and have_text("Venue can't be blank")
+        .and have_text("Url can't be blank")
+        .and have_text("Frequency can't be blank")
+        .and have_text("Event type can't be blank")
 
       autocomplete_select "Dogstar", from: "Venue"
       choose "Weekly class"
@@ -246,18 +246,18 @@ RSpec.describe "Editors can create events", :js do
 
       click_on "Create"
 
-      expect(page).to have_content("1 error prevented this record from being saved")
-        .and have_content("Class organiser must be present for classes")
-      expect(page).to have_no_content("Monthly") # This radio button should be hidden
+      expect(page).to have_text("1 error prevented this record from being saved")
+        .and have_text("Class organiser must be present for classes")
+      expect(page).to have_no_text("Monthly") # This radio button should be hidden
 
       autocomplete_select "Sunshine Swing", from: "Class organiser"
       click_on "Create"
 
-      expect(page).to have_content("Venue:\nDogstar")
-        .and have_content("Class Organiser:\nSunshine Swing")
-        .and have_content("Class")
-        .and have_content("Frequency:\nWeekly on Tuesdays")
-        .and have_content("Url:\nhttps://sunshineswing.uk/events")
+      expect(page).to have_text("Venue:\nDogstar")
+        .and have_text("Class Organiser:\nSunshine Swing")
+        .and have_text("Class")
+        .and have_text("Frequency:\nWeekly on Tuesdays")
+        .and have_text("Url:\nhttps://sunshineswing.uk/events")
     end
   end
 end

@@ -19,7 +19,7 @@ RSpec.describe "Refreshing Facebook access tokens" do
     visit "/account"
     click_on "Log in"
 
-    expect(page).to have_content("Facebook access token will expire in 29 days")
+    expect(page).to have_text("Facebook access token will expire in 29 days")
 
     response_body = {
       access_token: "a-super-secret-token",
@@ -31,6 +31,6 @@ RSpec.describe "Refreshing Facebook access tokens" do
 
     click_on("Refresh token")
 
-    expect(page).to have_content("Facebook access token will expire in 60 days")
+    expect(page).to have_text("Facebook access token will expire in 60 days")
   end
 end

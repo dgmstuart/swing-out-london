@@ -11,7 +11,7 @@ RSpec.describe "Editors can see associated events on venues" do
 
     skip_login("/venues/#{venue.to_param}")
 
-    expect(page).to have_content("Associated Events")
+    expect(page).to have_text("Associated Events")
     expect(page).to have_link("Class with Ron and Christine on Wednesdays", href: event_path(dance_class))
     expect(page).to have_link("Social: The Sunday Stomp", href: event_path(social))
   end
@@ -21,6 +21,6 @@ RSpec.describe "Editors can see associated events on venues" do
 
     skip_login("/venues/#{venue.to_param}")
 
-    expect(page).to have_no_content("Associated Events")
+    expect(page).to have_no_text("Associated Events")
   end
 end

@@ -22,24 +22,24 @@ RSpec.describe "Organisers can edit events" do
 
       visit("/external_events/abc123/edit")
 
-      expect(page).to have_content("Midtown stomp")
+      expect(page).to have_text("Midtown stomp")
         .and have_link("https://www.swingland.com/midtown", href: "https://www.swingland.com/midtown")
-        .and have_content("Frequency\nOccasional")
-        .and have_content("Status\nNot listed (no future dates)")
+        .and have_text("Frequency\nOccasional")
+        .and have_text("Status\nNot listed (no future dates)")
 
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
       fill_in "Cancelled dates", with: "12/12/2012"
       click_on "Update"
 
-      expect(page).to have_content("Event was successfully updated")
-        .and have_content("Status\nWill be listed until 12/01/2013")
+      expect(page).to have_text("Event was successfully updated")
+        .and have_text("Status\nWill be listed until 12/01/2013")
 
       aggregate_failures do
         expect(page).to have_field("Venue", with: "The 100 Club - central")
         expect(page).to have_field("Upcoming dates", with: "12/12/2012,12/01/2013")
         expect(page).to have_field("Cancelled dates", with: "12/12/2012")
-        expect(page).to have_content("Event was successfully updated")
+        expect(page).to have_text("Event was successfully updated")
       end
 
       expect(Audit.last.username).to eq("name" => "Organiser", "auth_id" => "abc123")
@@ -59,24 +59,24 @@ RSpec.describe "Organisers can edit events" do
 
       visit("/external_events/abc123/edit")
 
-      expect(page).to have_content("Midtown stomp")
+      expect(page).to have_text("Midtown stomp")
         .and have_link("https://www.swingland.com/midtown", href: "https://www.swingland.com/midtown")
-        .and have_content("Frequency\nEvery Wednesday")
-      expect(page).to have_no_content("Upcoming dates")
+        .and have_text("Frequency\nEvery Wednesday")
+      expect(page).to have_no_text("Upcoming dates")
 
       autocomplete_select "The 100 Club", from: "Venue"
       fill_in "Cancelled dates", with: "12/12/2012"
       fill_in "Last date", with: "2013-01-12"
       click_on "Update"
 
-      expect(page).to have_content("Event was successfully updated")
+      expect(page).to have_text("Event was successfully updated")
 
       aggregate_failures do
         expect(page).to have_field("Venue", with: "The 100 Club - central")
-        expect(page).to have_no_content("Upcoming dates")
+        expect(page).to have_no_text("Upcoming dates")
         expect(page).to have_field("Cancelled dates", with: "12/12/2012")
         expect(page).to have_field("Last date", with: "2013-01-12")
-        expect(page).to have_content("Event was successfully updated")
+        expect(page).to have_text("Event was successfully updated")
       end
 
       expect(Audit.last.username).to eq("name" => "Organiser", "auth_id" => "abc123")
@@ -129,8 +129,8 @@ RSpec.describe "Organisers can edit events" do
         click_on "Update"
 
         aggregate_failures do
-          expect(page).to have_content("Event was successfully updated")
-          expect(page).to have_no_content("Last date")
+          expect(page).to have_text("Event was successfully updated")
+          expect(page).to have_no_text("Last date")
         end
       end
     end
@@ -141,7 +141,7 @@ RSpec.describe "Organisers can edit events" do
 
       visit("/external_events/abc123/edit")
 
-      expect(page).to have_content("Dance class by Herbert White")
+      expect(page).to have_text("Dance class by Herbert White")
     end
 
     it "does not allow organisers to access other pages" do
@@ -149,7 +149,7 @@ RSpec.describe "Organisers can edit events" do
 
       visit("/external_events/abc123/edit")
 
-      expect(page).to have_content("Midtown stomp")
+      expect(page).to have_text("Midtown stomp")
 
       visit("/events/#{event.id}/edit")
 
@@ -166,8 +166,8 @@ RSpec.describe "Organisers can edit events" do
       select "", from: "Venue"
       click_on "Update"
 
-      expect(page).to have_content("1 error prevented this record from being saved:")
-        .and have_content("Venue can't be blank")
+      expect(page).to have_text("1 error prevented this record from being saved:")
+        .and have_text("Venue can't be blank")
     end
   end
 
@@ -181,8 +181,8 @@ RSpec.describe "Organisers can edit events" do
       fill_in "Last date", with: "2025-09-27"
       click_on "Update"
 
-      expect(page).to have_content("1 error prevented this record from being saved:")
-        .and have_content("Cancellations can't include dates after the last date")
+      expect(page).to have_text("1 error prevented this record from being saved:")
+        .and have_text("Cancellations can't include dates after the last date")
     end
   end
 
@@ -190,7 +190,7 @@ RSpec.describe "Organisers can edit events" do
     it "renders a 404" do
       visit("/external_events/abc123/edit")
 
-      expect(page).to have_content("The page you were looking for doesn't exist")
+      expect(page).to have_text("The page you were looking for doesn't exist")
     end
   end
 end
