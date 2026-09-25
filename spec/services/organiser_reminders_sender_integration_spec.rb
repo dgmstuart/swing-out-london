@@ -35,8 +35,8 @@ RSpec.describe OrganiserRemindersSender do
         sent_emails = ActionMailer::Base.deliveries
 
         expect(sent_emails.map(&:subject)).to contain_exactly(
-          match(/missing dates for "No dates"/),
-          match(/missing dates for "No future dates"/)
+          include('missing dates for "No dates"'),
+          include('missing dates for "No future dates"')
         )
       end
     end
