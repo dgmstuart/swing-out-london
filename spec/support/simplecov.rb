@@ -12,10 +12,10 @@ SimpleCov.start do
     validators
     concerns
   ].each do |directory|
-    add_group directory.capitalize, "app/#{directory}"
+    group directory.capitalize, "app/#{directory}"
   end
-  add_group "Libraries", "lib"
+  group "Libraries", "lib"
 
-  %w[config spec].each { add_filter(_1) }
+  %w[config spec].each { skip(it) }
 end
 SimpleCov.minimum_coverage 100

@@ -77,7 +77,7 @@ RSpec.describe SocialListing do
     context "when the venue has coordinates" do
       it "is a link to the venue on the map" do
         event = instance_double("Event", venue_id: 5, venue_coordinates: double)
-        url_helpers = double(map_socials_date_path: "a-map-url") # rubocop:disable RSpec/VerifiedDoubles
+        url_helpers = double(map_socials_date_path: "a-map-url")
 
         social_listing = described_class.new(event, url_helpers:)
 

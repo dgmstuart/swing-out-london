@@ -27,12 +27,12 @@ RSpec.describe "Editors can edit organisers" do
       click_on "Update"
     end
 
-    expect(page).to have_content("Name: Swingdance UK")
-      .and have_content("Shortname: Website") # ie. no value between this label and the next one
-      .and have_content("Website: https://swingdanceuk.com")
-      .and have_content("Description: A rebrand")
+    expect(page).to have_text("Name: Swingdance UK")
+      .and have_text("Shortname: Website") # ie. no value between this label and the next one
+      .and have_text("Website: https://swingdanceuk.com")
+      .and have_text("Description: A rebrand")
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+    expect(page).to have_text("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
   end
 
   context "with invalid data" do
@@ -51,17 +51,17 @@ RSpec.describe "Editors can edit organisers" do
 
       click_on "Update"
 
-      expect(page).to have_content("2 errors prevented this record from being saved")
-        .and have_content("Name can't be blank")
-        .and have_content("Shortname is too long")
+      expect(page).to have_text("2 errors prevented this record from being saved")
+        .and have_text("Name can't be blank")
+        .and have_text("Shortname is too long")
 
       fill_in "Name", with: "Swingdance UK"
       fill_in "Shortname", with: "12345678901234567890"
 
       click_on "Update"
 
-      expect(page).to have_content("Name: Swingdance UK")
-        .and have_content("Shortname: 12345678901234567890")
+      expect(page).to have_text("Name: Swingdance UK")
+        .and have_text("Shortname: 12345678901234567890")
     end
   end
 end

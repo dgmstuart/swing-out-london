@@ -15,8 +15,8 @@ RSpec.describe "Editors can delete events" do
       click_on "Delete", match: :first
     end
 
-    expect(page).to have_content("Event Name")
-    expect(page).to have_no_content("Delete")
-    expect(page).to have_no_content("Balboa at Bobby McGee's")
+    expect(page).to have_text("Event Name")
+    expect(page).to have_no_text("Delete")
+    expect(page).to have_no_text("Balboa at Bobby McGee's")
   end
 end

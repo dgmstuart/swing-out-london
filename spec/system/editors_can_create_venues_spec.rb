@@ -18,18 +18,18 @@ RSpec.describe "Editors can create venues" do
         VCR.use_cassette("geocode_100_club") do
           click_on "Create"
 
-          expect(page).to have_content("Venue was successfully created")
+          expect(page).to have_text("Venue was successfully created")
         end
       end
     end
 
-    expect(page).to have_content("Name: The 100 Club")
-    expect(page).to have_content("Address: 100 Oxford Street\r London")
-    expect(page).to have_content("Postcode: W1D 1LL")
-    expect(page).to have_content("Area: Oxford Street")
-    expect(page).to have_content("Website: https://www.the100club.co.uk/")
+    expect(page).to have_text("Name: The 100 Club")
+    expect(page).to have_text("Address: 100 Oxford Street\r London")
+    expect(page).to have_text("Postcode: W1D 1LL")
+    expect(page).to have_text("Area: Oxford Street")
+    expect(page).to have_text("Website: https://www.the100club.co.uk/")
     expect(page.find("a", text: "https://www.the100club.co.uk/")["href"]).to eq("https://www.the100club.co.uk/")
-    expect(page).to have_content("Coordinates: [ 51.5161082, -0.1353568 ]")
+    expect(page).to have_text("Coordinates: [ 51.5161082, -0.1353568 ]")
     expect(page.find("a", text: "[ 51.5161082, -0.1353568 ]")["href"])
       .to eq("https://www.google.co.uk/maps/place/51.5161082,-0.1353568/@51.5161082,-0.1353568,15z")
     expect(page.find("img")["src"]).to eq(
@@ -42,7 +42,7 @@ RSpec.describe "Editors can create venues" do
       "&size=500x400&zoom=17"
     )
 
-    expect(page).to have_content("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
+    expect(page).to have_text("Last updated by Al Minns (12345678901234567) on Sunday 2nd January 2000 at 23:17:16")
   end
 
   context "with invalid data" do
@@ -53,12 +53,12 @@ RSpec.describe "Editors can create venues" do
 
       click_on "Create"
 
-      expect(page).to have_content("5 errors prevented this record from being saved")
-        .and have_content("Address can't be blank")
-        .and have_content("Area can't be blank")
-        .and have_content("Name can't be blank")
-        .and have_content("Website is invalid")
-        .and have_content("The address information could not be geocoded")
+      expect(page).to have_text("5 errors prevented this record from being saved")
+        .and have_text("Address can't be blank")
+        .and have_text("Area can't be blank")
+        .and have_text("Name can't be blank")
+        .and have_text("Website is invalid")
+        .and have_text("The address information could not be geocoded")
 
       fill_in "Name", with: "The 100 Club"
       fill_in "Address", with: "100 Oxford Street\nLondon"
@@ -69,11 +69,11 @@ RSpec.describe "Editors can create venues" do
 
       click_on "Create"
 
-      expect(page).to have_content("Name: The 100 Club")
-        .and have_content("Address: 100 Oxford Street\r London")
-        .and have_content("Area: Oxford Street")
-        .and have_content("Website: https://www.the100club.co.uk/")
-        .and have_content("Coordinates: [ 51.5164092, -0.1345404 ]")
+      expect(page).to have_text("Name: The 100 Club")
+        .and have_text("Address: 100 Oxford Street\r London")
+        .and have_text("Area: Oxford Street")
+        .and have_text("Website: https://www.the100club.co.uk/")
+        .and have_text("Coordinates: [ 51.5164092, -0.1345404 ]")
     end
   end
 end

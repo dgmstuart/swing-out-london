@@ -7,7 +7,7 @@ class EventsController < CmsBaseController
       .includes(:venue, :social_organiser, :class_organiser)
       .order(has_social: :desc)
       .order(:title, :updated_at)
-      .map { EventListItem.new(_1) }
+      .map { EventListItem.new(it) }
   end
 
   def show

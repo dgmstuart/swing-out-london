@@ -12,6 +12,6 @@ RSpec.describe "Editors can navigate" do
 
     click_on "Edit"
 
-    expect(page).to have_content("Editing event")
+    expect(page).to have_text("Editing event")
   end
 end

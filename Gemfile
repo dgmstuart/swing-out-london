@@ -13,12 +13,12 @@ gem "geocoder"
 gem "http"
 gem "jbuilder"
 gem "jsbundling-rails"
+gem "json", "< 3" # This line no longer needed after upgrading to ruby 8.1
 gem "memcachier"
 gem "omniauth-facebook"
 gem "omniauth-rails_csrf_protection"
 gem "pg"
 gem "premailer-rails"
-gem "pry-rails"
 gem "puma"
 gem "rack-attack"
 gem "redcarpet" # Markdown
@@ -40,14 +40,13 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "rspec-rails"
-  gem "rubocop", "~> 1.75.5", require: false
+  gem "rubocop", require: false
   gem "rubocop-capybara", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-faker", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
-  gem "solargraph-rails"
 end
 
 group :test do

@@ -7,6 +7,6 @@ to = ENV["TO"].to_date
 SocialsListings.new.build(from..to).each do |date, events|
   events_listing = events.reject(&:cancelled?).map(&:title)
   puts I18n.l(date, format: :listing_date)
-  events_listing.each { puts "* #{_1}" }
+  events_listing.each { puts "* #{it}" }
   puts # newline
 end

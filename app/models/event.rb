@@ -34,7 +34,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_with ValidSocialOrClass
   validates_with ValidWeeklyEvent
 
-  enum(:day, DAYNAMES.index_by { _1 })
+  enum(:day, DAYNAMES.index_by { it })
 
   strip_attributes only: %i[title url]
 
@@ -67,7 +67,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def has_class_or_social # rubocop:disable Naming/PredicateName
+  def has_class_or_social # rubocop:disable Naming/PredicatePrefix
     return true if has_class? || has_social?
 
     errors.add(:base, "Events must have either a Social or a Class, otherwise they won't be listed")
@@ -80,7 +80,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def cannot_be_weekly_and_have_dates
-    return unless weekly? && event_instances.any? { _1.cancelled == false }
+    return unless weekly? && event_instances.any? { it.cancelled == false }
 
     errors.add(:event_instances, "must all be cancelled for weekly events")
   end

@@ -10,16 +10,16 @@ RSpec.describe "Editor Login" do
     visit "/events/new"
 
     expect(page).to have_button("Log in")
-    expect(page).to have_no_content("New event")
+    expect(page).to have_no_text("New event")
 
     click_on "Log in"
 
-    expect(page).to have_content("New event")
-    expect(page).to have_content("Al Minns")
+    expect(page).to have_text("New event")
+    expect(page).to have_text("Al Minns")
 
     click_on "Al Minns"
 
-    expect(page).to have_content(/Facebook access token will expire in (59|60|61) days/)
+    expect(page).to have_text(/Facebook access token will expire in (59|60|61) days/)
   end
 
   it "Admins can login and access editor pages" do
@@ -29,12 +29,12 @@ RSpec.describe "Editor Login" do
     visit "/events"
 
     expect(page).to have_button("Log in")
-    expect(page).to have_no_content("Events")
+    expect(page).to have_no_text("Events")
 
     click_on "Log in"
 
-    expect(page).to have_content("Events")
-    expect(page).to have_content("Herbert White (Admin)")
+    expect(page).to have_text("Events")
+    expect(page).to have_text("Herbert White (Admin)")
   end
 
   context "when the user isn't in the approved list" do
@@ -45,10 +45,10 @@ RSpec.describe "Editor Login" do
 
       click_on "Log in"
 
-      expect(page).to have_content(
+      expect(page).to have_text(
         "Your Facebook ID for Swing Out London (76543210987654321) isn't in the approved list"
       )
-      expect(page).to have_no_content("Events")
+      expect(page).to have_no_text("Events")
     end
   end
 
@@ -60,8 +60,8 @@ RSpec.describe "Editor Login" do
 
       click_on "Log in"
 
-      expect(page).to have_content("There was a problem with your login to Facebook")
-      expect(page).to have_no_content("Events")
+      expect(page).to have_text("There was a problem with your login to Facebook")
+      expect(page).to have_no_text("Events")
     end
   end
 
@@ -73,12 +73,12 @@ RSpec.describe "Editor Login" do
       visit "/login"
 
       expect(page).to have_button("Log in")
-      expect(page).to have_no_content("Events")
+      expect(page).to have_no_text("Events")
 
       click_on "Log in"
 
-      expect(page).to have_content("Events")
-      expect(page).to have_content("Al Minns")
+      expect(page).to have_text("Events")
+      expect(page).to have_text("Al Minns")
     end
   end
 end

@@ -9,7 +9,7 @@ class SessionCreator
     @logger = logger
   end
 
-  def create(user)
+  def create(user) # rubocop:disable Naming/PredicateMethod
     if authoriser.authorised?(user)
       login_session.log_in!(auth_id: user.id, name: user.name, token: user.token, token_expires_at: user.expires_at)
       true

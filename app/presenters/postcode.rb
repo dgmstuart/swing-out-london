@@ -34,15 +34,15 @@ class Postcode
   private
 
   attr_reader :postcode_string
-end
 
-# Handles events which don't publicise their address
-class SecretPostcode
-  def short
-    "???"
-  end
+  # Handles events which don't publicise their address
+  class SecretPostcode
+    def short
+      "???"
+    end
 
-  def description
-    "Bah - this event is too secret to have a postcode!"
+    def description
+      "Bah - this event is too secret to have a postcode!"
+    end
   end
 end

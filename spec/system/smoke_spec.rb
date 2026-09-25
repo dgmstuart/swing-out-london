@@ -43,7 +43,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_content("Venue was successfully created")
+    expect(page).to have_text("Venue was successfully created")
 
     # SOCIAL ORGANISER
     open_menu
@@ -56,7 +56,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_content("Organiser was successfully created")
+    expect(page).to have_text("Organiser was successfully created")
 
     # CLASS ORGANISER
     open_menu
@@ -67,7 +67,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_content("Organiser was successfully created")
+    expect(page).to have_text("Organiser was successfully created")
 
     # EVENT WITH CANCELLED DATE
     open_menu
@@ -95,7 +95,7 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_content("Event was successfully created")
+    expect(page).to have_text("Event was successfully created")
 
     # RECENTLY STARTED EVENT (NEW!)
     open_menu
@@ -113,28 +113,28 @@ RSpec.describe "Adding a new event", :js do
 
     click_on "Create"
 
-    expect(page).to have_content("Event was successfully created")
+    expect(page).to have_text("Event was successfully created")
 
     click_on "Swing Out London"
 
     venue_id = Venue.first.id
 
-    expect(page).to have_no_content("error prevented this record from being saved")
+    expect(page).to have_no_text("error prevented this record from being saved")
 
     within "#social_dances" do
       rows = page.all(".date_row")
       within rows[0] do
         aggregate_failures do
-          expect(page).to have_content "TODAY Friday 1st January"
+          expect(page).to have_text "TODAY Friday 1st January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-01?venue_id=#{venue_id}"
-          expect(page).to have_content "NEW! Ladies night"
+          expect(page).to have_text "NEW! Ladies night"
           expect(page).to have_link "Ladies night - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/ladies"
         end
       end
 
       within rows[1] do
         aggregate_failures do
-          expect(page).to have_content "TOMORROW Saturday 2nd January"
+          expect(page).to have_text "TOMORROW Saturday 2nd January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-02?venue_id=#{venue_id}"
           expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
         end
@@ -142,20 +142,20 @@ RSpec.describe "Adding a new event", :js do
 
       within rows[2] do
         aggregate_failures do
-          expect(page).to have_content "Saturday 9th January"
+          expect(page).to have_text "Saturday 9th January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-09?venue_id=#{venue_id}"
-          expect(page).to have_content "CANCELLED Stompin at the Savoy"
+          expect(page).to have_text "CANCELLED Stompin at the Savoy"
           # Regression: use .once to check that cancelled weekly events don't show twice
-          expect(page).to have_content("Stompin at the Savoy").once
+          expect(page).to have_text("Stompin at the Savoy").once
           expect(page).to have_link "Stompin at the Savoy - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/stompin"
         end
       end
 
       within rows[3] do
         aggregate_failures do
-          expect(page).to have_content "Thursday 14th January"
+          expect(page).to have_text "Thursday 14th January"
           expect(page).to have_link "WC2R", href: "/map/socials/1937-01-14?venue_id=#{venue_id}"
-          expect(page).to have_content "NEW! Ladies night"
+          expect(page).to have_text "NEW! Ladies night"
           expect(page).to have_link "Ladies night - The Savoy Ballroom in Harlem", href: "https://www.savoyballroom.com/ladies"
         end
       end
@@ -165,17 +165,17 @@ RSpec.describe "Adding a new event", :js do
       rows = page.all(".day_row")
       within rows[5] do
         aggregate_failures do
-          expect(page).to have_content "Saturday"
+          expect(page).to have_text "Saturday"
           expect(page).to have_link "WC2R", href: "/map/classes/Saturday?venue_id=#{venue_id}"
           expect(page).to have_link "Harlem (Savoy Style) at Stompin at the Savoy with Frankie", href: "https://www.savoyballroom.com/stompin"
-          expect(page).to have_content "Cancelled on 9th Jan"
+          expect(page).to have_text "Cancelled on 9th Jan"
         end
       end
     end
 
-    expect(page).to have_no_content("<")
-    expect(page).to have_no_content(">")
-    expect(page).to have_no_content("abbr title=")
+    expect(page).to have_no_text("<")
+    expect(page).to have_no_text(">")
+    expect(page).to have_no_text("abbr title=")
 
     aggregate_failures do
       expect(page).to have_css('meta[property="og:title"][content="Swing Out London"]', visible: :hidden)

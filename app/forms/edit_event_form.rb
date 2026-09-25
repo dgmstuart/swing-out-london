@@ -88,18 +88,18 @@ class EditEventForm
       cancellations: parsed_cancellations,
       has_class: has_weekly_class?,
       has_taster: has_occasional_class?,
-      course_length: (course_length.to_i if course_length.present?)
+      course_length: course_length.presence&.to_i
     ).except(
       :social_has_class
     )
   end
 
   # has_class? and has_social? are only used in validations - not ideal
-  def has_social? # rubocop:disable Naming/PredicateName
+  def has_social? # rubocop:disable Naming/PredicatePrefix
     type_is_social_dance?
   end
 
-  def has_class? # rubocop:disable Naming/PredicateName
+  def has_class? # rubocop:disable Naming/PredicatePrefix
     type_is_weekly_class? || !!social_has_class
   end
 
@@ -121,11 +121,11 @@ class EditEventForm
     event_type == "social_dance"
   end
 
-  def has_weekly_class? # rubocop:disable Naming/PredicateName
+  def has_weekly_class? # rubocop:disable Naming/PredicatePrefix
     type_is_weekly_class? || (type_is_social_dance? && social_has_class && weekly?)
   end
 
-  def has_occasional_class? # rubocop:disable Naming/PredicateName
+  def has_occasional_class? # rubocop:disable Naming/PredicatePrefix
     infrequent? && social_has_class
   end
 

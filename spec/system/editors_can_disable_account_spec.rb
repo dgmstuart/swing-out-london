@@ -5,6 +5,7 @@ require "spec/support/facebook_helper"
 
 RSpec.describe "Editor Login Revocation" do
   include FacebookHelper
+
   it "Editors can deauthorise Swing Out Londons facebook permissions", :vcr do
     stub_facebook_config(
       api_base!: "https://graph.facebook.com/",
@@ -22,8 +23,8 @@ RSpec.describe "Editor Login Revocation" do
       click_on "Disable my login"
     end
 
-    expect(page).to have_content("Editor Login")
-    expect(page).to have_content("Your login permissions have been revoked in Facebook")
+    expect(page).to have_text("Editor Login")
+    expect(page).to have_text("Your login permissions have been revoked in Facebook")
     expect(page).to have_button("Log in")
 
     visit "/events"
