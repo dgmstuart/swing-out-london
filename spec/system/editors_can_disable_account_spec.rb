@@ -5,6 +5,7 @@ require "spec/support/facebook_helper"
 
 RSpec.describe "Editor Login Revocation" do
   include FacebookHelper
+
   it "Editors can deauthorise Swing Out Londons facebook permissions", :vcr do
     stub_facebook_config(
       api_base!: "https://graph.facebook.com/",
