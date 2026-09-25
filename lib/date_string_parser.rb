@@ -56,7 +56,7 @@ class DateStringParser
       end
 
       def regexp
-        /^[0-9\-]+$/
+        /^[0-9-]+$/
       end
     end
   end
