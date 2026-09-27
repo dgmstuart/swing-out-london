@@ -34,5 +34,8 @@ module Swingoutlondon
 
     # Rate limiting and IP blocks
     config.middleware.use Rack::Attack
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil
   end
 end
