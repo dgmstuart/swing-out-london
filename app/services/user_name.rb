@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "facebook_graph_api/api"
-
 # Uses the Facebook Graph API to fetch the name of a user, based on their
 # App-Scoped User ID
 class UserName

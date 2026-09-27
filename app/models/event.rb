@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dates_string_parser"
-
 # The main model representing dance classes and social dances
 class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   audited
