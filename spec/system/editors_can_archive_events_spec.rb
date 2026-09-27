@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Editors can archive events" do
+  include TimeHelpers
+
   it "with a weekly event" do
     skip_login
     create(:event, frequency: 1, day: "Sunday")
@@ -10,7 +12,7 @@ RSpec.describe "Editors can archive events" do
     visit "/events"
 
     # 7th Jan 2012 was a saturday
-    Timecop.freeze(Time.zone.local(2012, 1, 7)) do
+    travel_to(Time.zone.local(2012, 1, 7)) do
       click_on "Archive", match: :first
     end
 
@@ -25,7 +27,7 @@ RSpec.describe "Editors can archive events" do
 
     visit "/events"
 
-    Timecop.freeze(Time.zone.local(2012, 1, 8)) do
+    travel_to(Time.zone.local(2012, 1, 8)) do
       click_on "Archive", match: :first
     end
 
@@ -54,7 +56,7 @@ RSpec.describe "Editors can archive events" do
 
       visit "/events"
 
-      Timecop.freeze("2012-01-08") do
+      travel_to("2012-01-08") do
         event.update!(last_date: "2012-01-02")
 
         click_on "Archive", match: :first
@@ -75,7 +77,7 @@ RSpec.describe "Editors can archive events" do
 
       visit "/events"
 
-      Timecop.freeze(Time.zone.local(2012, 1, 8)) do
+      travel_to(Time.zone.local(2012, 1, 8)) do
         click_on "Archive", match: :first
       end
 

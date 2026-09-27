@@ -3,10 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "Editors can list events" do
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   it "shows a list of events" do
-    Timecop.freeze(Time.zone.local(2012, 5, 23)) do
+    travel_to(Time.zone.local(2012, 5, 23)) do
       create(
         :event,
         title: "Stompin'",

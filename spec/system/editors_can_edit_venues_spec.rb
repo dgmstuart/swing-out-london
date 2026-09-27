@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Editors can edit venues", :vcr do
+  include TimeHelpers
+
   it "with valid data" do
     create(
       :venue,
@@ -28,7 +30,7 @@ RSpec.describe "Editors can edit venues", :vcr do
     fill_in "Longitude", with: "" # Blank out Lng so that it gets recalculated from postcode
     fill_in "Area", with: "Oxford Street"
     fill_in "Website", with: "https://www.the100club.co.uk/"
-    Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
+    travel_to(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
       VCR.use_cassette("geocode_100_club") do
         click_on "Update"
       end

@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Editors can list occasional events" do
+  include TimeHelpers
+
   it "with a dance class" do
     venue = create(
       :venue,
@@ -15,7 +17,7 @@ RSpec.describe "Editors can list occasional events" do
       :organiser,
       shortname: "Frankie"
     )
-    Timecop.freeze("01/01/2012") do
+    travel_to("01/01/2012") do
       event_instances = [
         build(:event_instance, date: "02/01/2012"),
         build(:event_instance, date: "09/01/2012", cancelled: true),
@@ -41,7 +43,7 @@ RSpec.describe "Editors can list occasional events" do
       )
     end
 
-    Timecop.freeze("02/01/2012") do
+    travel_to("02/01/2012") do
       skip_login("/occasional")
     end
 

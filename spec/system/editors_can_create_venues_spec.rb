@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Editors can create venues" do
+  include TimeHelpers
+
   it "with valid data", :vcr do
     skip_login(id: 12345678901234567, name: "Al Minns")
 
@@ -14,7 +16,7 @@ RSpec.describe "Editors can create venues" do
     fill_in "Area", with: "Oxford Street"
     fill_in "Website", with: "https://www.the100club.co.uk/"
     ClimateControl.modify(GOOGLE_MAPS_STATIC_API_KEY: "A1b2C3", GOOGLE_MAPS_MAP_ID: "9876") do
-      Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
+      travel_to(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
         VCR.use_cassette("geocode_100_club") do
           click_on "Create"
 

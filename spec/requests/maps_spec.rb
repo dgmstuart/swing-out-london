@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Maps" do
+  include TimeHelpers
+
   describe "/classes" do
     context "when the url contains a string which is not a day name" do
       it "redirects to the main classes page" do
@@ -15,7 +17,7 @@ RSpec.describe "Maps" do
   describe "/socials" do
     context "when the url contains a date outside the displayed range" do
       it "redirects to the main socials page" do
-        Timecop.freeze(Date.new(2012, 12, 20)) do
+        travel_to(Date.new(2012, 12, 20)) do
           expect(get("/map/socials/2013-12-23"))
             .to redirect_to("/map/socials")
         end
