@@ -277,7 +277,6 @@ GEM
     pg (1.6.3)
     pg (1.6.3-arm64-darwin)
     pg (1.6.3-x86_64-linux)
-    power_assert (3.1.0)
     pp (0.6.4)
       prettyprint
     premailer (1.31.0)
@@ -452,8 +451,6 @@ GEM
       railties (>= 6.0.0)
     strip_attributes (2.0.1)
       activemodel (>= 3.0, < 9.0)
-    test-unit (3.7.8)
-      power_assert
     thor (1.5.0)
     timecop (0.9.11)
     timeout (0.6.1)
@@ -536,7 +533,6 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   strip_attributes
-  test-unit
   timecop
   valid_email
   vcr

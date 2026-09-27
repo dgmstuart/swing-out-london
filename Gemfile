@@ -27,7 +27,6 @@ gem "rss"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "strip_attributes"
-gem "test-unit"
 gem "valid_email"
 
 group :development do
