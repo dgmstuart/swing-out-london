@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
-gem "rails", "~> 8.0.3"
+gem "rails", "~> 8.1.4"
 
 gem "audited"
 gem "bootsnap"

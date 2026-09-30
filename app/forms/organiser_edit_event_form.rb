@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dates_string_parser"
-
 # Form object backing the HTML form for external users (eg. organisers) to edit
 # events.
 #

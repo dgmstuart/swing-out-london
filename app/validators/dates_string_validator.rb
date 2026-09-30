@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dates_string_parser"
-
 class DatesStringValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     errors = parse(value)

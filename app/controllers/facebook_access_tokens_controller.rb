@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "facebook_graph_api/token_api"
-
 class FacebookAccessTokensController < CmsBaseController
   layout "cms"
 
