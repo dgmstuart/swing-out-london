@@ -12,6 +12,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :class_organiser, class_name: "Organiser", optional: true
   belongs_to :social_organiser, class_name: "Organiser", optional: true
   has_many :event_instances, dependent: :destroy
+  has_many(:cancelled_event_instances,
+           -> { cancelled },
+           class_name: "EventInstance",
+           inverse_of: :event,
+           dependent: :destroy)
   has_many :email_deliveries, dependent: :destroy
 
   validates :frequency, presence: true
@@ -129,37 +134,29 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   scope :notifiable, -> { where.not(reminder_email_address: nil) }
 
-  def caching_key(suffix)
-    "event_#{id}_#{suffix}"
-  end
-
   # ----- #
   # Dates #
   # ----- #
 
-  def dates_cache_key
-    caching_key("dates")
-  end
-
   def dates
     return [] if weekly?
 
-    Rails.cache.fetch(dates_cache_key) do
-      event_instances.order(date: :asc).pluck(:date)
-    end
-  end
-
-  after_save :clear_dates_cache
-  def clear_dates_cache
-    Rails.cache.delete(dates_cache_key)
+    # in order to get the benefits of includes(:event_instances):
+    #   - map, don't :pluck, since that bypasses the preloaded data
+    #   - sort in ruby, since `order` makes a new query
+    event_instances.map(&:date).sort
   end
 
   def cancellations
-    event_instances.cancelled.order(date: :asc).pluck(:date)
+    cancelled_event_instances.order(date: :asc).pluck(:date)
   end
 
   def future_cancellations
-    event_instances.cancelled.where(date: Date.current..).order(date: :asc).pluck(:date)
+    # in order to get the benefits of includes(:event_instances):
+    #   - map, don't :pluck, since that bypasses the preloaded data
+    #   - filter in ruby, since `where` makes a new query
+    #   - sort in ruby, since `order` makes a new query
+    cancelled_event_instances.select { it.date >= Date.current }.map(&:date).sort
   end
 
   # COMPARISON METHODS #
@@ -192,21 +189,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     last_date < Date.current
   end
 
-  def latest_date_cache_key
-    caching_key("latest_date")
-  end
-
-  # What's the Latest date in the date array
-  # N.B. Assumes the date array is sorted!
   def latest_date
-    Rails.cache.fetch(latest_date_cache_key) do
-      event_instances.maximum(:date)
-    end
-  end
-
-  after_save :clear_latest_dates_cache
-  def clear_latest_dates_cache
-    Rails.cache.delete(latest_date_cache_key)
+    # in order to get the benefits of includes(:event_instances):
+    #   - map, don't :pluck, since that bypasses the preloaded data
+    #   - sort in ruby, since `order` makes a new query
+    event_instances.map(&:date).max
   end
 
   def generate_organiser_token
