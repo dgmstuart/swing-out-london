@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "faker"
-
 # Allows skipping actual login by creating a fake response object mimicking what
 # {https://github.com/omniauth/omniauth OmniAuth} posts as the response body
 # after logging in with Facebook.
