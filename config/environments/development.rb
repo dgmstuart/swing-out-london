@@ -75,6 +75,9 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
     Bullet.add_footer = true
+
+    # Event instances aren't loaded on a warm cache since the row is fragment-cached.
+    Bullet.add_safelist(type: :unused_eager_loading, class_name: "Event", association: :event_instances)
   end
 
   config.log_formatter = FilteringLoggerFormatter.new(ActiveSupport::Logger::SimpleFormatter.new)
