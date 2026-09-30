@@ -15,6 +15,7 @@ class EventUpdater
       unless instances_attrs.nil?
         delete_instances!(instances_attrs)
         upsert_instances!(instances_attrs)
+        record.event_instances.reset
       end
       record.update!(attrs)
     end

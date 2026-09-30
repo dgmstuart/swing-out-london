@@ -4,7 +4,7 @@ class EventsController < CmsBaseController
   def index
     @events =
       Event
-      .includes(:venue, :social_organiser, :class_organiser)
+      .includes(:venue, :social_organiser, :class_organiser, :event_instances)
       .order(has_social: :desc)
       .order(:title, :updated_at)
       .map { EventListItem.new(it) }
