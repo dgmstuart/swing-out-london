@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require "spec/support/time_helpers"
+
 RSpec.shared_examples "validates no one off workshops" do |model_name|
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   before { travel_to Date.parse("2010-01-01") }
 

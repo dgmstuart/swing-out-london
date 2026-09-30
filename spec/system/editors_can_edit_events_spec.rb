@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Editors can edit events", :js do
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   it "with valid data" do
     cancellations = ["01/10/2010", "02/12/2011"]
@@ -35,7 +35,7 @@ RSpec.describe "Editors can edit events", :js do
     fill_in "Upcoming dates", with: "10/10/2010,10/11/2010, 02/12/2011"
     fill_in "Cancelled dates", with: "02/12/2011" # All cancellations need to be in the upcoming dates.
 
-    Timecop.freeze(Time.zone.local(2010, 1, 2, 23, 17, 16)) do
+    travel_to(Time.zone.local(2010, 1, 2, 23, 17, 16)) do
       click_on "Update"
 
       expect(page).to have_text("Event was successfully updated")
@@ -94,7 +94,7 @@ RSpec.describe "Editors can edit events", :js do
 
     fill_in "Upcoming dates", with: "12/12/2012, 12/01/2013"
 
-    Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
+    travel_to(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
       click_on "Update"
 
       expect(page).to have_text("Event was successfully updated")
@@ -132,7 +132,7 @@ RSpec.describe "Editors can edit events", :js do
 
     fill_in "Cancelled dates", with: "12/12/2012"
 
-    Timecop.freeze(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
+    travel_to(Time.zone.local(2015, 1, 2, 23, 17, 16)) do
       click_on "Update"
 
       expect(page).to have_text("Event was successfully updated")

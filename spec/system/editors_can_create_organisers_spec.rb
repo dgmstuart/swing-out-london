@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Editors can create organisers" do
+  include TimeHelpers
+
   it "with valid data" do
     skip_login(id: 12345678901234567, name: "Al Minns")
 
@@ -13,7 +15,7 @@ RSpec.describe "Editors can create organisers" do
     fill_in "Description", with: "A long-running business"
     fill_in "Website", with: "http://www.lsds.co.uk"
 
-    Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
+    travel_to(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
       click_on "Create"
     end
 

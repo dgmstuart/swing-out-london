@@ -2,23 +2,24 @@
 
 require "spec_helper"
 require "app/models/soldn_time"
-require "timecop"
+require "spec/support/time_helpers"
 require "spec/support/time_formats_helper"
 require "active_support/core_ext/string/zones"
 require "active_support/core_ext/numeric/time"
 require "active_support/core_ext/object/blank"
 
 RSpec.describe SOLDNTime, :time do
+  include TimeHelpers
+
   describe "today" do
     context "when the timezone is UTC" do
       around do |example|
         Time.use_zone("UTC") { example.run }
-        Timecop.return
       end
 
       context "when the time is before midnight" do # rubocop:disable RSpec/NestedGroups
         it "is the current date" do
-          Timecop.travel(Time.zone.parse("May 11, 1938 19:00"))
+          travel_to(Time.zone.parse("May 11, 1938 19:00"))
 
           expect(described_class.today.to_s).to eq "1938-05-11"
         end
@@ -26,7 +27,7 @@ RSpec.describe SOLDNTime, :time do
 
       context "when the time is before 4am" do # rubocop:disable RSpec/NestedGroups
         it "is the date that this crazy night began (yesterday's date)" do
-          Timecop.travel(Time.zone.parse("May 12, 1938 03:59"))
+          travel_to(Time.zone.parse("May 12, 1938 03:59"))
 
           expect(described_class.today.to_s).to eq "1938-05-11"
         end
@@ -34,7 +35,7 @@ RSpec.describe SOLDNTime, :time do
 
       context "when the time is 4am" do # rubocop:disable RSpec/NestedGroups
         it "is time to go to bed (today's date)" do
-          Timecop.travel(Time.zone.parse("May 12, 1938 04:00"))
+          travel_to(Time.zone.parse("May 12, 1938 04:00"))
 
           expect(described_class.today.to_s).to eq "1938-05-12"
         end
@@ -44,12 +45,11 @@ RSpec.describe SOLDNTime, :time do
     context "when the timezone is BST" do
       around do |example|
         Time.use_zone("London") { example.run }
-        Timecop.return
       end
 
       context "when the time is before 4am" do # rubocop:disable RSpec/NestedGroups
         it "is the date that this crazy night began (yesterday's date)" do
-          Timecop.travel(Time.zone.parse("May 12, 1938 03:59"))
+          travel_to(Time.zone.parse("May 12, 1938 03:59"))
 
           expect(described_class.today.to_s).to eq "1938-05-11"
         end
@@ -57,7 +57,7 @@ RSpec.describe SOLDNTime, :time do
 
       context "when the time is 4am" do # rubocop:disable RSpec/NestedGroups
         it "is time to go to bed (today's date)" do
-          Timecop.travel(Time.zone.parse("May 12, 1938 04:00"))
+          travel_to(Time.zone.parse("May 12, 1938 04:00"))
 
           expect(described_class.today.to_s).to eq "1938-05-12"
         end
@@ -65,7 +65,7 @@ RSpec.describe SOLDNTime, :time do
 
       context "when the time is 5am" do # rubocop:disable RSpec/NestedGroups
         it "is time to go to bed (today's date)" do
-          Timecop.travel(Time.zone.parse("May 12, 1938 05:00"))
+          travel_to(Time.zone.parse("May 12, 1938 05:00"))
 
           expect(described_class.today.to_s).to eq "1938-05-12"
         end
@@ -115,11 +115,10 @@ RSpec.describe SOLDNTime, :time do
     context "when the start date is not specified" do
       around do |example|
         Time.use_zone("UTC") { example.run }
-        Timecop.return
       end
 
       it "defaults to today" do
-        Timecop.travel(Time.zone.parse("Jan 1, 1928 19:00"))
+        travel_to(Time.zone.parse("Jan 1, 1928 19:00"))
 
         result = described_class.listing_dates(number_of_days: 1)
 

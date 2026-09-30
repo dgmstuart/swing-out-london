@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "active_support/testing/time_helpers"
+require "spec/support/time_helpers"
 require "active_support/core_ext/integer/time" # Required to call "2.years.from_now" in DatesStringValidator
 require "app/validators/past_date_validator"
 require "app/validators/distant_past_date_validator"
@@ -8,7 +8,7 @@ require "app/validators/distant_future_date_validator"
 require "app/validators/dates_string_validator"
 
 RSpec.shared_examples "validates dates string" do |attribute, model_name, options = {}|
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   before { travel_to Date.parse("2012-06-01") }
 

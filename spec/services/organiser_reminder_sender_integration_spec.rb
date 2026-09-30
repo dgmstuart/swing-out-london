@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe OrganiserReminderSender do
   include ActionMailer::TestHelper # assert_emails is defined in ActionMailer::TestHelper
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   describe "INTEGRATION TEST" do
     around do |example|

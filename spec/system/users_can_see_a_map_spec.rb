@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Users can view a map of upcoming events" do
+  include TimeHelpers
+
   describe "socials page" do
     it "viewing the page" do
       event_instances = [
@@ -41,7 +43,7 @@ RSpec.describe "Users can view a map of upcoming events" do
         class_organiser: create(:organiser, name: "Ann Johnson")
       )
 
-      Timecop.freeze(Time.utc(2019, 6, 4, 12)) do
+      travel_to(Time.utc(2019, 6, 4, 12)) do
         visit "/map/socials"
       end
 

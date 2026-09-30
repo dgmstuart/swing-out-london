@@ -3,11 +3,11 @@
 require "rails_helper"
 
 RSpec.describe "Adding a new event", :js do
-  around do |example|
-    Timecop.freeze("01/01/1937T12:00") { example.run }
-  end
+  include TimeHelpers
 
   before do
+    travel_to("01/01/1937T12:00")
+
     map_config = MapConfig.new(
       center: Coordinates.new(lat: 40.7828878, lng: -73.968811),
       zoom: 12

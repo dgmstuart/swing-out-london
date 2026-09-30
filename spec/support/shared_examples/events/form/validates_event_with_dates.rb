@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "active_support/testing/time_helpers"
+require "spec/support/time_helpers"
 
 RSpec.shared_examples "validates event with dates (form)" do |model_name|
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   before { travel_to Date.parse("2010-01-01") }
 

@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require "spec/support/time_helpers"
 require "app/validators/valid_cancellations"
 require "spec/support/time_formats_helper"
 require "app/presenters/date_printer"
 
 RSpec.shared_examples "validates dates in cancellations" do |model_name|
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   before { travel_to Date.parse("2010-01-01") }
 

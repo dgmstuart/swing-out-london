@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Maps" do
+  include TimeHelpers
+
   describe "Classes" do
     context "when no day is specified" do
       it "renders page metadata without a day" do
@@ -53,7 +55,7 @@ RSpec.describe "Maps" do
 
     context "when the url contains a date within the displayed range" do
       it "exposes that date" do
-        Timecop.freeze(Date.new(2012, 12, 20)) do
+        travel_to(Date.new(2012, 12, 20)) do
           visit "/map/socials/2012-12-23"
 
           expect(page).to have_title(/Swing Out London's Lindy Map: Socials\s+on Sunday 23rd December/)

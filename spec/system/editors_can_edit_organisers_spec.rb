@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "Editors can edit organisers" do
+  include TimeHelpers
+
   it "with valid data" do
     create(
       :organiser,
@@ -23,7 +25,7 @@ RSpec.describe "Editors can edit organisers" do
     fill_in "Website", with: "https://swingdanceuk.com"
     fill_in "Description", with: "A rebrand"
 
-    Timecop.freeze(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
+    travel_to(Time.zone.local(2000, 1, 2, 23, 17, 16)) do
       click_on "Update"
     end
 

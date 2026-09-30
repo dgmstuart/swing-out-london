@@ -3,10 +3,10 @@
 require "spec_helper"
 require "app/models/event_status"
 require "active_support"
-require "active_support/testing/time_helpers"
+require "spec/support/time_helpers"
 
 RSpec.describe EventStatus do
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   describe "#status_for" do
     context "when there are dates in the past" do

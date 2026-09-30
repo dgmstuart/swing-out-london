@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe MapListingsHelper do
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   describe "#mapinfo_swingclass_link" do
     context "with all the possible parts" do
