@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Editors can create events", :js do
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   context "an intermittent social with a taster" do # rubocop:disable RSpec/ContextWording
     it "with valid data" do

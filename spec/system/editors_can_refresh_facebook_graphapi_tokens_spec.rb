@@ -5,7 +5,7 @@ require "support/facebook_helper"
 
 RSpec.describe "Refreshing Facebook access tokens" do
   include FacebookHelper
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   it "Editors can login and access editor pages" do
     stub_auth_hash(id: 12345678901234567, expires_at: 1709166148)

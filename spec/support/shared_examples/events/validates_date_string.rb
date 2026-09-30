@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require "spec/support/time_helpers"
 require "app/validators/date_string_validator"
 
 RSpec.shared_examples "validates date string" do |attribute, model_name, options = {}|
   describe attribute do
-    include ActiveSupport::Testing::TimeHelpers
+    include TimeHelpers
 
     before { travel_to Date.parse("2012-06-01") }
 

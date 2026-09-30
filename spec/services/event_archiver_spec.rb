@@ -3,11 +3,11 @@
 require "spec_helper"
 require "app/services/event_archiver"
 require "active_support"
-require "active_support/testing/time_helpers"
+require "spec/support/time_helpers"
 require "active_support/core_ext/date_and_time/calculations" # for prev_occurring
 
 RSpec.describe EventArchiver do
-  include ActiveSupport::Testing::TimeHelpers
+  include TimeHelpers
 
   describe "#archive" do
     context "when the event has already ended" do
