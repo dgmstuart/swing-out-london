@@ -38,7 +38,7 @@ RSpec.describe "Editors can list occasional events" do
         frequency: 0,
         event_instances:,
         first_date: Date.parse("12/03/1926"),
-        last_date: Date.parse("11/10/1958"),
+        last_date: Date.parse("11/10/2018"),
         url: "https://www.savoyballroom.com/stompin"
       )
     end
