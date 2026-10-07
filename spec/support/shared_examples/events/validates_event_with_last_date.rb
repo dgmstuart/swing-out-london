@@ -19,7 +19,8 @@ RSpec.shared_examples "validates event with last date" do |model_name|
       build(:event_instance, date: "02/11/2011"),
       build(:event_instance, date: "31/10/2011")
     ]
-    model = create(model_name, :occasional, event_instances:, last_date: "2011-11-01")
+    model = create(model_name, :occasional, event_instances:)
+    model.last_date = "2011-11-01"
     model.valid?
     expect(model.errors.messages).to eq(dates: ["can't include dates after the last date"])
   end
