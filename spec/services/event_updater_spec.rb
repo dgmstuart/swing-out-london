@@ -218,6 +218,7 @@ RSpec.describe EventUpdater do
         record = create(:event, :occasional)
         create(:event_instance, event: record, date:, cancelled: true)
         create(:event_instance, event: record, date: 1.week.from_now.to_date, cancelled: false)
+        record.reload
         # In reality we always post the whole form, so we should never end up with params without any date key,
         # but let's be safe and test what happens when we do:
         expect do
@@ -296,7 +297,7 @@ RSpec.describe EventUpdater do
         ) # invalid because one date is too far in the past
 
         aggregate_failures do
-          expect(record.event_instances.sole.cancelled).to be false
+          expect(record.reload.event_instances.sole.cancelled).to be false
 
           expect { described_class.new(record).update!(params) }
             .to raise_error(ActiveRecord::RecordInvalid)

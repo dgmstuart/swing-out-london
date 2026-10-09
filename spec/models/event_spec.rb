@@ -206,6 +206,7 @@ RSpec.describe Event do
     context "when the event has one date in the future" do
       it "is true" do
         event = create(:event, dates: [Time.zone.today + 1])
+        event.reload
 
         expect(event.future_dates?).to be true
       end
