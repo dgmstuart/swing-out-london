@@ -55,6 +55,7 @@ export class Map {
       position: position,
       title: title,
       map: this.#mapInstance,
+      gmpClickable: true,
       ...(highlighted ? { content: this._highlightedPin() } : {})
     });
 
