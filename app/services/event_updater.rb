@@ -9,14 +9,10 @@ class EventUpdater
 
   def update!(attrs)
     attrs.merge!(audit_commenter.comment(record, attrs))
-
     instances_attrs = extract_instances_attrs(attrs)
+
     record.transaction do
-      unless instances_attrs.nil?
-        delete_instances!(instances_attrs)
-        upsert_instances!(instances_attrs)
-        record.event_instances.reset
-      end
+      sync_instances!(instances_attrs)
       record.update!(attrs)
     end
     record.reload
@@ -25,6 +21,14 @@ class EventUpdater
   private
 
   attr_reader :record, :audit_commenter
+
+  def sync_instances!(instances_attrs)
+    return if instances_attrs.nil?
+
+    delete_instances!(instances_attrs)
+    upsert_instances!(instances_attrs)
+    record.event_instances.reset
+  end
 
   def delete_instances!(instances_attrs)
     dates = instances_attrs.map { |attrs| attrs.fetch(:date) }
