@@ -73,6 +73,26 @@ RSpec.describe SOLDNTime, :time do
     end
   end
 
+  describe "today across daylight-saving changes" do
+    around do |example|
+      Time.use_zone("London") { example.run }
+    end
+
+    %w[2026-03-29 2026-10-25].each do |date|
+      it "keeps the previous listings day before 04:00 on #{date}" do
+        travel_to(Time.zone.parse("#{date} 03:59:59"))
+
+        expect(described_class.today).to eq(Date.parse(date).yesterday)
+      end
+
+      it "starts the new listings day at 04:00 on #{date}" do
+        travel_to(Time.zone.parse("#{date} 04:00:00"))
+
+        expect(described_class.today).to eq(Date.parse(date))
+      end
+    end
+  end
+
   describe ".listing_dates" do
     context "when the number of days is 2" do
       it "returns an array of the first date and the day after" do

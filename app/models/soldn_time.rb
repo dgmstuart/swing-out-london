@@ -5,7 +5,8 @@ class SOLDNTime
 
   class << self
     def today
-      if Date.current.midnight > 4.hours.ago
+      # Use local clock time: four elapsed hours can cross a daylight-saving change.
+      if Time.zone.now.hour < 4
         Date.current.yesterday
       else
         Date.current
